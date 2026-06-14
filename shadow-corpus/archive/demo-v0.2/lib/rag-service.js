@@ -394,11 +394,10 @@ async function queryRag({ query, namespace = 'harness', filters = {}, limit = 6 
 
   if (await canHybridRetrieve(namespace) || (isRagLive(k.config) && isEmbedLive(k.config))) {
     const hits = await k.retrieve({ namespace, query, filters, limit, strategy: 'hybrid' });
-    return {
-      hits,
-      mode: hits.some(h => h.scores?.vector > 0) ? 'hybrid' : 'rules',
-      rag_enabled: true
-    };
+    const { hasLocalIndex } = await import(path.join(__dirname, '../../../packages/rag-kit/lib/local-index.mjs'));
+    const hasVector = hits.some(h => h.scores?.vector > 0);
+    const mode = hasVector ? 'hybrid' : hasLocalIndex(namespace) ? 'rules-index' : 'rules';
+    return { hits, mode, rag_enabled: true };
   }
 
   if (isRagLive(k.config)) {
