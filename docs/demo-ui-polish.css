@@ -3,6 +3,18 @@
  * 规划：idea-refine · 实现：frontend-ui-engineering · 审计：web-design-guidelines
  */
 
+/* Intake 直达七年：不展示 Landing 选线页 */
+html.skip-landing-boot #p-landing,
+body.skip-landing #p-landing {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
 /* ═══ 轮1 · idea-refine：Landing 要有「入口仪式感」 ═══ */
 #p-landing::before {
   content: "";
@@ -19,7 +31,7 @@
   pointer-events: none;
   z-index: 0;
 }
-#p-landing > * { position: relative; z-index: 1; }
+#p-landing > * { position: relative; z-index: 1; flex-shrink: 0; }
 
 .landing-title .zpix-xxl {
   text-shadow: 2px 2px 0 rgba(58, 50, 40, 0.08), 0 0 24px rgba(200, 134, 58, 0.12);

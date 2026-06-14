@@ -328,6 +328,7 @@ function buildFullProfile({
     age: layerA.age_at_fork,
     birth_year: layerA.birth_year,
     fork_year: layerA.fork_year,
+    gender: layerA.gender || null,
     keywords: [
       ...(tagMap.trait || []).slice(0, 3),
       ...(tagMap.mood_at_fork || []).slice(0, 2)
@@ -344,12 +345,14 @@ function buildFullProfile({
       choice_text: layerA.choice_text,
       self_description: layerA.self_description,
       one_liner: layerA.one_liner,
+      gender: layerA.gender || null,
       selected_tags: selectedTags.map((t) => t.label || t)
     },
     temporal: {
       birth_year: layerA.birth_year,
       fork_year: layerA.fork_year,
-      age_at_fork: layerA.age_at_fork
+      age_at_fork: layerA.age_at_fork,
+      gender: layerA.gender || null
     },
     scenario_weights,
     persona_signals: {

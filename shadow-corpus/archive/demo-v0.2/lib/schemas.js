@@ -150,6 +150,45 @@ const PersonaAgentSchema = z.object({
     .describe('提醒下游勿鸡汤、勿强行和解')
 });
 
+const RelaxedInterventionSchema = z.object({
+  question: z.string().optional(),
+  options: z.array(z.string()).optional()
+}).nullable().optional();
+
+/** LLM 输出用宽松 schema，服务端再 normalizeYear 收紧 */
+const RelaxedYearSchema = z.object({
+  year: z.number().optional(),
+  age: z.number().optional(),
+  is_pivotal: z.boolean().optional(),
+  title: z.string().optional(),
+  scene: z.string().optional(),
+  environment: z.string().optional(),
+  pose: z.string().optional(),
+  prop: z.string().optional(),
+  city: z.string().optional(),
+  event: z.string().optional(),
+  decision_made: z.string().optional(),
+  intervention_prompt: RelaxedInterventionSchema,
+  emotion: z.union([
+    z.object({ label: z.string(), value: z.number() }),
+    z.string(),
+    z.number()
+  ]).optional(),
+  new_mood: z.number().optional(),
+  new_esteem: z.number().optional(),
+  reflection: z.string().optional(),
+  shadow_dialogue: z.string().optional(),
+  memory_summary: z.string().optional()
+});
+
+const RelaxedFinalSchema = z.object({
+  title: z.string().optional(),
+  message: z.string().optional(),
+  regret: z.string().optional(),
+  scene: z.string().optional(),
+  emotion_arc: z.string().optional()
+});
+
 module.exports = {
   PersonaAgentSchema,
   PersonaCardSchema,
@@ -157,7 +196,9 @@ module.exports = {
   BeatsSchema,
   InterventionPromptSchema,
   YearSchema,
+  RelaxedYearSchema,
   FinalSchema,
+  RelaxedFinalSchema,
   DialogueSchema,
   MemoryEntrySchema,
   ProfileSchema,

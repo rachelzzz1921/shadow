@@ -15,7 +15,13 @@
 /* ═══ 轮14 · 人格卡：档案袋质感 ═══ */
 .profile-teaser {
   position: relative;
-  overflow: hidden;
+  flex-shrink: 0;
+  align-self: center;
+  width: 100%;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: visible;
 }
 .profile-teaser::before {
   content: "PERSONA";
@@ -28,7 +34,8 @@
   opacity: 0.45;
   transform: scale(0.85);
 }
-.profile-teaser .avatar {
+.profile-teaser .avatar,
+.profile-teaser .pt-portrait-fallback {
   border-color: var(--amber);
   box-shadow:
     inset 2px 2px 0 var(--highlight),
@@ -38,7 +45,7 @@
 .pt-name {
   font-size: 12px;
   transform: scale(1.15);
-  transform-origin: left center;
+  transform-origin: center center;
   display: inline-block;
 }
 

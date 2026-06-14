@@ -18,3 +18,9 @@ test('dashscopeApiKey reads DASHSCOPE_API_KEY', () => {
   assert.equal(dashscopeApiKey({ DASHSCOPE_API_KEY: 'sk-test' }), 'sk-test');
   assert.equal(pickProvider({ DASHSCOPE_API_KEY: 'sk-test', SHADOW_PROVIDER: 'dashscope' }), 'dashscope');
 });
+
+test('deepseekApiKey and pickProvider select deepseek', () => {
+  const { deepseekApiKey, pickProvider } = require('../lib/llm-runtime');
+  assert.equal(deepseekApiKey({ DEEPSEEK_API_KEY: 'sk-test' }), 'sk-test');
+  assert.equal(pickProvider({ DEEPSEEK_API_KEY: 'sk-test', SHADOW_PROVIDER: 'deepseek' }), 'deepseek');
+});

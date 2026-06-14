@@ -29,18 +29,27 @@
 <div class="hub-wrap">
   <p class="hub-tag" style="font-family:monospace;font-size:11px;color:var(--amber);letter-spacing:2px">SHADOW HARNESS</p>
   <h1 class="hub-title">平行人生 Demo</h1>
-  <p class="hub-sub">先告诉影子你的岔路口，再选 Mock 预览或 Live 全链生成。GitHub Pages 上 Intake 走规则 Persona；Live 生成需自建 API（阶跃星辰）。</p>
+  <p class="hub-sub">先告诉影子你的岔路口，再选 Mock 预览或 Live 全链生成（Persona → Beats → 命运 agent → Year×7）。本地完整链路请 <code>npm run demo:local</code>。</p>
 
   <div class="hub-grid">
+    <a class="hub-card" href="generate.html">
+      <div class="tag">STEP 1 · API · 推荐</div>
+      <h2>Intake + API 七年生成</h2>
+      <p>四层采集 → Persona → Beats → 命运 agent → Year×7 → Final。纯文字结果，可下载 JSON。</p>
+    </a>
     <a class="hub-card" href="intake.html">
-      <div class="tag">STEP 1 · 推荐</div>
+      <div class="tag">STEP 1 · 采集</div>
       <h2>告诉影子，你是谁</h2>
-      <p>三层采集：自由文本 → 标签库 → 十道行为题 → Persona agent 推导人格。</p>
+      <p>仅 Intake 采集页；自定义岔路口确认后会跳转到 generate.html 跑 API 全链。</p>
     </a>
     <a class="hub-card" href="demo.html">
-      <div class="tag">STEP 2A · 静态</div>
       <h2>Mock 七年叙事</h2>
-      <p>四条 Golden 故事线：复读 · 出国读研 · 心动爱情 · 插画师。Landing 可切换；Intake 人格卡仅覆盖默认复读线（各故事直达链保持 fixture 主角）。</p>
+      <p>五条故事线：未复读 · 旧复读 · 出国读研 · 心动爱情 · 插画师。默认进入未复读线；Landing 可切换。</p>
+    </a>
+    <a class="hub-card" href="demo.html?story=wufuxdu">
+      <div class="tag">STORY · 阿岚</div>
+      <h2>未复读线</h2>
+      <p>没有回到那间教室。直接去 211，也在七年里走出了自己的精彩。</p>
     </a>
     <a class="hub-card" href="demo.html?story=linwan">
       <div class="tag">STORY · 林晚</div>
@@ -57,10 +66,25 @@
       <h2>插画师线</h2>
       <p>没填计算机。两百块首单、改稿二十次、AI 冲击，与凌晨那棵歪树。</p>
     </a>
-    <a class="hub-card" href="demo-live.html">
+    <a class="hub-card" href="demo-live.html?demo=1&story=linwan&autostart=1">
+      <div class="tag">MOCK · 林晚</div>
+      <h2>出国读研线 · Demo Mock</h2>
+      <p>无 API，直接播放 Golden 七年 → demo.html 浏览。</p>
+    </a>
+    <a class="hub-card" href="demo-live.html?demo=1&story=heartbeat_line&autostart=1">
+      <div class="tag">MOCK · 许星遥</div>
+      <h2>心动爱情线 · Demo Mock</h2>
+      <p>无 API，Golden 叙事 + 时代层文案（Mock）。</p>
+    </a>
+    <a class="hub-card" href="demo-live.html?demo=1&story=wufuxdu&autostart=1">
+      <div class="tag">MOCK · 阿岚</div>
+      <h2>未复读线 · Demo Mock</h2>
+      <p>无 API，直接播放未复读线七年 → demo.html 浏览。</p>
+    </a>
+    <a class="hub-card" href="demo-live.html?autostart=1">
       <div class="tag">STEP 2B · Live API</div>
-      <h2>Live 全 Agent 生成</h2>
-      <p>Persona → Beats → Year×7（含 Pivotal 介入）→ Final → 可进 Demo 浏览。需 <code>npm run demo:live</code>。</p>
+      <h2>Live 七年生成（Demo 同款 UI）</h2>
+      <p>Intake <strong>点选故事线</strong> → Demo Mock（无 API）；<strong>自己写岔路口</strong> → 需 LLM Key。</p>
     </a>
     <a class="hub-card" href="demo-phaser.html">
       <div class="tag">VISUAL</div>
@@ -94,7 +118,7 @@
   }).catch(() => {
     el.innerHTML = hasIntake
       ? '✓ 已采集人格 · Live API 未连接（Pages 静态模式）— 可用 <a href="demo.html?from=intake">Mock 预览</a>'
-      : '○ GitHub Pages 静态模式 · Live 需本地 <code>npm run demo:live</code> 或部署 API 服务';
+      : '○ 静态模式（无 API）— 本地请运行 <code>npm run demo:local</code> → <a href="http://localhost:3000/demo-hub.html">localhost:3000</a>';
   });
 })();
 </script>

@@ -14,7 +14,9 @@ const {
   PersonaCardSchema,
   BeatsSchema,
   YearSchema,
+  RelaxedYearSchema,
   FinalSchema,
+  RelaxedFinalSchema,
   DialogueSchema
 } = require('./schemas');
 
@@ -29,6 +31,72 @@ const { createLiveRuntime, pickProvider } = require('./llm-runtime');
 const { selectMemories } = require('./memory-retrieval');
 const { memoryFromYear } = require('./story-contract');
 const { runPersonaAnalyze, personaToPersonaCard } = require('./persona-agent');
+const { enums: schemaEnums } = require('./schemas');
+
+function clip(s, max, fallback = '') {
+  const t = String(s || fallback).trim();
+  return t.length <= max ? t : t.slice(0, max);
+}
+
+function pickEnum(value, list, fallback) {
+  return list.includes(value) ? value : fallback;
+}
+
+function sanitizeYearFromLlm(raw, input) {
+  const yearN = Number(raw?.year) || input.year_n;
+  const beatType = input.beat_type;
+  let emotion = raw?.emotion;
+  if (typeof emotion === 'string') emotion = { label: clip(emotion, 4, '平'), value: input.current_mood ?? 5 };
+  if (typeof emotion === 'number') emotion = { label: '平', value: emotion };
+  if (!emotion || typeof emotion !== 'object') {
+    emotion = { label: '平', value: input.current_mood ?? 5 };
+  }
+
+  let intervention = raw?.intervention_prompt ?? null;
+  if (beatType === 'quiet') {
+    intervention = null;
+  } else if (intervention && typeof intervention === 'object') {
+    const opts = Array.isArray(intervention.options) ? intervention.options : ['继续', '停下'];
+    intervention = {
+      question: clip(intervention.question, 40, '让影子继续走下去，还是停下来？'),
+      options: [clip(opts[0], 12, '继续'), clip(opts[1] ?? opts[0], 12, '停下')]
+    };
+  }
+
+  return {
+    year: yearN,
+    age: Number(raw?.age) || input.age,
+    is_pivotal: beatType === 'pivotal',
+    title: clip(raw?.title, 8, `第${yearN}年`),
+    scene: pickEnum(raw?.scene, schemaEnums.SCENES, 'city'),
+    environment: pickEnum(raw?.environment, schemaEnums.ENVIRONMENTS, 'office'),
+    pose: pickEnum(raw?.pose, schemaEnums.POSES, 'idle'),
+    prop: pickEnum(raw?.prop, schemaEnums.PROPS, 'desk'),
+    city: pickEnum(raw?.city, schemaEnums.CITIES, 'city1'),
+    event: String(raw?.event || input.beat_seed || '这一年在另一条路上继续往前走。'),
+    decision_made: clip(raw?.decision_made, 40, '在岔路口选了更稳妥的那一步'),
+    intervention_prompt: intervention,
+    emotion: {
+      label: clip(emotion.label, 4, '平'),
+      value: Math.max(1, Math.min(10, Math.round(Number(emotion.value) || 5)))
+    },
+    new_mood: Math.max(1, Math.min(10, Math.round(Number(raw?.new_mood ?? emotion.value) || 5))),
+    new_esteem: Math.max(1, Math.min(10, Math.round(Number(raw?.new_esteem) || (input.current_esteem ?? 5)))),
+    reflection: clip(raw?.reflection, 45, '原来有些路只能自己走完'),
+    shadow_dialogue: clip(raw?.shadow_dialogue, 35, '如果重来，我会更早对自己诚实'),
+    memory_summary: clip(raw?.memory_summary, 30, clip(raw?.event, 30, `第${yearN}年的转折`))
+  };
+}
+
+function sanitizeFinalFromLlm(raw) {
+  return {
+    title: clip(raw?.title, 12, '七年后的回信'),
+    message: clip(raw?.message, 80, String(raw?.message || '七年过去，影子在平行路上走完了你曾犹豫的那一步。')),
+    regret: clip(raw?.regret, 30, '有些选择没有回头路'),
+    scene: pickEnum(raw?.scene, schemaEnums.SCENES, 'night'),
+    emotion_arc: clip(raw?.emotion_arc, 40, '从紧绷到松动，再到与自己和解')
+  };
+}
 
 // ------------------------------------------------------------
 // Provider resolution
@@ -44,19 +112,20 @@ function getModel() {
 async function callAgent({ schema, system, prompt, temperature = 0.85, maxRetries = 1, runtime }) {
   const activeRuntime = runtime || createLiveRuntime();
   let lastError;
+  let temp = temperature;
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
     try {
       return await activeRuntime.generateStructured({
         schema,
         system,
         prompt,
-        temperature
+        temperature: temp
       });
     } catch (error) {
       lastError = error;
       if (attempt < maxRetries) {
-        // Inject a corrective hint on retry
-        prompt = prompt + '\n\n# 注意：上一次输出未通过 schema 校验，请严格按照字段约束重新输出。';
+        prompt += '\n\n# 注意：上一次输出未通过 schema 校验。请严格按字段长度与 enum 约束重新输出（title≤8字、reflection≤45字、memory_summary≤30字、intervention 仅 pivotal 年）。';
+        temp = Math.max(0.55, temp - 0.12);
         continue;
       }
       throw error;
@@ -106,13 +175,15 @@ async function runBeats({ persona_card, profile, runtime }) {
 // ------------------------------------------------------------
 async function runYear(input) {
   const { system, prompt } = buildYearPrompt(input);
-  const result = await callAgent({
-    schema: YearSchema,
+  const raw = await callAgent({
+    schema: RelaxedYearSchema,
     system,
     prompt,
     temperature: 0.9,
+    maxRetries: 3,
     runtime: input.runtime
   });
+  const result = sanitizeYearFromLlm(raw, input);
   // Enforce contract: quiet years must not have intervention_prompt
   if (input.beat_type === 'quiet') {
     result.is_pivotal = false;
@@ -139,13 +210,15 @@ async function runFinal(input) {
     at_year: 7
   });
   const { system, prompt } = buildFinalPrompt({ ...input, memory_stream });
-  return callAgent({
-    schema: FinalSchema,
+  const raw = await callAgent({
+    schema: RelaxedFinalSchema,
     system,
     prompt,
     temperature: 0.85,
+    maxRetries: 3,
     runtime: input.runtime
   });
+  return sanitizeFinalFromLlm(raw);
 }
 
 // ------------------------------------------------------------

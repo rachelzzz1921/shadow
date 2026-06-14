@@ -1,0 +1,218 @@
+/**
+ * Shadow Generate — Intake + API 纯文字生成页
+ */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#gen-viewport {
+  position: fixed;
+  inset: 52px 12px 16px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 统一页：Intake 嵌入 generate，不用全屏 fixed intake */
+body.generate-unified #intake-viewport {
+  position: relative;
+  inset: auto;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-bottom: 24px;
+}
+
+body.generate-unified .intake-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+}
+
+body.generate-unified #btnSkipDemo {
+  display: none;
+}
+
+body.generate-unified #gen-intake-section .intake-page-head .intake-preset-hint:last-of-type {
+  display: none;
+}
+
+#gen-root {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 8px 8px 48px;
+}
+
+.gen-head {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.gen-panel {
+  padding: 18px 20px;
+  margin-bottom: 16px;
+}
+
+.gen-form-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.gen-form-grid label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: var(--ink-soft);
+}
+
+.gen-form-grid textarea,
+.gen-form-grid input,
+.gen-form-grid select {
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  padding: 10px 12px;
+  border: 2px solid var(--panel-edge);
+  border-radius: 8px;
+  background: var(--paper);
+}
+
+.gen-row-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .gen-row-3 { grid-template-columns: 1fr; }
+}
+
+.gen-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.gen-progress-wrap {
+  height: 6px;
+  background: var(--panel-edge);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+#gen-progress {
+  height: 100%;
+  width: 0;
+  background: var(--amber);
+  transition: width 0.25s ease;
+}
+
+.gen-log {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+
+.gen-log li { padding: 2px 0; }
+
+.gen-error {
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: rgba(180, 72, 56, 0.1);
+  border: 1px solid rgba(180, 72, 56, 0.35);
+  color: #6b2f22;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.gen-hidden { display: none !important; }
+
+.gen-provider {
+  font-size: 11px;
+  font-family: monospace;
+  color: var(--amber);
+  margin-bottom: 8px;
+}
+
+.gen-section-title {
+  font-size: 15px;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+
+.gen-card {
+  padding: 14px 16px;
+  border: 1px solid var(--panel-edge);
+  border-radius: 10px;
+  background: rgba(255, 252, 245, 0.6);
+  margin-bottom: 12px;
+}
+
+.gen-card h4 {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+.gen-card dl {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.gen-card dt {
+  font-size: 11px;
+  color: var(--ink-muted);
+  margin-top: 8px;
+}
+
+.gen-card dd {
+  margin: 2px 0 0;
+}
+
+.gen-year-block {
+  border-left: 3px solid var(--amber);
+  padding-left: 14px;
+  margin-bottom: 20px;
+}
+
+.gen-year-block.pivotal {
+  border-left-color: var(--sage, #7da87a);
+}
+
+.gen-era {
+  font-size: 12px;
+  color: var(--sage, #5a7a58);
+  margin: 0 0 8px;
+}
+
+.gen-event {
+  white-space: pre-wrap;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
+.gen-final {
+  white-space: pre-wrap;
+  font-size: 15px;
+  line-height: 1.8;
+  padding: 16px;
+  border-radius: 10px;
+  background: rgba(212, 160, 86, 0.08);
+  border: 1px solid rgba(212, 160, 86, 0.3);
+}
+
+.gen-beats-list {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0;
+  padding-left: 18px;
+}

@@ -1,0 +1,93 @@
+{
+  "categories": [
+    { "id": "trait", "label_zh": "性格特质", "description": "长期稳定的做事风格", "max_select": 5, "min_select": 0, "display_order": 1, "maps_to_agent": ["persona.core_traits"] },
+    { "id": "mood_at_fork", "label_zh": "岔路口时心情", "description": "做出选择前后主导的情绪", "max_select": 4, "min_select": 0, "display_order": 2, "maps_to_agent": ["baseline.initial_mood"] },
+    { "id": "fear", "label_zh": "深层恐惧", "description": "驱动选择的隐性害怕", "max_select": 4, "min_select": 0, "display_order": 3, "maps_to_agent": ["persona.soft_spots"] },
+    { "id": "value", "label_zh": "价值倾向", "description": "做决定时的优先级", "max_select": 4, "min_select": 0, "display_order": 4, "maps_to_agent": ["persona.decision_tendency"] },
+    { "id": "relation_pressure", "label_zh": "关系压力源", "description": "谁的声音在影响你", "max_select": 3, "min_select": 0, "display_order": 5, "maps_to_agent": ["scenario_weights"] },
+    { "id": "scenario_hint", "label_zh": "人生域", "description": "这条岔路主要落在哪个领域", "max_select": 2, "min_select": 0, "display_order": 6, "maps_to_agent": ["scenario_weights"] }
+  ],
+  "tags": [
+    { "id": "t-trait-01", "category_id": "trait", "label": "要强", "synonyms": ["好胜", "不服输", "争强"] },
+    { "id": "t-trait-02", "category_id": "trait", "label": "慢热", "synonyms": ["内向", "谨慎"] },
+    { "id": "t-trait-03", "category_id": "trait", "label": "讨好型", "synonyms": ["迎合", "怕冲突"] },
+    { "id": "t-trait-04", "category_id": "trait", "label": "完美主义", "synonyms": ["高标准", "难满意"] },
+    { "id": "t-trait-05", "category_id": "trait", "label": "外冷内热", "synonyms": ["嘴硬", "不表达"] },
+    { "id": "t-trait-06", "category_id": "trait", "label": "独立", "synonyms": ["自己扛", "不爱麻烦人"] },
+    { "id": "t-trait-07", "category_id": "trait", "label": "敏感", "synonyms": ["多思", "易受影响"] },
+    { "id": "t-trait-08", "category_id": "trait", "label": "拖延", "synonyms": ["回避", "拖到最后"] },
+    { "id": "t-trait-09", "category_id": "trait", "label": "理性", "synonyms": ["算利弊", "冷静"] },
+    { "id": "t-trait-10", "category_id": "trait", "label": "冲动", "synonyms": ["先做了再说"] },
+    { "id": "t-trait-11", "category_id": "trait", "label": "晚熟", "synonyms": ["后知后觉"] },
+    { "id": "t-trait-12", "category_id": "trait", "label": "习惯藏话", "synonyms": ["不说真话", "报喜不报忧"] },
+
+    { "id": "t-mood-01", "category_id": "mood_at_fork", "label": "不甘", "synonyms": ["不服气", "意难平"] },
+    { "id": "t-mood-02", "category_id": "mood_at_fork", "label": "迷茫", "synonyms": ["不知道要什么"] },
+    { "id": "t-mood-03", "category_id": "mood_at_fork", "label": "赌气", "synonyms": ["赌一口气"] },
+    { "id": "t-mood-04", "category_id": "mood_at_fork", "label": "松一口气", "synonyms": ["终于定了"] },
+    { "id": "t-mood-05", "category_id": "mood_at_fork", "label": "假装无所谓", "synonyms": ["麻木", "抽离"] },
+    { "id": "t-mood-06", "category_id": "mood_at_fork", "label": "焦虑", "synonyms": ["睡不着", "反复想"] },
+    { "id": "t-mood-07", "category_id": "mood_at_fork", "label": "愧疚", "synonyms": ["对不起谁"] },
+    { "id": "t-mood-08", "category_id": "mood_at_fork", "label": "兴奋", "synonyms": ["期待", "跃跃欲试"] },
+    { "id": "t-mood-09", "category_id": "mood_at_fork", "label": "空", "synonyms": ["没感觉", "飘"] },
+    { "id": "t-mood-10", "category_id": "mood_at_fork", "label": "怕后悔", "synonyms": ["选错怎么办"] },
+
+    { "id": "t-fear-01", "category_id": "fear", "label": "怕被看穿", "synonyms": ["露馅", "装不住"] },
+    { "id": "t-fear-02", "category_id": "fear", "label": "怕让父母失望", "synonyms": ["对不起家人"] },
+    { "id": "t-fear-03", "category_id": "fear", "label": "怕选错", "synonyms": ["一步错步步错"] },
+    { "id": "t-fear-04", "category_id": "fear", "label": "怕平庸", "synonyms": ["就这样了", "没出头"] },
+    { "id": "t-fear-05", "category_id": "fear", "label": "怕孤独", "synonyms": ["没人懂", "被落下"] },
+    { "id": "t-fear-06", "category_id": "fear", "label": "怕失去关系", "synonyms": ["分开", "疏远"] },
+    { "id": "t-fear-07", "category_id": "fear", "label": "怕丢脸", "synonyms": ["没面子", "被人笑话"] },
+    { "id": "t-fear-08", "category_id": "fear", "label": "怕不稳定", "synonyms": ["没保障", "变数"] },
+    { "id": "t-fear-09", "category_id": "fear", "label": "怕浪费时间", "synonyms": ["沉没成本"] },
+    { "id": "t-fear-10", "category_id": "fear", "label": "怕自己其实不想要", "synonyms": ["假努力", "装喜欢"] },
+
+    { "id": "t-val-01", "category_id": "value", "label": "面子", "synonyms": ["体面", "好看"] },
+    { "id": "t-val-02", "category_id": "value", "label": "自由", "synonyms": ["自己说了算"] },
+    { "id": "t-val-03", "category_id": "value", "label": "稳定", "synonyms": ["稳妥", "保底"] },
+    { "id": "t-val-04", "category_id": "value", "label": "被认可", "synonyms": ["被看见", "被夸"] },
+    { "id": "t-val-05", "category_id": "value", "label": "关系优先", "synonyms": ["人比事重要"] },
+    { "id": "t-val-06", "category_id": "value", "label": "成就", "synonyms": ["做成事", "证明"] },
+    { "id": "t-val-07", "category_id": "value", "label": "真实", "synonyms": ["不装", "诚实"] },
+    { "id": "t-val-08", "category_id": "value", "label": "责任", "synonyms": ["该承担的"] },
+    { "id": "t-val-09", "category_id": "value", "label": "探索", "synonyms": ["试试", "看看"] },
+    { "id": "t-val-10", "category_id": "value", "label": "安全", "synonyms": ["别出岔子"] },
+
+    { "id": "t-rel-01", "category_id": "relation_pressure", "label": "父母期待", "synonyms": ["家里意见", "长辈"] },
+    { "id": "t-rel-02", "category_id": "relation_pressure", "label": "伴侣异地", "synonyms": ["异地恋", "分开"] },
+    { "id": "t-rel-03", "category_id": "relation_pressure", "label": "朋友分流", "synonyms": ["圈子变了", "渐行渐远"] },
+    { "id": "t-rel-04", "category_id": "relation_pressure", "label": "独自承担", "synonyms": ["没人可说", "自己扛"] },
+    { "id": "t-rel-05", "category_id": "relation_pressure", "label": "同辈比较", "synonyms": ["别人都有了"] },
+    { "id": "t-rel-06", "category_id": "relation_pressure", "label": "导师/前辈", "synonyms": ["老师看法"] },
+    { "id": "t-rel-07", "category_id": "relation_pressure", "label": "经济压力", "synonyms": ["家里需要钱"] },
+    { "id": "t-rel-08", "category_id": "relation_pressure", "label": "伴侣期待", "synonyms": ["TA想要"] },
+
+    { "id": "t-scn-01", "category_id": "scenario_hint", "label": "学业", "synonyms": ["复读", "考研", "学校"] },
+    { "id": "t-scn-02", "category_id": "scenario_hint", "label": "事业", "synonyms": ["工作", "考公", "创业"] },
+    { "id": "t-scn-03", "category_id": "scenario_hint", "label": "爱情", "synonyms": ["分手", "异地", "恋爱"] },
+    { "id": "t-scn-04", "category_id": "scenario_hint", "label": "亲情", "synonyms": ["父母", "家庭"] },
+    { "id": "t-scn-05", "category_id": "scenario_hint", "label": "友情", "synonyms": ["朋友", "圈子"] },
+    { "id": "t-scn-06", "category_id": "scenario_hint", "label": "自我成长", "synonyms": ["迷茫", "身份", "方向"] }
+  ],
+  "examples": [
+    {
+      "id": "demo-fuduline",
+      "title": "复读线",
+      "choice": "如果当年我去复读了，而不是直接上了那所大专",
+      "description": "我那时候就是不甘心，觉得一次没考好不代表我不行。但每次靠近一个目标，又会怀疑自己是不是真的想要它。"
+    },
+    {
+      "id": "demo-kaogong",
+      "title": "考公线",
+      "choice": "如果当年我留在老家考公，而不是去深圳做产品",
+      "description": "我嘴上说想要稳定，其实更怕的是在大城市被比较、被看穿。父母觉得考公是正道，我也说不清那是不是我的想要。"
+    },
+    {
+      "id": "demo-yidi",
+      "title": "异地线",
+      "choice": "如果当年我没有和爱人一起留在武汉，而是独自去了上海",
+      "description": "我选城市的时候，总在算哪边更「值得」。但夜里会想，我到底是怕错过机会，还是怕承担选择的代价。"
+    }
+  ]
+}

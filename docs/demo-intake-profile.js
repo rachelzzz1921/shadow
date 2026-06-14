@@ -104,9 +104,7 @@ function computeBaseline(answersObj) {
   const q05 = getAnswer(answersObj, 'SH-Q05');
   const q06 = getAnswer(answersObj, 'SH-Q06');
   const moodFallback = { A: 4, B: 3, C: 6, D: 4 };
-  const q05q = typeof window !== 'undefined' && window.ShadowIntakeQuestions
-    ? window.ShadowIntakeQuestions.QUESTIONS.find(q => q.id === 'SH-Q05')
-    : null;
+  const q05q = window.ShadowIntakeQuestions?.QUESTIONS?.find((q) => q.id === 'SH-Q05') ?? null;
   const moodCell = q05q?.cells?.find(c => c.key === q05?.answer?.optionKey);
 
   let initial_mood = moodCell?.mood ?? moodFallback[q05?.answer?.optionKey] ?? 5;
@@ -212,12 +210,14 @@ function buildFullProfile({ session_id, layerA = {}, selectedTags = [], answersO
       choice_text: layerA.choice_text || layerA.choice || null,
       self_description: layerA.self_description || null,
       one_liner: layerA.one_liner || null,
+      gender: layerA.gender || null,
       selected_tags: (selectedTags || []).map(t => t.label || t)
     },
     temporal: {
       birth_year: layerA.birth_year || null,
       fork_year: layerA.fork_year || null,
-      age_at_fork: layerA.age_at_fork ?? layerA.age ?? null
+      age_at_fork: layerA.age_at_fork ?? layerA.age ?? null,
+      gender: layerA.gender || null
     },
     scenario_weights,
     persona_signals: {
@@ -237,7 +237,11 @@ function buildFullProfile({ session_id, layerA = {}, selectedTags = [], answersO
       ...meta,
       longest_dwell_question: durs[0]?.[0] || null,
       scenario_detected: domainDetect?.top || null,
-      scenario_confidence: domainDetect ? +domainDetect.conf.toFixed(2) : null,
+      scenario_confidence: domainDetect?.conf != null
+        ? +domainDetect.conf.toFixed(2)
+        : domainDetect?.confidence != null
+          ? +domainDetect.confidence.toFixed(2)
+          : null,
       answered: Object.keys(answersObj).length
     }
   };

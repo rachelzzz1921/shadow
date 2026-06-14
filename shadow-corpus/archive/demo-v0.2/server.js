@@ -83,7 +83,8 @@ async function readJson(req) {
 
 function hasAnyKey() {
   return Boolean(
-    process.env.ANTHROPIC_API_KEY
+    process.env.DEEPSEEK_API_KEY
+    || process.env.ANTHROPIC_API_KEY
     || process.env.OPENAI_API_KEY
     || process.env.DASHSCOPE_API_KEY
     || process.env.STEPFUN_API_KEY
@@ -329,8 +330,24 @@ async function handleIntakeComplete(req, res) {
       persona_source = analyzed.source;
       shadow = getAgents().deriveShadow(persona_card);
     } catch (error) {
-      persona_source = 'error';
       console.error('[intake/complete persona]', error.message);
+      try {
+        const { personaToPersonaCard } = require('./lib/persona-agent');
+        const rulePath = path.join(DOCS_DIR, 'demo-persona-agent.js');
+        const ruleMod = require(rulePath);
+        const rulePersona = ruleMod.ShadowPersonaAgent?.analyze?.(full_profile);
+        if (rulePersona) {
+          persona = rulePersona;
+          persona_card = personaToPersonaCard(rulePersona);
+          persona_source = 'rule_fallback';
+          shadow = getAgents().deriveShadow(persona_card);
+        } else {
+          persona_source = 'error';
+        }
+      } catch (fallbackErr) {
+        persona_source = 'error';
+        console.error('[intake/complete persona fallback]', fallbackErr.message);
+      }
     }
   }
 
@@ -371,7 +388,12 @@ async function handleStoryStart(req, res) {
   const { createRunTrace, persistTrace, finishRunTrace } = require('./lib/run-trace');
   const trace = createRunTrace({ profile: body.profile, mode: 'live' });
   try {
-    const session = await getStorySession().startStorySession({ profile: body.profile, trace });
+    const session = await getStorySession().startStorySession({
+      profile: body.profile,
+      persona_card: body.persona_card || null,
+      full_profile: body.full_profile || null,
+      trace
+    });
     persistTrace(trace);
     sendJson(res, 200, { session, run_id: trace.run_id });
   } catch (error) {
@@ -503,6 +525,7 @@ function serveStatic(req, res) {
   /** docs/ 与 demo 同套 UI — 优先于 archive/public 旧版 intake */
   const DOCS_FIRST = new Set([
     '/intake.html',
+    '/generate.html',
     '/demo.html',
     '/demo-hub.html',
     '/demo-live.html',
@@ -611,7 +634,7 @@ server.listen(PORT, () => {
   const base = `http://localhost:${PORT}`;
   console.log(`Shadow local preview → ${base}`);
   console.log(`  Hub:     ${base}/demo-hub.html`);
-  console.log(`  Intake:  ${base}/intake.html`);
+  console.log(`  Generate: ${base}/generate.html`);
   console.log(`  Live:    ${base}/demo-live.html`);
   console.log(`  Mock 四条 Golden 线:`);
   console.log(`    复读线  ${base}/demo.html`);

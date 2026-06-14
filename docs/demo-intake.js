@@ -111,7 +111,7 @@
     const rels = p.relation_pressure || [];
     const any = traits.length || fears.length || vals.length || moods.length || rels.length;
     if (!any) {
-      return '<div class="shadow-read-body" style="color:var(--fog)">先选几个标签——这里会实时显示，影子第一眼会怎么读你。</div>';
+      return '<div class="shadow-read-body" style="color:var(--ink-muted)">先选几个标签——这里会实时显示，影子第一眼会怎么读你。</div>';
     }
     const frag = [];
     if (traits.length) frag.push(`你像是${traits.slice(0, 2).join('、')}的人`);
@@ -121,7 +121,7 @@
     const tail = moods.length ? `那段日子的底色，是${moods[0]}。` : '';
     let extra = '';
     if (traits.includes('好强又自卑') || fears.includes('怕被看穿') || vals.includes('面子')) {
-      extra = ' <span style="color:var(--glow)">我们还不确定——你扛着的，到底是你想要的，还是你以为该想要的。</span>';
+      extra = ' <span style="color:var(--amber)">我们还不确定——你扛着的，到底是你想要的，还是你以为该想要的。</span>';
     }
     return `<div class="shadow-read-body">${esc(frag.join('；'))}。${esc(tail)}${extra}</div>`;
   }
@@ -172,8 +172,8 @@
       return `
         <div class="tag-cat">
           <button type="button" class="tag-cat-head" data-cat-toggle="${cat.id}">
-            <span>${esc(cat.label_zh)} <small style="color:var(--fog)">${esc(cat.description)}</small></span>
-            <span style="font-family:var(--mono);font-size:11px;color:${n ? 'var(--glow)' : 'var(--fog)'}">${n}/${cat.max_select}</span>
+            <span>${esc(cat.label_zh)} <small style="color:var(--ink-muted)">${esc(cat.description)}</small></span>
+            <span style="font-family:monospace;font-size:11px;color:${n ? 'var(--amber)' : 'var(--ink-muted)'}">${n}/${cat.max_select}</span>
           </button>
           ${open ? `<div class="tag-pool">${list.map(tag => {
             const on = (state.picked[cat.id] || []).includes(tag);
@@ -192,7 +192,7 @@
           <div class="shadow-read">
             <div class="shadow-read-title">影子初读</div>
             ${shadowReadHtml()}
-            <div style="margin-top:16px;font-size:11px;color:var(--fog);font-style:italic">这只是初步印象，真正的影子会在 Persona agent 里被推导成形。</div>
+            <div style="margin-top:16px;font-size:11px;color:var(--ink-muted);font-style:italic">这只是初步印象，真正的影子会在 Persona agent 里被推导成形。</div>
           </div>
         </div>
       </div>
@@ -229,34 +229,32 @@
           <div class="slider-tier" id="slider-tier">${esc(tier)}</div>
           <input type="range" id="slider-input" min="${q.min}" max="${q.max}" value="${v}" data-q="${q.id}" />
           <div class="slider-fb" id="slider-fb">${esc(fb)}</div>
-          <p style="text-align:center;font-size:11px;color:var(--fog);font-family:var(--mono)">松手即记录 · 自动进入下一题</p>
+          <p style="text-align:center;font-size:11px;color:var(--ink-muted)">松手即记录 · 自动进入下一题</p>
         </div>`;
     } else if (q.kind === 'mood') {
       body = `<div class="mood-grid">${q.cells.map(c => `
         <button type="button" class="mood-cell${cur === c.key ? ' on' : ''}" data-q="${q.id}" data-val="${c.key}">
-          <div style="font-size:19px;margin-bottom:8px">${esc(c.label)}</div>
-          <div style="font-family:var(--mono);font-size:10.5px;color:var(--fog)">${esc(c.q)}</div>
+          <div style="font-size:16px;margin-bottom:8px">${esc(c.label)}</div>
+          <div style="font-size:10px;color:var(--ink-muted)">${esc(c.q)}</div>
         </button>`).join('')}</div>
-        <p style="text-align:center;font-family:var(--mono);font-size:11px;color:var(--fog);margin-top:16px">横轴：向外 ←→ 向内 · 纵轴：激烈 ↑↓ 低沉</p>`;
+        <p style="text-align:center;font-size:11px;color:var(--ink-muted);margin-top:16px">横轴：向外 ←→ 向内 · 纵轴：激烈 ↑↓ 低沉</p>`;
     } else if (q.kind === 'rank') {
-      const order = cur || q.items.map(x => x.key);
-      const byKey = Object.fromEntries(q.items.map(x => [x.key, x]));
-      body = order.map((k, idx) => {
-        const it = byKey[k];
-        return `
-          <div class="rank-row${idx === 0 ? ' top' : ''}">
-            <span class="rank-num">${idx + 1}</span>
-            <div style="flex:1"><div class="opt-text">${esc(it.text)}</div><div class="opt-sub">${esc(it.sub)}</div></div>
-            <div>
-              <button type="button" class="btn-ghost" data-rank-up="${k}" ${idx === 0 ? 'disabled' : ''}>▲</button>
-              <button type="button" class="btn-ghost" data-rank-down="${k}" ${idx === order.length - 1 ? 'disabled' : ''}>▼</button>
-            </div>
-          </div>`;
-      }).join('') + `<button type="button" class="btn-primary" style="width:100%;margin-top:8px" data-rank-commit="${q.id}">就按这个顺序 →</button>`;
+      const order = Array.isArray(cur) ? cur : [];
+      body = `
+        <p class="rank-hint">按优先级依次点击全部选项；选满后自动继续。</p>
+        <div class="rank-click-grid" data-rank-q="${q.id}">
+          ${q.items.map(it => {
+            const pos = order.indexOf(it.key);
+            return `<button type="button" class="opt-btn rank-opt${pos >= 0 ? ' on' : ''}" data-rank-key="${it.key}">
+              <span class="opt-key">${pos >= 0 ? pos + 1 : '—'}</span>
+              <div><div class="opt-text">${esc(it.text)}</div><div class="opt-sub">${esc(it.sub)}</div></div>
+            </button>`;
+          }).join('')}
+        </div>`;
     }
 
     const secIdx = SECTIONS.indexOf(q.section);
-    const secChips = SECTIONS.map((s, j) => `<span style="color:${j <= secIdx ? 'var(--mist)' : 'var(--fog)'};opacity:${j <= secIdx ? 1 : 0.5}">${s}</span>`).join(' <span style="color:var(--line)">—</span> ');
+    const secChips = SECTIONS.map((s, j) => `<span style="color:${j <= secIdx ? 'var(--ink-soft)' : 'var(--ink-muted)'};opacity:${j <= secIdx ? 1 : 0.5}">${s}</span>`).join(' <span style="color:var(--panel-edge)">—</span> ');
 
     return `
       <div class="q-progress"><span>${secChips}</span><span>${i + 1} / ${QUESTIONS.length}</span></div>
@@ -265,10 +263,10 @@
       ${q.scene ? `<div class="q-scene">场景 · ${esc(q.scene)}</div>` : ''}
       <h2 class="q-title">${esc(q.text)}</h2>
       ${q.subtitle ? `<div class="q-sub">${esc(q.subtitle)}</div>` : ''}
-      <div style="min-height:280px">${body}</div>
+      <div style="min-height:240px">${body}</div>
       <div class="next-bar" style="border-top:none;padding-top:16px">
         <button type="button" class="btn-ghost" id="q-prev" ${i === 0 ? 'disabled' : ''}>← 上一题</button>
-        <span style="font-size:11px;color:var(--fog);font-style:italic">${esc(q.note)}</span>
+        <span style="font-size:11px;color:var(--ink-muted);font-style:italic">${esc(q.note)}</span>
       </div>`;
   }
 
@@ -295,14 +293,14 @@
     const tension = (full.tension_flags || []).map(t => `
       <div style="margin-bottom:10px">
         <div>${esc(t.detail)}</div>
-        <div style="font-size:12px;color:var(--fog);font-style:italic;margin-top:4px">${esc(t.note)}</div>
+        <div style="font-size:12px;color:var(--ink-muted);font-style:italic;margin-top:4px">${esc(t.note)}</div>
       </div>`).join('');
 
     return `
       <h2 class="summary-title">影子已经成形</h2>
-      <p class="summary-sub">Persona agent · <span style="color:var(--glow)">${esc(sourceLabel)}</span>${errorMsg ? ` · ${esc(errorMsg)}` : ''}</p>
-      ${full.tension_flags?.length ? `<div class="tension-box"><div style="font-family:var(--mono);font-size:11px;color:var(--glow);margin-bottom:10px">⚑ 张力点</div>${tension}</div>` : ''}
-      <div class="persona-card">
+      <p class="summary-sub">Persona agent · <span style="color:var(--amber)">${esc(sourceLabel)}</span>${errorMsg ? ` · ${esc(errorMsg)}` : ''}</p>
+      ${full.tension_flags?.length ? `<div class="tension-box snes"><div style="font-size:11px;color:var(--amber);margin-bottom:10px">⚑ 张力点</div>${tension}</div>` : ''}
+      <div class="persona-card snes">
         <h3>影 · ${esc(persona.shadow_name)}</h3>
         <dl>
           <dt>core_tension</dt><dd>${esc(persona.core_tension)}</dd>
@@ -314,19 +312,19 @@
         </dl>
       </div>
       <details>
-        <summary style="cursor:pointer;color:var(--fog);font-family:var(--mono);font-size:12px">full_profile JSON</summary>
+        <summary style="cursor:pointer;color:var(--ink-muted);font-size:12px">full_profile JSON</summary>
         <pre class="json-pre">${esc(JSON.stringify(full, null, 2))}</pre>
       </details>
       <details style="margin-top:12px">
-        <summary style="cursor:pointer;color:var(--fog);font-family:var(--mono);font-size:12px">persona JSON</summary>
+        <summary style="cursor:pointer;color:var(--ink-muted);font-size:12px">persona JSON</summary>
         <pre class="json-pre">${esc(JSON.stringify(persona, null, 2))}</pre>
       </details>
       <div class="summary-actions">
-        <a href="demo-live.html" class="btn-primary" style="text-decoration:none;display:inline-block">Live 全链生成（需 API）</a>
-        <a href="demo.html?from=intake" class="btn-primary" style="text-decoration:none;display:inline-block;background:transparent;color:var(--glow);border:1px solid var(--glow-line)">Mock 预览七年</a>
+        <a href="demo-live.html" class="btn-start">Live 全链生成</a>
+        <a href="demo.html?from=intake" class="btn-ghost">Mock 预览七年</a>
         <button type="button" class="btn-ghost" id="btn-restart">重新采集</button>
       </div>
-      <p class="intake-foot-link"><a href="demo-hub.html">← Demo 入口</a></p>`;
+      <p class="intake-foot-link"><a href="demo-hub.html">← Demo 入口</a> · <a href="demo.html">叙事 Demo</a></p>`;
   }
 
   function renderSummary() {
@@ -385,24 +383,77 @@
       <div class="next-bar">
         ${back ? `<button type="button" class="btn-ghost" data-goto="${back}">← 返回</button>` : '<span></span>'}
         <div style="display:flex;align-items:center;gap:16px">
-          ${hint ? `<span style="font-size:12px;color:var(--fog)">${esc(hint)}</span>` : ''}
-          <button type="button" class="btn-primary" data-goto="${next}" ${can ? '' : 'disabled'}>继续 →</button>
+          ${hint ? `<span style="font-size:12px;color:var(--ink-muted)">${esc(hint)}</span>` : ''}
+          <button type="button" class="btn-start" data-goto="${next}" ${can ? '' : 'disabled'}>继续 →</button>
         </div>
       </div>`;
   }
 
-  function renderNav() {
-    const layers = [['A', '自由说'], ['B', '选标签'], ['C', '十道问']];
-    return layers.map(([k, l], idx) => {
+  function updateChrome() {
+    const tag = document.getElementById('source-tag');
+    const labels = {
+      A: 'STEP 1 · 自由说',
+      B: 'STEP 2 · 选标签',
+      C: 'STEP 3 · 十道问',
+      done: 'Persona · 成形'
+    };
+    if (tag) tag.textContent = `📋 Intake · ${labels[state.layer] || '三层采集'}`;
+
+    const back = document.getElementById('nav-back');
+    if (back) {
+      back.classList.add('visible');
+      back.onclick = () => {
+        if (state.layer === 'done') {
+          state.layer = 'C';
+          state.summary = null;
+          state.summaryStarted = false;
+          render();
+          return;
+        }
+        if (state.layer === 'C' && state.qIndex > 0) {
+          state.qIndex -= 1;
+          state.qStart = Date.now();
+          render();
+          return;
+        }
+        if (state.layer === 'C') {
+          state.layer = 'B';
+          render();
+          return;
+        }
+        if (state.layer === 'B') {
+          state.layer = 'A';
+          render();
+          return;
+        }
+        location.href = 'demo-hub.html';
+      };
+    }
+  }
+
+  function renderLayerNav() {
+    const layers = [
+      ['A', '自由说', '岔路口 · 时间锚点'],
+      ['B', '选标签', 'seed_tags 标签库'],
+      ['C', '十道问', '行为题 · 10 题']
+    ];
+    return layers.map(([k, title, sub], idx) => {
       const active = state.layer === k;
-      const done = (k === 'A' && state.layer !== 'A' && canLayerA()) ||
+      const done =
+        (k === 'A' && state.layer !== 'A' && canLayerA()) ||
         (k === 'B' && (state.layer === 'C' || state.layer === 'done'));
-      return `
-        <button type="button" class="${active ? 'active' : ''}${done ? ' done' : ''}" data-goto="${k}" ${k === 'C' && !canLayerA() ? 'disabled' : ''}>
-          <span class="step-id">${done ? '✓' : `0${idx + 1}`}</span>
-          <span>${l}</span>
-        </button>`;
+      const disabled =
+        (k === 'B' && !canLayerA()) ||
+        (k === 'C' && !canLayerB());
+      return `<button type="button" class="story-chip${active ? ' is-active' : ''}${done ? ' done' : ''}" data-goto="${k}" ${disabled ? 'disabled' : ''}>
+        <span class="story-chip-line">${done && !active ? '✓ ' : ''}${title}</span>
+        <span class="story-chip-name">${sub}</span>
+      </button>`;
     }).join('');
+  }
+
+  function renderNav() {
+    return renderLayerNav();
   }
 
   function render() {
@@ -415,28 +466,23 @@
     else main = renderSummary();
 
     root.innerHTML = `
-      <div class="intake-glow"></div>
-      <div class="intake-road"></div>
-      <div class="intake-wrap">
-        <header class="intake-header">
-          <div>
-            <div class="intake-kicker">SHADOW</div>
-            <h1 class="intake-title">告诉影子，你是谁</h1>
-            <p class="intake-sub">三层采集 → full_profile → Persona agent 推导 persona JSON。</p>
-          </div>
-          <div class="intake-clarity">
-            <svg viewBox="0 0 80 110" width="64" height="88" aria-hidden="true">
-              <ellipse cx="40" cy="28" rx="14" ry="16" fill="var(--cool)" opacity="${0.12 + clarity() * 0.5}"/>
-              <rect x="28" y="44" width="24" height="36" rx="6" fill="var(--cool)" opacity="${0.12 + clarity() * 0.4}"/>
-            </svg>
-            <div class="intake-clarity-num">清晰度 ${Math.round(clarity() * 100)}%</div>
-          </div>
-        </header>
-        ${state.layer !== 'done' ? `<nav class="intake-nav">${renderNav()}</nav>` : ''}
-        <main>${main}</main>
-        <p class="intake-foot-link"><a href="demo.html">← 返回 Demo</a></p>
-      </div>`;
+      <div class="intake-page-head enter-item">
+        <div class="landing-title"><span class="zpix-xxl">Shadow</span></div>
+        <div class="landing-subtitle"><span class="zpix-xl">告诉影子</span></div>
+        <div class="landing-tagline">三层采集 → Persona agent · 与 Demo 同契约</div>
+        <div class="clarity-ring" aria-hidden="true">
+          <svg viewBox="0 0 80 110" width="56" height="76">
+            <ellipse cx="40" cy="28" rx="14" ry="16" fill="var(--amber)" opacity="${0.08 + clarity() * 0.35}"/>
+            <rect x="28" y="44" width="24" height="36" rx="6" fill="var(--sage)" opacity="${0.08 + clarity() * 0.28}"/>
+          </svg>
+          <div class="clarity-ring-num">清晰度 ${Math.round(clarity() * 100)}%</div>
+        </div>
+      </div>
+      ${state.layer !== 'done' ? `<nav class="story-picker intake-layer-nav enter-item" aria-label="采集步骤">${renderLayerNav()}</nav>` : ''}
+      <div class="intake-panel snes enter-item">${main}</div>
+      <p class="intake-foot-link enter-item"><a href="demo-hub.html">Demo 入口</a> · <a href="demo.html">叙事 Mock</a> · <a href="demo-live.html">Live</a></p>`;
 
+    updateChrome();
     bindEvents();
 
     if (state.layer === 'done') {
@@ -451,7 +497,7 @@
         const t = btn.getAttribute('data-goto');
         if (t === 'B' && !canLayerA()) return;
         if (t === 'C' && !canLayerB()) return;
-        if (t === 'C') { state.qStart = Date.now(); }
+        if (t === 'C') { state.qStart = Date.now(); state.qIndex = 0; }
         state.layer = t;
         if (t === 'done') state.layer = 'done';
         render();
@@ -544,32 +590,24 @@
       });
     }
 
-    root.querySelectorAll('[data-rank-up],[data-rank-down]').forEach(btn => {
+    root.querySelectorAll('[data-rank-key]').forEach(btn => {
       btn.addEventListener('click', () => {
-        const q = window.ShadowIntakeQuestions.QUESTIONS[state.qIndex];
-        const order = [...(state.answers[q.id]?.value || q.items.map(x => x.key))];
-        const k = btn.getAttribute('data-rank-up') || btn.getAttribute('data-rank-down');
-        const idx = order.indexOf(k);
-        const dir = btn.hasAttribute('data-rank-up') ? -1 : 1;
-        const to = idx + dir;
-        if (to < 0 || to >= order.length) return;
-        [order[idx], order[to]] = [order[to], order[idx]];
-        state.answers[q.id] = { value: order, durationMs: 0 };
-        render();
+        const grid = btn.closest('[data-rank-q]');
+        const qid = grid?.getAttribute('data-rank-q');
+        const q = window.ShadowIntakeQuestions.QUESTIONS.find(x => x.id === qid);
+        if (!q) return;
+        const key = btn.getAttribute('data-rank-key');
+        let order = [...(state.answers[qid]?.value || [])];
+        const pos = order.indexOf(key);
+        order = pos >= 0 ? order.filter(k => k !== key) : [...order, key];
+        state.answers[qid] = { value: order, durationMs: Date.now() - state.qStart };
+        if (order.length === q.items.length) {
+          setTimeout(advanceQuestion, 400);
+        } else {
+          render();
+        }
       });
     });
-
-    const rankCommit = root.querySelector('[data-rank-commit]');
-    if (rankCommit) {
-      rankCommit.addEventListener('click', () => {
-        const id = rankCommit.getAttribute('data-rank-commit');
-        if (!state.answers[id]) {
-          const q = window.ShadowIntakeQuestions.QUESTIONS[state.qIndex];
-          state.answers[id] = { value: q.items.map(x => x.key), durationMs: Date.now() - state.qStart };
-        }
-        advanceQuestion();
-      });
-    }
 
     const qPrev = document.getElementById('q-prev');
     if (qPrev) {
@@ -620,7 +658,7 @@
       categories().forEach(c => { state.openCats[c.id] = true; });
       render();
     } catch (e) {
-      root.innerHTML = `<div class="intake-loading">加载失败：${esc(e.message)}<br>请用 <code>npm run demo:preview</code> 启动本地服务。</div>`;
+      root.innerHTML = `<div class="intake-loading snes">加载失败：${esc(e.message)}<br>请用 <code>npm run demo:local</code> 启动（http://localhost:3000）</div>`;
     }
   }
 

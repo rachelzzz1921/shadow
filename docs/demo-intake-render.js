@@ -129,6 +129,7 @@
         onChange({ optionKey: cell.key });
         setTimeout(() => onCommit?.(), AUTO_MS);
       });
+      global.ShadowAudio?.bindOptionButton?.(btn);
       grid.appendChild(btn);
     }
     return grid;
@@ -172,6 +173,7 @@
         }
       });
       buttons.push({ btn, opt });
+      global.ShadowAudio?.bindOptionButton?.(btn);
       root.appendChild(btn);
     }
 
@@ -191,12 +193,14 @@
         onChange({ optionKey: opt.key });
         setTimeout(() => onCommit?.(), AUTO_MS);
       });
+      global.ShadowAudio?.bindOptionButton?.(btn);
       root.appendChild(btn);
     }
     return root;
   }
 
   global.ShadowIntakeQuestions = {
+    ...(global.ShadowIntakeQuestions || {}),
     AUTO_MS,
     isAnswered,
     defaultSliderValue,

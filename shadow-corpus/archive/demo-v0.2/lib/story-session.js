@@ -25,7 +25,13 @@ const {
   finishRunTrace
 } = require('./run-trace');
 
-async function startStorySession({ profile, runtime = createLiveRuntime(), trace = null }) {
+async function startStorySession({
+  profile,
+  persona_card: intakePersonaCard = null,
+  full_profile = null,
+  runtime = createLiveRuntime(),
+  trace = null
+}) {
   try {
     const scenario = await classifyProfile(profile);
     appendEvent(trace, {
@@ -45,9 +51,17 @@ async function startStorySession({ profile, runtime = createLiveRuntime(), trace
       scenario_agent: scenario.agent
     };
 
-    appendEvent(trace, { stage: 'persona:start' });
-    const persona_card = await agents.runPersona({ profile: enrichedProfile, runtime });
-    appendEvent(trace, { stage: 'persona:done', payload: { name: persona_card.name } });
+    let persona_card = intakePersonaCard;
+    if (persona_card?.name) {
+      appendEvent(trace, {
+        stage: 'persona:skipped',
+        payload: { name: persona_card.name, from: 'intake' }
+      });
+    } else {
+      appendEvent(trace, { stage: 'persona:start' });
+      persona_card = await agents.runPersona({ profile: enrichedProfile, runtime });
+      appendEvent(trace, { stage: 'persona:done', payload: { name: persona_card.name } });
+    }
 
     appendEvent(trace, { stage: 'beats:start' });
     const beatsResult = await agents.runBeats({ persona_card, profile, runtime });
@@ -60,6 +74,7 @@ async function startStorySession({ profile, runtime = createLiveRuntime(), trace
 
     const session = {
       profile: enrichedProfile,
+      full_profile: full_profile || null,
       scenario,
       persona_card,
       shadow: agents.deriveShadow(persona_card),
@@ -69,7 +84,8 @@ async function startStorySession({ profile, runtime = createLiveRuntime(), trace
       years: [],
       mood: 5,
       esteem: 5,
-      run_id: trace?.run_id || null
+      run_id: trace?.run_id || null,
+      visual_character: full_profile?.visual_character || null
     };
     return session;
   } catch (error) {
