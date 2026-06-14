@@ -7,6 +7,13 @@
       "runtimeArgs": ["run", "dev"],
       "cwd": "${workspaceFolder}/example/shadow-demo",
       "port": 3000
+    },
+    {
+      "name": "shadow-docs",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4200"],
+      "cwd": "${workspaceFolder}/docs",
+      "port": 4200
     }
   ]
 }
