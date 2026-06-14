@@ -1,0 +1,187 @@
+{
+  "_meta": {
+    "index": 5,
+    "story_id": "zhoudran",
+    "line_name": "插画师线",
+    "shadow_name": "周染",
+    "profile": {
+      "choice": "如果当年我没有选计算机，而是去做自由插画师",
+      "keywords": "听话、压着的颜色、怕不稳定",
+      "description": "我填志愿的时候没有犹豫，因为所有人都说计算机好就业。但我其实知道自己想要什么，只是没说出口。",
+      "age": 18
+    },
+    "source": "hand-authored",
+    "extracted_at": "2026-06-14"
+  },
+
+  "shadow_name": "周染",
+
+  "premise": "你没有填计算机。你在志愿表上写下了自己真正想要的东西，然后用七年去承担这个答案。",
+
+  "persona_card": {
+    "name": "周染",
+    "core_traits": ["把想法压在最底下", "靠稳定感获得安全感", "对自己的欲望将信将疑"],
+    "soft_spots": [
+      "每次收入不稳定就觉得是自己不够好，而不是行业问题",
+      "父母一反对她第一反应不是坚持，是怀疑自己选错了"
+    ],
+    "decision_tendency": "在'安全的选择'和'真正想要的'之间，她这辈子只选过一次后者，然后用七年证明这个选择",
+    "growth_seed": "她需要明白，画画这件事不需要被证明是对的，它只需要是真实的"
+  },
+
+  "beats": [
+    { "year": 1, "type": "quiet",   "seed": "第一单接到了，钱很少，但是自己画的" },
+    { "year": 2, "type": "pivotal", "seed": "断单三个月，账户见底，父母说回来考公" },
+    { "year": 3, "type": "quiet",   "seed": "疫情，线上内容需求爆发，单子突然多了" },
+    { "year": 4, "type": "pivotal", "seed": "接了大甲方，改稿二十次，画出来的不是自己的东西" },
+    { "year": 5, "type": "quiet",   "seed": "辞掉大客户，回去画自己想画的，钱又少了" },
+    { "year": 6, "type": "quiet",   "seed": "AI绘画冲击，接单变难，开始怀疑自己" },
+    { "year": 7, "type": "pivotal", "seed": "某天凌晨画完一张没有甲方的画，第一次觉得够了" }
+  ],
+
+  "pivotal_years": [2, 4, 7],
+
+  "memory_stream_template": [
+    { "id": "m1", "year": 1, "type": "event",      "content": "第一单两百块，画了三天，存进银行卡盯着看了很久", "weight": 0.7 },
+    { "id": "m2", "year": 2, "type": "decision",   "content": "断单第三个月，父母打来电话说回来考公，她挂掉了", "weight": 0.9 },
+    { "id": "m3", "year": 3, "type": "event",      "content": "疫情那年接了二十三单，第一次觉得撑住了", "weight": 0.65 },
+    { "id": "m4", "year": 4, "type": "decision",   "content": "大甲方改稿二十次，最后交稿那天她删掉了原始文件", "weight": 0.95 },
+    { "id": "m5", "year": 5, "type": "reflection", "content": "辞掉大客户那天买了新的颜料，贵的那种", "weight": 0.75 },
+    { "id": "m6", "year": 6, "type": "reflection",  "content": "AI出来那年她把自己的画全部打了水印，然后继续画", "weight": 0.7 },
+    { "id": "m7", "year": 7, "type": "decision",   "content": "凌晨两点画完一张没有甲方的画，发给父母，他们说好看", "weight": 0.85 }
+  ],
+
+  "years": [
+    {
+      "year": 1, "age": 19, "is_pivotal": false,
+      "title": "两百块",
+      "scene": "home",
+      "environment": "studio",
+      "pose": "write",
+      "prop": "desk",
+      "city": "city1",
+      "event": "第一单两百块，画了三天。对方说构图可以再调整一下，你调了五版，最后过了。转账到账那天你截了图，存进手机相册。",
+      "decision_made": "没告诉父母接到第一单，因为两百块说出去显得更不值",
+      "intervention_prompt": null,
+      "emotion": "试探", "emotion_value": 5, "new_mood": 5, "new_esteem": 5,
+      "reflection": "那两百块是我画的，不是代码跑出来的。这件事本身让我安静了很久。",
+      "shadow_dialogue": "那张截图我现在还在。",
+      "memory_summary": "第一单两百块，画了三天，存进银行卡盯着看了很久"
+    },
+    {
+      "year": 2, "age": 20, "is_pivotal": true,
+      "title": "第三个月",
+      "scene": "night",
+      "environment": "home",
+      "pose": "hurt",
+      "prop": "phone",
+      "city": "city1",
+      "event": "断单第三个月，房租还有五天到期。父母打来电话，说回来吧，考公还来得及，计算机也行，什么都比这个强。你坐在出租屋地板上，窗外有人在放烟花，你听着电话里的沉默，最后说：我再试试。挂掉之后你打开稿件平台，把接单价格降了三十块，然后去便利店买了一碗泡面。",
+      "decision_made": "没有回去，把接单价格降了，因为放弃比降价更难开口",
+      "intervention_prompt": {
+        "question": "听父母的话回去，还是再撑一段时间？",
+        "options": ["回去", "再撑一段"]
+      },
+      "emotion": "悬", "emotion_value": 2, "new_mood": 2, "new_esteem": 4,
+      "reflection": "那晚我第一次认真想过放弃。但我发现我连怎么放弃都不知道。",
+      "shadow_dialogue": "你问我怎么撑过来的。我说我只是没有想好怎么停。",
+      "memory_summary": "断单第三个月，父母打来电话说回来考公，她挂掉了"
+    },
+    {
+      "year": 3, "age": 21, "is_pivotal": false,
+      "title": "二十三单",
+      "scene": "home",
+      "environment": "studio",
+      "pose": "doing",
+      "prop": "desk",
+      "city": "city1",
+      "event": "疫情那年线上内容需求暴涨，你接了二十三单，第一次觉得账户数字是真实的。",
+      "decision_made": "没有涨价，因为怕单子又消失",
+      "intervention_prompt": null,
+      "emotion": "松了口气", "emotion_value": 6, "new_mood": 6, "new_esteem": 6,
+      "reflection": "原来不是我不够好，是之前时机不对。这个想法让我害怕，因为时机这种东西不由我控制。",
+      "shadow_dialogue": "那年我画了很多，但记住的只有第二十三单交稿那天的天气。",
+      "memory_summary": "疫情那年接了二十三单，第一次觉得撑住了"
+    },
+    {
+      "year": 4, "age": 22, "is_pivotal": true,
+      "title": "第二十次",
+      "scene": "office",
+      "environment": "studio",
+      "pose": "tired",
+      "prop": "laptop",
+      "city": "city5",
+      "event": "大甲方，单价是平时的十倍。对方第一次回稿说风格再商业一点，你改了。第八次说颜色再亮一点，你改了。第二十次改完交稿，对方说：很好，正是我们想要的。你看着那张图，找不到一笔是你的。转账到账那天你把原始文件删了，连草稿一起。晚上你打开一张空白画布，画了一个小时，什么都没画出来，第一次觉得自己的手不是自己的。",
+      "decision_made": "接完这单之后再也没接过这个甲方，但没有告诉任何人原因",
+      "intervention_prompt": {
+        "question": "继续接这个甲方的下一个项目，还是拒掉？",
+        "options": ["继续接", "拒掉"]
+      },
+      "emotion": "空", "emotion_value": 3, "new_mood": 3, "new_esteem": 4,
+      "reflection": "钱是真实的，但那张图不是我画的。我第一次知道这两件事可以同时发生。",
+      "shadow_dialogue": "那笔钱我花掉了。那张图我忘不掉。",
+      "memory_summary": "大甲方改稿二十次，最后交稿那天她删掉了原始文件"
+    },
+    {
+      "year": 5, "age": 23, "is_pivotal": false,
+      "title": "新颜料",
+      "scene": "home",
+      "environment": "studio",
+      "pose": "write",
+      "prop": "desk",
+      "city": "city1",
+      "event": "辞掉大客户那天你去买了新颜料，贵的那种，买完账户只剩下三位数。",
+      "decision_made": "用剩下的钱买了颜料而不是存起来，因为存起来是为了以防万一，买颜料是为了继续画",
+      "intervention_prompt": null,
+      "emotion": "倔", "emotion_value": 6, "new_mood": 6, "new_esteem": 6,
+      "reflection": "那盒颜料我用了两年。每次打开都想起账户那三位数，但不后悔。",
+      "shadow_dialogue": "贵的颜料确实不一样。这是真的。",
+      "memory_summary": "辞掉大客户那天买了新的颜料，贵的那种"
+    },
+    {
+      "year": 6, "age": 24, "is_pivotal": false,
+      "title": "打水印",
+      "scene": "night",
+      "environment": "home",
+      "pose": "type",
+      "prop": "laptop",
+      "city": "city1",
+      "event": "AI绘画火起来那年，接单平台的价格开始往下压。你把自己所有的图全部打上水印，然后继续画。有人问你怕不怕被取代，你说怕，但画笔还在手里。",
+      "decision_made": "没有转行，没有去学AI工具，继续用手画",
+      "intervention_prompt": null,
+      "emotion": "倔强的平静", "emotion_value": 5, "new_mood": 5, "new_esteem": 6,
+      "reflection": "我不知道手绘还能撑多久。但我知道如果我停了，不是因为AI，是因为我自己先放弃了。",
+      "shadow_dialogue": "水印这个动作本身让我平静了，我也说不清楚为什么。",
+      "memory_summary": "AI出来那年她把自己的画全部打了水印，然后继续画"
+    },
+    {
+      "year": 7, "age": 25, "is_pivotal": true,
+      "title": "好看",
+      "scene": "night",
+      "environment": "studio",
+      "pose": "write",
+      "prop": "desk",
+      "city": "city1",
+      "event": "凌晨两点，你画完一张没有甲方的画。没有要求，没有改稿，就是你想画的那棵树，歪的，颜色也不对，但是你的。你发给父母，没有文字，只有图。过了二十分钟，父母回了两个字：好看。你盯着那两个字看了很久，然后去睡觉了。第二天醒来，那张画还在，那两个字还在。",
+      "decision_made": "没有回复父母，因为那两个字已经够了，再说什么都多余",
+      "intervention_prompt": {
+        "question": "回复父母，还是就这样睡觉？",
+        "options": ["回复他们", "就这样睡觉"]
+      },
+      "emotion": "落地", "emotion_value": 7, "new_mood": 7, "new_esteem": 7,
+      "reflection": "七年里我一直在证明这条路是对的。那晚我第一次不需要证明了。",
+      "shadow_dialogue": "那两个字不是终点。但那晚我睡得很好。",
+      "memory_summary": "凌晨两点画完一张没有甲方的画，发给父母，他们说好看"
+    }
+  ],
+
+  "final": {
+    "title": "周染的七年",
+    "message": "我没有变得很成功。断过单，删过稿，有一年账户只剩三位数。但有一天凌晨两点我画完一棵歪的树，发给父母，他们说好看。我不知道这算不算答案。我只知道那棵树是我画的。",
+    "regret": "太晚才明白，画画这件事不需要被证明是对的，只需要是真实的。",
+    "scene": "night",
+    "emotion_arc": "从试探开始，经过断单的悬崖和被甲方掏空的低谷，在AI冲击里倔强撑着，最后在一张没有甲方的画里找到了某种不需要被证明的平静"
+  },
+
+  "final_message": "我没有变得很成功。断过单，删过稿，有一年账户只剩三位数。但有一天凌晨两点我画完一棵歪的树，发给父母，他们说好看。我不知道这算不算答案。我只知道那棵树是我画的。"
+}

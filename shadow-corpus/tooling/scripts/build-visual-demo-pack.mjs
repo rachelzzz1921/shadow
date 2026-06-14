@@ -72,6 +72,18 @@ function main() {
 
   copyAssets();
   copyUniversalPack();
+  copyGoldenStories();
+}
+
+function copyGoldenStories() {
+  const srcDir = path.join(ROOT, 'shadow-corpus/fixtures/golden-stories');
+  const destDir = path.join(DOCS, 'stories');
+  fs.mkdirSync(destDir, { recursive: true });
+  for (const name of fs.readdirSync(srcDir)) {
+    if (!name.endsWith('.json')) continue;
+    fs.copyFileSync(path.join(srcDir, name), path.join(destDir, name));
+  }
+  console.log('copied golden-stories → docs/stories/');
 }
 
 function copyUniversalPack() {

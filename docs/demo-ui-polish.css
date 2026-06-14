@@ -292,4 +292,77 @@ body[data-scenario="friendship"] .yr-scenario-badge { animation-name: badge-glow
   .pixel-scene { height: 120px; }
   .yr-title { transform: scale(1.25); }
   .scenario-legend { gap: 4px; }
+  .story-picker { grid-template-columns: 1fr 1fr; }
+}
+
+/* ═══ 多故事 picker + 一日切片 ═══ */
+.story-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 520px;
+  margin: 0 auto 16px;
+}
+.story-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper-deep);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s, transform 0.12s, box-shadow 0.15s;
+}
+.story-chip:hover {
+  border-color: var(--amber);
+  transform: translateY(-1px);
+}
+.story-chip.is-active {
+  border-color: var(--amber);
+  box-shadow: 0 0 0 2px var(--amber-glow);
+  background: var(--paper);
+}
+.story-chip-line {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.story-chip-name {
+  font-size: 11px;
+  color: var(--ink-muted);
+  font-family: var(--font-mono, monospace);
+}
+.daily-events { margin-top: 12px; }
+.daily-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.daily-list li {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+.daily-list time {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  color: var(--amber-deep);
+}
+.pixel-scene.scene-env-studio .scene-backdrop {
+  background: linear-gradient(180deg, #3a3548 0%, #2a2538 100%);
+}
+.pixel-scene.scene-env-rental-house .scene-backdrop,
+.pixel-scene.scene-env-home-room .scene-backdrop {
+  background: linear-gradient(180deg, #4a4558 0%, #353040 100%);
+}
+.pixel-scene.scene-env-old-street .scene-backdrop {
+  background: linear-gradient(180deg, #5a5040 0%, #3a3530 100%);
 }

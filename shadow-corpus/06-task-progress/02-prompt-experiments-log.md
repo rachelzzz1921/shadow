@@ -4,6 +4,36 @@ Harness Memory：每次改 prompt、模型或 narrative 规则，在此记录，
 
 ---
 
+## 2026-06-14 — 六场景 Agent 人工提示词入库
+
+**Change**
+
+- 微信终稿入库 → `03-coding/prompts/scene-agents/scene-agents-prompts.md`
+- 拆分为 `base-prompt` / `scene-router` / 六域 lens / `output-schema`
+- 新增 `index.mjs`、`archive/demo-v0.2/lib/scene-agents-bridge.js`、`skills/shadow/scene-agents/`
+- 叙事协议追加 Scene Agents 节
+
+**Expected**
+
+- 六域 prompt 可被代码加载；复读 profile 路由到 `academic`
+- Year agent 尚未强制叠加 scene lens（P2 接线）
+
+**Result**
+
+- `test/scene-agents-bridge.test.js` 通过
+- 待 P2：Scene Router LLM + Year system 注入 + golden 回归
+
+**Keep / Revert**
+
+- Keep
+
+**Notes**
+
+- canonical 与分文件需同步维护
+- P2 目标 schema 见 `output-schema.md`（含 `agentTrace`）
+
+---
+
 ## 2026-06-14 — Live session 逐步生成 + intervention threading
 
 **Change**

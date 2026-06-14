@@ -1,0 +1,363 @@
+{
+  "_meta": {
+    "index": 4,
+    "story_id": "heartbeat_line",
+    "line_name": "心动爱情线",
+    "shadow_name": "许星遥",
+    "profile": {
+      "choice": "如果当年我选择了那个让我心动的人",
+      "keywords": [
+        "心动",
+        "现实压力",
+        "勇气与代价"
+      ],
+      "description": "现实里的她嫁给了合适的人，影子里的她选择了那个让她心动的人。",
+      "age": 25,
+      "mbti": "INFJ",
+      "quote": "我不是想重来一次，我只是想知道当时没走的那条路。"
+    },
+    "source": "shadow-corpus/xuxingyao/compiled-v0.1",
+    "extracted_at": "2026-06-14"
+  },
+  "shadow_name": "许星遥",
+  "premise": "三十二岁的你坐在客厅里，看着丈夫在厨房洗碗。窗外下着雨。你忽然想起七年前那个骑电动车送你回家的男生。",
+  "growth_seed": "她最终要学会接受：每条路都有代价，但有些代价值得奔赴。",
+  "persona_card": {
+    "name": "许星遥",
+    "core_traits": [
+      "重感情",
+      "容易心软",
+      "认定后会坚持"
+    ],
+    "soft_spots": [
+      "害怕贫穷失望",
+      "害怕自己赌错"
+    ],
+    "decision_tendency": "总是在现实与感受之间摇摆",
+    "growth_seed": "她需要知道，勇敢并不意味着一定赢。"
+  },
+  "beats": [
+    {
+      "year": 1,
+      "type": "pivotal",
+      "seed": "没有放开那只手"
+    },
+    {
+      "year": 2,
+      "type": "quiet",
+      "seed": "出租屋里的冬天"
+    },
+    {
+      "year": 3,
+      "type": "pivotal",
+      "seed": "第一次因为钱争吵"
+    },
+    {
+      "year": 4,
+      "type": "quiet",
+      "seed": "看见别人结婚"
+    },
+    {
+      "year": 5,
+      "type": "pivotal",
+      "seed": "没有等来的求婚"
+    },
+    {
+      "year": 6,
+      "type": "quiet",
+      "seed": "开始怀疑自己的选择"
+    },
+    {
+      "year": 7,
+      "type": "pivotal",
+      "seed": "终于理解什么叫遗憾"
+    }
+  ],
+  "pivotal_years": [1, 3, 5, 7],
+
+  "memory_stream": [
+    {
+      "id": "m1",
+      "year": 1,
+      "type": "decision",
+      "content": "没有听父母的话，选择了心动的人",
+      "weight": 0.95
+    },
+    {
+      "id": "m2",
+      "year": 2,
+      "type": "event",
+      "content": "在十八平米出租屋过冬",
+      "weight": 0.7
+    },
+    {
+      "id": "m3",
+      "year": 3,
+      "type": "event",
+      "content": "第一次因为现实问题争吵",
+      "weight": 0.9
+    },
+    {
+      "id": "m4",
+      "year": 4,
+      "type": "reflection",
+      "content": "发现爱情无法屏蔽自卑",
+      "weight": 0.8
+    },
+    {
+      "id": "m5",
+      "year": 5,
+      "type": "event",
+      "content": "生日那天没有等来求婚",
+      "weight": 0.95
+    },
+    {
+      "id": "m6",
+      "year": 6,
+      "type": "reflection",
+      "content": "开始频繁想起另一种人生",
+      "weight": 0.85
+    },
+    {
+      "id": "m7",
+      "type": "reflection",
+      "year": 7,
+      "content": "终于明白每条路都会失望",
+      "weight": 0.98
+    }
+  ],
+  "years": [
+    {
+      "year": 1,
+      "age": 25,
+      "is_pivotal": true,
+      "title": "没有松开的手",
+      "scene": "summer-night",
+      "environment": "old-street",
+      "event": "父母最后一次反对这段关系。那天晚上他送你回家，在楼下站了两个小时。临走前他说，如果你害怕的话，我们就到这里。你看着他，没有松手。",
+      "daily_events": [
+        {
+          "time": "18:20",
+          "content": "母亲说：喜欢不能当饭吃。"
+        },
+        {
+          "time": "20:45",
+          "content": "你们坐在便利店门口喝同一瓶可乐。"
+        },
+        {
+          "time": "23:12",
+          "content": "他说：我现在什么都没有。"
+        },
+        {
+          "time": "23:13",
+          "content": "你说：那就一起慢慢有。"
+        }
+      ],
+      "decision_made": "继续这段关系",
+      "emotion": "坚定",
+      "emotion_value": 8,
+      "reflection": "第一次没有选最正确的答案。",
+      "shadow_dialogue": "我想看看喜欢到底能走多远。"
+    },
+    {
+      "year": 2,
+      "age": 26,
+      "is_pivotal": false,
+      "title": "出租屋的冬天",
+      "scene": "winter-room",
+      "environment": "rental-house",
+      "event": "你们搬进十八平米出租屋。厕所漏水，空调制热坏，窗户关不严。",
+      "daily_events": [
+        {
+          "time": "07:10",
+          "content": "起床时房间只有十一度。"
+        },
+        {
+          "time": "19:30",
+          "content": "他加班到九点。"
+        },
+        {
+          "time": "22:45",
+          "content": "你们点着手机灯吃泡面。"
+        },
+        {
+          "time": "23:00",
+          "content": "他说以后会换大的房子。"
+        }
+      ],
+      "decision_made": "继续相信未来",
+      "emotion": "期待",
+      "emotion_value": 7,
+      "reflection": "穷是真的穷，但快乐也是真的快乐。",
+      "shadow_dialogue": "那时候我真的以为以后会越来越好。"
+    },
+    {
+      "year": 3,
+      "age": 27,
+      "is_pivotal": true,
+      "title": "五百块钱",
+      "scene": "apartment",
+      "event": "你们第一次激烈争吵，只因为五百块钱。",
+      "daily_events": [
+        {
+          "time": "14:20",
+          "content": "你买了一条喜欢很久的裙子。"
+        },
+        {
+          "time": "19:00",
+          "content": "他看到账单后沉默了。"
+        },
+        {
+          "time": "22:16",
+          "content": "他说最近压力很大。"
+        },
+        {
+          "time": "23:01",
+          "content": "这是你们第一次分房睡。"
+        }
+      ],
+      "decision_made": "没有分手",
+      "emotion": "失望",
+      "emotion_value": 6,
+      "reflection": "爱情不会输给贫穷，但会输给长期的压力。",
+      "shadow_dialogue": "我第一次发现喜欢解决不了所有问题。"
+    },
+    {
+      "year": 4,
+      "age": 28,
+      "is_pivotal": false,
+      "title": "婚礼",
+      "scene": "hotel",
+      "environment": "wedding",
+      "event": "大学室友结婚。新郎是公务员，房子全款。",
+      "daily_events": [
+        {
+          "time": "17:50",
+          "content": "朋友问你们什么时候结婚。"
+        },
+        {
+          "time": "18:30",
+          "content": "你笑着说快了。"
+        },
+        {
+          "time": "21:40",
+          "content": "回家路上你们一路沉默。"
+        },
+        {
+          "time": "23:15",
+          "content": "他睡前打开招聘软件。"
+        }
+      ],
+      "decision_made": "继续向前",
+      "emotion": "复杂",
+      "emotion_value": 6,
+      "reflection": "比较不会毁掉爱情，自卑会。",
+      "shadow_dialogue": "那天晚上他一夜没睡。"
+    },
+    {
+      "year": 5,
+      "age": 29,
+      "is_pivotal": true,
+      "title": "没有等来的戒指",
+      "scene": "restaurant",
+      "environment": "birthday",
+      "event": "你以为会被求婚。",
+      "daily_events": [
+        {
+          "time": "12:00",
+          "content": "同事起哄说今晚是求婚。"
+        },
+        {
+          "time": "18:40",
+          "content": "你认真化了妆。"
+        },
+        {
+          "time": "20:15",
+          "content": "你们只是吃了一顿火锅。"
+        },
+        {
+          "time": "23:30",
+          "content": "回家后你一个人在卫生间哭。"
+        }
+      ],
+      "intervention_prompt": {
+        "question": "继续等待，还是开始怀疑这段关系？",
+        "options": [
+          "继续等待",
+          "产生动摇"
+        ]
+      },
+      "emotion": "委屈",
+      "emotion_value": 8,
+      "reflection": "我难过的不是没有戒指，而是开始羡慕别人的人生。",
+      "shadow_dialogue": "第一次，我想起了另一条路。"
+    },
+    {
+      "year": 6,
+      "age": 30,
+      "is_pivotal": false,
+      "title": "如果",
+      "scene": "home-room",
+      "environment": "phone-light",
+      "event": "你开始频繁想起另一种人生。",
+      "daily_events": [
+        {
+          "time": "21:30",
+          "content": "刷到曾经相亲对象的婚礼照片。"
+        },
+        {
+          "time": "23:15",
+          "content": "照片里有房子，有孩子，笑得从容。"
+        },
+        {
+          "time": "02:10",
+          "content": "你第一次认真想：如果当年呢？"
+        }
+      ],
+      "decision_made": "继续留在关系里",
+      "emotion": "摇摆",
+      "emotion_value": 7,
+      "reflection": "原来每条路都有遗憾。",
+      "shadow_dialogue": "你在想他，我也在想你。"
+    },
+    {
+      "year": 7,
+      "age": 31,
+      "is_pivotal": true,
+      "title": "风景",
+      "scene": "road",
+      "environment": "rain-dusk",
+      "event": "你们最终还是结婚了，没有盛大婚礼，只是凑活过日子。翻出七年前的聊天记录，那一刻终于和解。",
+      "daily_events": [
+        {
+          "time": "19:45",
+          "content": "雨里你们坐在便利店门口。"
+        },
+        {
+          "time": "20:10",
+          "content": "只是想起当年那条路。"
+        },
+        {
+          "time": "21:10",
+          "content": "你突然笑了。"
+        }
+      ],
+      "intervention_prompt": null,
+      "emotion": "释然",
+      "emotion_value": 8,
+      "reflection": "这条路有苦，但也有独一份的温柔。",
+      "shadow_dialogue": "每条路都会有遗憾，但我不后悔自己的选择。",
+      "memory_summary": "与自己的选择和解"
+    }
+  ],
+
+  "final": {
+    "title": "许星遥的七年",
+    "message": "我们没有盛大的婚礼，也没有全款的房子。但七年后的某个雨夜，坐在便利店门口，我突然笑了——不是因为得到了什么，而是因为终于不再想象另一种人生。",
+    "regret": "没有早一点明白：比较不会毁掉爱情，自卑才会。",
+    "scene": "rain",
+    "emotion_arc": "从坚定选择心动，经过贫穷与争吵的磨损，在羡慕与动摇里反复，最终在普通日子里与自己的选择和解"
+  },
+
+  "final_message": "每条路都会有遗憾，但我不后悔自己的选择。"
+}

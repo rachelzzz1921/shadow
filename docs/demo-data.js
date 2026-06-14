@@ -9,7 +9,9 @@
  */
 'use strict';
 
-const STORY = {
+const STORY_FUXDUXIAN = {
+  id: 'fuxduxian',
+  line_name: '复读线',
   profile: {
     choice: '如果当年我去复读了',
     age: 18,
@@ -171,7 +173,18 @@ const ENV_LABELS = {
   office: '办公室',
   home: '家',
   hospital: '医院',
-  studio: '工作室'
+  studio: '工作室',
+  'old-street': '老街',
+  'rental-house': '出租屋',
+  wedding: '婚礼',
+  birthday: '生日',
+  'phone-light': '深夜',
+  'rain-dusk': '雨暮',
+  apartment: '公寓',
+  'home-room': '房间',
+  restaurant: '餐厅',
+  hotel: '婚宴',
+  road: '路口'
 };
 
 const V2_VISUAL = {
@@ -197,8 +210,12 @@ function normalizeYear(year) {
       emotion: { label: year.emotion, value: year.emotion_value ?? 5 }
     };
   }
-  const v2 = V2_VISUAL[year.year];
-  return v2 ? { ...out, ...v2 } : out;
+  const story = window.ShadowDemo?.STORY;
+  if (story?._visual_v2 || story?.id === 'fuxduxian') {
+    const v2 = V2_VISUAL[year.year];
+    return v2 ? { ...out, ...v2 } : out;
+  }
+  return out;
 }
 
 /**
@@ -284,20 +301,22 @@ const ShadowAgents = {
 
 /** @param {number} yearNum */
 function getBeatForYear(yearNum) {
-  return STORY.beats.find(b => b.year === yearNum) ?? null;
+  return window.ShadowDemo.STORY.beats.find(b => b.year === yearNum) ?? null;
 }
 
 /** @param {number} yearNum */
 function getMemoriesForYear(yearNum) {
-  return STORY.memory_stream.filter(m => m.year === yearNum);
+  return window.ShadowDemo.STORY.memory_stream.filter(m => m.year === yearNum);
 }
 
 function shadowDisplayName() {
-  return `影 · ${STORY.persona_card.name}`;
+  return `影 · ${window.ShadowDemo.STORY.persona_card.name}`;
 }
 
 /** 若 intake.html 已写入 sessionStorage，覆盖 landing 人格卡预览 */
 function applyIntakeFromSession() {
+  const STORY = window.ShadowDemo?.STORY;
+  if (!STORY) return false;
   try {
     const rawPersona = sessionStorage.getItem('shadow_persona');
     const rawProfile = sessionStorage.getItem('shadow_full_profile');
@@ -351,10 +370,10 @@ function applyIntakeFromSession() {
   }
 }
 
-applyIntakeFromSession();
-
 /** Live 全链生成结果注入（demo-live.html → demo.html?live=1） */
 function applyLiveFromSession() {
+  const STORY = window.ShadowDemo?.STORY;
+  if (!STORY) return false;
   try {
     const raw = sessionStorage.getItem('shadow_live_session');
     if (!raw) return false;
@@ -382,12 +401,12 @@ function applyLiveFromSession() {
   }
 }
 
-if (typeof URLSearchParams !== 'undefined' && new URLSearchParams(location.search).get('live') === '1') {
-  applyLiveFromSession();
-}
+/** 当前 Mock 故事（bootstrap 前为复读线） */
+let STORY = STORY_FUXDUXIAN;
 
 window.ShadowDemo = {
   STORY,
+  STORY_FUXDUXIAN,
   ENV_LABELS,
   ShadowAgents,
   normalizeYear,

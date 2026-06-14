@@ -1,0 +1,187 @@
+{
+  "_meta": {
+    "index": 4,
+    "story_id": "linwan",
+    "line_name": "出国读研线",
+    "shadow_name": "林晚",
+    "profile": {
+      "choice": "如果当年我没有考公，而是自己攒钱出国读研",
+      "keywords": "乖、野心、怕被看穿",
+      "description": "我从小听话，但听话从来不是因为我真的觉得那条路对。我只是不知道怎么开口说我想要别的。",
+      "age": 22
+    },
+    "source": "hand-authored",
+    "extracted_at": "2026-06-14"
+  },
+
+  "shadow_name": "林晚",
+
+  "premise": "你瞒着所有人买了那张机票。落地的时候是凌晨，伦敦的空气比你想象的冷。",
+
+  "persona_card": {
+    "name": "林晚",
+    "core_traits": ["用乖换安全感", "野心压在最底下", "一个人扛到底"],
+    "soft_spots": [
+      "以为只要做到了就能让父母回头，但她从不承认自己在等",
+      "每次被人否定第一反应不是愤怒而是更拼命证明自己"
+    ],
+    "decision_tendency": "在'让别人放心'和'让自己不后悔'之间，她这辈子只选过一次后者",
+    "growth_seed": "她需要明白，靠自己不是因为强，是因为那张安全网已经不在了——而她其实早就准备好了"
+  },
+
+  "beats": [
+    { "year": 1, "type": "quiet",   "seed": "落地英国，第一个冬天，一个人搬进宿舍" },
+    { "year": 2, "type": "pivotal", "seed": "打电话告诉父母，电话被挂掉" },
+    { "year": 3, "type": "quiet",   "seed": "被中介骗的钱追不回来，一个人处理" },
+    { "year": 4, "type": "pivotal", "seed": "拿到第一份英国工作offer，决定留下来" },
+    { "year": 5, "type": "quiet",   "seed": "意识到自己回不去了，也不想回去了" },
+    { "year": 6, "type": "quiet",   "seed": "生活开始有自己的形状，父母那个洞还在" },
+    { "year": 7, "type": "pivotal", "seed": "给父母发了一条消息，没有等到回复" }
+  ],
+
+  "pivotal_years": [2, 4, 7],
+
+  "memory_stream_template": [
+    { "id": "m1", "year": 1, "type": "event",      "content": "伦敦宿舍第一夜，暖气坏了，用外套当被子睡到天亮", "weight": 0.7 },
+    { "id": "m2", "year": 2, "type": "decision",   "content": "电话里说出'我在英国了'，听见父亲挂断的那一声", "weight": 0.95 },
+    { "id": "m3", "year": 3, "type": "event",      "content": "中介卷走两万块，报警无果，自己补交了学费", "weight": 0.75 },
+    { "id": "m4", "year": 4, "type": "decision",   "content": "签了留英工作合同，没有打电话告诉任何人", "weight": 0.9 },
+    { "id": "m5", "year": 5, "type": "reflection", "content": "护照续签那天，填紧急联系人一栏，空着交上去了", "weight": 0.8 },
+    { "id": "m6", "year": 6, "type": "reflection",  "content": "第一次请同事来家吃饭，做了红烧肉，没有人知道这是她妈教的", "weight": 0.65 },
+    { "id": "m7", "year": 7, "type": "decision",   "content": "给父母发了一条消息，写了删，删了写，最后发出去，没有回复", "weight": 0.85 }
+  ],
+
+  "years": [
+    {
+      "year": 1, "age": 24, "is_pivotal": false,
+      "title": "暖气坏了",
+      "scene": "rain",
+      "environment": "dorm_night",
+      "pose": "wait",
+      "prop": "suitcase",
+      "city": "city3",
+      "event": "落地那晚宿舍暖气坏了，你用外套压着被子睡到天亮。课上有人学你说话，你听懂了，没有回头。",
+      "decision_made": "没有哭，把那口气咽下去，告诉自己习惯了就好",
+      "intervention_prompt": null,
+      "emotion": "惶恐", "emotion_value": 3, "new_mood": 3, "new_esteem": 5,
+      "reflection": "我以为出来了就自由了，原来自由的第一关是冷。",
+      "shadow_dialogue": "那件外套我现在还留着。",
+      "memory_summary": "伦敦宿舍第一夜，暖气坏了，用外套当被子睡到天亮"
+    },
+    {
+      "year": 2, "age": 25, "is_pivotal": true,
+      "title": "挂断",
+      "scene": "night",
+      "environment": "dorm_night",
+      "pose": "phone",
+      "prop": "phone",
+      "city": "city3",
+      "event": "期末考完那天你给家里打了电话。你说：妈，我在英国。电话那头沉默了很久，然后是父亲的声音：你自己决定的，以后也自己过。嘟的一声，挂掉了。你坐在床边，窗外路灯是橘黄色的，和国内不一样。你没有哭，只是突然很想吃一碗热的东西。下楼去便利店，买了一盒泡面，站在街上吃完，风很大。",
+      "decision_made": "没有再打回去，因为不知道还能说什么",
+      "intervention_prompt": {
+        "question": "再打一次电话解释，还是就这样等他们先开口？",
+        "options": ["再打一次", "等他们开口"]
+      },
+      "emotion": "崩", "emotion_value": 2, "new_mood": 2, "new_esteem": 5,
+      "reflection": "原来最重的不是他们不理解，是那声挂断我早就预料到了。",
+      "shadow_dialogue": "你问我后不后悔打那个电话。我问你，不打你能睡着吗。",
+      "memory_summary": "电话里说出'我在英国了'，听见父亲挂断的那一声"
+    },
+    {
+      "year": 3, "age": 26, "is_pivotal": false,
+      "title": "两万块",
+      "scene": "rain",
+      "environment": "home",
+      "pose": "hurt",
+      "prop": "desk",
+      "city": "city3",
+      "event": "中介跑路，两万块追不回来。你报了警，警察说跨境案件难处理。你挂掉电话，把剩下的钱算了一遍，够交学费，不够吃饭。你在学校找了份咖啡馆兼职，每周三个早班，五点半起。",
+      "decision_made": "没告诉父母，因为告诉了也只会换来'活该'",
+      "intervention_prompt": null,
+      "emotion": "钝痛", "emotion_value": 3, "new_mood": 3, "new_esteem": 5,
+      "reflection": "我开始明白，靠自己不是一种选择，是唯一的选项。",
+      "shadow_dialogue": "那段时间我记得最清楚的是咖啡馆的洗手池，每天五点半的冷水。",
+      "memory_summary": "中介卷走两万块，报警无果，自己补交了学费"
+    },
+    {
+      "year": 4, "age": 27, "is_pivotal": true,
+      "title": "签了",
+      "scene": "office",
+      "environment": "office",
+      "pose": "doing",
+      "prop": "desk",
+      "city": "city3",
+      "event": "毕业前两个月，你拿到一家伦敦公司的offer。HR问你能不能六月入职，你说可以，挂掉电话在椅子上坐了很久。窗外是灰色的天，你想给人打个电话分享，翻了通讯录，不知道打给谁。最后发了一条朋友圈，只写了三个字：留下了。没有人评论，因为你已经三年没发过朋友圈了。",
+      "decision_made": "签了合同，没有打电话告诉父母，因为不需要他们同意了",
+      "intervention_prompt": {
+        "question": "告诉父母自己决定留在英国，还是继续沉默？",
+        "options": ["告诉父母", "继续沉默"]
+      },
+      "emotion": "燃", "emotion_value": 7, "new_mood": 7, "new_esteem": 8,
+      "reflection": "我第一次做了一个不需要任何人点头的决定。",
+      "shadow_dialogue": "那条朋友圈我后来删了，但那三个字我记得。",
+      "memory_summary": "签了留英工作合同，没有打电话告诉任何人"
+    },
+    {
+      "year": 5, "age": 28, "is_pivotal": false,
+      "title": "紧急联系人",
+      "scene": "office",
+      "environment": "office",
+      "pose": "write",
+      "prop": "desk",
+      "city": "city3",
+      "event": "护照续签，表格里有一栏：紧急联系人。你盯着那一行看了很久，最后空着交上去了。",
+      "decision_made": "没有填父母的名字，因为不确定他们还愿不愿意被联系",
+      "intervention_prompt": null,
+      "emotion": "空", "emotion_value": 4, "new_mood": 4, "new_esteem": 6,
+      "reflection": "那一栏空着，不是因为没有人，是因为我不确定我还算不算他们的人。",
+      "shadow_dialogue": "后来我填了一个朋友的名字。也挺好的。",
+      "memory_summary": "护照续签那天，填紧急联系人一栏，空着交上去了"
+    },
+    {
+      "year": 6, "age": 29, "is_pivotal": false,
+      "title": "红烧肉",
+      "scene": "home",
+      "environment": "home",
+      "pose": "doing",
+      "prop": "desk",
+      "city": "city3",
+      "event": "你第一次请同事来家里吃饭，做了红烧肉。有人问你在哪学的，你说家里。没有再说下去。",
+      "decision_made": "没有提父母，把那部分收进去，像收一件不常穿的衣服",
+      "intervention_prompt": null,
+      "emotion": "稳", "emotion_value": 6, "new_mood": 6, "new_esteem": 7,
+      "reflection": "生活开始有自己的味道了，只是有些味道是别人教的，我没办法假装忘记。",
+      "shadow_dialogue": "红烧肉我现在还会做，只是分量越来越小。",
+      "memory_summary": "第一次请同事来家吃饭，做了红烧肉，没有人知道这是她妈教的"
+    },
+    {
+      "year": 7, "age": 30, "is_pivotal": true,
+      "title": "发出去了",
+      "scene": "night",
+      "environment": "home",
+      "pose": "phone",
+      "prop": "phone",
+      "city": "city3",
+      "event": "某个普通的夜晚，你打开和父母的对话框，那里已经三年没有新消息了。你写了：我在这里过得还好，不用担心。写了删，删了写，改成：我还在。发出去了。两个灰色的勾，没有变蓝。你把手机扣在桌上，去洗了碗，晾好衣服，睡前看了一眼，还是灰色的。你关掉屏幕，睡着了。",
+      "decision_made": "发出去了，但没有等，因为等不等已经不影响明天",
+      "intervention_prompt": {
+        "question": "继续等父母回复，还是关掉手机先睡？",
+        "options": ["继续等", "关掉手机睡觉"]
+      },
+      "emotion": "落地", "emotion_value": 6, "new_mood": 6, "new_esteem": 7,
+      "reflection": "我不知道他们看没看见。但我知道我发出去了，这已经是我能做的全部。",
+      "shadow_dialogue": "那两个灰色的勾，我现在想起来还是会看一眼手机。",
+      "memory_summary": "给父母发了一条消息，写了删删了写，最后发出去，没有回复"
+    }
+  ],
+
+  "final": {
+    "title": "林晚的七年",
+    "message": "我没有等到他们回复。但我在伦敦住了七年，交了税，续了签，学会了一个人过节。有时候做红烧肉，会想起我妈站在灶台边的样子。我没有原谅任何人，也没有怪任何人。我只是还在。",
+    "regret": "没有早一点知道，靠自己和被爱，其实可以同时存在。",
+    "scene": "night",
+    "emotion_arc": "从惶恐落地，经过被挂断的崩，一个人扛过去，在异乡长出自己的形状，最后在一条没有回复的消息里找到了某种平静"
+  },
+
+  "final_message": "我没有等到他们回复。但我在伦敦住了七年，交了税，续了签，学会了一个人过节。有时候做红烧肉，会想起我妈站在灶台边的样子。我没有原谅任何人，也没有怪任何人。我只是还在。"
+}

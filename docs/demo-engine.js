@@ -4,16 +4,16 @@
 'use strict';
 
 (function initShadowDemoEngine() {
-  const { STORY, ENV_LABELS, ShadowAgents, normalizeYear, getBeatForYear, getMemoriesForYear, shadowDisplayName } = window.ShadowDemo;
+  const getStory = () => window.ShadowDemo.STORY;
+  const { ENV_LABELS, ShadowAgents, normalizeYear, getBeatForYear, getMemoriesForYear, shadowDisplayName } = window.ShadowDemo;
   const T = window.ShadowTransitions;
   const Sc = window.ShadowScenarios;
 
   const LANDING_PAGE = 0;
   const YEAR_START = 1;
-  const FINAL_PAGE = 1 + STORY.years.length;
-
+  function getFinalPage() { return 1 + getStory().years.length; }
+  function getTotalPages() { return getFinalPage() + 1; }
   let currentPage = LANDING_PAGE;
-  const totalPages = FINAL_PAGE + 1;
   let dialogTimer = null;
   /** @type {Array<{year:number, choice:string}>} */
   const userInterventions = [];
@@ -34,7 +34,7 @@
   }
 
   function buildYearTimeline(currentYear) {
-    return `<div class="yr-timeline enter-item" aria-hidden="true">${STORY.years.map(y => {
+    return `<div class="yr-timeline enter-item" aria-hidden="true">${getStory().years.map(y => {
       let cls = 'yr-timeline-seg';
       if (y.year < currentYear) cls += ' past';
       if (y.year === currentYear) cls += ' current';
@@ -47,17 +47,19 @@
   function buildPixelScene(year) {
     const env = year.environment || 'classroom';
     const mood = year.scene || 'city';
-    const scenario = year.scenario || STORY.scenario_primary || 'academic';
+    const scenario = year.scenario || getStory().scenario_primary || 'academic';
     const extras = [];
 
     if (env === 'classroom') extras.push('<div class="scene-window"></div>');
     if (env === 'dorm_night') extras.push('<div class="scene-moon"></div>');
     if (env === 'stage') extras.push('<div class="scene-spotlight"></div>');
     if (env === 'postoffice') extras.push('<div class="scene-sage"></div>');
+    if (env === 'studio') extras.push('<div class="scene-spotlight"></div>');
+    if (env === 'rental-house' || env === 'home-room') extras.push('<div class="scene-moon"></div>');
 
     const fx = [];
-    if (mood === 'rain') fx.push('<div class="scene-fx scene-fx-rain"></div>');
-    if (mood === 'night') fx.push('<div class="scene-fx scene-fx-night"></div>');
+    if (mood === 'rain' || mood === 'summer-night') fx.push('<div class="scene-fx scene-fx-rain"></div>');
+    if (mood === 'night' || mood === 'winter-room') fx.push('<div class="scene-fx scene-fx-night"></div>');
 
     return `
       <div class="pixel-scene enter-item scene-env-${env} scene-mood-${mood} scene-scenario-${scenario}" data-environment="${env}" data-scenario="${scenario}">
@@ -84,7 +86,7 @@
 
   function buildYearPage(rawYear) {
     const year = normalizeYear(rawYear);
-    const scenario = year.scenario || STORY.scenario_primary || 'academic';
+    const scenario = year.scenario || getStory().scenario_primary || 'academic';
     const theme = Sc?.getTheme(scenario);
     const page = document.createElement('div');
     page.className = `page p-year${year.is_pivotal ? ' pivotal-year' : ' quiet-year'}`;
@@ -119,6 +121,15 @@
         </div>`
       : '';
 
+    const dailyHtml = Array.isArray(year.daily_events) && year.daily_events.length
+      ? `<div class="daily-events snes-inset enter-item">
+          <div class="section-label">◈ 一日切片</div>
+          <ul class="daily-list">${year.daily_events.map(d =>
+            `<li><time>${esc(d.time)}</time><span>${esc(d.content)}</span></li>`
+          ).join('')}</ul>
+        </div>`
+      : '';
+
     page.innerHTML = `
       ${buildPixelScene(year)}
 
@@ -144,6 +155,8 @@
           <div class="section-label">◈ 这一年发生了</div>
           <div class="main-event snes-inset${year.is_pivotal ? '' : ' quiet-event'}">${esc(year.event)}</div>
         </div>
+
+        ${dailyHtml}
 
         <div class="two-col enter-item">
           <div class="info-block snes-inset">
@@ -187,10 +200,11 @@
   }
 
   function buildFinalPage() {
-    const f = STORY.final;
-    const scenario = STORY.scenario_secondary || 'self_growth';
+    const f = getStory().final;
+    const scenario = getStory().scenario_secondary || 'self_growth';
     const theme = Sc?.getTheme(scenario);
-    const arcSteps = STORY.years.map(y =>
+    const finalEnv = f.scene === 'rain' ? 'trainstation' : (f.scene === 'night' ? 'home' : 'postoffice');
+    const arcSteps = getStory().years.map(y =>
       `<span class="arc-step" style="--h:${Math.max(8, y.new_mood * 10)}%" data-y="${y.year}"></span>`
     ).join('');
     const page = document.createElement('div');
@@ -199,7 +213,7 @@
     page.dataset.scenario = scenario;
 
     page.innerHTML = `
-      <div class="pixel-scene enter-item scene-env-postoffice scene-mood-city scene-scenario-${scenario}" data-environment="postoffice" data-scenario="${scenario}">
+      <div class="pixel-scene enter-item scene-env-${finalEnv} scene-mood-${f.scene || 'city'} scene-scenario-${scenario}" data-environment="${finalEnv}" data-scenario="${scenario}">
         <span class="scene-corner tl" aria-hidden="true"></span>
         <span class="scene-corner tr" aria-hidden="true"></span>
         <span class="scene-corner bl" aria-hidden="true"></span>
@@ -209,7 +223,7 @@
         <div class="scene-floor"></div>
         <div class="scene-sage"></div>
         <div class="scene-tag snes-inset">
-          <span>和解 · 邮局</span>
+          <span>和解 · ${esc(getStory().line_name || '七年')}</span>
           <span>◆ FINAL</span>
         </div>
       </div>
@@ -235,13 +249,13 @@
         <div class="insight-block snes-inset enter-item">
           <div class="insight-diamond"></div>
           <div class="insight-label">◆ 遗憾 ◆</div>
-          <p class="insight-text">「${esc(f.regret)}」</p>
+          <p class="insight-text">「${esc(f.regret || '—')}」</p>
         </div>
 
         <div class="insight-block snes-inset reconcile-block enter-item">
           <div class="insight-diamond"></div>
           <div class="insight-label">◇ 和解 ◇</div>
-          <p class="insight-text">够了。在低处找到一种安静的平稳。</p>
+          <p class="insight-text">${esc((f.message || '').split('。').filter(Boolean)[0] ? (f.message.split('。').filter(Boolean)[0] + '。') : '七年走过，影子仍在。')}</p>
         </div>
 
         <div class="emo-arc enter-item">
@@ -261,8 +275,8 @@
   }
 
   function buildLandingProfile() {
-    const p = STORY.profile;
-    const c = STORY.persona_card;
+    const p = getStory().profile;
+    const c = getStory().persona_card;
     const el = document.getElementById('profile-teaser');
     if (!el) return;
 
@@ -275,7 +289,7 @@
         </div>
       </div>
       <div class="pt-meta">${esc(p.mbti || '')} · ${p.age} 岁 · ${(p.keywords || []).join(' · ')}</div>
-      <div class="pt-concept">${esc(STORY.premise)}</div>
+      <div class="pt-concept">${esc(getStory().premise)}</div>
       <details class="persona-details">
         <summary>人格卡 persona_card${c._from_intake ? ' · 来自 Intake' : ''}</summary>
         <ul class="persona-list">
@@ -301,7 +315,7 @@
   function buildYearDots() {
     const indicator = document.getElementById('page-indicator');
     indicator.innerHTML = '';
-    STORY.years.forEach((node, i) => {
+    getStory().years.forEach((node, i) => {
       const dot = document.createElement('button');
       dot.type = 'button';
       dot.className = 'dot' + (node.is_pivotal ? ' key' : '');
@@ -316,14 +330,14 @@
     finalDot.className = 'dot';
     finalDot.title = '七年后的回信';
     finalDot.setAttribute('aria-label', finalDot.title);
-    finalDot.onclick = () => goToPage(FINAL_PAGE);
+    finalDot.onclick = () => goToPage(getFinalPage());
     indicator.appendChild(finalDot);
   }
 
   function buildLandingYearDots() {
     const container = document.getElementById('year-dots-landing');
     container.innerHTML = '';
-    STORY.years.forEach((node, i) => {
+    getStory().years.forEach((node, i) => {
       const el = document.createElement('button');
       el.type = 'button';
       el.className = 'yr-dot';
@@ -347,11 +361,11 @@
   }
 
   function goToPage(n) {
-    const target = Math.max(0, Math.min(totalPages - 1, n));
+    const target = Math.max(0, Math.min(getTotalPages() - 1, n));
     if (target === currentPage) return;
 
     const direction = target > currentPage ? 1 : -1;
-    const scenarioKey = Sc?.scenarioForPage(target, STORY) || 'academic';
+    const scenarioKey = Sc?.scenarioForPage(target, getStory()) || 'academic';
 
     const run = () => {
       currentPage = target;
@@ -380,7 +394,8 @@
     const tag = document.getElementById('source-tag');
     if (!tag || currentPage === LANDING_PAGE) return;
     const theme = Sc?.getTheme(scenarioKey);
-    tag.textContent = `📦 ${theme?.label || scenarioKey} · 复读线`;
+    const line = getStory().line_name || '平行人生';
+    tag.textContent = `📦 ${theme?.label || scenarioKey} · ${line}`;
   }
 
   function announcePage(pageIdx, scenarioKey) {
@@ -390,11 +405,11 @@
       live.textContent = 'Shadow 平行人生 Demo 首页';
       return;
     }
-    if (pageIdx === FINAL_PAGE) {
+    if (pageIdx === getFinalPage()) {
       live.textContent = '七年后的回信 · 和解';
       return;
     }
-    const raw = STORY.years[pageIdx - YEAR_START];
+    const raw = getStory().years[pageIdx - YEAR_START];
     const theme = Sc?.getTheme(raw?.scenario || scenarioKey);
     if (raw) {
       live.textContent = `第 ${raw.year} 年，${raw.title}，${theme?.label || ''} Agent`;
@@ -429,7 +444,7 @@
       prev.classList.add('visible');
       next.classList.add('visible');
       prev.classList.toggle('hidden', currentPage <= YEAR_START);
-      next.classList.toggle('hidden', currentPage >= FINAL_PAGE);
+      next.classList.toggle('hidden', currentPage >= getFinalPage());
     }
 
     document.querySelectorAll('#page-indicator .dot').forEach((dot, i) => {
@@ -438,9 +453,9 @@
   }
 
   async function onPageEnter(pageIdx) {
-    if (pageIdx < YEAR_START || pageIdx > FINAL_PAGE - 1) return;
+    if (pageIdx < YEAR_START || pageIdx > getFinalPage() - 1) return;
     const yearIdx = pageIdx - YEAR_START;
-    const rawYear = STORY.years[yearIdx];
+    const rawYear = getStory().years[yearIdx];
     if (!rawYear) return;
 
     const year = normalizeYear(rawYear);
@@ -448,9 +463,9 @@
     if (ShadowAgents.fate.enabled) {
       const last = userInterventions.filter(u => u.year < year.year).pop() || null;
       const result = await ShadowAgents.fate.onYearEnter({
-        story: STORY,
+        story: getStory(),
         year,
-        beats: STORY.beats,
+        beats: getStory().beats,
         beat: getBeatForYear(year.year),
         yearIndex: yearIdx,
         lastIntervention: last
@@ -462,7 +477,7 @@
       window.ShadowVisual.paintYear(year.year, year.year, year);
     }
 
-    const scenarioKey = year.scenario || STORY.scenario_primary || 'academic';
+    const scenarioKey = year.scenario || getStory().scenario_primary || 'academic';
     if (window.ShadowUniversalAssets) {
       const scene = document.querySelector(`#p-year-${year.year} .pixel-scene`);
       await window.ShadowUniversalAssets.paintScenarioAsync(scene, scenarioKey);
@@ -493,7 +508,7 @@
   // ─── Intervention ────────────────────────────────────────
 
   function openIntervention(yearIdx) {
-    const year = STORY.years[yearIdx];
+    const year = getStory().years[yearIdx];
     if (!year?.intervention_prompt) return;
 
     const modal = document.getElementById('intervention-modal');
@@ -523,11 +538,11 @@
 
     if (ShadowAgents.fate.enabled) {
       const yearIdx = yearNum - 1;
-      const year = normalizeYear(STORY.years[yearIdx]);
+      const year = normalizeYear(getStory().years[yearIdx]);
       const result = await ShadowAgents.fate.onIntervention({
-        story: STORY,
+        story: getStory(),
         year,
-        beats: STORY.beats,
+        beats: getStory().beats,
         beat: getBeatForYear(yearNum),
         yearIndex: yearIdx,
         choice,
@@ -544,7 +559,7 @@
   // ─── Dialogue ────────────────────────────────────────────
 
   async function openDialog(yearIdx) {
-    const rawYear = STORY.years[yearIdx];
+    const rawYear = getStory().years[yearIdx];
     if (!rawYear) return;
     const year = normalizeYear(rawYear);
 
@@ -569,7 +584,7 @@
       statusEl.textContent = '▼ Shadow 正在回应...';
       try {
         const live = await ShadowAgents.dialogue.ask({
-          story: STORY,
+          story: getStory(),
           year,
           interventions: userInterventions
         });
@@ -662,8 +677,14 @@
   }
 
   function init() {
+    const story = getStory();
     const slider = document.getElementById('slider');
-    STORY.years.forEach(y => slider.appendChild(buildYearPage(y)));
+    slider.querySelectorAll('.page:not(#p-landing)').forEach(p => p.remove());
+    currentPage = LANDING_PAGE;
+    userInterventions.length = 0;
+    interventionShown.clear();
+
+    story.years.forEach(y => slider.appendChild(buildYearPage(y)));
     slider.appendChild(buildFinalPage());
 
     buildLandingProfile();
@@ -671,20 +692,28 @@
     buildYearDots();
     buildLandingYearDots();
 
-    if (STORY.persona_card._from_intake) {
-      const btn = document.getElementById('btn-start');
-      if (btn) btn.textContent = `进入${STORY.persona_card.name}的七年（Mock）`;
+    const btn = document.getElementById('btn-start');
+    if (btn) btn.textContent = `进入${story.persona_card.name}的七年`;
+
+    const tagline = document.querySelector('.landing-tagline');
+    if (tagline) tagline.textContent = `平行人生 · ${story.line_name || 'Demo'}`;
+
+    const sourceLanding = document.getElementById('source-tag');
+    if (sourceLanding && !story._from_live && !story.persona_card._from_intake) {
+      sourceLanding.textContent = `📦 Mock · ${story.line_name}`;
+    }
+
+    if (story.persona_card._from_intake) {
+      if (btn) btn.textContent = `进入${story.persona_card.name}的七年（Mock）`;
       const tag = document.getElementById('source-tag');
       if (tag) tag.textContent = '🧬 Intake · Persona agent';
-      const tagline = document.querySelector('.landing-tagline');
-      if (tagline && STORY.profile?.choice) {
-        tagline.textContent = `你的岔路口 · ${STORY.scenario_primary || '平行'}域`;
+      if (tagline && story.profile?.choice) {
+        tagline.textContent = `你的岔路口 · ${story.scenario_primary || '平行'}域`;
       }
     }
 
-    if (STORY._from_live) {
-      const btn = document.getElementById('btn-start');
-      if (btn) btn.textContent = `进入${STORY.persona_card.name}的七年（Live）`;
+    if (story._from_live) {
+      if (btn) btn.textContent = `进入${story.persona_card.name}的七年（Live）`;
       const tag = document.getElementById('source-tag');
       if (tag) tag.textContent = '⚡ Live · 全 Agent 生成';
     }
@@ -693,17 +722,13 @@
     updateNav();
 
     T.spawnAmbientParticles(document.getElementById('ambient-particles'), 14);
-    Sc?.applyScenario(STORY.scenario_primary || 'academic');
-    syncScenarioChrome(LANDING_PAGE, STORY.scenario_primary || 'academic');
+    Sc?.applyScenario(story.scenario_primary || 'academic');
+    syncScenarioChrome(LANDING_PAGE, story.scenario_primary || 'academic');
     T.initLanding();
 
     window.ShadowDemo.goToPage = goToPage;
     window.ShadowDemo.getInterventions = () => [...userInterventions];
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  window.ShadowDemoEngine = { init };
 })();

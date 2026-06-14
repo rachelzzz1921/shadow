@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="color-scheme" content="light" />
 <title>Shadow / 如影 — 平行人生 Demo</title>
-<meta name="description" content="Shadow 平行人生叙事 — 复读线七年 Mock Demo" />
+<meta name="description" content="Shadow 平行人生叙事 — 多故事 Mock Demo" />
 <link rel="stylesheet" href="demo-theme.css" />
 <link rel="stylesheet" href="demo-scenarios.css" />
 <link rel="stylesheet" href="demo-ui-polish.css" />
@@ -22,7 +22,7 @@
 
 <button type="button" id="nav-back">← 返回</button>
 <div id="page-indicator"></div>
-<div id="source-tag">📦 Mock · 复读线</div>
+<div id="source-tag">📦 Mock · 加载中</div>
 <button type="button" class="nav-arrow" id="nav-prev" aria-label="上一页">‹</button>
 <button type="button" class="nav-arrow" id="nav-next" aria-label="下一页">›</button>
 <div id="nav-hint-bar" aria-hidden="true">← 方向键翻页 · 顶部圆点跳年 →</div>
@@ -33,13 +33,14 @@
     <div class="page" id="p-landing">
       <div class="landing-title enter-item"><span class="zpix-xxl">Shadow</span></div>
       <div class="landing-subtitle enter-item"><span class="zpix-xl">如 影</span></div>
-      <div class="landing-tagline enter-item">平行人生 · 复读线 Demo</div>
+      <div class="landing-tagline enter-item">平行人生 · 选择故事线</div>
+      <div class="story-picker enter-item" id="story-picker" aria-label="选择故事线"></div>
       <div class="scenario-legend enter-item" id="scenario-legend" aria-label="六域场景 Agent"></div>
       <div class="landing-deco enter-item">═══ Harness 契约字段 · 静态 Mock ═══</div>
 
       <div class="profile-teaser snes enter-item" id="profile-teaser"></div>
 
-      <button type="button" class="btn-start enter-item" id="btn-start">进入阿岚的七年</button>
+      <button type="button" class="btn-start enter-item" id="btn-start">进入影子的七年</button>
       <p class="landing-intake enter-item" style="margin-top:14px;font-size:14px;color:var(--ink-muted)">
         <a href="intake.html" style="color:var(--amber);text-decoration:none;font-weight:600">告诉影子你是谁</a>
         <span style="opacity:.75"> · 三层采集 → Persona agent</span>
@@ -76,11 +77,13 @@
   </div>
 </div>
 
+<script src="demo-scenarios.js"></script>
 <script src="demo-data.js"></script>
+<script src="demo-stories.js"></script>
 <script src="demo-visual.js"></script>
 <script src="demo-universal-assets.js"></script>
-<script src="demo-scenarios.js"></script>
 <script src="demo-transitions.js"></script>
+<script src="demo-engine.js"></script>
 <script>
 document.documentElement.classList.add('js-ready');
 window.addEventListener('error', function (e) {
@@ -90,7 +93,20 @@ window.addEventListener('error', function (e) {
     b.textContent = 'Demo 加载失败：' + (e.message || '未知错误') + '。请用 npm run demo:preview 启动本地预览。';
   }
 });
+
+(async function bootDemo() {
+  try {
+    await window.ShadowStories.bootstrapDemoStory();
+    window.ShadowStories.renderStoryPicker('story-picker');
+    window.ShadowDemoEngine.init();
+  } catch (err) {
+    var b = document.getElementById('boot-error');
+    if (b) {
+      b.hidden = false;
+      b.textContent = '故事加载失败：' + (err.message || err);
+    }
+  }
+})();
 </script>
-<script src="demo-engine.js"></script>
 </body>
 </html>
