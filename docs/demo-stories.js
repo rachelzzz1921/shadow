@@ -174,11 +174,34 @@ function adaptGoldenStory(raw, catalogEntry = {}) {
 }
 
 /**
+ * 解析 ?story= — 兼容错误编码 ?story%3Dheartbeat_line（部分浏览器/工具会把 = 再 encode 一次）
+ * @returns {string}
+ */
+function resolveStoryIdFromLocation() {
+  const params = new URLSearchParams(location.search);
+  const direct = params.get('story');
+  if (direct) return direct;
+
+  for (const [key] of params.keys()) {
+    const embedded = /^story(?:=|%3[Dd])(.+)$/i.exec(key);
+    if (embedded) return decodeURIComponent(embedded[1]);
+  }
+
+  const fromSearch = location.search.match(/[?&]story(?:=|%3[Dd])([^&+#]+)/i);
+  if (fromSearch) return decodeURIComponent(fromSearch[1]);
+
+  return 'fuxduxian';
+}
+
+/**
  * @param {string} storyId
  * @returns {Promise<object>}
  */
 async function loadStory(storyId) {
-  const entry = STORY_CATALOG.find(s => s.id === storyId) || STORY_CATALOG[0];
+  const entry = STORY_CATALOG.find(s => s.id === storyId);
+  if (!entry) {
+    throw new Error(`未知故事线 "${storyId}"，可选：${STORY_CATALOG.map(s => s.id).join(', ')}`);
+  }
 
   if (!entry.file) {
     if (window.ShadowDemo?.STORY_FUXDUXIAN) {
@@ -198,13 +221,17 @@ async function loadStory(storyId) {
  */
 async function bootstrapDemoStory() {
   const params = new URLSearchParams(location.search);
-  const storyId = params.get('story') || 'fuxduxian';
+  const storyId = resolveStoryIdFromLocation();
   const story = await loadStory(storyId);
 
   if (window.ShadowDemo) {
     window.ShadowDemo.STORY = story;
+    window.ShadowDemo._activeStoryId = storyId;
     // Golden 故事 (?story=linwan 等) 保持 fixture 人格；Intake 只覆盖默认复读线或 ?from=intake
-    const explicitGoldenStory = params.has('story') && storyId !== 'fuxduxian';
+    const explicitGoldenStory = storyId !== 'fuxduxian' && (
+      params.has('story') ||
+      /[?&]story(?:=|%3[Dd])/i.test(location.search)
+    );
     const allowIntake =
       !explicitGoldenStory &&
       (params.get('from') === 'intake' || storyId === 'fuxduxian');
@@ -222,8 +249,7 @@ async function bootstrapDemoStory() {
 function renderStoryPicker(containerId) {
   const el = document.getElementById(containerId);
   if (!el) return;
-  const params = new URLSearchParams(location.search);
-  const current = params.get('story') || 'fuxduxian';
+  const current = resolveStoryIdFromLocation();
 
   el.innerHTML = STORY_CATALOG.map(s => {
     const active = s.id === current ? ' is-active' : '';
@@ -239,6 +265,7 @@ window.ShadowStories = {
   STORY_CATALOG,
   adaptGoldenStory,
   loadStory,
+  resolveStoryIdFromLocation,
   bootstrapDemoStory,
   renderStoryPicker
 };
