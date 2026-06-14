@@ -1,0 +1,498 @@
+{
+  "calendar_year": 2022,
+  "notebooklm_gaps": [
+    "2022年中国大陆具体的GDP、CPI、房价指数、高考及毕业生人数统计数据",
+    "2022年中国大陆国内具体的产业政策或具体的社会事件（如冬奥会细节、疫情防控具体政策）",
+    "中国大陆本土的2022年影视、综艺、神曲及现象级APP",
+    "笔记本语料库关于2022年的宏观事件记录不足25条，侧重于国际地缘政治、美方司法及全球科技突破"
+  ],
+  "summary": "2022年是全球进入「硬实力博弈」的转折点。俄乌战争爆发标志着地缘政治重回地面冲突时代，深刻影响了全球能源与供应链。年底ChatGPT的公开发布引发了人工智能领域的范式迁移，世界在旧秩序崩塌（如英女王逝世）与数字文明跃迁之间震荡。",
+  "social_mood": "大众情绪在对地缘政治动荡带来的安全焦虑与对AI技术革命的新奇感中交织。面对极端气候（全球野火）和能源危机的现实威胁，社会整体呈现出对「确定性」的强烈渴望和对未来数字主权化的初步反思。",
+  "atmosphere": {
+    "gdp_trillion_cny": null,
+    "gdp_growth_pct": null,
+    "cpi_pct": null,
+    "gaokao_candidates_wan": null,
+    "college_graduates_wan": null,
+    "internet_users_yi": null,
+    "housing_price_index_70_cities_pct": null,
+    "dominant_anxiety": "俄乌冲突引发的能源安全担忧以及极端高温气候带来的生存环境焦虑。",
+    "employment_pressure": "由于全球供应链进一步区域化（去风险化），传统跨国贸易型就业面临结构性重组。",
+    "education_hotspot": "生成式AI（如ChatGPT）对传统教学和知识生产模式的冲击。",
+    "policy_keyword": "硬实力博弈、能源紧急状态、生成式AI元年。",
+    "meme_keywords": ["ChatGPT", "俄乌战争", "女王逝世"]
+  },
+  "pop_culture": [
+    "ChatGPT (引发全球AI兴趣浪潮)",
+    "詹姆斯·韦伯望远镜首批图像 (太空视觉标志)",
+    "远程协同办公与数字游民 (数字化生存深化)",
+    "关于能源短缺与电价波动的讨论",
+    "生成式AI绘画 (早期AI内容生产热潮)",
+    "地缘政治解说类短视频 (因战争局势爆发)",
+    "斯里兰卡抗议影像 (国际社会动荡缩影)",
+    "关于马哈萨·阿米尼抗议的讨论",
+    "流媒体体育赛事直播常态化",
+    "抗原检测与疫苗接种后的「秩序重建」讨论"
+  ],
+  "sources": [
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告",
+    "Major Events of the 21st Century — A Timeline, 2000–2024 | HistoryCentral",
+    "Timeline: Social Change and the 21st Century | Foundations of Education",
+    "What have been the biggest historical events of each year of the 21st century? - Reddit",
+    "Paris Climate Agreement - Environmental and Energy Law Program"
+  ],
+  "macro_events": [
+    {
+      "category": "disaster_crisis",
+      "title": "俄乌冲突爆发",
+      "detail": "2022年2月24日俄乌冲突全面升级；中国民众通过电视与短视频关注局势，油价粮价波动与「去风险」讨论进入家庭账本。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 1.4,
+      "sensitivity": "high",
+      "tags": ["war", "geopolitics", "global"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "ChatGPT公开发布",
+      "detail": "2022年11月OpenAI发布ChatGPT，引发全球生成式AI热潮；国内高校与互联网从业者连夜讨论对写作、编程与教育的冲击。",
+      "source_url": "https://openai.com/blog/chatgpt",
+      "weight": 1.4,
+      "sensitivity": "low",
+      "tags": ["ai", "chatgpt"]
+    },
+    {
+      "category": "society",
+      "title": "英国女王伊丽莎白二世逝世",
+      "detail": "2022年9月英国女王伊丽莎白二世逝世；国际新闻滚动报道，中国网民在社交媒体讨论一个旧秩序符号的落幕。",
+      "source_url": "https://www.reddit.com/r/decadeology/comments/1hszup2/what_have_been_the_biggest_historical_events_of/",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["monarchy", "era_end", "global"]
+    },
+    {
+      "category": "economy",
+      "title": "美国通胀削减法案签署",
+      "detail": "2022年8月美国签署IRA法案，大规模补贴清洁能源；中国新能源产业链从业者关注出口与竞争格局变化。",
+      "source_url": "https://eelp.law.harvard.edu/tracker/paris-climate-agreement/",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["economy", "clean_energy"]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "2022年全球极端高温",
+      "detail": "2022年夏季多地破纪录高温与野火；长江流域极端干旱与限电话题登上国内热搜，气候焦虑进入日常对话。",
+      "source_url": "https://foundations.ed.brocku.ca/week12/3/",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": ["climate_change", "heatwave"]
+    },
+    {
+      "category": "society",
+      "title": "美国推翻罗诉韦德案",
+      "detail": "2022年美国最高法院推翻罗诉韦德案；法学与性别研究课程引用此案，网络讨论身体自主权与制度稳定性。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 1.0,
+      "sensitivity": "medium",
+      "tags": ["justice", "us_politics"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "COP27设立损失补偿基金",
+      "detail": "2022年埃及COP27大会同意设立气候损失与损害基金；环境专业学生在模联与课堂辩论南北气候正义。",
+      "source_url": "https://eelp.law.harvard.edu/tracker/paris-climate-agreement/",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["climate_policy", "diplomacy"]
+    },
+    {
+      "category": "economy",
+      "title": "全球能源危机加剧",
+      "detail": "2022年俄乌冲突推高国际油气价格；国内加油、取暖与化工成本上升，家庭开始讨论节能与备用电源。",
+      "source_url": "https://www.reddit.com/r/decadeology/comments/1hszup2/what_have_been_the_biggest_historical_events_of/",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": ["energy", "economic_crisis"]
+    },
+    {
+      "category": "society",
+      "title": "美国国会山事件听证会",
+      "detail": "2022年美国国会就2021年国会山事件举行公开听证；国际时政爱好者在播客与社群追踪西方法治与政治撕裂。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": ["politics", "hearings"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "韦伯望远镜首批深空图像",
+      "detail": "2022年詹姆斯·韦伯空间望远镜发布首批深空图像；科普自媒体刷屏，与天问、空间站新闻一起构成年度科学记忆。",
+      "source_url": "https://www.reddit.com/r/decadeology/comments/1hszup2/what_have_been_the_biggest_historical_events_of/",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["space", "astronomy"]
+    }
+  ],
+  "micro_events": [
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "深夜你第一次注册ChatGPT，看它逐字吐出代码，突然对自己的职业门槛生疑。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["ai", "career"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全家围看俄乌冲突特别报道，长辈在群里问要不要多囤米面，你感到动荡逼近。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["news", "preparedness"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "欧洲订单因地缘与能源成本上涨受阻，公司紧急转向东南亚买家。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["trade", "pivoting"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "语音频道里和朋友争论AI会不会三年内取代插画师，话里带着幸存者偏差。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["art", "ai_debate"]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "隔离期间你用VR居家健身，在物理隔绝里找到一点数字放风的出口。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["lockdown", "wellbeing"]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "父母叹息电费与菜价上涨，你第一次认真查账单，明白通胀不是远新闻。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["inflation", "family_finance"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "毕业论文大胆引用ChatGPT大纲，提交前因担心查重而彻夜手动重写。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["study", "academic_integrity"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "视频连线一起看英女王葬礼直播，感叹时代落幕，彼此成了眼前唯一。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["romance", "history"]
+    },
+    {
+      "category": "policy_touch",
+      "scenario": "self_growth",
+      "text": "模联辩论「损失与损害基金」落地，你体会到断裂时代南半球公平有多昂贵。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["diplomacy", "learning"]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "你教老人用抗原自测盒，再次确认数字化已写入家庭生存基准线。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["health", "family_care"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "技术群都在讨论Copilot，你预感AI助手将永久改变程序员工作流。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["coding", "ai_tools"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全家把买车钱改成应急准备金，防备能源不稳定带来的生活变数。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["savings", "uncertainty"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "异地封锁时你们同步看卡塔尔世界杯，深夜点球大战里找回集体共鸣。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["world_cup", "bonding"]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "虚拟货币大暴雷，你在「硬实力回归」的市场洗礼里学会什么叫避险。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["investment", "risk"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "虚拟实验室里完成基因重组实验，物理隔离下技术视野仍连着全球。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["biology", "tech_edu"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你开始关注数字主权，卸载过度收集隐私的App，哪怕生活更麻烦。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["privacy", "sovereignty"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "油价上涨，家里决定改乘地铁或骑行，被迫聊起了低碳生活。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["living_cost", "energy"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "面试里分析IRA法案对新能源出口的潜在冲击，赢得战略岗复试机会。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["career_growth", "insight"]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "高温无法出门，你读气候焦虑心理书，想在认知里找一点平衡。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["climate", "mental_health"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "你们在AI绘画社区共同「喂」出二次元形象，成了隔离生活的浪漫慰藉。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["romance", "ai_art"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "导师说精密器材因供应链中断延期半年，你的课题进度被迫停滞。",
+      "weight": 1.3,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["research", "bottleneck"]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "全家清算股市大跌后的养老金，你第一次感到分担家庭压力的责任。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["finance", "family_bond"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "Discord里讨论韦伯望远镜恒星诞生图，感叹宇宙尺度前封锁与战争如微尘。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["perspective", "deep_space"]
+    },
+    {
+      "category": "policy_touch",
+      "scenario": "career",
+      "text": "芯片禁令加码，研发中心预算翻三倍，你被时代推着跑。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["industry_shift", "career"]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "你给独居长辈寄去居家生存包，卡片上第一次写下超出「保重身体」的话。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["family", "preparedness"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "内推会上你提出「主权数据私有化」防御方案，意外获得管理层支持。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["innovation", "security"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "自学Stable Diffusion教程，学校还没开课，你已站在时代边缘。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["self_study", "new_tech"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "异地封锁里约定，解封后要去那个没有硝烟的国度看最真实的日落。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["romance", "long_distance"]
+    },
+    {
+      "category": "money",
+      "scenario": "self_growth",
+      "text": "退掉新款iPhone预定，换成三年技术网课，决定用硬技能抵御寒冬。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["savings", "learning"]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "远程医疗帮家人排到专家号，你感叹中断年代里数字化是救命稻草。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["health_tech", "efficiency"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你在加密社区建个人知识库，希望断网时思想结晶仍属于自己。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["sovereignty", "knowledge"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "父亲外贸厂关停提前退休，全家商量回老家做弹性生存的小副业。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["family_dynamics", "era_shift"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "你预判去风险化将永久抬高物流成本，帮公司省下数百万仓储预付金。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["business_strategy", "success"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "视频会议里为「AI有没有意识」吵得不可开交，那是寒冬里唯一的精神火花。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["debate", "digital_bonding"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "法学作业复盘罗诉韦德案，感叹制度在极化社会面前竟如此脆弱。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["legal_study", "reflection"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "你们转发野火与极端高温新闻，相约以后要住在离淡水资源最近的地方。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["environment", "romance"]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "全球化理财产品纷纷哑火，你开始研究黄金与实物，转向防御型投资。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["financial_shift", "defense"]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "每天阳台深呼吸，笔记本写下：2022里病毒与动荡交织，活着就是胜利。",
+      "weight": 1.3,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["resilience", "existentialism"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "2022跨年夜看着ChatGPT的新年祝词，你想：人类或许不再孤独，或更孤独。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["epiphany", "ai_future"]
+    },
+    {
+      "category": "neighborhood",
+      "scenario": "friendship",
+      "text": "线上地缘局势沙龙里观点激烈碰撞，你重新理清自己在断裂时代的位置。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["social_awareness", "growth"]
+    }
+  ]
+}

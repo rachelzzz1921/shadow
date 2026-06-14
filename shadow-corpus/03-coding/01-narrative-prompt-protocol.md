@@ -88,3 +88,42 @@
 - 必须引用 memory_stream 至少一条（cite_memory_ids）。
 - 不给建议，不说教，不扮演心理咨询师。
 - 不解释自己是 AI 或角色。
+
+---
+
+## Fate agent（时代际遇层 · 队友完善）
+
+- 读 `world/data/years/{calendar_year}.json` + Beats seed（**不在 UI 展示 Beats**）。
+- 输出 `era_line` / macro / micro 样本，作 Year prompt **背景压力**，勿照抄标题。
+- 归档 demo 接线：`lib/fate-bridge.js` → `buildYearPrompt` 内 `# 时代际遇层`。
+- 静态 demo：`docs/demo-era-snippets.json` + `ShadowAgents.fate` placeholder。
+
+---
+
+## Intervention re-plan（占位 · T-016）
+
+- 用户 pivotal 选择后，修订 **之后年份** beat seed（类型不变）。
+- 规则占位：`lib/beats-replan.js`。
+- LLM prompt 占位：`buildInterventionReplanPrompt`（队友替换文案）。
+- Live：`story-session.generateNextYear` 在 `user_intervention` 时触发。
+
+---
+
+## P0 迁移摘要（T-010）
+
+| 项 | 落点 | 状态 |
+|----|------|------|
+| Memory 检索 | `memory-retrieval.js` | ✅ |
+| Reflection type | `memoryFromYear` | ✅ |
+| re-plan | `beats-replan.js` + prompt 占位 | 🟡 |
+| Fate 层 | `fate-bridge.js` + `fate-hook.js` | 🟡 placeholder |
+| Dialogue 层 | `dialogue-hook.js` | 🟡 placeholder |
+
+## Agent Hook 契约（Wave 4 · CHG-H001）
+
+| Hook | 模块 | API | 静态 demo |
+|------|------|-----|-----------|
+| Dialogue | `lib/dialogue-hook.js` | `POST /api/dialogue`（无 key → placeholder） | `ShadowAgents.dialogue.ask` |
+| Fate | `lib/fate-hook.js` | `POST /api/fate/context` | `ShadowAgents.fate.onYearEnter` |
+
+队友替换 prompt 时保持 **返回 schema 不变**；见 `test/dialogue-contract.test.js`、`test/fate-hook.test.js`。

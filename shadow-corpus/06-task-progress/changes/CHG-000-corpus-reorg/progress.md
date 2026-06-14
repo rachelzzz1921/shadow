@@ -24,6 +24,8 @@ updated_at: 2026-06-14
 - [x] 81 skills 迁入 pool + sync 脚本
 - [x] demo 归档 archive/demo-v0.2
 - [x] npm test 7/7
+- [x] Corpus gap 扫描 → [`corpus-gap-scan.md`](../../corpus-gap-scan.md)
+- [x] 入口确认签字表 → [`gates/T-023-corpus-entry-signoff.md`](gates/T-023-corpus-entry-signoff.md)
 - [ ] P1 确认 corpus 为唯一入口（Wave 0）
 
 ## 历史

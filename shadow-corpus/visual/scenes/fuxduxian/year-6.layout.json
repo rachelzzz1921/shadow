@@ -1,0 +1,61 @@
+{
+  "story_id": "fuxduxian",
+  "year": 6,
+  "scene_type": "special",
+  "mood": "崩·雨",
+  "status": "draft",
+  "narrative_ref": {
+    "memory_id": "m6",
+    "event_summary": "出站雨棚"
+  },
+  "background": {
+    "asset_id": "PX-PLACEHOLDER-006",
+    "parallax": 0.2
+  },
+  "layers": [
+    {
+      "asset_id": "PX-CHAR-ALAN",
+      "role": "protagonist",
+      "x": 320,
+      "y": 220,
+      "depth": 2,
+      "animation": "hold_bag"
+    },
+    {
+      "asset_id": "PX-PROP-SUITCASE",
+      "role": "prop",
+      "x": 180,
+      "y": 240,
+      "depth": 1
+    },
+    {
+      "asset_id": "PX-PROP-RAIN",
+      "role": "prop",
+      "x": 300,
+      "y": 240,
+      "depth": 1
+    }
+  ],
+  "daily_loops": [
+    {
+      "id": "hold_bag",
+      "asset_id": "PX-CHAR-ALAN",
+      "animation": "hold_bag",
+      "trigger": "year_idle"
+    }
+  ],
+  "sequence": [
+    {
+      "duration_ms": 800,
+      "camera": "fade_in"
+    },
+    {
+      "duration_ms": 1200,
+      "camera": "hold"
+    },
+    {
+      "duration_ms": 600,
+      "camera": "fade_out"
+    }
+  ]
+}

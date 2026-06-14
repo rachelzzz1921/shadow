@@ -9,7 +9,9 @@
 | 00 | [**Harness 框架示意图**](./00-harness-framework-diagram.md) | ✅ |
 | 01 | [Shadow Harness 闭环](./01-shadow-harness-loop.md) | ✅ |
 | 02 | [API 与 JSON 契约](./02-api-and-contract.md) | ✅ |
+| 02b | [P0 迁移：Memory / Reflection / re-plan](./02-p0-memory-reflection-replan.md) | ✅ |
 | 03 | [Demo 文件地图](./03-demo-file-map.md) | ✅ |
+| 03b | [命运 Agent 与 World DB](./03-fate-agent-and-world-db.md) | 📋 队友实现 |
 
 ## 两章关系
 

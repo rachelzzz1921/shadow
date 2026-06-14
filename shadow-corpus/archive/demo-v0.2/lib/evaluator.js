@@ -107,6 +107,35 @@ function evaluateYear(year, beat) {
   return findings;
 }
 
+function evaluateVisualConsistency(years) {
+  const findings = [];
+  if (!Array.isArray(years) || !years.length) return findings;
+
+  const withAnchor = years.filter(y => y?.visual_anchor);
+  if (!withAnchor.length) return findings;
+
+  if (withAnchor.length !== years.length) {
+    const missing = years.filter(y => !y?.visual_anchor).map(y => y.year);
+    findings.push(issue(
+      'visual.partial',
+      `部分年份有 visual_anchor，但年 ${missing.join(',')} 缺失（v2 同步不完整）`,
+      'warn'
+    ));
+  }
+
+  for (const year of years) {
+    if (year?.visual_anchor && (!Array.isArray(year.key_props) || !year.key_props.length)) {
+      findings.push(issue(
+        'visual.key_props',
+        `年${year.year} 有 visual_anchor 但缺 key_props`,
+        'warn'
+      ));
+    }
+  }
+
+  return findings;
+}
+
 function evaluateInterventionThread(prevYear, nextYear) {
   const findings = [];
   const iv = prevYear?.user_intervention;
@@ -158,6 +187,7 @@ function evaluateStory(story) {
   });
 
   if ((story.years || []).length === 7) {
+    findings.push(...evaluateVisualConsistency(story.years));
     findings.push(...evaluateFinal(story.final));
   }
 
@@ -177,5 +207,6 @@ module.exports = {
   evaluateYear,
   evaluateFinal,
   evaluateStory,
-  evaluateInterventionThread
+  evaluateInterventionThread,
+  evaluateVisualConsistency
 };

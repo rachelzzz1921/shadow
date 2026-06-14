@@ -1,0 +1,498 @@
+{
+  "calendar_year": 2020,
+  "notebooklm_gaps": [
+    "2020年中国大陆具体的GDP、CPI、房价指数、高考/毕业生人数等统计数据",
+    "2020年中国大陆具体的宏观经济政策和详细国内政治事件",
+    "2020年中国大陆具体的流行影视剧、综艺、中文神曲、现象级国产APP（笔记本多为全球/美方背景）",
+    "满足25条macro_events和40条micro_events的具体细节，因笔记本语料库侧重于2006-2026宏观研判而存在数量缺口"
+  ],
+  "summary": "2020年是人类文明进入「全球中断时代」的元年。COVID-19从武汉爆发并演变为全球大流行，引发了二战以来最严重的全球经济萎缩，彻底重塑了人类对公共卫生、供应链安全与物理距离的认知，标志着新自由主义全球化的停摆。",
+  "social_mood": "社会情绪处于疫情爆发初期的极度不安与长期隔离带来的心理孤岛效应中。青年群体对学业和职业前景感到迷茫，而家庭层面则在生存安全与经济衰退的压力下表现出防御型心态。",
+  "atmosphere": {
+    "gdp_trillion_cny": null,
+    "gdp_growth_pct": null,
+    "cpi_pct": null,
+    "gaokao_candidates_wan": null,
+    "college_graduates_wan": null,
+    "internet_users_yi": null,
+    "housing_price_index_70_cities_pct": null,
+    "dominant_anxiety": "大流行病带来的生命威胁及长期社交距离引发的心理孤独与秩序崩塌感。",
+    "employment_pressure": "由于全球化进程逻辑极限的撞击与疫情封锁，跨国供应链中断导致严重的就业挑战。",
+    "education_hotspot": "全球性居家学习模式的开启以及对教育公平性的数字主权化探讨。",
+    "policy_keyword": "公共卫生紧急状态与全球范式中断。",
+    "meme_keywords": ["COVID-19", "大流行", "BLM"]
+  },
+  "pop_culture": [
+    "居家视频会议 (因办公与学习需求成为生活常态)",
+    "mRNA技术关注热潮 (代表科学界的突破希望)",
+    "SpaceX载人航天直播 (技术主权的视觉标志)",
+    "数字主权下的短视频应用",
+    "在线协同办公工具的爆发",
+    "关于流行病防治的专家科普视频",
+    "由于影院关闭而在流媒体平台首播的电影",
+    "居家健身与室内娱乐内容",
+    "全球范围内的在线公益音乐会",
+    "个人防护装备 (口罩与消毒液成为现象级必需品)"
+  ],
+  "sources": [
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告",
+    "Major Events of the 21st Century — A Timeline, 2000–2024 | HistoryCentral",
+    "What have been the biggest historical events of each year of the 21st century? - Reddit",
+    "2010s | Timeline | Virtual Museum and Archive of the History of Financial Regulation",
+    "Timeline: Social Change and the 21st Century | Foundations of Education"
+  ],
+  "macro_events": [
+    {
+      "category": "disaster_crisis",
+      "title": "WHO宣布新冠全球大流行",
+      "detail": "2020年3月11日WHO宣布新冠疫情为全球大流行；中国此前已经历武汉封城与全国抗疫，此后全球供应链与出行秩序连锁中断。",
+      "source_url": "https://www.who.int/emergencies/diseases/novel-coronavirus-2019",
+      "weight": 1.2,
+      "sensitivity": "high",
+      "tags": ["pandemic", "global", "who"]
+    },
+    {
+      "category": "economy",
+      "title": "二战后最严重经济萎缩",
+      "detail": "2020年受大流行冲击，全球经济剧烈萎缩；中国一季度GDP负增长后迅速反弹，外贸与产业链韧性成为舆论焦点。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": ["global_recession", "economic_shock"]
+    },
+    {
+      "category": "society",
+      "title": "BLM运动全球蔓延",
+      "detail": "乔治·弗洛伊德事件引发全球BLM抗议；中国年轻人多通过国际新闻与社交媒体片段间接感知，并在校园与网络讨论中引发对种族与公平的反思。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 1.0,
+      "sensitivity": "medium",
+      "tags": ["social_protest", "blm", "global"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "美国正式退出巴黎协定",
+      "detail": "2020年11月4日美国正式完成从《巴黎协定》退出；中国宣布碳达峰碳中和目标，形成国际气候治理的双轨叙事。",
+      "source_url": "https://eelp.law.harvard.edu/tracker/paris-climate-agreement/",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["climate_change", "us_policy"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "mRNA疫苗研发突破",
+      "detail": "2020年辉瑞/BioNTech等mRNA疫苗进入三期并获紧急授权；国内舆论在科普与谣言之间摇摆，为后续国产疫苗接种讨论预热。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": ["biotech", "vaccine"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "2020年美国总统大选",
+      "detail": "拜登击败特朗普赢得2020年美国大选；中国外贸与科技从业者关注关税与供应链政策会否转向。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["us_election", "political_shift"]
+    },
+    {
+      "category": "economy",
+      "title": "USMCA协议生效",
+      "detail": "美墨加贸易协议正式取代NAFTA；中国出口企业感受到区域贸易重组与「去全球化」苗头。",
+      "source_url": "https://www.sechistorical.org/museum/timeline/2010-timeline.php",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": ["trade_deal", "protectionism"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "SpaceX载人航天里程碑",
+      "detail": "2020年SpaceX载人龙飞船成功对接国际空间站；中国航天爱好者熬夜看直播，与同年北斗三号全球组网形成对照叙事。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["space_tech", "spacex"]
+    },
+    {
+      "category": "economy",
+      "title": "全球贸易增长逻辑中断",
+      "detail": "2020年全球贸易与人员流动骤降，开放度显著下降；中国提出双循环，产业链安全上升为政策关键词。",
+      "source_url": "https://traderiskguaranty.com/trgpeak/timeline-international-trade/",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["globalization_limit", "deglobalization"]
+    },
+    {
+      "category": "society",
+      "title": "2020年全球股市剧烈波动",
+      "detail": "2020年春季全球股市多次熔断式下跌；A股与美股走势分化，中国散户在宅家期间开户数激增。",
+      "source_url": "https://www.sechistorical.org/museum/timeline/2010-timeline.php",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["market_crash", "financial_regulation"]
+    }
+  ],
+  "micro_events": [
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "你和全家人围坐在电视前观看武汉封城的特写，感到一种「秩序停摆」的巨大恐慌感。",
+      "weight": 1.3,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": ["pandemic", "lockdown"]
+    },
+    {
+      "category": "digital",
+      "scenario": "academic",
+      "text": "你第一次在手机平板上打开网课，被不断掉线的网络和生疏的在线教学模式折磨。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["online_learning", "digital_shift"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "作为外贸业务员，你看着由于全球供应链停摆而不断取消的订单，在深夜陷入了失业的焦虑。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["economic_shock", "career_crisis"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "你和死党在视频通话里转发着各种未经证实的疫情谣言，在一场真假难辨的信息洪流中感到疲惫。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["infodemic", "social_media"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "长辈整天在群里转发钟南山的视频，严禁全家人踏出房门一步，你开始在阳台上寻找哪怕一丝的自由。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["family_dynamics", "quarantine"]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "你在隔离期间开始阅读关于基因组学和mRNA技术的书籍，试图在科学的确定性中寻找对抗病毒的勇气。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["self_study", "scientific_hope"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "在这个「物理切断」的一年，你给心仪的对象快递了一盒紧缺的口罩，这成了你们之间最隐秘的告白方式。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["romance", "pandemic_life"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "你发现原本的国际交换项目由于「全球中断」被永久取消，你坐在书桌前，不得不重新规划整个人生轨迹。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["academic_gap", "plan_change"]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "父母投资的实体店面因为长期停业而难以为继，全家人商量着如何通过网购和缩减支出来度过寒冬。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["financial_hit", "household_finance"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你在社交媒体上关注着BLM引发的全球抗议，开始反思身处的环境与这种系统性不平等之间是否存在隐秘的连接。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["social_awareness", "reflection"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "在这个无法聚会的春节，全家通过视频连线给亲戚拜年，你第一次意识到这种「数字相聚」可能成为常态。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["cny", "digital_reunion"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "你在各种远程会议中学会了如何隐藏疲惫的脸色，意识到由于疫情，工作与生活的边界正被彻底摧毁。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["remote_work", "exhaustion"]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "你开始在客厅里跟着健身App跳操，试图通过挥汗如雨来对抗长期禁锢带来的心理焦虑。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["fitness", "mental_resilience"]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "目睹了股市的数次熔断后，你撤出了所有激进投资，深刻理解了什么叫「现金为王」和「防御型生存」。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["financial_logic", "survival_strategy"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "生物学导师在Zoom会议上激情洋溢地讨论着冠状病毒的变异机制，你决定以后要投身公共卫生领域。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["academic_choice", "public_health"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "你和好友通过在线游戏在虚拟空间里「聚餐」，这种在废土设定中互相安慰的体验让你们的友谊更加稳固。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["gaming", "camaraderie"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "你帮助长辈安装并教会他们使用各种预约挂号和购物App，第一次感到了作为「数字原住民」对家庭的责任。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["digital_divide", "responsibility"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "你在公司内推会上大胆预测：未来由于供应链安全，我们将看到更多「去风险」性质的业务重组。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["business_foresight", "career_insight"]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "因为普通门诊关闭，你通过远程医疗为突发小病的家属咨询到了用药建议，感叹数字化医疗时代的被迫降临。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["telemedicine", "family_care"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你开始在数字社区中寻找关于不再盲从、独立思考的讨论，对互联网的全面追踪开始保持高度警惕。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["critical_thinking", "privacy"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "由于延迟的高考，你在家每天复习到深夜，窗外救护车的鸣笛声成了那个夏天最刺耳的记忆。",
+      "weight": 1.3,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": ["gaokao", "perseverance"]
+    },
+    {
+      "category": "money",
+      "scenario": "self_growth",
+      "text": "你退掉了原本环球旅行的机票，看着退款到账，心中明白那个「说走就走」的世界已经一去不返了。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["savings", "era_change"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "通过定位共享，你发现那个心仪的人也正好在你对面的楼层隔离，这种近在咫尺的禁锢成了你们唯一的纽带。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["romance", "lockdown_love"]
+    },
+    {
+      "category": "neighborhood",
+      "scenario": "friendship",
+      "text": "你在各种隔离政策的动态调整中学会了如何敏锐地察觉邻里之间的互助网络，感受到一种原始的社区韧性。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["community", "observation"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "你在初创团队的在线头脑风暴中提出了开发「无接触配送」相关算法的建议，并以此拿到了第一笔内部奖励。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["startup", "innovation"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "你通过电子图书馆下载了大量关于1918年大流感的论文，感叹历史总是在一种诡异的韵律中重复。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["historical_study", "reflection"]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "因为长期佩戴口罩，你开始变得敏感于呼吸的每一口新鲜空气，重新思考了人与自然的生态边界。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["health_consciousness", "ecology"]
+    },
+    {
+      "category": "digital",
+      "scenario": "academic",
+      "text": "你在网络论坛上参与了关于「mRNA技术是否为生物武器」的激烈辩论，深刻体会到科学素养与偏见之间的鸿沟。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["science_literacy", "debate"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "你发现原本强悍的父亲在疫情期间也开始变得沉默寡言，你第一次尝试主动去分担家庭的心理重担。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["family_growth", "support"]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "你所在的公司由于涉及防疫物资出口而意外盈利，但你看着奖金，却感到一种发「国难财」的复杂道德感。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["bonus", "ethics"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "你和老同学在云端举行了一场简陋的周年庆典，在屏幕亮起的马赛克中感叹青春被疫情强行切分的样子。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["reunion", "digital_era"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "你开始学习如何从海量的学术搜索中过滤掉噪音，这种在大流行期间练就的专注力成了你未来的核心竞争力。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["study_method", "focus"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "你们在各个短视频平台上分享隔离日常，通过这些琐碎而又真实的画面，确定了想要共度余生的心愿。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["romance", "digital_intimacy"]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "你学会了给家里寄送体温枪、口罩和消毒用品，在这种全方位的自我防护训练中，你被迫提前走向了成熟。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["preparedness", "family_safety"]
+    },
+    {
+      "category": "money",
+      "scenario": "self_growth",
+      "text": "你取消了原本分期购买新款手机的计划，开始有意识地进行「去杠杆」生活，为未来的断裂时代储备现金流。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["financial_discipline", "growth"]
+    },
+    {
+      "category": "digital",
+      "scenario": "academic",
+      "text": "你在学术交流群中目睹了全球科学家如何实时同步病毒测序数据，感受到了另一种维度的全球化韧性。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["collaboration", "science"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "因为无法亲自送别远去的亲人，你在那个阴沉的冬日里对着屏幕泣不成声，深刻体会到了「中断」的残忍。",
+      "weight": 1.3,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": ["grief", "pandemic"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "你在面试中通过对「后全球化时代」物流风险的精准分析打动了考官，拿到了大厂战略部的入职通知。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["interview", "strategy"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你开始在加密社区中寻找数据主权保护的可能性，在这个一切都被数字化的2020年，你想夺回自己的主权。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["tech_sovereignty", "learning"]
+    },
+    {
+      "category": "neighborhood",
+      "scenario": "self_growth",
+      "text": "在隔离的第100天，你推开窗看着空荡而洁净的城市街道，突然意识到这不仅是一场灾难，更是一场认知的洗牌。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["epiphany", "era_shift"]
+    }
+  ]
+}

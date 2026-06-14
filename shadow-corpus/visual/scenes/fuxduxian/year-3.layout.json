@@ -1,0 +1,47 @@
+{
+  "story_id": "fuxduxian",
+  "year": 3,
+  "scene_type": "special",
+  "mood": "钝·孤独",
+  "status": "draft",
+  "narrative_ref": {
+    "memory_id": "m3",
+    "event_summary": "食堂角落"
+  },
+  "background": {
+    "asset_id": "PX-PLACEHOLDER-003",
+    "parallax": 0.2
+  },
+  "layers": [
+    {
+      "asset_id": "PX-CHAR-ALAN",
+      "role": "protagonist",
+      "x": 320,
+      "y": 220,
+      "depth": 2,
+      "animation": "eat_slow"
+    },
+    {
+      "asset_id": "PX-PROP-TRAY",
+      "role": "prop",
+      "x": 180,
+      "y": 240,
+      "depth": 1
+    },
+    {
+      "asset_id": "PX-PROP-CHAIR",
+      "role": "prop",
+      "x": 300,
+      "y": 240,
+      "depth": 1
+    }
+  ],
+  "daily_loops": [
+    {
+      "id": "eat_slow",
+      "asset_id": "PX-CHAR-ALAN",
+      "animation": "eat_slow",
+      "trigger": "year_idle"
+    }
+  ]
+}

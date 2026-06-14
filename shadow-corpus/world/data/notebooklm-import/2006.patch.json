@@ -1,0 +1,255 @@
+{
+  "calendar_year": 2006,
+  "notebooklm_gaps": [
+    "中国大陆2006年GDP、CPI、房价指数、高考/毕业生人数等统计数据",
+    "2006年中国大陆具体的宏观经济政策和国内政治事件（笔记本多侧重2026年研判）",
+    "具体的2006年中国大陆流行影视剧、综艺、中文神曲、现象级国产APP",
+    "笔记本中提及的2006年宏观事件不足25条，主要集中在科技与全球政治重组"
+  ],
+  "summary": "2006年是新自由主义全球化进程达到逻辑极限的一年。人类文明处于从台式电脑向移动互联网转型的关键前夜，数字社交随着Google收购YouTube开启了内容生产权的范式迁移，而特斯拉原型车的问世则种下了能源转型的种子。",
+  "social_mood": "社会情绪处于数字生活爆发前的宁静与全球政治动荡的交织中。青年群体对新兴的视频社交表现出极大的好奇，而家庭层面则在关注如萨达姆死刑等重大国际秩序转折带来的感官冲击。",
+  "atmosphere": {
+    "gdp_trillion_cny": null,
+    "gdp_growth_pct": null,
+    "cpi_pct": null,
+    "gaokao_candidates_wan": null,
+    "college_graduates_wan": null,
+    "internet_users_yi": null,
+    "housing_price_index_70_cities_pct": null,
+    "dominant_anxiety": "大众内容生产权转移引发的传统媒体与新兴社交模式的认知冲突。",
+    "employment_pressure": "全球化鼎盛时期带来的跨国协作需求对专业技能提出了更高要求。",
+    "education_hotspot": "人类基因组计划完成引发的生物科学教育热潮。",
+    "policy_keyword": "全球范式迁移的起点与地缘政治初步重组。",
+    "meme_keywords": ["YouTube", "特斯拉Roadster", "萨达姆死刑"]
+  },
+  "pop_culture": [
+    "YouTube视频分享 (Google收购事件引发全球关注)",
+    "特斯拉Roadster电动跑车 (代表前沿科技审美)",
+    "大众内容生产 (UGC模式的初步觉醒)",
+    "人类基因组序列图谱 (科学界现象级话题)",
+    "移动互联网前夜的数字社交雏形",
+    "关于伊拉克局势的国际新闻纪录片",
+    "能源转型概念的早期讨论",
+    "跨国贸易带来的全球品牌消费热潮",
+    "早期的台式互联网视频博客",
+    "数字主权与隐私保护的初步探讨"
+  ],
+  "sources": [
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告",
+    "Major Events of the 21st Century — A Timeline, 2000–2024 | HistoryCentral",
+    "What have been the biggest historical events of each year of the 21st century? - Reddit",
+    "2010s | Timeline | Virtual Museum and Archive of the History of Financial Regulation",
+    "7 Medical Sciences Trends Shaping Healthcare in 2026"
+  ],
+  "macro_events": [
+    {
+      "category": "tech_internet",
+      "title": "Google收购YouTube",
+      "detail": "2006年10月，Google以16.5亿美元收购YouTube，标志UGC视频平台进入主流视野；对中国青年而言，更多是通过国际科技新闻间接感知。",
+      "source_url": "https://www.reddit.com/r/decadeology/comments/1hszup2/what_have_been_the_biggest_historical_events_of/",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": ["global", "ugc", "internet"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "特斯拉Roadster原型",
+      "detail": "2006年特斯拉公开Roadster电动跑车计划，全球能源转型叙事开始进入大众视野，当时对中国街头几乎无感。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": ["global", "ev"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "萨达姆被执行死刑",
+      "detail": "2006年12月30日萨达姆·侯赛因被处决，央视等国际新闻滚动播放，许多中国家庭在电视前讨论中东秩序。",
+      "source_url": "https://www.reddit.com/r/decadeology/comments/1hszup2/what_have_been_the_biggest_historical_events_of/",
+      "weight": 1.0,
+      "sensitivity": "medium",
+      "tags": ["global", "middle_east", "tv_news"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "Hamdan案裁决",
+      "detail": "2006年美国最高法院Hamdan v. Rumsfeld案裁决，法学与外交学院学生常在课堂与模联中讨论。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": ["global", "law"]
+    },
+    {
+      "category": "education",
+      "title": "人类基因组计划完成",
+      "detail": "2006年前后生命科学界持续报道人类基因组计划成果，国内生物课与科普杂志频繁引用。",
+      "source_url": "https://www.reddit.com/r/decadeology/comments/1hszup2/what_have_been_the_biggest_historical_events_of/",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": ["science", "biology"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "美国中期选举蓝潮",
+      "detail": "2006年美国中期选举民主党掌控国会，国际新闻版块关注，部分公考时政题涉及。",
+      "source_url": "https://www.reddit.com/r/decadeology/comments/1hszup2/what_have_been_the_biggest_historical_events_of/",
+      "weight": 0.7,
+      "sensitivity": "low",
+      "tags": ["global", "us_politics"]
+    },
+    {
+      "category": "economy",
+      "title": "全球化高峰体感",
+      "detail": "2006年前后中国外贸与外资活跃，沿海工厂订单饱满，「世界工厂」叙事在媒体中高频出现。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["trade", "export"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "UGC与视频博客前夜",
+      "detail": "2006年国内仍以博客、BBS、QQ空间为主；YouTube收购案让少数网民第一次想象「人人能拍视频」。",
+      "source_url": "https://www.cnnic.cn",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["ugc", "cn_internet"]
+    }
+  ],
+  "micro_events": [
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你第一次在网吧台式机上看到YouTube收购新闻，觉得「普通人也能发视频」很新鲜。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["internet", "ugc"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "晚饭时电视国际新闻播萨达姆被处决，父亲换台，母亲问「会不会更乱」。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["tv", "news"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "生物课讲到人类基因组计划，你在课本空白处抄下「生命科学」四个字。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["biology"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "你和室友在电脑城比价显卡，讨论能不能流畅看网上下载的国外视频。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["pc", "dorm"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "模联社团辩论Hamdan案，你查英文资料查到图书馆闭馆。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["debate", "law"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你在QQ空间写日志，引用「世界是平的」里一段全球化描写，觉得自己也要接轨。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["blog", "globalization"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "外贸公司加班赶圣诞订单，你第一次摸到「全球化」的实物——一箱箱要海运的货。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["trade", "overtime"]
+    },
+    {
+      "category": "school",
+      "scenario": "friendship",
+      "text": "机房课后你们围看Google收购YouTube的网页，争论国内会不会出现一样的网站。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["internet", "peer"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "你给喜欢的人发了一个搞笑视频链接，对方回「哪里下的」。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["crush", "digital"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "你在地理课画全球贸易线，老师指着东部沿海说「这里最忙」。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["geography", "trade"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你用数码相机拍了一段宿舍花絮，犹豫要不要传到网上——最后只存在硬盘里。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["vlog", "creator"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全家看国际新闻讨论油价，你说以后会不会有电动车，被笑「想太远」。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["energy", "family"]
+    },
+    {
+      "category": "school",
+      "scenario": "friendship",
+      "text": "晚自习后操场散步，同学争论萨达姆死后中东会不会更乱，你也插不上话。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["discussion"]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "父母说今年生意不错，想换大电视，你更想要一台能上网的新电脑。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["consumption"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "报社实习时，前辈抱怨「网上什么都能发」，你偷偷觉得新鲜。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["media"]
+    }
+  ]
+}

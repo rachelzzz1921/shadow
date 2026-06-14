@@ -33,6 +33,36 @@ Harness Memory：每次改 prompt、模型或 narrative 规则，在此记录，
 
 ---
 
+## 2026-06-14 — P0 占位接线（memory / fate / replan）
+
+**Change**
+
+- `memory-retrieval.js` + `memoryFromYear` 类型对齐 golden
+- `fate-bridge.js` 读 world corpus；`beats-replan.js` 规则占位
+- `docs/demo*`：`ShadowAgents.dialogue` / `fate` 占位启用
+- `buildInterventionReplanPrompt` 骨架（**待人写终稿**）
+
+**Expected**
+
+- npm test 全绿；golden eval ≥90
+- Live 干预后 trace 含 `fate:sampled`、replan 字段
+
+**Result**
+
+- test 14/14；`test:golden` ok= true, score=95
+- LLM re-plan / Dialogue / Fate 仍为 placeholder
+
+**Keep / Revert**
+
+- Keep 占位；P2 替换 prompt 后再记一条
+
+**Notes**
+
+- 有效变体合并 → 本文件顶部追加，不删历史
+- 队友：T-016 prompt 终稿、T-021 人审后改 `Keep`
+
+---
+
 ## 2026-06-14 — Harness 文档 + evaluator + run trace
 
 **Change**

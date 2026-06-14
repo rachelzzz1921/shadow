@@ -11,7 +11,7 @@
   },
   "tiers": {
     "T0_router": ["shadow-router"],
-    "T1_shadow": ["story-authoring", "story-review", "harness-init"],
+    "T1_shadow": ["story-authoring", "story-review", "fate-agent", "harness-init"],
     "T2_harness": ["design-generator", "progress-tracker"],
     "T3_architecture": [
       "improve-codebase-architecture",
@@ -80,11 +80,11 @@
       "secondary": ["to-prd", "ubiquitous-language"]
     },
     "02-technical-design": {
-      "primary": ["design-generator", "improve-codebase-architecture", "grill-with-docs", "api-and-interface-design"],
+      "primary": ["design-generator", "improve-codebase-architecture", "grill-with-docs", "api-and-interface-design", "fate-agent"],
       "secondary": ["zoom-out", "design-an-interface", "documentation-and-adrs"]
     },
     "03-coding": {
-      "primary": ["incremental-implementation", "tdd", "context-engineering"],
+      "primary": ["incremental-implementation", "tdd", "context-engineering", "fate-agent"],
       "secondary": ["source-driven-development", "doubt-driven-development", "git-workflow-and-versioning"]
     },
     "04-dev-testing": {
@@ -141,6 +141,12 @@
       "rule": "设计讨论用 grill-with-docs；决策落盘用 documentation-and-adrs；术语表用 ubiquitous-language"
     },
     {
+      "topic": "叙事 vs 时代语料",
+      "skills": ["story-authoring", "fate-agent", "story-review"],
+      "primary": "story-authoring",
+      "rule": "七年正文/golden 用 story-authoring；2006–2026 语料/命运权重/seed 用 fate-agent；审叙事质量用 story-review"
+    },
+    {
       "topic": "Harness Init",
       "skills": ["harness-init", "setup-matt-pocock-skills"],
       "primary": "harness-init",
@@ -159,6 +165,6 @@
   },
   "manual_canonical": {
     "note": "以下 skill 源码在 skills/shadow 或 skills/harness，编辑后运行 skills/sync-shadow-skills.sh",
-    "skills": ["story-authoring", "story-review", "harness-init", "design-generator", "progress-tracker"]
+    "skills": ["story-authoring", "story-review", "fate-agent", "harness-init", "design-generator", "progress-tracker"]
   }
 }

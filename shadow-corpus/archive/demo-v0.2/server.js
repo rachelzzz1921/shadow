@@ -155,15 +155,52 @@ async function handleDialogue(req, res) {
     sendJson(res, 400, { error: 'Missing persona_card or user_question' });
     return;
   }
-  const reply = await getAgents().runDialogue({
+  const input = {
     persona_card: body.persona_card,
     memory_stream: body.memory_stream || [],
     current_mood: body.current_mood ?? 5,
     current_esteem: body.current_esteem ?? 5,
     at_year: body.at_year ?? 7,
     user_question: body.user_question
-  });
+  };
+  if (!hasAnyKey()) {
+    const { askDialoguePlaceholder } = require('./lib/dialogue-hook');
+    sendJson(res, 200, askDialoguePlaceholder(input));
+    return;
+  }
+  const reply = await getAgents().runDialogue({ ...input, runtime: undefined });
   sendJson(res, 200, reply);
+}
+
+async function handleScenarioClassify(req, res) {
+  const body = await readJson(req);
+  const { classifyUserQuestion, classifyProfile } = require('./lib/scenario-classify');
+  const text = body.text ?? body.question ?? body.choice ?? '';
+  const result = text && !body.profile
+    ? await classifyUserQuestion(text, {
+        keywords: body.keywords,
+        description: body.description
+      })
+    : await classifyProfile(body.profile || { choice: text, keywords: body.keywords, description: body.description });
+  sendJson(res, 200, result);
+}
+
+async function handleFateContext(req, res) {
+  const body = await readJson(req);
+  const { askFatePlaceholder, askFateOnIntervention } = require('./lib/fate-hook');
+  const fn = body.intervention || body.choice ? askFateOnIntervention : askFatePlaceholder;
+  const result = await fn({
+    profile: body.profile,
+    persona_card: body.persona_card,
+    narrativeYear: body.narrative_year ?? body.narrativeYear ?? 1,
+    year: body.year,
+    beatType: body.beat_type,
+    choice: body.choice,
+    lastIntervention: body.last_intervention,
+    priorInterventions: body.prior_interventions || [],
+    snippets: body.snippets
+  });
+  sendJson(res, 200, result);
 }
 
 async function handleStoryStart(req, res) {
@@ -319,6 +356,8 @@ const ROUTES = {
   'POST /api/year': handleYear,
   'POST /api/final': handleFinal,
   'POST /api/dialogue': handleDialogue,
+  'POST /api/fate/context': handleFateContext,
+  'POST /api/scenario/classify': handleScenarioClassify,
   'POST /api/story': handleStoryStream,
   'POST /api/story/start': handleStoryStart,
   'POST /api/story/year': handleStoryYear,

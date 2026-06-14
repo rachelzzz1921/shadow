@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shadow Demo — UI Mood Board</title>
+<style>
+/* ─── Zpix ─── */
+@font-face {
+  font-family: 'Zpix';
+  src: url('assets/fonts/zpix.ttf') format('truetype');
+  font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* 纸感 · 午后 */
+  --paper: #f7f0e3;
+  --paper-deep: #ebe3d1;
+  --paper-shadow: #d9cfba;
+  --sky-warm: #c9daf0;
+  --sky-gold: #f5dcaa;
+
+  /* 墨色 */
+  --ink: #3a3228;
+  --ink-soft: #6b5f4f;
+  --ink-muted: #9a8b78;
+
+  /* Shadow amber */
+  --amber: #c8863a;
+  --amber-bright: #f0b85c;
+  --amber-deep: #9a6328;
+  --amber-glow: rgba(200, 134, 58, 0.28);
+
+  /* 情绪弧：遗憾 → 和解 */
+  --rose-soft: #c97868;
+  --sage: #7da87a;
+  --sage-light: #b8d4b4;
+
+  /* SNES 面板 */
+  --panel: #faf6ee;
+  --panel-edge: #b8a88c;
+  --panel-shadow: #7a6a54;
+  --highlight: #fffdf8;
+  --step: 3px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Zpix', monospace;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--ink);
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 11px, rgba(58, 50, 40, 0.025) 11px, rgba(58, 50, 40, 0.025) 12px),
+    var(--paper);
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+}
+
+img { image-rendering: pixelated; image-rendering: crisp-edges; }
+
+/* ─── Layout ─── */
+.wrap { max-width: 980px; margin: 0 auto; padding: 28px 16px 64px; }
+
+.hero {
+  text-align: center;
+  padding: 32px 12px 28px;
+  margin-bottom: 28px;
+  border-bottom: var(--step) solid var(--paper-shadow);
+}
+
+.hero-kicker {
+  font-size: 12px;
+  color: var(--ink-muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+.hero-title {
+  display: inline-block;
+  font-size: 12px;
+  transform: scale(2.4);
+  transform-origin: center top;
+  margin-bottom: 28px;
+  color: var(--ink);
+}
+
+.hero-sub {
+  font-size: 12px;
+  color: var(--ink-soft);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 2px dashed var(--paper-shadow);
+}
+
+.section-head h2 {
+  font-size: 12px;
+  transform: scale(1.35);
+  transform-origin: left center;
+}
+
+.section-head span {
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+
+/* ─── SNES panel chrome ─── */
+.snes {
+  background: var(--panel);
+  border: var(--step) solid var(--panel-edge);
+  box-shadow:
+    inset var(--step) var(--step) 0 var(--highlight),
+    inset calc(var(--step) * -1) calc(var(--step) * -1) 0 var(--panel-shadow),
+    calc(var(--step) + 1px) calc(var(--step) + 1px) 0 rgba(58, 50, 40, 0.12);
+}
+
+.snes-inset {
+  background: var(--paper-deep);
+  border: 2px solid var(--panel-edge);
+  box-shadow: inset 2px 2px 0 rgba(58, 50, 40, 0.08);
+}
+
+/* ─── Palette ─── */
+.palette {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+  gap: 10px;
+}
+
+.swatch {
+  border: 2px solid var(--panel-edge);
+  overflow: hidden;
+  box-shadow: 2px 2px 0 rgba(58, 50, 40, 0.1);
+}
+
+.swatch-color { height: 52px; }
+
+.swatch-meta {
+  padding: 8px;
+  background: var(--panel);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.swatch-meta code {
+  color: var(--amber-deep);
+  font-family: inherit;
+}
+
+.swatch-meta small {
+  display: block;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+
+/* ─── Type scale ─── */
+.type-row {
+  display: grid;
+  gap: 12px;
+}
+
+.type-sample {
+  padding: 14px 16px;
+}
+
+.type-label {
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-bottom: 8px;
+}
+
+.scale-1 { font-size: 12px; }
+.scale-15 {
+  font-size: 12px;
+  transform: scale(1.5);
+  transform-origin: left top;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.scale-2 {
+  font-size: 12px;
+  transform: scale(2);
+  transform-origin: left top;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+/* ─── Mock grid ─── */
+.mock-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 820px) {
+  .mock-grid { grid-template-columns: 1fr 1fr; }
+  .mock-grid .mock-full { grid-column: 1 / -1; }
+}
+
+.mock-label {
+  font-size: 12px;
+  color: var(--amber-deep);
+  margin-bottom: 8px;
+  transform: scale(1.1);
+  transform-origin: left center;
+}
+
+/* ─── CRT overlay (toggle) ─── */
+.crt-host { position: relative; }
+.crt-host.crt-on::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(58, 50, 40, 0.04) 2px,
+      rgba(58, 50, 40, 0.04) 4px
+    );
+  mix-blend-mode: multiply;
+}
+.crt-host.crt-on::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 19;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(58, 50, 40, 0.08) 100%);
+}
+
+/* ─── Particles ─── */
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 3;
+}
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--amber-bright);
+  opacity: 0.45;
+  animation: float-up linear infinite;
+}
+@keyframes float-up {
+  from { transform: translateY(100%); opacity: 0; }
+  20% { opacity: 0.5; }
+  to { transform: translateY(-20px); opacity: 0; }
+}
+
+/* ─── Pixel scenes (light warm) ─── */
+.pixel-scene {
+  position: relative;
+  height: 120px;
+  overflow: hidden;
+  border-bottom: 3px solid var(--panel-edge);
+  image-rendering: pixelated;
+}
+.pixel-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 40%, transparent 30%, rgba(247, 240, 227, 0.35) 100%);
+  pointer-events: none;
+}
+
+.scene-classroom {
+  background:
+    repeating-linear-gradient(112deg, rgba(140, 170, 200, 0.35) 0 2px, transparent 2px 14px),
+    linear-gradient(180deg, var(--sky-warm) 0%, #b8cce4 45%, var(--paper-deep) 45%, #c8b89a 100%);
+}
+.scene-classroom .window {
+  position: absolute;
+  top: 18px; right: 14%;
+  width: 64px; height: 48px;
+  background: linear-gradient(180deg, #dfeaf8, #a8c0dc);
+  border: 3px solid var(--panel-edge);
+  box-shadow: inset 0 0 0 3px var(--highlight);
+}
+.scene-classroom .desk-row {
+  position: absolute;
+  bottom: 8px; left: 8%; right: 8%;
+  height: 28px;
+  background: url('assets/kenney/dungeon-tilemap_packed.png') repeat;
+  background-size: 16px 16px;
+  opacity: 0.55;
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+.scene-postoffice {
+  background:
+    radial-gradient(circle at 78% 22%, var(--sky-gold) 0 18px, transparent 19px),
+    linear-gradient(180deg, #e8dcc8 0%, #d4c4a8 55%, #b8a888 100%);
+}
+.scene-postoffice .counter {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 44px;
+  background: linear-gradient(180deg, #c8a878, #a88860);
+  border-top: 3px solid var(--panel-edge);
+}
+.scene-postoffice .sage-light {
+  position: absolute;
+  top: 24px; left: 12%;
+  width: 48px; height: 48px;
+  background: var(--sage-light);
+  opacity: 0.35;
+  box-shadow: 0 0 0 3px rgba(125, 168, 122, 0.25);
+}
+
+/* ─── LANDING mock ─── */
+.mock-landing {
+  padding: 24px 20px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.mock-landing .title-block {
+  margin: 8px 0 20px;
+}
+.mock-landing .title-main {
+  font-size: 12px;
+  transform: scale(2.2);
+  transform-origin: center;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+.mock-landing .title-sub {
+  font-size: 12px;
+  transform: scale(1.4);
+  transform-origin: center;
+  display: inline-block;
+  color: var(--ink-soft);
+  letter-spacing: 0.2em;
+}
+
+.profile-teaser {
+  text-align: left;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 2;
+}
+.profile-teaser .name { color: var(--ink); margin-bottom: 4px; }
+.profile-teaser .path { color: var(--ink-muted); margin-bottom: 8px; }
+.profile-teaser .quote {
+  color: var(--amber-deep);
+  border-left: 3px solid var(--amber);
+  padding-left: 10px;
+  line-height: 1.7;
+}
+
+.btn-start {
+  display: inline-block;
+  padding: 10px 28px;
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--highlight);
+  background: linear-gradient(180deg, var(--amber-bright), var(--amber));
+  border: 3px solid var(--amber-deep);
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 255, 255, 0.35),
+    inset -2px -2px 0 rgba(0, 0, 0, 0.15),
+    3px 3px 0 rgba(58, 50, 40, 0.2);
+  cursor: default;
+  letter-spacing: 0.12em;
+}
+
+.year-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.yr-dot {
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  background: var(--paper-deep);
+  border: 2px solid var(--panel-edge);
+  color: var(--ink-soft);
+}
+.yr-dot.key {
+  border-color: var(--amber);
+  color: var(--amber-deep);
+  box-shadow: 0 0 0 2px var(--amber-glow);
+}
+
+/* ─── YEAR CARD mock ─── */
+.mock-card { padding: 0; overflow: hidden; }
+
+.card-body { padding: 16px 18px 18px; }
+
+.yr-header {
+  text-align: center;
+  margin-bottom: 12px;
+}
+.yr-idx { color: var(--ink-muted); margin-bottom: 6px; }
+.yr-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  margin-bottom: 6px;
+  background: var(--amber-glow);
+  border: 2px solid var(--amber);
+  color: var(--amber-deep);
+}
+.yr-title {
+  font-size: 12px;
+  transform: scale(1.25);
+  transform-origin: center;
+  display: inline-block;
+}
+
+.section-label {
+  color: var(--ink-muted);
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.main-event {
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  line-height: 1.75;
+  color: var(--ink);
+}
+
+.emotion-row { margin-bottom: 12px; }
+.emo-track {
+  height: 10px;
+  background: var(--paper-shadow);
+  border: 2px solid var(--panel-edge);
+  position: relative;
+}
+.emo-fill {
+  height: 100%;
+  width: 42%;
+  background: linear-gradient(90deg, var(--rose-soft), var(--amber-bright));
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.08);
+}
+
+.btn-shadow {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--ink);
+  background: var(--paper-deep);
+  border: 2px solid var(--panel-edge);
+  box-shadow: inset 2px 2px 0 var(--highlight);
+  letter-spacing: 0.1em;
+}
+
+/* ─── DIALOG mock ─── */
+.mock-dialog-wrap {
+  padding: 28px 20px 24px;
+  background:
+    linear-gradient(180deg, rgba(201, 218, 240, 0.35), rgba(247, 240, 227, 0.9));
+  position: relative;
+}
+
+.dlg-box {
+  position: relative;
+  padding: 18px 16px 14px;
+  z-index: 2;
+}
+.dlg-nametag {
+  position: absolute;
+  top: -10px; left: 12px;
+  padding: 2px 10px;
+  background: var(--panel);
+  border: 2px solid var(--panel-edge);
+  color: var(--amber-deep);
+  box-shadow: 2px 2px 0 rgba(58, 50, 40, 0.1);
+}
+.dlg-ctx {
+  color: var(--ink-muted);
+  margin-bottom: 10px;
+  margin-top: 4px;
+}
+.dlg-text-area {
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  min-height: 72px;
+  line-height: 1.75;
+}
+.dlg-cursor {
+  display: inline-block;
+  width: 7px; height: 12px;
+  background: var(--amber);
+  vertical-align: middle;
+  animation: blink 0.9s step-end infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.dlg-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--ink-muted);
+}
+
+/* ─── Decisions table ─── */
+.decisions {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.decisions th, .decisions td {
+  padding: 8px 10px;
+  text-align: left;
+  border: 2px solid var(--panel-edge);
+  vertical-align: top;
+}
+.decisions th {
+  background: var(--paper-deep);
+  color: var(--ink-soft);
+  width: 28%;
+}
+.decisions td { background: var(--panel); }
+
+/* ─── Asset list ─── */
+.asset-list { list-style: none; }
+.asset-list li {
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border-left: 3px solid var(--sage);
+  background: var(--panel);
+  line-height: 1.6;
+}
+.asset-list a { color: var(--amber-deep); }
+.asset-list .tag {
+  display: inline-block;
+  padding: 0 6px;
+  margin-left: 6px;
+  background: var(--sage-light);
+  color: var(--ink-soft);
+  font-size: 12px;
+  transform: scale(0.85);
+}
+
+/* ─── Controls ─── */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.toolbar button {
+  font-family: inherit;
+  font-size: 12px;
+  padding: 6px 12px;
+  background: var(--paper-deep);
+  border: 2px solid var(--panel-edge);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: inset 1px 1px 0 var(--highlight);
+}
+.toolbar button.active {
+  background: var(--amber-glow);
+  border-color: var(--amber);
+}
+
+.footer-note {
+  text-align: center;
+  color: var(--ink-muted);
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 2px dashed var(--paper-shadow);
+  line-height: 1.8;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <p class="hero-kicker">SHADOW DEMO · UI MOOD BOARD · v0.1</p>
+    <h1 class="hero-title">如影 · 视觉方向</h1>
+    <p class="hero-sub">
+      16-bit 柔像素 · 浅色暖调 · Zpix 全站 · 对齐归档 pixel-scene<br />
+      情绪弧：遗憾中有温度，最终走向和解
+    </p>
+  </header>
+
+  <!-- 已锁定决策 -->
+  <section class="section">
+    <div class="section-head">
+      <h2>已锁定决策</h2>
+      <span>来自需求核对</span>
+    </div>
+    <table class="decisions snes">
+      <tr><th>像素强度</th><td>16-bit SNES 柔像素（阶梯边框、暖色块，非硬 8-bit）</td></tr>
+      <tr><th>色温</th><td>浅色暖调 — 米纸、旧相册、午后光</td></tr>
+      <tr><th>场景</th><td>对齐 archive demo 的 environment 切换；素材用 CC0 开源包</td></tr>
+      <tr><th>字体</th><td>Zpix 最像素 12px 基准，标题用整数倍 scale</td></tr>
+      <tr><th>动效</th><td>CRT 扫描线、轻粒子、打字光标；翻页保留 frame 切换感</td></tr>
+      <tr><th>气质</th><td>对外 showcase；叙事最终导向和解，UI 带柔软希望（sage 点缀）</td></tr>
+      <tr><th>范围</th><td>全改 demo.html + demo.css + engine DOM；看板不动</td></tr>
+    </table>
+  </section>
+
+  <!-- 色板 -->
+  <section class="section">
+    <div class="section-head"><h2>色板</h2><span>Light Warm · Amber Arc</span></div>
+    <div class="palette">
+      <div class="swatch"><div class="swatch-color" style="background:#f7f0e3"></div><div class="swatch-meta"><code>#f7f0e3</code><small>paper 主背景</small></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#ebe3d1"></div><div class="swatch-meta"><code>#ebe3d1</code><small>paper-deep 内嵌区</small></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#3a3228"></div><div class="swatch-meta"><code>#3a3228</code><small>ink 正文</small></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#9a8b78"></div><div class="swatch-meta"><code>#9a8b78</code><small>ink-muted 元信息</small></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#c8863a"></div><div class="swatch-meta"><code>#c8863a</code><small>amber Shadow 主色</small></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#f0b85c"></div><div class="swatch-meta"><code>#f0b85c</code><small>amber-bright 按钮/高亮</small></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#c97868"></div><div class="swatch-meta"><code>#c97868</code><small>rose 遗憾/低情绪</small></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#7da87a"></div><div class="swatch-meta"><code>#7da87a</code><small>sage 和解/希望</small></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#c9daf0"></div><div class="swatch-meta"><code>#c9daf0</code><small>sky-warm 场景天光</small></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#f5dcaa"></div><div class="swatch-meta"><code>#f5dcaa</code><small>sky-gold 邮局午后</small></div></div>
+    </div>
+  </section>
+
+  <!-- 字体 -->
+  <section class="section">
+    <div class="section-head"><h2>字体</h2><span>Zpix 12px 基准</span></div>
+    <div class="type-row snes type-sample">
+      <div class="type-label">12px · 正文 / 元信息</div>
+      <p class="scale-1">你又坐回到教室最后一排。七年后才知道，那年决定的不只是分数。</p>
+      <div class="type-label">18px scale(1.5) · 卡片标题</div>
+      <p class="scale-15">YEAR.1 · 复读班开学</p>
+      <div class="type-label">24px scale(2) · Landing 主标题</div>
+      <p class="scale-2">Shadow / 如影</p>
+    </div>
+  </section>
+
+  <!-- 动效开关 -->
+  <section class="section">
+    <div class="section-head"><h2>动效预览</h2><span>点击下方开关</span></div>
+    <div class="toolbar">
+      <button type="button" id="toggle-crt" class="active">CRT 扫描线</button>
+      <button type="button" id="toggle-particles" class="active">琥珀粒子</button>
+    </div>
+  </section>
+
+  <!-- 组件 Mock -->
+  <section class="section">
+    <div class="section-head"><h2>组件 Mock</h2><span>Landing · 年份卡 · 对话弹窗</span></div>
+    <div class="mock-grid">
+
+      <!-- Landing -->
+      <div class="mock-full">
+        <p class="mock-label">① Landing</p>
+        <div class="crt-host crt-on" id="crt-landing">
+          <div class="snes mock-landing">
+            <div class="particles" id="particles-landing"></div>
+            <div class="title-block">
+              <div class="title-main">Shadow</div><br />
+              <div class="title-sub">如 影</div>
+            </div>
+            <p style="color:var(--ink-muted);margin-bottom:16px;">平行人生 · 复读线 Demo</p>
+            <div class="profile-teaser snes-inset">
+              <div class="name">阿岚 · 18 · INFJ</div>
+              <div class="path">如果当年我去复读了</div>
+              <div class="quote">「我宁愿后悔做过，也不后悔没做。」</div>
+            </div>
+            <div class="btn-start">进入阿岚的七年</div>
+            <div class="year-dots">
+              <div class="yr-dot key">1</div>
+              <div class="yr-dot">2</div>
+              <div class="yr-dot">3</div>
+              <div class="yr-dot key">4</div>
+              <div class="yr-dot">5</div>
+              <div class="yr-dot key">6</div>
+              <div class="yr-dot">7</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Year card -->
+      <div>
+        <p class="mock-label">② 年份卡片 · Pivotal</p>
+        <div class="crt-host crt-on" id="crt-card">
+          <div class="snes mock-card">
+            <div class="pixel-scene scene-classroom">
+              <div class="window"></div>
+              <div class="desk-row"></div>
+            </div>
+            <div class="card-body">
+              <div class="yr-header">
+                <div class="yr-idx">YEAR.1 · 年龄 19</div>
+                <div class="yr-badge">◆ PIVOTAL</div>
+                <div class="yr-title">复读班开学</div>
+              </div>
+              <div class="section-label">◈ 这一年发生了</div>
+              <div class="main-event snes-inset">
+                雨天。你坐回教室最后一排，窗外是灰蓝色的光。同桌问你怎么又来，你说：再来一次。
+              </div>
+              <div class="emotion-row">
+                <div class="section-label">情绪 · 紧绷 4/10</div>
+                <div class="emo-track"><div class="emo-fill"></div></div>
+              </div>
+              <button type="button" class="btn-shadow">和影子对话</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dialog -->
+      <div>
+        <p class="mock-label">③ Shadow 对话弹窗</p>
+        <div class="crt-host crt-on" id="crt-dialog">
+          <div class="mock-dialog-wrap">
+            <div class="particles" id="particles-dialog"></div>
+            <div class="snes dlg-box">
+              <div class="dlg-nametag">影 · 阿岚</div>
+              <div class="dlg-ctx">YEAR.7 · 邮局 · 和解前夕</div>
+              <div class="dlg-text-area snes-inset">
+                你听见「你字真好看」——那一刻，你第一次觉得，够了也可以。<span class="dlg-cursor"></span>
+              </div>
+              <div class="dlg-footer">
+                <span>▼ 正在讲述...</span>
+                <span>[ 跳过 ]</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 场景 -->
+  <section class="section">
+    <div class="section-head"><h2>Pixel Scene</h2><span>对齐 environment · 浅色版</span></div>
+    <div class="mock-grid">
+      <div>
+        <p class="mock-label">classroom · 雨天开学</p>
+        <div class="snes" style="overflow:hidden">
+          <div class="pixel-scene scene-classroom" style="height:140px">
+            <div class="window"></div>
+            <div class="desk-row"></div>
+          </div>
+          <p style="padding:10px 12px;color:var(--ink-muted);">Year 1 · rain · 冷雨 + 纸感天光</p>
+        </div>
+      </div>
+      <div>
+        <p class="mock-label">postoffice · 和解收束</p>
+        <div class="snes" style="overflow:hidden">
+          <div class="pixel-scene scene-postoffice" style="height:140px">
+            <div class="counter"></div>
+            <div class="sage-light"></div>
+          </div>
+          <p style="padding:10px 12px;color:var(--ink-muted);">Year 7 · sage 点缀 · 午后金粉</p>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:12px;color:var(--ink-muted);line-height:1.8;">
+      全量实现：7 个 environment 各映射一条浅色 pixel-scene（classroom / dorm_night / cafeteria / stage / trainstation / postoffice …），
+      背景层叠 Kenney + Cozy pack 地砖，前景保留 archive demo 的 pose/prop sprite 位。
+    </p>
+  </section>
+
+  <!-- 素材 -->
+  <section class="section">
+    <div class="section-head"><h2>开源素材计划</h2><span>对外可商用</span></div>
+    <ul class="asset-list">
+      <li>
+        <strong>Kenney · Tiny Dungeon</strong> <span class="tag">CC0</span><br />
+        地砖 / 室内基础 · 已放入 <code>docs/assets/moodboard/</code> 试贴<br />
+        <a href="https://kenney.nl/assets/tiny-dungeon">kenney.nl/assets/tiny-dungeon</a>
+      </li>
+      <li>
+        <strong>Kenney · Pico-8 City</strong> <span class="tag">CC0</span><br />
+        城市/火车站外景 tile<br />
+        <a href="https://kenney-assets.itch.io/pico-8-city">itch.io/pico-8-city</a>
+      </li>
+      <li>
+        <strong>Ishtar · Cozy Pack</strong> <span class="tag">免费商用</span><br />
+        16×16 暖色室内、角色 · 适合食堂/宿舍<br />
+        <a href="https://ishtarpixels.itch.io/cozy-pack-asset">itch.io/cozy-pack</a>
+      </li>
+      <li>
+        <strong>OPP Village & Room</strong> <span class="tag">Public Domain</span><br />
+        32×32 房间/小镇 · 邮局/家场景<br />
+        <a href="https://openpixelproject.itch.io/opp2017village">openpixelproject</a>
+      </li>
+      <li>
+        <strong>Zpix 最像素</strong> <span class="tag">个人免费</span><br />
+        对外 showcase 属个人/教育用途；商业上线需单独授权<br />
+        <a href="https://github.com/SolidZORO/zpix-pixel-font">github.com/SolidZORO/zpix-pixel-font</a>
+      </li>
+    </ul>
+    <p style="margin-top:10px;color:var(--rose-soft);line-height:1.7;">
+      ⚠ archive demo 的 <code>assets/modern/</code> LPC 角色为<strong>非商用</strong>许可，全量改版将换为 CC0 角色（Cozy pack / Universal LPC 等）。
+    </p>
+  </section>
+
+  <!-- 下一步 -->
+  <section class="section">
+    <div class="section-head"><h2>下一步 · 全量改版</h2></div>
+    <div class="snes" style="padding:16px 18px;line-height:1.85;color:var(--ink-soft);">
+      <p style="margin-bottom:10px;"><strong style="color:var(--ink)">Phase A</strong> — 抽 <code>demo-theme.css</code>：色板、SNES 组件、CRT/粒子</p>
+      <p style="margin-bottom:10px;"><strong style="color:var(--ink)">Phase B</strong> — 改 <code>demo.html</code> 结构 + <code>demo-engine.js</code> 场景容器</p>
+      <p style="margin-bottom:10px;"><strong style="color:var(--ink)">Phase C</strong> — 下载 CC0 素材包，按 environment 切 scene class</p>
+      <p><strong style="color:var(--ink)">Phase D</strong> — 介入 modal、final 页和解色（sage 渐变收束）</p>
+    </div>
+  </section>
+
+  <p class="footer-note">
+    在浏览器打开本文件预览 · docs/demo-moodboard.html<br />
+    确认方向后回复「按 moodboard 全量改」即可开始 Phase A
+  </p>
+</div>
+
+<script>
+(function () {
+  function spawnParticles(container, count) {
+    if (!container) return;
+    container.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('span');
+      p.className = 'particle';
+      p.style.left = (8 + Math.random() * 84) + '%';
+      p.style.animationDuration = (4 + Math.random() * 5) + 's';
+      p.style.animationDelay = (Math.random() * 4) + 's';
+      container.appendChild(p);
+    }
+  }
+
+  spawnParticles(document.getElementById('particles-landing'), 12);
+  spawnParticles(document.getElementById('particles-dialog'), 8);
+
+  let crtOn = true;
+  let particlesOn = true;
+
+  document.getElementById('toggle-crt').addEventListener('click', function () {
+    crtOn = !crtOn;
+    this.classList.toggle('active', crtOn);
+    document.querySelectorAll('.crt-host').forEach(el => el.classList.toggle('crt-on', crtOn));
+  });
+
+  document.getElementById('toggle-particles').addEventListener('click', function () {
+    particlesOn = !particlesOn;
+    this.classList.toggle('active', particlesOn);
+    ['particles-landing', 'particles-dialog'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = particlesOn ? '' : 'none';
+    });
+  });
+})();
+</script>
+</body>
+</html>

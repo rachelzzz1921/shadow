@@ -5,7 +5,7 @@ const test = require('node:test');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const { evaluateStory, evaluateYear, evaluateBeats } = require('../lib/evaluator');
+const { evaluateStory, evaluateYear, evaluateBeats, evaluateVisualConsistency } = require('../lib/evaluator');
 const golden = require('../../../04-dev-testing/golden-stories/复读线.json');
 
 test('golden story 复读线 passes rule eval without errors', () => {
@@ -37,4 +37,14 @@ test('evaluateYear rejects quiet year with intervention', () => {
     { type: 'quiet' }
   );
   assert.ok(findings.some(f => f.code === 'year.quiet_intervention'));
+});
+
+test('evaluateVisualConsistency warns when only some years have visual_anchor', () => {
+  const years = [
+    { year: 1, visual_anchor: '雨窗', key_props: ['书包'] },
+    { year: 2 },
+    { year: 3 }
+  ];
+  const findings = evaluateVisualConsistency(years);
+  assert.ok(findings.some(f => f.code === 'visual.partial'));
 });

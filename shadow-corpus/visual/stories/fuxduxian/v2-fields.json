@@ -1,0 +1,50 @@
+{
+  "_doc": "P2 叙事 v2 视觉字段侧车 · Gate G-N1 前为 draft。sync-golden-from-v2.mjs 只 patch 这些键，不改 event/intervention 结构。",
+  "story_id": "fuxduxian",
+  "gate": "G-N1",
+  "updated": "2026-06-14",
+  "years": {
+    "1": {
+      "visual_anchor": "雨天，最后一排靠窗，书包在空桌",
+      "key_props": ["书包", "窗雨"],
+      "mood_visual": "灰、冷、窄画幅",
+      "daily_micro": "翻书、望窗"
+    },
+    "2": {
+      "visual_anchor": "查分夜，桌上有撕碎准考证",
+      "key_props": ["准考证碎片", "台灯"],
+      "mood_visual": "灰、冷、窄画幅",
+      "daily_micro": "撕纸、静止"
+    },
+    "3": {
+      "visual_anchor": "食堂最里角，双份餐盘只有一个有人",
+      "key_props": ["餐盘", "空椅"],
+      "mood_visual": "灰、冷、窄画幅",
+      "daily_micro": "慢吃 loop"
+    },
+    "4": {
+      "visual_anchor": "舞台侧幕，领带打反，稿纸五叠",
+      "key_props": ["领带", "稿纸", "麦"],
+      "mood_visual": "略暖、舞台光",
+      "daily_micro": "改稿"
+    },
+    "5": {
+      "visual_anchor": "凌晨 4 点，手机 4:03，窗帘缝光",
+      "key_props": ["手机", "床", "窗帘"],
+      "mood_visual": "低饱和、夜",
+      "daily_micro": "睁眼 loop"
+    },
+    "6": {
+      "visual_anchor": "出站雨棚，行李箱，对面校服小孩睡",
+      "key_props": ["行李箱", "雨", "小孩"],
+      "mood_visual": "低饱和、雨",
+      "daily_micro": "抱箱蹲坐"
+    },
+    "7": {
+      "visual_anchor": "邮局小窗，信封与笔，老太太半脸",
+      "key_props": ["信封", "笔", "窗口"],
+      "mood_visual": "留白大、小窗高光",
+      "daily_micro": "写字 loop"
+    }
+  }
+}

@@ -28,6 +28,16 @@ npm test --prefix archive/demo-v0.2
 
 Harness 闭环：[`02-technical-design/01-shadow-harness-loop.md`](02-technical-design/01-shadow-harness-loop.md)
 
+**持续迭代（Wave 4）**：[`docs/plans/2026-06-14-harness-wave4-iteration.md`](docs/plans/2026-06-14-harness-wave4-iteration.md) · 日志 [`06-task-progress/harness-iteration-log.md`](06-task-progress/harness-iteration-log.md)
+
+```bash
+npm test                    # 归档 demo 16 tests
+npm run test:golden
+npm run harness:smoke       # mock live 一条龙
+npm run demo:preview        # 静态复读线 demo
+npm run board:publish
+```
+
 ## Do Not
 
 - 不要在 pivotal 年之外写 `intervention_prompt`
@@ -59,6 +69,7 @@ Harness 闭环：[`02-technical-design/01-shadow-harness-loop.md`](02-technical-
 | 任务 | Skill |
 |------|-------|
 | 写故事 / golden | `story-authoring` |
+| 命运 agent / world 语料 | `fate-agent` |
 | 审叙事 / trace | `story-review` |
 | 改 lib / prompt | `tdd` |
 | 架构改进 | `improve-codebase-architecture` |

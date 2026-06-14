@@ -9,6 +9,7 @@
 | 01 | [产品需求与验收标准](./01-shadow-product-requirements.md) | ✅ |
 | 02 | [Pivotal 介入需求](./02-intervention-requirements.md) | ✅ |
 | 03 | [Golden 验收参照：复读线](../04-dev-testing/golden-stories/复读线.md) | ✅ |
+| 04 | [命运 Agent 与时代语料库](./03-fate-agent-requirements.md) | ✅ |
 
 ## 核心原则
 

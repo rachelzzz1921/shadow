@@ -12,8 +12,13 @@
 | 04 | [五人团队执行计划](./04-team-execution-plan.md) | ✅ |
 | 05 | [任务管理系统 CLI](./05-task-system.md) | ✅ |
 | — | [团队花名册](./team-roster.md) | 📝 待填真名 |
+| — | [Kickoff 议程 T-001](./kickoff-agenda-T001.md) | 占位 |
+| — | [Agent 分支策略](./agent-branch-strategy.md) | T-003 |
+| — | [共读清单 T-002](./reading-checklist-T002.md) | 占位 |
+| — | [Harness 迭代日志](./harness-iteration-log.md) | Wave 4 I-1…I-5 |
+| — | [Wave 4 计划](../docs/plans/2026-06-14-harness-wave4-iteration.md) | CHG-H001 |
 | — | [全链路看板 BOARD.md](./BOARD.md) | v2 + CLI 自动区 |
-| — | [任务库 registry.json](./tasks/registry.json) | 32 项 |
+| — | [任务库 registry.json](./tasks/registry.json) | 40 项 |
 | — | [变更进度 `./changes/`](./changes/) | 进行中 |
 
 ## 任务管理 Skill
@@ -66,6 +71,10 @@ ls -lt shadow-corpus/archive/demo-v0.2/runs/*.json 2>/dev/null | head
 
 # Golden eval
 npm test
+npm run test:golden
+
+# v2 视觉字段 → golden（G-N1 后 --apply）
+npm run sync:golden-v2
 
 # 同步 Skill 到 Cursor
 npm run sync-skills

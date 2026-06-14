@@ -71,6 +71,7 @@ skills/
 ├── shadow/                       # ★ Shadow 领域（改这里）
 │   ├── story-authoring/
 │   ├── story-review/
+│   ├── fate-agent/
 │   └── harness-init/
 ├── harness/                      # ★ Harness 框架
 │   ├── design-generator/
@@ -79,7 +80,7 @@ skills/
 └── pool/                         # 75 个第三方 Skill（完整副本）
 ```
 
-**统计**：Shadow 自有 3 + Harness 2 + 路由 1 + 第三方 75 = **81**
+**统计**：Shadow 自有 4 + Harness 2 + 路由 1 + 第三方 75 = **82**
 
 ---
 
@@ -90,11 +91,15 @@ skills/
 | [`fixtures/golden-stories/复读线.json`](fixtures/golden-stories/复读线.json) | Golden 故事 JSON（evaluator 基准） |
 | [`fixtures/golden-stories/复读线.md`](fixtures/golden-stories/复读线.md) | 复读线叙事说明与验收要点 |
 
-`04-dev-testing/golden-stories/` 保留同名引用副本，与 fixtures 同步。
+## 7. 世界语料（world/）
 
----
+| 路径 | 说明 |
+|------|------|
+| [`world/README.md`](world/README.md) | 2006–2026 中国大陆时代语料库 + Supabase seed |
+| [`world/data/years/`](world/data/years/) | 冻结 JSON（21 年 × macro≥30 micro≥80） |
+| [`01-requirements/03-fate-agent-requirements.md`](01-requirements/03-fate-agent-requirements.md) | 命运 Agent 需求 |
 
-## 6. 工具（tooling/）
+## 8. 工具（tooling/）
 
 | 路径 | 说明 |
 |------|------|

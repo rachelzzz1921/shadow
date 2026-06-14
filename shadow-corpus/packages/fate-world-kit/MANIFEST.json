@@ -1,0 +1,27 @@
+{
+  "name": "fate-world-kit",
+  "description": "Shadow Fate Agent + 2006-2026 China era corpus portable pack",
+  "built_at": "2026-06-14",
+  "world_corpus_version": "2026.06.14-v1",
+  "includes": [
+    "world/",
+    "skill/",
+    "docs/03-fate-agent-requirements.md",
+    "docs/03-fate-agent-and-world-db.md",
+    "docs/04-scenario-weight-system.md",
+    "notebooklm/"
+  ],
+  "stats_per_year_typical": {
+    "macro_events": "37-61",
+    "micro_events": "~268",
+    "scenario_domains_min": 30
+  },
+  "scenario_domains": [
+    "family",
+    "love",
+    "friendship",
+    "academic",
+    "career",
+    "self_growth"
+  ]
+}

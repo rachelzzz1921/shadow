@@ -3,6 +3,9 @@
 const agents = require('./agents');
 const { createLiveRuntime } = require('./llm-runtime');
 const { memoryFromYear, normalizeYear } = require('./story-contract');
+const { replanBeatsAfterIntervention } = require('./beats-replan');
+const { resolveFateContext } = require('./fate-bridge');
+const { classifyProfile } = require('./scenario-classify');
 const {
   evaluateBeats,
   evaluateStory,
@@ -23,8 +26,26 @@ const {
 
 async function startStorySession({ profile, runtime = createLiveRuntime(), trace = null }) {
   try {
+    const scenario = await classifyProfile(profile);
+    appendEvent(trace, {
+      stage: 'scenario:classified',
+      payload: {
+        domain: scenario.domain,
+        label: scenario.label,
+        agent: scenario.agent,
+        confidence: scenario.confidence
+      }
+    });
+
+    const enrichedProfile = {
+      ...profile,
+      scenario_domain: scenario.domain,
+      scenario_label: scenario.label,
+      scenario_agent: scenario.agent
+    };
+
     appendEvent(trace, { stage: 'persona:start' });
-    const persona_card = await agents.runPersona({ profile, runtime });
+    const persona_card = await agents.runPersona({ profile: enrichedProfile, runtime });
     appendEvent(trace, { stage: 'persona:done', payload: { name: persona_card.name } });
 
     appendEvent(trace, { stage: 'beats:start' });
@@ -37,7 +58,8 @@ async function startStorySession({ profile, runtime = createLiveRuntime(), trace
     });
 
     const session = {
-      profile,
+      profile: enrichedProfile,
+      scenario,
       persona_card,
       shadow: agents.deriveShadow(persona_card),
       beats: beatsResult.beats,
@@ -69,8 +91,43 @@ async function generateNextYear({ session, user_intervention = null, runtime = c
     recordIntervention(trace, user_intervention);
   }
 
+  let beats = session.beats;
+  let pivotal_years = session.pivotal_years;
+  const replanLog = session.replan_log || [];
+
+  if (user_intervention) {
+    const replanned = replanBeatsAfterIntervention({
+      beats,
+      pivotal_years,
+      intervention: user_intervention
+    });
+    if (replanned.replanned) {
+      beats = replanned.beats;
+      replanLog.push({
+        at_year: beat.year,
+        intervention: user_intervention,
+        placeholder: replanned.placeholder,
+        note: replanned.note
+      });
+    }
+  }
+
   try {
     appendEvent(trace, { stage: 'year:start', payload: { year: beat.year, type: beat.type } });
+
+    const fate_context = await resolveFateContext({
+      runId: session.run_id || trace?.run_id || 'local',
+      profile: session.profile,
+      persona_card: session.persona_card,
+      narrativeYear: beat.year,
+      beatType: beat.type,
+      priorInterventions: replanLog.map(r => r.intervention)
+    });
+    appendEvent(trace, {
+      stage: 'fate:sampled',
+      payload: { year: beat.year, era_line: fate_context?.era_line, placeholder: fate_context?.placeholder }
+    });
+
     const rawYear = await agents.runYear({
       persona_card: session.persona_card,
       memory_stream: session.memory_stream || [],
@@ -81,8 +138,9 @@ async function generateNextYear({ session, user_intervention = null, runtime = c
       beat_type: beat.type,
       beat_seed: beat.seed,
       user_intervention,
-      full_beats: session.beats,
-      pivotal_years: session.pivotal_years || [],
+      full_beats: beats,
+      pivotal_years,
+      fate_context,
       runtime
     });
     const year = normalizeYear(
@@ -108,10 +166,14 @@ async function generateNextYear({ session, user_intervention = null, runtime = c
 
     const nextSession = {
       ...session,
+      beats,
+      pivotal_years,
+      replan_log: replanLog,
       years: [...(session.years || []), year],
       memory_stream: [...(session.memory_stream || []), memory],
       mood: year.new_mood,
-      esteem: year.new_esteem
+      esteem: year.new_esteem,
+      last_fate_context: fate_context
     };
     return { session: nextSession, year, memory, eval: yearEval };
   } catch (error) {

@@ -1,6 +1,10 @@
 # OS
 .DS_Store
 
+# Local IDE / agent settings
+.claude/settings.local.json
+.cursor/skills/
+
 # Dependencies
 node_modules/
 **/node_modules/
@@ -23,3 +27,5 @@ example/shadow-demo/runs/*.json
 *.xlsx
 assets_extract/
 thumbs/
+shadow-four-stories-pack/
+shadow-pixel-assets-pack/

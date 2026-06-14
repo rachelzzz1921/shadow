@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shadow · Visual Layout 预览</title>
+  <style>
+    body { margin: 0; background: #0a0a12; color: #ccc; font-family: system-ui, sans-serif; }
+    .bar { display: flex; gap: 8px; padding: 12px; align-items: center; flex-wrap: wrap; }
+    .bar button { padding: 6px 12px; cursor: pointer; background: #1a1a28; color: #ddd; border: 1px solid #444; border-radius: 4px; }
+    .bar button.active { border-color: #65d6d0; color: #e8fffe; }
+    .bar a { color: #65d6d0; text-decoration: none; }
+    #game-mount { width: 640px; max-width: 100%; margin: 0 auto; }
+    .hint { padding: 0 12px 12px; font-size: 12px; color: #666; }
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <strong>复读线 layout</strong>
+    <span id="year-btns"></span>
+    <a href="index.html">← Live demo</a>
+  </div>
+  <div id="game-mount"></div>
+  <p class="hint">V-007 占位 Scene · visual-layouts.json · sprite 待 V-002</p>
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+  <script src="visual-preview.js"></script>
+</body>
+</html>

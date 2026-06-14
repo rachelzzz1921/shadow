@@ -16,12 +16,13 @@ Prompt 集合 → Context + Harness + Skill 驱动的 closed loop
 
 **验收标准**：
 
-- 输出符合 `example/shadow-demo/lib/schemas.js` 与 `example/shadow-demo/lib/contract.example.json` 契约。
+- 输出符合 `archive/demo-v0.2/lib/schemas.js` 与 `archive/demo-v0.2/lib/contract.example.json` 契约。
 - 七年包含 2-3 个 pivotal 年与足够 quiet 留白。
 - Live mode 下用户 intervention 能进入下一年 agent 上下文。
 - `memory_stream` 可支撑跨时空 dialogue 引用。
 - `final` 有重量、有 regret，不强行鸡汤。
-- 规则型 eval（`lib/evaluator.js`）无 error；warn 需人工判断是否可接受。
+- 规则型 eval（`archive/demo-v0.2/lib/evaluator.js`）无 error；warn 需人工判断是否可接受。
+- 静态展示：`docs/demo.html`（复读线 mock + Agent hook 占位）。
 
 ## 2. Actor
 
@@ -32,6 +33,7 @@ Prompt 集合 → Context + Harness + Skill 驱动的 closed loop
 | Year agent | 生成单年叙事 | 每年一次；可带 user_intervention |
 | Final agent | 收束七年 | 7 年完成后 |
 | Dialogue agent | 跨时空对话 | 用户随时提问 |
+| Fate agent | 时代语境 overlay | 每年；独立 Beats UI |
 | User | pivotal 介入选择 | pivotal 年弹窗 |
 | Story session Module | 状态、暂停/继续、trace | 贯穿 live 流程 |
 | Evaluator | 规则型 feedback | beats / year / story 完成后 |
@@ -39,11 +41,13 @@ Prompt 集合 → Context + Harness + Skill 驱动的 closed loop
 
 ## 3. Environment
 
-- **Runtime**：Node 20+，`example/shadow-demo/server.js` + `lib/*`
-- **Frontend**：`example/shadow-demo/public/index.html`（本地预生成 / live session 双模式）
-- **LLM**：Anthropic 或 OpenAI（`example/shadow-demo/lib/llm-runtime.js`）
-- **Fixtures**：`LOCAL_STORIES`、`example/shadow-demo/lib/contract.example.json`
-- **Traces**：`example/shadow-demo/runs/*.json`（live session 自动写入）
+- **Runtime**：Node 20+，`archive/demo-v0.2/server.js` + `lib/*`
+- **Frontend（Live）**：`archive/demo-v0.2/public/index.html`
+- **Frontend（静态）**：仓库根 `docs/demo.html` + `demo-data.js` + `demo-engine.js`
+- **LLM**：Anthropic 或 OpenAI（`archive/demo-v0.2/lib/llm-runtime.js`）
+- **Fixtures**：`fixtures/golden-stories/`（源）；`04-dev-testing/golden-stories/`（副本）
+- **Traces**：`archive/demo-v0.2/runs/*.json`（live session 自动写入）
+- **迭代计划**：`docs/plans/2026-06-14-harness-wave4-iteration.md`
 
 ## 4. Feedback
 
@@ -73,7 +77,8 @@ Prompt 集合 → Context + Harness + Skill 驱动的 closed loop
 | Harness 文档 | `01-requirements/` … `07-debug-and-correction/` | 叙事协议、介入规则、golden story |
 | Skills | `skills/story-authoring/`、`skills/story-review/` | 可复用流程 |
 | Prompt 实验 | `06-task-progress/02-prompt-experiments-log.md` | 改 prompt 的可追溯记录 |
-| Run trace | `example/shadow-demo/runs/*.json` | 调试、审计、eval 复盘 |
+| Run trace | `archive/demo-v0.2/runs/*.json` | 调试、审计、eval 复盘 |
+| 迭代日志 | `06-task-progress/harness-iteration-log.md` | Wave 4+ 持续迭代 |
 
 ## 6. Stop Condition
 
@@ -99,10 +104,11 @@ POST /api/story/final
 
 ## 8. 相关文件
 
-- 契约：`lib/schemas.js`、`lib/contract.example.json`
-- Session：`lib/story-session.js`
-- Eval：`lib/evaluator.js`
-- Trace：`lib/run-trace.js`
-- Prompt：`lib/prompts.js`
+- 契约：`archive/demo-v0.2/lib/schemas.js`、`archive/demo-v0.2/lib/contract.example.json`
+- Session：`archive/demo-v0.2/lib/story-session.js`
+- Eval：`archive/demo-v0.2/lib/evaluator.js`
+- Trace：`archive/demo-v0.2/lib/run-trace.js`
+- Prompt：`archive/demo-v0.2/lib/prompts.js`
 - 叙事协议：`03-coding/01-narrative-prompt-protocol.md`
 - 介入设计：`01-requirements/02-intervention-requirements.md`
+- Smoke：`npm run harness:smoke` · `test/harness-smoke.test.js`

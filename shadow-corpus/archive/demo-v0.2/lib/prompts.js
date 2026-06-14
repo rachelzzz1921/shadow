@@ -42,6 +42,21 @@ function formatBeats(beats, pivotalYears) {
     .join('\n');
 }
 
+function formatFateContext(ctx) {
+  if (!ctx) return '（无时代际遇层）';
+  const lines = [
+    `时代线：${ctx.era_line || '—'}`,
+    ctx.emphasis_line ? `侧重：${ctx.emphasis_line}` : null,
+    ctx.macro_sample?.length
+      ? `宏观：${ctx.macro_sample.slice(0, 2).map(m => m.title).join('；')}`
+      : null,
+    ctx.micro_sample?.length
+      ? `微观：${ctx.micro_sample.slice(0, 2).map(m => m.text).join('；')}`
+      : null
+  ].filter(Boolean);
+  return lines.join('\n');
+}
+
 // ============================================================
 // Agent 1: 人格分析师
 // ============================================================
@@ -166,7 +181,8 @@ function buildYearPrompt(input) {
     beat_seed,
     user_intervention,
     full_beats,
-    pivotal_years
+    pivotal_years,
+    fate_context
   } = input;
 
   const lines = [
@@ -178,6 +194,9 @@ function buildYearPrompt(input) {
     '',
     `# 七年节拍全局（用来理解上下文，不要剧透未来年份的细节）`,
     formatBeats(full_beats, pivotal_years),
+    '',
+    `# 时代际遇层（Fate agent · 背景压力，勿照抄标题）`,
+    formatFateContext(fate_context),
     '',
     `# 当前内在状态`,
     `情绪值：${current_mood}/10`,
@@ -283,14 +302,48 @@ function buildDialoguePrompt(input) {
   return { system: DIALOGUE_SYSTEM, prompt: lines.join('\n') };
 }
 
+// ============================================================
+// Agent 6: Intervention re-plan（PLACEHOLDER · T-016 队友替换）
+// ============================================================
+const REPLAN_SYSTEM = `你是「节奏修订师」。用户在 pivotal 年做了介入选择，你需要修订**之后年份**的 beat seed，使七年节奏仍合理。
+
+# 原则
+- 只改 intervention 年之后的 seed，不动 pivotal_years 数量。
+- 每个 seed 8-40 字，保留 quiet/pivotal 类型不变。
+- 让后续 seed 能从用户选择后果长出来，不要写具体剧情。
+
+# 输出
+严格 JSON：{ "beats": [7条], "pivotal_years": [2-3个数字] }`;
+
+function buildInterventionReplanPrompt(input) {
+  const { persona_card, beats, pivotal_years, intervention } = input;
+  const lines = [
+    '# 人格卡',
+    formatPersonaCard(persona_card),
+    '',
+    '# 当前七年节拍',
+    formatBeats(beats, pivotal_years),
+    '',
+    '# 用户介入',
+    `年${intervention.from_year}：用户选择了「${intervention.choice}」`,
+    intervention.question ? `原问题：${intervention.question}` : null,
+    '',
+    '# 任务',
+    '修订 intervention 年之后的 seed。类型字段保持不变。'
+  ].filter(Boolean);
+  return { system: REPLAN_SYSTEM, prompt: lines.join('\n') };
+}
+
 module.exports = {
   buildPersonaPrompt,
   buildBeatsPrompt,
   buildYearPrompt,
   buildFinalPrompt,
   buildDialoguePrompt,
+  buildInterventionReplanPrompt,
   // helpers exposed for tests / debugging
   formatPersonaCard,
   formatMemoryStream,
-  formatBeats
+  formatBeats,
+  formatFateContext
 };

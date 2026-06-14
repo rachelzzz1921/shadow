@@ -1,0 +1,194 @@
+[
+  {
+    "id": "SH-Q01",
+    "order": 1,
+    "section": "岔路口",
+    "kind": "binary",
+    "text": "和人起冲突时，你的身体先做哪件事？",
+    "subtitle": "不是你想做什么，是你实际会做什么",
+    "note": "这题帮系统理解你在压力下的默认反应——这是 decision_tendency 的根。",
+    "ui": {},
+    "options": [
+      {
+        "key": "A",
+        "text": "先退一步，把场面圆回来",
+        "sub": "冲突回避型，倾向妥协以维持关系",
+        "maps_to": { "decision_tendency": "compromise_first", "scenario_weights.family": 0.1 }
+      },
+      {
+        "key": "B",
+        "text": "先顶住，绝不先低头",
+        "sub": "对抗坚持型，倾向硬撑以维护立场",
+        "maps_to": { "decision_tendency": "hold_first", "scenario_weights.self_growth": 0.1 }
+      }
+    ]
+  },
+  {
+    "id": "SH-Q02",
+    "order": 2,
+    "section": "性格",
+    "kind": "slider",
+    "text": "别人怎么看你，对你有多重要？",
+    "subtitle": "诚实一点，没人在记分",
+    "note": "外在评价敏感度——直接喂 soft_spots 和 initial_esteem 的脆弱程度。",
+    "ui": {
+      "min": 0,
+      "max": 100,
+      "tierLabels": [
+        { "range": [0, 20], "label": "我活我的" },
+        { "range": [21, 45], "label": "听听就算" },
+        { "range": [46, 70], "label": "会在意" },
+        { "range": [71, 90], "label": "很在意" },
+        { "range": [91, 100], "label": "几乎是我的标尺" }
+      ],
+      "minLabel": "几乎不影响",
+      "maxLabel": "几乎是我的标尺",
+      "feedback": [
+        { "range": [0, 30], "text": "你似乎有一套自己的秤。" },
+        { "range": [31, 70], "text": "你在自己和别人之间来回。" },
+        { "range": [71, 100], "text": "别人的眼光，可能比你以为的更重。" }
+      ]
+    },
+    "options": []
+  },
+  {
+    "id": "SH-Q03",
+    "order": 3,
+    "section": "性格",
+    "kind": "scenario",
+    "text": "一件事彻底搞砸了。第二天醒来，你做的第一件事是——",
+    "note": "失败后第一反应，暴露防御机制类型。",
+    "ui": { "scene": "失败的第二天清晨" },
+    "options": [
+      { "key": "A", "text": "立刻列计划，想怎么补救", "sub": "行动型防御：用忙碌掩盖失控感", "maps_to": { "defense_mechanism": "overwork", "decision_tendency": "try_again" } },
+      { "key": "B", "text": "反复回想哪里错了，怪自己", "sub": "内归因型：高自我苛责", "maps_to": { "defense_mechanism": "self_blame", "initial_esteem_fragility": "high" } },
+      { "key": "C", "text": "假装没事，照常过日子", "sub": "压抑型：回避情绪，怕被看穿", "maps_to": { "defense_mechanism": "suppression", "soft_spots.being_seen_through": 0.2 } },
+      { "key": "D", "text": "找人吐槽，或干脆出去玩", "sub": "外部调节型：依赖关系或刺激转移", "maps_to": { "defense_mechanism": "external_regulation", "scenario_weights.friendship": 0.15 } }
+    ]
+  },
+  {
+    "id": "SH-Q04",
+    "order": 4,
+    "section": "关系",
+    "kind": "choice",
+    "text": "做大决定时，谁的脸会先浮现在你脑子里？",
+    "subtitle": "不是你想听谁的，是谁先出现",
+    "note": "关系压力源 → 六域 family/love/friendship 权重分配。",
+    "ui": {},
+    "options": [
+      { "key": "A", "text": "父母", "sub": "家庭期待为主导决策力", "maps_to": { "scenario_weights.family": 0.3, "relation_pressure": "parental" } },
+      { "key": "B", "text": "伴侣 / 喜欢的人", "sub": "亲密关系为主导决策力", "maps_to": { "scenario_weights.love": 0.3, "relation_pressure": "partner" } },
+      { "key": "C", "text": "朋友 / 同辈", "sub": "同辈比较为主导决策力", "maps_to": { "scenario_weights.friendship": 0.25, "relation_pressure": "peer" } },
+      { "key": "D", "text": "几乎只有我自己", "sub": "高自主，但可能孤立无支持", "maps_to": { "scenario_weights.self_growth": 0.25, "relation_pressure": "isolated" } }
+    ]
+  },
+  {
+    "id": "SH-Q05",
+    "order": 5,
+    "section": "岔路口",
+    "kind": "mood",
+    "text": "岔路口那天晚上，主导你的是哪种情绪？",
+    "subtitle": "点最接近的那一格",
+    "note": "岔路口当晚主导情绪 → 初始 mood 基线（1-10）。",
+    "ui": {
+      "grid": "2x2",
+      "cells": [
+        { "key": "A", "label": "不甘 / 赌气", "mood_value": 4 },
+        { "key": "B", "label": "迷茫 / 空", "mood_value": 3 },
+        { "key": "C", "label": "松一口气", "mood_value": 6 },
+        { "key": "D", "label": "麻木 / 假装无所谓", "mood_value": 4, "emotional_suppression": 0.3 }
+      ]
+    },
+    "options": []
+  },
+  {
+    "id": "SH-Q06",
+    "order": 6,
+    "section": "价值",
+    "kind": "slider",
+    "text": "「再试一次」和「算了，就这样」之间，你的指针停在哪？",
+    "subtitle": "这一题，影子会记很久",
+    "note": "decision_tendency 的核心信号。",
+    "ui": {
+      "min": 0,
+      "max": 100,
+      "minLabel": "算了，就这样",
+      "maxLabel": "再试一次",
+      "tierLabels": [
+        { "range": [0, 25], "label": "学会放手" },
+        { "range": [26, 50], "label": "会权衡" },
+        { "range": [51, 75], "label": "倾向再拼一次" },
+        { "range": [76, 100], "label": "几乎永远不甘心" }
+      ],
+      "feedback": [
+        { "range": [0, 25], "text": "你懂得什么时候停下。" },
+        { "range": [26, 50], "text": "你会算成本。" },
+        { "range": [51, 75], "text": "你倾向于再给自己一次机会。" },
+        { "range": [76, 100], "text": "「再撑一下」可能是你的本能，也可能是你的陷阱。" }
+      ]
+    },
+    "options": []
+  },
+  {
+    "id": "SH-Q07",
+    "order": 7,
+    "section": "价值",
+    "kind": "binary",
+    "text": "如果只能保住一个——",
+    "subtitle": "面子，还是真实的自己？",
+    "note": "面子 vs 真实，核心价值冲突。",
+    "ui": {},
+    "options": [
+      { "key": "A", "text": "体面地撑住", "sub": "面子优先：怕被看穿", "maps_to": { "value_priority": "face", "soft_spots.being_seen_through": 0.25 } },
+      { "key": "B", "text": "难看也要做真的自己", "sub": "真实优先：自我一致性高于外部认可", "maps_to": { "value_priority": "authenticity", "growth_seed.self_honesty": 0.2 } }
+    ]
+  },
+  {
+    "id": "SH-Q08",
+    "order": 8,
+    "section": "价值",
+    "kind": "rank",
+    "text": "往后七年，你最怕失去哪一样？把它拖到最上面。",
+    "subtitle": "按优先级依次点击全部选项",
+    "note": "恐惧排序 → soft_spots 主轴。",
+    "ui": {},
+    "options": [
+      { "key": "A", "text": "重要的关系", "sub": "丧失焦虑指向亲密/家庭", "maps_to": { "fear_axis": "relationship", "scenario_weights.love": 0.15 } },
+      { "key": "B", "text": "做成事的成就", "sub": "丧失焦虑指向事业/学业", "maps_to": { "fear_axis": "achievement", "scenario_weights.career": 0.15 } },
+      { "key": "C", "text": "自己的自由", "sub": "丧失焦虑指向自主", "maps_to": { "fear_axis": "freedom", "scenario_weights.self_growth": 0.15 } },
+      { "key": "D", "text": "被人真正理解", "sub": "丧失焦虑指向被看见的需要", "maps_to": { "fear_axis": "being_understood", "soft_spots.unseen": 0.2 } }
+    ]
+  },
+  {
+    "id": "SH-Q09",
+    "order": 9,
+    "section": "岔路口",
+    "kind": "scenario",
+    "text": "岔路口的前一夜，你大概率在干嘛？",
+    "subtitle": "凭直觉选",
+    "note": "前夜行为模式，暴露应对焦虑的真实方式。",
+    "ui": { "scene": "决定的前夜" },
+    "options": [
+      { "key": "A", "text": "反复查资料、列利弊，睡不着", "sub": "焦虑性过度准备", "maps_to": { "coping_style": "over_preparation", "anxiety_level": "high" } },
+      { "key": "B", "text": "和某个人聊到很晚", "sub": "依赖外部确认来下决心", "maps_to": { "coping_style": "seek_reassurance", "relation_pressure": "high" } },
+      { "key": "C", "text": "假装这事不存在，刷手机/睡了", "sub": "回避型，推迟面对", "maps_to": { "coping_style": "avoidance", "emotional_suppression": 0.2 } },
+      { "key": "D", "text": "其实早就决定了，很平静", "sub": "决心已定，或事后合理化", "maps_to": { "coping_style": "predetermined", "decision_tendency.decisive": 0.2 } }
+    ]
+  },
+  {
+    "id": "SH-Q10",
+    "order": 10,
+    "section": "性格",
+    "kind": "choice",
+    "text": "用一句话形容那时候的自己，哪句最像？",
+    "subtitle": "选最扎心的那个",
+    "note": "core_traits archetype 锚定 + Persona voice 校准。",
+    "ui": {},
+    "options": [
+      { "key": "A", "text": "「再撑一下，撑过去就好了」", "sub": "archetype: 硬撑者", "maps_to": { "archetype": "the_endurer", "core_traits": ["要强", "不甘"] } },
+      { "key": "B", "text": "「我是不是根本不该来」", "sub": "archetype: 怀疑者", "maps_to": { "archetype": "the_doubter", "core_traits": ["敏感", "自我怀疑"] } },
+      { "key": "C", "text": "「只要别人觉得我可以就行」", "sub": "archetype: 取悦者", "maps_to": { "archetype": "the_pleaser", "core_traits": ["讨好型", "怕让人失望"] } },
+      { "key": "D", "text": "「随便吧，反正也没差」", "sub": "archetype: 抽离者", "maps_to": { "archetype": "the_detached", "core_traits": ["外冷内热", "压抑"] } }
+    ]
+  }
+]

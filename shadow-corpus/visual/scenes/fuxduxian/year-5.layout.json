@@ -1,0 +1,47 @@
+{
+  "story_id": "fuxduxian",
+  "year": 5,
+  "scene_type": "special",
+  "mood": "压· insomnia",
+  "status": "draft",
+  "narrative_ref": {
+    "memory_id": "m5",
+    "event_summary": "凌晨宿舍"
+  },
+  "background": {
+    "asset_id": "PX-PLACEHOLDER-005",
+    "parallax": 0.2
+  },
+  "layers": [
+    {
+      "asset_id": "PX-CHAR-ALAN",
+      "role": "protagonist",
+      "x": 320,
+      "y": 220,
+      "depth": 2,
+      "animation": "eyes_open"
+    },
+    {
+      "asset_id": "PX-PROP-PHONE",
+      "role": "prop",
+      "x": 180,
+      "y": 240,
+      "depth": 1
+    },
+    {
+      "asset_id": "PX-PROP-BED",
+      "role": "prop",
+      "x": 300,
+      "y": 240,
+      "depth": 1
+    }
+  ],
+  "daily_loops": [
+    {
+      "id": "eyes_open",
+      "asset_id": "PX-CHAR-ALAN",
+      "animation": "eyes_open",
+      "trigger": "year_idle"
+    }
+  ]
+}

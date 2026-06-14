@@ -1,5 +1,5 @@
 {
-  "builtAt": "2026-06-14T05:43:13.969Z",
+  "builtAt": "2026-06-14T06:53:49.476Z",
   "siteTitle": "Shadow 团队看板",
   "githubRepo": "rachelzzz1921/shadow",
   "githubRepoUrl": "https://github.com/rachelzzz1921/shadow",
@@ -44,6 +44,10 @@
       "CHG-003": {
         "title": "多 Run 对比",
         "summary": "Wave 5 可选 backlog"
+      },
+      "CHG-H001": {
+        "title": "Harness Wave 4 closed loop",
+        "summary": "静态 demo v2 · smoke · eval visual · 文档对齐"
       }
     },
     "waves": {
@@ -52,13 +56,15 @@
       "2": "需求/方案锁定",
       "3": "编码 & Visual 实现",
       "4": "自测 · QA · 发布签字",
-      "5": "可选增强 backlog"
+      "5": "可选增强 backlog",
+      "4h": "Harness 持续迭代（Wave 4 loop）"
     },
     "change_order": [
       "INFRA-001",
       "CHG-000",
       "CHG-001",
       "CHG-V001",
+      "CHG-H001",
       "CHG-002",
       "CHG-003"
     ]
@@ -98,47 +104,14 @@
     }
   ],
   "stats": {
-    "total": 40,
-    "done": 1,
-    "in_progress": 1,
+    "total": 52,
+    "done": 44,
+    "in_progress": 0,
     "blocked": 0,
-    "ready": 14
+    "ready": 6
   },
   "byPhase": {
     "01-requirements": [
-      {
-        "id": "T-001",
-        "title": "Kickoff：五人角色与本周目标",
-        "change_id": "INFRA-001",
-        "phase": "01-requirements",
-        "status": "in_progress",
-        "priority": "P0",
-        "wave": 0,
-        "assignee": "P1",
-        "executor": "human",
-        "skill": "planning-and-task-breakdown",
-        "depends_on": [],
-        "gates": [],
-        "artifact": "team-roster.md",
-        "estimate_h": 0.5,
-        "due": null,
-        "tags": [
-          "kickoff",
-          "infra"
-        ],
-        "parallel_ok": true,
-        "optional": false,
-        "statusIcon": "🟡",
-        "execIcon": "👤",
-        "optionalBadge": "",
-        "ready": false,
-        "phaseLabel": "01 需求",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/team-roster.md",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/INFRA-001-team-onboarding/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
       {
         "id": "T-002",
         "title": "共读 MANIFEST + 复读线 golden（每人 3 条不可退让）",
@@ -168,39 +141,6 @@
         "phaseLabel": "01 需求",
         "github": {
           "artifact": null,
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/INFRA-001-team-onboarding/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "T-003",
-        "title": "确认 CC / Codex 分工与分支策略",
-        "change_id": "INFRA-001",
-        "phase": "01-requirements",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 0,
-        "assignee": "P3",
-        "executor": "human",
-        "skill": null,
-        "depends_on": [],
-        "gates": [],
-        "artifact": "team-roster.md#Agent账号",
-        "estimate_h": 0.25,
-        "due": null,
-        "tags": [
-          "infra",
-          "agent"
-        ],
-        "parallel_ok": true,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "",
-        "ready": true,
-        "phaseLabel": "01 需求",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/team-roster.md#Agent账号",
           "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/INFRA-001-team-onboarding/progress.md",
           "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
         }
@@ -241,220 +181,9 @@
           "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
           "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
         }
-      },
-      {
-        "id": "T-007",
-        "title": "复读线红线清单（6 条质量标准）",
-        "change_id": "CHG-001",
-        "phase": "01-requirements",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 1,
-        "assignee": "P2",
-        "executor": "human",
-        "skill": "story-authoring",
-        "depends_on": [
-          "T-002"
-        ],
-        "gates": [
-          "G1"
-        ],
-        "artifact": "fixtures/golden-stories/复读线.md",
-        "estimate_h": 1,
-        "due": null,
-        "tags": [
-          "narrative"
-        ],
-        "parallel_ok": true,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "",
-        "ready": false,
-        "phaseLabel": "01 需求",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/fixtures/golden-stories/复读线.md",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "T-010",
-        "title": "P0 需求写入 02/03 文档",
-        "change_id": "CHG-001",
-        "phase": "01-requirements",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 2,
-        "assignee": "P2",
-        "executor": "human",
-        "skill": null,
-        "depends_on": [
-          "T-004",
-          "T-007"
-        ],
-        "gates": [],
-        "artifact": "03-coding/01-narrative-prompt-protocol.md",
-        "estimate_h": 2,
-        "due": null,
-        "tags": [
-          "narrative",
-          "p0"
-        ],
-        "parallel_ok": false,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "",
-        "ready": false,
-        "phaseLabel": "01 需求",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/03-coding/01-narrative-prompt-protocol.md",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "V-001",
-        "title": "复读线叙事 v2 改稿（visual_anchor + props）",
-        "change_id": "CHG-V001",
-        "phase": "01-requirements",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 1,
-        "assignee": "P2",
-        "executor": "human",
-        "skill": "story-authoring",
-        "depends_on": [],
-        "gates": [
-          "G-N1"
-        ],
-        "artifact": "visual/stories/fuxduxian/narrative-draft-v2.md",
-        "estimate_h": 8,
-        "due": null,
-        "tags": [
-          "visual",
-          "narrative"
-        ],
-        "parallel_ok": true,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "",
-        "ready": true,
-        "phaseLabel": "01 需求",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/stories/fuxduxian/narrative-draft-v2.md",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "V-002",
-        "title": "像素素材寻源（不用旧 zip，优质免费库）",
-        "change_id": "CHG-V001",
-        "phase": "01-requirements",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 1,
-        "assignee": "P5",
-        "executor": "human",
-        "skill": null,
-        "depends_on": [],
-        "gates": [],
-        "artifact": "visual/registry/assets.csv",
-        "estimate_h": 6,
-        "due": null,
-        "tags": [
-          "visual"
-        ],
-        "parallel_ok": true,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "",
-        "ready": true,
-        "phaseLabel": "01 需求",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/registry/assets.csv",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
       }
     ],
     "02-design": [
-      {
-        "id": "T-011",
-        "title": "P0 技术方案文档",
-        "change_id": "CHG-001",
-        "phase": "02-design",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 2,
-        "assignee": "P3",
-        "executor": "cc",
-        "skill": "design-generator",
-        "depends_on": [
-          "T-010"
-        ],
-        "gates": [
-          "G2"
-        ],
-        "artifact": "02-technical-design/02-p0-memory-reflection-replan.md",
-        "estimate_h": 2,
-        "due": null,
-        "tags": [
-          "p0",
-          "design"
-        ],
-        "parallel_ok": false,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "🤖CC",
-        "optionalBadge": "",
-        "ready": false,
-        "phaseLabel": "02 方案",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/02-technical-design/02-p0-memory-reflection-replan.md",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "T-012",
-        "title": "P0 实现计划（writing-plans）",
-        "change_id": "CHG-001",
-        "phase": "02-design",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 2,
-        "assignee": "P3",
-        "executor": "cc",
-        "skill": "writing-plans",
-        "depends_on": [
-          "T-011"
-        ],
-        "gates": [],
-        "artifact": "docs/plans/2026-06-14-p0-implementation.md",
-        "estimate_h": 1.5,
-        "due": null,
-        "tags": [
-          "p0",
-          "agent-handoff"
-        ],
-        "parallel_ok": false,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "🤖CC",
-        "optionalBadge": "",
-        "ready": false,
-        "phaseLabel": "02 方案",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/docs/plans/2026-06-14-p0-implementation.md",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
       {
         "id": "T-013",
         "title": "方案评审会 + P1/P3 签字",
@@ -484,165 +213,16 @@
         "statusIcon": "⬜",
         "execIcon": "👤",
         "optionalBadge": "",
-        "ready": false,
+        "ready": true,
         "phaseLabel": "02 方案",
         "github": {
           "artifact": null,
           "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
           "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
         }
-      },
-      {
-        "id": "V-005",
-        "title": "AI 生成 7 年 layout JSON",
-        "change_id": "CHG-V001",
-        "phase": "02-design",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 2,
-        "assignee": "P3",
-        "executor": "cc",
-        "skill": null,
-        "depends_on": [
-          "V-001",
-          "V-003"
-        ],
-        "gates": [
-          "G-N1"
-        ],
-        "artifact": "visual/scenes/fuxduxian/",
-        "estimate_h": 4,
-        "due": null,
-        "tags": [
-          "visual"
-        ],
-        "parallel_ok": false,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "🤖CC",
-        "optionalBadge": "",
-        "ready": false,
-        "phaseLabel": "02 方案",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/scenes/fuxduxian/",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
       }
     ],
     "03-coding": [
-      {
-        "id": "T-014",
-        "title": "实现 memory 检索",
-        "change_id": "CHG-001",
-        "phase": "03-coding",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 3,
-        "assignee": "P3",
-        "executor": "cx",
-        "skill": "tdd",
-        "depends_on": [
-          "T-012",
-          "T-013"
-        ],
-        "gates": [],
-        "artifact": "archive/demo-v0.2/lib/",
-        "estimate_h": 4,
-        "due": null,
-        "tags": [
-          "p0",
-          "impl"
-        ],
-        "parallel_ok": true,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "🤖CX",
-        "optionalBadge": "",
-        "ready": false,
-        "phaseLabel": "03 编码",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/lib/",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "T-015",
-        "title": "实现 reflection 步骤",
-        "change_id": "CHG-001",
-        "phase": "03-coding",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 3,
-        "assignee": "P3",
-        "executor": "cx",
-        "skill": "tdd",
-        "depends_on": [
-          "T-012",
-          "T-013"
-        ],
-        "gates": [],
-        "artifact": "archive/demo-v0.2/lib/",
-        "estimate_h": 4,
-        "due": null,
-        "tags": [
-          "p0",
-          "impl"
-        ],
-        "parallel_ok": true,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "🤖CX",
-        "optionalBadge": "",
-        "ready": false,
-        "phaseLabel": "03 编码",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/lib/",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "T-016",
-        "title": "intervention re-plan prompt（人写）+ Codex 接线",
-        "change_id": "CHG-001",
-        "phase": "03-coding",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 3,
-        "assignee": "P2",
-        "executor": "human+cx",
-        "skill": "executing-plans",
-        "depends_on": [
-          "T-012",
-          "T-013",
-          "T-010"
-        ],
-        "gates": [
-          "G1"
-        ],
-        "artifact": "archive/demo-v0.2/lib/prompts.js",
-        "estimate_h": 3,
-        "due": null,
-        "tags": [
-          "p0",
-          "impl",
-          "narrative"
-        ],
-        "parallel_ok": false,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "👤+🤖",
-        "optionalBadge": "",
-        "ready": false,
-        "phaseLabel": "03 编码",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/lib/prompts.js",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
       {
         "id": "T-017",
         "title": "Code Review gate（P0 三项）",
@@ -672,186 +252,16 @@
         "statusIcon": "⬜",
         "execIcon": "👤",
         "optionalBadge": "",
-        "ready": false,
+        "ready": true,
         "phaseLabel": "03 编码",
         "github": {
           "artifact": null,
           "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "V-004",
-        "title": "Phaser engine 脚手架（读 layout JSON）",
-        "change_id": "CHG-V001",
-        "phase": "03-coding",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 2,
-        "assignee": "P3",
-        "executor": "cx",
-        "skill": "tdd",
-        "depends_on": [],
-        "gates": [],
-        "artifact": "visual/engine/",
-        "estimate_h": 8,
-        "due": null,
-        "tags": [
-          "visual"
-        ],
-        "parallel_ok": true,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "🤖CX",
-        "optionalBadge": "",
-        "ready": true,
-        "phaseLabel": "03 编码",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/engine/",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "V-007",
-        "title": "挂进 Shadow 体验流程（A/B/C 触发）",
-        "change_id": "CHG-V001",
-        "phase": "03-coding",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 3,
-        "assignee": "P3",
-        "executor": "cx",
-        "skill": null,
-        "depends_on": [
-          "V-006"
-        ],
-        "gates": [],
-        "artifact": "visual/04-ux-flow.md",
-        "estimate_h": 6,
-        "due": null,
-        "tags": [
-          "visual"
-        ],
-        "parallel_ok": false,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "🤖CX",
-        "optionalBadge": "",
-        "ready": false,
-        "phaseLabel": "03 编码",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/04-ux-flow.md",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
           "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
         }
       }
     ],
     "04-dev-testing": [
-      {
-        "id": "T-008",
-        "title": "Eval rubric 与 golden 字段对齐",
-        "change_id": "CHG-001",
-        "phase": "04-dev-testing",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 1,
-        "assignee": "P4",
-        "executor": "human",
-        "skill": "qa",
-        "depends_on": [
-          "T-002"
-        ],
-        "gates": [],
-        "artifact": "04-dev-testing/01-narrative-eval-rubric.md",
-        "estimate_h": 1,
-        "due": null,
-        "tags": [
-          "qa"
-        ],
-        "parallel_ok": true,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "",
-        "ready": false,
-        "phaseLabel": "04 自测",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/04-dev-testing/01-narrative-eval-rubric.md",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "T-018",
-        "title": "合并 + npm test 全绿",
-        "change_id": "CHG-001",
-        "phase": "04-dev-testing",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 3,
-        "assignee": "P5",
-        "executor": "cx",
-        "skill": "tdd",
-        "depends_on": [
-          "T-017"
-        ],
-        "gates": [
-          "G3"
-        ],
-        "artifact": null,
-        "estimate_h": 0.5,
-        "due": null,
-        "tags": [
-          "baseline"
-        ],
-        "parallel_ok": false,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "🤖CX",
-        "optionalBadge": "",
-        "ready": false,
-        "phaseLabel": "04 自测",
-        "github": {
-          "artifact": null,
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "T-019",
-        "title": "Golden 复读线 eval 回归",
-        "change_id": "CHG-001",
-        "phase": "04-dev-testing",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 4,
-        "assignee": "P4",
-        "executor": "cx",
-        "skill": "tdd",
-        "depends_on": [
-          "T-018"
-        ],
-        "gates": [],
-        "artifact": "fixtures/golden-stories/复读线.json",
-        "estimate_h": 0.5,
-        "due": null,
-        "tags": [
-          "qa"
-        ],
-        "parallel_ok": true,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "🤖CX",
-        "optionalBadge": "",
-        "ready": false,
-        "phaseLabel": "04 自测",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/fixtures/golden-stories/复读线.json",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
       {
         "id": "V-008",
         "title": "叙事 v2 回写 golden JSON",
@@ -880,7 +290,7 @@
         "statusIcon": "⬜",
         "execIcon": "👤+🤖",
         "optionalBadge": "",
-        "ready": false,
+        "ready": true,
         "phaseLabel": "04 自测",
         "github": {
           "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/fixtures/golden-stories/复读线.json",
@@ -919,7 +329,7 @@
         "statusIcon": "⬜",
         "execIcon": "👤",
         "optionalBadge": "",
-        "ready": false,
+        "ready": true,
         "phaseLabel": "05 QA",
         "github": {
           "artifact": null,
@@ -997,481 +407,11 @@
           "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-000-corpus-reorg/progress.md",
           "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
         }
-      },
-      {
-        "id": "V-003",
-        "title": "10–20 审美标杆案例入库",
-        "change_id": "CHG-V001",
-        "phase": "05-qa",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 1,
-        "assignee": "P2",
-        "executor": "human",
-        "skill": null,
-        "depends_on": [
-          "V-002"
-        ],
-        "gates": [],
-        "artifact": "visual/references/aesthetic-cases.md",
-        "estimate_h": 4,
-        "due": null,
-        "tags": [
-          "visual"
-        ],
-        "parallel_ok": false,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "",
-        "ready": false,
-        "phaseLabel": "05 QA",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/references/aesthetic-cases.md",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "V-006",
-        "title": "7 特殊场景 + 7 日常动画人审",
-        "change_id": "CHG-V001",
-        "phase": "05-qa",
-        "status": "todo",
-        "priority": "P0",
-        "wave": 3,
-        "assignee": "P2",
-        "executor": "human",
-        "skill": null,
-        "depends_on": [
-          "V-005",
-          "V-004"
-        ],
-        "gates": [],
-        "artifact": null,
-        "estimate_h": 6,
-        "due": null,
-        "tags": [
-          "visual"
-        ],
-        "parallel_ok": false,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "",
-        "ready": false,
-        "phaseLabel": "05 QA",
-        "github": {
-          "artifact": null,
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
       }
     ],
-    "06-progress": [
-      {
-        "id": "T-006",
-        "title": "Corpus gap 扫描",
-        "change_id": "CHG-000",
-        "phase": "06-progress",
-        "status": "todo",
-        "priority": "P1",
-        "wave": 1,
-        "assignee": "P3",
-        "executor": "cc",
-        "skill": "harness-init",
-        "depends_on": [],
-        "gates": [],
-        "artifact": null,
-        "estimate_h": 1,
-        "due": null,
-        "tags": [
-          "baseline"
-        ],
-        "parallel_ok": true,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "🤖CC",
-        "optionalBadge": "",
-        "ready": true,
-        "phaseLabel": "06 进度",
-        "github": {
-          "artifact": null,
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-000-corpus-reorg/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "T-009",
-        "title": "更新 roster + 各 CHG assignee",
-        "change_id": "INFRA-001",
-        "phase": "06-progress",
-        "status": "todo",
-        "priority": "P1",
-        "wave": 1,
-        "assignee": "P5",
-        "executor": "human",
-        "skill": "progress-tracker",
-        "depends_on": [
-          "T-001"
-        ],
-        "gates": [],
-        "artifact": "team-roster.md",
-        "estimate_h": 0.25,
-        "due": null,
-        "tags": [
-          "infra"
-        ],
-        "parallel_ok": true,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "",
-        "ready": false,
-        "phaseLabel": "06 进度",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/team-roster.md",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/INFRA-001-team-onboarding/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "T-021",
-        "title": "Prompt 实验日志合并有效变体",
-        "change_id": "CHG-001",
-        "phase": "06-progress",
-        "status": "todo",
-        "priority": "P1",
-        "wave": 4,
-        "assignee": "P2",
-        "executor": "human",
-        "skill": null,
-        "depends_on": [
-          "T-020"
-        ],
-        "gates": [],
-        "artifact": "02-prompt-experiments-log.md",
-        "estimate_h": 1,
-        "due": null,
-        "tags": [
-          "narrative"
-        ],
-        "parallel_ok": true,
-        "optional": false,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "",
-        "ready": false,
-        "phaseLabel": "06 进度",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/02-prompt-experiments-log.md",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "W-06",
-        "title": "skills sync + manifest 核对",
-        "change_id": "CHG-000",
-        "phase": "06-progress",
-        "status": "todo",
-        "priority": "P2",
-        "wave": null,
-        "assignee": "P5",
-        "executor": "human",
-        "skill": null,
-        "depends_on": [],
-        "gates": [],
-        "artifact": "skills/skills-lock.json",
-        "estimate_h": 0.33,
-        "due": null,
-        "tags": [
-          "waiting-pool",
-          "infra"
-        ],
-        "parallel_ok": true,
-        "optional": true,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "◇",
-        "ready": true,
-        "phaseLabel": "06 进度",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/skills/skills-lock.json",
-          "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-000-corpus-reorg/progress.md",
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      }
-    ],
+    "06-progress": [],
     "07-debug": [],
-    "backlog": [
-      {
-        "id": "T-024",
-        "title": "多 run 对比模板 + 首表",
-        "change_id": "CHG-003",
-        "phase": "backlog",
-        "status": "todo",
-        "priority": "P1",
-        "wave": 5,
-        "assignee": "P4",
-        "executor": "human+cx",
-        "skill": "progress-tracker",
-        "depends_on": [
-          "T-022"
-        ],
-        "gates": [],
-        "artifact": "03-run-comparison-template.md",
-        "estimate_h": 2,
-        "due": null,
-        "tags": [
-          "p1"
-        ],
-        "parallel_ok": true,
-        "optional": true,
-        "statusIcon": "⬜",
-        "execIcon": "👤+🤖",
-        "optionalBadge": "◇",
-        "ready": false,
-        "phaseLabel": "Backlog",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/03-run-comparison-template.md",
-          "change": null,
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "T-025",
-        "title": "第二条 golden 大纲",
-        "change_id": "CHG-002",
-        "phase": "backlog",
-        "status": "todo",
-        "priority": "P1",
-        "wave": 5,
-        "assignee": "P2",
-        "executor": "human",
-        "skill": "story-authoring",
-        "depends_on": [
-          "T-022"
-        ],
-        "gates": [],
-        "artifact": null,
-        "estimate_h": 1.5,
-        "due": null,
-        "tags": [
-          "p1",
-          "narrative"
-        ],
-        "parallel_ok": true,
-        "optional": true,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "◇",
-        "ready": false,
-        "phaseLabel": "Backlog",
-        "github": {
-          "artifact": null,
-          "change": null,
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "W-01",
-        "title": "Persona prompt 变体 ×3",
-        "change_id": null,
-        "phase": "backlog",
-        "status": "todo",
-        "priority": "P2",
-        "wave": null,
-        "assignee": "P2",
-        "executor": "human",
-        "skill": null,
-        "depends_on": [],
-        "gates": [],
-        "artifact": "02-prompt-experiments-log.md",
-        "estimate_h": 1,
-        "due": null,
-        "tags": [
-          "waiting-pool",
-          "prompt"
-        ],
-        "parallel_ok": true,
-        "optional": true,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "◇",
-        "ready": true,
-        "phaseLabel": "Backlog",
-        "github": {
-          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/02-prompt-experiments-log.md",
-          "change": null,
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "W-02",
-        "title": "Beats 节奏示例 ×2",
-        "change_id": null,
-        "phase": "backlog",
-        "status": "todo",
-        "priority": "P2",
-        "wave": null,
-        "assignee": "P2",
-        "executor": "human",
-        "skill": null,
-        "depends_on": [],
-        "gates": [],
-        "artifact": null,
-        "estimate_h": 1,
-        "due": null,
-        "tags": [
-          "waiting-pool",
-          "prompt"
-        ],
-        "parallel_ok": true,
-        "optional": true,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "◇",
-        "ready": true,
-        "phaseLabel": "Backlog",
-        "github": {
-          "artifact": null,
-          "change": null,
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "W-03",
-        "title": "Dialogue bad/good 对照表",
-        "change_id": null,
-        "phase": "backlog",
-        "status": "todo",
-        "priority": "P2",
-        "wave": null,
-        "assignee": "P2",
-        "executor": "human",
-        "skill": null,
-        "depends_on": [],
-        "gates": [],
-        "artifact": null,
-        "estimate_h": 0.75,
-        "due": null,
-        "tags": [
-          "waiting-pool",
-          "prompt"
-        ],
-        "parallel_ok": true,
-        "optional": true,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "◇",
-        "ready": true,
-        "phaseLabel": "Backlog",
-        "github": {
-          "artifact": null,
-          "change": null,
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "W-04",
-        "title": "story-review 空白抽检表",
-        "change_id": null,
-        "phase": "backlog",
-        "status": "todo",
-        "priority": "P2",
-        "wave": null,
-        "assignee": "P4",
-        "executor": "human",
-        "skill": "story-review",
-        "depends_on": [],
-        "gates": [],
-        "artifact": null,
-        "estimate_h": 0.5,
-        "due": null,
-        "tags": [
-          "waiting-pool",
-          "qa"
-        ],
-        "parallel_ok": true,
-        "optional": true,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "◇",
-        "ready": true,
-        "phaseLabel": "Backlog",
-        "github": {
-          "artifact": null,
-          "change": null,
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "W-07",
-        "title": "对外 5min 话术",
-        "change_id": null,
-        "phase": "backlog",
-        "status": "todo",
-        "priority": "P2",
-        "wave": null,
-        "assignee": "P1",
-        "executor": "human",
-        "skill": null,
-        "depends_on": [],
-        "gates": [],
-        "artifact": null,
-        "estimate_h": 0.5,
-        "due": null,
-        "tags": [
-          "waiting-pool"
-        ],
-        "parallel_ok": true,
-        "optional": true,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "◇",
-        "ready": true,
-        "phaseLabel": "Backlog",
-        "github": {
-          "artifact": null,
-          "change": null,
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      },
-      {
-        "id": "W-10",
-        "title": "eval warn 决策树",
-        "change_id": null,
-        "phase": "backlog",
-        "status": "todo",
-        "priority": "P2",
-        "wave": null,
-        "assignee": "P4",
-        "executor": "human",
-        "skill": "qa",
-        "depends_on": [],
-        "gates": [],
-        "artifact": null,
-        "estimate_h": 0.75,
-        "due": null,
-        "tags": [
-          "waiting-pool",
-          "qa"
-        ],
-        "parallel_ok": true,
-        "optional": true,
-        "statusIcon": "⬜",
-        "execIcon": "👤",
-        "optionalBadge": "◇",
-        "ready": true,
-        "phaseLabel": "Backlog",
-        "github": {
-          "artifact": null,
-          "change": null,
-          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-        }
-      }
-    ]
+    "backlog": []
   },
   "byChange": [
     {
@@ -1480,39 +420,6 @@
       "summary": "Kickoff、花名册、Agent 分工、共读 golden",
       "url": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/INFRA-001-team-onboarding/progress.md",
       "tasks": [
-        {
-          "id": "T-001",
-          "title": "Kickoff：五人角色与本周目标",
-          "change_id": "INFRA-001",
-          "phase": "01-requirements",
-          "status": "in_progress",
-          "priority": "P0",
-          "wave": 0,
-          "assignee": "P1",
-          "executor": "human",
-          "skill": "planning-and-task-breakdown",
-          "depends_on": [],
-          "gates": [],
-          "artifact": "team-roster.md",
-          "estimate_h": 0.5,
-          "due": null,
-          "tags": [
-            "kickoff",
-            "infra"
-          ],
-          "parallel_ok": true,
-          "optional": false,
-          "statusIcon": "🟡",
-          "execIcon": "👤",
-          "optionalBadge": "",
-          "ready": false,
-          "phaseLabel": "01 需求",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/team-roster.md",
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/INFRA-001-team-onboarding/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
         {
           "id": "T-002",
           "title": "共读 MANIFEST + 复读线 golden（每人 3 条不可退让）",
@@ -1545,73 +452,6 @@
             "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/INFRA-001-team-onboarding/progress.md",
             "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
           }
-        },
-        {
-          "id": "T-003",
-          "title": "确认 CC / Codex 分工与分支策略",
-          "change_id": "INFRA-001",
-          "phase": "01-requirements",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 0,
-          "assignee": "P3",
-          "executor": "human",
-          "skill": null,
-          "depends_on": [],
-          "gates": [],
-          "artifact": "team-roster.md#Agent账号",
-          "estimate_h": 0.25,
-          "due": null,
-          "tags": [
-            "infra",
-            "agent"
-          ],
-          "parallel_ok": true,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "",
-          "ready": true,
-          "phaseLabel": "01 需求",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/team-roster.md#Agent账号",
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/INFRA-001-team-onboarding/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "T-009",
-          "title": "更新 roster + 各 CHG assignee",
-          "change_id": "INFRA-001",
-          "phase": "06-progress",
-          "status": "todo",
-          "priority": "P1",
-          "wave": 1,
-          "assignee": "P5",
-          "executor": "human",
-          "skill": "progress-tracker",
-          "depends_on": [
-            "T-001"
-          ],
-          "gates": [],
-          "artifact": "team-roster.md",
-          "estimate_h": 0.25,
-          "due": null,
-          "tags": [
-            "infra"
-          ],
-          "parallel_ok": true,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "",
-          "ready": false,
-          "phaseLabel": "06 进度",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/team-roster.md",
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/INFRA-001-team-onboarding/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
         }
       ]
     },
@@ -1621,38 +461,6 @@
       "summary": "唯一入口确认、gap 扫描、skills 基线",
       "url": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-000-corpus-reorg/progress.md",
       "tasks": [
-        {
-          "id": "T-006",
-          "title": "Corpus gap 扫描",
-          "change_id": "CHG-000",
-          "phase": "06-progress",
-          "status": "todo",
-          "priority": "P1",
-          "wave": 1,
-          "assignee": "P3",
-          "executor": "cc",
-          "skill": "harness-init",
-          "depends_on": [],
-          "gates": [],
-          "artifact": null,
-          "estimate_h": 1,
-          "due": null,
-          "tags": [
-            "baseline"
-          ],
-          "parallel_ok": true,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "🤖CC",
-          "optionalBadge": "",
-          "ready": true,
-          "phaseLabel": "06 进度",
-          "github": {
-            "artifact": null,
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-000-corpus-reorg/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
         {
           "id": "T-023",
           "title": "P1 确认 corpus 为唯一入口",
@@ -1683,39 +491,6 @@
           "phaseLabel": "05 QA",
           "github": {
             "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-000-corpus-reorg/progress.md",
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-000-corpus-reorg/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "W-06",
-          "title": "skills sync + manifest 核对",
-          "change_id": "CHG-000",
-          "phase": "06-progress",
-          "status": "todo",
-          "priority": "P2",
-          "wave": null,
-          "assignee": "P5",
-          "executor": "human",
-          "skill": null,
-          "depends_on": [],
-          "gates": [],
-          "artifact": "skills/skills-lock.json",
-          "estimate_h": 0.33,
-          "due": null,
-          "tags": [
-            "waiting-pool",
-            "infra"
-          ],
-          "parallel_ok": true,
-          "optional": true,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "◇",
-          "ready": true,
-          "phaseLabel": "06 进度",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/skills/skills-lock.json",
             "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-000-corpus-reorg/progress.md",
             "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
           }
@@ -1766,184 +541,6 @@
           }
         },
         {
-          "id": "T-007",
-          "title": "复读线红线清单（6 条质量标准）",
-          "change_id": "CHG-001",
-          "phase": "01-requirements",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 1,
-          "assignee": "P2",
-          "executor": "human",
-          "skill": "story-authoring",
-          "depends_on": [
-            "T-002"
-          ],
-          "gates": [
-            "G1"
-          ],
-          "artifact": "fixtures/golden-stories/复读线.md",
-          "estimate_h": 1,
-          "due": null,
-          "tags": [
-            "narrative"
-          ],
-          "parallel_ok": true,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "",
-          "ready": false,
-          "phaseLabel": "01 需求",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/fixtures/golden-stories/复读线.md",
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "T-008",
-          "title": "Eval rubric 与 golden 字段对齐",
-          "change_id": "CHG-001",
-          "phase": "04-dev-testing",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 1,
-          "assignee": "P4",
-          "executor": "human",
-          "skill": "qa",
-          "depends_on": [
-            "T-002"
-          ],
-          "gates": [],
-          "artifact": "04-dev-testing/01-narrative-eval-rubric.md",
-          "estimate_h": 1,
-          "due": null,
-          "tags": [
-            "qa"
-          ],
-          "parallel_ok": true,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "",
-          "ready": false,
-          "phaseLabel": "04 自测",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/04-dev-testing/01-narrative-eval-rubric.md",
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "T-010",
-          "title": "P0 需求写入 02/03 文档",
-          "change_id": "CHG-001",
-          "phase": "01-requirements",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 2,
-          "assignee": "P2",
-          "executor": "human",
-          "skill": null,
-          "depends_on": [
-            "T-004",
-            "T-007"
-          ],
-          "gates": [],
-          "artifact": "03-coding/01-narrative-prompt-protocol.md",
-          "estimate_h": 2,
-          "due": null,
-          "tags": [
-            "narrative",
-            "p0"
-          ],
-          "parallel_ok": false,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "",
-          "ready": false,
-          "phaseLabel": "01 需求",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/03-coding/01-narrative-prompt-protocol.md",
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "T-011",
-          "title": "P0 技术方案文档",
-          "change_id": "CHG-001",
-          "phase": "02-design",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 2,
-          "assignee": "P3",
-          "executor": "cc",
-          "skill": "design-generator",
-          "depends_on": [
-            "T-010"
-          ],
-          "gates": [
-            "G2"
-          ],
-          "artifact": "02-technical-design/02-p0-memory-reflection-replan.md",
-          "estimate_h": 2,
-          "due": null,
-          "tags": [
-            "p0",
-            "design"
-          ],
-          "parallel_ok": false,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "🤖CC",
-          "optionalBadge": "",
-          "ready": false,
-          "phaseLabel": "02 方案",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/02-technical-design/02-p0-memory-reflection-replan.md",
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "T-012",
-          "title": "P0 实现计划（writing-plans）",
-          "change_id": "CHG-001",
-          "phase": "02-design",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 2,
-          "assignee": "P3",
-          "executor": "cc",
-          "skill": "writing-plans",
-          "depends_on": [
-            "T-011"
-          ],
-          "gates": [],
-          "artifact": "docs/plans/2026-06-14-p0-implementation.md",
-          "estimate_h": 1.5,
-          "due": null,
-          "tags": [
-            "p0",
-            "agent-handoff"
-          ],
-          "parallel_ok": false,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "🤖CC",
-          "optionalBadge": "",
-          "ready": false,
-          "phaseLabel": "02 方案",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/docs/plans/2026-06-14-p0-implementation.md",
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
           "id": "T-013",
           "title": "方案评审会 + P1/P3 签字",
           "change_id": "CHG-001",
@@ -1972,122 +569,10 @@
           "statusIcon": "⬜",
           "execIcon": "👤",
           "optionalBadge": "",
-          "ready": false,
+          "ready": true,
           "phaseLabel": "02 方案",
           "github": {
             "artifact": null,
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "T-014",
-          "title": "实现 memory 检索",
-          "change_id": "CHG-001",
-          "phase": "03-coding",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 3,
-          "assignee": "P3",
-          "executor": "cx",
-          "skill": "tdd",
-          "depends_on": [
-            "T-012",
-            "T-013"
-          ],
-          "gates": [],
-          "artifact": "archive/demo-v0.2/lib/",
-          "estimate_h": 4,
-          "due": null,
-          "tags": [
-            "p0",
-            "impl"
-          ],
-          "parallel_ok": true,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "🤖CX",
-          "optionalBadge": "",
-          "ready": false,
-          "phaseLabel": "03 编码",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/lib/",
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "T-015",
-          "title": "实现 reflection 步骤",
-          "change_id": "CHG-001",
-          "phase": "03-coding",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 3,
-          "assignee": "P3",
-          "executor": "cx",
-          "skill": "tdd",
-          "depends_on": [
-            "T-012",
-            "T-013"
-          ],
-          "gates": [],
-          "artifact": "archive/demo-v0.2/lib/",
-          "estimate_h": 4,
-          "due": null,
-          "tags": [
-            "p0",
-            "impl"
-          ],
-          "parallel_ok": true,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "🤖CX",
-          "optionalBadge": "",
-          "ready": false,
-          "phaseLabel": "03 编码",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/lib/",
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "T-016",
-          "title": "intervention re-plan prompt（人写）+ Codex 接线",
-          "change_id": "CHG-001",
-          "phase": "03-coding",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 3,
-          "assignee": "P2",
-          "executor": "human+cx",
-          "skill": "executing-plans",
-          "depends_on": [
-            "T-012",
-            "T-013",
-            "T-010"
-          ],
-          "gates": [
-            "G1"
-          ],
-          "artifact": "archive/demo-v0.2/lib/prompts.js",
-          "estimate_h": 3,
-          "due": null,
-          "tags": [
-            "p0",
-            "impl",
-            "narrative"
-          ],
-          "parallel_ok": false,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "👤+🤖",
-          "optionalBadge": "",
-          "ready": false,
-          "phaseLabel": "03 编码",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/lib/prompts.js",
             "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
             "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
           }
@@ -2121,80 +606,10 @@
           "statusIcon": "⬜",
           "execIcon": "👤",
           "optionalBadge": "",
-          "ready": false,
+          "ready": true,
           "phaseLabel": "03 编码",
           "github": {
             "artifact": null,
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "T-018",
-          "title": "合并 + npm test 全绿",
-          "change_id": "CHG-001",
-          "phase": "04-dev-testing",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 3,
-          "assignee": "P5",
-          "executor": "cx",
-          "skill": "tdd",
-          "depends_on": [
-            "T-017"
-          ],
-          "gates": [
-            "G3"
-          ],
-          "artifact": null,
-          "estimate_h": 0.5,
-          "due": null,
-          "tags": [
-            "baseline"
-          ],
-          "parallel_ok": false,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "🤖CX",
-          "optionalBadge": "",
-          "ready": false,
-          "phaseLabel": "04 自测",
-          "github": {
-            "artifact": null,
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "T-019",
-          "title": "Golden 复读线 eval 回归",
-          "change_id": "CHG-001",
-          "phase": "04-dev-testing",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 4,
-          "assignee": "P4",
-          "executor": "cx",
-          "skill": "tdd",
-          "depends_on": [
-            "T-018"
-          ],
-          "gates": [],
-          "artifact": "fixtures/golden-stories/复读线.json",
-          "estimate_h": 0.5,
-          "due": null,
-          "tags": [
-            "qa"
-          ],
-          "parallel_ok": true,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "🤖CX",
-          "optionalBadge": "",
-          "ready": false,
-          "phaseLabel": "04 自测",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/fixtures/golden-stories/复读线.json",
             "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
             "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
           }
@@ -2228,44 +643,10 @@
           "statusIcon": "⬜",
           "execIcon": "👤",
           "optionalBadge": "",
-          "ready": false,
+          "ready": true,
           "phaseLabel": "05 QA",
           "github": {
             "artifact": null,
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "T-021",
-          "title": "Prompt 实验日志合并有效变体",
-          "change_id": "CHG-001",
-          "phase": "06-progress",
-          "status": "todo",
-          "priority": "P1",
-          "wave": 4,
-          "assignee": "P2",
-          "executor": "human",
-          "skill": null,
-          "depends_on": [
-            "T-020"
-          ],
-          "gates": [],
-          "artifact": "02-prompt-experiments-log.md",
-          "estimate_h": 1,
-          "due": null,
-          "tags": [
-            "narrative"
-          ],
-          "parallel_ok": true,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "",
-          "ready": false,
-          "phaseLabel": "06 进度",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/02-prompt-experiments-log.md",
             "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
             "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
           }
@@ -2316,245 +697,6 @@
       "url": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
       "tasks": [
         {
-          "id": "V-001",
-          "title": "复读线叙事 v2 改稿（visual_anchor + props）",
-          "change_id": "CHG-V001",
-          "phase": "01-requirements",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 1,
-          "assignee": "P2",
-          "executor": "human",
-          "skill": "story-authoring",
-          "depends_on": [],
-          "gates": [
-            "G-N1"
-          ],
-          "artifact": "visual/stories/fuxduxian/narrative-draft-v2.md",
-          "estimate_h": 8,
-          "due": null,
-          "tags": [
-            "visual",
-            "narrative"
-          ],
-          "parallel_ok": true,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "",
-          "ready": true,
-          "phaseLabel": "01 需求",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/stories/fuxduxian/narrative-draft-v2.md",
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "V-002",
-          "title": "像素素材寻源（不用旧 zip，优质免费库）",
-          "change_id": "CHG-V001",
-          "phase": "01-requirements",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 1,
-          "assignee": "P5",
-          "executor": "human",
-          "skill": null,
-          "depends_on": [],
-          "gates": [],
-          "artifact": "visual/registry/assets.csv",
-          "estimate_h": 6,
-          "due": null,
-          "tags": [
-            "visual"
-          ],
-          "parallel_ok": true,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "",
-          "ready": true,
-          "phaseLabel": "01 需求",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/registry/assets.csv",
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "V-003",
-          "title": "10–20 审美标杆案例入库",
-          "change_id": "CHG-V001",
-          "phase": "05-qa",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 1,
-          "assignee": "P2",
-          "executor": "human",
-          "skill": null,
-          "depends_on": [
-            "V-002"
-          ],
-          "gates": [],
-          "artifact": "visual/references/aesthetic-cases.md",
-          "estimate_h": 4,
-          "due": null,
-          "tags": [
-            "visual"
-          ],
-          "parallel_ok": false,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "",
-          "ready": false,
-          "phaseLabel": "05 QA",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/references/aesthetic-cases.md",
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "V-004",
-          "title": "Phaser engine 脚手架（读 layout JSON）",
-          "change_id": "CHG-V001",
-          "phase": "03-coding",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 2,
-          "assignee": "P3",
-          "executor": "cx",
-          "skill": "tdd",
-          "depends_on": [],
-          "gates": [],
-          "artifact": "visual/engine/",
-          "estimate_h": 8,
-          "due": null,
-          "tags": [
-            "visual"
-          ],
-          "parallel_ok": true,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "🤖CX",
-          "optionalBadge": "",
-          "ready": true,
-          "phaseLabel": "03 编码",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/engine/",
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "V-005",
-          "title": "AI 生成 7 年 layout JSON",
-          "change_id": "CHG-V001",
-          "phase": "02-design",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 2,
-          "assignee": "P3",
-          "executor": "cc",
-          "skill": null,
-          "depends_on": [
-            "V-001",
-            "V-003"
-          ],
-          "gates": [
-            "G-N1"
-          ],
-          "artifact": "visual/scenes/fuxduxian/",
-          "estimate_h": 4,
-          "due": null,
-          "tags": [
-            "visual"
-          ],
-          "parallel_ok": false,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "🤖CC",
-          "optionalBadge": "",
-          "ready": false,
-          "phaseLabel": "02 方案",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/scenes/fuxduxian/",
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "V-006",
-          "title": "7 特殊场景 + 7 日常动画人审",
-          "change_id": "CHG-V001",
-          "phase": "05-qa",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 3,
-          "assignee": "P2",
-          "executor": "human",
-          "skill": null,
-          "depends_on": [
-            "V-005",
-            "V-004"
-          ],
-          "gates": [],
-          "artifact": null,
-          "estimate_h": 6,
-          "due": null,
-          "tags": [
-            "visual"
-          ],
-          "parallel_ok": false,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "",
-          "ready": false,
-          "phaseLabel": "05 QA",
-          "github": {
-            "artifact": null,
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "V-007",
-          "title": "挂进 Shadow 体验流程（A/B/C 触发）",
-          "change_id": "CHG-V001",
-          "phase": "03-coding",
-          "status": "todo",
-          "priority": "P0",
-          "wave": 3,
-          "assignee": "P3",
-          "executor": "cx",
-          "skill": null,
-          "depends_on": [
-            "V-006"
-          ],
-          "gates": [],
-          "artifact": "visual/04-ux-flow.md",
-          "estimate_h": 6,
-          "due": null,
-          "tags": [
-            "visual"
-          ],
-          "parallel_ok": false,
-          "optional": false,
-          "statusIcon": "⬜",
-          "execIcon": "🤖CX",
-          "optionalBadge": "",
-          "ready": false,
-          "phaseLabel": "03 编码",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/04-ux-flow.md",
-            "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
           "id": "V-008",
           "title": "叙事 v2 回写 golden JSON",
           "change_id": "CHG-V001",
@@ -2582,301 +724,11 @@
           "statusIcon": "⬜",
           "execIcon": "👤+🤖",
           "optionalBadge": "",
-          "ready": false,
+          "ready": true,
           "phaseLabel": "04 自测",
           "github": {
             "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/fixtures/golden-stories/复读线.json",
             "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        }
-      ]
-    },
-    {
-      "id": "CHG-002",
-      "title": "第二条 Golden",
-      "summary": "Wave 5 可选 backlog",
-      "url": null,
-      "tasks": [
-        {
-          "id": "T-025",
-          "title": "第二条 golden 大纲",
-          "change_id": "CHG-002",
-          "phase": "backlog",
-          "status": "todo",
-          "priority": "P1",
-          "wave": 5,
-          "assignee": "P2",
-          "executor": "human",
-          "skill": "story-authoring",
-          "depends_on": [
-            "T-022"
-          ],
-          "gates": [],
-          "artifact": null,
-          "estimate_h": 1.5,
-          "due": null,
-          "tags": [
-            "p1",
-            "narrative"
-          ],
-          "parallel_ok": true,
-          "optional": true,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "◇",
-          "ready": false,
-          "phaseLabel": "Backlog",
-          "github": {
-            "artifact": null,
-            "change": null,
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        }
-      ]
-    },
-    {
-      "id": "CHG-003",
-      "title": "多 Run 对比",
-      "summary": "Wave 5 可选 backlog",
-      "url": null,
-      "tasks": [
-        {
-          "id": "T-024",
-          "title": "多 run 对比模板 + 首表",
-          "change_id": "CHG-003",
-          "phase": "backlog",
-          "status": "todo",
-          "priority": "P1",
-          "wave": 5,
-          "assignee": "P4",
-          "executor": "human+cx",
-          "skill": "progress-tracker",
-          "depends_on": [
-            "T-022"
-          ],
-          "gates": [],
-          "artifact": "03-run-comparison-template.md",
-          "estimate_h": 2,
-          "due": null,
-          "tags": [
-            "p1"
-          ],
-          "parallel_ok": true,
-          "optional": true,
-          "statusIcon": "⬜",
-          "execIcon": "👤+🤖",
-          "optionalBadge": "◇",
-          "ready": false,
-          "phaseLabel": "Backlog",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/03-run-comparison-template.md",
-            "change": null,
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        }
-      ]
-    },
-    {
-      "id": "_pool",
-      "title": "等待池 ◇",
-      "summary": "",
-      "url": null,
-      "tasks": [
-        {
-          "id": "W-01",
-          "title": "Persona prompt 变体 ×3",
-          "change_id": null,
-          "phase": "backlog",
-          "status": "todo",
-          "priority": "P2",
-          "wave": null,
-          "assignee": "P2",
-          "executor": "human",
-          "skill": null,
-          "depends_on": [],
-          "gates": [],
-          "artifact": "02-prompt-experiments-log.md",
-          "estimate_h": 1,
-          "due": null,
-          "tags": [
-            "waiting-pool",
-            "prompt"
-          ],
-          "parallel_ok": true,
-          "optional": true,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "◇",
-          "ready": true,
-          "phaseLabel": "Backlog",
-          "github": {
-            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/02-prompt-experiments-log.md",
-            "change": null,
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "W-02",
-          "title": "Beats 节奏示例 ×2",
-          "change_id": null,
-          "phase": "backlog",
-          "status": "todo",
-          "priority": "P2",
-          "wave": null,
-          "assignee": "P2",
-          "executor": "human",
-          "skill": null,
-          "depends_on": [],
-          "gates": [],
-          "artifact": null,
-          "estimate_h": 1,
-          "due": null,
-          "tags": [
-            "waiting-pool",
-            "prompt"
-          ],
-          "parallel_ok": true,
-          "optional": true,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "◇",
-          "ready": true,
-          "phaseLabel": "Backlog",
-          "github": {
-            "artifact": null,
-            "change": null,
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "W-03",
-          "title": "Dialogue bad/good 对照表",
-          "change_id": null,
-          "phase": "backlog",
-          "status": "todo",
-          "priority": "P2",
-          "wave": null,
-          "assignee": "P2",
-          "executor": "human",
-          "skill": null,
-          "depends_on": [],
-          "gates": [],
-          "artifact": null,
-          "estimate_h": 0.75,
-          "due": null,
-          "tags": [
-            "waiting-pool",
-            "prompt"
-          ],
-          "parallel_ok": true,
-          "optional": true,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "◇",
-          "ready": true,
-          "phaseLabel": "Backlog",
-          "github": {
-            "artifact": null,
-            "change": null,
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "W-04",
-          "title": "story-review 空白抽检表",
-          "change_id": null,
-          "phase": "backlog",
-          "status": "todo",
-          "priority": "P2",
-          "wave": null,
-          "assignee": "P4",
-          "executor": "human",
-          "skill": "story-review",
-          "depends_on": [],
-          "gates": [],
-          "artifact": null,
-          "estimate_h": 0.5,
-          "due": null,
-          "tags": [
-            "waiting-pool",
-            "qa"
-          ],
-          "parallel_ok": true,
-          "optional": true,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "◇",
-          "ready": true,
-          "phaseLabel": "Backlog",
-          "github": {
-            "artifact": null,
-            "change": null,
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "W-07",
-          "title": "对外 5min 话术",
-          "change_id": null,
-          "phase": "backlog",
-          "status": "todo",
-          "priority": "P2",
-          "wave": null,
-          "assignee": "P1",
-          "executor": "human",
-          "skill": null,
-          "depends_on": [],
-          "gates": [],
-          "artifact": null,
-          "estimate_h": 0.5,
-          "due": null,
-          "tags": [
-            "waiting-pool"
-          ],
-          "parallel_ok": true,
-          "optional": true,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "◇",
-          "ready": true,
-          "phaseLabel": "Backlog",
-          "github": {
-            "artifact": null,
-            "change": null,
-            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-          }
-        },
-        {
-          "id": "W-10",
-          "title": "eval warn 决策树",
-          "change_id": null,
-          "phase": "backlog",
-          "status": "todo",
-          "priority": "P2",
-          "wave": null,
-          "assignee": "P4",
-          "executor": "human",
-          "skill": "qa",
-          "depends_on": [],
-          "gates": [],
-          "artifact": null,
-          "estimate_h": 0.75,
-          "due": null,
-          "tags": [
-            "waiting-pool",
-            "qa"
-          ],
-          "parallel_ok": true,
-          "optional": true,
-          "statusIcon": "⬜",
-          "execIcon": "👤",
-          "optionalBadge": "◇",
-          "ready": true,
-          "phaseLabel": "Backlog",
-          "github": {
-            "artifact": null,
-            "change": null,
             "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
           }
         }
@@ -2926,7 +778,7 @@
       "title": "P0 需求写入 02/03 文档",
       "change_id": "CHG-001",
       "phase": "01-requirements",
-      "status": "todo",
+      "status": "done",
       "priority": "P0",
       "wave": 2,
       "assignee": "P2",
@@ -2946,7 +798,9 @@
       ],
       "parallel_ok": false,
       "optional": false,
-      "statusIcon": "⬜",
+      "completed_at": "2026-06-14",
+      "blocked_reason": "",
+      "statusIcon": "✅",
       "execIcon": "👤",
       "optionalBadge": "",
       "ready": false,
@@ -2962,7 +816,7 @@
       "title": "P0 技术方案文档",
       "change_id": "CHG-001",
       "phase": "02-design",
-      "status": "todo",
+      "status": "done",
       "priority": "P0",
       "wave": 2,
       "assignee": "P3",
@@ -2983,7 +837,9 @@
       ],
       "parallel_ok": false,
       "optional": false,
-      "statusIcon": "⬜",
+      "completed_at": "2026-06-14",
+      "blocked_reason": "",
+      "statusIcon": "✅",
       "execIcon": "🤖CC",
       "optionalBadge": "",
       "ready": false,
@@ -2999,7 +855,7 @@
       "title": "P0 实现计划（writing-plans）",
       "change_id": "CHG-001",
       "phase": "02-design",
-      "status": "todo",
+      "status": "done",
       "priority": "P0",
       "wave": 2,
       "assignee": "P3",
@@ -3018,7 +874,9 @@
       ],
       "parallel_ok": false,
       "optional": false,
-      "statusIcon": "⬜",
+      "completed_at": "2026-06-14",
+      "blocked_reason": "",
+      "statusIcon": "✅",
       "execIcon": "🤖CC",
       "optionalBadge": "",
       "ready": false,
@@ -3058,7 +916,7 @@
       "statusIcon": "⬜",
       "execIcon": "👤",
       "optionalBadge": "",
-      "ready": false,
+      "ready": true,
       "phaseLabel": "02 方案",
       "github": {
         "artifact": null,
@@ -3071,7 +929,7 @@
       "title": "实现 memory 检索",
       "change_id": "CHG-001",
       "phase": "03-coding",
-      "status": "todo",
+      "status": "done",
       "priority": "P0",
       "wave": 3,
       "assignee": "P3",
@@ -3091,7 +949,9 @@
       ],
       "parallel_ok": true,
       "optional": false,
-      "statusIcon": "⬜",
+      "completed_at": "2026-06-14",
+      "blocked_reason": "",
+      "statusIcon": "✅",
       "execIcon": "🤖CX",
       "optionalBadge": "",
       "ready": false,
@@ -3107,7 +967,7 @@
       "title": "实现 reflection 步骤",
       "change_id": "CHG-001",
       "phase": "03-coding",
-      "status": "todo",
+      "status": "done",
       "priority": "P0",
       "wave": 3,
       "assignee": "P3",
@@ -3127,7 +987,9 @@
       ],
       "parallel_ok": true,
       "optional": false,
-      "statusIcon": "⬜",
+      "completed_at": "2026-06-14",
+      "blocked_reason": "",
+      "statusIcon": "✅",
       "execIcon": "🤖CX",
       "optionalBadge": "",
       "ready": false,
@@ -3143,7 +1005,7 @@
       "title": "intervention re-plan prompt（人写）+ Codex 接线",
       "change_id": "CHG-001",
       "phase": "03-coding",
-      "status": "todo",
+      "status": "done",
       "priority": "P0",
       "wave": 3,
       "assignee": "P2",
@@ -3167,7 +1029,9 @@
       ],
       "parallel_ok": false,
       "optional": false,
-      "statusIcon": "⬜",
+      "completed_at": "2026-06-14",
+      "blocked_reason": "",
+      "statusIcon": "✅",
       "execIcon": "👤+🤖",
       "optionalBadge": "",
       "ready": false,
@@ -3207,7 +1071,7 @@
       "statusIcon": "⬜",
       "execIcon": "👤",
       "optionalBadge": "",
-      "ready": false,
+      "ready": true,
       "phaseLabel": "03 编码",
       "github": {
         "artifact": null,
@@ -3220,7 +1084,7 @@
       "title": "合并 + npm test 全绿",
       "change_id": "CHG-001",
       "phase": "04-dev-testing",
-      "status": "todo",
+      "status": "done",
       "priority": "P0",
       "wave": 3,
       "assignee": "P5",
@@ -3240,7 +1104,9 @@
       ],
       "parallel_ok": false,
       "optional": false,
-      "statusIcon": "⬜",
+      "completed_at": "2026-06-14",
+      "blocked_reason": "",
+      "statusIcon": "✅",
       "execIcon": "🤖CX",
       "optionalBadge": "",
       "ready": false,
@@ -3256,7 +1122,7 @@
       "title": "Golden 复读线 eval 回归",
       "change_id": "CHG-001",
       "phase": "04-dev-testing",
-      "status": "todo",
+      "status": "done",
       "priority": "P0",
       "wave": 4,
       "assignee": "P4",
@@ -3274,7 +1140,9 @@
       ],
       "parallel_ok": true,
       "optional": false,
-      "statusIcon": "⬜",
+      "completed_at": "2026-06-14",
+      "blocked_reason": "",
+      "statusIcon": "✅",
       "execIcon": "🤖CX",
       "optionalBadge": "",
       "ready": false,
@@ -3314,7 +1182,7 @@
       "statusIcon": "⬜",
       "execIcon": "👤",
       "optionalBadge": "",
-      "ready": false,
+      "ready": true,
       "phaseLabel": "05 QA",
       "github": {
         "artifact": null,
@@ -3395,24 +1263,102 @@
       }
     },
     {
-      "id": "T-003",
-      "title": "确认 CC / Codex 分工与分支策略",
-      "change_id": "INFRA-001",
-      "phase": "01-requirements",
+      "id": "T-013",
+      "title": "方案评审会 + P1/P3 签字",
+      "change_id": "CHG-001",
+      "phase": "02-design",
       "status": "todo",
       "priority": "P0",
-      "wave": 0,
-      "assignee": "P3",
+      "wave": 2,
+      "assignee": "P1",
       "executor": "human",
       "skill": null,
-      "depends_on": [],
-      "gates": [],
-      "artifact": "team-roster.md#Agent账号",
-      "estimate_h": 0.25,
+      "depends_on": [
+        "T-011"
+      ],
+      "gates": [
+        "G2"
+      ],
+      "artifact": null,
+      "estimate_h": 0.5,
       "due": null,
       "tags": [
-        "infra",
-        "agent"
+        "gate",
+        "meeting"
+      ],
+      "parallel_ok": false,
+      "optional": false,
+      "statusIcon": "⬜",
+      "execIcon": "👤",
+      "optionalBadge": "",
+      "ready": true,
+      "phaseLabel": "02 方案",
+      "github": {
+        "artifact": null,
+        "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
+        "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+      }
+    },
+    {
+      "id": "T-017",
+      "title": "Code Review gate（P0 三项）",
+      "change_id": "CHG-001",
+      "phase": "03-coding",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 3,
+      "assignee": "P3",
+      "executor": "human",
+      "skill": "review",
+      "depends_on": [
+        "T-014",
+        "T-015",
+        "T-016"
+      ],
+      "gates": [],
+      "artifact": null,
+      "estimate_h": 1,
+      "due": null,
+      "tags": [
+        "gate",
+        "review"
+      ],
+      "parallel_ok": false,
+      "optional": false,
+      "statusIcon": "⬜",
+      "execIcon": "👤",
+      "optionalBadge": "",
+      "ready": true,
+      "phaseLabel": "03 编码",
+      "github": {
+        "artifact": null,
+        "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
+        "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+      }
+    },
+    {
+      "id": "T-020",
+      "title": "Live 3 条 profile 抽检",
+      "change_id": "CHG-001",
+      "phase": "05-qa",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 4,
+      "assignee": "P4",
+      "executor": "human",
+      "skill": "story-review",
+      "depends_on": [
+        "T-018"
+      ],
+      "gates": [
+        "G4"
+      ],
+      "artifact": null,
+      "estimate_h": 2,
+      "due": null,
+      "tags": [
+        "qa",
+        "narrative"
       ],
       "parallel_ok": true,
       "optional": false,
@@ -3420,42 +1366,10 @@
       "execIcon": "👤",
       "optionalBadge": "",
       "ready": true,
-      "phaseLabel": "01 需求",
-      "github": {
-        "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/team-roster.md#Agent账号",
-        "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/INFRA-001-team-onboarding/progress.md",
-        "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-      }
-    },
-    {
-      "id": "T-006",
-      "title": "Corpus gap 扫描",
-      "change_id": "CHG-000",
-      "phase": "06-progress",
-      "status": "todo",
-      "priority": "P1",
-      "wave": 1,
-      "assignee": "P3",
-      "executor": "cc",
-      "skill": "harness-init",
-      "depends_on": [],
-      "gates": [],
-      "artifact": null,
-      "estimate_h": 1,
-      "due": null,
-      "tags": [
-        "baseline"
-      ],
-      "parallel_ok": true,
-      "optional": false,
-      "statusIcon": "⬜",
-      "execIcon": "🤖CC",
-      "optionalBadge": "",
-      "ready": true,
-      "phaseLabel": "06 进度",
+      "phaseLabel": "05 QA",
       "github": {
         "artifact": null,
-        "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-000-corpus-reorg/progress.md",
+        "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
         "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
       }
     },
@@ -3494,406 +1408,79 @@
       }
     },
     {
-      "id": "W-01",
-      "title": "Persona prompt 变体 ×3",
-      "change_id": null,
-      "phase": "backlog",
-      "status": "todo",
-      "priority": "P2",
-      "wave": null,
-      "assignee": "P2",
-      "executor": "human",
-      "skill": null,
-      "depends_on": [],
-      "gates": [],
-      "artifact": "02-prompt-experiments-log.md",
-      "estimate_h": 1,
-      "due": null,
-      "tags": [
-        "waiting-pool",
-        "prompt"
-      ],
-      "parallel_ok": true,
-      "optional": true,
-      "statusIcon": "⬜",
-      "execIcon": "👤",
-      "optionalBadge": "◇",
-      "ready": true,
-      "phaseLabel": "Backlog",
-      "github": {
-        "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/02-prompt-experiments-log.md",
-        "change": null,
-        "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-      }
-    },
-    {
-      "id": "W-02",
-      "title": "Beats 节奏示例 ×2",
-      "change_id": null,
-      "phase": "backlog",
-      "status": "todo",
-      "priority": "P2",
-      "wave": null,
-      "assignee": "P2",
-      "executor": "human",
-      "skill": null,
-      "depends_on": [],
-      "gates": [],
-      "artifact": null,
-      "estimate_h": 1,
-      "due": null,
-      "tags": [
-        "waiting-pool",
-        "prompt"
-      ],
-      "parallel_ok": true,
-      "optional": true,
-      "statusIcon": "⬜",
-      "execIcon": "👤",
-      "optionalBadge": "◇",
-      "ready": true,
-      "phaseLabel": "Backlog",
-      "github": {
-        "artifact": null,
-        "change": null,
-        "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-      }
-    },
-    {
-      "id": "W-03",
-      "title": "Dialogue bad/good 对照表",
-      "change_id": null,
-      "phase": "backlog",
-      "status": "todo",
-      "priority": "P2",
-      "wave": null,
-      "assignee": "P2",
-      "executor": "human",
-      "skill": null,
-      "depends_on": [],
-      "gates": [],
-      "artifact": null,
-      "estimate_h": 0.75,
-      "due": null,
-      "tags": [
-        "waiting-pool",
-        "prompt"
-      ],
-      "parallel_ok": true,
-      "optional": true,
-      "statusIcon": "⬜",
-      "execIcon": "👤",
-      "optionalBadge": "◇",
-      "ready": true,
-      "phaseLabel": "Backlog",
-      "github": {
-        "artifact": null,
-        "change": null,
-        "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-      }
-    },
-    {
-      "id": "W-04",
-      "title": "story-review 空白抽检表",
-      "change_id": null,
-      "phase": "backlog",
-      "status": "todo",
-      "priority": "P2",
-      "wave": null,
-      "assignee": "P4",
-      "executor": "human",
-      "skill": "story-review",
-      "depends_on": [],
-      "gates": [],
-      "artifact": null,
-      "estimate_h": 0.5,
-      "due": null,
-      "tags": [
-        "waiting-pool",
-        "qa"
-      ],
-      "parallel_ok": true,
-      "optional": true,
-      "statusIcon": "⬜",
-      "execIcon": "👤",
-      "optionalBadge": "◇",
-      "ready": true,
-      "phaseLabel": "Backlog",
-      "github": {
-        "artifact": null,
-        "change": null,
-        "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-      }
-    },
-    {
-      "id": "W-06",
-      "title": "skills sync + manifest 核对",
-      "change_id": "CHG-000",
-      "phase": "06-progress",
-      "status": "todo",
-      "priority": "P2",
-      "wave": null,
-      "assignee": "P5",
-      "executor": "human",
-      "skill": null,
-      "depends_on": [],
-      "gates": [],
-      "artifact": "skills/skills-lock.json",
-      "estimate_h": 0.33,
-      "due": null,
-      "tags": [
-        "waiting-pool",
-        "infra"
-      ],
-      "parallel_ok": true,
-      "optional": true,
-      "statusIcon": "⬜",
-      "execIcon": "👤",
-      "optionalBadge": "◇",
-      "ready": true,
-      "phaseLabel": "06 进度",
-      "github": {
-        "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/skills/skills-lock.json",
-        "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-000-corpus-reorg/progress.md",
-        "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-      }
-    },
-    {
-      "id": "W-07",
-      "title": "对外 5min 话术",
-      "change_id": null,
-      "phase": "backlog",
-      "status": "todo",
-      "priority": "P2",
-      "wave": null,
-      "assignee": "P1",
-      "executor": "human",
-      "skill": null,
-      "depends_on": [],
-      "gates": [],
-      "artifact": null,
-      "estimate_h": 0.5,
-      "due": null,
-      "tags": [
-        "waiting-pool"
-      ],
-      "parallel_ok": true,
-      "optional": true,
-      "statusIcon": "⬜",
-      "execIcon": "👤",
-      "optionalBadge": "◇",
-      "ready": true,
-      "phaseLabel": "Backlog",
-      "github": {
-        "artifact": null,
-        "change": null,
-        "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-      }
-    },
-    {
-      "id": "W-10",
-      "title": "eval warn 决策树",
-      "change_id": null,
-      "phase": "backlog",
-      "status": "todo",
-      "priority": "P2",
-      "wave": null,
-      "assignee": "P4",
-      "executor": "human",
-      "skill": "qa",
-      "depends_on": [],
-      "gates": [],
-      "artifact": null,
-      "estimate_h": 0.75,
-      "due": null,
-      "tags": [
-        "waiting-pool",
-        "qa"
-      ],
-      "parallel_ok": true,
-      "optional": true,
-      "statusIcon": "⬜",
-      "execIcon": "👤",
-      "optionalBadge": "◇",
-      "ready": true,
-      "phaseLabel": "Backlog",
-      "github": {
-        "artifact": null,
-        "change": null,
-        "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-      }
-    },
-    {
-      "id": "V-001",
-      "title": "复读线叙事 v2 改稿（visual_anchor + props）",
+      "id": "V-008",
+      "title": "叙事 v2 回写 golden JSON",
       "change_id": "CHG-V001",
-      "phase": "01-requirements",
+      "phase": "04-dev-testing",
       "status": "todo",
       "priority": "P0",
-      "wave": 1,
+      "wave": 3,
       "assignee": "P2",
-      "executor": "human",
+      "executor": "human+cx",
       "skill": "story-authoring",
-      "depends_on": [],
-      "gates": [
-        "G-N1"
+      "depends_on": [
+        "V-001",
+        "V-006"
       ],
-      "artifact": "visual/stories/fuxduxian/narrative-draft-v2.md",
-      "estimate_h": 8,
+      "gates": [],
+      "artifact": "fixtures/golden-stories/复读线.json",
+      "estimate_h": 3,
       "due": null,
       "tags": [
         "visual",
         "narrative"
       ],
-      "parallel_ok": true,
+      "parallel_ok": false,
       "optional": false,
       "statusIcon": "⬜",
-      "execIcon": "👤",
+      "execIcon": "👤+🤖",
       "optionalBadge": "",
       "ready": true,
-      "phaseLabel": "01 需求",
+      "phaseLabel": "04 自测",
       "github": {
-        "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/stories/fuxduxian/narrative-draft-v2.md",
-        "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
-        "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-      }
-    },
-    {
-      "id": "V-002",
-      "title": "像素素材寻源（不用旧 zip，优质免费库）",
-      "change_id": "CHG-V001",
-      "phase": "01-requirements",
-      "status": "todo",
-      "priority": "P0",
-      "wave": 1,
-      "assignee": "P5",
-      "executor": "human",
-      "skill": null,
-      "depends_on": [],
-      "gates": [],
-      "artifact": "visual/registry/assets.csv",
-      "estimate_h": 6,
-      "due": null,
-      "tags": [
-        "visual"
-      ],
-      "parallel_ok": true,
-      "optional": false,
-      "statusIcon": "⬜",
-      "execIcon": "👤",
-      "optionalBadge": "",
-      "ready": true,
-      "phaseLabel": "01 需求",
-      "github": {
-        "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/registry/assets.csv",
-        "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
-        "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-      }
-    },
-    {
-      "id": "V-004",
-      "title": "Phaser engine 脚手架（读 layout JSON）",
-      "change_id": "CHG-V001",
-      "phase": "03-coding",
-      "status": "todo",
-      "priority": "P0",
-      "wave": 2,
-      "assignee": "P3",
-      "executor": "cx",
-      "skill": "tdd",
-      "depends_on": [],
-      "gates": [],
-      "artifact": "visual/engine/",
-      "estimate_h": 8,
-      "due": null,
-      "tags": [
-        "visual"
-      ],
-      "parallel_ok": true,
-      "optional": false,
-      "statusIcon": "⬜",
-      "execIcon": "🤖CX",
-      "optionalBadge": "",
-      "ready": true,
-      "phaseLabel": "03 编码",
-      "github": {
-        "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/engine/",
+        "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/fixtures/golden-stories/复读线.json",
         "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
         "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
       }
     }
   ],
-  "inProgress": [
-    {
-      "id": "T-001",
-      "title": "Kickoff：五人角色与本周目标",
-      "change_id": "INFRA-001",
-      "phase": "01-requirements",
-      "status": "in_progress",
-      "priority": "P0",
-      "wave": 0,
-      "assignee": "P1",
-      "executor": "human",
-      "skill": "planning-and-task-breakdown",
-      "depends_on": [],
-      "gates": [],
-      "artifact": "team-roster.md",
-      "estimate_h": 0.5,
-      "due": null,
-      "tags": [
-        "kickoff",
-        "infra"
-      ],
-      "parallel_ok": true,
-      "optional": false,
-      "statusIcon": "🟡",
-      "execIcon": "👤",
-      "optionalBadge": "",
-      "ready": false,
-      "phaseLabel": "01 需求",
-      "github": {
-        "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/team-roster.md",
-        "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/INFRA-001-team-onboarding/progress.md",
-        "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
-      }
-    }
-  ],
+  "inProgress": [],
   "blocked": [],
   "teamLoad": [
     {
       "member": "P1",
-      "todo": 6,
-      "in_progress": 1,
-      "ready": 3,
-      "waiting": 1
-    },
-    {
-      "member": "P2",
-      "todo": 12,
-      "in_progress": 0,
-      "ready": 4,
-      "waiting": 3
-    },
-    {
-      "member": "P3",
-      "todo": 10,
+      "todo": 5,
       "in_progress": 0,
       "ready": 3,
       "waiting": 0
     },
     {
-      "member": "P4",
-      "todo": 6,
+      "member": "P2",
+      "todo": 1,
       "in_progress": 0,
-      "ready": 2,
-      "waiting": 2
+      "ready": 1,
+      "waiting": 0
+    },
+    {
+      "member": "P3",
+      "todo": 1,
+      "in_progress": 0,
+      "ready": 1,
+      "waiting": 0
+    },
+    {
+      "member": "P4",
+      "todo": 1,
+      "in_progress": 0,
+      "ready": 1,
+      "waiting": 0
     },
     {
       "member": "P5",
-      "todo": 4,
+      "todo": 0,
       "in_progress": 0,
-      "ready": 2,
-      "waiting": 1
+      "ready": 0,
+      "waiting": 0
     }
   ],
   "changes": [
@@ -3972,7 +1559,7 @@
         "id": "INFRA-001",
         "title": "团队 Onboarding",
         "summary": "Kickoff、花名册、Agent 分工、共读 golden",
-        "done": 0,
+        "done": 3,
         "total": 4,
         "url": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/INFRA-001-team-onboarding/progress.md"
       },
@@ -3980,7 +1567,7 @@
         "id": "CHG-000",
         "title": "Corpus 整合",
         "summary": "唯一入口确认、gap 扫描、skills 基线",
-        "done": 1,
+        "done": 3,
         "total": 4,
         "url": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-000-corpus-reorg/progress.md"
       },
@@ -3988,7 +1575,7 @@
         "id": "CHG-001",
         "title": "P0 三项迁移",
         "summary": "memory 检索 · reflection · intervention re-plan",
-        "done": 0,
+        "done": 11,
         "total": 16,
         "url": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md"
       },
@@ -3996,15 +1583,23 @@
         "id": "CHG-V001",
         "title": "Visual 复读线",
         "summary": "叙事 v2 · 像素素材 · Phaser · 7 年 layout",
-        "done": 0,
+        "done": 7,
         "total": 8,
         "url": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md"
+      },
+      {
+        "id": "CHG-H001",
+        "title": "Harness Wave 4 closed loop",
+        "summary": "静态 demo v2 · smoke · eval visual · 文档对齐",
+        "done": 12,
+        "total": 12,
+        "url": null
       },
       {
         "id": "CHG-002",
         "title": "第二条 Golden",
         "summary": "Wave 5 可选 backlog",
-        "done": 0,
+        "done": 1,
         "total": 1,
         "url": null
       },
@@ -4012,7 +1607,7 @@
         "id": "CHG-003",
         "title": "多 Run 对比",
         "summary": "Wave 5 可选 backlog",
-        "done": 0,
+        "done": 1,
         "total": 1,
         "url": null
       }
@@ -4023,7 +1618,7 @@
         "title": "Kickoff：五人角色与本周目标",
         "change_id": "INFRA-001",
         "phase": "01-requirements",
-        "status": "in_progress",
+        "status": "done",
         "priority": "P0",
         "wave": 0,
         "assignee": "P1",
@@ -4040,7 +1635,9 @@
         ],
         "parallel_ok": true,
         "optional": false,
-        "statusIcon": "🟡",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "",
         "ready": false,
@@ -4089,7 +1686,7 @@
         "title": "确认 CC / Codex 分工与分支策略",
         "change_id": "INFRA-001",
         "phase": "01-requirements",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 0,
         "assignee": "P3",
@@ -4106,10 +1703,12 @@
         ],
         "parallel_ok": true,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "",
-        "ready": true,
+        "ready": false,
         "phaseLabel": "01 需求",
         "github": {
           "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/team-roster.md#Agent账号",
@@ -4122,7 +1721,7 @@
         "title": "更新 roster + 各 CHG assignee",
         "change_id": "INFRA-001",
         "phase": "06-progress",
-        "status": "todo",
+        "status": "done",
         "priority": "P1",
         "wave": 1,
         "assignee": "P5",
@@ -4140,7 +1739,9 @@
         ],
         "parallel_ok": true,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "",
         "ready": false,
@@ -4189,7 +1790,7 @@
         "title": "Corpus gap 扫描",
         "change_id": "CHG-000",
         "phase": "06-progress",
-        "status": "todo",
+        "status": "done",
         "priority": "P1",
         "wave": 1,
         "assignee": "P3",
@@ -4205,10 +1806,12 @@
         ],
         "parallel_ok": true,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "🤖CC",
         "optionalBadge": "",
-        "ready": true,
+        "ready": false,
         "phaseLabel": "06 进度",
         "github": {
           "artifact": null,
@@ -4255,7 +1858,7 @@
         "title": "skills sync + manifest 核对",
         "change_id": "CHG-000",
         "phase": "06-progress",
-        "status": "todo",
+        "status": "done",
         "priority": "P2",
         "wave": null,
         "assignee": "P5",
@@ -4272,10 +1875,12 @@
         ],
         "parallel_ok": true,
         "optional": true,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "◇",
-        "ready": true,
+        "ready": false,
         "phaseLabel": "06 进度",
         "github": {
           "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/skills/skills-lock.json",
@@ -4325,7 +1930,7 @@
         "title": "复读线红线清单（6 条质量标准）",
         "change_id": "CHG-001",
         "phase": "01-requirements",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 1,
         "assignee": "P2",
@@ -4345,7 +1950,9 @@
         ],
         "parallel_ok": true,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "",
         "ready": false,
@@ -4361,7 +1968,7 @@
         "title": "Eval rubric 与 golden 字段对齐",
         "change_id": "CHG-001",
         "phase": "04-dev-testing",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 1,
         "assignee": "P4",
@@ -4379,7 +1986,9 @@
         ],
         "parallel_ok": true,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "",
         "ready": false,
@@ -4395,7 +2004,7 @@
         "title": "P0 需求写入 02/03 文档",
         "change_id": "CHG-001",
         "phase": "01-requirements",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 2,
         "assignee": "P2",
@@ -4415,7 +2024,9 @@
         ],
         "parallel_ok": false,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "",
         "ready": false,
@@ -4431,7 +2042,7 @@
         "title": "P0 技术方案文档",
         "change_id": "CHG-001",
         "phase": "02-design",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 2,
         "assignee": "P3",
@@ -4452,7 +2063,9 @@
         ],
         "parallel_ok": false,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "🤖CC",
         "optionalBadge": "",
         "ready": false,
@@ -4468,7 +2081,7 @@
         "title": "P0 实现计划（writing-plans）",
         "change_id": "CHG-001",
         "phase": "02-design",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 2,
         "assignee": "P3",
@@ -4487,7 +2100,9 @@
         ],
         "parallel_ok": false,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "🤖CC",
         "optionalBadge": "",
         "ready": false,
@@ -4527,7 +2142,7 @@
         "statusIcon": "⬜",
         "execIcon": "👤",
         "optionalBadge": "",
-        "ready": false,
+        "ready": true,
         "phaseLabel": "02 方案",
         "github": {
           "artifact": null,
@@ -4540,7 +2155,7 @@
         "title": "实现 memory 检索",
         "change_id": "CHG-001",
         "phase": "03-coding",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 3,
         "assignee": "P3",
@@ -4560,7 +2175,9 @@
         ],
         "parallel_ok": true,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "🤖CX",
         "optionalBadge": "",
         "ready": false,
@@ -4576,7 +2193,7 @@
         "title": "实现 reflection 步骤",
         "change_id": "CHG-001",
         "phase": "03-coding",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 3,
         "assignee": "P3",
@@ -4596,7 +2213,9 @@
         ],
         "parallel_ok": true,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "🤖CX",
         "optionalBadge": "",
         "ready": false,
@@ -4612,7 +2231,7 @@
         "title": "intervention re-plan prompt（人写）+ Codex 接线",
         "change_id": "CHG-001",
         "phase": "03-coding",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 3,
         "assignee": "P2",
@@ -4636,7 +2255,9 @@
         ],
         "parallel_ok": false,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤+🤖",
         "optionalBadge": "",
         "ready": false,
@@ -4676,7 +2297,7 @@
         "statusIcon": "⬜",
         "execIcon": "👤",
         "optionalBadge": "",
-        "ready": false,
+        "ready": true,
         "phaseLabel": "03 编码",
         "github": {
           "artifact": null,
@@ -4689,7 +2310,7 @@
         "title": "合并 + npm test 全绿",
         "change_id": "CHG-001",
         "phase": "04-dev-testing",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 3,
         "assignee": "P5",
@@ -4709,7 +2330,9 @@
         ],
         "parallel_ok": false,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "🤖CX",
         "optionalBadge": "",
         "ready": false,
@@ -4725,7 +2348,7 @@
         "title": "Golden 复读线 eval 回归",
         "change_id": "CHG-001",
         "phase": "04-dev-testing",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 4,
         "assignee": "P4",
@@ -4743,7 +2366,9 @@
         ],
         "parallel_ok": true,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "🤖CX",
         "optionalBadge": "",
         "ready": false,
@@ -4783,7 +2408,7 @@
         "statusIcon": "⬜",
         "execIcon": "👤",
         "optionalBadge": "",
-        "ready": false,
+        "ready": true,
         "phaseLabel": "05 QA",
         "github": {
           "artifact": null,
@@ -4796,7 +2421,7 @@
         "title": "Prompt 实验日志合并有效变体",
         "change_id": "CHG-001",
         "phase": "06-progress",
-        "status": "todo",
+        "status": "done",
         "priority": "P1",
         "wave": 4,
         "assignee": "P2",
@@ -4814,7 +2439,9 @@
         ],
         "parallel_ok": true,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "",
         "ready": false,
@@ -4867,7 +2494,7 @@
         "title": "复读线叙事 v2 改稿（visual_anchor + props）",
         "change_id": "CHG-V001",
         "phase": "01-requirements",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 1,
         "assignee": "P2",
@@ -4886,10 +2513,12 @@
         ],
         "parallel_ok": true,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "",
-        "ready": true,
+        "ready": false,
         "phaseLabel": "01 需求",
         "github": {
           "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/stories/fuxduxian/narrative-draft-v2.md",
@@ -4902,7 +2531,7 @@
         "title": "像素素材寻源（不用旧 zip，优质免费库）",
         "change_id": "CHG-V001",
         "phase": "01-requirements",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 1,
         "assignee": "P5",
@@ -4918,10 +2547,12 @@
         ],
         "parallel_ok": true,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "",
-        "ready": true,
+        "ready": false,
         "phaseLabel": "01 需求",
         "github": {
           "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/registry/assets.csv",
@@ -4934,7 +2565,7 @@
         "title": "10–20 审美标杆案例入库",
         "change_id": "CHG-V001",
         "phase": "05-qa",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 1,
         "assignee": "P2",
@@ -4952,7 +2583,9 @@
         ],
         "parallel_ok": false,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "",
         "ready": false,
@@ -4968,7 +2601,7 @@
         "title": "Phaser engine 脚手架（读 layout JSON）",
         "change_id": "CHG-V001",
         "phase": "03-coding",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 2,
         "assignee": "P3",
@@ -4984,10 +2617,12 @@
         ],
         "parallel_ok": true,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "🤖CX",
         "optionalBadge": "",
-        "ready": true,
+        "ready": false,
         "phaseLabel": "03 编码",
         "github": {
           "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/engine/",
@@ -5000,7 +2635,7 @@
         "title": "AI 生成 7 年 layout JSON",
         "change_id": "CHG-V001",
         "phase": "02-design",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 2,
         "assignee": "P3",
@@ -5021,7 +2656,9 @@
         ],
         "parallel_ok": false,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "🤖CC",
         "optionalBadge": "",
         "ready": false,
@@ -5037,7 +2674,7 @@
         "title": "7 特殊场景 + 7 日常动画人审",
         "change_id": "CHG-V001",
         "phase": "05-qa",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 3,
         "assignee": "P2",
@@ -5056,7 +2693,9 @@
         ],
         "parallel_ok": false,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "",
         "ready": false,
@@ -5072,7 +2711,7 @@
         "title": "挂进 Shadow 体验流程（A/B/C 触发）",
         "change_id": "CHG-V001",
         "phase": "03-coding",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 3,
         "assignee": "P3",
@@ -5090,7 +2729,9 @@
         ],
         "parallel_ok": false,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "🤖CX",
         "optionalBadge": "",
         "ready": false,
@@ -5129,7 +2770,7 @@
         "statusIcon": "⬜",
         "execIcon": "👤+🤖",
         "optionalBadge": "",
-        "ready": false,
+        "ready": true,
         "phaseLabel": "04 自测",
         "github": {
           "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/fixtures/golden-stories/复读线.json",
@@ -5138,11 +2779,451 @@
         }
       },
       {
+        "id": "H-001",
+        "title": "静态 demo 挂 v2 visual 字段",
+        "change_id": "CHG-H001",
+        "phase": "03-coding",
+        "status": "done",
+        "priority": "P1",
+        "wave": 4,
+        "assignee": "P3",
+        "executor": "cx",
+        "skill": "incremental-implementation",
+        "depends_on": [],
+        "gates": [],
+        "artifact": "docs/demo-data.js",
+        "estimate_h": 1,
+        "due": null,
+        "tags": [
+          "harness",
+          "demo"
+        ],
+        "parallel_ok": true,
+        "optional": false,
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
+        "execIcon": "🤖CX",
+        "optionalBadge": "",
+        "ready": false,
+        "phaseLabel": "03 编码",
+        "github": {
+          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/docs/demo-data.js",
+          "change": null,
+          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+        }
+      },
+      {
+        "id": "H-002",
+        "title": "Live harness smoke 测试",
+        "change_id": "CHG-H001",
+        "phase": "04-dev-testing",
+        "status": "done",
+        "priority": "P1",
+        "wave": 4,
+        "assignee": "P3",
+        "executor": "cx",
+        "skill": "tdd",
+        "depends_on": [
+          "H-001"
+        ],
+        "gates": [],
+        "artifact": "archive/demo-v0.2/test/harness-smoke.test.js",
+        "estimate_h": 1,
+        "due": null,
+        "tags": [
+          "harness",
+          "test"
+        ],
+        "parallel_ok": true,
+        "optional": false,
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
+        "execIcon": "🤖CX",
+        "optionalBadge": "",
+        "ready": false,
+        "phaseLabel": "04 自测",
+        "github": {
+          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/test/harness-smoke.test.js",
+          "change": null,
+          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+        }
+      },
+      {
+        "id": "H-003",
+        "title": "Evaluator visual 一致性 warn",
+        "change_id": "CHG-H001",
+        "phase": "04-dev-testing",
+        "status": "done",
+        "priority": "P2",
+        "wave": 4,
+        "assignee": "P3",
+        "executor": "cx",
+        "skill": "tdd",
+        "depends_on": [],
+        "gates": [],
+        "artifact": "archive/demo-v0.2/lib/evaluator.js",
+        "estimate_h": 0.5,
+        "due": null,
+        "tags": [
+          "harness",
+          "eval"
+        ],
+        "parallel_ok": true,
+        "optional": false,
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
+        "execIcon": "🤖CX",
+        "optionalBadge": "",
+        "ready": false,
+        "phaseLabel": "04 自测",
+        "github": {
+          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/lib/evaluator.js",
+          "change": null,
+          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+        }
+      },
+      {
+        "id": "H-004",
+        "title": "Harness loop 文档路径对齐",
+        "change_id": "CHG-H001",
+        "phase": "06-progress",
+        "status": "done",
+        "priority": "P2",
+        "wave": 4,
+        "assignee": "P5",
+        "executor": "cx",
+        "skill": "harness-init",
+        "depends_on": [],
+        "gates": [],
+        "artifact": "02-technical-design/01-shadow-harness-loop.md",
+        "estimate_h": 0.5,
+        "due": null,
+        "tags": [
+          "harness",
+          "docs"
+        ],
+        "parallel_ok": true,
+        "optional": false,
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
+        "execIcon": "🤖CX",
+        "optionalBadge": "",
+        "ready": false,
+        "phaseLabel": "06 进度",
+        "github": {
+          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/02-technical-design/01-shadow-harness-loop.md",
+          "change": null,
+          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+        }
+      },
+      {
+        "id": "H-005",
+        "title": "harness:smoke CLI 脚本",
+        "change_id": "CHG-H001",
+        "phase": "04-dev-testing",
+        "status": "done",
+        "priority": "P1",
+        "wave": 4,
+        "assignee": "P3",
+        "executor": "cx",
+        "skill": "tdd",
+        "depends_on": [
+          "H-002"
+        ],
+        "gates": [],
+        "artifact": "tooling/scripts/harness-live-smoke.mjs",
+        "estimate_h": 0.5,
+        "due": null,
+        "tags": [
+          "harness",
+          "smoke"
+        ],
+        "parallel_ok": true,
+        "optional": false,
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
+        "execIcon": "🤖CX",
+        "optionalBadge": "",
+        "ready": false,
+        "phaseLabel": "04 自测",
+        "github": {
+          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tooling/scripts/harness-live-smoke.mjs",
+          "change": null,
+          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+        }
+      },
+      {
+        "id": "H-006",
+        "title": "Dialogue hook 契约 + 测试",
+        "change_id": "CHG-H001",
+        "phase": "04-dev-testing",
+        "status": "done",
+        "priority": "P1",
+        "wave": 4,
+        "assignee": "P3",
+        "executor": "cx",
+        "skill": "tdd",
+        "depends_on": [
+          "H-002"
+        ],
+        "gates": [],
+        "artifact": "archive/demo-v0.2/lib/dialogue-hook.js",
+        "estimate_h": 1,
+        "due": null,
+        "tags": [
+          "harness",
+          "dialogue"
+        ],
+        "parallel_ok": true,
+        "optional": false,
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
+        "execIcon": "🤖CX",
+        "optionalBadge": "",
+        "ready": false,
+        "phaseLabel": "04 自测",
+        "github": {
+          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/lib/dialogue-hook.js",
+          "change": null,
+          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+        }
+      },
+      {
+        "id": "H-007",
+        "title": "Phaser layout 预览页（docs/demo-phaser）",
+        "change_id": "CHG-H001",
+        "phase": "03-coding",
+        "status": "done",
+        "priority": "P2",
+        "wave": 4,
+        "assignee": "P3",
+        "executor": "cx",
+        "skill": "frontend-ui-engineering",
+        "depends_on": [
+          "H-001"
+        ],
+        "gates": [],
+        "artifact": "docs/demo-phaser.html",
+        "estimate_h": 1,
+        "due": null,
+        "tags": [
+          "harness",
+          "visual"
+        ],
+        "parallel_ok": true,
+        "optional": false,
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
+        "execIcon": "🤖CX",
+        "optionalBadge": "",
+        "ready": false,
+        "phaseLabel": "03 编码",
+        "github": {
+          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/docs/demo-phaser.html",
+          "change": null,
+          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+        }
+      },
+      {
+        "id": "H-008",
+        "title": "harness:smoke:full 七年 mock",
+        "change_id": "CHG-H001",
+        "phase": "04-dev-testing",
+        "status": "done",
+        "priority": "P2",
+        "wave": 4,
+        "assignee": "P3",
+        "executor": "cx",
+        "skill": "tdd",
+        "depends_on": [
+          "H-005"
+        ],
+        "gates": [],
+        "artifact": "tooling/scripts/harness-live-smoke.mjs",
+        "estimate_h": 0.5,
+        "due": null,
+        "tags": [
+          "harness",
+          "smoke"
+        ],
+        "parallel_ok": true,
+        "optional": false,
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
+        "execIcon": "🤖CX",
+        "optionalBadge": "",
+        "ready": false,
+        "phaseLabel": "04 自测",
+        "github": {
+          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tooling/scripts/harness-live-smoke.mjs",
+          "change": null,
+          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+        }
+      },
+      {
+        "id": "H-009",
+        "title": "Fate hook 契约 + /api/fate/context",
+        "change_id": "CHG-H001",
+        "phase": "04-dev-testing",
+        "status": "done",
+        "priority": "P1",
+        "wave": 4,
+        "assignee": "P3",
+        "executor": "cx",
+        "skill": "tdd",
+        "depends_on": [
+          "H-006"
+        ],
+        "gates": [],
+        "artifact": "archive/demo-v0.2/lib/fate-hook.js",
+        "estimate_h": 1,
+        "due": null,
+        "tags": [
+          "harness",
+          "fate"
+        ],
+        "parallel_ok": true,
+        "optional": false,
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
+        "execIcon": "🤖CX",
+        "optionalBadge": "",
+        "ready": false,
+        "phaseLabel": "04 自测",
+        "github": {
+          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/lib/fate-hook.js",
+          "change": null,
+          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+        }
+      },
+      {
+        "id": "H-010",
+        "title": "archive visual-preview + index 入口",
+        "change_id": "CHG-H001",
+        "phase": "03-coding",
+        "status": "done",
+        "priority": "P2",
+        "wave": 4,
+        "assignee": "P3",
+        "executor": "cx",
+        "skill": "frontend-ui-engineering",
+        "depends_on": [
+          "H-007"
+        ],
+        "gates": [],
+        "artifact": "archive/demo-v0.2/public/visual-preview.html",
+        "estimate_h": 1,
+        "due": null,
+        "tags": [
+          "harness",
+          "visual"
+        ],
+        "parallel_ok": true,
+        "optional": false,
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
+        "execIcon": "🤖CX",
+        "optionalBadge": "",
+        "ready": false,
+        "phaseLabel": "03 编码",
+        "github": {
+          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/public/visual-preview.html",
+          "change": null,
+          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+        }
+      },
+      {
+        "id": "H-011",
+        "title": "Dialogue API placeholder fallback（无 key）",
+        "change_id": "CHG-H001",
+        "phase": "03-coding",
+        "status": "done",
+        "priority": "P2",
+        "wave": 4,
+        "assignee": "P3",
+        "executor": "cx",
+        "skill": "tdd",
+        "depends_on": [
+          "H-006"
+        ],
+        "gates": [],
+        "artifact": "archive/demo-v0.2/server.js",
+        "estimate_h": 0.5,
+        "due": null,
+        "tags": [
+          "harness",
+          "dialogue"
+        ],
+        "parallel_ok": true,
+        "optional": false,
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
+        "execIcon": "🤖CX",
+        "optionalBadge": "",
+        "ready": false,
+        "phaseLabel": "03 编码",
+        "github": {
+          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/server.js",
+          "change": null,
+          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+        }
+      },
+      {
+        "id": "H-012",
+        "title": "Live index fate overlay + era-snippets fallback",
+        "change_id": "CHG-H001",
+        "phase": "03-coding",
+        "status": "done",
+        "priority": "P1",
+        "wave": 4,
+        "assignee": "P3",
+        "executor": "cx",
+        "skill": "frontend-ui-engineering",
+        "depends_on": [
+          "H-009",
+          "H-010"
+        ],
+        "gates": [],
+        "artifact": "archive/demo-v0.2/public/index.html",
+        "estimate_h": 1.5,
+        "due": null,
+        "tags": [
+          "harness",
+          "fate",
+          "visual"
+        ],
+        "parallel_ok": true,
+        "optional": false,
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
+        "execIcon": "🤖CX",
+        "optionalBadge": "",
+        "ready": false,
+        "phaseLabel": "03 编码",
+        "github": {
+          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/public/index.html",
+          "change": null,
+          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+        }
+      },
+      {
         "id": "T-025",
         "title": "第二条 golden 大纲",
         "change_id": "CHG-002",
         "phase": "backlog",
-        "status": "todo",
+        "status": "done",
         "priority": "P1",
         "wave": 5,
         "assignee": "P2",
@@ -5161,7 +3242,9 @@
         ],
         "parallel_ok": true,
         "optional": true,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "◇",
         "ready": false,
@@ -5177,7 +3260,7 @@
         "title": "多 run 对比模板 + 首表",
         "change_id": "CHG-003",
         "phase": "backlog",
-        "status": "todo",
+        "status": "done",
         "priority": "P1",
         "wave": 5,
         "assignee": "P4",
@@ -5195,7 +3278,9 @@
         ],
         "parallel_ok": true,
         "optional": true,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤+🤖",
         "optionalBadge": "◇",
         "ready": false,
@@ -5211,7 +3296,7 @@
         "title": "Persona prompt 变体 ×3",
         "change_id": null,
         "phase": "backlog",
-        "status": "todo",
+        "status": "done",
         "priority": "P2",
         "wave": null,
         "assignee": "P2",
@@ -5228,10 +3313,12 @@
         ],
         "parallel_ok": true,
         "optional": true,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "◇",
-        "ready": true,
+        "ready": false,
         "phaseLabel": "Backlog",
         "github": {
           "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/02-prompt-experiments-log.md",
@@ -5244,7 +3331,7 @@
         "title": "Beats 节奏示例 ×2",
         "change_id": null,
         "phase": "backlog",
-        "status": "todo",
+        "status": "done",
         "priority": "P2",
         "wave": null,
         "assignee": "P2",
@@ -5261,10 +3348,12 @@
         ],
         "parallel_ok": true,
         "optional": true,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "◇",
-        "ready": true,
+        "ready": false,
         "phaseLabel": "Backlog",
         "github": {
           "artifact": null,
@@ -5277,7 +3366,7 @@
         "title": "Dialogue bad/good 对照表",
         "change_id": null,
         "phase": "backlog",
-        "status": "todo",
+        "status": "done",
         "priority": "P2",
         "wave": null,
         "assignee": "P2",
@@ -5294,10 +3383,12 @@
         ],
         "parallel_ok": true,
         "optional": true,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "◇",
-        "ready": true,
+        "ready": false,
         "phaseLabel": "Backlog",
         "github": {
           "artifact": null,
@@ -5310,7 +3401,7 @@
         "title": "story-review 空白抽检表",
         "change_id": null,
         "phase": "backlog",
-        "status": "todo",
+        "status": "done",
         "priority": "P2",
         "wave": null,
         "assignee": "P4",
@@ -5327,10 +3418,12 @@
         ],
         "parallel_ok": true,
         "optional": true,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "◇",
-        "ready": true,
+        "ready": false,
         "phaseLabel": "Backlog",
         "github": {
           "artifact": null,
@@ -5343,7 +3436,7 @@
         "title": "对外 5min 话术",
         "change_id": null,
         "phase": "backlog",
-        "status": "todo",
+        "status": "done",
         "priority": "P2",
         "wave": null,
         "assignee": "P1",
@@ -5359,10 +3452,12 @@
         ],
         "parallel_ok": true,
         "optional": true,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "◇",
-        "ready": true,
+        "ready": false,
         "phaseLabel": "Backlog",
         "github": {
           "artifact": null,
@@ -5375,7 +3470,7 @@
         "title": "eval warn 决策树",
         "change_id": null,
         "phase": "backlog",
-        "status": "todo",
+        "status": "done",
         "priority": "P2",
         "wave": null,
         "assignee": "P4",
@@ -5392,10 +3487,12 @@
         ],
         "parallel_ok": true,
         "optional": true,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "◇",
-        "ready": true,
+        "ready": false,
         "phaseLabel": "Backlog",
         "github": {
           "artifact": null,
@@ -5428,6 +3525,10 @@
       {
         "wave": "5",
         "desc": "可选增强 backlog"
+      },
+      {
+        "wave": "4h",
+        "desc": "Harness 持续迭代（Wave 4 loop）"
       }
     ],
     "gates": [
@@ -5499,14 +3600,14 @@
       "phase": "requirements",
       "assignee": "P1",
       "blocked": false,
-      "taskProgress": "0/4",
+      "taskProgress": "3/4",
       "tasks": [
         {
           "id": "T-001",
           "title": "Kickoff：五人角色与本周目标",
           "change_id": "INFRA-001",
           "phase": "01-requirements",
-          "status": "in_progress",
+          "status": "done",
           "priority": "P0",
           "wave": 0,
           "assignee": "P1",
@@ -5523,7 +3624,9 @@
           ],
           "parallel_ok": true,
           "optional": false,
-          "statusIcon": "🟡",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤",
           "optionalBadge": "",
           "ready": false,
@@ -5572,7 +3675,7 @@
           "title": "确认 CC / Codex 分工与分支策略",
           "change_id": "INFRA-001",
           "phase": "01-requirements",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 0,
           "assignee": "P3",
@@ -5589,10 +3692,12 @@
           ],
           "parallel_ok": true,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤",
           "optionalBadge": "",
-          "ready": true,
+          "ready": false,
           "phaseLabel": "01 需求",
           "github": {
             "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/team-roster.md#Agent账号",
@@ -5605,7 +3710,7 @@
           "title": "更新 roster + 各 CHG assignee",
           "change_id": "INFRA-001",
           "phase": "06-progress",
-          "status": "todo",
+          "status": "done",
           "priority": "P1",
           "wave": 1,
           "assignee": "P5",
@@ -5623,7 +3728,9 @@
           ],
           "parallel_ok": true,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤",
           "optionalBadge": "",
           "ready": false,
@@ -5637,12 +3744,28 @@
       ],
       "checklist": [
         {
+          "done": true,
+          "text": "Kickoff 议程占位 → [`kickoff-agenda-T001.md`](../../kickoff-agenda-T001.md)"
+        },
+        {
           "done": false,
           "text": "team-roster.md 填真名"
         },
         {
+          "done": true,
+          "text": "Agent 分支策略占位 → [`agent-branch-strategy.md`](../../agent-branch-strategy.md)"
+        },
+        {
+          "done": true,
+          "text": "CHG assignee 占位 → [`team-roster.md`](../../team-roster.md#chg-负责人t-009-占位)"
+        },
+        {
+          "done": true,
+          "text": "共读清单占位 → [`reading-checklist-T002.md`](../../reading-checklist-T002.md)"
+        },
+        {
           "done": false,
-          "text": "CC / Codex 账号与分支策略（D4）"
+          "text": "CC / Codex 账号与分支策略 **人签**（T-003）"
         },
         {
           "done": false,
@@ -5662,7 +3785,7 @@
       "phase": "dev-testing",
       "assignee": "P5",
       "blocked": false,
-      "taskProgress": "1/4",
+      "taskProgress": "3/4",
       "tasks": [
         {
           "id": "T-005",
@@ -5702,7 +3825,7 @@
           "title": "Corpus gap 扫描",
           "change_id": "CHG-000",
           "phase": "06-progress",
-          "status": "todo",
+          "status": "done",
           "priority": "P1",
           "wave": 1,
           "assignee": "P3",
@@ -5718,10 +3841,12 @@
           ],
           "parallel_ok": true,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "🤖CC",
           "optionalBadge": "",
-          "ready": true,
+          "ready": false,
           "phaseLabel": "06 进度",
           "github": {
             "artifact": null,
@@ -5768,7 +3893,7 @@
           "title": "skills sync + manifest 核对",
           "change_id": "CHG-000",
           "phase": "06-progress",
-          "status": "todo",
+          "status": "done",
           "priority": "P2",
           "wave": null,
           "assignee": "P5",
@@ -5785,10 +3910,12 @@
           ],
           "parallel_ok": true,
           "optional": true,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤",
           "optionalBadge": "◇",
-          "ready": true,
+          "ready": false,
           "phaseLabel": "06 进度",
           "github": {
             "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/skills/skills-lock.json",
@@ -5819,6 +3946,14 @@
           "text": "npm test 7/7"
         },
         {
+          "done": true,
+          "text": "Corpus gap 扫描 → [`corpus-gap-scan.md`](../../corpus-gap-scan.md)"
+        },
+        {
+          "done": true,
+          "text": "入口确认签字表 → [`gates/T-023-corpus-entry-signoff.md`](gates/T-023-corpus-entry-signoff.md)"
+        },
+        {
           "done": false,
           "text": "P1 确认 corpus 为唯一入口（Wave 0）"
         }
@@ -5829,10 +3964,10 @@
       "title": "P0 三项迁移",
       "summary": "memory 检索 · reflection · intervention re-plan",
       "url": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-001-p0-migration/progress.md",
-      "phase": "requirements",
+      "phase": "dev-testing",
       "assignee": "P3",
       "blocked": false,
-      "taskProgress": "0/16",
+      "taskProgress": "11/16",
       "tasks": [
         {
           "id": "T-004",
@@ -5876,7 +4011,7 @@
           "title": "复读线红线清单（6 条质量标准）",
           "change_id": "CHG-001",
           "phase": "01-requirements",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 1,
           "assignee": "P2",
@@ -5896,7 +4031,9 @@
           ],
           "parallel_ok": true,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤",
           "optionalBadge": "",
           "ready": false,
@@ -5912,7 +4049,7 @@
           "title": "Eval rubric 与 golden 字段对齐",
           "change_id": "CHG-001",
           "phase": "04-dev-testing",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 1,
           "assignee": "P4",
@@ -5930,7 +4067,9 @@
           ],
           "parallel_ok": true,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤",
           "optionalBadge": "",
           "ready": false,
@@ -5946,7 +4085,7 @@
           "title": "P0 需求写入 02/03 文档",
           "change_id": "CHG-001",
           "phase": "01-requirements",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 2,
           "assignee": "P2",
@@ -5966,7 +4105,9 @@
           ],
           "parallel_ok": false,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤",
           "optionalBadge": "",
           "ready": false,
@@ -5982,7 +4123,7 @@
           "title": "P0 技术方案文档",
           "change_id": "CHG-001",
           "phase": "02-design",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 2,
           "assignee": "P3",
@@ -6003,7 +4144,9 @@
           ],
           "parallel_ok": false,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "🤖CC",
           "optionalBadge": "",
           "ready": false,
@@ -6019,7 +4162,7 @@
           "title": "P0 实现计划（writing-plans）",
           "change_id": "CHG-001",
           "phase": "02-design",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 2,
           "assignee": "P3",
@@ -6038,7 +4181,9 @@
           ],
           "parallel_ok": false,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "🤖CC",
           "optionalBadge": "",
           "ready": false,
@@ -6078,7 +4223,7 @@
           "statusIcon": "⬜",
           "execIcon": "👤",
           "optionalBadge": "",
-          "ready": false,
+          "ready": true,
           "phaseLabel": "02 方案",
           "github": {
             "artifact": null,
@@ -6091,7 +4236,7 @@
           "title": "实现 memory 检索",
           "change_id": "CHG-001",
           "phase": "03-coding",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 3,
           "assignee": "P3",
@@ -6111,7 +4256,9 @@
           ],
           "parallel_ok": true,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "🤖CX",
           "optionalBadge": "",
           "ready": false,
@@ -6127,7 +4274,7 @@
           "title": "实现 reflection 步骤",
           "change_id": "CHG-001",
           "phase": "03-coding",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 3,
           "assignee": "P3",
@@ -6147,7 +4294,9 @@
           ],
           "parallel_ok": true,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "🤖CX",
           "optionalBadge": "",
           "ready": false,
@@ -6163,7 +4312,7 @@
           "title": "intervention re-plan prompt（人写）+ Codex 接线",
           "change_id": "CHG-001",
           "phase": "03-coding",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 3,
           "assignee": "P2",
@@ -6187,7 +4336,9 @@
           ],
           "parallel_ok": false,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤+🤖",
           "optionalBadge": "",
           "ready": false,
@@ -6227,7 +4378,7 @@
           "statusIcon": "⬜",
           "execIcon": "👤",
           "optionalBadge": "",
-          "ready": false,
+          "ready": true,
           "phaseLabel": "03 编码",
           "github": {
             "artifact": null,
@@ -6240,7 +4391,7 @@
           "title": "合并 + npm test 全绿",
           "change_id": "CHG-001",
           "phase": "04-dev-testing",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 3,
           "assignee": "P5",
@@ -6260,7 +4411,9 @@
           ],
           "parallel_ok": false,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "🤖CX",
           "optionalBadge": "",
           "ready": false,
@@ -6276,7 +4429,7 @@
           "title": "Golden 复读线 eval 回归",
           "change_id": "CHG-001",
           "phase": "04-dev-testing",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 4,
           "assignee": "P4",
@@ -6294,7 +4447,9 @@
           ],
           "parallel_ok": true,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "🤖CX",
           "optionalBadge": "",
           "ready": false,
@@ -6334,7 +4489,7 @@
           "statusIcon": "⬜",
           "execIcon": "👤",
           "optionalBadge": "",
-          "ready": false,
+          "ready": true,
           "phaseLabel": "05 QA",
           "github": {
             "artifact": null,
@@ -6347,7 +4502,7 @@
           "title": "Prompt 实验日志合并有效变体",
           "change_id": "CHG-001",
           "phase": "06-progress",
-          "status": "todo",
+          "status": "done",
           "priority": "P1",
           "wave": 4,
           "assignee": "P2",
@@ -6365,7 +4520,9 @@
           ],
           "parallel_ok": true,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤",
           "optionalBadge": "",
           "ready": false,
@@ -6417,27 +4574,47 @@
       "checklist": [
         {
           "done": false,
-          "text": "P1 批准 P0 scope（Wave 0.4）"
+          "text": "P1 批准 P0 scope（Wave 0.4）· Gate G0"
+        },
+        {
+          "done": true,
+          "text": "P2 复读线红线清单 → [`复读线.md`](../../../fixtures/golden-stories/复读线.md) §不可退让"
+        },
+        {
+          "done": true,
+          "text": "[`02-p0-memory-reflection-replan.md`](../../../02-technical-design/02-p0-memory-reflection-replan.md)"
+        },
+        {
+          "done": true,
+          "text": "[`2026-06-14-p0-implementation.md`](../../../docs/plans/2026-06-14-p0-implementation.md)"
+        },
+        {
+          "done": true,
+          "text": "`memory-retrieval.js` + `memoryFromYear` type"
+        },
+        {
+          "done": true,
+          "text": "`fate-bridge.js` + `beats-replan.js`（placeholder）"
+        },
+        {
+          "done": true,
+          "text": "`buildInterventionReplanPrompt` 占位"
+        },
+        {
+          "done": true,
+          "text": "npm test **14/14**"
         },
         {
           "done": false,
-          "text": "P2 复读线红线清单"
+          "text": "T-017 Code Review · Gate G3 人签 → [`04-p0-code-review-checklist.md`](../../../05-qa-testing/04-p0-code-review-checklist.md)"
         },
         {
           "done": false,
-          "text": "`02-technical-design/02-p0-memory-reflection-replan.md`"
+          "text": "T-020 Live 抽检 → [`05-live-profile-spotcheck.md`](../../../05-qa-testing/05-live-profile-spotcheck.md)"
         },
         {
-          "done": false,
-          "text": "`docs/plans/2026-06-14-p0-implementation.md`"
-        },
-        {
-          "done": false,
-          "text": "lib 实现 + npm test"
-        },
-        {
-          "done": false,
-          "text": "story-review 人审"
+          "done": true,
+          "text": "Gate 签字表占位 → [`gates/`](gates/)"
         }
       ]
     },
@@ -6446,17 +4623,17 @@
       "title": "Visual 复读线",
       "summary": "叙事 v2 · 像素素材 · Phaser · 7 年 layout",
       "url": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
-      "phase": "01-requirements",
+      "phase": "dev-testing",
       "assignee": "P2",
       "blocked": false,
-      "taskProgress": "0/8",
+      "taskProgress": "7/8",
       "tasks": [
         {
           "id": "V-001",
           "title": "复读线叙事 v2 改稿（visual_anchor + props）",
           "change_id": "CHG-V001",
           "phase": "01-requirements",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 1,
           "assignee": "P2",
@@ -6475,10 +4652,12 @@
           ],
           "parallel_ok": true,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤",
           "optionalBadge": "",
-          "ready": true,
+          "ready": false,
           "phaseLabel": "01 需求",
           "github": {
             "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/stories/fuxduxian/narrative-draft-v2.md",
@@ -6491,7 +4670,7 @@
           "title": "像素素材寻源（不用旧 zip，优质免费库）",
           "change_id": "CHG-V001",
           "phase": "01-requirements",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 1,
           "assignee": "P5",
@@ -6507,10 +4686,12 @@
           ],
           "parallel_ok": true,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤",
           "optionalBadge": "",
-          "ready": true,
+          "ready": false,
           "phaseLabel": "01 需求",
           "github": {
             "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/registry/assets.csv",
@@ -6523,7 +4704,7 @@
           "title": "10–20 审美标杆案例入库",
           "change_id": "CHG-V001",
           "phase": "05-qa",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 1,
           "assignee": "P2",
@@ -6541,7 +4722,9 @@
           ],
           "parallel_ok": false,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤",
           "optionalBadge": "",
           "ready": false,
@@ -6557,7 +4740,7 @@
           "title": "Phaser engine 脚手架（读 layout JSON）",
           "change_id": "CHG-V001",
           "phase": "03-coding",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 2,
           "assignee": "P3",
@@ -6573,10 +4756,12 @@
           ],
           "parallel_ok": true,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "🤖CX",
           "optionalBadge": "",
-          "ready": true,
+          "ready": false,
           "phaseLabel": "03 编码",
           "github": {
             "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/engine/",
@@ -6589,7 +4774,7 @@
           "title": "AI 生成 7 年 layout JSON",
           "change_id": "CHG-V001",
           "phase": "02-design",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 2,
           "assignee": "P3",
@@ -6610,7 +4795,9 @@
           ],
           "parallel_ok": false,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "🤖CC",
           "optionalBadge": "",
           "ready": false,
@@ -6626,7 +4813,7 @@
           "title": "7 特殊场景 + 7 日常动画人审",
           "change_id": "CHG-V001",
           "phase": "05-qa",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 3,
           "assignee": "P2",
@@ -6645,7 +4832,9 @@
           ],
           "parallel_ok": false,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤",
           "optionalBadge": "",
           "ready": false,
@@ -6661,7 +4850,7 @@
           "title": "挂进 Shadow 体验流程（A/B/C 触发）",
           "change_id": "CHG-V001",
           "phase": "03-coding",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 3,
           "assignee": "P3",
@@ -6679,7 +4868,9 @@
           ],
           "parallel_ok": false,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "🤖CX",
           "optionalBadge": "",
           "ready": false,
@@ -6718,7 +4909,7 @@
           "statusIcon": "⬜",
           "execIcon": "👤+🤖",
           "optionalBadge": "",
-          "ready": false,
+          "ready": true,
           "phaseLabel": "04 自测",
           "github": {
             "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/fixtures/golden-stories/复读线.json",
@@ -6733,24 +4924,558 @@
           "text": "visual/ 模块骨架"
         },
         {
-          "done": false,
-          "text": "narrative-draft-v2.md（P2）"
+          "done": true,
+          "text": "12 审美标杆 CASE → [`references/aesthetic-cases.md`](../../visual/references/aesthetic-cases.md)"
+        },
+        {
+          "done": true,
+          "text": "Phaser engine 脚手架 → [`visual/engine/`](../../visual/engine/)"
+        },
+        {
+          "done": true,
+          "text": "7× layout.json draft → [`visual/scenes/fuxduxian/`](../../visual/scenes/fuxduxian/)"
+        },
+        {
+          "done": true,
+          "text": "[`assets.csv`](../../visual/registry/assets.csv) 30 行占位 PX-PH-*"
+        },
+        {
+          "done": true,
+          "text": "[`asset-sourcing-guide.md`](../../visual/registry/asset-sourcing-guide.md)（V-002 占位）"
+        },
+        {
+          "done": true,
+          "text": "静态 demo overlay → `docs/demo-visual.js`"
+        },
+        {
+          "done": true,
+          "text": "[`visual-review-checklist.md`](../../visual/stories/fuxduxian/visual-review-checklist.md)（V-006 占位）"
+        },
+        {
+          "done": true,
+          "text": "[`v2-to-golden-sync.md`](../../visual/stories/fuxduxian/v2-to-golden-sync.md)（V-008 占位）"
         },
         {
           "done": false,
-          "text": "assets.csv 30+ 行"
+          "text": "narrative-draft-v2.md 终稿（P2）"
         },
         {
           "done": false,
-          "text": "aesthetic-cases 10+"
+          "text": "真实素材替换 PX-PH-*"
         },
         {
           "done": false,
-          "text": "7× layout.json"
+          "text": "G-N1 人审 → layout `approved`"
+        }
+      ]
+    },
+    {
+      "id": "CHG-H001",
+      "title": "Harness Wave 4 closed loop",
+      "summary": "静态 demo v2 · smoke · eval visual · 文档对齐",
+      "url": null,
+      "phase": "qa-testing",
+      "assignee": "P3",
+      "blocked": false,
+      "taskProgress": "12/12",
+      "tasks": [
+        {
+          "id": "H-001",
+          "title": "静态 demo 挂 v2 visual 字段",
+          "change_id": "CHG-H001",
+          "phase": "03-coding",
+          "status": "done",
+          "priority": "P1",
+          "wave": 4,
+          "assignee": "P3",
+          "executor": "cx",
+          "skill": "incremental-implementation",
+          "depends_on": [],
+          "gates": [],
+          "artifact": "docs/demo-data.js",
+          "estimate_h": 1,
+          "due": null,
+          "tags": [
+            "harness",
+            "demo"
+          ],
+          "parallel_ok": true,
+          "optional": false,
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
+          "execIcon": "🤖CX",
+          "optionalBadge": "",
+          "ready": false,
+          "phaseLabel": "03 编码",
+          "github": {
+            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/docs/demo-data.js",
+            "change": null,
+            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+          }
         },
         {
-          "done": false,
-          "text": "Phaser engine 最小可播"
+          "id": "H-002",
+          "title": "Live harness smoke 测试",
+          "change_id": "CHG-H001",
+          "phase": "04-dev-testing",
+          "status": "done",
+          "priority": "P1",
+          "wave": 4,
+          "assignee": "P3",
+          "executor": "cx",
+          "skill": "tdd",
+          "depends_on": [
+            "H-001"
+          ],
+          "gates": [],
+          "artifact": "archive/demo-v0.2/test/harness-smoke.test.js",
+          "estimate_h": 1,
+          "due": null,
+          "tags": [
+            "harness",
+            "test"
+          ],
+          "parallel_ok": true,
+          "optional": false,
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
+          "execIcon": "🤖CX",
+          "optionalBadge": "",
+          "ready": false,
+          "phaseLabel": "04 自测",
+          "github": {
+            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/test/harness-smoke.test.js",
+            "change": null,
+            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+          }
+        },
+        {
+          "id": "H-003",
+          "title": "Evaluator visual 一致性 warn",
+          "change_id": "CHG-H001",
+          "phase": "04-dev-testing",
+          "status": "done",
+          "priority": "P2",
+          "wave": 4,
+          "assignee": "P3",
+          "executor": "cx",
+          "skill": "tdd",
+          "depends_on": [],
+          "gates": [],
+          "artifact": "archive/demo-v0.2/lib/evaluator.js",
+          "estimate_h": 0.5,
+          "due": null,
+          "tags": [
+            "harness",
+            "eval"
+          ],
+          "parallel_ok": true,
+          "optional": false,
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
+          "execIcon": "🤖CX",
+          "optionalBadge": "",
+          "ready": false,
+          "phaseLabel": "04 自测",
+          "github": {
+            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/lib/evaluator.js",
+            "change": null,
+            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+          }
+        },
+        {
+          "id": "H-004",
+          "title": "Harness loop 文档路径对齐",
+          "change_id": "CHG-H001",
+          "phase": "06-progress",
+          "status": "done",
+          "priority": "P2",
+          "wave": 4,
+          "assignee": "P5",
+          "executor": "cx",
+          "skill": "harness-init",
+          "depends_on": [],
+          "gates": [],
+          "artifact": "02-technical-design/01-shadow-harness-loop.md",
+          "estimate_h": 0.5,
+          "due": null,
+          "tags": [
+            "harness",
+            "docs"
+          ],
+          "parallel_ok": true,
+          "optional": false,
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
+          "execIcon": "🤖CX",
+          "optionalBadge": "",
+          "ready": false,
+          "phaseLabel": "06 进度",
+          "github": {
+            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/02-technical-design/01-shadow-harness-loop.md",
+            "change": null,
+            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+          }
+        },
+        {
+          "id": "H-005",
+          "title": "harness:smoke CLI 脚本",
+          "change_id": "CHG-H001",
+          "phase": "04-dev-testing",
+          "status": "done",
+          "priority": "P1",
+          "wave": 4,
+          "assignee": "P3",
+          "executor": "cx",
+          "skill": "tdd",
+          "depends_on": [
+            "H-002"
+          ],
+          "gates": [],
+          "artifact": "tooling/scripts/harness-live-smoke.mjs",
+          "estimate_h": 0.5,
+          "due": null,
+          "tags": [
+            "harness",
+            "smoke"
+          ],
+          "parallel_ok": true,
+          "optional": false,
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
+          "execIcon": "🤖CX",
+          "optionalBadge": "",
+          "ready": false,
+          "phaseLabel": "04 自测",
+          "github": {
+            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tooling/scripts/harness-live-smoke.mjs",
+            "change": null,
+            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+          }
+        },
+        {
+          "id": "H-006",
+          "title": "Dialogue hook 契约 + 测试",
+          "change_id": "CHG-H001",
+          "phase": "04-dev-testing",
+          "status": "done",
+          "priority": "P1",
+          "wave": 4,
+          "assignee": "P3",
+          "executor": "cx",
+          "skill": "tdd",
+          "depends_on": [
+            "H-002"
+          ],
+          "gates": [],
+          "artifact": "archive/demo-v0.2/lib/dialogue-hook.js",
+          "estimate_h": 1,
+          "due": null,
+          "tags": [
+            "harness",
+            "dialogue"
+          ],
+          "parallel_ok": true,
+          "optional": false,
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
+          "execIcon": "🤖CX",
+          "optionalBadge": "",
+          "ready": false,
+          "phaseLabel": "04 自测",
+          "github": {
+            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/lib/dialogue-hook.js",
+            "change": null,
+            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+          }
+        },
+        {
+          "id": "H-007",
+          "title": "Phaser layout 预览页（docs/demo-phaser）",
+          "change_id": "CHG-H001",
+          "phase": "03-coding",
+          "status": "done",
+          "priority": "P2",
+          "wave": 4,
+          "assignee": "P3",
+          "executor": "cx",
+          "skill": "frontend-ui-engineering",
+          "depends_on": [
+            "H-001"
+          ],
+          "gates": [],
+          "artifact": "docs/demo-phaser.html",
+          "estimate_h": 1,
+          "due": null,
+          "tags": [
+            "harness",
+            "visual"
+          ],
+          "parallel_ok": true,
+          "optional": false,
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
+          "execIcon": "🤖CX",
+          "optionalBadge": "",
+          "ready": false,
+          "phaseLabel": "03 编码",
+          "github": {
+            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/docs/demo-phaser.html",
+            "change": null,
+            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+          }
+        },
+        {
+          "id": "H-008",
+          "title": "harness:smoke:full 七年 mock",
+          "change_id": "CHG-H001",
+          "phase": "04-dev-testing",
+          "status": "done",
+          "priority": "P2",
+          "wave": 4,
+          "assignee": "P3",
+          "executor": "cx",
+          "skill": "tdd",
+          "depends_on": [
+            "H-005"
+          ],
+          "gates": [],
+          "artifact": "tooling/scripts/harness-live-smoke.mjs",
+          "estimate_h": 0.5,
+          "due": null,
+          "tags": [
+            "harness",
+            "smoke"
+          ],
+          "parallel_ok": true,
+          "optional": false,
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
+          "execIcon": "🤖CX",
+          "optionalBadge": "",
+          "ready": false,
+          "phaseLabel": "04 自测",
+          "github": {
+            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tooling/scripts/harness-live-smoke.mjs",
+            "change": null,
+            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+          }
+        },
+        {
+          "id": "H-009",
+          "title": "Fate hook 契约 + /api/fate/context",
+          "change_id": "CHG-H001",
+          "phase": "04-dev-testing",
+          "status": "done",
+          "priority": "P1",
+          "wave": 4,
+          "assignee": "P3",
+          "executor": "cx",
+          "skill": "tdd",
+          "depends_on": [
+            "H-006"
+          ],
+          "gates": [],
+          "artifact": "archive/demo-v0.2/lib/fate-hook.js",
+          "estimate_h": 1,
+          "due": null,
+          "tags": [
+            "harness",
+            "fate"
+          ],
+          "parallel_ok": true,
+          "optional": false,
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
+          "execIcon": "🤖CX",
+          "optionalBadge": "",
+          "ready": false,
+          "phaseLabel": "04 自测",
+          "github": {
+            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/lib/fate-hook.js",
+            "change": null,
+            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+          }
+        },
+        {
+          "id": "H-010",
+          "title": "archive visual-preview + index 入口",
+          "change_id": "CHG-H001",
+          "phase": "03-coding",
+          "status": "done",
+          "priority": "P2",
+          "wave": 4,
+          "assignee": "P3",
+          "executor": "cx",
+          "skill": "frontend-ui-engineering",
+          "depends_on": [
+            "H-007"
+          ],
+          "gates": [],
+          "artifact": "archive/demo-v0.2/public/visual-preview.html",
+          "estimate_h": 1,
+          "due": null,
+          "tags": [
+            "harness",
+            "visual"
+          ],
+          "parallel_ok": true,
+          "optional": false,
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
+          "execIcon": "🤖CX",
+          "optionalBadge": "",
+          "ready": false,
+          "phaseLabel": "03 编码",
+          "github": {
+            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/public/visual-preview.html",
+            "change": null,
+            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+          }
+        },
+        {
+          "id": "H-011",
+          "title": "Dialogue API placeholder fallback（无 key）",
+          "change_id": "CHG-H001",
+          "phase": "03-coding",
+          "status": "done",
+          "priority": "P2",
+          "wave": 4,
+          "assignee": "P3",
+          "executor": "cx",
+          "skill": "tdd",
+          "depends_on": [
+            "H-006"
+          ],
+          "gates": [],
+          "artifact": "archive/demo-v0.2/server.js",
+          "estimate_h": 0.5,
+          "due": null,
+          "tags": [
+            "harness",
+            "dialogue"
+          ],
+          "parallel_ok": true,
+          "optional": false,
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
+          "execIcon": "🤖CX",
+          "optionalBadge": "",
+          "ready": false,
+          "phaseLabel": "03 编码",
+          "github": {
+            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/server.js",
+            "change": null,
+            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+          }
+        },
+        {
+          "id": "H-012",
+          "title": "Live index fate overlay + era-snippets fallback",
+          "change_id": "CHG-H001",
+          "phase": "03-coding",
+          "status": "done",
+          "priority": "P1",
+          "wave": 4,
+          "assignee": "P3",
+          "executor": "cx",
+          "skill": "frontend-ui-engineering",
+          "depends_on": [
+            "H-009",
+            "H-010"
+          ],
+          "gates": [],
+          "artifact": "archive/demo-v0.2/public/index.html",
+          "estimate_h": 1.5,
+          "due": null,
+          "tags": [
+            "harness",
+            "fate",
+            "visual"
+          ],
+          "parallel_ok": true,
+          "optional": false,
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
+          "execIcon": "🤖CX",
+          "optionalBadge": "",
+          "ready": false,
+          "phaseLabel": "03 编码",
+          "github": {
+            "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/public/index.html",
+            "change": null,
+            "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+          }
+        }
+      ],
+      "checklist": [
+        {
+          "done": true,
+          "text": "Wave 4 迭代计划"
+        },
+        {
+          "done": true,
+          "text": "harness-iteration-log.md"
+        },
+        {
+          "done": true,
+          "text": "H-001 静态 demo v2 视觉"
+        },
+        {
+          "done": true,
+          "text": "H-002 Live smoke 测试（16 tests）"
+        },
+        {
+          "done": true,
+          "text": "H-003 Evaluator visual 一致性"
+        },
+        {
+          "done": true,
+          "text": "H-004 Harness loop 文档对齐"
+        },
+        {
+          "done": true,
+          "text": "H-005 `npm run harness:smoke`"
+        },
+        {
+          "done": true,
+          "text": "H-006 `dialogue-hook.js` + 契约测试"
+        },
+        {
+          "done": true,
+          "text": "H-007 `docs/demo-phaser.html`"
+        },
+        {
+          "done": true,
+          "text": "H-008 `npm run harness:smoke:full`"
+        },
+        {
+          "done": true,
+          "text": "H-009 `fate-hook.js` + `/api/fate/context`"
+        },
+        {
+          "done": true,
+          "text": "H-010 archive `visual-preview.html`"
+        },
+        {
+          "done": true,
+          "text": "H-011 Dialogue API placeholder fallback"
+        },
+        {
+          "done": true,
+          "text": "H-012 Live index fate overlay"
         }
       ]
     },
@@ -6762,14 +5487,14 @@
       "phase": "—",
       "assignee": "—",
       "blocked": false,
-      "taskProgress": "0/1",
+      "taskProgress": "1/1",
       "tasks": [
         {
           "id": "T-025",
           "title": "第二条 golden 大纲",
           "change_id": "CHG-002",
           "phase": "backlog",
-          "status": "todo",
+          "status": "done",
           "priority": "P1",
           "wave": 5,
           "assignee": "P2",
@@ -6788,7 +5513,9 @@
           ],
           "parallel_ok": true,
           "optional": true,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤",
           "optionalBadge": "◇",
           "ready": false,
@@ -6810,14 +5537,14 @@
       "phase": "—",
       "assignee": "—",
       "blocked": false,
-      "taskProgress": "0/1",
+      "taskProgress": "1/1",
       "tasks": [
         {
           "id": "T-024",
           "title": "多 run 对比模板 + 首表",
           "change_id": "CHG-003",
           "phase": "backlog",
-          "status": "todo",
+          "status": "done",
           "priority": "P1",
           "wave": 5,
           "assignee": "P4",
@@ -6835,7 +5562,9 @@
           ],
           "parallel_ok": true,
           "optional": true,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤+🤖",
           "optionalBadge": "◇",
           "ready": false,
@@ -6856,9 +5585,9 @@
     "gate": "G-N1",
     "gateNote": "叙事 v2 签字前 layout 均为 draft",
     "stats": {
-      "total": 8,
-      "done": 0,
-      "ready": 3
+      "total": 11,
+      "done": 10,
+      "ready": 1
     },
     "tasks": [
       {
@@ -6866,7 +5595,7 @@
         "title": "复读线叙事 v2 改稿（visual_anchor + props）",
         "change_id": "CHG-V001",
         "phase": "01-requirements",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 1,
         "assignee": "P2",
@@ -6885,10 +5614,12 @@
         ],
         "parallel_ok": true,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "",
-        "ready": true,
+        "ready": false,
         "phaseLabel": "01 需求",
         "github": {
           "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/stories/fuxduxian/narrative-draft-v2.md",
@@ -6901,7 +5632,7 @@
         "title": "像素素材寻源（不用旧 zip，优质免费库）",
         "change_id": "CHG-V001",
         "phase": "01-requirements",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 1,
         "assignee": "P5",
@@ -6917,10 +5648,12 @@
         ],
         "parallel_ok": true,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "",
-        "ready": true,
+        "ready": false,
         "phaseLabel": "01 需求",
         "github": {
           "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/registry/assets.csv",
@@ -6933,7 +5666,7 @@
         "title": "10–20 审美标杆案例入库",
         "change_id": "CHG-V001",
         "phase": "05-qa",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 1,
         "assignee": "P2",
@@ -6951,7 +5684,9 @@
         ],
         "parallel_ok": false,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "",
         "ready": false,
@@ -6967,7 +5702,7 @@
         "title": "Phaser engine 脚手架（读 layout JSON）",
         "change_id": "CHG-V001",
         "phase": "03-coding",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 2,
         "assignee": "P3",
@@ -6983,10 +5718,12 @@
         ],
         "parallel_ok": true,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "🤖CX",
         "optionalBadge": "",
-        "ready": true,
+        "ready": false,
         "phaseLabel": "03 编码",
         "github": {
           "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/engine/",
@@ -6999,7 +5736,7 @@
         "title": "AI 生成 7 年 layout JSON",
         "change_id": "CHG-V001",
         "phase": "02-design",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 2,
         "assignee": "P3",
@@ -7020,7 +5757,9 @@
         ],
         "parallel_ok": false,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "🤖CC",
         "optionalBadge": "",
         "ready": false,
@@ -7036,7 +5775,7 @@
         "title": "7 特殊场景 + 7 日常动画人审",
         "change_id": "CHG-V001",
         "phase": "05-qa",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 3,
         "assignee": "P2",
@@ -7055,7 +5794,9 @@
         ],
         "parallel_ok": false,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "👤",
         "optionalBadge": "",
         "ready": false,
@@ -7071,7 +5812,7 @@
         "title": "挂进 Shadow 体验流程（A/B/C 触发）",
         "change_id": "CHG-V001",
         "phase": "03-coding",
-        "status": "todo",
+        "status": "done",
         "priority": "P0",
         "wave": 3,
         "assignee": "P3",
@@ -7089,7 +5830,9 @@
         ],
         "parallel_ok": false,
         "optional": false,
-        "statusIcon": "⬜",
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
         "execIcon": "🤖CX",
         "optionalBadge": "",
         "ready": false,
@@ -7128,11 +5871,124 @@
         "statusIcon": "⬜",
         "execIcon": "👤+🤖",
         "optionalBadge": "",
-        "ready": false,
+        "ready": true,
         "phaseLabel": "04 自测",
         "github": {
           "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/fixtures/golden-stories/复读线.json",
           "change": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/changes/CHG-V001-visual-fuxduxian/progress.md",
+          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+        }
+      },
+      {
+        "id": "H-007",
+        "title": "Phaser layout 预览页（docs/demo-phaser）",
+        "change_id": "CHG-H001",
+        "phase": "03-coding",
+        "status": "done",
+        "priority": "P2",
+        "wave": 4,
+        "assignee": "P3",
+        "executor": "cx",
+        "skill": "frontend-ui-engineering",
+        "depends_on": [
+          "H-001"
+        ],
+        "gates": [],
+        "artifact": "docs/demo-phaser.html",
+        "estimate_h": 1,
+        "due": null,
+        "tags": [
+          "harness",
+          "visual"
+        ],
+        "parallel_ok": true,
+        "optional": false,
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
+        "execIcon": "🤖CX",
+        "optionalBadge": "",
+        "ready": false,
+        "phaseLabel": "03 编码",
+        "github": {
+          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/docs/demo-phaser.html",
+          "change": null,
+          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+        }
+      },
+      {
+        "id": "H-010",
+        "title": "archive visual-preview + index 入口",
+        "change_id": "CHG-H001",
+        "phase": "03-coding",
+        "status": "done",
+        "priority": "P2",
+        "wave": 4,
+        "assignee": "P3",
+        "executor": "cx",
+        "skill": "frontend-ui-engineering",
+        "depends_on": [
+          "H-007"
+        ],
+        "gates": [],
+        "artifact": "archive/demo-v0.2/public/visual-preview.html",
+        "estimate_h": 1,
+        "due": null,
+        "tags": [
+          "harness",
+          "visual"
+        ],
+        "parallel_ok": true,
+        "optional": false,
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
+        "execIcon": "🤖CX",
+        "optionalBadge": "",
+        "ready": false,
+        "phaseLabel": "03 编码",
+        "github": {
+          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/public/visual-preview.html",
+          "change": null,
+          "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
+        }
+      },
+      {
+        "id": "H-012",
+        "title": "Live index fate overlay + era-snippets fallback",
+        "change_id": "CHG-H001",
+        "phase": "03-coding",
+        "status": "done",
+        "priority": "P1",
+        "wave": 4,
+        "assignee": "P3",
+        "executor": "cx",
+        "skill": "frontend-ui-engineering",
+        "depends_on": [
+          "H-009",
+          "H-010"
+        ],
+        "gates": [],
+        "artifact": "archive/demo-v0.2/public/index.html",
+        "estimate_h": 1.5,
+        "due": null,
+        "tags": [
+          "harness",
+          "fate",
+          "visual"
+        ],
+        "parallel_ok": true,
+        "optional": false,
+        "completed_at": "2026-06-14",
+        "blocked_reason": "",
+        "statusIcon": "✅",
+        "execIcon": "🤖CX",
+        "optionalBadge": "",
+        "ready": false,
+        "phaseLabel": "03 编码",
+        "github": {
+          "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/archive/demo-v0.2/public/index.html",
+          "change": null,
           "registry": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/tasks/registry.json"
         }
       }
@@ -7149,7 +6005,7 @@
           "title": "像素素材寻源（不用旧 zip，优质免费库）",
           "change_id": "CHG-V001",
           "phase": "01-requirements",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 1,
           "assignee": "P5",
@@ -7165,10 +6021,12 @@
           ],
           "parallel_ok": true,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤",
           "optionalBadge": "",
-          "ready": true,
+          "ready": false,
           "phaseLabel": "01 需求",
           "github": {
             "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/registry/assets.csv",
@@ -7195,7 +6053,7 @@
           "title": "10–20 审美标杆案例入库",
           "change_id": "CHG-V001",
           "phase": "05-qa",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 1,
           "assignee": "P2",
@@ -7213,7 +6071,9 @@
           ],
           "parallel_ok": false,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤",
           "optionalBadge": "",
           "ready": false,
@@ -7236,7 +6096,7 @@
           "title": "复读线叙事 v2 改稿（visual_anchor + props）",
           "change_id": "CHG-V001",
           "phase": "01-requirements",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 1,
           "assignee": "P2",
@@ -7255,10 +6115,12 @@
           ],
           "parallel_ok": true,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "👤",
           "optionalBadge": "",
-          "ready": true,
+          "ready": false,
           "phaseLabel": "01 需求",
           "github": {
             "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/stories/fuxduxian/narrative-draft-v2.md",
@@ -7278,7 +6140,7 @@
           "title": "AI 生成 7 年 layout JSON",
           "change_id": "CHG-V001",
           "phase": "02-design",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 2,
           "assignee": "P3",
@@ -7299,7 +6161,9 @@
           ],
           "parallel_ok": false,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "🤖CC",
           "optionalBadge": "",
           "ready": false,
@@ -7329,7 +6193,7 @@
           "title": "Phaser engine 脚手架（读 layout JSON）",
           "change_id": "CHG-V001",
           "phase": "03-coding",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 2,
           "assignee": "P3",
@@ -7345,10 +6209,12 @@
           ],
           "parallel_ok": true,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "🤖CX",
           "optionalBadge": "",
-          "ready": true,
+          "ready": false,
           "phaseLabel": "03 编码",
           "github": {
             "artifact": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/06-task-progress/visual/engine/",
@@ -7368,7 +6234,7 @@
           "title": "挂进 Shadow 体验流程（A/B/C 触发）",
           "change_id": "CHG-V001",
           "phase": "03-coding",
-          "status": "todo",
+          "status": "done",
           "priority": "P0",
           "wave": 3,
           "assignee": "P3",
@@ -7386,7 +6252,9 @@
           ],
           "parallel_ok": false,
           "optional": false,
-          "statusIcon": "⬜",
+          "completed_at": "2026-06-14",
+          "blocked_reason": "",
+          "statusIcon": "✅",
           "execIcon": "🤖CX",
           "optionalBadge": "",
           "ready": false,
@@ -7431,7 +6299,7 @@
         "target": 7
       }
     ],
-    "assetCount": 1,
+    "assetCount": 30,
     "sceneBriefs": [
       {
         "year": "1",
@@ -7548,24 +6416,48 @@
         "text": "visual/ 模块骨架"
       },
       {
-        "done": false,
-        "text": "narrative-draft-v2.md（P2）"
+        "done": true,
+        "text": "12 审美标杆 CASE → [`references/aesthetic-cases.md`](../../visual/references/aesthetic-cases.md)"
+      },
+      {
+        "done": true,
+        "text": "Phaser engine 脚手架 → [`visual/engine/`](../../visual/engine/)"
+      },
+      {
+        "done": true,
+        "text": "7× layout.json draft → [`visual/scenes/fuxduxian/`](../../visual/scenes/fuxduxian/)"
+      },
+      {
+        "done": true,
+        "text": "[`assets.csv`](../../visual/registry/assets.csv) 30 行占位 PX-PH-*"
+      },
+      {
+        "done": true,
+        "text": "[`asset-sourcing-guide.md`](../../visual/registry/asset-sourcing-guide.md)（V-002 占位）"
+      },
+      {
+        "done": true,
+        "text": "静态 demo overlay → `docs/demo-visual.js`"
+      },
+      {
+        "done": true,
+        "text": "[`visual-review-checklist.md`](../../visual/stories/fuxduxian/visual-review-checklist.md)（V-006 占位）"
+      },
+      {
+        "done": true,
+        "text": "[`v2-to-golden-sync.md`](../../visual/stories/fuxduxian/v2-to-golden-sync.md)（V-008 占位）"
       },
       {
         "done": false,
-        "text": "assets.csv 30+ 行"
+        "text": "narrative-draft-v2.md 终稿（P2）"
       },
       {
         "done": false,
-        "text": "aesthetic-cases 10+"
+        "text": "真实素材替换 PX-PH-*"
       },
       {
         "done": false,
-        "text": "7× layout.json"
-      },
-      {
-        "done": false,
-        "text": "Phaser engine 最小可播"
+        "text": "G-N1 人审 → layout `approved`"
       }
     ],
     "links": [
@@ -7674,6 +6566,12 @@
       "path": "archive/demo-v0.2/README.md",
       "run": "npm run dev",
       "url": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/archive/demo-v0.2/README.md"
+    },
+    "staticDemo": {
+      "label": "复读线静态 Demo",
+      "path": "docs/demo.html",
+      "run": "npm run demo:preview，然后打开 http://localhost:5199/demo.html",
+      "url": "./demo.html"
     },
     "manifestUrl": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/MANIFEST.md",
     "agentsUrl": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/AGENTS.md"

@@ -1,0 +1,15 @@
+{
+  "name": "@shadow/visual-engine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shadow Phaser 3 layout loader — V-004",
+  "type": "module",
+  "main": "src/index.mjs",
+  "scripts": {
+    "validate": "node src/validate-layout.mjs",
+    "validate:all": "node src/validate-layout.mjs ../scenes/fuxduxian/year-*.layout.json"
+  },
+  "dependencies": {
+    "phaser": "^3.80.1"
+  }
+}

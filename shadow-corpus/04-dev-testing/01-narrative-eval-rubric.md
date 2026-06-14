@@ -4,6 +4,19 @@
 
 坏例子清单。可用于人工 review、`lib/evaluator.js` 规则、prompt 迭代。
 
+## Golden 字段对照（T-008）
+
+机器验收源：[`fixtures/golden-stories/复读线.json`](../fixtures/golden-stories/复读线.json)
+
+| 域 | 关键字段 | Eval |
+|----|----------|------|
+| 结构 | `beats`(7), `pivotal_years`(2–3) | `beats.*` |
+| 年 | `event`, `intervention_prompt`, `memory_summary` | `year.*` |
+| 记忆 | `memory_stream[].type`, `weight`, `content` | `year.memory_*` |
+| 收尾 | `final.message`, `final.regret` | `final.cliche` |
+
+完整映射见 [`05-qa-testing/03-eval-warn-decision-tree.md`](../05-qa-testing/03-eval-warn-decision-tree.md) 附录。
+
 ## 结构类
 
 | 反模式 | 说明 | Eval code |

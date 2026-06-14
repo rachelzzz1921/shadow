@@ -78,13 +78,34 @@ function normalizeYear(year, { index = 0, startAge = 26, beats = null, pivotalYe
   };
 }
 
+const REFLECTION_QUIET = /接受|够了|安静|不是最好|平稳|字真好看/;
+
+function inferMemoryType(year) {
+  if (year.is_pivotal) return 'decision';
+  const text = `${year.reflection || ''}${year.memory_summary || ''}`;
+  if (REFLECTION_QUIET.test(text)) return 'reflection';
+  return 'event';
+}
+
+function inferMemoryWeight(year, type) {
+  if (type === 'decision') return 0.85;
+  if (type === 'reflection') {
+    if (year.year === 7) return 0.75;
+    return 0.5;
+  }
+  if (year.year === 2) return 0.7;
+  if (year.year === 5) return 0.6;
+  return 0.5;
+}
+
 function memoryFromYear(year) {
+  const type = inferMemoryType(year);
   return {
     id: `m${year.year}`,
     year: year.year,
-    type: year.is_pivotal ? 'decision' : 'event',
+    type,
     content: year.memory_summary,
-    weight: year.is_pivotal ? 0.85 : 0.5
+    weight: inferMemoryWeight(year, type)
   };
 }
 
@@ -117,6 +138,8 @@ function normalizeStory(story, { profile } = {}) {
 
 module.exports = {
   inferStageDetails,
+  inferMemoryType,
+  inferMemoryWeight,
   memoryFromYear,
   normalizeStory,
   normalizeYear,

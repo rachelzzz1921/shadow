@@ -29,6 +29,8 @@ const {
   buildDialoguePrompt
 } = require('./prompts');
 const { createLiveRuntime, pickProvider } = require('./llm-runtime');
+const { selectMemories } = require('./memory-retrieval');
+const { memoryFromYear } = require('./story-contract');
 
 // ------------------------------------------------------------
 // Provider resolution
@@ -134,7 +136,11 @@ async function runYear(input) {
 // Agent 4: final wrap
 // ------------------------------------------------------------
 async function runFinal(input) {
-  const { system, prompt } = buildFinalPrompt(input);
+  const memory_stream = selectMemories(input.memory_stream || [], {
+    limit: 5,
+    at_year: 7
+  });
+  const { system, prompt } = buildFinalPrompt({ ...input, memory_stream });
   return callAgent({
     schema: FinalSchema,
     system,
@@ -148,7 +154,12 @@ async function runFinal(input) {
 // Agent 5: cross-time dialogue
 // ------------------------------------------------------------
 async function runDialogue(input) {
-  const { system, prompt } = buildDialoguePrompt(input);
+  const memory_stream = selectMemories(input.memory_stream || [], {
+    limit: 3,
+    at_year: input.at_year || 7,
+    query: input.user_question || ''
+  });
+  const { system, prompt } = buildDialoguePrompt({ ...input, memory_stream });
   return callAgent({
     schema: DialogueSchema,
     system,
@@ -201,13 +212,7 @@ async function runFullStory({ profile, onProgress, runtime }) {
 
     mood = yearObj.new_mood;
     esteem = yearObj.new_esteem;
-    memory_stream.push({
-      id: `m${beat.year}`,
-      year: beat.year,
-      type: yearObj.is_pivotal ? 'decision' : 'event',
-      content: yearObj.memory_summary,
-      weight: yearObj.is_pivotal ? 0.85 : 0.5
-    });
+    memory_stream.push(memoryFromYear(yearObj));
     years.push(yearObj);
     emit('year:done', yearObj);
   }

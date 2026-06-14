@@ -1,0 +1,498 @@
+{
+  "calendar_year": 2023,
+  "notebooklm_gaps": [
+    "2023年中国大陆具体的GDP、CPI、房价指数、高考及毕业生人数统计数据",
+    "2023年中国大陆本土的具体社会新闻、民生政策或具体的城市生活细节（笔记本多为全球/美方背景）",
+    "中国大陆本土的2023年影视、综艺、神曲及现象级APP名（笔记本侧重生成式AI、GPT-4及全球地缘政治）",
+    "满足25条macro_events的具体细节，因笔记本对2023年非AI/地缘冲突类事件记录较少"
+  ],
+  "summary": "2023年是生成式人工智能（AIGC）全面爆发并重塑人类智能定义的元年。以GPT-4发布为标志，人类进入与非人类智能协同共存的新时代；与此同时，地缘政治冲突（如加沙战争爆发）与后全球化时代的去风险化逻辑进一步加剧了世界的碎片化。",
+  "social_mood": "社会情绪在AI技术带来的「加速主义」兴奋与对未来职业替代的深层焦虑中摇摆。青年群体一方面狂热投入AI创作，另一方面在通胀压力与碎片化世界导致的不确定性中寻求「防御型生存」。",
+  "atmosphere": {
+    "gdp_trillion_cny": null,
+    "gdp_growth_pct": null,
+    "cpi_pct": null,
+    "gaokao_candidates_wan": null,
+    "college_graduates_wan": null,
+    "internet_users_yi": null,
+    "housing_price_index_70_cities_pct": null,
+    "dominant_anxiety": "人工智能引发的白领失业危机以及地缘冲突导致的世界秩序崩塌感。",
+    "employment_pressure": "由于全球供应链区域化及AI工具对初级专业岗位的替代，就业市场面临结构性重组压力。",
+    "education_hotspot": "生成式AI对传统作业、考试及论文撰写模式的根本性冲击。",
+    "policy_keyword": "生成式AI治理、去风险化、能源转型共识。",
+    "meme_keywords": ["GPT-4", "Prompt", "去风险"]
+  },
+  "pop_culture": [
+    "GPT-4 (重新定义智能上限)",
+    "提示词工程 (Prompt Engineering 成为显学)",
+    "生成式AI绘画 (Midjourney/DALL-E等引发艺术讨论)",
+    "AI数字人直播 (尝试降本增效的新手段)",
+    "关于加沙冲突的地缘政治科普视频",
+    "COP28关于「摆脱化石燃料」的全球热议",
+    "流媒体短视频对传统影视制作的进一步蚕食",
+    "数字化生存下的「去杠杆」生活Vlog",
+    "生物技术与基因治疗的科普热潮",
+    "居家办公与远程协同工具的深度集成"
+  ],
+  "sources": [
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告",
+    "Major Events of the 21st Century — A Timeline, 2000–2024 | HistoryCentral",
+    "Paris Climate Agreement - Environmental and Energy Law Program",
+    "What have been the biggest historical events of each year of the 21st century? - Reddit",
+    "Timeline: Social Change and the 21st Century | Foundations of Education"
+  ],
+  "macro_events": [
+    {
+      "category": "tech_internet",
+      "title": "GPT-4正式发布",
+      "detail": "2023年3月OpenAI发布GPT-4；国内文心、通义等国产大模型同步竞速，高校与企业连夜讨论AI对写作、编程与客服的冲击。",
+      "source_url": "https://openai.com/research/gpt-4",
+      "weight": 1.4,
+      "sensitivity": "low",
+      "tags": ["ai", "gpt4", "tech_boom"]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "新一轮巴以冲突爆发",
+      "detail": "2023年10月7日起新一轮巴以冲突升级；央视与国际新闻滚动报道，中国网民在社交媒体激烈讨论人道危机与地缘博弈。",
+      "source_url": "https://www.reddit.com/r/decadeology/comments/1hszup2/what_have_been_the_biggest_historical_events_of/",
+      "weight": 1.3,
+      "sensitivity": "high",
+      "tags": ["war", "geopolitics", "humanitarian_crisis"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "COP28达成历史协议",
+      "detail": "2023年12月COP28在迪拜达成「摆脱化石燃料」表述；环境专业学生在课堂与模联中讨论对中国能源转型与出口的影响。",
+      "source_url": "https://eelp.law.harvard.edu/tracker/paris-climate-agreement/",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": ["climate_policy", "energy_transition"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "特朗普遭刑事起诉",
+      "detail": "2023年美国前总统特朗普面临多项刑事指控；中国时政爱好者通过国际新闻间接关注，讨论法律与政治边界。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 1.0,
+      "sensitivity": "medium",
+      "tags": ["us_politics", "justice"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "美众议院议长被罢免",
+      "detail": "2023年美国众议院议长麦卡锡被罢免；国内国际新闻栏目解读西方政治极化，成为饭桌闲聊话题。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["politics", "order_collapse"]
+    },
+    {
+      "category": "economy",
+      "title": "全球通胀压力持续",
+      "detail": "2023年多国通胀回落但仍高于疫情前；国内CPI低位运行与体感物价、就业压力形成反差讨论。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": ["inflation", "macro_economy"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "主要经济体气候论坛",
+      "detail": "2023年4月拜登召集主要经济体能源与气候论坛；中国双碳目标与新能源产业链成为对照议题。",
+      "source_url": "https://eelp.law.harvard.edu/tracker/paris-climate-agreement/",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": ["climate_summit", "policy"]
+    },
+    {
+      "category": "economy",
+      "title": "全球融资契约峰会",
+      "detail": "2023年6月巴黎举办全球融资契约峰会，讨论发展中国家气候融资；财经媒体解读对绿色债券与南南合作的影响。",
+      "source_url": "https://eelp.law.harvard.edu/tracker/paris-climate-agreement/",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": ["finance", "international_cooperation"]
+    },
+    {
+      "category": "economy",
+      "title": "AI+生物技术市场扩张",
+      "detail": "2023年AI与生物医药结合加速，基因编辑与药物研发获资本追捧；国内生物专业学生讨论就业与伦理边界。",
+      "source_url": "https://distance.physiology.med.ufl.edu/about/articles/7-medical-sciences-trends-shaping-healthcare-in-2026/",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["biotech", "market_growth"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "巴黎协定碳信用机制推进",
+      "detail": "2023年11月联合国就《巴黎协定》第6.4条碳信用机制达成一致；碳交易与ESG岗位成为职场新关键词。",
+      "source_url": "https://eelp.law.harvard.edu/tracker/paris-climate-agreement/",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["carbon_market", "treaty"]
+    }
+  ],
+  "micro_events": [
+    {
+      "category": "digital",
+      "scenario": "career",
+      "text": "你用GPT-4三小时写完原本要三天的行业研判大纲，感到职业被降维打击的寒意。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["ai", "productivity"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "教务处紧急禁止期末论文使用生成式AI，你盯着Prompt陷入学术诚信挣扎。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["ai_ethics", "university"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "饭桌讨论物价与通胀，母亲提议取消出国游，改省内「微度假」。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["inflation", "consumption"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "视频会议里和朋友争论AI是最后工具还是智能终结，加速主义成了社交日常。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["debate", "digital_social"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "公司启动「全员AI化」培训，不会写提示词的绘图同事面临转岗压力。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["workplace_change", "ai_skills"]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "远程诊疗平台帮老人咨询基因疗法可能，感叹碎片化世界里技术仍在流动。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["telemedicine", "hope"]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "地缘震荡下家里清空激进权益资产，转向黄金实物，开启防御型生存。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["investment", "risk_aversion"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你在加密社区备份个人知识库，防备断网或数据丢失。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["sovereignty", "knowledge"]
+    },
+    {
+      "category": "policy_touch",
+      "scenario": "academic",
+      "text": "模联辩论COP28「摆脱化石燃料」执行难度，感叹2023年共识有多昂贵。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["climate_debate", "learning"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "父亲外贸订单因去风险化锐减，全家在阳台商量是否回老家弹性就业。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["era_shift", "family_career"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "历史课听教授讲「断裂时代」，转头用AI整理笔记，觉得自己坐在历史裂缝里。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["history", "insight"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "AI绘画的虚拟日落前视频许愿，物理隔阂增加的一年里数字浪漫成了慰藉。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["romance", "ai_art"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "面试里分析供应链安全风险与AI赋能业务，拿到大厂战略岗复试机会。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["interview", "strategy"]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "极端高温无法户外运动，你读气候焦虑心理书，在失序里找内心锚点。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["mental_health", "climate"]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "跨国协作兼职因关税调整中断，你开始狂学国产AI工具找本土平替。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["work_pivot", "localization"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "生物研讨会上引用2023生物技术市场数据，论证长寿将与技术主权绑定。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["biotech", "seminar"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全家看美众院议长被罢免新闻，长辈叹秩序崩塌，范式迁移成了生活背景。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["news", "history"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你花三个月工资报提示词工程师培训，想在AI时代前先拿入场券。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["upskilling", "ai_era"]
+    },
+    {
+      "category": "neighborhood",
+      "scenario": "friendship",
+      "text": "邻居群讨论新装智慧安防，你察觉以安全为名的数字围合正在逼近。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["surveillance", "neighborhood"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "AI帮你检索巴黎协定第6.4条资料，导师夸研究效率「质的飞跃」。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["study_hack", "efficiency"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "会上你提议建「本地化数据主权私有云」，意外获老板签字支持。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["corporate_strategy", "sovereignty"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "家里因是否清仓受制裁风险的半导体股爆发激烈争吵。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["stock", "risk"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "视频连线同步看中东冲突纪录片，彼此信任成了对抗世界荒谬的避风港。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": ["romance", "global_crisis"]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "你给独居长辈寄去「后大流行生存包」，附信写：2023里健康是硬通货。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["family_care", "preparedness"]
+    },
+    {
+      "category": "money",
+      "scenario": "self_growth",
+      "text": "退掉分期新款手机，钱存入「去风险准备金」，开启防御型金钱观。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["savings", "survival"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "毕业论文改题「生成式AI对人类主体性的重构」，怕错过时代核心命题。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["thesis", "era_insight"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "和朋友在元宇宙展厅看「和平」主题影展，像素虚拟里你们仍被触动。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["digital_art", "bonding"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "产品经理被迫三天交出接入GPT-4的产品重构方案，通宵后看见时代巨轮。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["product_logic", "overtime"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "模联里因中东地缘见解获最佳辩手，你第一次萌生了从政念头。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": ["debate", "ambition"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你系统性清理陈旧社交账号，想在AI信息洪流里保持认知敏锐。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["digital_detox", "growth"]
+    },
+    {
+      "category": "neighborhood",
+      "scenario": "friendship",
+      "text": "小区花园漫谈极端天气，你和邻居商量自发建互助物资共享群。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["community", "resilience"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "读到「去风险化导致知识孤岛」论文，你对国际学术交流项目生出担忧。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["academic_gap", "sovereignty"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "中秋无法团聚，全家视频连线互发AI贺卡，马赛克屏幕里确认亲情温度。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["digital_reunion", "tradition"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "公司削减海外分部预算，你忙着处理撤离法律文书，平坦世界正隆起高墙。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["career_struggle", "geopolitics"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "你们转发中东人道危机的真假消息，观点对立里选择紧紧拥抱彼此。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": ["trust", "infodemic"]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "AI自动驾驶初创因融资从扩张转安全而折戟，你交了范式迁移的学费。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["startup", "failure"]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "你教长辈用健康监测App并识别AI医疗谣言，感叹数字时代教养责任巨大。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["digital_literacy", "family"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "模拟庭审辩论AI创作物所有权，感到法律框架正被技术巨浪暴力拆解。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["law", "tech_shift"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "2023跨年夜看GPT-4生成的总结，你想：人类或站在最后一块独享智能荒原上。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["epiphany", "ai_future"]
+    },
+    {
+      "category": "neighborhood",
+      "scenario": "friendship",
+      "text": "2023首个春天推开窗见闹市烟火，热闹里你却对地缘局势隐隐不安。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["vibe", "era_change"]
+    }
+  ]
+}

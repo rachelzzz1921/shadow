@@ -354,10 +354,14 @@ function buildCorpusModules(siteBoard, repo) {
   const demo = siteBoard.demo
     ? { ...siteBoard.demo, url: corpusFileUrl(repo, siteBoard.demo.path) }
     : null;
+  const staticDemo = siteBoard.staticDemo
+    ? { ...siteBoard.staticDemo, url: siteBoard.staticDemo.path.startsWith('docs/') ? siteBoard.staticDemo.path.replace(/^docs\//, './') : corpusFileUrl(repo, siteBoard.staticDemo.path) }
+    : null;
   return {
     phases,
     knowledge,
     demo,
+    staticDemo,
     manifestUrl: corpusFileUrl(repo, 'MANIFEST.md'),
     agentsUrl: corpusFileUrl(repo, 'AGENTS.md'),
   };

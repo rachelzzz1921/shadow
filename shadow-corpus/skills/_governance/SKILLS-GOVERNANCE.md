@@ -16,6 +16,7 @@ shadow-corpus/skills/
 ├── shadow/                       ★ Shadow 领域 skill 源码（改这里）
 │   ├── story-authoring/
 │   ├── story-review/
+│   ├── fate-agent/
 │   └── harness-init/
 ├── harness/                      ★ Harness 框架 skill 源码
 │   ├── design-generator/
@@ -44,7 +45,7 @@ shadow/.cursor/skills/            ← Cursor 发现（由 sync 脚本生成的�
 | Tier | 名称 | 数量 | 说明 |
 |------|------|------|------|
 | T0 | 路由 | 1 | `shadow-router` — 不确定用哪个时先 invoke |
-| T1 | Shadow 领域 | 3 | story-* , harness-init |
+| T1 | Shadow 领域 | 4 | story-* , fate-agent, harness-init |
 | T2 | Harness 框架 | 2 | design-generator, progress-tracker |
 | T3 | 架构 | 8 | improve-codebase-architecture, grill-with-docs, ADR… |
 | T4 | 工程全流程 | 13 | addyosmani 24 包中的核心子集 |

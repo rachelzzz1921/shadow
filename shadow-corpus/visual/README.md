@@ -17,7 +17,7 @@ visual/
 ├── scenes/                   # 场景 layout JSON（按故事/年）
 ├── stories/fuxduxian/        # 复读线第一期
 ├── references/               # 审美标杆案例
-└── engine/                   # Phaser 渲染（待建）
+└── engine/                   # Phaser 渲染（V-004 脚手架）
 ```
 
 ## 第一期范围

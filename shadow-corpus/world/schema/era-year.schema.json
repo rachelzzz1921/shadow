@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://shadow.dev/world/era-year.schema.json",
+  "title": "WorldEraYear",
+  "type": "object",
+  "required": [
+    "calendar_year",
+    "summary",
+    "social_mood",
+    "atmosphere",
+    "pop_culture",
+    "macro_events",
+    "micro_events",
+    "sources",
+    "version"
+  ],
+  "properties": {
+    "calendar_year": { "type": "integer", "minimum": 2006, "maximum": 2026 },
+    "summary": { "type": "string", "minLength": 20 },
+    "social_mood": { "type": "string", "minLength": 20 },
+    "atmosphere": { "type": "object", "minProperties": 15 },
+    "pop_culture": {
+      "type": "array",
+      "minItems": 10,
+      "items": { "type": "string", "minLength": 4 }
+    },
+    "macro_events": {
+      "type": "array",
+      "minItems": 30,
+      "items": { "$ref": "#/definitions/macroEvent" }
+    },
+    "micro_events": {
+      "type": "array",
+      "minItems": 80,
+      "items": { "$ref": "#/definitions/microEvent" }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 5,
+      "items": { "type": "string", "format": "uri" }
+    },
+    "version": { "type": "string" }
+  },
+  "definitions": {
+    "macroEvent": {
+      "type": "object",
+      "required": ["category", "title", "detail", "source_url", "weight", "sensitivity", "tags"],
+      "properties": {
+        "category": {
+          "type": "string",
+          "enum": [
+            "politics_policy", "economy", "education", "tech_internet",
+            "culture_entertainment", "disaster_crisis", "society", "urban_life",
+            "employment", "housing"
+          ]
+        },
+        "title": { "type": "string" },
+        "detail": { "type": "string", "minLength": 20 },
+        "source_url": { "type": "string", "format": "uri" },
+        "weight": { "type": "number", "minimum": 0.1 },
+        "sensitivity": { "type": "string", "enum": ["low", "medium", "high"] },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "microEvent": {
+      "type": "object",
+      "required": ["category", "text", "weight", "can_pivot", "sensitivity", "tags", "scenario"],
+      "properties": {
+        "category": {
+          "type": "string",
+          "enum": [
+            "family", "school", "work", "romance", "money", "health",
+            "neighborhood", "digital", "policy_touch"
+          ]
+        },
+        "text": { "type": "string", "minLength": 10, "maxLength": 80 },
+        "weight": { "type": "number", "minimum": 0.1 },
+        "can_pivot": { "type": "boolean" },
+        "sensitivity": { "type": "string", "enum": ["low", "medium", "high"] },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "scenario": {
+          "type": "string",
+          "enum": ["family", "love", "friendship", "academic", "career", "self_growth"]
+        }
+      }
+    }
+  }
+}

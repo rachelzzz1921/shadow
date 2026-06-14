@@ -1432,6 +1432,22 @@
       color: var(--muted);
       letter-spacing: 0.04em;
     }
+
+    /* ============ v2: fate era overlay ============ */
+    .fate-overlay {
+      margin-top: 8px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: rgba(101, 214, 208, 0.08);
+      border: 1px solid rgba(101, 214, 208, 0.25);
+      font-size: 12px;
+      line-height: 1.45;
+      animation: liftIn 320ms ease;
+    }
+    .fate-overlay[hidden] { display: none; }
+    .fate-overlay .fate-era { display: block; color: #a8ebe7; }
+    .fate-overlay .fate-hint { display: block; margin-top: 2px; font-size: 10px; color: var(--muted); opacity: 0.85; }
+
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes liftIn {
       from { opacity: 0; transform: translateY(20px) scale(0.96); }
@@ -1642,6 +1658,14 @@
       font-size: 11px;
       color: var(--muted);
     }
+    .scenario-badge {
+      margin: 6px 0 0;
+      font-size: 11px;
+      color: var(--muted);
+      min-height: 1.1rem;
+    }
+    .scenario-badge strong { color: var(--cyan); font-weight: 600; }
+    .scenario-badge .conf { opacity: 0.65; font-size: 10px; }
 
     /* ============ v2: stage badge for pivotal year ============ */
     .year-pill.pivotal {
@@ -1723,6 +1747,7 @@
           人生选择
           <input id="choice" name="choice" autocomplete="off" spellcheck="false" placeholder="如果当年我没有复读…" value="如果当年我去复读了">
         </label>
+        <div id="scenarioBadge" class="scenario-badge" aria-live="polite"></div>
 
         <div class="row">
           <label for="keywords">
@@ -1812,6 +1837,7 @@
           <button id="shuffleBtn" class="icon-button" type="button" title="切换示例故事" aria-label="切换示例故事">↻</button>
         </div>
         <button id="resetBtn" class="ghost" type="button">重置舞台</button>
+        <a href="visual-preview.html" class="ghost" style="display:inline-block;margin-top:8px;font-size:13px;color:#65d6d0;">◎ Layout 预览（Phaser）</a>
 
         <div id="status" class="status" role="status">默认使用本地示例（3 套），现场断网也能演示。关闭开关后会请求 /api/generate。</div>
       </aside>
@@ -1821,6 +1847,7 @@
           <div>
             <div class="year-pill" id="yearLabel">等待开始</div>
             <div id="premise">输入一个岔路口，让另一个你走完七年。</div>
+            <div id="fateOverlay" class="fate-overlay" hidden aria-live="polite"></div>
           </div>
           <div id="progress" class="progress" aria-label="七年进度"></div>
         </header>
@@ -1919,10 +1946,12 @@
           <button class="primary" type="submit">发送</button>
         </form>
         <p class="dialogue-hint">影子会引用一条 memory stream 来回答你。</p>
+        <p id="dialogueDomainHint" class="scenario-badge" aria-live="polite"></p>
       </div>
     </div>
   </main>
 
+  <script src="scenario-classify-client.js"></script>
   <script>
     const USE_LOCAL_DEFAULT = true;
 
@@ -2674,6 +2703,56 @@
 
     localModeEl.checked = USE_LOCAL_DEFAULT;
 
+    let scenarioClassifyTimer = null;
+
+    function renderScenarioBadge(el, result) {
+      if (!el || !result) return;
+      const conf = result.confidence != null ? ` · ${Math.round(result.confidence * 100)}%` : '';
+      el.innerHTML = `领域：<strong>${result.label || result.domain}</strong> → ${result.agent || ''}<span class="conf">${conf}</span>`;
+    }
+
+    async function classifyInputs(payload) {
+      if (window.ShadowScenarioClassify?.classifyProfile) {
+        return window.ShadowScenarioClassify.classifyProfile(payload);
+      }
+      const res = await fetch('/api/scenario/classify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) return null;
+      return res.json();
+    }
+
+    async function refreshScenarioBadge() {
+      const badge = document.getElementById('scenarioBadge');
+      const inputs = getInputs();
+      if (!badge || !inputs.choice) {
+        if (badge) badge.textContent = '';
+        return;
+      }
+      try {
+        const result = await classifyInputs({
+          choice: inputs.choice,
+          keywords: inputs.keywords.split(/[、,，\s]+/).filter(Boolean),
+          description: inputs.description
+        });
+        renderScenarioBadge(badge, result);
+      } catch (_) {
+        badge.textContent = '';
+      }
+    }
+
+    function scheduleScenarioClassify() {
+      clearTimeout(scenarioClassifyTimer);
+      scenarioClassifyTimer = setTimeout(refreshScenarioBadge, 280);
+    }
+
+    document.getElementById('choice')?.addEventListener('input', scheduleScenarioClassify);
+    document.getElementById('keywords')?.addEventListener('input', scheduleScenarioClassify);
+    document.getElementById('description')?.addEventListener('input', scheduleScenarioClassify);
+    refreshScenarioBadge();
+
     function initProgress() {
       progressEl.innerHTML = '';
       for (let i = 0; i < 7; i += 1) {
@@ -3299,6 +3378,7 @@
       // v2 hooks
       pushMemoryFromYear(year);
       showDialogueCue();
+      refreshFateOverlay(year, year.user_intervention);
       if (year.is_pivotal && year.intervention_prompt) {
         // small delay so the typing reveal lands first
         setTimeout(() => openIntervention(year), 350);
@@ -3344,6 +3424,7 @@
       dialogueEl.classList.remove('show');
       setProgress(index);
       setStatus('影子正在走进这一年…');
+      hideFateOverlay();
       nextBtnEl.textContent = '跳过';
       nextBtnEl.classList.remove('pulse-next');
 
@@ -3505,6 +3586,7 @@
       closeDialogueModal();
       hideAgentMeeting();
       hideDialogueCue();
+      hideFateOverlay();
       yearLabelEl.classList.remove('pivotal');
       premiseEl.textContent = '输入一个岔路口，让另一个你走完七年。';
       yearLabelEl.textContent = '等待开始';
@@ -3634,6 +3716,59 @@
     const dialogueCloseBtnEl = document.getElementById('dialogueCloseBtn');
 
     let dialogueCueEl = null;
+    const fateOverlayEl = document.getElementById('fateOverlay');
+    let eraSnippetsCache = null;
+
+    async function loadEraSnippets() {
+      if (eraSnippetsCache) return eraSnippetsCache;
+      try {
+        const r = await fetch('/era-snippets.json');
+        eraSnippetsCache = await r.json();
+      } catch {
+        eraSnippetsCache = {};
+      }
+      return eraSnippetsCache;
+    }
+
+    function hideFateOverlay() {
+      if (fateOverlayEl) fateOverlayEl.hidden = true;
+    }
+
+    async function refreshFateOverlay(year, intervention = null) {
+      if (!fateOverlayEl || !year) return;
+      const beatType = year.is_pivotal ? 'pivotal' : 'quiet';
+      let result = null;
+      try {
+        result = await postJson('/api/fate/context', {
+          profile: activeStory?.profile || { age: Math.max(12, (year.age || 19) - year.year), choice: '' },
+          narrative_year: year.year,
+          beat_type: beatType,
+          choice: intervention?.choice,
+          intervention: Boolean(intervention)
+        });
+      } catch {
+        const snippets = await loadEraSnippets();
+        const cal = 2018 + year.year;
+        const snip = snippets[String(cal)];
+        if (snip) {
+          result = {
+            overlay: intervention
+              ? `${snip.era_line} · 你选了「${intervention.choice}」`
+              : snip.era_line,
+            hint: `时代 ${cal} · offline`,
+            _placeholder: true
+          };
+        }
+      }
+      if (!result?.overlay && !result?.hint) {
+        hideFateOverlay();
+        return;
+      }
+      fateOverlayEl.hidden = false;
+      fateOverlayEl.innerHTML = `
+        <span class="fate-era">${escapeHtml(result.overlay || result.hint)}</span>
+        <span class="fate-hint">${escapeHtml(result.hint || '')}</span>`;
+    }
 
     function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
@@ -3715,6 +3850,7 @@
             if (next) next.user_intervention = year.user_intervention;
           }
           setStatus(`你为影子选了：「${opt}」。这条选择会写进下一年。`);
+          refreshFateOverlay(year, year.user_intervention);
           closeIntervention();
         });
         interventionOptionsEl.appendChild(btn);
@@ -3796,6 +3932,12 @@
       const userTurn = { role: 'user', content: question };
       dialogueHistory.push(userTurn);
       appendDialogueTurn(userTurn);
+
+      try {
+        const domainHint = document.getElementById('dialogueDomainHint');
+        const qDomain = await classifyInputs({ choice: question });
+        renderScenarioBadge(domainHint, qDomain);
+      } catch (_) { /* ignore */ }
 
       let reply;
       if (!localModeEl.checked && activeStory.persona_card) {
