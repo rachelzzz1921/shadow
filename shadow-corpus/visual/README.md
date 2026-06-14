@@ -13,6 +13,7 @@ visual/
 ├── 02-asset-registry-spec.md # Excel 字段规范
 ├── 03-layout-schema.json     # AI 布局输出 JSON Schema
 ├── 04-ux-flow.md             # A/B/C 在体验里的位置
+├── 05-ui-design-document.md  # UI 设计总文档（Demo + 双 overlay + 素材包）
 ├── registry/                 # 素材库（CSV，可进 Excel）
 ├── scenes/                   # 场景 layout JSON（按故事/年）
 ├── stories/fuxduxian/        # 复读线第一期
@@ -42,6 +43,7 @@ visual/
 
 ## 快速链接
 
+- **UI 设计总文档**：[`05-ui-design-document.md`](./05-ui-design-document.md)
 - 流水线：[`01-pipeline.md`](./01-pipeline.md)
 - Excel 规范：[`02-asset-registry-spec.md`](./02-asset-registry-spec.md)
 - 复读线场景清单：[`stories/fuxduxian/scene-briefs.md`](./stories/fuxduxian/scene-briefs.md)

@@ -1738,7 +1738,7 @@
         <div class="brand">
           <div>
             <h1 translate="no">Shadow</h1>
-            <p class="brand-sub">平行人生叙事引擎</p>
+            <p class="brand-sub">平行人生叙事引擎 · <a href="/intake.html" style="color:var(--cyan);text-decoration:none">完整采集 →</a></p>
           </div>
           <span class="badge">7 YEARS</span>
         </div>
@@ -2702,6 +2702,26 @@
     let spriteAnimationState = { frame: -1, lastTick: 0, frames: 24, speed: 1000, scale: 4 };
 
     localModeEl.checked = USE_LOCAL_DEFAULT;
+
+    (function applyIntakeHandoff() {
+      const params = new URLSearchParams(window.location.search);
+      if (!params.get('intake')) return;
+      try {
+        const raw = sessionStorage.getItem('shadow_intake_profile');
+        if (!raw) return;
+        const { handoff } = JSON.parse(raw);
+        if (!handoff) return;
+        if (handoff.choice) document.getElementById('choice').value = handoff.choice;
+        if (handoff.description) document.getElementById('description').value = handoff.description;
+        if (handoff.age) document.getElementById('age').value = handoff.age;
+        if (handoff.keywords?.length) {
+          document.getElementById('keywords').value = handoff.keywords.join('、');
+        }
+        if (typeof refreshScenarioBadge === 'function') refreshScenarioBadge();
+        setStatus('已从信息采集页载入 profile，可直接开始生成。');
+        history.replaceState({}, '', '/');
+      } catch (_) { /* ignore */ }
+    })();
 
     let scenarioClassifyTimer = null;
 
@@ -3949,6 +3969,10 @@
             body: JSON.stringify({
               persona_card: activeStory.persona_card,
               memory_stream: getCurrentMemoryStream(),
+              years: activeStory.years || [],
+              profile: activeStory.profile || activeStory._liveSession?.profile || {},
+              run_id: activeStory.run_id || activeStory._liveSession?.run_id || null,
+              last_fate_context: activeStory._liveSession?.last_fate_context || null,
               current_mood: activeStory.years[activeIndex]?.new_mood ?? 5,
               current_esteem: activeStory.years[activeIndex]?.new_esteem ?? 5,
               at_year: activeStory.years[activeIndex]?.year || 7,

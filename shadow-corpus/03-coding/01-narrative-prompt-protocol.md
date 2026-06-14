@@ -91,6 +91,25 @@
 
 ---
 
+## Scene Agents（六域场景 lens · 2026-06-14 入库）
+
+人工终稿：`03-coding/prompts/scene-agents/scene-agents-prompts.md`
+
+| 层 | 文件 | 作用 |
+|----|------|------|
+| Base | `base-prompt.md` | 因果链、心理真实、现实约束、和解收尾 |
+| Router | `scene-router.md` | `primaryScene` + `secondaryTags` |
+| Lens | `family` … `self_growth` | 各域推演边界与 dialogue 风格 |
+| P2 JSON | `output-schema.md` | 含 `agentTrace` 的七年 timeline 契约 |
+
+**当前接线**：archive demo 可通过 `scene-agents-bridge.js` 将 scene lens 叠加到 Year system；完整 P2 编排待实现。
+
+**与 Fate 协作**：Scene 定叙事 lens；Fate 定 `emphasis_line` 与时代 micro。二者同时进 Year prompt，不互相替代。
+
+Skill：`skills/shadow/scene-agents/SKILL.md`
+
+---
+
 ## Fate agent（时代际遇层 · 队友完善）
 
 - 读 `world/data/years/{calendar_year}.json` + Beats seed（**不在 UI 展示 Beats**）。

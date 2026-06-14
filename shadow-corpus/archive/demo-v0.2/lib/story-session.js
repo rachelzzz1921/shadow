@@ -6,6 +6,7 @@ const { memoryFromYear, normalizeYear } = require('./story-contract');
 const { replanBeatsAfterIntervention } = require('./beats-replan');
 const { resolveFateContext } = require('./fate-bridge');
 const { classifyProfile } = require('./scenario-classify');
+const { indexSessionAfterYear, indexTraceAfterFinal } = require('./rag-service');
 const {
   evaluateBeats,
   evaluateStory,
@@ -175,6 +176,13 @@ async function generateNextYear({ session, user_intervention = null, runtime = c
       esteem: year.new_esteem,
       last_fate_context: fate_context
     };
+
+    indexSessionAfterYear({
+      run_id: session.run_id || trace?.run_id,
+      memory,
+      year
+    });
+
     return { session: nextSession, year, memory, eval: yearEval };
   } catch (error) {
     appendEvent(trace, { stage: 'year:error', status: 'error', payload: { year: beat.year }, error });
@@ -216,6 +224,11 @@ async function finishStorySession({ session, runtime = createLiveRuntime(), trac
         stop_reason,
         eval: storyEval,
         session: finishedSession
+      });
+      indexTraceAfterFinal({
+        trace: traceResult?.trace || trace,
+        session: finishedSession,
+        storyEval
       });
     }
 

@@ -72,6 +72,7 @@ skills/
 │   ├── story-authoring/
 │   ├── story-review/
 │   ├── fate-agent/
+│   ├── scene-agents/
 │   └── harness-init/
 ├── harness/                      # ★ Harness 框架
 │   ├── design-generator/
@@ -80,7 +81,7 @@ skills/
 └── pool/                         # 75 个第三方 Skill（完整副本）
 ```
 
-**统计**：Shadow 自有 4 + Harness 2 + 路由 1 + 第三方 75 = **82**
+**统计**：Shadow 自有 5 + Harness 2 + 路由 1 + 第三方 75 = **83**
 
 ---
 

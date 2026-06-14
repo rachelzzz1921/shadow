@@ -4,6 +4,9 @@
  */
 'use strict';
 
+/** Cool School B 层 48px 切片 — 六域场景小图标（无 Kenney 角色包时的 CC0 替代） */
+const CC0_SPRITE = 'visual-assets/coolschool_B.png';
+
 const SCENARIO_THEMES = {
   family: {
     id: 'family',
@@ -12,7 +15,7 @@ const SCENARIO_THEMES = {
     transition: 'door',
     walkLine: '……门开了，先别说话。',
     walkLineBack: '（把门轻轻带上）',
-    sprite: 'assets/kenney/tiles/tile_0105.png',
+    sprite: { sheet: CC0_SPRITE, pos: '-288px -336px', size: '48px 48px' },
     colors: {
       paper: '#f8ede4',
       paperDeep: '#edd9c8',
@@ -31,7 +34,7 @@ const SCENARIO_THEMES = {
     transition: 'pulse',
     walkLine: '你发的那条消息，还在输入框里。',
     walkLineBack: '……算了，不发了。',
-    sprite: 'assets/kenney/tiles/tile_0098.png',
+    sprite: { sheet: CC0_SPRITE, pos: '-192px -672px', size: '48px 48px' },
     colors: {
       paper: '#f9eef2',
       paperDeep: '#efdce6',
@@ -50,7 +53,7 @@ const SCENARIO_THEMES = {
     transition: 'wave',
     walkLine: '群里又有人退群了，你没点进去看。',
     walkLineBack: '原来一个人吃饭，也没那么糟。',
-    sprite: 'assets/kenney/tiles/tile_0104.png',
+    sprite: { sheet: CC0_SPRITE, pos: '-48px -240px', size: '48px 48px' },
     colors: {
       paper: '#eef6f0',
       paperDeep: '#dcebe0',
@@ -69,7 +72,7 @@ const SCENARIO_THEMES = {
     transition: 'walk',
     walkLine: '书包很沉。最后一排，靠窗。',
     walkLineBack: '试卷还在夹层里，先走吧。',
-    sprite: 'assets/kenney/tiles/tile_0096.png',
+    sprite: { sheet: CC0_SPRITE, pos: '-240px -672px', size: '48px 48px' },
     colors: {
       paper: '#f7f0e3',
       paperDeep: '#ebe3d1',
@@ -88,7 +91,7 @@ const SCENARIO_THEMES = {
     transition: 'commute',
     walkLine: '简历改到第三版，还是不太像自己。',
     walkLineBack: '下一站，先把自己交出去。',
-    sprite: 'assets/kenney/tiles/tile_0122.png',
+    sprite: { sheet: CC0_SPRITE, pos: '0 -624px', size: '48px 48px' },
     colors: {
       paper: '#eef0f4',
       paperDeep: '#dce0e8',
@@ -107,7 +110,7 @@ const SCENARIO_THEMES = {
     transition: 'step',
     walkLine: '够了——这句话，练了很多年。',
     walkLineBack: '在低处，也可以很稳。',
-    sprite: 'assets/kenney/tiles/tile_0097.png',
+    sprite: { sheet: CC0_SPRITE, pos: '-336px -672px', size: '48px 48px' },
     colors: {
       paper: '#f4f0ea',
       paperDeep: '#e8e0d4',
@@ -127,6 +130,20 @@ function getTheme(key) {
 }
 
 /** 写入 CSS 变量 + body[data-scenario] */
+function applySpriteVars(root, sprite) {
+  if (!sprite) return;
+  if (typeof sprite === 'string') {
+    root.style.setProperty('--sprite-char', `url('${sprite}')`);
+    root.style.removeProperty('--sprite-pos');
+    root.style.removeProperty('--sprite-size');
+    return;
+  }
+  root.style.setProperty('--sprite-char', `url('${sprite.sheet}')`);
+  root.style.setProperty('--sprite-pos', sprite.pos || '0 0');
+  root.style.setProperty('--sprite-size', sprite.size || '48px 48px');
+}
+
+/** 写入 CSS 变量 + body[data-scenario] */
 function applyScenario(key) {
   const t = getTheme(key);
   const root = document.documentElement;
@@ -140,7 +157,7 @@ function applyScenario(key) {
   root.style.setProperty('--scenario-wipe', c.wipe);
   root.style.setProperty('--scenario-wipe-deep', c.accentDeep || c.wipe);
   root.style.setProperty('--sage', c.sage);
-  root.style.setProperty('--sprite-char', `url('${t.sprite}')`);
+  applySpriteVars(root, t.sprite);
   document.body.dataset.scenario = t.id;
   return t;
 }

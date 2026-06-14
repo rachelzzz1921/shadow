@@ -31,7 +31,7 @@ test('normalizeDialogueResult rejects invalid dialogue payload', () => {
   assert.throws(() => normalizeDialogueResult({ reply: '短', cite_memory_ids: [], mood_after: 'x' }));
 });
 
-test('runDialogue uses selectMemories and returns schema-valid reply via mock runtime', async () => {
+test('runDialogue uses RAG context and returns schema-valid reply via mock runtime', async () => {
   const mockReply = {
     reply: '撕准考证那晚，纸边划破手指，我假装是天气太干。你现在问这个，是想替我说出那声疼吗？',
     cite_memory_ids: ['m2'],

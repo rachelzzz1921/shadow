@@ -13,7 +13,8 @@ test('pickProvider selects stepfun when STEPFUN_API_KEY set', () => {
   assert.equal(pickProvider(env), 'stepfun');
 });
 
-test('stepfunApiKey accepts STEP_API_KEY alias', () => {
-  assert.equal(stepfunApiKey({ STEP_API_KEY: 'x' }), 'x');
-  assert.equal(stepfunApiKey({ STEPFUN_API_KEY: 'y' }), 'y');
+test('dashscopeApiKey reads DASHSCOPE_API_KEY', () => {
+  const { dashscopeApiKey, pickProvider } = require('../lib/llm-runtime');
+  assert.equal(dashscopeApiKey({ DASHSCOPE_API_KEY: 'sk-test' }), 'sk-test');
+  assert.equal(pickProvider({ DASHSCOPE_API_KEY: 'sk-test', SHADOW_PROVIDER: 'dashscope' }), 'dashscope');
 });

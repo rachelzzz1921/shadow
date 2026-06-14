@@ -452,6 +452,32 @@
     });
   }
 
+  function applySceneTexturesForPage(pageIdx) {
+    const Ttex = window.ShadowSceneTextures;
+    if (!Ttex) return;
+    if (pageIdx >= YEAR_START && pageIdx < getFinalPage()) {
+      const yearIdx = pageIdx - YEAR_START;
+      const raw = getStory().years[yearIdx];
+      if (!raw) return;
+      const year = normalizeYear(raw);
+      const scene = document.querySelector(`#p-year-${year.year} .pixel-scene`);
+      const scenarioKey = year.scenario || getStory().scenario_primary || 'academic';
+      Ttex.apply(scene, scenarioKey, year);
+      return;
+    }
+    if (pageIdx === getFinalPage()) {
+      const scenario = getStory().scenario_secondary || 'self_growth';
+      const scene = document.querySelector('#p-final .pixel-scene');
+      Ttex.apply(scene, scenario, { environment: 'postoffice', scene: getStory().final?.scene || 'city' });
+    }
+  }
+
+  function applyAllSceneTextures() {
+    for (let p = YEAR_START; p <= getFinalPage(); p += 1) {
+      applySceneTexturesForPage(p);
+    }
+  }
+
   async function onPageEnter(pageIdx) {
     if (pageIdx < YEAR_START || pageIdx > getFinalPage() - 1) return;
     const yearIdx = pageIdx - YEAR_START;
@@ -482,6 +508,8 @@
       const scene = document.querySelector(`#p-year-${year.year} .pixel-scene`);
       await window.ShadowUniversalAssets.paintScenarioAsync(scene, scenarioKey);
     }
+
+    applySceneTexturesForPage(pageIdx);
 
     if (year.is_pivotal && year.intervention_prompt && !interventionShown.has(year.year)) {
       interventionShown.add(year.year);
@@ -718,12 +746,16 @@
       if (tag) tag.textContent = '⚡ Live · 全 Agent 生成';
     }
 
+    const dlgName = document.getElementById('dlg-name');
+    if (dlgName) dlgName.textContent = shadowDisplayName();
+
     bindGlobalEvents();
     updateNav();
 
     T.spawnAmbientParticles(document.getElementById('ambient-particles'), 14);
     Sc?.applyScenario(story.scenario_primary || 'academic');
     syncScenarioChrome(LANDING_PAGE, story.scenario_primary || 'academic');
+    applyAllSceneTextures();
     T.initLanding();
 
     window.ShadowDemo.goToPage = goToPage;

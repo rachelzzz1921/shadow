@@ -35,9 +35,10 @@
   --highlight: #fffdf8;
   --step: 3px;
 
-  --dungeon-tile: url('assets/kenney/dungeon-tilemap_packed.png');
-  --city-tile: url('assets/kenney/city-tilemap_packed.png');
-  --sprite-char: url('assets/kenney/tiles/tile_0096.png');
+  --cc0-floor: url('visual-assets/coolschool_A2.png');
+  --sprite-char: url('visual-assets/coolschool_B.png');
+  --sprite-pos: -240px -672px;
+  --sprite-size: 48px 48px;
 
   --ease-pixel: steps(4, end);
   --ease-soft: cubic-bezier(0.22, 0.68, 0.12, 1);
@@ -375,7 +376,7 @@ img { image-rendering: pixelated; image-rendering: crisp-edges; }
   width: 48px;
   height: 48px;
   flex-shrink: 0;
-  background: var(--sprite-char) center / contain no-repeat;
+  background: var(--sprite-char) var(--sprite-pos, center) / var(--sprite-size, contain) no-repeat;
   image-rendering: pixelated;
   border: 2px solid var(--panel-edge);
   box-shadow: inset 1px 1px 0 var(--highlight), 2px 2px 0 rgba(58, 50, 40, 0.1);
@@ -506,6 +507,25 @@ img { image-rendering: pixelated; image-rendering: crisp-edges; }
   z-index: 0;
 }
 
+/* CC0 纹理层（Cool School A2/A4/B + Rain）— 叠在 environment 渐变之上 */
+.scene-backdrop.has-cc0-texture {
+  background-blend-mode: multiply;
+  image-rendering: pixelated;
+}
+.pixel-scene[class*="scene-env-"] .scene-backdrop.has-cc0-texture {
+  background-color: var(--paper-deep);
+}
+.scene-fx-rain.has-cc0-rain {
+  opacity: 0.42 !important;
+  background-repeat: repeat-x;
+  animation: cc0-rain-scroll 10s linear infinite;
+  mix-blend-mode: soft-light;
+}
+@keyframes cc0-rain-scroll {
+  from { background-position: 0 0; }
+  to { background-position: 512px 0; }
+}
+
 .scene-fx {
   position: absolute;
   inset: 0;
@@ -561,7 +581,7 @@ img { image-rendering: pixelated; image-rendering: crisp-edges; }
 .sprite {
   width: 48px;
   height: 48px;
-  background: var(--sprite-char) center / contain no-repeat;
+  background: var(--sprite-char) var(--sprite-pos, center) / var(--sprite-size, 48px 48px) no-repeat;
   image-rendering: pixelated;
   filter: drop-shadow(2px 3px 0 rgba(58, 50, 40, 0.15));
 }
@@ -595,9 +615,9 @@ img { image-rendering: pixelated; image-rendering: crisp-edges; }
   background: linear-gradient(180deg, var(--sky-warm) 0%, #b0c4dc 55%, var(--paper-deep) 55%);
 }
 .scene-env-classroom .scene-floor {
-  background: var(--dungeon-tile) repeat;
-  background-size: 16px 16px;
-  opacity: 0.65;
+  background: var(--cc0-floor) repeat;
+  background-size: 192px 144px;
+  opacity: 0.72;
 }
 .scene-env-classroom .scene-window {
   position: absolute;
@@ -616,9 +636,9 @@ img { image-rendering: pixelated; image-rendering: crisp-edges; }
   background: linear-gradient(180deg, #3a4468 0%, #5a6088 50%, #4a4858 50%);
 }
 .scene-env-dorm_night .scene-floor {
-  background: var(--dungeon-tile) repeat;
-  background-size: 16px 16px;
-  opacity: 0.5;
+  background: var(--cc0-floor) repeat;
+  background-size: 192px 144px;
+  opacity: 0.45;
   filter: brightness(0.75);
 }
 .scene-env-dorm_night .scene-moon {
@@ -662,9 +682,9 @@ img { image-rendering: pixelated; image-rendering: crisp-edges; }
   background: linear-gradient(180deg, var(--sky-warm) 0%, #98aac8 50%, #7888a0 50%);
 }
 .scene-env-trainstation .scene-floor {
-  background: var(--city-tile) repeat;
-  background-size: 16px 16px;
-  opacity: 0.7;
+  background: var(--cc0-floor) repeat;
+  background-size: 192px 144px;
+  opacity: 0.62;
 }
 
 /* postoffice — reconciliation */

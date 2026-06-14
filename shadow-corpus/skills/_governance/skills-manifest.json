@@ -11,7 +11,7 @@
   },
   "tiers": {
     "T0_router": ["shadow-router"],
-    "T1_shadow": ["story-authoring", "story-review", "fate-agent", "harness-init"],
+    "T1_shadow": ["story-authoring", "story-review", "fate-agent", "scene-agents", "harness-init"],
     "T2_harness": ["design-generator", "progress-tracker"],
     "T3_architecture": [
       "improve-codebase-architecture",

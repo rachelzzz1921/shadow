@@ -95,7 +95,7 @@
     transition: 'walk',
     walkLine: '',
     walkLineBack: '',
-    sprite: 'assets/kenney/tiles/tile_0096.png'
+    sprite: { sheet: 'visual-assets/coolschool_B.png', pos: '-240px -672px', size: '48px 48px' }
   };
 
   function resolveTheme(scenarioKey) {
@@ -126,6 +126,21 @@
     });
   }
 
+  function applySpriteEl(el, sprite, extraPos) {
+    if (!el || !sprite) return;
+    if (typeof sprite === 'string') {
+      el.style.backgroundImage = `url('${sprite}')`;
+      el.style.backgroundSize = '';
+      el.style.backgroundPosition = extraPos || '';
+      return;
+    }
+    el.style.backgroundImage = `url('${sprite.sheet}')`;
+    el.style.backgroundSize = sprite.size || '48px 48px';
+    el.style.backgroundPosition = extraPos || sprite.pos || '0 0';
+    el.style.backgroundRepeat = 'no-repeat';
+    el.style.imageRendering = 'pixelated';
+  }
+
   function prepareActor(theme, phase, direction) {
     const mode = theme?.transition || 'walk';
     const el = ensureActorStage();
@@ -141,7 +156,7 @@
     el.classList.add('active', `mode-${mode}`, phase);
     el.setAttribute('aria-hidden', 'false');
 
-    if (sprite) sprite.style.backgroundImage = `url('${theme.sprite}')`;
+    if (sprite) applySpriteEl(sprite, theme.sprite);
 
     const line = phase === 'cover'
       ? (direction >= 0 ? theme.walkLine : theme.walkLineBack)
@@ -151,8 +166,10 @@
       if (body) body.style.display = 'none';
       if (waveBubble) waveBubble.textContent = line;
       friends.forEach((f, i) => {
-        f.style.backgroundImage = `url('${theme.sprite}')`;
-        f.style.backgroundPosition = `${i * -4}px center`;
+        const base = theme.sprite?.pos || '0 0';
+        const parts = base.split(/\s+/);
+        const x = parseInt(parts[0], 10) - i * 48;
+        applySpriteEl(f, theme.sprite, `${x}px ${parts[1] || '0'}`);
       });
     } else {
       if (body) body.style.display = '';

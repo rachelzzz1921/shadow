@@ -18,6 +18,7 @@ Shadow 安装了 80+ skill。本 skill 负责**选对一个**，避免重复或�
 |----------|-----------|------|
 | 写/改本地故事、golden | `story-authoring` | — |
 | 命运 agent / 时代语料 / 六域权重 | `fate-agent` | `design-generator` |
+| 场景 Agent prompt / Scene Router | `scene-agents` | `fate-agent` |
 | 审叙事、复盘 trace | `story-review` | `verification-before-completion` |
 | 初始化/刷新项目文档 | `harness-init` | `setup-matt-pocock-skills` |
 | 技术方案 / design | `design-generator` | `spec-driven-development` |

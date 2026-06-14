@@ -8,6 +8,7 @@
 |------|------|------|
 | 01 | [叙事 Prompt 协议](./01-narrative-prompt-protocol.md) | ✅ |
 | 02 | [Prompt 变更协议](./02-prompt-change-protocol.md) | ✅ |
+| — | [六场景 Agent 提示词](./prompts/scene-agents/README.md) | ✅ 2026-06-14 入库 |
 
 ## 编码流水线
 

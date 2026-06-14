@@ -203,7 +203,12 @@ async function bootstrapDemoStory() {
 
   if (window.ShadowDemo) {
     window.ShadowDemo.STORY = story;
-    if (typeof window.ShadowDemo.applyIntakeFromSession === 'function') {
+    // Golden 故事 (?story=linwan 等) 保持 fixture 人格；Intake 只覆盖默认复读线或 ?from=intake
+    const explicitGoldenStory = params.has('story') && storyId !== 'fuxduxian';
+    const allowIntake =
+      !explicitGoldenStory &&
+      (params.get('from') === 'intake' || storyId === 'fuxduxian');
+    if (allowIntake && typeof window.ShadowDemo.applyIntakeFromSession === 'function') {
       window.ShadowDemo.applyIntakeFromSession();
     }
     if (params.get('live') === '1' && typeof window.ShadowDemo.applyLiveFromSession === 'function') {

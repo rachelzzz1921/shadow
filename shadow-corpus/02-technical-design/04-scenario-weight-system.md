@@ -80,9 +80,14 @@ world/lib/scenario-pools/
 
 生成时与 `micro-expand.mjs` 通用层合并；校验要求**每个公历年、每个 scenario ≥ 30 条**。
 
-## 后续：六场景子 Agent
+## 六场景 Agent 提示词（已入库）
 
-当前为 **单 Fate Orchestrator + 六域子池 + 权重透镜**；下一步可拆为各 lens 独立 prompt / 候选合并（见 [`04-scenario-weight-system.md`](./04-scenario-weight-system.md)）。
+人工终稿与模块化 prompt：
+
+- [`03-coding/prompts/scene-agents/scene-agents-prompts.md`](../03-coding/prompts/scene-agents/scene-agents-prompts.md)
+- Skill：[`skills/shadow/scene-agents/SKILL.md`](../skills/shadow/scene-agents/SKILL.md)
+
+当前为 **Fate Orchestrator + 六域子池 + 权重透镜 + Scene lens 文案**；P2 可接 Scene Router LLM + 七年 `agentTrace` JSON（见 `output-schema.md`）。
 
 ## 本地试跑
 

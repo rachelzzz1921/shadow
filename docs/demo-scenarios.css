@@ -269,7 +269,7 @@ body[data-scenario="self_growth"] .yr-card {
 .actor-sprite {
   width: 56px;
   height: 56px;
-  background: var(--sprite-char) center / contain no-repeat;
+  background: var(--sprite-char) var(--sprite-pos, center) / var(--sprite-size, 48px 48px) no-repeat;
   image-rendering: pixelated;
   filter: drop-shadow(0 3px 0 rgba(58, 50, 40, 0.2));
 }
@@ -426,7 +426,7 @@ body[data-scenario="self_growth"] .yr-card {
   bottom: 36px;
   width: 40px;
   height: 40px;
-  background: var(--sprite-char) center / contain no-repeat;
+  background: var(--sprite-char) var(--sprite-pos, center) / var(--sprite-size, 48px 48px) no-repeat;
   image-rendering: pixelated;
   opacity: 0;
   z-index: 3;

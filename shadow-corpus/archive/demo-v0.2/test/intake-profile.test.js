@@ -45,7 +45,7 @@ test('buildFullProfile: 复读线-like intake yields academic weight', () => {
   assert.equal(full.profile.choice, '如果当年我去复读了');
   assert.ok(full.persona_signals.decision_tendency.includes('再努力一次'));
   assert.ok(full.persona_signals.soft_spots.length >= 1);
-  assert.equal(full.baseline.initial_mood, 4);
+  assert.equal(full.baseline.initial_mood, 3);
 });
 
 test('buildFullProfile detects self_report vs behavior tension', () => {

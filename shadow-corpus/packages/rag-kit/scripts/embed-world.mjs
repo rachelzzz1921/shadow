@@ -7,9 +7,14 @@ import { loadEnv, ragConfig, worldYearsDir, isConfiguredSecret } from '../lib/co
 import { chunkWorldYear } from '../lib/chunk-world.mjs';
 import { embedTexts } from '../lib/embed.mjs';
 import { upsertChunks } from '../lib/supabase-client.mjs';
+import { loadNamespace } from '../lib/local-index.mjs';
 
 loadEnv();
 const cfg = ragConfig();
+
+function chunkKey(c) {
+  return `${c.source_id}|${c.chunk_index ?? 0}|${cfg.corpusVersion}`;
+}
 
 async function main() {
   const dryRun = process.argv.includes('--dry-run');
@@ -30,6 +35,7 @@ async function main() {
   }
 
   const noEmbed = process.argv.includes('--no-embed');
+  const resume = !process.argv.includes('--no-resume');
   const embedReady =
     isConfiguredSecret(cfg.dashscopeApiKey) || isConfiguredSecret(cfg.zhipuApiKey);
   if (!noEmbed && !embedReady) {
@@ -37,25 +43,54 @@ async function main() {
     process.exit(1);
   }
 
+  const cachedEmb = new Map();
+  if (resume && !noEmbed) {
+    for (const row of loadNamespace('world')) {
+      if (Array.isArray(row.embedding) && row.embedding.length) {
+        cachedEmb.set(chunkKey(row), row.embedding);
+      }
+    }
+    if (cachedEmb.size) console.log(`resume: ${cachedEmb.size} chunks already embedded locally`);
+  }
+
   const BATCH = 8;
   let upserted = 0;
   let failed = 0;
+  let skipped = 0;
+  let embedded = 0;
   const provider = noEmbed ? 'none' : cfg.embeddingProvider;
   const namespace = 'world';
   for (let i = 0; i < allChunks.length; i += BATCH) {
     const batch = allChunks.slice(i, i + BATCH);
-    let embeddings = null;
+    const needTexts = [];
+    const needIdx = [];
     if (!noEmbed) {
-      const texts = batch.map(c => c.content);
-      embeddings = await embedTexts(texts, {
-        instruction: '为平行人生叙事检索中国大陆时代背景与真实际遇'
+      batch.forEach((c, j) => {
+        const key = chunkKey(c);
+        if (cachedEmb.has(key)) {
+          skipped += 1;
+        } else {
+          needIdx.push(j);
+          needTexts.push(c.content);
+        }
       });
     }
-    const rows = batch.map((c, j) => ({
-      ...c,
-      embedding: embeddings ? embeddings[j] : null,
-      corpus_version: cfg.corpusVersion
-    }));
+    let newEmb = [];
+    if (needTexts.length) {
+      newEmb = await embedTexts(needTexts, {
+        instruction: '为平行人生叙事检索中国大陆时代背景与真实际遇'
+      });
+      embedded += newEmb.length;
+    }
+    let newEmbPtr = 0;
+    const rows = batch.map(c => {
+      const key = chunkKey(c);
+      let emb = null;
+      if (!noEmbed) {
+        emb = cachedEmb.has(key) ? cachedEmb.get(key) : newEmb[newEmbPtr++];
+      }
+      return { ...c, embedding: emb, corpus_version: cfg.corpusVersion };
+    });
     try {
       upserted += await upsertChunks(rows);
     } catch (err) {
@@ -70,7 +105,8 @@ async function main() {
     namespace,
     provider,
     chunk_total: allChunks.length,
-    embed_success: noEmbed ? 0 : allChunks.length - failed,
+    embed_new: embedded,
+    embed_skipped: skipped,
     upsert_success: upserted,
     failed,
     corpus_version: cfg.corpusVersion,

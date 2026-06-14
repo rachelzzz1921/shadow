@@ -61,7 +61,8 @@ Trace：`archive/demo-v0.2/runs/{run_id}.json`
 ## 改 prompt 时
 
 1. 更新 [`03-coding/01-narrative-prompt-protocol.md`](03-coding/01-narrative-prompt-protocol.md) 若口径变
-2. 追加 [`06-task-progress/02-prompt-experiments-log.md`](06-task-progress/02-prompt-experiments-log.md)
+2. 六场景 Agent 改 [`03-coding/prompts/scene-agents/`](03-coding/prompts/scene-agents/)（skill **`scene-agents`**）
+3. 追加 [`06-task-progress/02-prompt-experiments-log.md`](06-task-progress/02-prompt-experiments-log.md)
 3. 用 skill **`tdd`** 跑归档 demo 的 `npm test` + golden eval
 4. 用 skill **`story-review`** 抽检
 

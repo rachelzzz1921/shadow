@@ -84,6 +84,7 @@ function hasAnyKey() {
   return Boolean(
     process.env.ANTHROPIC_API_KEY
     || process.env.OPENAI_API_KEY
+    || process.env.DASHSCOPE_API_KEY
     || process.env.STEPFUN_API_KEY
     || process.env.STEP_API_KEY
   );

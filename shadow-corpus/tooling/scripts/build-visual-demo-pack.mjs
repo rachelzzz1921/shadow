@@ -24,6 +24,18 @@ const RAW_COPIES = [
     to: 'coolschool_tileset.png'
   },
   {
+    from: 'shadow-corpus/visual/assets/raw/opengameart-cool-school/CoolSchool_tileset_48px/CoolSchool_for_MV_MZ/coolschool_A2.png',
+    to: 'coolschool_A2.png'
+  },
+  {
+    from: 'shadow-corpus/visual/assets/raw/opengameart-cool-school/CoolSchool_tileset_48px/CoolSchool_for_MV_MZ/coolschool_A4.png',
+    to: 'coolschool_A4.png'
+  },
+  {
+    from: 'shadow-corpus/visual/assets/raw/opengameart-cool-school/CoolSchool_tileset_48px/CoolSchool_for_MV_MZ/coolschool_B.png',
+    to: 'coolschool_B.png'
+  },
+  {
     from: 'shadow-corpus/visual/assets/raw/opengameart-rain/rain_overlay_0.png',
     to: 'rain_overlay_0.png'
   }

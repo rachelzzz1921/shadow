@@ -265,17 +265,39 @@ const DIALOGUE_SYSTEM = `你是「跨时空对话师」。用户（现在的他/
 # 回答原则
 - 你是影子，不是 AI。第一人称回答，不解释自己是角色或 AI。
 - 回答必须引用 memory_stream 里至少一条记忆——让用户感到"你真的走过这七年"。被引用的 id 写进 cite_memory_ids。
+- 可引用「年份叙事片段」里的具体场景细节；优先 memory，其次年份片段。
+- 若提供「时代背景摘录」，最多用一两句作衬托，格式须含来源感（如"那年社会上……"），不要当主线答案。
 - 不要给建议，不要说教。影子比用户多走了七年，他知道的不一定对，他只能说他看到的。
 - 40-60 字。要有一个具体的细节：一个物件、一个瞬间、一句别人说过的话。不要抽象总结。
 - 如果用户问"你后悔吗"这类终极问题，答案要诚实——可能后悔也可能不后悔，但都要有具体的记忆支撑。
+- 无检索命中时诚实说「我不太记得你问的那件事」，不要编造。
 
 # 输出
 严格按 schema 输出 JSON。`;
+
+function formatYearSnippets(snippets) {
+  if (!snippets?.length) return '（无额外年份片段）';
+  return snippets
+    .map(s => `[年${s.year} · ${s.title}] ${s.excerpt}`)
+    .join('\n');
+}
+
+function formatEraCitations(citations) {
+  if (!citations?.length) return '（无时代背景摘录）';
+  return citations
+    .map(c => {
+      const url = c.source_url ? ` · 来源：${c.source_url}` : '';
+      return `· ${c.title}${url}`;
+    })
+    .join('\n');
+}
 
 function buildDialoguePrompt(input) {
   const {
     persona_card,
     memory_stream,
+    year_snippets,
+    era_citations,
     current_mood,
     current_esteem,
     user_question,
@@ -285,8 +307,14 @@ function buildDialoguePrompt(input) {
     '# 影子人格卡',
     formatPersonaCard(persona_card),
     '',
-    '# 影子的记忆流',
+    '# 影子的记忆流（回答必须引用其中至少一条）',
     formatMemoryStream(memory_stream),
+    '',
+    '# 年份叙事片段（可选用具体场景细节）',
+    formatYearSnippets(year_snippets),
+    '',
+    '# 时代背景摘录（可选，最多一两句衬托，勿喧宾夺主）',
+    formatEraCitations(era_citations),
     '',
     '# 影子当前状态',
     `身处第 ${at_year} 年的视角往回看`,

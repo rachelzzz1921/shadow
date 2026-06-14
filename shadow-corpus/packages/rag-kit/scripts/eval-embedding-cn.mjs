@@ -12,7 +12,7 @@
 
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { loadEnv, ragConfig, worldYearsDir } from '../lib/config.mjs';
+import { loadEnv, ragConfig, worldYearsDir, isConfiguredSecret } from '../lib/config.mjs';
 import { chunkWorldYear } from '../lib/chunk-world.mjs';
 import { embedTexts, cosineSimilarity } from '../lib/embed.mjs';
 import { walkRepoMarkdown } from '../lib/chunk-repo.mjs';
@@ -102,7 +102,7 @@ async function main() {
   const { world, harness } = await buildCorpus();
   console.log(`  world chunks: ${world.length}, harness chunks: ${harness.length}`);
 
-  if (!cfg.dashscopeApiKey && provider === 'dashscope') {
+  if (!isConfiguredSecret(cfg.dashscopeApiKey) && provider === 'dashscope' && !isConfiguredSecret(cfg.zhipuApiKey)) {
     console.error('\nMissing DASHSCOPE_API_KEY — eval requires live embedding API.');
     console.error('Set key in world/.env, or run with --dry-skeleton to print query set only.');
     if (process.argv.includes('--dry-skeleton')) {

@@ -11,6 +11,7 @@
 | 02 | [API 与 JSON 契约](./02-api-and-contract.md) | ✅ |
 | 02b | [P0 迁移：Memory / Reflection / re-plan](./02-p0-memory-reflection-replan.md) | ✅ |
 | 03 | [Demo 文件地图](./03-demo-file-map.md) | ✅ |
+| 03c | [Demo UI 设计文档](../visual/05-ui-design-document.md) | ✅ draft |
 | 03b | [命运 Agent 与 World DB](./03-fate-agent-and-world-db.md) | 📋 队友实现 |
 
 ## 两章关系

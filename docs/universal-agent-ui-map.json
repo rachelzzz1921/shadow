@@ -36,10 +36,9 @@
       "story_tags": ["爱情", "异地", "分手", "复合"],
       "slots": {
         "background": {
-          "asset_id": "PX-UNI-014",
-          "name": "异地车站站台",
-          "usage_case": "两人隔站台或车门，离别 loop",
-          "candidate_only": true
+          "asset_id": "PX-UNI-017",
+          "name": "同居公寓卧室（CC0 纹理：coolschool_B）",
+          "usage_case": "雨夜/出租屋/便利店谈话，B 层家具切片"
         },
         "prop": {
           "asset_id": "PX-UNI-024",
@@ -52,10 +51,9 @@
           "usage_case": "分手/雨夜叠层"
         },
         "ui": {
-          "asset_id": "PX-UNI-019",
-          "name": "像素对话框与头像 UI",
-          "usage_case": "分支选择用 portrait + dialogue box",
-          "candidate_only": true
+          "asset_id": "PX-UNI-018",
+          "name": "手机聊天图标 CC0",
+          "usage_case": "分支选择用 portrait + dialogue box"
         }
       },
       "candidates_pending": ["PX-UNI-013", "PX-UNI-016", "PX-UNI-020"]
@@ -112,10 +110,9 @@
       "story_tags": ["事业", "就业", "城市机会", "面试"],
       "slots": {
         "background": {
-          "asset_id": "PX-UNI-049",
-          "name": "现代办公室主场景",
-          "usage_case": "工位排列表现职场秩序",
-          "candidate_only": true
+          "asset_id": "PX-UNI-045",
+          "name": "校务/办公室 CC0（coolschool_A4）",
+          "usage_case": "工位、文件柜、面试等候"
         },
         "prop": {
           "asset_id": "PX-UNI-060",
@@ -124,10 +121,9 @@
         },
         "fx": null,
         "ui": {
-          "asset_id": "PX-UNI-062",
-          "name": "办公对话 UI",
-          "usage_case": "面试/汇报统一对话框",
-          "candidate_only": true
+          "asset_id": "PX-UNI-046",
+          "name": "考试选择 UI CC0",
+          "usage_case": "面试/汇报选项面板"
         }
       },
       "candidates_pending": ["PX-UNI-051", "PX-UNI-053", "PX-UNI-058"]
