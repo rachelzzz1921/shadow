@@ -1,0 +1,356 @@
+/**
+ * Shadow Demo — UI 迭代 polish 第二轮（轮 13–32）
+ * 规划：idea-refine 收敛轮 · 实现：frontend-ui-engineering
+ */
+
+/* ═══ 轮13 · CTA 呼吸：主按钮可发现性 ═══ */
+.btn-start {
+  animation: cta-glow 2.8s ease-in-out infinite;
+}
+@keyframes cta-glow {
+  0%, 100% { box-shadow: inset 2px 2px 0 rgba(255,255,255,0.35), inset -2px -2px 0 rgba(0,0,0,0.12), 3px 3px 0 rgba(58,50,40,0.18); }
+  50% { box-shadow: inset 2px 2px 0 rgba(255,255,255,0.4), inset -2px -2px 0 rgba(0,0,0,0.1), 3px 3px 0 rgba(58,50,40,0.18), 0 0 16px var(--amber-glow); }
+}
+
+/* ═══ 轮14 · 人格卡：档案袋质感 ═══ */
+.profile-teaser {
+  position: relative;
+  overflow: hidden;
+}
+.profile-teaser::before {
+  content: "PERSONA";
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ink-muted);
+  opacity: 0.45;
+  transform: scale(0.85);
+}
+.profile-teaser .avatar {
+  border-color: var(--amber);
+  box-shadow:
+    inset 2px 2px 0 var(--highlight),
+    3px 3px 0 rgba(58, 50, 40, 0.12),
+    0 0 0 2px var(--amber-glow);
+}
+.pt-name {
+  font-size: 12px;
+  transform: scale(1.15);
+  transform-origin: left center;
+  display: inline-block;
+}
+
+/* ═══ 轮15 · 七年时间轴 ═══ */
+.yr-timeline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 10px auto 6px;
+  max-width: 320px;
+  padding: 6px 8px;
+  background: var(--paper-deep);
+  border: 2px solid var(--panel-edge);
+}
+.yr-timeline-seg {
+  flex: 1;
+  height: 6px;
+  background: var(--paper-shadow);
+  border: 1px solid var(--panel-edge);
+  opacity: 0.55;
+  transition: opacity 0.25s, background 0.25s, transform 0.2s;
+}
+.yr-timeline-seg.past {
+  opacity: 0.85;
+  background: var(--amber-glow);
+}
+.yr-timeline-seg.current {
+  opacity: 1;
+  background: var(--amber);
+  transform: scaleY(1.35);
+  box-shadow: 0 0 0 1px var(--amber-deep);
+}
+.yr-timeline-seg.pivotal.current {
+  background: linear-gradient(90deg, var(--amber-deep), var(--amber-bright));
+}
+
+/* ═══ 轮16 · 对话窗：RPG 文本框 ═══ */
+.dlg-text-area {
+  border-left: 4px solid var(--amber);
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 15px, rgba(58, 50, 40, 0.025) 15px, rgba(58, 50, 40, 0.025) 16px),
+    var(--paper-deep);
+}
+.dlg-box::after {
+  content: "";
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--panel-edge);
+  border-bottom: 2px solid var(--panel-edge);
+  opacity: 0.5;
+}
+
+/* ═══ 轮17 · 记忆流：展开态 ═══ */
+.memory-panel[open] {
+  padding: 8px 10px;
+  background: rgba(235, 227, 209, 0.45);
+  border: 2px dashed var(--panel-edge);
+}
+.memory-panel[open] summary {
+  color: var(--amber-deep);
+  margin-bottom: 6px;
+}
+.memory-list li:last-child { border-bottom: none; }
+.mem-pivotal { border-left: 2px solid var(--amber); padding-left: 8px; }
+
+/* ═══ 轮18 · 人格卡 details ═══ */
+.persona-details[open] summary {
+  color: var(--amber-deep);
+}
+.persona-details[open] {
+  animation: details-open 280ms ease forwards;
+}
+@keyframes details-open {
+  from { opacity: 0.7; }
+  to { opacity: 1; }
+}
+
+/* ═══ 轮19 · source-tag 动态（样式预留） ═══ */
+#source-tag {
+  transition: color 0.3s, border-color 0.3s;
+}
+body[data-scenario="family"] #source-tag { border-color: #c97b5a; color: #8a5038; }
+body[data-scenario="friendship"] #source-tag { border-color: #5a9878; color: #386850; }
+body[data-scenario="career"] #source-tag { border-color: #4a6888; color: #2a4058; }
+body[data-scenario="self_growth"] #source-tag { border-color: #8a78a8; color: #5a4878; }
+
+/* ═══ 轮20 · Landing 圆点：pivotal 标记 ═══ */
+.yr-circle.key::after {
+  content: "◆";
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  font-size: 8px;
+  color: var(--amber-deep);
+}
+.yr-circle { position: relative; }
+
+/* ═══ 轮21 · fate-slot 命运层 ═══ */
+.fate-slot {
+  border-left: 4px solid var(--amber-bright);
+  background:
+    linear-gradient(90deg, rgba(240, 184, 92, 0.14), transparent 60%),
+    var(--panel);
+  font-size: 12px;
+}
+.fate-slot .fate-overlay {
+  padding-left: 4px;
+  border-left: 2px solid rgba(200, 134, 58, 0.35);
+}
+
+/* ═══ 轮22 · 双轨情绪条 mood / esteem ═══ */
+.emo-dual { display: flex; flex-direction: column; gap: 8px; }
+.emo-row-mini {
+  display: grid;
+  grid-template-columns: 52px 1fr 36px;
+  align-items: center;
+  gap: 8px;
+}
+.emo-row-label {
+  color: var(--ink-muted);
+  transform: scale(0.88);
+  transform-origin: left center;
+}
+.emo-row-val {
+  text-align: right;
+  color: var(--ink-soft);
+  transform: scale(0.88);
+}
+.emo-track.thin { height: 8px; }
+.emo-track.thin .emo-fill {
+  background: repeating-linear-gradient(90deg, var(--rose-soft) 0 5px, #d89078 5px 7px);
+}
+.emo-track.thin.esteem .emo-fill {
+  background: repeating-linear-gradient(90deg, #88a8c0 0 5px, var(--sky-warm) 5px 7px);
+}
+
+/* ═══ 轮23 · 画面锚点：引文块 ═══ */
+.yr-visual-block {
+  border-left: 4px solid var(--amber-bright);
+  background: linear-gradient(90deg, rgba(240, 184, 92, 0.08), transparent 70%);
+}
+.yr-visual-anchor {
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.65;
+}
+.yr-visual-anchor::before { content: "「"; opacity: 0.5; }
+.yr-visual-anchor::after { content: "」"; opacity: 0.5; }
+
+/* ═══ 轮24 · Shadow 对话按钮 ═══ */
+.btn-shadow:hover {
+  background: linear-gradient(180deg, var(--paper), var(--amber-glow));
+  box-shadow: inset 2px 2px 0 var(--highlight), 3px 3px 0 rgba(58, 50, 40, 0.14);
+}
+.btn-shadow:active {
+  transform: translateY(1px);
+}
+
+/* ═══ 轮25 · 页内翻页提示弱化（与底栏分工） ═══ */
+.pg-hint {
+  opacity: 0.45;
+  font-size: 11px;
+  margin-top: 12px;
+}
+
+/* ═══ 轮26 · 终章情绪轨迹可视化 ═══ */
+.emo-arc-viz {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  height: 64px;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: var(--paper-deep);
+  border: 2px solid var(--panel-edge);
+}
+.arc-step {
+  flex: 1;
+  max-width: 28px;
+  height: var(--h, 30%);
+  min-height: 4px;
+  background: linear-gradient(180deg, var(--amber-bright), var(--rose-soft));
+  border: 1px solid var(--amber-deep);
+  opacity: 0.85;
+  position: relative;
+}
+.arc-step::after {
+  content: attr(data-y);
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.75);
+  color: var(--ink-muted);
+  font-size: 10px;
+}
+.arc-step:last-child {
+  background: linear-gradient(180deg, var(--sage-light), var(--sage));
+  border-color: var(--sage);
+}
+
+/* ═══ 轮27 · CRT 更柔 ═══ */
+#crt-overlay {
+  opacity: 0.72;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(58, 50, 40, 0.022) 3px, rgba(58, 50, 40, 0.022) 5px);
+}
+
+/* ═══ 轮28 · 粒子随场景（密度在 JS） ═══ */
+body[data-scenario="family"] .ambient-particle { background: #e8a080; width: 4px; height: 4px; }
+body[data-scenario="career"] .ambient-particle { background: #78a0c0; }
+body[data-scenario="self_growth"] .ambient-particle { background: #b8a8d0; }
+#ambient-particles.dense .ambient-particle { opacity: 0.55; }
+
+/* ═══ 轮29 · 页切换 announcer（视觉隐藏） ═══ */
+#page-announcer {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ═══ 轮30 · 年份页顶栏场景色条 ═══ */
+.p-year::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--amber);
+  opacity: 0.85;
+}
+body[data-scenario="family"] .p-year::before { background: #c97b5a; }
+body[data-scenario="friendship"] .p-year::before { background: #5a9878; }
+body[data-scenario="career"] .p-year::before { background: #4a6888; }
+body[data-scenario="self_growth"] .p-year::before { background: #8a78a8; }
+body[data-scenario="love"] .p-year::before { background: #c86b88; }
+#p-final::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--sage);
+}
+
+/* ═══ 轮31 · 岔路口标签 ═══ */
+.intervention-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.intervention-label::before {
+  content: "◆";
+  color: var(--amber-bright);
+  animation: pivot-blink 1.2s steps(2) infinite;
+}
+@keyframes pivot-blink {
+  50% { opacity: 0.35; }
+}
+
+/* ═══ 轮32 · 对话 nametag 随场景 ═══ */
+body[data-scenario="family"] .dlg-nametag { color: #8a5038; border-color: #c97b5a; }
+body[data-scenario="friendship"] .dlg-nametag { color: #386850; border-color: #5a9878; }
+body[data-scenario="career"] .dlg-nametag { color: #2a4058; border-color: #4a6888; }
+body[data-scenario="self_growth"] .dlg-nametag { color: #5a4878; border-color: #8a78a8; }
+
+/* ═══ 通用：六域 overlay 占位 ═══ */
+.universal-asset-overlay {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  z-index: 8;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 9px;
+  line-height: 1.3;
+  pointer-events: none;
+  opacity: 0.72;
+}
+.uao-pack {
+  padding: 1px 4px;
+  background: rgba(58, 50, 40, 0.55);
+  color: rgba(255, 253, 248, 0.9);
+  border: 1px solid rgba(255, 253, 248, 0.2);
+}
+.uao-slot {
+  padding: 1px 3px;
+  background: rgba(0, 0, 0, 0.35);
+  color: rgba(200, 220, 240, 0.85);
+}
+.uao-slot[data-tier="cc0_ready"] { color: rgba(184, 212, 180, 0.95); }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-start { animation: none !important; }
+  .intervention-label::before { animation: none; }
+}
+
+@media (max-width: 480px) {
+  .yr-timeline { max-width: 280px; gap: 2px; }
+  .emo-row-mini { grid-template-columns: 44px 1fr 28px; }
+}

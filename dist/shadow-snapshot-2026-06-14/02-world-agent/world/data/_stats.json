@@ -1,0 +1,380 @@
+[
+  {
+    "year": 2006,
+    "macro": 68,
+    "micro": 284,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 5,
+    "notebooklm": true,
+    "notebooklm_gaps": 4,
+    "scenarios": {
+      "family": 50,
+      "love": 40,
+      "friendship": 51,
+      "academic": 48,
+      "career": 57,
+      "self_growth": 38
+    }
+  },
+  {
+    "year": 2007,
+    "macro": 86,
+    "micro": 309,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 7,
+    "notebooklm": true,
+    "notebooklm_gaps": 3,
+    "scenarios": {
+      "family": 55,
+      "love": 43,
+      "friendship": 51,
+      "academic": 57,
+      "career": 62,
+      "self_growth": 41
+    }
+  },
+  {
+    "year": 2008,
+    "macro": 60,
+    "micro": 311,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 7,
+    "notebooklm": true,
+    "notebooklm_gaps": 3,
+    "scenarios": {
+      "family": 58,
+      "love": 41,
+      "friendship": 52,
+      "academic": 57,
+      "career": 61,
+      "self_growth": 42
+    }
+  },
+  {
+    "year": 2009,
+    "macro": 52,
+    "micro": 309,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 8,
+    "notebooklm": true,
+    "notebooklm_gaps": 3,
+    "scenarios": {
+      "family": 57,
+      "love": 42,
+      "friendship": 52,
+      "academic": 52,
+      "career": 63,
+      "self_growth": 43
+    }
+  },
+  {
+    "year": 2010,
+    "macro": 51,
+    "micro": 309,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 8,
+    "notebooklm": true,
+    "notebooklm_gaps": 3,
+    "scenarios": {
+      "family": 59,
+      "love": 41,
+      "friendship": 53,
+      "academic": 51,
+      "career": 62,
+      "self_growth": 43
+    }
+  },
+  {
+    "year": 2011,
+    "macro": 50,
+    "micro": 310,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 8,
+    "notebooklm": true,
+    "notebooklm_gaps": 3,
+    "scenarios": {
+      "family": 56,
+      "love": 42,
+      "friendship": 54,
+      "academic": 52,
+      "career": 63,
+      "self_growth": 43
+    }
+  },
+  {
+    "year": 2012,
+    "macro": 49,
+    "micro": 309,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 8,
+    "notebooklm": true,
+    "notebooklm_gaps": 3,
+    "scenarios": {
+      "family": 58,
+      "love": 42,
+      "friendship": 53,
+      "academic": 51,
+      "career": 62,
+      "self_growth": 43
+    }
+  },
+  {
+    "year": 2013,
+    "macro": 58,
+    "micro": 309,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 8,
+    "notebooklm": true,
+    "notebooklm_gaps": 5,
+    "scenarios": {
+      "family": 56,
+      "love": 43,
+      "friendship": 53,
+      "academic": 55,
+      "career": 63,
+      "self_growth": 39
+    }
+  },
+  {
+    "year": 2014,
+    "macro": 57,
+    "micro": 309,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 8,
+    "notebooklm": true,
+    "notebooklm_gaps": 6,
+    "scenarios": {
+      "family": 55,
+      "love": 42,
+      "friendship": 53,
+      "academic": 54,
+      "career": 63,
+      "self_growth": 42
+    }
+  },
+  {
+    "year": 2015,
+    "macro": 58,
+    "micro": 308,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 8,
+    "notebooklm": true,
+    "notebooklm_gaps": 6,
+    "scenarios": {
+      "family": 56,
+      "love": 41,
+      "friendship": 54,
+      "academic": 55,
+      "career": 62,
+      "self_growth": 40
+    }
+  },
+  {
+    "year": 2016,
+    "macro": 58,
+    "micro": 308,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 8,
+    "notebooklm": true,
+    "notebooklm_gaps": 4,
+    "scenarios": {
+      "family": 59,
+      "love": 42,
+      "friendship": 51,
+      "academic": 56,
+      "career": 63,
+      "self_growth": 37
+    }
+  },
+  {
+    "year": 2017,
+    "macro": 57,
+    "micro": 309,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 8,
+    "notebooklm": true,
+    "notebooklm_gaps": 3,
+    "scenarios": {
+      "family": 57,
+      "love": 42,
+      "friendship": 54,
+      "academic": 56,
+      "career": 61,
+      "self_growth": 39
+    }
+  },
+  {
+    "year": 2018,
+    "macro": 58,
+    "micro": 307,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 8,
+    "notebooklm": true,
+    "notebooklm_gaps": 3,
+    "scenarios": {
+      "family": 57,
+      "love": 42,
+      "friendship": 51,
+      "academic": 56,
+      "career": 63,
+      "self_growth": 38
+    }
+  },
+  {
+    "year": 2019,
+    "macro": 56,
+    "micro": 307,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 8,
+    "notebooklm": true,
+    "notebooklm_gaps": 3,
+    "scenarios": {
+      "family": 58,
+      "love": 42,
+      "friendship": 51,
+      "academic": 57,
+      "career": 61,
+      "self_growth": 38
+    }
+  },
+  {
+    "year": 2020,
+    "macro": 47,
+    "micro": 308,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 5,
+    "notebooklm": true,
+    "notebooklm_gaps": 4,
+    "scenarios": {
+      "family": 57,
+      "love": 42,
+      "friendship": 51,
+      "academic": 53,
+      "career": 60,
+      "self_growth": 45
+    }
+  },
+  {
+    "year": 2021,
+    "macro": 47,
+    "micro": 307,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 5,
+    "notebooklm": true,
+    "notebooklm_gaps": 5,
+    "scenarios": {
+      "family": 56,
+      "love": 42,
+      "friendship": 51,
+      "academic": 55,
+      "career": 61,
+      "self_growth": 42
+    }
+  },
+  {
+    "year": 2022,
+    "macro": 47,
+    "micro": 307,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 5,
+    "notebooklm": true,
+    "notebooklm_gaps": 4,
+    "scenarios": {
+      "family": 55,
+      "love": 43,
+      "friendship": 54,
+      "academic": 50,
+      "career": 61,
+      "self_growth": 44
+    }
+  },
+  {
+    "year": 2023,
+    "macro": 47,
+    "micro": 307,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 5,
+    "notebooklm": true,
+    "notebooklm_gaps": 4,
+    "scenarios": {
+      "family": 56,
+      "love": 42,
+      "friendship": 53,
+      "academic": 54,
+      "career": 61,
+      "self_growth": 41
+    }
+  },
+  {
+    "year": 2024,
+    "macro": 61,
+    "micro": 308,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 5,
+    "notebooklm": true,
+    "notebooklm_gaps": 4,
+    "scenarios": {
+      "family": 56,
+      "love": 43,
+      "friendship": 53,
+      "academic": 55,
+      "career": 60,
+      "self_growth": 41
+    }
+  },
+  {
+    "year": 2025,
+    "macro": 63,
+    "micro": 308,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 6,
+    "notebooklm": true,
+    "notebooklm_gaps": 4,
+    "scenarios": {
+      "family": 56,
+      "love": 43,
+      "friendship": 54,
+      "academic": 54,
+      "career": 60,
+      "self_growth": 41
+    }
+  },
+  {
+    "year": 2026,
+    "macro": 63,
+    "micro": 308,
+    "atmosphere_keys": 19,
+    "pop": 22,
+    "sources": 6,
+    "notebooklm": true,
+    "notebooklm_gaps": 4,
+    "scenarios": {
+      "family": 55,
+      "love": 43,
+      "friendship": 53,
+      "academic": 53,
+      "career": 60,
+      "self_growth": 44
+    }
+  }
+]

@@ -1,0 +1,589 @@
+/**
+ * 透明像素主角 + CC0 背景叠层 — 复读线 / 爱情线配图 v1
+ */
+
+/* ─── 富视觉场景条（更高、更沉浸） ─── */
+.pixel-scene.scene-rich {
+  height: 176px;
+  max-width: 680px;
+  border-width: 3px;
+  box-shadow:
+    inset 0 0 0 2px var(--highlight),
+    0 8px 0 rgba(58, 50, 40, 0.08);
+}
+
+.pixel-scene.scene-rich .scene-backdrop.has-cc0-texture {
+  background-blend-mode: soft-light, normal;
+  image-rendering: pixelated;
+}
+
+.pixel-scene.scene-rich::after {
+  background: radial-gradient(ellipse at 55% 42%, transparent 28%, rgba(247, 240, 227, 0.32) 100%);
+}
+
+/* 情绪染色层 */
+.scene-mood-tint {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+  transition: background 400ms ease;
+}
+
+.scene-mood-tint.mood-fx-warm {
+  background: linear-gradient(180deg, rgba(255, 210, 140, 0.28) 0%, transparent 55%) !important;
+  mix-blend-mode: soft-light;
+}
+
+.scene-mood-tint.mood-fx-cold {
+  background: linear-gradient(180deg, rgba(80, 110, 180, 0.32) 0%, rgba(40, 50, 80, 0.15) 100%) !important;
+}
+
+.scene-mood-tint.mood-fx-night {
+  background: linear-gradient(180deg, rgba(20, 25, 55, 0.45) 0%, rgba(10, 12, 30, 0.2) 60%) !important;
+}
+
+.scene-mood-tint.mood-fx-flat {
+  background: linear-gradient(180deg, rgba(120, 120, 120, 0.18) 0%, transparent 70%) !important;
+  filter: saturate(0.88);
+}
+
+/* ─── 透明主角 PNG ─── */
+.pixel-scene.scene-rich .sprite-wrap.has-hero-png {
+  left: 10%;
+  bottom: 14%;
+  width: 112px;
+  height: 112px;
+  z-index: 4;
+}
+
+.sprite-wrap .sprite.hero-png {
+  width: 112px;
+  height: 112px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  background: none;
+  filter: drop-shadow(0 6px 0 rgba(58, 50, 40, 0.12)) drop-shadow(0 12px 18px rgba(58, 50, 40, 0.18));
+}
+
+.pixel-scene.scene-rich .sprite-glow {
+  width: 72px;
+  height: 14px;
+  bottom: 2px;
+  opacity: 0.35;
+}
+
+.sprite-wrap.pose-hurt .sprite.hero-png {
+  transform: rotate(-3deg) scale(0.96);
+  filter: drop-shadow(0 4px 0 rgba(58, 50, 40, 0.1)) saturate(0.88);
+}
+
+.sprite-wrap.pose-cast .sprite.hero-png {
+  animation: sprite-celebrate 1.2s ease-in-out infinite;
+}
+
+.sprite-wrap.pose-doing .sprite.hero-png,
+.sprite-wrap.pose-write .sprite.hero-png,
+.sprite-wrap.pose-phone .sprite.hero-png {
+  animation: sprite-work 0.9s ease-in-out infinite;
+}
+
+.sprite-wrap.pose-hurt.has-hero-png {
+  left: 8%;
+  bottom: 12%;
+}
+
+/* ─── 天气 / 节庆 FX ─── */
+.scene-fx-rain.is-active {
+  opacity: 0.48 !important;
+}
+
+.scene-fx-night.is-active {
+  opacity: 1 !important;
+  background: linear-gradient(180deg, rgba(15, 18, 40, 0.55) 0%, rgba(8, 10, 24, 0.15) 45%, transparent 70%);
+}
+
+.scene-fx-lantern.is-active {
+  position: absolute;
+  top: 8px;
+  right: 14%;
+  width: 28px;
+  height: 36px;
+  z-index: 3;
+  background: radial-gradient(circle at 50% 35%, #ffd080 0%, #e8a040 45%, transparent 70%);
+  border-radius: 4px 4px 8px 8px;
+  box-shadow:
+    0 0 24px rgba(255, 180, 60, 0.55),
+    0 0 48px rgba(255, 140, 40, 0.25);
+  animation: lantern-sway 2.4s ease-in-out infinite;
+}
+
+@keyframes lantern-sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+.scene-street-lamps {
+  position: absolute;
+  top: 18px;
+  left: 8%;
+  right: 8%;
+  height: 24px;
+  z-index: 2;
+  background:
+    radial-gradient(circle at 12% 80%, rgba(255, 200, 100, 0.45) 0%, transparent 35%),
+    radial-gradient(circle at 88% 80%, rgba(255, 200, 100, 0.45) 0%, transparent 35%);
+  pointer-events: none;
+}
+
+/* ─── 道具 chip ─── */
+.scene-prop-chips {
+  position: absolute;
+  left: 10px;
+  bottom: 8px;
+  z-index: 6;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: 58%;
+}
+
+.pixel-scene.scene-rich .scene-prop-chips {
+  left: auto;
+  right: 10px;
+  bottom: 10px;
+  max-width: 46%;
+  justify-content: flex-end;
+}
+
+.scene-prop-chip {
+  font-size: 10px;
+  padding: 3px 8px;
+  border: 2px solid var(--panel-edge);
+  background: rgba(255, 253, 248, 0.92);
+  color: var(--ink-soft);
+  border-radius: 999px;
+  box-shadow: 2px 2px 0 rgba(58, 50, 40, 0.08);
+  backdrop-filter: blur(2px);
+}
+
+.pixel-scene.scene-rich .scene-tag {
+  font-size: 11px;
+  background: rgba(255, 253, 248, 0.82);
+  backdrop-filter: blur(3px);
+}
+
+.scene-desk-prop {
+  position: absolute;
+  bottom: 28%;
+  left: 18%;
+  width: 48px;
+  height: 20px;
+  background: var(--panel-edge);
+  border-radius: 2px;
+  opacity: 0.35;
+  z-index: 2;
+}
+
+/* ─── 画面锚点文案块 ─── */
+.yr-visual-block {
+  margin-top: 10px;
+}
+
+.yr-visual-anchor {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0 0 6px;
+}
+
+.yr-props {
+  display: block;
+  font-size: 11px;
+  color: var(--amber);
+  letter-spacing: 0.5px;
+}
+
+.yr-daily-micro {
+  display: block;
+  margin-top: 6px;
+  font-size: 10px;
+  color: var(--ink-muted);
+  font-family: monospace;
+}
+
+.yr-mood-visual {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(232, 178, 92, 0.15);
+  color: var(--amber);
+  border: 1px solid rgba(232, 178, 92, 0.35);
+}
+
+/* 素材 debug 叠层 — Demo 对人审隐藏（开发可在 DOM 保留） */
+.visual-layout-overlay,
+.extended-asset-overlay,
+.universal-asset-overlay {
+  display: none !important;
+}
+
+/* 场景底部道具 chip + PIVOTAL/QUIET 条 — 对人审隐藏 */
+.pixel-scene .scene-prop-chips,
+.pixel-scene .scene-tag {
+  display: none !important;
+}
+
+@media (max-width: 520px) {
+  .pixel-scene.scene-rich {
+    height: 148px;
+  }
+  .pixel-scene.scene-rich .sprite-wrap.has-hero-png {
+    left: 6%;
+    bottom: 10%;
+    transform: scale(0.88);
+    transform-origin: left bottom;
+  }
+}
+
+/* ─── 未复读线 · Mana Seed 动画分镜层 ─── */
+.pixel-scene.wufuxdu-cinematic {
+  height: 248px;
+  min-height: 248px;
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  max-width: 680px;
+  overflow: hidden;
+  --wfd-warm: 0.15;
+  --wfd-gold: rgba(245, 190, 92, var(--wfd-warm));
+}
+.pixel-scene.wufuxdu-cinematic.warmth-1 { --wfd-warm: 0.12; }
+.pixel-scene.wufuxdu-cinematic.warmth-2 { --wfd-warm: 0.18; }
+.pixel-scene.wufuxdu-cinematic.warmth-3 { --wfd-warm: 0.24; }
+.pixel-scene.wufuxdu-cinematic.warmth-4 { --wfd-warm: 0.32; }
+.pixel-scene.wufuxdu-cinematic.warmth-5 { --wfd-warm: 0.38; }
+.pixel-scene.wufuxdu-cinematic.warmth-6 { --wfd-warm: 0.52; }
+.pixel-scene.wufuxdu-cinematic.warmth-7 { --wfd-warm: 0.62; }
+.pixel-scene.wufuxdu-cinematic .scene-backdrop { animation: wfd-slow-pan 18s linear infinite; }
+.pixel-scene.wufuxdu-cinematic .scene-mood-tint {
+  opacity: 1;
+  background:
+    radial-gradient(circle at 72% 24%, rgba(255, 220, 150, calc(var(--wfd-warm) + .12)), transparent 24%),
+    linear-gradient(90deg, rgba(80, 90, 130, .12), var(--wfd-gold));
+}
+.wfd-cinematic-layer { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+.wfd-cinematic-layer > * { position: absolute; image-rendering: pixelated; }
+.wfd-sky-drift {
+  inset: 8px 0 auto 0;
+  height: 42px;
+  opacity: .42;
+  background:
+    radial-gradient(circle at 12% 55%, rgba(255,255,255,.75) 0 5px, transparent 6px),
+    radial-gradient(circle at 38% 42%, rgba(255,255,255,.52) 0 8px, transparent 9px),
+    radial-gradient(circle at 76% 48%, rgba(255,255,255,.6) 0 6px, transparent 7px);
+  animation: wfd-clouds 20s linear infinite;
+}
+.wfd-season-overlay {
+  inset: 0;
+  opacity: .2;
+  background: repeating-linear-gradient(115deg, transparent 0 28px, rgba(255, 220, 150, .3) 28px 30px);
+}
+.wfd-fog {
+  inset: 0;
+  opacity: 0;
+  background: linear-gradient(90deg, rgba(240,240,255,.34), transparent 35%, rgba(240,240,255,.18));
+  filter: blur(2px);
+}
+.wfd-lantern {
+  top: 12px;
+  left: 62%;
+  width: 18px;
+  height: 24px;
+  opacity: 0;
+  background: #d8893a;
+  border: 2px solid rgba(80,45,20,.35);
+  box-shadow: 0 0 16px rgba(245, 170, 70, .45);
+  animation: wfd-lantern-sway 2.4s ease-in-out infinite;
+}
+.wfd-transport {
+  right: -80px;
+  bottom: 48px;
+  width: 70px;
+  height: 20px;
+  opacity: 0;
+  background:
+    linear-gradient(90deg, #5a6c88 0 58px, transparent 58px),
+    radial-gradient(circle at 14px 19px, #2a2a34 0 5px, transparent 6px),
+    radial-gradient(circle at 50px 19px, #2a2a34 0 5px, transparent 6px);
+}
+.wfd-particles {
+  inset: 0;
+  opacity: 0;
+  background:
+    radial-gradient(circle, rgba(255, 230, 150, .9) 0 2px, transparent 3px) 18% 28% / 54px 54px,
+    radial-gradient(circle, rgba(255, 230, 150, .55) 0 1px, transparent 2px) 42% 40% / 38px 38px;
+  animation: wfd-particle-rise 2.4s linear infinite;
+}
+.wfd-window-light {
+  top: 24px;
+  right: 20%;
+  width: 72px;
+  height: 42px;
+  opacity: .25;
+  background: linear-gradient(115deg, rgba(255, 224, 142, .8), transparent 72%);
+  clip-path: polygon(20% 0, 100% 0, 70% 100%, 0 100%);
+}
+.wfd-luggage {
+  left: -34px;
+  bottom: 42px;
+  width: 22px;
+  height: 28px;
+  background: #835f4b;
+  border: 2px solid rgba(58, 50, 40, .4);
+  box-shadow: inset 4px 0 0 rgba(255,255,255,.13), 0 -6px 0 -2px #6f5142;
+}
+.wfd-prop {
+  right: 22%;
+  bottom: 72px;
+  width: 18px;
+  height: 14px;
+  background: #f1dfb9;
+  border: 2px solid rgba(58, 50, 40, .35);
+  opacity: .88;
+}
+.wfd-prop-b {
+  right: 17%;
+  bottom: 58px;
+  width: 24px;
+  height: 10px;
+  opacity: .72;
+}
+.wfd-npc-row {
+  right: 12%;
+  bottom: 46px;
+  display: flex;
+  gap: 7px;
+  opacity: 0;
+}
+.wfd-npc-row span {
+  position: static;
+  width: 14px;
+  height: 22px;
+  background: #6b7f82;
+  box-shadow: 0 6px 0 #3f4d52;
+  animation: wfd-npc-idle 1.4s ease-in-out infinite;
+}
+.wfd-npc-row span:nth-child(2) { animation-delay: .15s; background: #826b74; }
+.wfd-npc-row span:nth-child(3) { animation-delay: .28s; background: #7b7d58; }
+.wfd-npc-row span:nth-child(4) { animation-delay: .42s; background: #6f6f8b; }
+.wfd-npc-row .is-empty {
+  background: transparent;
+  box-shadow: inset 0 -3px 0 rgba(58,50,40,.3);
+  animation: none;
+  opacity: .55;
+}
+.wfd-flashback {
+  left: 10%;
+  bottom: 58px;
+  width: 30px;
+  height: 42px;
+  opacity: 0;
+  border: 2px dashed rgba(255, 230, 170, .6);
+  background: rgba(255, 230, 170, .22);
+}
+.wfd-hud {
+  top: 8px;
+  right: 8px;
+  width: 96px;
+  padding: 4px 5px;
+  z-index: 5;
+  color: rgba(255, 250, 220, .9);
+  background: rgba(58, 50, 40, .48);
+  border: 1px solid rgba(255, 230, 170, .45);
+  font-size: 10px;
+}
+.wfd-hud i {
+  display: block;
+  height: 4px;
+  margin-top: 3px;
+  background: linear-gradient(90deg, #f2b65e var(--p), rgba(255,255,255,.18) var(--p));
+}
+.wfd-asset-strip {
+  left: 8px;
+  top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 360px;
+  gap: 4px;
+  z-index: 5;
+}
+.wfd-asset {
+  position: static;
+  padding: 1px 4px;
+  color: rgba(70, 55, 35, .9);
+  background: rgba(255, 245, 220, .68);
+  border: 1px solid rgba(120, 90, 50, .28);
+  font-size: 9px;
+}
+.wufuxdu-cinematic .sprite-wrap.has-hero-png {
+  width: 112px;
+  height: 112px;
+}
+.wufuxdu-cinematic .sprite-wrap {
+  z-index: 4;
+  animation: sprite-slide-in 680ms var(--ease-soft) forwards, wfd-breathe 1.8s ease-in-out infinite 700ms;
+}
+.wufuxdu-cinematic.mode-luggage-window .wfd-luggage { animation: wfd-drag-luggage 2.8s steps(8, end) forwards; }
+.wufuxdu-cinematic.mode-luggage-window .sprite-wrap { left: 18%; bottom: 44%; }
+.wufuxdu-cinematic.mode-luggage-window .wfd-prop-a {
+  right: 23%;
+  bottom: 96px;
+  border-radius: 2px;
+  animation: wfd-phone-glow 2.4s steps(2, end) infinite;
+}
+.wufuxdu-cinematic.mode-raise-hand .sprite-wrap {
+  left: 46%;
+  bottom: 38%;
+  animation: sprite-slide-in 400ms var(--ease-soft) forwards, wfd-raise-hand 1.8s ease-in-out infinite .5s;
+}
+.wufuxdu-cinematic.mode-raise-hand .wfd-window-light { opacity: .5; animation: wfd-light-sweep 3.2s ease-in-out infinite; }
+.wufuxdu-cinematic.mode-raise-hand .wfd-prop-a {
+  left: 22%;
+  right: auto;
+  bottom: 54px;
+  width: 12px;
+  height: 16px;
+  background: #93b978;
+}
+.wufuxdu-cinematic.mode-count-crowd .wfd-npc-row { opacity: 1; animation: wfd-crowd-fade 4s ease-in-out infinite; }
+.wufuxdu-cinematic.mode-count-crowd .sprite-wrap { left: 25%; bottom: 35%; }
+.wufuxdu-cinematic.mode-count-crowd .wfd-particles { opacity: .75; }
+.wufuxdu-cinematic.mode-coffee-snow .wfd-transport { opacity: 1; animation: wfd-vehicle 6s linear infinite; }
+.wufuxdu-cinematic.mode-coffee-snow .wfd-season-overlay {
+  opacity: .38;
+  background: radial-gradient(circle, rgba(255,255,255,.9) 0 1px, transparent 2px) 0 0 / 34px 34px;
+  animation: wfd-snow 8s linear infinite;
+}
+.wufuxdu-cinematic.mode-coffee-snow .wfd-prop-a {
+  right: 31%;
+  bottom: 55px;
+  width: 18px;
+  height: 18px;
+  border-radius: 0 0 8px 8px;
+  animation: wfd-steam 1.8s ease-in-out infinite;
+}
+.wufuxdu-cinematic.mode-admitted-flashback .wfd-window-light {
+  opacity: .75;
+  width: 170px;
+  right: 8%;
+  animation: wfd-golden-shift 4s ease-in-out infinite;
+}
+.wufuxdu-cinematic.mode-admitted-flashback .wfd-prop-a {
+  right: 24%;
+  bottom: 74px;
+  width: 62px;
+  height: 30px;
+}
+.wufuxdu-cinematic.mode-admitted-flashback .wfd-prop-a::after {
+  content: "拟录取";
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  font-size: 9px;
+  color: #6b4a21;
+}
+.wufuxdu-cinematic.mode-admitted-flashback .wfd-flashback { animation: wfd-flashback 4.2s ease-in-out infinite; }
+.wufuxdu-cinematic.mode-admitted-flashback .wfd-particles { opacity: .85; }
+.wufuxdu-cinematic.mode-focus-night .wfd-fog {
+  opacity: .5;
+  animation: wfd-fog-clear 5.4s ease-in-out infinite;
+}
+.wufuxdu-cinematic.mode-focus-night .wfd-sky-drift {
+  top: 4px;
+  opacity: .55;
+  background:
+    radial-gradient(circle at 16% 30%, #fff 0 1px, transparent 2px),
+    radial-gradient(circle at 42% 55%, #fff 0 1px, transparent 2px),
+    radial-gradient(circle at 74% 38%, #fff 0 1px, transparent 2px);
+}
+.wufuxdu-cinematic.mode-focus-night .wfd-prop-a { animation: wfd-page-flip 1.6s steps(3, end) infinite; }
+.wufuxdu-cinematic.mode-graduation-toast .wfd-npc-row {
+  opacity: 1;
+  right: 18%;
+  bottom: 52px;
+}
+.wufuxdu-cinematic.mode-graduation-toast .wfd-lantern { opacity: 1; }
+.wufuxdu-cinematic.mode-graduation-toast .sprite-wrap {
+  left: 24%;
+  bottom: 33%;
+  animation: sprite-slide-in 520ms var(--ease-soft) forwards, wfd-toast 2.5s ease-in-out infinite .6s;
+}
+.yr-animation-beats {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+}
+.yr-animation-beats li {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 6px;
+  color: var(--ink-soft);
+  font-size: 11px;
+  line-height: 1.45;
+}
+.yr-animation-beats li span {
+  display: inline-grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  color: var(--amber-deep);
+  background: var(--amber-glow);
+  border: 1px solid rgba(200, 134, 58, .38);
+}
+@keyframes wfd-slow-pan { 50% { background-position: 8px 0, 0 0; } }
+@keyframes wfd-clouds { to { transform: translateX(80px); } }
+@keyframes wfd-breathe { 50% { transform: translateY(1px); } }
+@keyframes wfd-drag-luggage { to { left: 22%; } }
+@keyframes wfd-phone-glow { 50% { box-shadow: 0 0 14px rgba(255,230,120,.8); } }
+@keyframes wfd-raise-hand {
+  0%, 100% { transform: translateX(0) translateY(0) rotate(0); }
+  30% { transform: translateX(1px) translateY(-4px) rotate(-2deg); }
+  36% { transform: translateX(-1px) translateY(-4px) rotate(1deg); }
+  42% { transform: translateX(1px) translateY(-4px) rotate(-1deg); }
+}
+@keyframes wfd-light-sweep { 50% { transform: translateX(-34px); opacity: .72; } }
+@keyframes wfd-npc-idle { 50% { transform: translateY(1px); } }
+@keyframes wfd-crowd-fade {
+  0%, 20% { opacity: 1; transform: translateX(0); }
+  68%, 100% { opacity: .28; transform: translateX(34px); }
+}
+@keyframes wfd-particle-rise { to { background-position: 18% -60px, 42% -40px; } }
+@keyframes wfd-vehicle { from { right: -80px; } to { right: 110%; } }
+@keyframes wfd-snow { to { background-position: 30px 90px; } }
+@keyframes wfd-steam { 50% { box-shadow: 0 -14px 0 -9px rgba(255,255,255,.7), 0 -24px 0 -12px rgba(255,255,255,.35); } }
+@keyframes wfd-golden-shift { 50% { transform: translateX(-24px); opacity: .9; } }
+@keyframes wfd-flashback {
+  0%, 58%, 100% { opacity: 0; transform: scale(.9); }
+  68%, 82% { opacity: .7; transform: scale(1); }
+}
+@keyframes wfd-fog-clear {
+  0%, 30% { opacity: .58; transform: translateX(-18px); }
+  72%, 100% { opacity: .08; transform: translateX(34px); }
+}
+@keyframes wfd-page-flip { 50% { transform: rotateX(38deg) translateY(1px); } }
+@keyframes wfd-lantern-sway { 50% { transform: rotate(4deg); } }
+@keyframes wfd-toast { 50% { transform: translateY(-3px) rotate(-2deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .wufuxdu-cinematic *,
+  .yr-animation-beats * {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}

@@ -8,12 +8,14 @@
   const WIPE_ROWS = 12;
   const ACTOR_COVER_MS = 480;
   const ACTOR_EXIT_MS = 180;
+  const ACTOR_REVEAL_MS = 320;
   const WIPE_MS = 440;
   const STAGGER_MS = 48;
 
   let wipeRoot = null;
   let actorRoot = null;
   let busy = false;
+  let transitionGen = 0;
 
   function prefersReducedMotion() {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -260,7 +262,14 @@
    * @returns {Promise<boolean>}
    */
   async function pageTransition(mutateDom, direction, scenarioKey) {
-    if (busy) return false;
+    const gen = ++transitionGen;
+
+    if (busy) {
+      resetOverlays();
+      mutateDom();
+      busy = false;
+      return true;
+    }
 
     const theme = resolveTheme(scenarioKey);
     const mode = theme.transition || 'walk';
@@ -278,40 +287,68 @@
       window.ShadowScenarios?.applyScenario(scenarioKey || 'academic');
 
       await playActorCover(theme, direction);
+      if (gen !== transitionGen) return true;
 
       if (withWipe) {
         await playActorExit(theme);
+        if (gen !== transitionGen) return true;
         await playWipe('in', direction);
+        if (gen !== transitionGen) return true;
       } else if (mode === 'door') {
         await wait(120);
+        if (gen !== transitionGen) return true;
         mutateDom();
         await playActorReveal(theme, direction);
         return true;
       } else if (mode === 'pulse' || mode === 'wave') {
         await playActorExit(theme);
+        if (gen !== transitionGen) return true;
       }
 
       if (withWipe || mode === 'pulse' || mode === 'wave') {
         mutateDom();
         await wait(16);
+        if (gen !== transitionGen) return true;
         if (withWipe) await playWipe('out', direction);
       }
 
       return true;
     } catch (err) {
       console.error('[ShadowTransitions]', err);
-      mutateDom();
+      if (gen === transitionGen) mutateDom();
       return true;
     } finally {
-      busy = false;
-      resetOverlays();
+      if (gen === transitionGen) {
+        busy = false;
+        resetOverlays();
+      }
     }
   }
 
+  function revealEnterItems(root) {
+    if (!root) return;
+    root.querySelectorAll('.enter-item').forEach(el => {
+      el.classList.add('enter-active');
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      el.style.animation = 'none';
+    });
+  }
+
   function staggerEnter(root) {
-    if (!root || prefersReducedMotion()) return;
-    root.querySelectorAll('.enter-item').forEach((el, idx) => {
+    if (!root) return;
+
+    const items = root.querySelectorAll('.enter-item');
+    if (prefersReducedMotion()) {
+      revealEnterItems(root);
+      return;
+    }
+
+    items.forEach((el, idx) => {
       el.classList.remove('enter-active');
+      el.style.opacity = '';
+      el.style.transform = '';
+      el.style.animation = '';
       el.style.animationDelay = `${idx * STAGGER_MS}ms`;
       void el.offsetWidth;
       el.classList.add('enter-active');
@@ -330,6 +367,17 @@
       void sprite.offsetWidth;
       sprite.classList.add('sprite-enter');
     }
+
+    const fallbackMs = items.length * STAGGER_MS + 640;
+    setTimeout(() => {
+      items.forEach(el => {
+        if (parseFloat(getComputedStyle(el).opacity) < 0.5) {
+          el.classList.add('enter-active');
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        }
+      });
+    }, fallbackMs);
   }
 
   function initLanding() {

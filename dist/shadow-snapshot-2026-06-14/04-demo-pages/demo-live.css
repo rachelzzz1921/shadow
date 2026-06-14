@@ -1,0 +1,229 @@
+/**
+ * Live 七年生成 — 与 demo.html / intake 同套 16-bit 壳
+ */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#live-viewport {
+  position: fixed;
+  inset: 52px 12px 72px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#live-root {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 8px 8px 32px;
+}
+
+.live-head {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.live-head .landing-tagline {
+  font-size: 13px;
+  color: var(--ink-muted);
+  margin-top: 8px;
+}
+
+.live-grid {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .live-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.live-main-panel {
+  padding: 20px 18px;
+}
+
+.live-aside-panel {
+  padding: 18px 16px;
+  position: sticky;
+  top: 8px;
+}
+
+.live-provider-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-family: monospace;
+  letter-spacing: 1px;
+  color: var(--amber);
+  margin-bottom: 10px;
+}
+
+.live-progress-bar {
+  height: 8px;
+  background: var(--panel-inset);
+  border: 2px solid var(--panel-edge);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 14px 0 18px;
+}
+
+.live-progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--amber), var(--sage));
+  transition: width 0.45s ease;
+}
+
+.live-stages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.live-stage-chip {
+  font-size: 11px;
+  padding: 6px 10px;
+  border: 2px solid var(--panel-edge);
+  border-radius: 999px;
+  background: var(--panel-bg);
+  color: var(--ink-muted);
+}
+
+.live-stage-chip.is-active {
+  border-color: var(--amber);
+  color: var(--ink);
+  background: rgba(232, 178, 92, 0.12);
+}
+
+.live-stage-chip.is-done {
+  border-color: var(--sage);
+  color: var(--ink);
+}
+
+.live-log {
+  max-height: 280px;
+  overflow: auto;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  padding: 12px 14px;
+  background: var(--panel-inset);
+  border: 2px inset var(--panel-edge);
+  border-radius: 4px;
+}
+
+.live-log li {
+  list-style: none;
+  margin-bottom: 6px;
+  padding-left: 0;
+}
+
+.live-log .stage-persona { color: var(--amber); }
+.live-log .stage-beats { color: #6e8bd6; }
+.live-log .stage-year { color: var(--sage); }
+.live-log .stage-fate { color: #9a7ec8; }
+.live-log .stage-final { color: #c8863a; }
+
+.live-year-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.live-year-card {
+  padding: 12px 14px;
+  animation: live-card-in 0.35s ease;
+}
+
+.live-year-card h4 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.live-year-card p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.live-year-card .live-era {
+  font-size: 10px;
+  color: var(--ink-muted);
+  margin-top: 6px;
+  font-style: italic;
+}
+
+@keyframes live-card-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.live-persona-mini dl {
+  margin: 0;
+  font-size: 12px;
+}
+
+.live-persona-mini dt {
+  font-size: 10px;
+  color: var(--amber);
+  margin-top: 8px;
+}
+
+.live-persona-mini dd {
+  margin: 2px 0 0;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.live-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.live-actions .btn-start[disabled],
+.live-actions .btn-ghost[disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.live-foot {
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-top: 20px;
+}
+
+.live-error {
+  padding: 12px 14px;
+  border: 2px solid #c8863a;
+  background: #fff3e0;
+  color: var(--ink);
+  font-size: 13px;
+  border-radius: 4px;
+  margin-bottom: 14px;
+}
+
+#nav-back-live {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 20;
+  padding: 8px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  border: 2px solid var(--panel-edge);
+  background: var(--panel-bg);
+  color: var(--ink);
+  border-radius: 4px;
+}

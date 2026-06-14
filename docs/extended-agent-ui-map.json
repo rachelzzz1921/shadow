@@ -1,0 +1,122 @@
+{
+  "pack_id": "extended-scenes-v1",
+  "agent": "visual-layout-generator",
+  "input_from": "year-narrative-agent",
+  "output_schema": "shadow-corpus/visual/03-layout-schema.json",
+  "selection_rules": [
+    "Filter assets by story_tags overlap with year scenario + mood",
+    "Prefer ui_ready=prototype_ready; never use candidate_only in production UI",
+    "Season transitions: use PX-EXT-001~005 + PX-EXT-021 as unified Mana Seed kit",
+    "Year-to-year: always attach PX-EXT-033 transition fx between chapters",
+    "Introspection/insomnia: stack PX-EXT-014|015 + PX-EXT-029 over existing interior",
+    "Festival scenes: PX-EXT-017|018 without human review gate",
+    "Rural hometown: PX-EXT-010~012 vs PX-UNI-007 urban contrast"
+  ],
+  "categories": [
+    {
+      "id": "season_fx",
+      "label": "01_四季气候FX",
+      "order": 1,
+      "count": 9
+    },
+    {
+      "id": "rural_hometown",
+      "label": "02_乡镇农村老家",
+      "order": 2,
+      "count": 3
+    },
+    {
+      "id": "park_night_sky",
+      "label": "03_公园星夜天空",
+      "order": 3,
+      "count": 5
+    },
+    {
+      "id": "transit_interior",
+      "label": "04_地铁高铁车厢",
+      "order": 4,
+      "count": 2
+    },
+    {
+      "id": "festival_culture",
+      "label": "05_节庆文化道具",
+      "order": 5,
+      "count": 3
+    },
+    {
+      "id": "bookstore_study",
+      "label": "06_书店学习空间",
+      "order": 6,
+      "count": 3
+    },
+    {
+      "id": "character_expression",
+      "label": "07_角色表情氛围",
+      "order": 7,
+      "count": 7
+    },
+    {
+      "id": "support_ui_transition",
+      "label": "08_转场UI辅助",
+      "order": 8,
+      "count": 7
+    }
+  ],
+  "assets_by_category": {
+    "season_fx": [
+      "PX-EXT-001",
+      "PX-EXT-002",
+      "PX-EXT-003",
+      "PX-EXT-004",
+      "PX-EXT-005",
+      "PX-EXT-006",
+      "PX-EXT-007",
+      "PX-EXT-008",
+      "PX-EXT-009"
+    ],
+    "rural_hometown": [
+      "PX-EXT-010",
+      "PX-EXT-011",
+      "PX-EXT-012"
+    ],
+    "park_night_sky": [
+      "PX-EXT-013",
+      "PX-EXT-014",
+      "PX-EXT-015",
+      "PX-EXT-016",
+      "PX-EXT-030"
+    ],
+    "transit_interior": [
+      "PX-EXT-020",
+      "PX-EXT-034"
+    ],
+    "festival_culture": [
+      "PX-EXT-017",
+      "PX-EXT-018",
+      "PX-EXT-035"
+    ],
+    "bookstore_study": [
+      "PX-EXT-019",
+      "PX-EXT-036",
+      "PX-EXT-037"
+    ],
+    "character_expression": [
+      "PX-EXT-021",
+      "PX-EXT-022",
+      "PX-EXT-023",
+      "PX-EXT-024",
+      "PX-EXT-025",
+      "PX-EXT-028",
+      "PX-EXT-029"
+    ],
+    "support_ui_transition": [
+      "PX-EXT-026",
+      "PX-EXT-027",
+      "PX-EXT-031",
+      "PX-EXT-032",
+      "PX-EXT-033",
+      "PX-EXT-038",
+      "PX-EXT-039"
+    ]
+  }
+}

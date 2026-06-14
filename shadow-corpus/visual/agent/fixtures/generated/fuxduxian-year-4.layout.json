@@ -1,0 +1,64 @@
+{
+  "story_id": "fuxduxian",
+  "year": 4,
+  "pack": "extended-scenes-v1",
+  "pack_status": "draft_agent",
+  "scene_type": "pivotal_sequence",
+  "visual_anchor": "冬天，冬夜，阿岚站在雪地舞台侧幕，枯树剪影",
+  "mood": "略暖·暴露",
+  "status": "draft",
+  "narrative_ref": {
+    "memory_id": "m4",
+    "event_summary": "推上主席"
+  },
+  "background": {
+    "asset_id": "PX-EXT-003",
+    "parallax": 0.15,
+    "tint": "#c8a878"
+  },
+  "layers": [
+    {
+      "asset_id": "PX-EXT-021",
+      "role": "protagonist",
+      "x": 460,
+      "y": 252,
+      "depth": 1,
+      "animation": "idle"
+    },
+    {
+      "asset_id": "PX-EXT-001",
+      "role": "fx",
+      "x": 320,
+      "y": 100,
+      "depth": 12,
+      "alpha": 0.28,
+      "note": "season_weather_fx"
+    }
+  ],
+  "transition_fx_id": "PX-EXT-033",
+  "sequence": [
+    {
+      "duration_ms": 800,
+      "camera": "fade_in",
+      "note": "介入前"
+    },
+    {
+      "duration_ms": 1200,
+      "camera": "hold",
+      "note": "推上主席"
+    },
+    {
+      "duration_ms": 600,
+      "camera": "fade_out",
+      "note": "介入弹窗"
+    },
+    {
+      "duration_ms": 400,
+      "camera": "fade_out",
+      "note": "year_transition_wipe",
+      "layers_delta": {
+        "fx": "PX-EXT-033"
+      }
+    }
+  ]
+}

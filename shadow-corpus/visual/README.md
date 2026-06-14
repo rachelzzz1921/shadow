@@ -49,11 +49,14 @@ visual/
 - 复读线场景清单：[`stories/fuxduxian/scene-briefs.md`](./stories/fuxduxian/scene-briefs.md)
 - 复读线 v1 寻源包：[`registry/packs/fuxduxian-v1.csv`](./registry/packs/fuxduxian-v1.csv) · draft layout 在 [`scenes/fuxduxian/draft/`](./scenes/fuxduxian/draft/)
 - **六域通用包**：[`universal-life-scenes-sourcing-notes.md`](./registry/universal-life-scenes-sourcing-notes.md) · [`packs/universal-life-scenes-v1.csv`](./registry/packs/universal-life-scenes-v1.csv) · Agent 映射 [`packs/universal-agent-ui-map.json`](./registry/packs/universal-agent-ui-map.json)
+- **扩展场景包 v1**（39 条缺口补充）：[`extended-scenes-sourcing-notes.md`](./registry/extended-scenes-sourcing-notes.md) · [`packs/extended-scenes-v1.csv`](./registry/packs/extended-scenes-v1.csv) · Excel 主表 [`packs/extended-scenes-v1-enriched.csv`](./registry/packs/extended-scenes-v1-enriched.csv) · Cursor 任务 [`registry/CURSOR-HANDOFF-layout-agent.md`](./registry/CURSOR-HANDOFF-layout-agent.md)
 - 叙事待加强：[`stories/fuxduxian/narrative-gaps.md`](./stories/fuxduxian/narrative-gaps.md)
 
 ## Demo 打包
 
 ```bash
-npm run build:visual-demo   # draft layout + manifest → docs/
-npm run demo:preview        # /demo-phaser.html
+npm run build:visual-demo      # draft layout + manifest → docs/
+npm run build:extended-scenes  # extended v1 enriched CSV + sheets + manifest
+npm run seed:visual            # enriched CSV → Supabase visual_assets
+npm run demo:preview           # /demo-phaser.html
 ```

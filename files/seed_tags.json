@@ -1,0 +1,1313 @@
+{
+  "categories": [
+    {
+      "id": "trait",
+      "label_zh": "性格特质",
+      "description": "岔路口前后你大致是个怎样的人",
+      "max_select": 5,
+      "min_select": 1,
+      "display_order": 1,
+      "maps_to_agent": [
+        "persona.core_traits"
+      ]
+    },
+    {
+      "id": "mood_at_fork",
+      "label_zh": "岔路口时心情",
+      "description": "做决定那段时间，心里的底色",
+      "max_select": 3,
+      "min_select": 1,
+      "display_order": 2,
+      "maps_to_agent": [
+        "year.initial_mood",
+        "year.initial_esteem"
+      ]
+    },
+    {
+      "id": "fear",
+      "label_zh": "深层恐惧",
+      "description": "夜里睡不着时，真正怕的东西",
+      "max_select": 4,
+      "min_select": 0,
+      "display_order": 3,
+      "maps_to_agent": [
+        "persona.soft_spots"
+      ]
+    },
+    {
+      "id": "value",
+      "label_zh": "价值排序",
+      "description": "取舍时，你下意识护住的东西",
+      "max_select": 4,
+      "min_select": 1,
+      "display_order": 4,
+      "maps_to_agent": [
+        "persona.decision_tendency"
+      ]
+    },
+    {
+      "id": "relation_pressure",
+      "label_zh": "关系压力源",
+      "description": "谁的存在，让这个决定变重了",
+      "max_select": 3,
+      "min_select": 0,
+      "display_order": 5,
+      "maps_to_agent": [
+        "fate.scenario_weights"
+      ]
+    },
+    {
+      "id": "scenario_hint",
+      "label_zh": "人生域",
+      "description": "这件事主要发生在你人生的哪一块",
+      "max_select": 2,
+      "min_select": 1,
+      "display_order": 6,
+      "maps_to_agent": [
+        "fate.scenario_weights"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "category_id": "trait",
+      "label": "要强",
+      "synonyms": [
+        "好胜",
+        "不服输",
+        "争强",
+        "不甘人后",
+        "逞强"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.8,
+        "persona.decision_tendency": 0.5
+      }
+    },
+    {
+      "category_id": "trait",
+      "label": "完美主义",
+      "synonyms": [
+        "吹毛求疵",
+        "不容差错",
+        "洁癖",
+        "标准高",
+        "做不到就难受"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.7,
+        "persona.soft_spots": 0.4
+      }
+    },
+    {
+      "category_id": "trait",
+      "label": "讨好型",
+      "synonyms": [
+        "取悦",
+        "迎合",
+        "怕得罪人",
+        "老好人",
+        "不会拒绝"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.7,
+        "persona.soft_spots": 0.5
+      }
+    },
+    {
+      "category_id": "trait",
+      "label": "慢热",
+      "synonyms": [
+        "内向",
+        "需要时间",
+        "认生",
+        "熟了才放开"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.5
+      }
+    },
+    {
+      "category_id": "trait",
+      "label": "外冷内热",
+      "synonyms": [
+        "面冷心软",
+        "嘴硬",
+        "刀子嘴豆腐心",
+        "装酷"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.6
+      }
+    },
+    {
+      "category_id": "trait",
+      "label": "敏感",
+      "synonyms": [
+        "玻璃心",
+        "想太多",
+        "在意细节",
+        "容易受伤"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.6,
+        "persona.soft_spots": 0.4
+      }
+    },
+    {
+      "category_id": "trait",
+      "label": "独立",
+      "synonyms": [
+        "自己扛",
+        "不爱麻烦人",
+        "一个人也行",
+        "自主"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.6,
+        "fate.scenario_weights.self_growth": 0.2
+      }
+    },
+    {
+      "category_id": "trait",
+      "label": "钝感",
+      "synonyms": [
+        "没心没肺",
+        "不往心里去",
+        "大条",
+        "迟钝"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.5
+      }
+    },
+    {
+      "category_id": "trait",
+      "label": "理性",
+      "synonyms": [
+        "冷静",
+        "讲逻辑",
+        "凡事先分析",
+        "克制"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.5,
+        "persona.decision_tendency": 0.3
+      }
+    },
+    {
+      "category_id": "trait",
+      "label": "感性",
+      "synonyms": [
+        "情绪化",
+        "凭感觉",
+        "心软",
+        "共情强"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.5
+      }
+    },
+    {
+      "category_id": "trait",
+      "label": "拖延",
+      "synonyms": [
+        "能拖就拖",
+        "临时抱佛脚",
+        "不到最后不动",
+        "逃避"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.5,
+        "persona.defense_mechanism": 0.3
+      }
+    },
+    {
+      "category_id": "trait",
+      "label": "执拗",
+      "synonyms": [
+        "认死理",
+        "一根筋",
+        "撞南墙不回头",
+        "轴"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.6,
+        "persona.decision_tendency": 0.4
+      }
+    },
+    {
+      "category_id": "trait",
+      "label": "随和",
+      "synonyms": [
+        "好说话",
+        "无所谓",
+        "不计较",
+        "佛系"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.5
+      }
+    },
+    {
+      "category_id": "trait",
+      "label": "好强又自卑",
+      "synonyms": [
+        "又骄傲又心虚",
+        "强撑",
+        "色厉内荏",
+        "怕被看穿底子"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.7,
+        "persona.soft_spots": 0.6
+      }
+    },
+    {
+      "category_id": "trait",
+      "label": "控制欲强",
+      "synonyms": [
+        "什么都要管",
+        "怕失控",
+        "安排一切",
+        "不放心交出去"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.6,
+        "persona.defense_mechanism": 0.4
+      }
+    },
+    {
+      "category_id": "trait",
+      "label": "讨厌冲突",
+      "synonyms": [
+        "怕吵架",
+        "息事宁人",
+        "回避对立",
+        "和稀泥"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.5,
+        "persona.decision_tendency": 0.4
+      }
+    },
+    {
+      "category_id": "trait",
+      "label": "上进",
+      "synonyms": [
+        "有野心",
+        "想往上走",
+        "不安于现状",
+        "拼"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.6,
+        "fate.scenario_weights.career": 0.2
+      }
+    },
+    {
+      "category_id": "trait",
+      "label": "钻牛角尖",
+      "synonyms": [
+        "反复纠结",
+        "想不开",
+        "放不下",
+        "内耗"
+      ],
+      "weight_hint": {
+        "persona.core_traits": 0.6,
+        "persona.soft_spots": 0.4
+      }
+    },
+    {
+      "category_id": "mood_at_fork",
+      "label": "不甘",
+      "synonyms": [
+        "咽不下这口气",
+        "憋屈",
+        "心有不甘",
+        "凭什么"
+      ],
+      "weight_hint": {
+        "year.initial_mood": -0.5,
+        "year.initial_esteem": -0.3
+      }
+    },
+    {
+      "category_id": "mood_at_fork",
+      "label": "迷茫",
+      "synonyms": [
+        "没方向",
+        "不知道要什么",
+        "空",
+        "懵"
+      ],
+      "weight_hint": {
+        "year.initial_mood": -0.4,
+        "year.initial_esteem": -0.4
+      }
+    },
+    {
+      "category_id": "mood_at_fork",
+      "label": "赌气",
+      "synonyms": [
+        "就要证明给你看",
+        "较劲",
+        "憋着一股劲"
+      ],
+      "weight_hint": {
+        "year.initial_mood": -0.3,
+        "persona.decision_tendency": 0.4
+      }
+    },
+    {
+      "category_id": "mood_at_fork",
+      "label": "松一口气",
+      "synonyms": [
+        "终于解脱",
+        "卸下负担",
+        "放下了",
+        "轻松"
+      ],
+      "weight_hint": {
+        "year.initial_mood": 0.5,
+        "year.initial_esteem": 0.2
+      }
+    },
+    {
+      "category_id": "mood_at_fork",
+      "label": "假装无所谓",
+      "synonyms": [
+        "强装镇定",
+        "嘴上说不在乎",
+        "麻木",
+        "逞强"
+      ],
+      "weight_hint": {
+        "year.initial_mood": -0.3,
+        "persona.defense_mechanism": 0.5
+      }
+    },
+    {
+      "category_id": "mood_at_fork",
+      "label": "焦虑",
+      "synonyms": [
+        "坐立不安",
+        "心慌",
+        "怕来不及",
+        "睡不着"
+      ],
+      "weight_hint": {
+        "year.initial_mood": -0.4,
+        "year.initial_esteem": -0.2
+      }
+    },
+    {
+      "category_id": "mood_at_fork",
+      "label": "期待",
+      "synonyms": [
+        "跃跃欲试",
+        "满怀希望",
+        "想试试",
+        "憧憬"
+      ],
+      "weight_hint": {
+        "year.initial_mood": 0.5,
+        "year.initial_esteem": 0.3
+      }
+    },
+    {
+      "category_id": "mood_at_fork",
+      "label": "疲惫",
+      "synonyms": [
+        "累了",
+        "撑不动",
+        "心力交瘁",
+        "想躺平"
+      ],
+      "weight_hint": {
+        "year.initial_mood": -0.4,
+        "year.initial_esteem": -0.2
+      }
+    },
+    {
+      "category_id": "mood_at_fork",
+      "label": "害怕",
+      "synonyms": [
+        "怕选错",
+        "发憷",
+        "没底",
+        "心虚"
+      ],
+      "weight_hint": {
+        "year.initial_mood": -0.4,
+        "persona.soft_spots": 0.4
+      }
+    },
+    {
+      "category_id": "mood_at_fork",
+      "label": "释然",
+      "synonyms": [
+        "想开了",
+        "认了",
+        "坦然",
+        "放下执念"
+      ],
+      "weight_hint": {
+        "year.initial_mood": 0.4,
+        "persona.growth_seed": 0.3
+      }
+    },
+    {
+      "category_id": "mood_at_fork",
+      "label": "委屈",
+      "synonyms": [
+        "没人懂",
+        "觉得不公平",
+        "想哭",
+        "憋屈"
+      ],
+      "weight_hint": {
+        "year.initial_mood": -0.5,
+        "persona.soft_spots": 0.4
+      }
+    },
+    {
+      "category_id": "mood_at_fork",
+      "label": "兴奋",
+      "synonyms": [
+        "激动",
+        "热血",
+        "按捺不住",
+        "冲"
+      ],
+      "weight_hint": {
+        "year.initial_mood": 0.6
+      }
+    },
+    {
+      "category_id": "mood_at_fork",
+      "label": "空落落",
+      "synonyms": [
+        "失落",
+        "像丢了什么",
+        "怅然",
+        "提不起劲"
+      ],
+      "weight_hint": {
+        "year.initial_mood": -0.4,
+        "year.initial_esteem": -0.3
+      }
+    },
+    {
+      "category_id": "mood_at_fork",
+      "label": "倔强",
+      "synonyms": [
+        "偏不",
+        "非要这样",
+        "犟",
+        "认定了"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.5,
+        "year.initial_mood": -0.2
+      }
+    },
+    {
+      "category_id": "mood_at_fork",
+      "label": "麻木",
+      "synonyms": [
+        "没感觉",
+        "行尸走肉",
+        "无所谓",
+        "放空"
+      ],
+      "weight_hint": {
+        "year.initial_mood": -0.5,
+        "persona.defense_mechanism": 0.5
+      }
+    },
+    {
+      "category_id": "mood_at_fork",
+      "label": "侥幸",
+      "synonyms": [
+        "赌一把",
+        "也许能行",
+        "碰碰运气",
+        "试试又不亏"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.3,
+        "year.initial_mood": 0.2
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕被看穿",
+      "synonyms": [
+        "怕露馅",
+        "怕被识破",
+        "装不下去",
+        "怕底子被发现"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.8,
+        "persona.core_traits": 0.4
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕让父母失望",
+      "synonyms": [
+        "怕辜负",
+        "不能让爸妈难过",
+        "怕对不起家里",
+        "背负期待"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.8,
+        "fate.scenario_weights.family": 0.4
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕选错",
+      "synonyms": [
+        "怕走错路",
+        "怕后悔",
+        "怕一步错步步错",
+        "决策瘫痪"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.7,
+        "persona.decision_tendency": 0.4
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕平庸",
+      "synonyms": [
+        "怕泯然众人",
+        "不甘平凡",
+        "怕一辈子普通",
+        "怕没出息"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.7,
+        "persona.core_traits": 0.4
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕被抛下",
+      "synonyms": [
+        "怕落后",
+        "怕跟不上",
+        "怕被同龄人甩开",
+        "同辈焦虑"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.7,
+        "fate.scenario_weights.friendship": 0.3
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕孤独",
+      "synonyms": [
+        "怕没人陪",
+        "怕独自承担",
+        "怕被孤立",
+        "怕落单"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.6,
+        "fate.scenario_weights.love": 0.3
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕不被爱",
+      "synonyms": [
+        "怕不被需要",
+        "怕被嫌弃",
+        "怕没人要",
+        "值得被爱吗"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.8,
+        "fate.scenario_weights.love": 0.4
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕失控",
+      "synonyms": [
+        "怕意外",
+        "怕计划崩盘",
+        "怕不在掌握中",
+        "怕乱"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.6,
+        "persona.defense_mechanism": 0.4
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕被否定",
+      "synonyms": [
+        "怕被批评",
+        "怕做得不够好",
+        "怕被指责",
+        "差评恐惧"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.7,
+        "persona.core_traits": 0.4
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕浪费时间",
+      "synonyms": [
+        "怕来不及",
+        "怕蹉跎",
+        "怕白费",
+        "时间焦虑"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.6,
+        "persona.decision_tendency": 0.3
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕真实的自己不够好",
+      "synonyms": [
+        "怕暴露脆弱",
+        "怕本来面目让人失望",
+        "自我怀疑"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.9
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕失去自由",
+      "synonyms": [
+        "怕被困住",
+        "怕一眼望到头",
+        "怕被束缚",
+        "怕没退路"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.6,
+        "fate.scenario_weights.self_growth": 0.3
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕辜负自己",
+      "synonyms": [
+        "怕对不起努力",
+        "怕浪费天赋",
+        "怕没尽全力"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.6,
+        "persona.growth_seed": 0.4
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕被比较",
+      "synonyms": [
+        "怕比不过",
+        "怕被拿来对比",
+        "别人家的孩子",
+        "排名焦虑"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.7,
+        "fate.scenario_weights.family": 0.2
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕承认失败",
+      "synonyms": [
+        "不肯认输",
+        "怕被说不行",
+        "拉不下脸",
+        "死撑"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.7,
+        "persona.decision_tendency": 0.5
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕没有意义",
+      "synonyms": [
+        "怕白活",
+        "虚无",
+        "这一切值得吗",
+        "意义缺失"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.6,
+        "persona.growth_seed": 0.3
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕被看轻",
+      "synonyms": [
+        "怕被瞧不起",
+        "怕没面子",
+        "怕被低估",
+        "尊严焦虑"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.7,
+        "persona.core_traits": 0.4
+      }
+    },
+    {
+      "category_id": "fear",
+      "label": "怕亲密",
+      "synonyms": [
+        "怕靠太近",
+        "怕受伤",
+        "不敢交付",
+        "回避依恋"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.6,
+        "fate.scenario_weights.love": 0.3
+      }
+    },
+    {
+      "category_id": "value",
+      "label": "面子",
+      "synonyms": [
+        "体面",
+        "尊严",
+        "别丢人",
+        "形象"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.6,
+        "persona.soft_spots": 0.3
+      }
+    },
+    {
+      "category_id": "value",
+      "label": "自由",
+      "synonyms": [
+        "不受束缚",
+        "想干嘛干嘛",
+        "独立自主",
+        "无拘无束"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.6,
+        "fate.scenario_weights.self_growth": 0.3
+      }
+    },
+    {
+      "category_id": "value",
+      "label": "稳定",
+      "synonyms": [
+        "安稳",
+        "保险",
+        "别折腾",
+        "踏实"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.6,
+        "fate.scenario_weights.career": 0.2
+      }
+    },
+    {
+      "category_id": "value",
+      "label": "被认可",
+      "synonyms": [
+        "被看见",
+        "得到肯定",
+        "被尊重",
+        "被赏识"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.5,
+        "persona.soft_spots": 0.4
+      }
+    },
+    {
+      "category_id": "value",
+      "label": "关系优先",
+      "synonyms": [
+        "家人重要",
+        "感情第一",
+        "人比事重要",
+        "陪伴"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.5,
+        "fate.scenario_weights.family": 0.3
+      }
+    },
+    {
+      "category_id": "value",
+      "label": "成就",
+      "synonyms": [
+        "做成事",
+        "成功",
+        "证明实力",
+        "拿结果"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.6,
+        "fate.scenario_weights.career": 0.3
+      }
+    },
+    {
+      "category_id": "value",
+      "label": "真实",
+      "synonyms": [
+        "做自己",
+        "不装",
+        "忠于内心",
+        "诚实面对"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.6,
+        "persona.growth_seed": 0.4
+      }
+    },
+    {
+      "category_id": "value",
+      "label": "掌控",
+      "synonyms": [
+        "一切在握",
+        "自己说了算",
+        "主动权",
+        "安全感"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.5,
+        "persona.defense_mechanism": 0.3
+      }
+    },
+    {
+      "category_id": "value",
+      "label": "成长",
+      "synonyms": [
+        "变更好",
+        "不断进步",
+        "学到东西",
+        "突破自己"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.5,
+        "fate.scenario_weights.self_growth": 0.3
+      }
+    },
+    {
+      "category_id": "value",
+      "label": "归属",
+      "synonyms": [
+        "有个地方属于我",
+        "被接纳",
+        "圈子",
+        "根"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.4,
+        "fate.scenario_weights.family": 0.2
+      }
+    },
+    {
+      "category_id": "value",
+      "label": "公平",
+      "synonyms": [
+        "讲道理",
+        "不能吃亏",
+        "对等",
+        "正义"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.4
+      }
+    },
+    {
+      "category_id": "value",
+      "label": "安全感",
+      "synonyms": [
+        "有底",
+        "不慌",
+        "有退路",
+        "保障"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.5,
+        "persona.soft_spots": 0.3
+      }
+    },
+    {
+      "category_id": "value",
+      "label": "卓越",
+      "synonyms": [
+        "做到最好",
+        "出类拔萃",
+        "登顶",
+        "极致"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.6,
+        "persona.core_traits": 0.4
+      }
+    },
+    {
+      "category_id": "value",
+      "label": "轻松",
+      "synonyms": [
+        "别太累",
+        "舒服就好",
+        "张弛有度",
+        "不内卷"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.4
+      }
+    },
+    {
+      "category_id": "value",
+      "label": "忠诚",
+      "synonyms": [
+        "讲义气",
+        "靠得住",
+        "不背叛",
+        "长久"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.4,
+        "fate.scenario_weights.friendship": 0.2
+      }
+    },
+    {
+      "category_id": "value",
+      "label": "意义感",
+      "synonyms": [
+        "值得",
+        "有价值",
+        "不白活",
+        "使命"
+      ],
+      "weight_hint": {
+        "persona.decision_tendency": 0.4,
+        "persona.growth_seed": 0.3
+      }
+    },
+    {
+      "category_id": "relation_pressure",
+      "label": "父母期待",
+      "synonyms": [
+        "爸妈的要求",
+        "家里的安排",
+        "光宗耀祖",
+        "望子成龙"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.family": 0.5,
+        "persona.soft_spots": 0.3
+      }
+    },
+    {
+      "category_id": "relation_pressure",
+      "label": "伴侣异地",
+      "synonyms": [
+        "两地分居",
+        "感情拉扯",
+        "要不要为对方留下",
+        "异地恋"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.love": 0.5
+      }
+    },
+    {
+      "category_id": "relation_pressure",
+      "label": "朋友分流",
+      "synonyms": [
+        "各奔东西",
+        "圈子散了",
+        "大家走远了",
+        "友情淡了"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.friendship": 0.5
+      }
+    },
+    {
+      "category_id": "relation_pressure",
+      "label": "独自承担",
+      "synonyms": [
+        "没人帮",
+        "一个人扛",
+        "孤立无援",
+        "靠自己"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.self_growth": 0.4,
+        "persona.soft_spots": 0.3
+      }
+    },
+    {
+      "category_id": "relation_pressure",
+      "label": "同辈比较",
+      "synonyms": [
+        "别人都比我好",
+        "被拿来对比",
+        "同学混得好",
+        "内卷"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.friendship": 0.4,
+        "persona.soft_spots": 0.3
+      }
+    },
+    {
+      "category_id": "relation_pressure",
+      "label": "家庭经济",
+      "synonyms": [
+        "没钱",
+        "要养家",
+        "学费压力",
+        "经济负担"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.family": 0.4,
+        "fate.scenario_weights.career": 0.2
+      }
+    },
+    {
+      "category_id": "relation_pressure",
+      "label": "长辈催促",
+      "synonyms": [
+        "催婚",
+        "催生",
+        "催就业",
+        "别人都成家了"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.family": 0.4,
+        "fate.scenario_weights.love": 0.2
+      }
+    },
+    {
+      "category_id": "relation_pressure",
+      "label": "师长期望",
+      "synonyms": [
+        "老师看好我",
+        "导师施压",
+        "别辜负培养",
+        "重点栽培"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.study": 0.4
+      }
+    },
+    {
+      "category_id": "relation_pressure",
+      "label": "照顾家人",
+      "synonyms": [
+        "父母生病",
+        "要回家",
+        "放不下家里",
+        "尽孝"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.family": 0.5
+      }
+    },
+    {
+      "category_id": "relation_pressure",
+      "label": "感情新生",
+      "synonyms": [
+        "遇到喜欢的人",
+        "刚在一起",
+        "为爱停留",
+        "心动"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.love": 0.4
+      }
+    },
+    {
+      "category_id": "relation_pressure",
+      "label": "被寄予厚望",
+      "synonyms": [
+        "全家的希望",
+        "背负全村",
+        "唯一的指望",
+        "压力山大"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.family": 0.5,
+        "persona.soft_spots": 0.4
+      }
+    },
+    {
+      "category_id": "relation_pressure",
+      "label": "关系破裂",
+      "synonyms": [
+        "分手",
+        "闹翻",
+        "决裂",
+        "感情结束"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.love": 0.4,
+        "year.initial_mood": -0.3
+      }
+    },
+    {
+      "category_id": "relation_pressure",
+      "label": "无人理解",
+      "synonyms": [
+        "没人懂我",
+        "孤独感",
+        "说不出口",
+        "憋着"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.4,
+        "fate.scenario_weights.self_growth": 0.3
+      }
+    },
+    {
+      "category_id": "relation_pressure",
+      "label": "社交回避",
+      "synonyms": [
+        "不想见人",
+        "社恐",
+        "逃避聚会",
+        "自我封闭"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.friendship": 0.3,
+        "persona.defense_mechanism": 0.3
+      }
+    },
+    {
+      "category_id": "relation_pressure",
+      "label": "为他人牺牲",
+      "synonyms": [
+        "成全别人",
+        "委屈自己",
+        "顾全大局",
+        "放弃所求"
+      ],
+      "weight_hint": {
+        "persona.soft_spots": 0.4,
+        "persona.decision_tendency": 0.4
+      }
+    },
+    {
+      "category_id": "scenario_hint",
+      "label": "学业",
+      "synonyms": [
+        "读书",
+        "考试",
+        "升学",
+        "复读",
+        "考研",
+        "考公",
+        "学校"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.study": 1.0
+      }
+    },
+    {
+      "category_id": "scenario_hint",
+      "label": "事业",
+      "synonyms": [
+        "工作",
+        "职场",
+        "创业",
+        "跳槽",
+        "升职",
+        "赚钱",
+        "行业"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.career": 1.0
+      }
+    },
+    {
+      "category_id": "scenario_hint",
+      "label": "爱情",
+      "synonyms": [
+        "恋爱",
+        "感情",
+        "结婚",
+        "分手",
+        "喜欢的人",
+        "伴侣"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.love": 1.0
+      }
+    },
+    {
+      "category_id": "scenario_hint",
+      "label": "亲情",
+      "synonyms": [
+        "家庭",
+        "父母",
+        "家人",
+        "回家",
+        "尽孝",
+        "亲子"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.family": 1.0
+      }
+    },
+    {
+      "category_id": "scenario_hint",
+      "label": "友情",
+      "synonyms": [
+        "朋友",
+        "同学",
+        "圈子",
+        "兄弟",
+        "闺蜜",
+        "同伴"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.friendship": 1.0
+      }
+    },
+    {
+      "category_id": "scenario_hint",
+      "label": "自我成长",
+      "synonyms": [
+        "活成自己",
+        "认识自己",
+        "内在",
+        "成长",
+        "疗愈",
+        "独立"
+      ],
+      "weight_hint": {
+        "fate.scenario_weights.self_growth": 1.0
+      }
+    }
+  ]
+}

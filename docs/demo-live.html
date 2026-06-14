@@ -3,51 +3,84 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Shadow — Live 全链生成</title>
+<meta name="color-scheme" content="light" />
+<title>Shadow / 如影 — Live 七年生成</title>
 <link rel="stylesheet" href="demo-theme.css" />
+<link rel="stylesheet" href="demo-ui-polish.css" />
 <link rel="stylesheet" href="demo-intake.css" />
-<style>
-.live-wrap { max-width: 880px; margin: 0 auto; padding: 32px 24px 80px; }
-.live-log { background: #11182b; color: #c7cddd; border-radius: 12px; padding: 16px 18px; font-family: monospace; font-size: 12px; line-height: 1.7; max-height: 320px; overflow: auto; margin: 20px 0; }
-.live-log li { margin-bottom: 6px; list-style: none; }
-.live-log .stage-persona { color: #e8b25c; }
-.live-log .stage-beats { color: #6e8bd6; }
-.live-log .stage-year { color: #8fd4a8; }
-.live-log .stage-fate { color: #b8a0e8; }
-.live-log .stage-final { color: #f0a0a0; }
-.live-bar { height: 6px; background: #2a3350; border-radius: 4px; overflow: hidden; margin: 16px 0; }
-.live-bar-fill { height: 100%; background: #e8b25c; transition: width .4s; width: 0; }
-.live-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
-.live-actions a, .live-actions button { padding: 12px 22px; border-radius: 24px; font-size: 15px; cursor: pointer; border: none; text-decoration: none; }
-.btn-live { background: #e8b25c; color: #0b1020; font-weight: 600; }
-.btn-ghost-live { background: transparent; color: #8a93ad; border: 1px solid #2a3350; }
-#intervention-live { margin-top: 20px; padding: 18px; border: 1px solid #e8b25c; border-radius: 12px; background: rgba(232,178,92,.08); }
-#intervention-live[hidden] { display: none; }
-</style>
+<link rel="stylesheet" href="demo-live.css" />
 </head>
-<body style="background:#0b1020;color:#c7cddd;font-family:'Songti SC',serif">
-<div class="live-wrap">
-  <p style="font-family:monospace;font-size:11px;color:#e8b25c;letter-spacing:2px">SHADOW LIVE</p>
-  <h1 style="font-weight:500;margin:0 0 8px">全 Agent 七年生成</h1>
-  <p id="live-intro" style="color:#8a93ad;font-size:14px;line-height:1.7">读取 Intake 人格，依次调用 Persona → Beats → Fate+Year×7 → Final。</p>
+<body>
 
-  <div class="live-bar"><div class="live-bar-fill" id="live-progress"></div></div>
-  <ul class="live-log" id="live-log"></ul>
+<div id="crt-overlay" aria-hidden="true"></div>
+<button type="button" id="nav-back-live">← Intake</button>
 
-  <div id="intervention-live" hidden>
-    <p style="font-size:11px;color:#e8b25c;font-family:monospace">PIVOTAL · 你的选择会写入 session</p>
-    <p id="iv-question" style="font-size:18px;margin:12px 0"></p>
-    <div id="iv-options" style="display:flex;gap:10px;flex-wrap:wrap"></div>
-    <button type="button" class="btn-ghost-live" id="iv-skip" style="margin-top:12px">跳过</button>
-  </div>
+<div id="live-viewport">
+  <div id="live-root">
+    <header class="live-head">
+      <p style="font-family:monospace;font-size:11px;color:var(--amber);letter-spacing:2px;margin:0">SHADOW LIVE</p>
+      <div class="landing-title"><span class="zpix-xxl">Shadow</span></div>
+      <div class="landing-subtitle"><span class="zpix-xl">七 年 生 成</span></div>
+      <p class="landing-tagline" id="live-intro">Persona → Beats → 命运 agent → Year×7 → Final</p>
+    </header>
 
-  <div class="live-actions">
-    <button type="button" class="btn-live" id="btn-run">开始 Live 生成</button>
-    <a href="intake.html" class="btn-ghost-live" style="display:inline-flex;align-items:center">← 重新 Intake</a>
-    <a href="demo-hub.html" class="btn-ghost-live" style="display:inline-flex;align-items:center">Demo 入口</a>
-    <a href="demo.html" class="btn-ghost-live" id="link-demo" hidden style="display:inline-flex;align-items:center">进入 Demo 浏览 →</a>
+    <div id="live-error" class="live-error intake-hidden" role="alert"></div>
+
+    <div class="live-grid">
+      <section class="live-main-panel snes">
+        <span class="live-provider-tag" id="live-provider">LLM · 检测中</span>
+        <div class="live-progress-bar" aria-hidden="true">
+          <div class="live-progress-fill" id="live-progress"></div>
+        </div>
+
+        <div class="live-stages" id="live-stages" aria-label="生成阶段">
+          <span class="live-stage-chip is-done" data-stage="persona">Persona</span>
+          <span class="live-stage-chip" data-stage="beats">Beats</span>
+          <span class="live-stage-chip" data-stage="year">Year×7</span>
+          <span class="live-stage-chip" data-stage="fate">命运</span>
+          <span class="live-stage-chip" data-stage="final">Final</span>
+        </div>
+
+        <ul class="live-log snes-inset" id="live-log" aria-live="polite"></ul>
+        <div class="live-year-cards" id="live-year-cards" aria-live="polite"></div>
+
+        <div class="live-actions">
+          <button type="button" class="btn-start" id="btn-run">开始七年生成</button>
+          <a href="demo.html?live=1" class="btn-ghost intake-hidden" id="link-demo">进入 Demo 浏览 →</a>
+          <a href="intake.html" class="btn-ghost">重新 Intake</a>
+        </div>
+      </section>
+
+      <aside class="live-aside-panel snes intake-preview-panel">
+        <p class="intake-preview-title">你的影子</p>
+        <div id="characterPreview" class="intake-character-preview" aria-live="polite"></div>
+        <div class="live-persona-mini" id="live-persona-mini"></div>
+        <p class="intake-preview-foot" style="margin-top:14px">命运 agent 按岔路口年份注入时代背景 · 六域微池采样</p>
+        <p class="intake-agent-chain">Persona → Beats → <strong>命运</strong> → Year×7 → Final</p>
+      </aside>
+    </div>
+
+    <p class="live-foot"><a href="demo-hub.html" style="color:var(--amber)">Demo 入口</a> · <a href="demo.html" style="color:var(--amber)">Mock 浏览</a></p>
   </div>
 </div>
+
+<!-- Pivotal 介入 — 与 demo.html 同款 -->
+<div id="intervention-modal" hidden>
+  <div class="intervention-card snes modal-cutin" role="dialog" aria-modal="true" aria-labelledby="intervention-question">
+    <div class="intervention-label">PIVOTAL · 岔路口</div>
+    <p id="intervention-question"></p>
+    <div id="intervention-options"></div>
+    <p class="intervention-hint">你的选择会写入 session，并触发命运 agent 重采样。</p>
+    <button type="button" id="intervention-skip">跳过</button>
+  </div>
+</div>
+
+<script src="demo-intake-presets.js"></script>
+<script src="demo-data.js"></script>
+<script src="demo-stories.js"></script>
+<script src="demo-mock-bridge.js"></script>
+<script src="demo-custom-story.js"></script>
+<script src="demo-character-library.js"></script>
 <script src="demo-live-client.js"></script>
 </body>
 </html>

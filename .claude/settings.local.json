@@ -31,7 +31,14 @@
       "Bash(unrar)",
       "Bash(7z)",
       "Bash(python3 -m pip install --break-system-packages -q Pillow)",
-      "Bash(python3 make_xlsx.py)"
+      "Bash(python3 make_xlsx.py)",
+      "Bash(ls /Users/chenzhiwei/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files/wxid_w2m3prtetwsk22_f3a2/msg/file/2026-06/ 2>/dev/null | head -20)",
+      "Bash(unzip -o \"/Users/chenzhiwei/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files/wxid_w2m3prtetwsk22_f3a2/msg/file/2026-06/shadow-demo-vscode.zip\" -d shadow-demo-wechat)",
+      "Bash(unzip -o \"/Users/chenzhiwei/Documents/shadow/shadow-demo-vscode.zip\" -d shadow-demo-project)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "WebSearch",
+      "Bash(node -e \"require\\('./lib/load-env'\\).loadDemoEnv\\(\\); const { pickProvider } = require\\('./lib/llm-runtime'\\); console.log\\('provider:', pickProvider\\(\\)\\)\")"
     ]
   }
 }

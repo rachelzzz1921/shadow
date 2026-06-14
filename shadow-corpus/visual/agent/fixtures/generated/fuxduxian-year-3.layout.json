@@ -1,0 +1,47 @@
+{
+  "story_id": "fuxduxian",
+  "year": 3,
+  "pack": "extended-scenes-v1",
+  "pack_status": "draft_agent",
+  "scene_type": "special",
+  "visual_anchor": "秋天，午后，阿岚走在落叶食堂最里角，脚下金黄",
+  "mood": "灰冷·孤独",
+  "status": "draft",
+  "narrative_ref": {
+    "memory_id": "m3",
+    "event_summary": "一个人吃饭"
+  },
+  "background": {
+    "asset_id": "PX-EXT-002",
+    "parallax": 0.12,
+    "tint": "#7a8494"
+  },
+  "layers": [
+    {
+      "asset_id": "PX-EXT-021",
+      "role": "protagonist",
+      "x": 460,
+      "y": 252,
+      "depth": 1,
+      "animation": "eat_slow"
+    },
+    {
+      "asset_id": "PX-EXT-001",
+      "role": "fx",
+      "x": 320,
+      "y": 100,
+      "depth": 12,
+      "alpha": 0.28,
+      "note": "season_weather_fx"
+    }
+  ],
+  "transition_fx_id": "PX-EXT-033",
+  "daily_loops": [
+    {
+      "id": "eat_slow",
+      "asset_id": "PX-EXT-021",
+      "animation": "eat_slow",
+      "trigger": "year_idle"
+    }
+  ]
+}

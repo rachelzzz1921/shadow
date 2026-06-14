@@ -1,0 +1,246 @@
+/**
+ * 透明像素主角 + CC0 背景叠层 — 复读线 / 爱情线配图 v1
+ */
+
+/* ─── 富视觉场景条（更高、更沉浸） ─── */
+.pixel-scene.scene-rich {
+  height: 176px;
+  max-width: 680px;
+  border-width: 3px;
+  box-shadow:
+    inset 0 0 0 2px var(--highlight),
+    0 8px 0 rgba(58, 50, 40, 0.08);
+}
+
+.pixel-scene.scene-rich .scene-backdrop.has-cc0-texture {
+  background-blend-mode: soft-light, normal;
+  image-rendering: pixelated;
+}
+
+.pixel-scene.scene-rich::after {
+  background: radial-gradient(ellipse at 55% 42%, transparent 28%, rgba(247, 240, 227, 0.32) 100%);
+}
+
+/* 情绪染色层 */
+.scene-mood-tint {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+  transition: background 400ms ease;
+}
+
+.scene-mood-tint.mood-fx-warm {
+  background: linear-gradient(180deg, rgba(255, 210, 140, 0.28) 0%, transparent 55%) !important;
+  mix-blend-mode: soft-light;
+}
+
+.scene-mood-tint.mood-fx-cold {
+  background: linear-gradient(180deg, rgba(80, 110, 180, 0.32) 0%, rgba(40, 50, 80, 0.15) 100%) !important;
+}
+
+.scene-mood-tint.mood-fx-night {
+  background: linear-gradient(180deg, rgba(20, 25, 55, 0.45) 0%, rgba(10, 12, 30, 0.2) 60%) !important;
+}
+
+.scene-mood-tint.mood-fx-flat {
+  background: linear-gradient(180deg, rgba(120, 120, 120, 0.18) 0%, transparent 70%) !important;
+  filter: saturate(0.88);
+}
+
+/* ─── 透明主角 PNG ─── */
+.pixel-scene.scene-rich .sprite-wrap.has-hero-png {
+  left: 10%;
+  bottom: 14%;
+  width: 112px;
+  height: 112px;
+  z-index: 4;
+}
+
+.sprite-wrap .sprite.hero-png {
+  width: 112px;
+  height: 112px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  background: none;
+  filter: drop-shadow(0 6px 0 rgba(58, 50, 40, 0.12)) drop-shadow(0 12px 18px rgba(58, 50, 40, 0.18));
+}
+
+.pixel-scene.scene-rich .sprite-glow {
+  width: 72px;
+  height: 14px;
+  bottom: 2px;
+  opacity: 0.35;
+}
+
+.sprite-wrap.pose-hurt .sprite.hero-png {
+  transform: rotate(-3deg) scale(0.96);
+  filter: drop-shadow(0 4px 0 rgba(58, 50, 40, 0.1)) saturate(0.88);
+}
+
+.sprite-wrap.pose-cast .sprite.hero-png {
+  animation: sprite-celebrate 1.2s ease-in-out infinite;
+}
+
+.sprite-wrap.pose-doing .sprite.hero-png,
+.sprite-wrap.pose-write .sprite.hero-png,
+.sprite-wrap.pose-phone .sprite.hero-png {
+  animation: sprite-work 0.9s ease-in-out infinite;
+}
+
+.sprite-wrap.pose-hurt.has-hero-png {
+  left: 8%;
+  bottom: 12%;
+}
+
+/* ─── 天气 / 节庆 FX ─── */
+.scene-fx-rain.is-active {
+  opacity: 0.48 !important;
+}
+
+.scene-fx-night.is-active {
+  opacity: 1 !important;
+  background: linear-gradient(180deg, rgba(15, 18, 40, 0.55) 0%, rgba(8, 10, 24, 0.15) 45%, transparent 70%);
+}
+
+.scene-fx-lantern.is-active {
+  position: absolute;
+  top: 8px;
+  right: 14%;
+  width: 28px;
+  height: 36px;
+  z-index: 3;
+  background: radial-gradient(circle at 50% 35%, #ffd080 0%, #e8a040 45%, transparent 70%);
+  border-radius: 4px 4px 8px 8px;
+  box-shadow:
+    0 0 24px rgba(255, 180, 60, 0.55),
+    0 0 48px rgba(255, 140, 40, 0.25);
+  animation: lantern-sway 2.4s ease-in-out infinite;
+}
+
+@keyframes lantern-sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+.scene-street-lamps {
+  position: absolute;
+  top: 18px;
+  left: 8%;
+  right: 8%;
+  height: 24px;
+  z-index: 2;
+  background:
+    radial-gradient(circle at 12% 80%, rgba(255, 200, 100, 0.45) 0%, transparent 35%),
+    radial-gradient(circle at 88% 80%, rgba(255, 200, 100, 0.45) 0%, transparent 35%);
+  pointer-events: none;
+}
+
+/* ─── 道具 chip ─── */
+.scene-prop-chips {
+  position: absolute;
+  left: 10px;
+  bottom: 8px;
+  z-index: 6;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: 58%;
+}
+
+.pixel-scene.scene-rich .scene-prop-chips {
+  left: auto;
+  right: 10px;
+  bottom: 10px;
+  max-width: 46%;
+  justify-content: flex-end;
+}
+
+.scene-prop-chip {
+  font-size: 10px;
+  padding: 3px 8px;
+  border: 2px solid var(--panel-edge);
+  background: rgba(255, 253, 248, 0.92);
+  color: var(--ink-soft);
+  border-radius: 999px;
+  box-shadow: 2px 2px 0 rgba(58, 50, 40, 0.08);
+  backdrop-filter: blur(2px);
+}
+
+.pixel-scene.scene-rich .scene-tag {
+  font-size: 11px;
+  background: rgba(255, 253, 248, 0.82);
+  backdrop-filter: blur(3px);
+}
+
+.scene-desk-prop {
+  position: absolute;
+  bottom: 28%;
+  left: 18%;
+  width: 48px;
+  height: 20px;
+  background: var(--panel-edge);
+  border-radius: 2px;
+  opacity: 0.35;
+  z-index: 2;
+}
+
+/* ─── 画面锚点文案块 ─── */
+.yr-visual-block {
+  margin-top: 10px;
+}
+
+.yr-visual-anchor {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0 0 6px;
+}
+
+.yr-props {
+  display: block;
+  font-size: 11px;
+  color: var(--amber);
+  letter-spacing: 0.5px;
+}
+
+.yr-daily-micro {
+  display: block;
+  margin-top: 6px;
+  font-size: 10px;
+  color: var(--ink-muted);
+  font-family: monospace;
+}
+
+.yr-mood-visual {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(232, 178, 92, 0.15);
+  color: var(--amber);
+  border: 1px solid rgba(232, 178, 92, 0.35);
+}
+
+/* 富视觉故事隐藏 debug 叠层 */
+.pixel-scene.has-story-visual .visual-layout-overlay,
+.pixel-scene.has-story-visual .extended-asset-overlay,
+.pixel-scene.has-story-visual .universal-asset-overlay {
+  display: none !important;
+}
+
+@media (max-width: 520px) {
+  .pixel-scene.scene-rich {
+    height: 148px;
+  }
+  .pixel-scene.scene-rich .sprite-wrap.has-hero-png {
+    left: 6%;
+    bottom: 10%;
+    transform: scale(0.88);
+    transform-origin: left bottom;
+  }
+}

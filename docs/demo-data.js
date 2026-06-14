@@ -211,7 +211,12 @@ function normalizeYear(year) {
     };
   }
   const story = window.ShadowDemo?.STORY;
-  if (story?._visual_v2 || story?.id === 'fuxduxian') {
+  const storyId = story?.id || window.ShadowDemo?._activeStoryId;
+  if (window.ShadowStoryVisuals?.hasVisualPack(storyId)) {
+    const pack = window.ShadowStoryVisuals.getForYear(storyId, year.year);
+    if (pack) return { ...out, ...pack };
+  }
+  if (storyId === 'fuxduxian') {
     const v2 = V2_VISUAL[year.year];
     return v2 ? { ...out, ...v2 } : out;
   }
@@ -249,13 +254,46 @@ const ShadowAgents = {
     enabled: true,
     async ask(ctx) {
       const year = ctx.year;
+      const story = ctx.story || window.ShadowDemo?.STORY;
+      const userQuestion = (ctx.userQuestion || '').trim()
+        || `第 ${year.year} 年「${year.title}」—— Shadow，你想对现在的我说什么？`;
+
       const memIds = getMemoriesForYear(year.year).map(m => m.id).slice(0, 1);
-      return {
+      const fallback = {
         reply: year.shadow_dialogue,
         cite_memory_ids: memIds.length ? memIds : [`m${year.year}`],
         mood_after: typeof year.emotion === 'object' ? year.emotion.label : year.emotion,
         _placeholder: true
       };
+
+      try {
+        const res = await fetch('/api/dialogue', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            persona_card: story?.persona_card,
+            memory_stream: story?.memory_stream || [],
+            years: story?.years || [],
+            profile: story?.profile || {},
+            current_mood: year.new_mood ?? 5,
+            current_esteem: year.new_esteem ?? 5,
+            at_year: year.year,
+            user_question: userQuestion,
+            fallback_reply: year.shadow_dialogue
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+        return {
+          reply: data.reply || year.shadow_dialogue,
+          cite_memory_ids: data.cite_memory_ids || fallback.cite_memory_ids,
+          mood_after: data.mood_after || fallback.mood_after,
+          _placeholder: Boolean(data._placeholder)
+        };
+      } catch (err) {
+        console.warn('[ShadowAgents.dialogue]', err.message);
+        return { ...fallback, _error: err.message };
+      }
     }
   },
 
@@ -346,8 +384,15 @@ function applyIntakeFromSession() {
         description: full.raw.self_description || STORY.profile.description,
         quote: full.raw.one_liner || STORY.profile.quote,
         age: full.temporal?.age_at_fork ?? STORY.profile.age,
+        gender: full.raw.gender || full.temporal?.gender || STORY.profile.gender,
         keywords: (full.raw.selected_tags || []).slice(0, 5)
       };
+    }
+
+    const gender = full?.raw?.gender || full?.temporal?.gender;
+    if (gender && window.ShadowGenderSprites?.applyToRoot) {
+      window.ShadowGenderSprites.applyToRoot(gender);
+      STORY.shadow = { ...(STORY.shadow || {}), gender };
     }
 
     if (full?.scenario_weights) {
@@ -395,6 +440,10 @@ function applyLiveFromSession() {
     STORY.premise = live.final?.message?.slice(0, 48) || STORY.premise;
     STORY._from_live = true;
     STORY._live_run_id = session.run_id || null;
+    STORY._demo_mock = Boolean(live._demo_mock || session._demo_mock);
+    if (live.visual_character || session.visual_character) {
+      STORY.visual_character = live.visual_character || session.visual_character;
+    }
     return true;
   } catch (_) {
     return false;

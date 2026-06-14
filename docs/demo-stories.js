@@ -5,11 +5,19 @@
 
 const STORY_CATALOG = [
   {
+    id: 'wufuxdu',
+    line_name: '未复读线',
+    shadow_name: '阿岚',
+    scenario_primary: 'self_growth',
+    scenario_secondary: 'friendship',
+    file: 'stories/未复读线-阿岚.json'
+  },
+  {
     id: 'fuxduxian',
-    line_name: '复读线',
+    line_name: '旧复读线',
     shadow_name: '阿岚',
     scenario_primary: 'academic',
-    file: null
+    file: 'stories/复读线.json'
   },
   {
     id: 'linwan',
@@ -169,7 +177,8 @@ function adaptGoldenStory(raw, catalogEntry = {}) {
     years,
     final,
     scenario_primary: primary,
-    scenario_secondary: secondary
+    scenario_secondary: secondary,
+    _visual_v2: true
   };
 }
 
@@ -190,7 +199,7 @@ function resolveStoryIdFromLocation() {
   const fromSearch = location.search.match(/[?&]story(?:=|%3[Dd])([^&+#]+)/i);
   if (fromSearch) return decodeURIComponent(fromSearch[1]);
 
-  return 'fuxduxian';
+  return 'wufuxdu';
 }
 
 /**
@@ -205,7 +214,11 @@ async function loadStory(storyId) {
 
   if (!entry.file) {
     if (window.ShadowDemo?.STORY_FUXDUXIAN) {
-      return { ...window.ShadowDemo.STORY_FUXDUXIAN, id: entry.id, line_name: entry.line_name };
+      const story = { ...window.ShadowDemo.STORY_FUXDUXIAN, id: entry.id, line_name: entry.line_name };
+      if (window.ShadowStoryVisuals) {
+        story.protagonist_sprite = window.ShadowStoryVisuals.getProtagonist(story.id);
+      }
+      return story;
     }
     throw new Error('复读线内嵌数据未就绪');
   }
@@ -213,7 +226,11 @@ async function loadStory(storyId) {
   const res = await fetch(entry.file);
   if (!res.ok) throw new Error(`无法加载 ${entry.file}: ${res.status}`);
   const raw = await res.json();
-  return adaptGoldenStory(raw, entry);
+  const story = adaptGoldenStory(raw, entry);
+  if (window.ShadowStoryVisuals) {
+    story.protagonist_sprite = window.ShadowStoryVisuals.getProtagonist(story.id);
+  }
+  return story;
 }
 
 /**
@@ -227,14 +244,14 @@ async function bootstrapDemoStory() {
   if (window.ShadowDemo) {
     window.ShadowDemo.STORY = story;
     window.ShadowDemo._activeStoryId = storyId;
-    // Golden 故事 (?story=linwan 等) 保持 fixture 人格；Intake 只覆盖默认复读线或 ?from=intake
-    const explicitGoldenStory = storyId !== 'fuxduxian' && (
+    // Golden 故事 (?story=linwan 等) 保持 fixture 人格；Intake 只覆盖默认线或 ?from=intake
+    const explicitGoldenStory = storyId !== 'wufuxdu' && storyId !== 'fuxduxian' && (
       params.has('story') ||
       /[?&]story(?:=|%3[Dd])/i.test(location.search)
     );
     const allowIntake =
       !explicitGoldenStory &&
-      (params.get('from') === 'intake' || storyId === 'fuxduxian');
+      (params.get('from') === 'intake' || storyId === 'wufuxdu' || storyId === 'fuxduxian');
     if (allowIntake && typeof window.ShadowDemo.applyIntakeFromSession === 'function') {
       window.ShadowDemo.applyIntakeFromSession();
     }
@@ -253,7 +270,7 @@ function renderStoryPicker(containerId) {
 
   el.innerHTML = STORY_CATALOG.map(s => {
     const active = s.id === current ? ' is-active' : '';
-    const href = s.id === 'fuxduxian' ? 'demo.html' : `demo.html?story=${encodeURIComponent(s.id)}`;
+    const href = s.id === 'wufuxdu' ? 'demo.html' : `demo.html?story=${encodeURIComponent(s.id)}`;
     return `<a class="story-chip${active}" href="${href}" data-story="${s.id}">
       <span class="story-chip-line">${s.line_name}</span>
       <span class="story-chip-name">影 · ${s.shadow_name}</span>

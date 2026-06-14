@@ -1,0 +1,64 @@
+{
+  "story_id": "fuxduxian",
+  "year": 1,
+  "pack": "extended-scenes-v1",
+  "pack_status": "draft_agent",
+  "scene_type": "pivotal_sequence",
+  "visual_anchor": "春天，春日，阿岚在新绿教室最后一排，萌动初开",
+  "mood": "灰冷·退缩",
+  "status": "draft",
+  "narrative_ref": {
+    "memory_id": "m1",
+    "event_summary": "雨天最后一排复读"
+  },
+  "background": {
+    "asset_id": "PX-EXT-005",
+    "parallax": 0.12,
+    "tint": "#7a8494"
+  },
+  "layers": [
+    {
+      "asset_id": "PX-EXT-021",
+      "role": "protagonist",
+      "x": 460,
+      "y": 252,
+      "depth": 1,
+      "animation": "read_idle"
+    },
+    {
+      "asset_id": "PX-EXT-001",
+      "role": "fx",
+      "x": 320,
+      "y": 100,
+      "depth": 12,
+      "alpha": 0.28,
+      "note": "season_weather_fx"
+    },
+    {
+      "asset_id": "PX-UNI-023",
+      "role": "fx",
+      "x": 320,
+      "y": 100,
+      "depth": 12,
+      "alpha": 0.28,
+      "note": "rain_fx"
+    }
+  ],
+  "sequence": [
+    {
+      "duration_ms": 800,
+      "camera": "fade_in",
+      "note": "介入前"
+    },
+    {
+      "duration_ms": 1200,
+      "camera": "hold",
+      "note": "雨天最后一排复读"
+    },
+    {
+      "duration_ms": 600,
+      "camera": "fade_out",
+      "note": "介入弹窗"
+    }
+  ]
+}

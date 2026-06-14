@@ -1,0 +1,4086 @@
+{
+  "calendar_year": 2009,
+  "summary": "四万亿刺激落地、建国60周年、H1N1与就业压力。",
+  "social_mood": "信心修复与结构转型并行的「保八」之年。。普通人在新闻与日常之间，感知到的情绪与压力真实可触。",
+  "atmosphere": {
+    "gdp_trillion_cny": 34.85,
+    "gdp_growth_pct": 9.4,
+    "cpi_pct": -0.7,
+    "gaokao_candidates_wan": 1020,
+    "college_graduates_wan": 531,
+    "internet_users_yi": 3.84,
+    "mobile_users_yi": 7.5,
+    "housing_price_index_70_cities_pct": 5.7,
+    "migrant_workers_wan": 14500,
+    "avg_urban_disposable_income_cny": 17175,
+    "rural_net_income_cny": 5153,
+    "foreign_reserves_usd_trillion": 2.4,
+    "dominant_anxiety": "信心修复与结构转型并行的「保八」之年。",
+    "employment_pressure": "毕业生531万与城镇调查失业率受关注",
+    "education_hotspot": "高考1020万，考研与考公热度",
+    "policy_keyword": "四万亿刺激落地、建国60周年、H1N1与",
+    "international_shadow": "全球宏观与国内结构性矛盾交织",
+    "meme_keywords": [
+      "贾君鹏",
+      "哥只是个传说",
+      "潜伏",
+      "H1N1",
+      "MJ离世",
+      "比特币",
+      "哈德逊河奇迹"
+    ],
+    "international_anxiety": "H1N1猪流感带来的跨国卫生威胁，以及大衰退末期严重的失业与生存不确定性。"
+  },
+  "pop_culture": [
+    "潜伏（流行文化）",
+    "三枪拍案惊奇",
+    "开心网（流行文化）",
+    "新浪微博",
+    "贾君鹏你妈妈喊你回家吃饭",
+    "建国60周年",
+    "QQ农场",
+    "快乐女声",
+    "蜗居（流行文化）",
+    "阿凡达（流行文化）",
+    "神话（流行文化）",
+    "迈克尔杰克逊",
+    "迈克尔·杰克逊离世 (全球哀悼与网络流量洪峰)",
+    "比特币诞生 (去中心化金融起点)",
+    "哈德逊河奇迹 (萨利机长全员营救)",
+    "H1N1流感科普 (全民公共卫生拉练)",
+    "伊朗选举与推特传播 (社交媒体政治化)",
+    "世界数字图书馆 (知识共享尝试)",
+    "哈里发塔完工 (全球最高建筑)",
+    "高锟获诺贝尔物理学奖 (光纤之父)",
+    "金砖四国首脑会议 (新兴市场集体发声)",
+    "通用汽车破产 (传统工业黄昏)"
+  ],
+  "macro_events": [
+    {
+      "category": "economy",
+      "title": "四万亿刺激落地",
+      "detail": "2009年中央投资推动「保八」成功，GDP增长9.4%。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": []
+    },
+    {
+      "category": "politics_policy",
+      "title": "建国60周年",
+      "detail": "2009年10月1日庆祝中华人民共和国成立60周年大会。",
+      "source_url": "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": []
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "H1N1流感",
+      "detail": "2009年甲型H1N1流感传入中国，学校停课与疫苗接种。",
+      "source_url": "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
+      "weight": 1,
+      "sensitivity": "medium",
+      "tags": []
+    },
+    {
+      "category": "society",
+      "title": "乌鲁木齐7·5事件",
+      "detail": "2009年7月5日乌鲁木齐发生严重暴力犯罪事件。",
+      "source_url": "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
+      "weight": 1,
+      "sensitivity": "high",
+      "tags": []
+    },
+    {
+      "category": "tech_internet",
+      "title": "3G商用启动",
+      "detail": "2009年中国进入3G商用元年。。该事件在当年社会舆论与青年生活中留有清晰印记。",
+      "source_url": "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": []
+    },
+    {
+      "category": "employment",
+      "title": "大学生就业最难年",
+      "detail": "2009届毕业生约531万，金融危机冲击出口就业。",
+      "source_url": "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": []
+    },
+    {
+      "category": "housing",
+      "title": "房价报复性上涨",
+      "detail": "2009年货币宽松后一线房价快速上涨。。该事件在当年社会舆论与青年生活中留有清晰印记。",
+      "source_url": "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": []
+    },
+    {
+      "category": "tech_internet",
+      "title": "新浪微博上线",
+      "detail": "2009年8月新浪微博开始公测。。该事件在当年社会舆论与青年生活中留有清晰印记。",
+      "source_url": "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": []
+    },
+    {
+      "category": "economy",
+      "title": "汽车下乡",
+      "detail": "2009年汽车摩托车下乡刺激农村消费。。该事件在当年社会舆论与青年生活中留有清晰印记。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": []
+    },
+    {
+      "category": "education",
+      "title": "新高考改革探索",
+      "detail": "2009年部分省份启动新高考改革试点。。该事件在当年社会舆论与青年生活中留有清晰印记。",
+      "source_url": "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": []
+    },
+    {
+      "category": "urban_life",
+      "title": "上海迪士尼获批",
+      "detail": "2009年迪士尼与上海签约项目获国家批复。",
+      "source_url": "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": []
+    },
+    {
+      "category": "culture_entertainment",
+      "title": "建国60周年阅兵",
+      "detail": "2009年天安门阅兵展示装备与方阵。。该事件在当年社会舆论与青年生活中留有清晰印记。",
+      "source_url": "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": []
+    },
+    {
+      "category": "economy",
+      "title": "2009年GDP约34.85万亿元",
+      "detail": "2009年中国国内生产总值约34.85万亿元，比上年增长9.4%，CPI约-0.7%。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": []
+    },
+    {
+      "category": "education",
+      "title": "2009年高考1020万人",
+      "detail": "2009年全国高考报名约1020万人，高校毕业生约531万人。",
+      "source_url": "https://www.moe.gov.cn/jyb_xwfb/",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": []
+    },
+    {
+      "category": "tech_internet",
+      "title": "2009年网民3.84亿",
+      "detail": "2009年中国网民规模约3.84亿，移动电话用户约7.5亿。",
+      "source_url": "https://www.cnnic.cn/n4/2024/0902/166-18798.htm",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": []
+    },
+    {
+      "category": "employment",
+      "title": "2009年农民工14500万",
+      "detail": "2009年全国农民工总量约14500万人。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": []
+    },
+    {
+      "category": "housing",
+      "title": "2009年70城房价指数",
+      "detail": "2009年70个大中城市新建住宅价格同比约5.7%。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": []
+    },
+    {
+      "category": "economy",
+      "title": "2009年外汇储备",
+      "detail": "2009年末外汇储备约2.4万亿美元。。该事件在当年社会舆论与青年生活中留有清晰印记。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 0.7,
+      "sensitivity": "low",
+      "tags": []
+    },
+    {
+      "category": "employment",
+      "title": "2009年就业市场体感",
+      "detail": "毕业生531万与城镇调查失业率受关注；城镇新增就业与高校毕业生约531万叠加，「先就业再择业」成为常见策略。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "employment",
+        "graduate"
+      ]
+    },
+    {
+      "category": "housing",
+      "title": "2009年房价指数约5.7%",
+      "detail": "70个大中城市新建住宅价格同比约5.7%；首套与二套政策、公积金与按揭利率牵动刚需与改善群体。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "housing",
+        "mortgage"
+      ]
+    },
+    {
+      "category": "education",
+      "title": "2009年高考约1020万考生",
+      "detail": "高考报名约1020万人；高考1020万，考研与考公热度持续升温，家庭在教育支出上的机会成本讨论增多。",
+      "source_url": "https://www.moe.gov.cn/",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "gaokao",
+        "education"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "2009年网民约3.84亿",
+      "detail": "CNNIC统计网民约3.84亿、手机用户约7.5亿；移动支付、短视频与平台经济渗透日常生活。",
+      "source_url": "https://www.cnnic.cn/hlwfzyj/hlwxzbg/",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "internet",
+        "mobile"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "2009年城乡收入差距",
+      "detail": "城镇人均可支配收入约17175元、农村约5153元；进城务工约14500万，户籍与公共服务均等化仍是议题。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "income",
+        "rural"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "2009年社会焦虑主轴",
+      "detail": "舆论与家庭谈话中「信心修复与结构转型并行的「保八」之年。」高频出现，影响婚育、职业选择与地域流动决策。",
+      "source_url": "https://www.gov.cn/",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "anxiety",
+        "mood"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "2009年政策关键词：四万亿刺激落地、建国60周年、H1N1与",
+      "detail": "年度政策与规划表述围绕「四万亿刺激落地、建国60周年、H1N1与」展开，地方落实通过项目、补贴与考核机制触达居民。",
+      "source_url": "https://www.gov.cn/",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "policy"
+      ]
+    },
+    {
+      "category": "urban_life",
+      "title": "2009年通勤与地铁扩张",
+      "detail": "多城地铁新线开通或延伸，「TOD」「一小时通勤圈」进入租房决策；高峰拥挤成本计入生活账。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "transit",
+        "urban"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "2009年家庭催婚催育压力",
+      "detail": "春节与节假日聚会中，就业、买房、结婚、生育成亲戚问答清单；代际价值观冲突在饭桌上显性化。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "marriage"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "2009年理财与负债",
+      "detail": "房贷、消费贷与货币基金/基金定投并存；利率变动与资产价格波动影响中产资产负债表。",
+      "source_url": "https://www.pbc.gov.cn/",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "finance",
+        "debt"
+      ]
+    },
+    {
+      "category": "culture_entertainment",
+      "title": "2009年网络迷因：贾君鹏",
+      "detail": "「贾君鹏」等梗在社交媒体二次传播，构成同龄人文化暗号与情绪出口。",
+      "source_url": "https://www.cnnic.cn/hlwfzyj/hlwxzbg/",
+      "weight": 0.7,
+      "sensitivity": "low",
+      "tags": [
+        "meme",
+        "culture"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "2009年医疗与体检",
+      "detail": "医保异地结算、集采降价持续推进；年轻人「体检报告焦虑」与加班文化交织。",
+      "source_url": "https://www.gov.cn/",
+      "weight": 0.9,
+      "sensitivity": "medium",
+      "tags": [
+        "healthcare"
+      ]
+    },
+    {
+      "category": "employment",
+      "title": "2009年灵活就业与平台用工",
+      "detail": "外卖、网约车、直播带货等吸纳大量灵活就业；社保衔接与劳动权益保障讨论不断。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "gig",
+        "labor"
+      ]
+    },
+    {
+      "category": "housing",
+      "title": "2009年租赁市场",
+      "detail": "一线与新一线租金占收入比上升，合租、群租治理与「青年公寓」政策并存，流动青年「住」的稳定性不足。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "rent"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "2009年数字生活",
+      "detail": "扫码支付、网约车、外卖、在线会议/网课成为基础设施；算法推荐塑造信息茧房与消费路径。",
+      "source_url": "https://www.cnnic.cn/hlwfzyj/hlwxzbg/",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "digital"
+      ]
+    },
+    {
+      "category": "education",
+      "title": "2009年职业教育与技能",
+      "detail": "制造业与服务业缺工与大学生「慢就业」并存，高职扩招与1+X证书试点推进技能通道。",
+      "source_url": "https://www.moe.gov.cn/",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "vocational"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "2009年老龄化与养老",
+      "detail": "60岁及以上人口占比继续上升，独生子女家庭养老责任加重，社区助餐与长期护理险试点扩面。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "aging"
+      ]
+    },
+    {
+      "category": "urban_life",
+      "title": "2009年消费分级",
+      "detail": "平价零售与品质消费并存，「平替」「反向消费」话语出现；县域商业与电商下沉改变三四线城市消费地图。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "consumption"
+      ]
+    },
+    {
+      "category": "urban_life",
+      "title": "2009年环保与生活",
+      "detail": "蓝天保卫战、垃圾分类、新能源车牌与充电网络影响出行选择；极端天气新闻提高灾害风险感知。",
+      "source_url": "https://www.gov.cn/",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "environment"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "奥巴马正式就任总统",
+      "detail": "2009年1月20日奥巴马宣誓就任美国第44任总统，国内媒体解读「改变」预期与全球经济走出危机的路径。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": [
+        "us_politics",
+        "obama"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "比特币创始块诞生",
+      "detail": "2009年1月3日比特币网络启动，极客论坛开始讨论这种去中心化数字货币的可能性。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": [
+        "bitcoin",
+        "fintech"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "H1N1流感全球大流行",
+      "detail": "2009年WHO宣布H1N1大流行；中国学校停课、测温与疫苗接种成为日常。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "pandemic",
+        "health"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "通用汽车破产保护",
+      "detail": "2009年通用汽车申请破产保护，被视为金融危机后传统汽车产业链重组的标志性事件。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "bankruptcy",
+        "economic_crisis"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "金砖四国首次峰会",
+      "detail": "2009年6月16日中俄印巴首脑叶卡捷琳堡会晤，「金砖」作为新兴市场集体发声机制成型。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "bric",
+        "diplomacy"
+      ]
+    },
+    {
+      "category": "culture_entertainment",
+      "title": "迈克尔·杰克逊逝世",
+      "detail": "2009年6月25日MJ去世，全球哀悼使当时互联网流量一度濒临瘫痪，成为世纪级文化事件。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "culture",
+        "legacy"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "伊朗大选后绿色抗议",
+      "detail": "2009年伊朗总统选举后爆发大规模抗议，社交媒体动员引发全球对数字传播的早期反思。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "medium",
+      "tags": [
+        "iran_protests",
+        "social_media"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "全球经济触底复苏",
+      "detail": "2009年多国数据确认金融危机最剧烈休克期告一段落，世界进入漫长的后危机修复时代。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "recovery",
+        "finance"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "里斯本条约生效",
+      "detail": "2009年12月1日欧盟《里斯本条约》生效，国际关系课堂讨论欧洲制度整合与主权碎片化。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "eu",
+        "treaty"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "高锟获诺贝尔物理学奖",
+      "detail": "2009年高锟因光纤通信获诺贝尔物理学奖，国内理工科学生以「光纤之父」为论文引用热点。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "nobel"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "迪拜世界债务危机",
+      "detail": "2009年11月迪拜世界宣布债务重组，引发全球市场对新兴市场资产泡沫的再评估。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "debt_crisis",
+        "dubai"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "黑龙江鹤岗矿难",
+      "detail": "2009年11月黑龙江鹤岗煤矿特大瓦斯爆炸致108人死亡，再次震动煤炭安全生产舆论。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1,
+      "sensitivity": "medium",
+      "tags": [
+        "mining",
+        "safety"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "力拓间谍案宣判",
+      "detail": "2009年上海法院宣判力拓案，跨国商业情报与资源博弈成为财经与外交交叉话题。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1,
+      "sensitivity": "medium",
+      "tags": [
+        "business",
+        "diplomacy"
+      ]
+    },
+    {
+      "category": "culture_entertainment",
+      "title": "哈德逊河奇迹迫降",
+      "detail": "2009年1月美联航1549号在哈德逊河成功迫降，萨利机长全员生还成为年度英雄叙事。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "aviation",
+        "heroism"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "世界数字图书馆上线",
+      "detail": "2009年联合国教科文组织世界数字图书馆开放，学生可在网上查阅多语种古籍与手稿。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "education",
+        "digital_library"
+      ]
+    }
+  ],
+  "micro_events": [
+    {
+      "category": "school",
+      "text": "2009年高考季，刷题与志愿表堆满书桌",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "gaokao"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "digital",
+      "text": "2009年在BBS或微博上追热点、跟帖到深夜",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "internet"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "family",
+      "text": "2009年饭桌上父母聊物价、房价与「稳定」",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "family"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "money",
+      "text": "2009年同学讨论存银行还是买基金股票",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "finance"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "policy_touch",
+      "text": "2009年新闻里的改革词，慢慢写进课本与考卷",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "policy"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "family",
+      "text": "春节回家，亲戚追问「2009年打算考研还是工作」",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "spring",
+        "pressure"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "母亲把相亲对象照片发到家族群，你选择已读不回",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "marriage"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "父亲在饭桌上说「别人家孩子已经买房了」",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "housing"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "奶奶住院，你在医院走廊改简历",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "health"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "school",
+      "text": "室友通宵打植物大战僵尸，你戴着耳塞刷题到两点",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "dorm"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "四级成绩公布，你差一分没过",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "exam"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "社团招新，你犹豫要不要竞选部长",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "club"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "毕业论文选题被导师打回三次",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "thesis"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "实习答辩当天，你发现自己PPT页码错了",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "intern"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "work",
+      "text": "实习工资120元/天，午餐只敢吃食堂最便宜的窗口",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "intern"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "部门群里@全体成员，你假装没看见直到被点名",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "office"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "996讨论上热搜，你公司发邮件强调「奋斗者文化」",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "996"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "裁员名单流传，工位空了一半",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "layoff"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "领导说「年轻人要多承担」，你接下不属于你的项目",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "overwork"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "romance",
+      "text": "前任在朋友圈晒结婚照，你划过去又划回来",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "breakup"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "相亲对象问「你有房吗」，你笑了一下没回答",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "dating"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "异地恋视频时对方说「我们冷静一下」",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "distance"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "money",
+      "text": "合租房东通知：2009年涨租200元，每月1100元",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "rent"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "money",
+      "text": "花呗账单日，你先把最低还款还上",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "debt"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "money",
+      "text": "基金绿了一周，你发誓再也不看账户",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "invest"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "money",
+      "text": "工资到账短信和房贷扣款短信几乎同时到达",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "mortgage"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "health",
+      "text": "体检报告「轻度脂肪肝」，你买了健身卡却只去了一次",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "health"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "health",
+      "text": "连续熬夜后心悸，你去搜「是不是要猝死了」",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "burnout"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "neighborhood",
+      "text": "地铁新线开通，通勤缩短20分钟",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "transit"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "neighborhood",
+      "text": "楼下商铺换成连锁奶茶，常去的小馆关门了",
+      "weight": 0.5,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "gentrification"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "neighborhood",
+      "text": "小区群发通知：垃圾分类督导员上岗",
+      "weight": 0.5,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "policy"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "digital",
+      "text": "新浪微博推送「贾君鹏」相关热搜，你转发又删除",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "meme"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "digital",
+      "text": "追的综艺潜伏更新，你熬夜看完第二天迟到",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "entertainment"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "digital",
+      "text": "微博热搜爆了一个你所在行业的丑闻",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "news"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "digital",
+      "text": "群聊里同学晒offer，你默默把聊天设成免打扰",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "peer"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "policy_touch",
+      "text": "落户政策微调，你查攻略到凌晨",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "hukou"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "policy_touch",
+      "text": "考研报名系统卡顿，你刷新了一小时",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "exam"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "教资/公考培训班传单塞满宿舍门缝",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "exam"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "work",
+      "text": "面试被问「能接受出差吗」，你知道这意味着全年飞",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "job"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "同事离职请客，饭桌上说「行业不行了」",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "industry"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "family",
+      "text": "妹妹高考，家人把关注全转过去，你突然松一口气",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "sibling"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "money",
+      "text": "双十一购物车删了又加，最后只买了必需品",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "shopping"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "romance",
+      "text": "Crush给你点了外卖，备注写「加油」",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "crush"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "health",
+      "text": "牙疼拖了三周，终于预约到周末号源",
+      "weight": 0.5,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "dental"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "neighborhood",
+      "text": "暴雨淹了小区门口，你拖鞋趟水上班",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "weather"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "digital",
+      "text": "短视频刷到「同龄人已经年入百万」",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "anxiety"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "图书馆占座大战，你六点去排队",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "study"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "work",
+      "text": "远程办公第一天，你穿着睡衣开摄像头",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "wfh"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "family",
+      "text": "视频通话里看到父母白发多了，你转开话题",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "aging"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "money",
+      "text": "兼职翻译2000字，稿费80块",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "sidejob"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "policy_touch",
+      "text": "居住证续签窗口排队三小时",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "bureaucracy"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "同学出国读书，散伙饭上大家都喝多",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "farewell"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "work",
+      "text": "年会抽奖没中，安慰奖是一盒月饼",
+      "weight": 0.4,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "office"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "digital",
+      "text": "游戏新赛季更新，你请假的理由编得很烂",
+      "weight": 0.5,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "game"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "romance",
+      "text": "暧昧对象已读不回48小时",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "ghosting"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "health",
+      "text": "心理咨询预约排到两周后",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "mental"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "neighborhood",
+      "text": "快递柜超时收费，你和邻居一起投诉",
+      "weight": 0.5,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "daily"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "family",
+      "text": "家里让你考公务员「稳定」，你口头答应",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "civil_service"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "work",
+      "text": "工牌刷不进新门禁，保安说系统升级",
+      "weight": 0.4,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "office"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "money",
+      "text": "共享单车月卡涨价，你改骑地铁",
+      "weight": 0.3,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "daily"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "实验数据跑飞了，你在实验室通宵重跑",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "lab"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "digital",
+      "text": "朋友圈有人晒证，你点赞后立刻划走",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "social"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "policy_touch",
+      "text": "个税App提醒专项附加扣除",
+      "weight": 0.4,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "tax"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "客户改需求第五版，你微笑说「好的收到」",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "client"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "family",
+      "text": "过年红包金额被 cousin 比较，你笑得很僵",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "spring"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "health",
+      "text": "体检排队空腹到中午，低血糖手抖",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "health"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "romance",
+      "text": "分手后的歌单随机播到那一首",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "music"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "neighborhood",
+      "text": "物业通知停水停电，你提前接了三盆水",
+      "weight": 0.5,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "utility"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "money",
+      "text": "信用卡分期广告弹窗，你点了关闭",
+      "weight": 0.5,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "debt"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "digital",
+      "text": "群文件「就业形势分析.pdf」下载了没打开",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "career"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "选课系统崩溃，你捡漏一门冷门课",
+      "weight": 0.5,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "course"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "work",
+      "text": "电梯里听见HR聊「优化」，你楼层到了",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "layoff"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "family",
+      "text": "父母学会用视频通话，每次先问「吃饭了吗」",
+      "weight": 0.5,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "parent"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "policy_touch",
+      "text": "核酸/健康码政策变动，你截图保存攻略",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "covid"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "digital",
+      "text": "QQ群文件病毒谣言，你转发辟谣链接",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "internet"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "work",
+      "text": "第一份工资到手，你请室友吃了顿好的",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "career"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "money",
+      "text": "存折去银行排队，前面大爷聊房价",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "finance"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "期末周占座贴条「考研勿扰」",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "society"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "digital",
+      "text": "论坛晒工资条被HR约谈",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "covid"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "family",
+      "text": "家族群转发养生谣言，你选择不回复",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "spring"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "work",
+      "text": "打印机卡纸，全办公室等你修",
+      "weight": 0.5,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "ai"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "选修课签到二维码，室友让你代扫",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "exam"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "食堂涨价5毛，朋友圈骂了一天",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "inflation"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "digital",
+      "text": "博客园/知乎长文收藏了从未读完",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "ai"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "neighborhood",
+      "text": "共享单车颜色换了一批",
+      "weight": 0.4,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "olympics"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "health",
+      "text": "换季过敏，药店断货一种鼻喷",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "covid"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "policy_touch",
+      "text": "居住证积分政策解读文章收藏夹吃灰",
+      "weight": 0.5,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "policy"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "实习转正答辩，PPT最后一页写「谢谢」",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "tech"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "占座神器「占座猴」在二手群转让",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "education"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "family",
+      "text": "父亲学会微信转账，每次多转50让你收下",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "policy"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "digital",
+      "text": "B站弹幕玩梗，你跟不上缩写",
+      "weight": 0.5,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "livestream"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "money",
+      "text": "ATM取现限额，你跑了两家银行",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "education"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "团建强制爬山，你膝盖疼但不敢请假",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "wfh"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "romance",
+      "text": "情人节外卖鲜花迟到，你仍说没关系",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "dating"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "school",
+      "text": "实验室师兄留校读博，你问「值得吗」",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "ai"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "neighborhood",
+      "text": "旧改公告贴单元门，邻居讨论补偿方案",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "urban"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "health",
+      "text": "瑜伽课团购券过期前最后一天去",
+      "weight": 0.4,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "health"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "family",
+      "text": "春节回2009年老家，饭桌上被问「什么时候带对象回来」",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "spring"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "母亲转发「985父母培养出废柴」文章给你，附言：你看",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "parent"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "父亲沉默地帮你交了一季度房租，说「别告诉你妈」",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "money"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "家族群里 cousin 晒娃，你母亲发了一个「微笑」表情",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "spring"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "爷爷电话说「身体还好，就是常想你」，你握着手机很久",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "parent"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "父母来你工作的城市「顺路看看」，实际坐了12小时硬座",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "visit"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "母亲偷偷在你行李箱塞了腊味，安检时被要求开箱",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "spring"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "父亲用你旧手机，不会用微信视频，只能发语音",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "parent"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "家里让你「稳定一点」，你解释互联网行业他们听不懂",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "弟弟妹妹问「哥/姐，我能不能也考去你那城市」",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "sibling"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "母亲住院做小手术，你请假回去陪护三天",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "health"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "父亲在亲戚面前说「孩子在大城市有出息」，你听着心虚",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "face"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "家族长辈撮合相亲，你婉拒后母亲整晚没说话",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "marriage"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "你给父母买了新手机，教了十遍他们还是不会扫码",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "parent"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "春节红包金额被比较，你笑得很僵",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "spring"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "父母学会视频通话，每次先问「吃饭了吗」",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "parent"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "家里老房拆迁讨论，亲戚在群里吵分配方案",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "housing"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "母亲存了一万「应急」，说「别硬撑」",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "money"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "父亲酒后说「爸没本事，委屈你了」",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "parent"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "你瞒着家里真实薪资，报高了三千块",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "money"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "母亲帮你相亲角挂了资料，你气过后又心软",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "marriage"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "父亲来城市看你，坚持睡沙发不肯住酒店",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "visit"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "你第一次带礼物回家，母亲嫌贵让拿去退",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "spring"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "家里供你读书的弟弟问「值得吗」，你没法回答",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "sibling"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "父母吵架，母亲打电话向你诉苦，你不知道站哪边",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "parent"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "亲戚说「女孩子读那么多书干嘛」，母亲替你回嘴",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "gender"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "你给父母订了体检，他们嫌贵偷偷取消",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "health"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "母亲把你们兄妹拉群，标题叫「相亲相爱一家人」",
+      "weight": 0.5,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "parent"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "2009年你没能回家过年，视频里看见门口新贴的对联",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "spring"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "父亲学会用拼多多，给你寄了一箱不太需要的坚果",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "parent"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "你告诉父母想换城市，母亲说「别跑太远」",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "move"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "家里老照片翻出你小时候，母亲说「那时候多乖」",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "memory"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "你承担家里第一台空调的安装费，父亲记在了本上",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "money"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "父母来参加你的毕业典礼，在人群里踮脚找你",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "milestone"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "family",
+      "text": "母亲问你「还恨不恨当年逼你复读」，你沉默",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "gaokao"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "romance",
+      "text": "前任发来「最近好吗」，你打了删删了打",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "breakup"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "暧昧对象已读不回48小时，你刷TA朋友圈到三个月前",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "ghosting"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "分手后的歌单随机播到那一首，你立刻切歌",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "breakup"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "约会对象说「感觉你不够松弛」",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "dating"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "你在社交软件匹配到同校学妹，犹豫要不要划走",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "dating"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "恋人想公开关系，你担心同事议论",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "public"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "对方父母视频「顺便看看你」，你穿了最正式的一件衬衫",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "family"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "吵架后你道歉，其实不确定错在哪",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "conflict"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "前任婚礼请柬送到，你随了份子没去",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "breakup"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "暧昧止于「我们还是做朋友吧」",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "friendzone"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "你保存了聊天记录截图，却不敢回看",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "memory"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "恋人提分手时说「你很好，是我配不上」",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "breakup"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "你在地铁看见相似背影，追了两站不是TA",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "memory"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "恋爱三周年，你忘了，对方说「没事」",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "anniversary"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "对方想同居，你担心房租和边界",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "cohabit"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "Introvert的你被拉去恋人朋友局，整晚微笑",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "social"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "你第一次说「我爱你」，对方回答「嗯」",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "confession"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "恋人出差一个月，你们靠 nightly call 维持",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "distance"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "你发现对方仍关注前任微博，一夜没睡",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "trust"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "父母反对这段关系，你第一次顶嘴",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "family"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "分手后共同好友结婚，你们被安排同桌",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "awkward"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "你在恋人面前哭，事后觉得丢脸",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "vulnerable"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "对方送你的礼物，你收在抽屉最里层",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "memory"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "恋爱中你仍在 dating app 上滑，然后注销",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "guilt"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "你们讨论「将来」，一个说城市一个说自由",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "future"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "复合后旧问题在第三周重新出现",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "reconcile"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "你写长信解释，对方回「收到了」",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "conflict"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "单身久了，朋友介绍你时你说「随缘吧」",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "dating"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "你在雨里等TA两小时，收到「下次吧」",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "standup"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "恋人说「我需要空间」，你回「好」然后失眠",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "distance"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "2009年跨年夜，你一个人刷到满屏情侣合照",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "lonely"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "romance",
+      "text": "你终于承认：有些关系不是努力就能修好",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "acceptance"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "digital",
+      "text": "群聊里同学晒offer，你默默设成免打扰",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "peer"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "室友通宵打游戏，你戴耳塞刷题到两点",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "dorm"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "neighborhood",
+      "text": "地铁新线开通，你和室友约定「以后一起坐这条线」",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "transit"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "小组作业只有你在写，其他人在群里发表情",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "teamwork"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "digital",
+      "text": "你退了一个500人的年级群，没人发现",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "drift"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "昔日死党换了专业，见面话题只剩「忙吗」",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "drift"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "你借同学笔记，发现最后一页写着「别卷了」",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "peer"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "neighborhood",
+      "text": "合租室友搬走，你们没互删微信却不再说话",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "drift"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "digital",
+      "text": "你在游戏公会认识的朋友，线下见面发现完全两样",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "online"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "毕业照站位，你站在最边缘",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "farewell"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "同学结婚请你当伴郎/伴娘，你担心随份子",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "wedding"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "digital",
+      "text": "你发起聚会，最后只有两个人到场",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "lonely"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "室友恋爱后常不在宿舍，你突然不习惯独处",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "dorm"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "你帮同学改简历，TA拿到offer后很少联系你",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "peer"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "digital",
+      "text": "老同学在LinkedIn加你，你们寒暄三句结束",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "drift"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "你加入兴趣小组，发现只是换了个地方玩手机",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "club"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "neighborhood",
+      "text": "小区球局缺人，邻居喊你，你去了并踢进一个乌龙",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "sport"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "digital",
+      "text": "你在B站弹幕认出一个ID，私信后对方说「谁啊」",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "online"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "你向朋友倾诉，TA回「我也一样啊」",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "support"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "昔日小团体散了，朋友圈点赞只剩互赞",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "drift"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "你记得朋友生日，对方忘记你的",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "hurt"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "你拒绝帮同学代课，后来关系淡了一截",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "boundary"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "实习公司遇见校友，你们假装很熟",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "network"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "digital",
+      "text": "你在微博小号吐槽，被共同好友截图",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "trust"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "毕业五年聚会，你发现说话最多的人变了",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "reunion"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "你送朋友离开月台，回来发了一条仅自己可见的朋友圈",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "farewell"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "digital",
+      "text": "2009年你删了聊天记录，却留着那个人的备注",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "memory"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "2009年高考成绩公布，你刷榜刷到手机发烫",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "gaokao"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "复读班开学，座位在最后一排靠窗",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "gaokao"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "你撕了模拟考准考证，室友看见没说话",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "gaokao"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "转专业窗口期，你填了表又撤回",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "major"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "保研名单公示，你的名字在边缘",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "postgrad"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "留学中介电话轰炸，你说「再考虑」",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "abroad"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "你在图书馆闭馆音乐里收拾书包，天还没亮",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "study"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "挂科重修，你走进教室发现是学弟学妹",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "fail"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "导师说「这篇能发」，你高兴了一周",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "thesis"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "你第一次挂科，不敢告诉家里",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "fail"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "竞赛获奖，名字却排在第二位",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "competition"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "你在复读机构月考排名上升，却更焦虑",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "gaokao"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "高考志愿填了「服从调剂」",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "gaokao"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "你偷听到同学被保送，假装在听歌",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "peer"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "网课时代你开着摄像头走神，被点名",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "online"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "你申请交换项目，材料被退回缺一个章",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "abroad"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "答辩当天PPT页码错了，你硬讲完了",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "thesis"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "你买了五三，只写了前两章",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "gaokao"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "班主任说「再坚持一下」，你想哭",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "gaokao"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "你查分前洗手焚香，其实不信",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "gaokao"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "调剂系统开放，你每隔十分钟刷新",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "gaokao"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "你决定二战，父母说「家里供得起」",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "postgrad"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "专业课老师记住你的名字，你受宠若惊",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "mentor"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "你在自习室看见昔日竞争对手，互相点头",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "gaokao"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "教材改版，你的笔记一半作废",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "course"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "你帮室友押题，结果全没中",
+      "weight": 0.5,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "exam"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "奖学金公示，你差0.5分",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "award"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "你写下「若考不上就……」，没写完",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "gaokao"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "2009年考研国家线公布，你盯着屏幕发呆",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "postgrad"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "school",
+      "text": "AI查重系统升级，你参考文献格式改一夜",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "ai"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "work",
+      "text": "居家办公考勤App要拍照，你在被窝打卡",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "wfh"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "ChatGPT帮你写周报，你改了三版才敢交",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "ai"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "面试被问「35岁怎么办」，你愣了一秒",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "job"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "互联网寒冬，内推码突然没人要了",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "layoff"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "你收到offer，薪资比预期低两千",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "job"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "入职第一天，没人带你吃饭",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "onboard"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "你提离职，领导说「再想想，给你加薪」",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "quit"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "考公进面，你请假封闭培训一周",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "civil_service"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "事业单位笔试，考场外全是刷题的",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "civil_service"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "你想转行，简历被HR已读不回",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "pivot"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "创业想法写在备忘录，第三版仍没发",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "startup"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "你跨城offer，纠结户口与房租",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "move"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "money",
+      "text": "P2P暴雷新闻出来，你查自己的理财App",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "finance"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "你加班到末班地铁，车厢里全是同样的人",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "996"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "猎头电话说「有个机会」，你正在开会",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "job"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "绩效面谈，你提前写了小作文",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "review"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "你被派去驻场，客户比老板难伺候",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "client"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "2009年行业报告说「回暖」，你工资没涨",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "industry"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "你存够六个月生活费，才敢提离职",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "quit"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "work",
+      "text": "同事被裁，你帮忙搬纸箱，心里发凉",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "layoff"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "digital",
+      "text": "你在日记App写了三千字，设为私密",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "journal"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "health",
+      "text": "你第一次对朋友说「我可能需要帮助」",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "mental"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "digital",
+      "text": "你删了社交App三天，又装了回来",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "detox"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "health",
+      "text": "你尝试冥想，第十分钟想到待办清单",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "mental"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "school",
+      "text": "你问自己「到底想要什么」，没有答案",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "identity"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "health",
+      "text": "你梦见还在高考考场，醒来一身汗",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "gaokao"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "digital",
+      "text": "你发仅自己可见：「今天又假装很好」",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "anxiety"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "health",
+      "text": "你报了一个线下工作坊，差点临阵脱逃",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "growth"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "school",
+      "text": "你翻出旧日记，发现担心的事一半没发生",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "memory"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "health",
+      "text": "你学会说「不」，代价是被人说变了",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "boundary"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "digital",
+      "text": "你取关一半博主，信息流安静了",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "detox"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "health",
+      "text": "你第一次独自旅行，在青旅和陌生人聊到两点",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "solo"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "school",
+      "text": "你意识到「要强」有时是怕被人看穿",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "identity"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "health",
+      "text": "你写下十年后的信，封存在邮箱草稿",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "future"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "digital",
+      "text": "你看了心理医生推荐的书，划线划到第三页",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "mental"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "health",
+      "text": "你尝试早起，坚持了四天",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "habit"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "school",
+      "text": "你承认某个梦想已经放下，心里空了一下",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "regret"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "health",
+      "text": "你在镜子前练习「我已经够好了」",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "self_worth"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "digital",
+      "text": "你关闭「同龄人对比」推送，世界没塌",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "anxiety"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "health",
+      "text": "你因为「不甘」多撑了一年，不确定值不值",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "identity"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "school",
+      "text": "你列出「如果不怕失败会做什么」清单",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "growth"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "health",
+      "text": "你第一次没哭着挂电话，而是去洗了脸",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "resilience"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "digital",
+      "text": "你把「别人眼里的我」和「真实的我」写两栏",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "identity"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "health",
+      "text": "你报名志愿者，只是想走出房间",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "growth"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "school",
+      "text": "你对自己说：遗憾可以存在，不必马上和解",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "regret"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "health",
+      "text": "你删了「待办100条」，只留下三件",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "minimal"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "digital",
+      "text": "2009年深夜，你搜索「人生意义」，关掉手机没点进去",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "meaning"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "health",
+      "text": "你终于允许自己「不想要也可以」",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "acceptance"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "网吧弹窗说MJ去世，你点开国外新闻站，页面因流量过大一直转圈。",
+      "weight": 1.3,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "mj",
+        "internet_history"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "H1N1新闻后母亲囤光消毒洗手液，叮嘱你在公交车上必须戴口罩。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "h1n1",
+        "prevention"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "写字楼里讨论通用破产可能拖垮零部件厂，你第一次感到传统工业寒意。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career_anxiety",
+        "gm"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "极客论坛有人聊比特币，你下了客户端却没运行，后来常想「要是当时」。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "bitcoin",
+        "early_adopter"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全家看奥巴马就职片段，父亲叹美国出了黑人总统，世道真的变了。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "news",
+        "obama"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "QQ上互传哈德逊河迫降照片，死党说萨利机长那刻真像电影。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "heroism",
+        "digital_sharing"
+      ]
+    },
+    {
+      "category": "neighborhood",
+      "scenario": "career",
+      "text": "新疆出差遭遇突然断网，那几天你第一次感到信息管制离生活很近。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "witness",
+        "disruption"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "毕业论文引用高锟光纤理论，导师说这是对信息技术基石的致敬。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "study",
+        "science"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "四万亿红利还在，父母商量把存款换成刚开盘的新房，说砖头比纸币稳。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "investment",
+        "housing"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你第一次登录世界数字图书馆，在虚拟展厅里翻人类古老手稿。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "education",
+        "digital_library"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "会议上你提金砖市场布局，主管意外点头，说外贸得找新方向。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "business_pivot",
+        "global_view"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "鹤岗矿难后黑龙江亲戚连夜报平安，全家感叹煤炭行业太高危。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "safety",
+        "mining_tragedy"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "2G网络上你们用短信跟进MJ葬礼直播，彼此分享心碎瞬间。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "digital_love",
+        "pop_culture"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "H1N1实验室泄露传闻让你写日记，反思生物技术与公共安全的边界。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "reflection",
+        "biosafety"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "迪拜世界债务危机那天，新手交易员第一次听懂「资产负债表陷阱」。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "finance",
+        "risk_management"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "秋天宿舍争论第一代安卓能否挑战iPhone，争到半夜还不肯睡。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "tech_trend",
+        "debate"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "国际关系课解读里斯本条约，你低头记下一串陌生的欧盟机构名。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "study",
+        "europe"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "长辈提起萨达姆被处决已三年，叹世界更乱，全家陷入沉默。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "history",
+        "mood"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你在博客记录金融危机是否真结束，想在断裂现实里保持清醒。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "writing",
+        "consciousness"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "出口厂订单锐减转做淘宝，你忙着帮老板安装各种网银支付插件。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career_pivot",
+        "digitalization"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "模联里你对金砖合作前景的见解获最佳代表，老师说你视野够宽。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "mun",
+        "success"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "self_growth",
+      "text": "退掉分期买表计划，钱改存定期，开启极端防御型金钱观。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "savings",
+        "financial_literacy"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "网速慢的年头，你们在QQ上同步看MJ纪念帖，像一场数字仪式。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "digital_intimacy",
+        "ritual"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "你帮外地家属预约流感疫苗，感叹动荡年代里医疗预约也是救命事。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "care",
+        "health_tech"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "地理课用遥感对比汶川重建前后，你决定以此写大论文。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "thesis",
+        "science"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "邮件组讨论力拓案，好友说「平坦世界」正在隆起高墙。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "cyber_security",
+        "peer_talk"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "迪拜塔落成那周，父亲在阳台说全球泡沫幻灭，还是落袋为安。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family_mood",
+        "realism"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你用在线翻译读伊朗抗议报道，第一次感到信息可以绕开电视。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "translation_tech",
+        "learning"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "公司让你做第一批安卓原生应用，你感到移动互联风口微微抬头。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "coding",
+        "innovation"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "历史研讨会辩论奥巴马「改变」承诺，你感到制度韧性与民粹在角力。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "history",
+        "debate"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全家因是否抛售通用供应链股票激烈争吵，你第一次参与家庭理财。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "investment",
+        "risk"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "经济阴霾里你给恋人发Flash做的MJ致敬动画，当跨年礼物。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "pop_culture",
+        "romance"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "出口厂关停，你回老家备考公务员，寒冬里第一次懂「铁饭碗」。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career_change",
+        "stability"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "你下载金砖经济互补性论文，想在断裂时代找新的研究锚点。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "economics",
+        "foresight"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "春节取消长途旅行，全家看建国60周年阅兵录播，简约却温馨。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family_bond",
+        "simplicity"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "早期比特币挖矿创业项目因监管不明被迫关闭，你交了范式迁移学费。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "startup",
+        "failure"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "天涯帖里你们为伊朗抗议真伪吵到半夜，那是2009的精神火花。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "online_talk",
+        "clash"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "社区免费发H1N1疫苗，你陪长辈排队，感叹公共卫生真到家门口。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "health_care",
+        "tech"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "学术搜索里一篇供应链断裂风险论文，成了你科研起点。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "thesis",
+        "logic"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "2009跨年夜你盯着比特币创世块哈希，想人类或许站在金融悬崖边。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "epiphany",
+        "crypto_future"
+      ]
+    }
+  ],
+  "sources": [
+    "https://www.gov.cn/gongbao/",
+    "https://www.stats.gov.cn/sj/tjgb/",
+    "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
+    "https://www.cnnic.cn/",
+    "https://www.moe.gov.cn/jyb_xwfb/",
+    "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+    "https://en.wikipedia.org/wiki/21st_century",
+    "https://www.historycentral.com/Today/21st.html"
+  ],
+  "version": "2026.06.14-v1",
+  "notebooklm_summary": "2009年是全球经济在金融海啸后的「触底年」与「复苏元年」。奥巴马就任承载「改变」希望，比特币诞生与社交媒体崛起标志数字时代萌芽；H1N1大流行与迈克尔·杰克逊离世，在公共卫生与大众文化史上留下沉重注脚。",
+  "notebooklm_social_mood": "社会情绪在危机后的疲惫、脆弱的复苏希望以及突发公共卫生事件的焦虑中交织。公众对传统工业模式感到幻灭，却在移动互联网与社交媒体的早期爆发中寻找新的表达出口。",
+  "notebooklm_sources": [
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告"
+  ],
+  "notebooklm_gaps": [
+    "2009年中国大陆具体的GDP（万亿）、CPI、房价指数、高考及毕业生人数统计数据",
+    "2009年具体的中国大陆本土流行影视剧、综艺及华语乐坛神曲清单（笔记本侧重全球文化与重大社会事件）",
+    "2009年具体的中国大陆宏观经济微调政策（笔记本主要提及四万亿计划的延续与大衰退的结束）"
+  ],
+  "notebooklm_imported_at": "2026-06-14"
+}

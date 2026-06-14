@@ -10,19 +10,19 @@
 <link rel="stylesheet" href="demo-scenarios.css" />
 <link rel="stylesheet" href="demo-ui-polish.css" />
 <link rel="stylesheet" href="demo-ui-polish-r2.css" />
+<link rel="stylesheet" href="demo-hero-visual.css" />
 </head>
 <body>
 
 <a class="skip-demo" href="#btn-start">跳过装饰，进入内容</a>
 <p id="boot-error" hidden></p>
-<noscript><p style="position:fixed;inset:16px;z-index:999;padding:12px;background:#fff3e0;border:2px solid #c8863a;">需要启用 JavaScript。请在项目根目录运行 <code>npm run demo:preview</code> 后访问 <code>http://localhost:5199/demo.html</code></p></noscript>
+<noscript><p style="position:fixed;inset:16px;z-index:999;padding:12px;background:#fff3e0;border:2px solid #c8863a;">需要启用 JavaScript。请在项目根目录运行 <code>npm run demo:local</code> 后访问 <code>http://localhost:3000/demo.html</code></p></noscript>
 
 <div id="crt-overlay" aria-hidden="true"></div>
 <div id="ambient-particles" aria-hidden="true"></div>
 
 <button type="button" id="nav-back">← 返回</button>
 <div id="page-indicator"></div>
-<div id="source-tag">📦 Mock · 加载中</div>
 <button type="button" class="nav-arrow" id="nav-prev" aria-label="上一页">‹</button>
 <button type="button" class="nav-arrow" id="nav-next" aria-label="下一页">›</button>
 <div id="nav-hint-bar" aria-hidden="true">← 方向键翻页 · 顶部圆点跳年 →</div>
@@ -68,7 +68,11 @@
   <div class="dlg-box snes modal-cutin">
     <div class="dlg-nametag" id="dlg-name">影 · 阿岚</div>
     <div class="dlg-year-ctx" id="dlg-ctx"></div>
-    <div class="dlg-text-area snes-inset"><p class="dlg-text" id="dlg-text"></p></div>
+    <div class="dlg-text-area snes-inset"><div id="dlg-thread" class="dlg-thread" aria-live="polite"></div></div>
+    <form id="dialog-form" class="dlg-form" hidden>
+      <input id="dialog-input" type="text" maxlength="80" placeholder="问影子一句话…" autocomplete="off" />
+      <button type="submit" id="dialog-send">发送</button>
+    </form>
     <p class="dlg-cite" id="dlg-cite" hidden></p>
     <div class="dlg-footer">
       <span class="dlg-status" id="dlg-status">▼ 正在讲述...</span>
@@ -77,13 +81,31 @@
   </div>
 </div>
 
+<script>
+(function markSkipLandingEarly() {
+  var p = new URLSearchParams(location.search);
+  if (p.get('from') === 'intake' || p.get('live') === '1' || p.get('skipLanding') === '1') {
+    document.documentElement.classList.add('skip-landing-boot');
+    return;
+  }
+  try {
+    if (sessionStorage.getItem('shadow_intake_story_id')) {
+      document.documentElement.classList.add('skip-landing-boot');
+    }
+  } catch (_) { /* ignore */ }
+})();
+</script>
 <script src="demo-scenarios.js"></script>
+<script src="demo-story-visuals.js"></script>
+<script src="demo-gender-sprites.js"></script>
 <script src="demo-data.js"></script>
 <script src="demo-stories.js"></script>
 <script src="demo-visual.js"></script>
 <script src="demo-scene-textures.js"></script>
 <script src="demo-universal-assets.js"></script>
+<script src="demo-extended-assets.js"></script>
 <script src="demo-transitions.js"></script>
+<script src="demo-audio.js"></script>
 <script src="demo-engine.js"></script>
 <script>
 document.documentElement.classList.add('js-ready');
@@ -91,7 +113,7 @@ window.addEventListener('error', function (e) {
   var b = document.getElementById('boot-error');
   if (b) {
     b.hidden = false;
-    b.textContent = 'Demo 加载失败：' + (e.message || '未知错误') + '。请用 npm run demo:preview 启动本地预览。';
+    b.textContent = 'Demo 加载失败：' + (e.message || '未知错误') + '。请用 npm run demo:local 启动（http://localhost:3000）。';
   }
 });
 

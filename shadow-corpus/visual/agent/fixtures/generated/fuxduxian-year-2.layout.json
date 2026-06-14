@@ -1,0 +1,46 @@
+{
+  "story_id": "fuxduxian",
+  "year": 2,
+  "pack": "extended-scenes-v1",
+  "pack_status": "draft_agent",
+  "scene_type": "special",
+  "visual_anchor": "夏天，夏日，阿岚在茂密绿林宿舍床上，暑气可见",
+  "mood": "低饱和·麻木",
+  "status": "draft",
+  "narrative_ref": {
+    "memory_id": "m2",
+    "event_summary": "查分夜撕准考证"
+  },
+  "background": {
+    "asset_id": "PX-EXT-004",
+    "parallax": 0.12
+  },
+  "layers": [
+    {
+      "asset_id": "PX-EXT-021",
+      "role": "protagonist",
+      "x": 460,
+      "y": 252,
+      "depth": 1,
+      "animation": "tear_paper"
+    },
+    {
+      "asset_id": "PX-EXT-001",
+      "role": "fx",
+      "x": 320,
+      "y": 100,
+      "depth": 12,
+      "alpha": 0.28,
+      "note": "season_weather_fx"
+    }
+  ],
+  "transition_fx_id": "PX-EXT-033",
+  "daily_loops": [
+    {
+      "id": "tear_paper",
+      "asset_id": "PX-EXT-021",
+      "animation": "tear_paper",
+      "trigger": "year_idle"
+    }
+  ]
+}

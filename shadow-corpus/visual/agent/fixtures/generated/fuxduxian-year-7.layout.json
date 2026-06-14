@@ -1,0 +1,54 @@
+{
+  "story_id": "fuxduxian",
+  "year": 7,
+  "pack": "extended-scenes-v1",
+  "pack_status": "draft_agent",
+  "scene_type": "special",
+  "visual_anchor": "夏天，夏日，阿岚在茂密绿林邮局小窗，暑气可见",
+  "mood": "留白·够了",
+  "status": "draft",
+  "narrative_ref": {
+    "memory_id": "m7",
+    "event_summary": "邮局窗口字真好看"
+  },
+  "background": {
+    "asset_id": "PX-EXT-004",
+    "parallax": 0.12
+  },
+  "layers": [
+    {
+      "asset_id": "PX-EXT-034",
+      "role": "prop",
+      "x": 500,
+      "y": 240,
+      "depth": 1,
+      "note": "城市路上公交/出租车作为通勤过场道具；和站台/车厢内景配合"
+    },
+    {
+      "asset_id": "PX-EXT-021",
+      "role": "protagonist",
+      "x": 460,
+      "y": 252,
+      "depth": 2,
+      "animation": "write_idle"
+    },
+    {
+      "asset_id": "PX-EXT-001",
+      "role": "fx",
+      "x": 320,
+      "y": 100,
+      "depth": 13,
+      "alpha": 0.28,
+      "note": "season_weather_fx"
+    }
+  ],
+  "transition_fx_id": "PX-EXT-033",
+  "daily_loops": [
+    {
+      "id": "write_idle",
+      "asset_id": "PX-EXT-021",
+      "animation": "write_idle",
+      "trigger": "year_idle"
+    }
+  ]
+}

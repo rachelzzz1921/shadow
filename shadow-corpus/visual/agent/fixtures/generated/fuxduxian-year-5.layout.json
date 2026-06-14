@@ -1,0 +1,56 @@
+{
+  "story_id": "fuxduxian",
+  "year": 5,
+  "pack": "extended-scenes-v1",
+  "pack_status": "draft_agent",
+  "scene_type": "special",
+  "visual_anchor": "深夜星空，阿岚在宿舍床上窗边剪影",
+  "mood": "凌晨4点·失眠",
+  "status": "draft",
+  "narrative_ref": {
+    "memory_id": "m5",
+    "event_summary": "连续三个月失眠"
+  },
+  "background": {
+    "asset_id": "PX-EXT-030",
+    "parallax": 0.18,
+    "tint": "#4a5060"
+  },
+  "layers": [
+    {
+      "asset_id": "PX-EXT-021",
+      "role": "protagonist",
+      "x": 460,
+      "y": 252,
+      "depth": 1,
+      "animation": "eyes_open"
+    },
+    {
+      "asset_id": "PX-EXT-029",
+      "role": "fx",
+      "x": 320,
+      "y": 100,
+      "depth": 12,
+      "alpha": 0.35,
+      "note": "fog_overlay"
+    },
+    {
+      "asset_id": "PX-EXT-001",
+      "role": "fx",
+      "x": 320,
+      "y": 100,
+      "depth": 12,
+      "alpha": 0.28,
+      "note": "season_weather_fx"
+    }
+  ],
+  "transition_fx_id": "PX-EXT-033",
+  "daily_loops": [
+    {
+      "id": "eyes_open",
+      "asset_id": "PX-EXT-021",
+      "animation": "eyes_open",
+      "trigger": "year_idle"
+    }
+  ]
+}

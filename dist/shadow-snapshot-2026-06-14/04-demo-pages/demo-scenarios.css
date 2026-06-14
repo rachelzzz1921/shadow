@@ -1,0 +1,469 @@
+/* Shadow Demo — 六域场景 UI 差异（像素风统一，色温/面板/场景/过场各异） */
+
+/* ─── 场景徽章 ─── */
+.yr-scenario-badge {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 10px;
+  font-size: 12px;
+  transform: scale(0.88);
+  border: 2px solid var(--amber);
+  background: var(--amber-glow);
+  color: var(--amber-deep);
+}
+.yr-scenario-brief {
+  display: block;
+  margin-top: 4px;
+  color: var(--ink-muted);
+  transform: scale(0.85);
+  transform-origin: center top;
+}
+
+/* ─── 场景卡片变体 ─── */
+.yr-card { transition: border-color 0.35s, box-shadow 0.35s; }
+
+body[data-scenario="family"] .yr-card {
+  border-color: #c97b5a;
+  box-shadow:
+    inset var(--step) var(--step) 0 var(--highlight),
+    inset calc(var(--step) * -1) calc(var(--step) * -1) 0 rgba(138, 80, 56, 0.2),
+    calc(var(--step) + 1px) calc(var(--step) + 1px) 0 rgba(58, 50, 40, 0.1);
+}
+body[data-scenario="love"] .emo-fill {
+  background: linear-gradient(90deg, #c86b88, #f0a0b8);
+}
+body[data-scenario="friendship"] .ambient-particle {
+  background: #88c8a0;
+  border-radius: 0;
+  width: 4px;
+  height: 4px;
+}
+body[data-scenario="career"] .yr-card {
+  border-color: #4a6888;
+}
+body[data-scenario="career"] .pixel-scene {
+  border-color: #4a6888;
+}
+body[data-scenario="self_growth"] .final-card,
+body[data-scenario="self_growth"] .yr-card {
+  border-color: var(--sage);
+}
+
+/* ─── 六域 pixel-scene 氛围层 ─── */
+.pixel-scene[class*="scene-scenario-"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.scene-scenario-family::before {
+  background:
+    radial-gradient(circle at 22% 28%, rgba(232, 160, 128, 0.35), transparent 42%),
+    linear-gradient(180deg, transparent 60%, rgba(201, 123, 90, 0.12) 100%);
+}
+.scene-scenario-love::before {
+  background:
+    radial-gradient(circle at 50% 80%, rgba(240, 160, 184, 0.25), transparent 50%),
+    repeating-linear-gradient(90deg, transparent, transparent 24px, rgba(200, 107, 136, 0.06) 24px, rgba(200, 107, 136, 0.06) 26px);
+}
+.scene-scenario-friendship::before {
+  background:
+    radial-gradient(circle at 18% 70%, rgba(136, 200, 160, 0.3), transparent 40%),
+    radial-gradient(circle at 82% 40%, rgba(136, 200, 160, 0.2), transparent 35%);
+}
+.scene-scenario-academic::before {
+  background:
+    linear-gradient(180deg, rgba(201, 218, 240, 0.4), transparent 55%);
+}
+.scene-scenario-career::before {
+  background:
+    linear-gradient(135deg, rgba(120, 160, 192, 0.25), transparent 50%),
+    repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(74, 104, 136, 0.05) 8px, rgba(74, 104, 136, 0.05) 10px);
+}
+.scene-scenario-self_growth::before {
+  background:
+    radial-gradient(circle at 50% 20%, rgba(184, 168, 208, 0.35), transparent 45%),
+    radial-gradient(circle at 70% 80%, rgba(125, 168, 122, 0.25), transparent 40%);
+}
+
+/* ─── 拟人过场：底部舞台 + 分层，不挡全屏交互 ─── */
+#actor-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 290;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  overflow: hidden;
+}
+#actor-transition.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* 仅底部渐晕，上方保持可见直到 wipe */
+.actor-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(58, 50, 40, 0.42) 0%, rgba(58, 50, 40, 0.18) 28%, transparent 52%);
+  opacity: 0;
+  z-index: 0;
+}
+#actor-transition.actor-on .actor-vignette {
+  animation: vignette-in 420ms ease forwards;
+}
+#actor-transition.actor-exiting .actor-vignette {
+  animation: vignette-out 220ms ease forwards;
+}
+@keyframes vignette-in { to { opacity: 1; } }
+@keyframes vignette-out { to { opacity: 0; } }
+
+/* 底部像素舞台 */
+.actor-stage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: min(38vh, 280px);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 12px;
+}
+.actor-stage-floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 28px;
+  background:
+    repeating-linear-gradient(90deg, var(--paper-deep) 0 16px, var(--paper-shadow) 16px 32px);
+  border-top: 3px solid var(--panel-edge);
+  box-shadow: 0 -4px 0 rgba(255, 253, 248, 0.35) inset;
+  image-rendering: pixelated;
+}
+.actor-stage-floor::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(58, 50, 40, 0.08), transparent 70%);
+}
+
+.actor-curtain {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 52%;
+  z-index: 4;
+  image-rendering: pixelated;
+  background:
+    linear-gradient(90deg, var(--scenario-wipe-deep, var(--amber-deep)), var(--scenario-wipe, var(--amber)));
+  box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+.actor-curtain-l {
+  left: 0;
+  transform: translateX(-102%);
+  border-right: 4px solid rgba(255, 253, 248, 0.2);
+}
+.actor-curtain-r {
+  right: 0;
+  transform: translateX(102%);
+  border-left: 4px solid rgba(255, 253, 248, 0.2);
+}
+
+#actor-transition.mode-door.cover .actor-curtain-l {
+  animation: curtain-in-l 640ms steps(8, end) forwards;
+}
+#actor-transition.mode-door.cover .actor-curtain-r {
+  animation: curtain-in-r 640ms steps(8, end) forwards;
+}
+#actor-transition.mode-door.reveal .actor-curtain-l {
+  animation: curtain-out-l 560ms steps(8, end) forwards;
+}
+#actor-transition.mode-door.reveal .actor-curtain-r {
+  animation: curtain-out-r 560ms steps(8, end) forwards;
+}
+@keyframes curtain-in-l { to { transform: translateX(-4%); } }
+@keyframes curtain-in-r { to { transform: translateX(4%); } }
+@keyframes curtain-out-l { from { transform: translateX(-4%); } to { transform: translateX(-102%); } }
+@keyframes curtain-out-r { from { transform: translateX(4%); } to { transform: translateX(102%); } }
+
+#actor-transition.mode-door .actor-stage {
+  z-index: 3;
+  height: min(42vh, 300px);
+}
+#actor-transition.mode-door.cover .actor-body {
+  animation: actor-door-in 640ms steps(6, end) forwards;
+}
+#actor-transition.mode-door.reveal .actor-body {
+  animation: actor-door-out 560ms steps(5, end) forwards;
+}
+@keyframes actor-door-in {
+  0% { opacity: 0; transform: translateY(12px) scale(0.92); }
+  35% { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes actor-door-out {
+  to { opacity: 0; transform: translateY(-8px) scale(0.94); }
+}
+
+.actor-body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateX(-18vw);
+}
+#actor-transition.actor-on .actor-body {
+  opacity: 1;
+}
+#actor-transition.actor-exiting .actor-body,
+#actor-transition.actor-exiting .actor-stage {
+  animation: actor-fade-out 220ms ease forwards;
+}
+@keyframes actor-fade-out {
+  to { opacity: 0; transform: translateY(10px); }
+}
+
+.actor-bubble {
+  position: relative;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  max-width: min(240px, 72vw);
+  background: var(--panel);
+  border: 2px solid var(--panel-edge);
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+  box-shadow: 3px 3px 0 rgba(58, 50, 40, 0.14);
+  transform: scale(0.6) translateY(6px);
+  opacity: 0;
+}
+.actor-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: var(--panel);
+  border-right: 2px solid var(--panel-edge);
+  border-bottom: 2px solid var(--panel-edge);
+  transform: translateX(-50%) rotate(45deg);
+}
+#actor-transition.actor-on .actor-bubble {
+  animation: bubble-pop 360ms steps(4, end) 180ms forwards;
+}
+@keyframes bubble-pop {
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.actor-sprite {
+  width: 56px;
+  height: 56px;
+  background: var(--sprite-char) var(--sprite-pos, center) / var(--sprite-size, 48px 48px) no-repeat;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 3px 0 rgba(58, 50, 40, 0.2));
+}
+.actor-ground {
+  width: 52px;
+  height: 8px;
+  margin-top: 3px;
+  background: rgba(58, 50, 40, 0.2);
+  border-radius: 50%;
+  transform: scaleX(0.6);
+  animation: ground-pulse 280ms steps(2) infinite;
+}
+@keyframes ground-pulse {
+  50% { transform: scaleX(0.85); opacity: 0.85; }
+}
+
+/* walk — 学业 */
+#actor-transition.mode-walk.cover .actor-body {
+  animation: actor-walk-in 560ms steps(8, end) forwards;
+}
+#actor-transition.mode-walk.reveal .actor-body.actor-entering {
+  animation: actor-peek-in 380ms steps(5, end) forwards;
+}
+@keyframes actor-walk-in {
+  0% { transform: translateX(-22vw); opacity: 0; }
+  12% { opacity: 1; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+@keyframes actor-peek-in {
+  from { transform: translateX(14vw); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+#actor-transition.mode-walk.cover .actor-sprite {
+  animation: actor-bob 240ms steps(2) 6;
+}
+@keyframes actor-bob {
+  50% { transform: translateY(-4px); }
+}
+
+/* commute — 事业 */
+#actor-transition.mode-commute.cover .actor-body {
+  animation: actor-commute-in 560ms steps(7, end) forwards;
+}
+#actor-transition.mode-commute.reveal .actor-body.actor-entering {
+  animation: actor-peek-in 360ms steps(5, end) forwards;
+}
+@keyframes actor-commute-in {
+  from { transform: translateX(-28vw); opacity: 0; }
+  to { transform: translateX(2vw); opacity: 1; }
+}
+#actor-transition.mode-commute.cover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 28px;
+  height: 2px;
+  z-index: 1;
+  background: repeating-linear-gradient(90deg, transparent 0 24px, rgba(74, 104, 136, 0.35) 24px 28px);
+  animation: commute-lines 560ms linear forwards;
+}
+@keyframes commute-lines {
+  from { transform: translateX(0); opacity: 0; }
+  20% { opacity: 0.9; }
+  to { transform: translateX(-80px); opacity: 0.4; }
+}
+
+/* step — 自我成长 */
+#actor-transition.mode-step.cover .actor-body {
+  animation: actor-step-in 560ms steps(6, end) forwards;
+}
+#actor-transition.mode-step.reveal .actor-body.actor-entering {
+  animation: actor-step-peek 380ms steps(5, end) forwards;
+}
+@keyframes actor-step-in {
+  0% { transform: translateX(-8vw) translateY(8px) scale(0.9); opacity: 0; }
+  100% { transform: translateX(0) translateY(0) scale(1); opacity: 1; }
+}
+@keyframes actor-step-peek {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+#actor-transition.mode-step.cover .actor-vignette {
+  background:
+    linear-gradient(to top, rgba(138, 120, 168, 0.35) 0%, rgba(184, 168, 208, 0.15) 35%, transparent 58%);
+}
+
+/* pulse — 爱情：柔光环，不全屏糊色 */
+.actor-pulse-ring {
+  position: absolute;
+  left: 50%;
+  bottom: 18%;
+  width: 120px;
+  height: 120px;
+  margin-left: -60px;
+  border-radius: 50%;
+  border: 3px solid rgba(200, 107, 136, 0.45);
+  opacity: 0;
+  z-index: 1;
+  box-shadow: 0 0 0 8px rgba(200, 107, 136, 0.08);
+}
+#actor-transition.mode-pulse.cover .actor-pulse-ring {
+  animation: pulse-ring 680ms ease-out forwards;
+}
+#actor-transition.mode-pulse.cover .actor-vignette {
+  background: radial-gradient(circle at 50% 78%, rgba(200, 107, 136, 0.22), transparent 52%);
+  animation: vignette-in 320ms ease forwards;
+}
+#actor-transition.mode-pulse.cover .actor-body {
+  animation: love-heart-bob 680ms ease-in-out forwards;
+  transform: translateX(0);
+  opacity: 1;
+}
+#actor-transition.mode-pulse .actor-stage {
+  justify-content: center;
+}
+@keyframes pulse-ring {
+  0% { opacity: 0; transform: scale(0.6); }
+  40% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.35); }
+}
+@keyframes love-heart-bob {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
+  50% { transform: translateY(-3px) scale(1.06); opacity: 1; }
+}
+
+/* wave — 友情 */
+.actor-wave-bubble {
+  position: absolute;
+  left: 50%;
+  bottom: calc(min(38vh, 280px) + 8px);
+  transform: translateX(-50%) scale(0.85);
+  padding: 8px 14px;
+  max-width: min(260px, 80vw);
+  background: var(--panel);
+  border: 2px solid var(--panel-edge);
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+  z-index: 5;
+  opacity: 0;
+  box-shadow: 3px 3px 0 rgba(58, 50, 40, 0.12);
+}
+#actor-transition.mode-wave.cover .actor-wave-bubble {
+  animation: bubble-pop 400ms steps(4, end) 280ms forwards;
+}
+#actor-transition.mode-wave.cover .actor-vignette {
+  background: linear-gradient(to top, rgba(90, 152, 120, 0.28) 0%, transparent 48%);
+}
+
+.actor-friend {
+  position: absolute;
+  bottom: 36px;
+  width: 40px;
+  height: 40px;
+  background: var(--sprite-char) var(--sprite-pos, center) / var(--sprite-size, 48px 48px) no-repeat;
+  image-rendering: pixelated;
+  opacity: 0;
+  z-index: 3;
+  filter: drop-shadow(0 2px 0 rgba(58, 50, 40, 0.15));
+}
+.actor-friend-a { left: 22%; }
+.actor-friend-b { left: 44%; width: 48px; height: 48px; }
+.actor-friend-c { left: 66%; }
+#actor-transition.mode-wave.cover .actor-friend {
+  animation: friend-wave 680ms steps(6, end) forwards;
+}
+#actor-transition.mode-wave.cover .actor-friend-b { animation-delay: 90ms; }
+#actor-transition.mode-wave.cover .actor-friend-c { animation-delay: 180ms; }
+@keyframes friend-wave {
+  0% { opacity: 0; transform: translateY(24px); }
+  55% { opacity: 1; transform: translateY(-6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+#actor-transition.mode-wave.actor-exiting .actor-friend {
+  animation: friend-hide 360ms steps(4, end) forwards;
+}
+@keyframes friend-hide {
+  to { opacity: 0; transform: translateY(14px); }
+}
+
+/* 粒子随场景变色 */
+body[data-scenario="family"] .ambient-particle { background: #e8a080; }
+body[data-scenario="love"] .ambient-particle { background: #f0a0b8; }
+body[data-scenario="career"] .ambient-particle { background: #78a0c0; }
+body[data-scenario="self_growth"] .ambient-particle { background: #b8a8d0; }
+
+/* 对话/介入弹窗随场景 */
+body[data-scenario="family"] .dlg-nametag,
+body[data-scenario="family"] .intervention-label { color: #8a5038; }
+body[data-scenario="love"] .dlg-box { border-color: #c86b88; }
+body[data-scenario="friendship"] .intervention-card { border-color: #5a9878; }
+
+@media (prefers-reduced-motion: reduce) {
+  #actor-transition { display: none !important; }
+}

@@ -8,13 +8,61 @@
   const { ENV_LABELS, ShadowAgents, normalizeYear, getBeatForYear, getMemoriesForYear, shadowDisplayName } = window.ShadowDemo;
   const T = window.ShadowTransitions;
   const Sc = window.ShadowScenarios;
+  const Sfx = () => window.ShadowAudio;
 
   const LANDING_PAGE = 0;
   const YEAR_START = 1;
   function getFinalPage() { return 1 + getStory().years.length; }
   function getTotalPages() { return getFinalPage() + 1; }
   let currentPage = LANDING_PAGE;
+  /** 首页未点「进入七年」前，禁止方向键/滑动误触翻页 */
+  let journeyStarted = false;
+  /** Intake 直达七年时，返回键回 intake 而非 Landing */
+  let skipLandingMode = false;
+
+  function shouldSkipLanding() {
+    const params = new URLSearchParams(location.search);
+    if (params.get('from') === 'intake') return true;
+    if (params.get('live') === '1') return true;
+    if (params.get('skipLanding') === '1') return true;
+    try {
+      if (sessionStorage.getItem('shadow_intake_story_id')) return true;
+    } catch (_) { /* ignore */ }
+    return false;
+  }
+
+  function enableSkipLandingMode() {
+    skipLandingMode = true;
+    document.body.classList.add('skip-landing');
+    document.documentElement.classList.add('skip-landing-boot');
+    const landing = document.getElementById('p-landing');
+    if (landing) landing.setAttribute('aria-hidden', 'true');
+  }
+
+  function autoStartJourney() {
+    enableSkipLandingMode();
+    journeyStarted = true;
+    currentPage = YEAR_START;
+    applyPageTransform();
+    const scenarioKey = Sc?.scenarioForPage(YEAR_START, getStory()) || getStory().scenario_primary || 'academic';
+    Sc?.applyScenario(scenarioKey);
+    syncScenarioChrome(currentPage, scenarioKey);
+    onPageEnter(currentPage);
+    const pages = document.querySelectorAll('.page');
+    if (pages[currentPage]) T.staggerEnter(pages[currentPage]);
+  }
+
+  function handleNavBack() {
+    if (skipLandingMode || shouldSkipLanding()) {
+      window.location.href = 'intake.html';
+      return;
+    }
+    goLanding();
+  }
   let dialogTimer = null;
+  /** @type {{ yearIdx: number, year: object, busy: boolean } | null} */
+  let dialogSession = null;
+  let interventionTimer = null;
   /** @type {Array<{year:number, choice:string}>} */
   const userInterventions = [];
   /** @type {Set<number>} */
@@ -48,33 +96,84 @@
     const env = year.environment || 'classroom';
     const mood = year.scene || 'city';
     const scenario = year.scenario || getStory().scenario_primary || 'academic';
+    const storyId = getStory().id || getStory()._activeStoryId;
+    const isWufuxdu = storyId === 'wufuxdu';
+    const richVisual = window.ShadowStoryVisuals?.isRichStory?.(storyId);
     const extras = [];
 
     if (env === 'classroom') extras.push('<div class="scene-window"></div>');
     if (env === 'dorm_night') extras.push('<div class="scene-moon"></div>');
     if (env === 'stage') extras.push('<div class="scene-spotlight"></div>');
     if (env === 'postoffice') extras.push('<div class="scene-sage"></div>');
-    if (env === 'studio') extras.push('<div class="scene-spotlight"></div>');
     if (env === 'rental-house' || env === 'home-room') extras.push('<div class="scene-moon"></div>');
+    if (env === 'studio') extras.push('<div class="scene-spotlight"></div><div class="scene-desk-prop"></div>');
+    if (env === 'wedding' || env === 'birthday') extras.push('<div class="scene-spotlight"></div>');
+    if (env === 'old-street' && richVisual) extras.push('<div class="scene-street-lamps"></div>');
+
+    const heroUrl = (richVisual || isWufuxdu)
+      ? (window.ShadowStoryVisuals?.resolveHeroUrl?.(getStory()) || '')
+      : '';
+    const spriteEl = heroUrl
+      ? `<img class="sprite hero-png" src="${esc(heroUrl)}" alt="" width="112" height="112" decoding="async" />`
+      : '<div class="sprite" aria-hidden="true"></div>';
+
+    const props = Array.isArray(year.key_props) ? year.key_props : [];
+    const propsLayer = props.length
+      ? `<div class="scene-prop-chips">${props.map(p => `<span class="scene-prop-chip">${esc(p)}</span>`).join('')}</div>`
+      : '';
+
+    const animAssets = year.anim_assets || {};
+    const wufuxduLayer = isWufuxdu
+      ? `<div class="wfd-cinematic-layer" aria-hidden="true">
+          <div class="wfd-sky-drift" data-asset-id="${esc(animAssets.sky || '')}"></div>
+          <div class="wfd-season-overlay" data-asset-id="${esc(animAssets.season || animAssets.weather || '')}"></div>
+          <div class="wfd-fog" data-asset-id="${esc(animAssets.fog || '')}"></div>
+          <div class="wfd-lantern" data-asset-id="${esc(animAssets.lantern || '')}"></div>
+          <div class="wfd-transport" data-asset-id="${esc(animAssets.transit || '')}"></div>
+          <div class="wfd-particles" data-asset-id="${esc(animAssets.vfx || '')}"></div>
+          <div class="wfd-window-light"></div>
+          <div class="wfd-luggage" data-asset-id="PX-EXT-027"></div>
+          <div class="wfd-prop wfd-prop-a" data-asset-id="PX-EXT-027"></div>
+          <div class="wfd-prop wfd-prop-b" data-asset-id="PX-EXT-027"></div>
+          <div class="wfd-npc-row" data-asset-id="${esc(animAssets.npc || '')}">
+            <span></span><span></span><span></span><span></span><span class="is-empty"></span>
+          </div>
+          <div class="wfd-flashback"></div>
+          <div class="wfd-hud" data-asset-id="${esc(animAssets.hud || 'PX-EXT-026')}">
+            <span>Y${year.year}/7</span>
+            <i style="--p:${Math.max(1, Math.min(7, year.year)) / 7 * 100}%"></i>
+          </div>
+        </div>`
+      : '';
 
     const fx = [];
-    if (mood === 'rain' || mood === 'summer-night') fx.push('<div class="scene-fx scene-fx-rain"></div>');
-    if (mood === 'night' || mood === 'winter-room') fx.push('<div class="scene-fx scene-fx-night"></div>');
+    if (mood === 'rain' || mood === 'summer-night' || mood === 'rain-dusk' || year.fx === 'rain') {
+      fx.push('<div class="scene-fx scene-fx-rain"></div>');
+    }
+    if (mood === 'night' || mood === 'winter-room' || mood === 'phone-light' || year.fx === 'night' || year.fx === 'cold') {
+      fx.push('<div class="scene-fx scene-fx-night"></div>');
+    }
+
+    const richCls = richVisual ? ' has-story-visual scene-rich' : '';
+    const extAttr = year.ext_bg ? ` data-ext-bg="${esc(year.ext_bg)}"` : '';
 
     return `
-      <div class="pixel-scene enter-item scene-env-${env} scene-mood-${mood} scene-scenario-${scenario}" data-environment="${env}" data-scenario="${scenario}">
+      <div class="pixel-scene enter-item scene-env-${env} scene-mood-${mood} scene-scenario-${scenario}${richCls}${isWufuxdu ? ` wufuxdu-cinematic mode-${year.anim_mode || 'idle'} warmth-${year.warmth || year.year}` : ''}" data-environment="${env}" data-scenario="${scenario}" data-anim-mode="${esc(year.anim_mode || '')}" data-warmth="${esc(String(year.warmth || ''))}"${extAttr}>
         <span class="scene-corner tl" aria-hidden="true"></span>
         <span class="scene-corner tr" aria-hidden="true"></span>
         <span class="scene-corner bl" aria-hidden="true"></span>
         <span class="scene-corner br" aria-hidden="true"></span>
         <div class="scene-scanlines" aria-hidden="true"></div>
         <div class="scene-backdrop"></div>
+        <div class="scene-mood-tint" aria-hidden="true"></div>
         <div class="scene-floor"></div>
+        ${wufuxduLayer}
         ${extras.join('')}
         ${fx.join('')}
-        <div class="sprite-wrap pose-${year.pose || 'wait'}" data-pose="${year.pose || 'wait'}">
+        ${propsLayer}
+        <div class="sprite-wrap has-hero-png pose-${year.pose || 'wait'}" data-pose="${year.pose || 'wait'}">
           <div class="sprite-glow"></div>
-          <div class="sprite" aria-hidden="true"></div>
+          ${spriteEl}
         </div>
         <div class="scene-tag snes-inset">
           <span>${esc(sceneTag(year))}</span>
@@ -117,7 +216,6 @@
           <div class="section-label">◎ 画面锚点</div>
           <p class="yr-visual-anchor">${esc(year.visual_anchor)}</p>
           ${propsHtml}
-          ${year.daily_micro ? `<span class="yr-daily-micro">A: ${esc(year.daily_micro)}</span>` : ''}
         </div>`
       : '';
 
@@ -280,14 +378,15 @@
     const el = document.getElementById('profile-teaser');
     if (!el) return;
 
+    const heroUrl = window.ShadowStoryVisuals?.resolveHeroUrl?.(getStory()) || '';
+    const portrait = heroUrl
+      ? `<img class="pt-portrait" src="${esc(heroUrl)}" alt="" width="96" height="96" decoding="async" />`
+      : '<div class="avatar pt-portrait-fallback" aria-hidden="true"></div>';
+
     el.innerHTML = `
-      <div class="pt-row">
-        <div class="avatar" aria-hidden="true"></div>
-        <div>
-          <div class="pt-name">${esc(c.name)}</div>
-          <div class="pt-path">${esc(p.choice)}</div>
-        </div>
-      </div>
+      <div class="pt-hero">${portrait}</div>
+      <div class="pt-name">${esc(c.name)}</div>
+      <div class="pt-path">${esc(p.choice)}</div>
       <div class="pt-meta">${esc(p.mbti || '')} · ${p.age} 岁 · ${(p.keywords || []).join(' · ')}</div>
       <div class="pt-concept">${esc(getStory().premise)}</div>
       <details class="persona-details">
@@ -322,7 +421,10 @@
       dot.title = `第 ${node.year} 年 · ${node.title}`;
       dot.setAttribute('aria-label', dot.title);
       if (node.scenario) dot.dataset.scenario = node.scenario;
-      dot.onclick = () => goToPage(YEAR_START + i);
+      dot.onclick = () => {
+        Sfx()?.playPageTurn?.();
+        goToPage(YEAR_START + i);
+      };
       indicator.appendChild(dot);
     });
     const finalDot = document.createElement('button');
@@ -352,9 +454,15 @@
 
   // ─── Navigation ──────────────────────────────────────────
 
+  /** skip-landing 时 Landing 脱离 flex 占位，滑块偏移需扣掉一页 */
+  function sliderOffsetForPage(pageIdx) {
+    if (skipLandingMode && pageIdx > LANDING_PAGE) return pageIdx - 1;
+    return pageIdx;
+  }
+
   function applyPageTransform() {
     const slider = document.getElementById('slider');
-    slider.style.transform = `translateX(-${currentPage * 100}vw)`;
+    slider.style.transform = `translateX(-${sliderOffsetForPage(currentPage) * 100}vw)`;
     const pages = document.querySelectorAll('.page');
     if (pages[currentPage]) pages[currentPage].scrollTop = 0;
     updateNav();
@@ -364,15 +472,27 @@
     const target = Math.max(0, Math.min(getTotalPages() - 1, n));
     if (target === currentPage) return;
 
+    const interventionModal = document.getElementById('intervention-modal');
+    if (interventionModal?.classList.contains('open')) {
+      closeIntervention();
+    }
+    if (interventionTimer) {
+      clearTimeout(interventionTimer);
+      interventionTimer = null;
+    }
+
     const direction = target > currentPage ? 1 : -1;
     const scenarioKey = Sc?.scenarioForPage(target, getStory()) || 'academic';
 
     const run = () => {
       currentPage = target;
+      if (target === LANDING_PAGE) journeyStarted = false;
+      else if (target >= YEAR_START) journeyStarted = true;
       applyPageTransform();
     };
 
     const after = () => {
+      if (currentPage !== target) return;
       Sc?.applyScenario(scenarioKey);
       syncScenarioChrome(currentPage, scenarioKey);
       onPageEnter(currentPage);
@@ -381,14 +501,33 @@
     };
 
     T.pageTransition(run, direction, scenarioKey).then(ok => {
-      if (ok !== false) after();
+      if (ok === false) {
+        run();
+      }
+      after();
     });
   }
 
-  function prevPage() { goToPage(currentPage - 1); }
-  function nextPage() { goToPage(currentPage + 1); }
-  function startJourney(yearOffset) { goToPage(YEAR_START + (yearOffset || 0)); }
-  function goLanding() { goToPage(LANDING_PAGE); }
+  function prevPage() {
+    if (currentPage <= LANDING_PAGE) return;
+    goToPage(currentPage - 1);
+  }
+
+  function nextPage() {
+    if (currentPage === LANDING_PAGE && !journeyStarted) return;
+    if (currentPage >= getFinalPage()) return;
+    goToPage(currentPage + 1);
+  }
+
+  function startJourney(yearOffset) {
+    journeyStarted = true;
+    goToPage(YEAR_START + (yearOffset || 0));
+  }
+
+  function goLanding() {
+    journeyStarted = false;
+    goToPage(LANDING_PAGE);
+  }
 
   function updateSourceTag(scenarioKey) {
     const tag = document.getElementById('source-tag');
@@ -432,7 +571,7 @@
     const isLanding = currentPage === LANDING_PAGE;
     document.getElementById('nav-back').classList.toggle('visible', !isLanding);
     document.getElementById('page-indicator').classList.toggle('visible', !isLanding);
-    document.getElementById('source-tag').classList.toggle('visible', !isLanding);
+    document.getElementById('source-tag')?.classList.toggle('visible', !isLanding);
     document.getElementById('nav-hint-bar')?.classList.toggle('visible', !isLanding);
 
     const prev = document.getElementById('nav-prev');
@@ -463,6 +602,11 @@
       const scene = document.querySelector(`#p-year-${year.year} .pixel-scene`);
       const scenarioKey = year.scenario || getStory().scenario_primary || 'academic';
       Ttex.apply(scene, scenarioKey, year);
+      if (scene && (window.ShadowStoryVisuals?.isRichStory?.(getStory().id) || getStory().id === 'wufuxdu')) {
+        const hero = scene.querySelector('.hero-png');
+        const url = window.ShadowStoryVisuals.resolveHeroUrl(getStory());
+        if (hero && url) hero.src = url;
+      }
       return;
     }
     if (pageIdx === getFinalPage()) {
@@ -499,21 +643,32 @@
       applyFateSlot(year.year, result);
     }
 
-    if (window.ShadowVisual) {
+    const storyId = getStory().id;
+
+    if (window.ShadowVisual && !window.ShadowStoryVisuals?.isRichStory?.(storyId) && storyId !== 'wufuxdu') {
       window.ShadowVisual.paintYear(year.year, year.year, year);
     }
 
     const scenarioKey = year.scenario || getStory().scenario_primary || 'academic';
-    if (window.ShadowUniversalAssets) {
-      const scene = document.querySelector(`#p-year-${year.year} .pixel-scene`);
+    const scene = document.querySelector(`#p-year-${year.year} .pixel-scene`);
+    if (window.ShadowUniversalAssets && scene && !window.ShadowStoryVisuals?.isRichStory?.(getStory().id)) {
       await window.ShadowUniversalAssets.paintScenarioAsync(scene, scenarioKey);
+    }
+    if (window.ShadowExtendedAssets && scene && !window.ShadowStoryVisuals?.isRichStory?.(getStory().id)) {
+      await window.ShadowExtendedAssets.paintYearAsync(scene, year);
     }
 
     applySceneTexturesForPage(pageIdx);
 
     if (year.is_pivotal && year.intervention_prompt && !interventionShown.has(year.year)) {
       interventionShown.add(year.year);
-      setTimeout(() => openIntervention(yearIdx), 520);
+      const pageAtSchedule = pageIdx;
+      if (interventionTimer) clearTimeout(interventionTimer);
+      interventionTimer = setTimeout(() => {
+        interventionTimer = null;
+        if (currentPage !== pageAtSchedule) return;
+        openIntervention(yearIdx);
+      }, 520);
     }
   }
 
@@ -549,9 +704,11 @@
       btn.type = 'button';
       btn.textContent = option;
       btn.onclick = () => selectIntervention(year.year, option);
+      Sfx()?.bindOptionButton?.(btn);
       opts.appendChild(btn);
     });
 
+    Sfx()?.playModalOpen?.();
     T.modalOpen(modal, 'intervention');
   }
 
@@ -586,90 +743,199 @@
 
   // ─── Dialogue ────────────────────────────────────────────
 
-  async function openDialog(yearIdx) {
-    const rawYear = getStory().years[yearIdx];
-    if (!rawYear) return;
-    const year = normalizeYear(rawYear);
-
-    const overlay = document.getElementById('dialog-overlay');
-    document.getElementById('dlg-name').textContent = shadowDisplayName();
-    document.getElementById('dlg-ctx').textContent = `~ 第 ${year.year} 年 · ${year.title} ~`;
-
-    const textEl = document.getElementById('dlg-text');
-    const statusEl = document.getElementById('dlg-status');
+  function setDialogBusy(busy) {
+    if (dialogSession) dialogSession.busy = busy;
+    const input = document.getElementById('dialog-input');
+    const send = document.getElementById('dialog-send');
     const closeBtn = document.getElementById('btn-dlg-close');
+    if (input) input.disabled = busy;
+    if (send) send.disabled = busy;
+    if (closeBtn) closeBtn.disabled = busy;
+  }
 
-    textEl.innerHTML = '';
-    statusEl.textContent = '▼ 正在讲述...';
-    closeBtn.textContent = '跳过';
+  function appendDialogTurn(role, text, citeIds) {
+    const thread = document.getElementById('dlg-thread');
+    if (!thread) return null;
+    const turn = document.createElement('div');
+    turn.className = `dlg-turn dlg-turn-${role}`;
+    if (role === 'shadow' && citeIds?.length) {
+      turn.innerHTML = `${esc(text)}<span class="dlg-turn-cite">引用记忆 · ${citeIds.map(id => esc(id)).join(', ')}</span>`;
+    } else {
+      turn.textContent = text;
+    }
+    thread.appendChild(turn);
+    thread.scrollTop = thread.scrollHeight;
+    return turn;
+  }
 
-    T.modalOpen(overlay, 'dialog');
+  function waitTypewriter(textEl, text, statusEl, closeBtn) {
+    return new Promise(resolve => {
+      if (dialogTimer) clearInterval(dialogTimer);
+      if (T.prefersReducedMotion()) {
+        textEl.textContent = text;
+        statusEl.textContent = '▼ 可以继续提问';
+        closeBtn.textContent = '关闭';
+        setDialogBusy(false);
+        resolve();
+        return;
+      }
 
-    let text = year.shadow_dialogue;
-    let citeIds = getMemoriesForYear(year.year).map(m => m.id).slice(0, 1);
+      textEl.textContent = '';
+      let i = 0;
+      const cursor = document.createElement('span');
+      cursor.className = 'dlg-cursor';
+      textEl.appendChild(cursor);
+
+      dialogTimer = setInterval(() => {
+        cursor.before(text[i]);
+        i++;
+        if (i >= text.length) {
+          clearInterval(dialogTimer);
+          dialogTimer = null;
+          cursor.remove();
+          statusEl.textContent = '▼ 可以继续提问';
+          closeBtn.textContent = '关闭';
+          setDialogBusy(false);
+          resolve();
+        }
+      }, 42);
+    });
+  }
+
+  async function requestShadowReply(userQuestion, statusEl, closeBtn) {
+    if (!dialogSession) return;
+    setDialogBusy(true);
+    statusEl.textContent = '▼ Shadow 正在回应...';
+    closeBtn.textContent = '等待';
+
+    let text = dialogSession.year.shadow_dialogue;
+    let citeIds = getMemoriesForYear(dialogSession.year.year).map(m => m.id).slice(0, 1);
+    let moodAfter = '';
 
     if (ShadowAgents.dialogue.enabled) {
-      statusEl.textContent = '▼ Shadow 正在回应...';
       try {
         const live = await ShadowAgents.dialogue.ask({
           story: getStory(),
-          year,
-          interventions: userInterventions
+          year: dialogSession.year,
+          interventions: userInterventions,
+          userQuestion
         });
         if (live?.reply) {
           text = live.reply;
           citeIds = live.cite_memory_ids || citeIds;
-          if (live.mood_after) statusEl.textContent = `▼ mood · ${live.mood_after}`;
+          moodAfter = live.mood_after || '';
         }
       } catch (_) {
         /* fallback to static */
       }
     }
 
-    if (citeIds.length) {
-      document.getElementById('dlg-cite').textContent = `cite: ${citeIds.join(', ')}`;
-      document.getElementById('dlg-cite').hidden = false;
-    } else {
-      document.getElementById('dlg-cite').hidden = true;
-    }
+    const citeEl = document.getElementById('dlg-cite');
+    if (citeEl) citeEl.hidden = true;
 
-    runTypewriter(textEl, text, statusEl, closeBtn);
+    const thread = document.getElementById('dlg-thread');
+    if (!thread) {
+      setDialogBusy(false);
+      return;
+    }
+    const turn = document.createElement('div');
+    turn.className = 'dlg-turn dlg-turn-shadow';
+    const body = document.createElement('span');
+    turn.appendChild(body);
+    if (citeIds.length) {
+      const cite = document.createElement('span');
+      cite.className = 'dlg-turn-cite';
+      cite.textContent = `引用记忆 · ${citeIds.join(', ')}`;
+      turn.appendChild(cite);
+    }
+    thread.appendChild(turn);
+    if (moodAfter) statusEl.textContent = `▼ mood · ${moodAfter}`;
+    await waitTypewriter(body, text, statusEl, closeBtn);
+    thread.scrollTop = thread.scrollHeight;
   }
 
-  function runTypewriter(textEl, text, statusEl, closeBtn) {
-    if (dialogTimer) clearInterval(dialogTimer);
-    let i = 0;
-    const cursor = document.createElement('span');
-    cursor.className = 'dlg-cursor';
-    textEl.appendChild(cursor);
+  async function openDialog(yearIdx) {
+    const rawYear = getStory().years[yearIdx];
+    if (!rawYear) return;
+    const year = normalizeYear(rawYear);
 
-    dialogTimer = setInterval(() => {
-      cursor.before(text[i]);
-      i++;
-      if (i >= text.length) {
-        clearInterval(dialogTimer);
-        dialogTimer = null;
-        cursor.remove();
-        statusEl.textContent = '▼ 对话结束';
-        closeBtn.textContent = '关闭';
-      }
-    }, 42);
+    const overlay = document.getElementById('dialog-overlay');
+    const thread = document.getElementById('dlg-thread');
+    const form = document.getElementById('dialog-form');
+    const input = document.getElementById('dialog-input');
+    document.getElementById('dlg-name').textContent = shadowDisplayName();
+    document.getElementById('dlg-ctx').textContent = `~ 第 ${year.year} 年 · ${year.title} ~`;
+
+    const statusEl = document.getElementById('dlg-status');
+    const closeBtn = document.getElementById('btn-dlg-close');
+
+    dialogSession = { yearIdx, year, busy: false };
+    if (thread) thread.innerHTML = '';
+    if (form) form.hidden = true;
+    if (input) input.value = '';
+    statusEl.textContent = '▼ 正在连接 Shadow...';
+    closeBtn.textContent = '跳过';
+
+    Sfx()?.playModalOpen?.();
+    T.modalOpen(overlay, 'dialog');
+
+    const openingQ = `第 ${year.year} 年「${year.title}」—— Shadow，你想对现在的我说什么？`;
+    await requestShadowReply(openingQ, statusEl, closeBtn);
+    if (form) form.hidden = false;
+    if (input) input.focus();
+  }
+
+  async function submitDialogQuestion(e) {
+    e.preventDefault();
+    const input = document.getElementById('dialog-input');
+    const statusEl = document.getElementById('dlg-status');
+    const closeBtn = document.getElementById('btn-dlg-close');
+    const question = input?.value.trim();
+    if (!question || !dialogSession || dialogSession.busy) return;
+    Sfx()?.playUiClick?.();
+    input.value = '';
+    appendDialogTurn('user', question);
+    await requestShadowReply(question, statusEl, closeBtn);
+    input.focus();
   }
 
   function closeDialog() {
     if (dialogTimer) { clearInterval(dialogTimer); dialogTimer = null; }
+    dialogSession = null;
+    setDialogBusy(false);
     T.modalClose(document.getElementById('dialog-overlay'));
   }
 
   // ─── Init ────────────────────────────────────────────────
 
   function bindGlobalEvents() {
-    document.getElementById('nav-back').addEventListener('click', goLanding);
-    document.getElementById('nav-prev').addEventListener('click', prevPage);
-    document.getElementById('nav-next').addEventListener('click', nextPage);
-    document.getElementById('btn-start').addEventListener('click', () => startJourney(0));
-    document.getElementById('btn-dlg-close').addEventListener('click', closeDialog);
-    document.getElementById('intervention-skip').addEventListener('click', closeIntervention);
+    Sfx()?.mountToggle?.();
+
+    document.getElementById('nav-back').addEventListener('click', () => {
+      Sfx()?.playUiClick?.();
+      handleNavBack();
+    });
+    document.getElementById('nav-prev').addEventListener('click', () => {
+      Sfx()?.playPageTurn?.();
+      prevPage();
+    });
+    document.getElementById('nav-next').addEventListener('click', () => {
+      Sfx()?.playPageTurn?.();
+      nextPage();
+    });
+    document.getElementById('btn-start').addEventListener('click', () => {
+      Sfx()?.playOptionSelect?.();
+      startJourney(0);
+    });
+    document.getElementById('btn-dlg-close').addEventListener('click', () => {
+      Sfx()?.playUiClick?.();
+      closeDialog();
+    });
+    document.getElementById('dialog-form')?.addEventListener('submit', submitDialogQuestion);
+    document.getElementById('intervention-skip').addEventListener('click', () => {
+      Sfx()?.playUiClick?.();
+      closeIntervention();
+    });
 
     document.addEventListener('keydown', e => {
       if (document.getElementById('intervention-modal').classList.contains('open')) {
@@ -681,6 +947,7 @@
         return;
       }
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      if (currentPage === LANDING_PAGE && !journeyStarted) return;
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
         e.preventDefault();
         nextPage();
@@ -696,6 +963,7 @@
     document.addEventListener('touchend', e => {
       if (document.getElementById('dialog-overlay').classList.contains('open')) return;
       if (document.getElementById('intervention-modal').classList.contains('open')) return;
+      if (currentPage === LANDING_PAGE && !journeyStarted) return;
       const dx = e.changedTouches[0].clientX - touchStartX;
       if (Math.abs(dx) > 50) {
         if (dx < 0) nextPage();
@@ -709,6 +977,7 @@
     const slider = document.getElementById('slider');
     slider.querySelectorAll('.page:not(#p-landing)').forEach(p => p.remove());
     currentPage = LANDING_PAGE;
+    journeyStarted = false;
     userInterventions.length = 0;
     interventionShown.clear();
 
@@ -743,7 +1012,9 @@
     if (story._from_live) {
       if (btn) btn.textContent = `进入${story.persona_card.name}的七年（Live）`;
       const tag = document.getElementById('source-tag');
-      if (tag) tag.textContent = '⚡ Live · 全 Agent 生成';
+      if (tag) tag.textContent = story._demo_mock
+        ? '📦 Demo Mock · Golden 七年'
+        : '⚡ Live · 全 Agent 生成';
     }
 
     const dlgName = document.getElementById('dlg-name');
@@ -753,10 +1024,16 @@
     updateNav();
 
     T.spawnAmbientParticles(document.getElementById('ambient-particles'), 14);
-    Sc?.applyScenario(story.scenario_primary || 'academic');
-    syncScenarioChrome(LANDING_PAGE, story.scenario_primary || 'academic');
     applyAllSceneTextures();
-    T.initLanding();
+
+    if (shouldSkipLanding()) {
+      autoStartJourney();
+      Sfx()?.unlock?.();
+    } else {
+      Sc?.applyScenario(story.scenario_primary || 'academic');
+      syncScenarioChrome(LANDING_PAGE, story.scenario_primary || 'academic');
+      T.initLanding();
+    }
 
     window.ShadowDemo.goToPage = goToPage;
     window.ShadowDemo.getInterventions = () => [...userInterventions];
