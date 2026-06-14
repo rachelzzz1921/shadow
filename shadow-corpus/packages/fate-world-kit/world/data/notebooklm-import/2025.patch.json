@@ -1,0 +1,632 @@
+{
+  "calendar_year": 2025,
+  "notebooklm_gaps": [
+    "2025年中国大陆具体的GDP、CPI、房价指数统计数据（仅有增长放缓至2.5%的预测值）",
+    "2025年高考报名人数及高校毕业生具体人数",
+    "2025年70城房价指数百分比",
+    "中国大陆本土2025年具体流行梗和流行语清单"
+  ],
+  "summary": "2025年是「范式迁移」全面转化为动能冲突的决战年。中国大陆在DeepSeek等自研AI领域取得主权技术突破，与重启的中美贸易战形成硬对垒；国内处于法治修订舆情与航天应急挑战的交织期，社会从扩张增长彻底转向防御型生存。",
+  "social_mood": "大众情绪在主权技术突破带来的民族自豪与地缘局势恶化引发的生存焦虑间剧烈波动。青年对K字签证与治安法修订表现出高度政治参与感，家庭则在资源战争与关税重启阴影下转向极端务实的去杠杆生活。",
+  "atmosphere": {
+    "gdp_trillion_cny": null,
+    "gdp_growth_pct": 2.5,
+    "cpi_pct": 5.2,
+    "gaokao_candidates_wan": null,
+    "college_graduates_wan": null,
+    "internet_users_yi": null,
+    "housing_price_index_70_cities_pct": null,
+    "dominant_anxiety": "中东局势引发的能源中断风险及中美贸易战重启带来的通胀压力。",
+    "employment_pressure": "受稀土管制与半导体禁令影响，外向型科技企业缩招，劳动力流向新能源与国防自主领域。",
+    "education_hotspot": "生成式AI对知识生产主权的重构及K字签证引发的人才流动争议。",
+    "policy_keyword": "治安违法记录封存、主权AI、稀土出口管制。",
+    "meme_keywords": ["DeepSeek-R1", "K字签证", "去风险化"]
+  },
+  "pop_culture": [
+    "《哪吒之魔童闹海》 (亚洲首部20亿美元票房电影)",
+    "DeepSeek-R1 (现象级国产开源大模型)",
+    "GPT-5 (被称为「口袋里的博士团队」)",
+    "神舟二十号/二十一号任务 (全民关注的太空应急营救)",
+    "稀土出口管制讨论 (地缘政治科普化)",
+    "个性化CRISPR疗法 (生物医学破圈话题)",
+    "虚拟医院 (数字化医疗样板)",
+    "全息跨国讲座 (技术流动的新形态)",
+    "「防御型生存」Vlog (记录去杠杆生活)",
+    "混合团队协作 (AI代理与人类共事的职场叙事)"
+  ],
+  "sources": [
+    "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告",
+    "Ten Most Significant World Events in 2025 | Council on Foreign Relations",
+    "7 Medical Sciences Trends Shaping Healthcare in 2026"
+  ],
+  "macro_events": [
+    {
+      "category": "tech_internet",
+      "title": "DeepSeek-R1发布",
+      "detail": "2025年1月20日深度求索发布DeepSeek-R1，在算力受限条件下引发全球AI成本与开源路线讨论，国内科技圈连夜测试部署。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.4,
+      "sensitivity": "low",
+      "tags": ["ai", "sovereignty", "deepseek"]
+    },
+    {
+      "category": "economy",
+      "title": "中美贸易战重启",
+      "detail": "2025年2月特朗普第二任期启动后中美关税再度升级；外贸群与制造业企业讨论抢出口、转口与供应链南移。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "medium",
+      "tags": ["trade_war", "trump"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "互联网军事信息传播管理办法施行",
+      "detail": "2025年3月1日起《互联网军事信息传播管理办法》施行；军事爱好者社区与自媒体讨论内容边界与合规尺度。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.0,
+      "sensitivity": "high",
+      "tags": ["policy", "internet"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "海峡雷霆环台演练",
+      "detail": "2025年4月解放军开展「海峡雷霆—2025A」环台演练；新闻滚动报道，东南沿海居民对局势保持高度关注。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "high",
+      "tags": ["military", "taiwan_strait"]
+    },
+    {
+      "category": "society",
+      "title": "江油未成年人欺凌案舆情",
+      "detail": "2025年7月四川江油未成年人欺凌案引发大规模社会讨论，校园安全与基层治理成为舆论焦点。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 0.9,
+      "sensitivity": "medium",
+      "tags": ["society", "safety"]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "京津冀特大强降雨",
+      "detail": "2025年7月京津冀遭遇强降雨致重大伤亡；城市排水、应急预警与气候韧性再次成为公共讨论。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["climate", "flood"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "中央军委高层人事变动",
+      "detail": "2025年10月中央军委副主席何卫东等多人被宣布处理；体制内权力重组成为时政新闻热点。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "high",
+      "tags": ["politics", "military"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "神舟二十一号舷窗险情",
+      "detail": "2025年10月神舟二十一号任务中舷窗出现裂纹，乘组提前返回；全民关注太空碎片与载人航天安全。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["space", "accident"]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "西藏定日地震",
+      "detail": "2025年1月7日西藏定日地震造成重大伤亡；全国动员救灾，高原抗震与基层应急能力受关注。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": ["earthquake", "tibet"]
+    },
+    {
+      "category": "culture_entertainment",
+      "title": "哪吒2票房破20亿美元",
+      "detail": "2025年3月《哪吒之魔童闹海》票房突破20亿美元，成为亚洲影史里程碑；春节档与国产动画自豪感刷屏。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["movie", "soft_power"]
+    },
+    {
+      "category": "economy",
+      "title": "稀土出口管制反制",
+      "detail": "2025年中国收紧稀土及磁体出口作为贸易反制筹码；新能源与半导体产业链企业评估原料风险。",
+      "source_url": "https://www.cfr.org/articles/ten-most-significant-world-events-2025",
+      "weight": 1.3,
+      "sensitivity": "medium",
+      "tags": ["rare_earth", "trade_war"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "K字签证引发争议",
+      "detail": "2025年10月起签发青年科技人才K字签证；社交媒体激烈辩论人才引进、竞争与身份边界。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.0,
+      "sensitivity": "medium",
+      "tags": ["talent", "migration"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "以伊直接冲突与停火",
+      "detail": "2025年6月以色列与伊朗爆发直接军事冲突后达成脆弱停火；国内油价与中东局势科普视频刷屏。",
+      "source_url": "https://www.cfr.org/articles/ten-most-significant-world-events-2025",
+      "weight": 1.3,
+      "sensitivity": "high",
+      "tags": ["war", "middle_east"]
+    },
+    {
+      "category": "society",
+      "title": "释永信被宣布调查",
+      "detail": "2025年7月少林寺住持释永信涉嫌违法被宣布调查；宗教治理与公共信任成为热议话题。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": ["religion", "law"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "利奥十四世当选教皇",
+      "detail": "2025年5月利奥十四世成为首位北美籍教皇；天主教徒与国际观察者在中文网络讨论其工人群体立场。",
+      "source_url": "https://www.cfr.org/articles/ten-most-significant-world-events-2025",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": ["pope", "global"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "GPT-5正式发布",
+      "detail": "2025年8月OpenAI发布GPT-5，推理能力再跃升；国内开发者对比测试，讨论中美AI差距与算力瓶颈。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": ["ai", "gpt5"]
+    },
+    {
+      "category": "society",
+      "title": "治安违法记录封存制度",
+      "detail": "2025年6月治安管理处罚法修订引入违法记录封存；法学课堂与社交媒体大规模讨论隐私与信用边界。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "medium",
+      "tags": ["policy", "law"]
+    },
+    {
+      "category": "economy",
+      "title": "雅鲁藏布江下游水电开工",
+      "detail": "2025年7月西藏林芝雅鲁藏布江下游水电工程动工；清洁能源、地缘与生态议题同时进入舆论场。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["energy", "infrastructure"]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "香港宏福苑特大火灾",
+      "detail": "2025年11月香港大埔宏福苑五级大火造成重大伤亡；大湾区居民重新审视高层住宅防火与维修责任。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "medium",
+      "tags": ["fire", "safety"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "普京2025年访华",
+      "detail": "2025年9月普京访华，与中方在阅兵前后举行战略沟通；国际新闻与国内时政解读刷屏。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.1,
+      "sensitivity": "medium",
+      "tags": ["diplomacy", "russia"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "神舟二十二号应急发射",
+      "detail": "2025年11月神舟二十二号无人应急发射执行营救任务；中国载人航天应急能力引发全民讨论。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["space", "emergency"]
+    },
+    {
+      "category": "economy",
+      "title": "可再生能源装机领先全球",
+      "detail": "2025年中国可再生能源新增装机占全球六成以上；光伏、风电与储能产业链就业持续扩张。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["green_energy", "economy"]
+    },
+    {
+      "category": "society",
+      "title": "个性化CRISPR疗法突破",
+      "detail": "2025年全球首例高度个性化基因治疗引发关注；国内生物医学社群讨论可及性与伦理边界。",
+      "source_url": "https://distance.physiology.med.ufl.edu/about/articles/7-medical-sciences-trends-shaping-healthcare-in-2026/",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["biotech", "medicine"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "美国宣布退出世卫组织",
+      "detail": "2025年1月特朗普政府启动退出WHO程序；公卫专业学生与国际新闻受众讨论全球卫生治理碎片化。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["who", "us_policy"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "正义使命环台演练",
+      "detail": "2025年12月底解放军开展「正义使命」环台跨年演练；年度地缘军事议题在社交媒体持续发酵。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.0,
+      "sensitivity": "high",
+      "tags": ["military", "politics"]
+    }
+  ],
+  "micro_events": [
+    {
+      "category": "digital",
+      "scenario": "career",
+      "text": "DeepSeek-R1普及后公司裁撤初级研发组，你被迫转向提示词架构岗位。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["ai", "deepseek", "job_loss"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "《哪吒2》破纪录，你带全家看巨幕版，母亲说是她看过最好的国产片。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["nezha", "family"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "法学课激辩治安法修订后的违法记录封存，你担心社交痕迹成隐形印记。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["law", "debate"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "贸易战重启后订单被加征关税，你连夜评估把供应链迁往东南亚。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["trade_war", "supply_chain"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "和香港朋友通话，对方谈起宏福苑大火余悸，你们重谈都市安全底线。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["hk_fire", "bonding"]
+    },
+    {
+      "category": "policy_touch",
+      "scenario": "academic",
+      "text": "K字签证讨论刷屏，原本要出国的师兄改口留下，说要攻关国产芯片。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["k-visa", "career_choice"]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "担心中东冲突推高油价，父母商量卖燃油车换钠电池电车。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["energy_crisis", "electric_vehicle"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你注册GPT-5账号，让它帮你设计抗通胀的家庭理财模型。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["gpt5", "finance"]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "读到个性化CRISPR疗法报道，你为患病亲属咨询国内临床机会。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["crispr", "hope"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "开黑时讨论直播中的环台演练，信息轰鸣里你感到真实的地缘压迫。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": ["military_drill", "geopolitics"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "你用DeepSeek-R1整理稀土博弈综述，教授夸资料详实超往届。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["deepseek", "study"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "定日地震后你在公益平台捐了三天生活费，朋友圈写「愿高山无恙」。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["earthquake", "donation"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "芯片厂拿到国产替代大单，你拿双倍年终奖，加班到虚脱。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["tech_boom", "overtime"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "全息投影完成跨国约会，像素光影里你们交换对和平的渴望。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["hologram", "romance"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "模联辩论以伊冲突人道议题，幻灯片放核设施残骸时你手心出汗。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["debate", "global_crisis"]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "AI自动驾驶初创因地缘风控融资受阻，你第一次感到规则失效的残酷。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["startup", "risk"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全家看九三阅兵直播，无人机方队经过时老一辈眼里闪着泪花。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["parade", "pride"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你在加密社区备份个人知识库，防备断网或关税升级导致数据丢失。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["sovereignty", "privacy"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "毕业论文引用2025生物技术数据，论证长寿将与技术主权深度绑定。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["biotech", "thesis"]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "京津冀洪水后空气多变，你开始室内有氧训练，维持防御型体质。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["health", "flood_aftermath"]
+    },
+    {
+      "category": "neighborhood",
+      "scenario": "friendship",
+      "text": "小区花园漫谈极端天气，你和邻居商量建互助物资共享群。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["community", "resilience"]
+    },
+    {
+      "category": "policy_touch",
+      "scenario": "academic",
+      "text": "军事信息新规施行，你撤下微博上的军事模型帖，感到尺度在变。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": ["policy", "internet"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "内推会上你提主权数据私有云方案，意外获管理层签字支持。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["innovation", "security"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "父亲外贸厂因关税预期提前退休，全家商量回老家做弹性副业。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["family_growth", "era_shift"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "你们同步观看神舟二十二号应急发射直播，同时按下点赞。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["romance", "space_interest"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "读到去风险化导致知识孤岛论文，你对跨国课题生出担忧。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["academic_gap", "global_order"]
+    },
+    {
+      "category": "money",
+      "scenario": "self_growth",
+      "text": "退掉分期新手机，钱改报DeepSeek认证课，用硬技能御寒。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["savings", "upskilling"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "你们转发江油欺凌案深度报道，在观点碰撞里更坚定彼此价值观。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["trust", "social_issue"]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "远程诊疗帮老人预约多癌早筛，你感叹数字化是动荡年代救命稻草。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["telemedicine", "care"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "你提议用国产AI做内容去泡沫，裁员潮里暂时保住了岗位。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["ai_skills", "career_security"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "AI翻译帮你读阿拉伯媒体中东评论，你感叹多极世界里的视角差。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["learning_tech", "multilingual"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "视频会议里为「AI有没有政治立场」吵到深夜，那是春天唯一的火花。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["debate", "digital_bonding"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "家里因是否抛售受贸易限制影响的科技股爆发争吵，你感到成人责任。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["investment", "family_drama"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "2025跨年夜读AI年度总结，你想：独享智能的荒原或许已不远。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["epiphany", "ai_future"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "模拟庭审辩论AI生成证据真实性，你的发言被法学社群转发。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["law_tech", "talent"]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "稀土出口管制带旺上游材料公司，你拿奖金却感到复杂道德感。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["bonus", "ethics"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "你给心仪的人发AI合成的《哪吒2》混剪，数字浪漫在压力下弥足珍贵。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["romance", "ai_content"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "历史研讨会引用霍尔木兹海峡风险报告，讨论断裂时代的能源命门。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["history", "data"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "长辈叹特朗普又回来了，你静静听着，感受时代的错位。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["news", "family"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "2025最后一个雪夜你关掉所有推送，明白内心平静才是最强主权。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["resilience", "existentialism"]
+    }
+  ]
+}

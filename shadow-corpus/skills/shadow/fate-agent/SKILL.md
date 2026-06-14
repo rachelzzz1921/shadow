@@ -89,7 +89,13 @@ Profile 必填：`birth_year`、`fork_year`、`age`（与 `fork_year - birth_yea
 cd shadow-corpus/world
 npm run generate    # 合并 → data/years/{year}.json
 npm run validate    # schema + 量级 + 六域≥30
+npm run query -- --q "关键词" --year 2020   # 本地检索抽检
+npm run query -- --status                   # 刷新 _stats.json
+npm run audit-duplicates                    # 近重复审计
+npm run sync-rag -- --dry-run               # RAG 同步（validate + embed）
 ```
+
+架构：`world/docs/ARCHITECTURE.md`（数据流、L1/L2 检索、与 rag-kit 分工）。
 
 扩子池：
 

@@ -1,0 +1,20 @@
+{
+  "name": "@shadow/rag-kit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Shadow hybrid RAG — DashScope embeddings + Supabase pgvector + local index",
+  "scripts": {
+    "embed:world": "node scripts/embed-world.mjs",
+    "embed:repo": "node scripts/embed-repo.mjs",
+    "embed:all": "node scripts/embed-all.mjs",
+    "embed:local": "node scripts/embed-all.mjs --no-embed",
+    "index:runs": "node scripts/index-runs.mjs",
+    "eval:embedding": "node scripts/eval-embedding-cn.mjs",
+    "query": "node scripts/query.mjs",
+    "test": "node --test test/*.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1"
+  }
+}

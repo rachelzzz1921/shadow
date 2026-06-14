@@ -23,8 +23,10 @@
     "meme_keywords": [
       "葛优躺",
       "洪荒之力",
-      "蓝瘦香菇"
-    ]
+      "蓝瘦香菇",
+      "小目标"
+    ],
+    "international_anxiety": "地缘政治剧变引发的全球秩序担忧与教育医疗公平焦虑"
   },
   "pop_culture": [
     "三生三世十里桃花",
@@ -38,7 +40,17 @@
     "悟空传（流行文化）",
     "人民的名义筹备",
     "支付宝集五福",
-    "共享单车"
+    "共享单车",
+    "AlphaGo战胜李世石引发AI恐慌与崇拜",
+    "“洪荒之力”因里约奥运傅园慧爆火",
+    "王健林“先挣它一个亿”小目标刷屏",
+    "魏则西事件引发百度搜索公信力危机",
+    "短视频平台快手、抖音雏形期活跃",
+    "《微微一笑很倾城》等电竞题材偶像剧流行",
+    "墨子号量子卫星发射成功",
+    "G20杭州峰会视觉元素刷屏",
+    "FAST‘天眼’在贵州启用",
+    "共享单车补贴战进入白热化（摩拜/ofo）"
   ],
   "macro_events": [
     {
@@ -421,6 +433,258 @@
       "sensitivity": "low",
       "tags": [
         "environment"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "两孩政策全面施行",
+      "detail": "1月1日起，全国全面实施一对夫妇可生育两个孩子的政策，计划生育进入新阶段。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.5,
+      "sensitivity": "low",
+      "tags": [
+        "policy",
+        "demographics"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "亚投行在北京开业",
+      "detail": "1月16日，亚洲基础设施投资银行（AIIB）正式开业，中国在国际金融中话语权提升。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": [
+        "economy",
+        "finance"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "墨子号量子卫星",
+      "detail": "8月16日，世界首颗量子科学实验卫星“墨子号”在酒泉发射升空。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.4,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "space"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "天宫二号对接",
+      "detail": "9月发射天宫二号，10月神舟十一号与之对接，航天员驻留33天完成多项实验。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "station"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "FAST望远镜落成",
+      "detail": "9月25日，500米口径球面射电望远镜在贵州平塘正式启用，成为世界之最。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "astronomy"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "A股四天内两熔断",
+      "detail": "1月初，A股因实施指数熔断机制导致两次提前休市，引发金融监管制度调整。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 1.4,
+      "sensitivity": "medium",
+      "tags": [
+        "finance",
+        "stock"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "英国公投脱欧",
+      "detail": "6月23日英国投票脱离欧盟，该消息在大陆知识分子与金融圈引发巨大冲击波。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 1.4,
+      "sensitivity": "low",
+      "tags": [
+        "geopolitics",
+        "brexit"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "特朗普当选总统",
+      "detail": "11月唐纳德·特朗普当选美国总统，反建制派胜利引发对中美关系未来的猜测。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 1.5,
+      "sensitivity": "low",
+      "tags": [
+        "usa",
+        "politics"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "邢台特大洪灾",
+      "detail": "7月河北邢台因暴雨引发洪灾导致130人死亡，其预警与应对机制引发广泛争议。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "high",
+      "tags": [
+        "disaster",
+        "governance"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "新疆再教育营争议",
+      "detail": "8月陈全国调任新疆书记，随后针对宗教极端主义的再教育设施建设引发国际关注。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "high",
+      "tags": [
+        "xinjiang",
+        "politics"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "令计划被判刑",
+      "detail": "7月4日原统战部长令计划因受贿罪等被判无期徒刑，标志反腐继续纵深。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "anti-corruption"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "债转股方案出台",
+      "detail": "10月国务院出台指导意见，通过债转股等方式推进企业去杠杆，作为供给侧改革手段。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "economy",
+        "reform"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "AlphaGo战胜李世石",
+      "detail": "3月谷歌AI在围棋对决中4:1胜出，在大陆引发关于人工智能取代人类的社会恐慌。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": [
+        "ai",
+        "tech"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "杜特尔特访华",
+      "detail": "10月菲律宾总统杜特尔特访华，中菲关系因南海仲裁案后的转圜引发国际瞩目。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "diplomacy",
+        "sea"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "猎鹰9号海上回收",
+      "detail": "4月SpaceX首次在海上驳船成功降落火箭第一级，开启复用航天时代。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "tech"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "南海仲裁案裁决",
+      "detail": "7月海牙法庭公布裁决，中国政府宣布‘不接受、不承认’，引发全民爱国情绪。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 1.4,
+      "sensitivity": "high",
+      "tags": [
+        "diplomacy",
+        "sea"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "泰王普密蓬逝世",
+      "detail": "10月泰王普密蓬去世，大陆学界对其作为‘国家稳定器’的机制进行深度总结。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "history",
+        "thailand"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "巴拿马文件泄露",
+      "detail": "国际记者协会披露大量离岸公司信息，相关名字涉及多国政要，在大陆引发高强度内容审查。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 1.4,
+      "sensitivity": "high",
+      "tags": [
+        "leak",
+        "politics"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "长征五号首飞",
+      "detail": "11月中国最大运力火箭长征五号首飞成功，标志着深空探测能力实现跨越。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "tech"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "寨卡病毒预警",
+      "detail": "世卫宣布寨卡疫情为紧急状态，中国加强出入境检疫，尤其是针对来自里约奥运的人员。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "health",
+        "virus"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "朴槿惠亲信干政",
+      "detail": "韩国爆发大规模示威抗议朴槿惠，该事件通过社交媒体在大陆获得极高关注与调侃。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "korea",
+        "politics"
       ]
     }
   ],
@@ -3373,6 +3637,486 @@
         "acceptance"
       ],
       "scenario": "self_growth"
+    },
+    {
+      "category": "school",
+      "text": "看完李世石输给AlphaGo的重播，我连夜修改了机器人大课的论文题目，想探讨人类的边界。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "ai"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "1月初股指熔断那天，我眼睁睁看着账户里的首付款在十五分钟内灰飞烟灭，连卖出的机会都没有。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "finance",
+        "loss"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "family",
+      "text": "爸妈听说二孩全面开放了，立刻开始在饭桌上催我和老公，甚至说愿意出钱雇保姆。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "policy"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "digital",
+      "text": "我和几个哥们儿第一次在街头扫码骑上了摩拜单车，那种‘随时随地骑走’的新鲜感挺神奇。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "tech",
+        "lifestyle"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "health",
+      "text": "魏则西事件后，爷爷生病我坚决不让爸妈在搜索软件里找医院，坚持带他去正规三甲挂号。",
+      "weight": 1.3,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "health",
+        "anxiety"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "policy_touch",
+      "text": "英语角里大家都在疯狂辩论特朗普胜选的原因，有个同学因为支持特朗普被大家‘群起而攻之’。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "politics",
+        "campus"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "neighborhood",
+      "text": "邢台洪水后，小区里发起了募捐，我把攒了半年的零花钱全投进了捐款箱，希望能帮到同龄人。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "disaster",
+        "charity"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "school",
+      "text": "物理系教授讲起‘墨子号’的量子纠缠，说这可能是未来通讯的终极防御，我听得入迷极了。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "quantum"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "digital",
+      "text": "我和她在里约奥运会傅园慧的表情包里找到了共同话题，那种‘洪荒之力’的自黑精神成了我们的媒人。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "meme",
+        "love"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "money",
+      "text": "公司HR说因为英国脱欧导致外贸订单缩水，今年的年终奖改成了一大箱过期的公司周边产品。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "job",
+        "brexit"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "为了看懂希格斯玻色子的物理学内涵，我在图书馆通宵啃完了三本专著，最后还是似懂非懂。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "physics",
+        "library"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "health",
+      "text": "去药店发现很多常备药涨价了，店员说是因为国家搞供给侧改革去产能，药厂成本上去了。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "medical",
+        "reform"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "digital",
+      "text": "我注册了一个直播账号，学着那些网红在镜头前唱歌，希望能通过流量赚点生活费。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "streaming",
+        "job"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "family",
+      "text": "听说全面两孩施行了，原本冷清的家族群里瞬间多了好几个大肚子孕妇的照片，热闹不少。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "policy"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "money",
+      "text": "单位里传言要引进什么‘人工智能’系统取代我们这些录入员，我吓得赶紧报了会计补习班。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "ai",
+        "job insecurity"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "学校新修了航天模拟实验室，我们在VR里体验了对接天宫二号的过程，感觉自己就是陈冬。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "tech",
+        "space"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "爸爸想趁着房价还在疯涨前去G20后的杭州买套房，结果因为限购政策下来晚了一天。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "housing",
+        "policy"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "digital",
+      "text": "哥们儿给我发了个巴拿马文件的PDF，还没点开链接就挂了，我们俩心照不宣地放下了手机。",
+      "weight": 1.4,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "censorship"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "系里组织去贵州参观FAST，站在那个巨大的锅盖下，我第一次感觉到人类探索宇宙的渺小与伟大。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "fast"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "neighborhood",
+      "text": "邻居家的二胎出生了，是个小女孩，全家人在那儿商量学区房要不要换成三居室。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "housing"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "school",
+      "text": "教授在讨论南海仲裁，他说这是法律战而非军事战，让我们多看外媒报道对比分析。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "law"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "因为公司拿到了亚投行的信用担保，我们成功接下了哈萨克斯坦的一条高铁订单，拿到了丰厚提成。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "economy",
+        "aiib"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "health",
+      "text": "去医院复查发现诊室门口挂了‘严禁竞价排名挂号’的牌子，觉得魏则西也算是用生命换了改变。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "health",
+        "fairness"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "digital",
+      "text": "我在他的短视频评论区夸他做饭好吃，竟然真的加上了微信，跨越了半个中国谈起了初恋。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "love",
+        "app"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "school",
+      "text": "为了写关于‘特朗普现象’的课题，我注册了推特账号，每天看那些疯狂的回复，觉得世界疯了。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "usa",
+        "politics"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "family",
+      "text": "爷爷坚持要在家里贴傅园慧的‘洪荒之力’海报，说这丫头喜庆，能给全家带来好运。",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "meme"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "money",
+      "text": "看到王健林赚一亿的小目标，我默默把自己银行卡里的三千块余额截图发了朋友圈，自嘲了一把。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "finance",
+        "lifestyle"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "在讨论叙利亚难民的研讨会上，我表达了对无限度接收的担忧，结果被几个文青同学说是‘冷血’。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "politics",
+        "debate"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "digital",
+      "text": "我和哥们儿在微信群里为了朴槿惠是不是被下咒了争论了一个下午，最后还是靠一顿火锅解决矛盾。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "politics",
+        "friendship"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "policy_touch",
+      "text": "听说令计划判了，单位连夜组织我们看反腐纪录片，写了三千字的思想汇报，真写得手酸。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "discipline"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "health",
+      "text": "盐城龙卷风后，我妈非要在阳台加固防护网，生怕自己也被大风刮走，那种恐惧持续了很久。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "disaster",
+        "family"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "digital",
+      "text": "我终于抢到了ofo的线下体验官名额，每天在西单街头给人讲解共享经济，感觉自己站在风口上。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career",
+        "digital"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "为了研究量子纠缠，我甚至写信给中科大的一位博士生请教，竟然收到了回复，开心坏了。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "science"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "爸爸想趁着二孩放开去卖童装，结果发现现在满大街都是童装店，最后还是决定去开快车。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "finance",
+        "family"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "digital",
+      "text": "我在推特上看到那些反对脱欧的示威画面，第一次意识到西方的裂痕已经到了无法弥补的地步。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "politics",
+        "brexit"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "neighborhood",
+      "text": "小区里新开了家无人超市，邻居阿姨拉着我去‘破译’怎么用脸刷卡，折腾了一下午还没进去。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "tech",
+        "neighbor"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "school",
+      "text": "考前辅导员说今年不能在网上乱发‘小道消息’，尤其是关于新疆的，大家瞬间都闭嘴了。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "campus"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "我在杭州租到了G20时期新翻修的旧厂房当工作室，那种古朴与现代的结合让我灵感爆棚。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "career",
+        "g20"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "health",
+      "text": "听说寨卡病毒会传染给小孩，正在备孕的表嫂连巴西咖啡都不敢喝了，天天在家煮生姜水。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "health",
+        "rumor"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "romance",
+      "text": "和他一起在FAST的观景台上看星星，他指着那个巨大的‘大锅’说，这就是他给我的宇宙礼物。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "love",
+        "science"
+      ],
+      "scenario": "love"
     }
   ],
   "sources": [
@@ -3380,7 +4124,22 @@
     "https://www.stats.gov.cn/sj/tjgb/",
     "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
     "https://www.cnnic.cn/",
-    "https://www.moe.gov.cn/jyb_xwfb/"
+    "https://www.moe.gov.cn/jyb_xwfb/",
+    "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+    "https://en.wikipedia.org/wiki/21st_century",
+    "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3"
   ],
-  "version": "2026.06.14-v1"
+  "version": "2026.06.14-v1",
+  "notebooklm_summary": "2016年是全球民粹主义崛起与中国尖端科技爆发的一年。英国脱欧与特朗普当选震动世界，中国则通过全面实施“两孩政策”、成立亚投行及主办G20峰会进一步提升国际地位。墨子号、天宫二号及FAST的启用标志着中国在航天与基础科学领域取得重大突破。",
+  "notebooklm_social_mood": "社会情绪在技术乐观主义与地缘不确定性间游走。青年群体对黑科技（AI、量子、FAST）展现出极高热忱，而股市年初的熔断与魏则西事件等社会悲剧则加深了公众对资本与平台监管的质疑。全面二孩政策开始在家庭层面产生实质性的养育焦虑与决策压力。",
+  "notebooklm_sources": [
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告"
+  ],
+  "notebooklm_gaps": [
+    "具体的GDP数值",
+    "具体的CPI及房价指数比例",
+    "高考报名人数精确统计",
+    "2016年中国互联网普及率的具体百分点（笔记本中常为概括性描述）"
+  ],
+  "notebooklm_imported_at": "2026-06-14"
 }

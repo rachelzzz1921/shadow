@@ -23,8 +23,13 @@
     "meme_keywords": [
       "贾君鹏",
       "哥只是个传说",
-      "潜伏"
-    ]
+      "潜伏",
+      "H1N1",
+      "MJ离世",
+      "比特币",
+      "哈德逊河奇迹"
+    ],
+    "international_anxiety": "H1N1猪流感带来的跨国卫生威胁，以及大衰退末期严重的失业与生存不确定性。"
   },
   "pop_culture": [
     "潜伏（流行文化）",
@@ -38,7 +43,17 @@
     "蜗居（流行文化）",
     "阿凡达（流行文化）",
     "神话（流行文化）",
-    "迈克尔杰克逊"
+    "迈克尔杰克逊",
+    "迈克尔·杰克逊离世 (全球哀悼与网络流量洪峰)",
+    "比特币诞生 (去中心化金融起点)",
+    "哈德逊河奇迹 (萨利机长全员营救)",
+    "H1N1流感科普 (全民公共卫生拉练)",
+    "伊朗选举与推特传播 (社交媒体政治化)",
+    "世界数字图书馆 (知识共享尝试)",
+    "哈里发塔完工 (全球最高建筑)",
+    "高锟获诺贝尔物理学奖 (光纤之父)",
+    "金砖四国首脑会议 (新兴市场集体发声)",
+    "通用汽车破产 (传统工业黄昏)"
   ],
   "macro_events": [
     {
@@ -421,6 +436,186 @@
       "sensitivity": "low",
       "tags": [
         "environment"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "奥巴马正式就任总统",
+      "detail": "2009年1月20日奥巴马宣誓就任美国第44任总统，国内媒体解读「改变」预期与全球经济走出危机的路径。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": [
+        "us_politics",
+        "obama"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "比特币创始块诞生",
+      "detail": "2009年1月3日比特币网络启动，极客论坛开始讨论这种去中心化数字货币的可能性。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": [
+        "bitcoin",
+        "fintech"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "H1N1流感全球大流行",
+      "detail": "2009年WHO宣布H1N1大流行；中国学校停课、测温与疫苗接种成为日常。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "pandemic",
+        "health"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "通用汽车破产保护",
+      "detail": "2009年通用汽车申请破产保护，被视为金融危机后传统汽车产业链重组的标志性事件。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "bankruptcy",
+        "economic_crisis"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "金砖四国首次峰会",
+      "detail": "2009年6月16日中俄印巴首脑叶卡捷琳堡会晤，「金砖」作为新兴市场集体发声机制成型。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "bric",
+        "diplomacy"
+      ]
+    },
+    {
+      "category": "culture_entertainment",
+      "title": "迈克尔·杰克逊逝世",
+      "detail": "2009年6月25日MJ去世，全球哀悼使当时互联网流量一度濒临瘫痪，成为世纪级文化事件。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "culture",
+        "legacy"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "伊朗大选后绿色抗议",
+      "detail": "2009年伊朗总统选举后爆发大规模抗议，社交媒体动员引发全球对数字传播的早期反思。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "medium",
+      "tags": [
+        "iran_protests",
+        "social_media"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "全球经济触底复苏",
+      "detail": "2009年多国数据确认金融危机最剧烈休克期告一段落，世界进入漫长的后危机修复时代。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "recovery",
+        "finance"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "里斯本条约生效",
+      "detail": "2009年12月1日欧盟《里斯本条约》生效，国际关系课堂讨论欧洲制度整合与主权碎片化。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "eu",
+        "treaty"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "高锟获诺贝尔物理学奖",
+      "detail": "2009年高锟因光纤通信获诺贝尔物理学奖，国内理工科学生以「光纤之父」为论文引用热点。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "nobel"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "迪拜世界债务危机",
+      "detail": "2009年11月迪拜世界宣布债务重组，引发全球市场对新兴市场资产泡沫的再评估。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "debt_crisis",
+        "dubai"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "黑龙江鹤岗矿难",
+      "detail": "2009年11月黑龙江鹤岗煤矿特大瓦斯爆炸致108人死亡，再次震动煤炭安全生产舆论。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1,
+      "sensitivity": "medium",
+      "tags": [
+        "mining",
+        "safety"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "力拓间谍案宣判",
+      "detail": "2009年上海法院宣判力拓案，跨国商业情报与资源博弈成为财经与外交交叉话题。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1,
+      "sensitivity": "medium",
+      "tags": [
+        "business",
+        "diplomacy"
+      ]
+    },
+    {
+      "category": "culture_entertainment",
+      "title": "哈德逊河奇迹迫降",
+      "detail": "2009年1月美联航1549号在哈德逊河成功迫降，萨利机长全员生还成为年度英雄叙事。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "aviation",
+        "heroism"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "世界数字图书馆上线",
+      "detail": "2009年联合国教科文组织世界数字图书馆开放，学生可在网上查阅多语种古籍与手稿。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "education",
+        "digital_library"
       ]
     }
   ],
@@ -3384,6 +3579,486 @@
         "acceptance"
       ],
       "scenario": "self_growth"
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "网吧弹窗说MJ去世，你点开国外新闻站，页面因流量过大一直转圈。",
+      "weight": 1.3,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "mj",
+        "internet_history"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "H1N1新闻后母亲囤光消毒洗手液，叮嘱你在公交车上必须戴口罩。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "h1n1",
+        "prevention"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "写字楼里讨论通用破产可能拖垮零部件厂，你第一次感到传统工业寒意。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career_anxiety",
+        "gm"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "极客论坛有人聊比特币，你下了客户端却没运行，后来常想「要是当时」。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "bitcoin",
+        "early_adopter"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全家看奥巴马就职片段，父亲叹美国出了黑人总统，世道真的变了。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "news",
+        "obama"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "QQ上互传哈德逊河迫降照片，死党说萨利机长那刻真像电影。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "heroism",
+        "digital_sharing"
+      ]
+    },
+    {
+      "category": "neighborhood",
+      "scenario": "career",
+      "text": "新疆出差遭遇突然断网，那几天你第一次感到信息管制离生活很近。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "witness",
+        "disruption"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "毕业论文引用高锟光纤理论，导师说这是对信息技术基石的致敬。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "study",
+        "science"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "四万亿红利还在，父母商量把存款换成刚开盘的新房，说砖头比纸币稳。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "investment",
+        "housing"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你第一次登录世界数字图书馆，在虚拟展厅里翻人类古老手稿。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "education",
+        "digital_library"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "会议上你提金砖市场布局，主管意外点头，说外贸得找新方向。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "business_pivot",
+        "global_view"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "鹤岗矿难后黑龙江亲戚连夜报平安，全家感叹煤炭行业太高危。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "safety",
+        "mining_tragedy"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "2G网络上你们用短信跟进MJ葬礼直播，彼此分享心碎瞬间。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "digital_love",
+        "pop_culture"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "H1N1实验室泄露传闻让你写日记，反思生物技术与公共安全的边界。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "reflection",
+        "biosafety"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "迪拜世界债务危机那天，新手交易员第一次听懂「资产负债表陷阱」。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "finance",
+        "risk_management"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "秋天宿舍争论第一代安卓能否挑战iPhone，争到半夜还不肯睡。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "tech_trend",
+        "debate"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "国际关系课解读里斯本条约，你低头记下一串陌生的欧盟机构名。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "study",
+        "europe"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "长辈提起萨达姆被处决已三年，叹世界更乱，全家陷入沉默。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "history",
+        "mood"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你在博客记录金融危机是否真结束，想在断裂现实里保持清醒。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "writing",
+        "consciousness"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "出口厂订单锐减转做淘宝，你忙着帮老板安装各种网银支付插件。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career_pivot",
+        "digitalization"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "模联里你对金砖合作前景的见解获最佳代表，老师说你视野够宽。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "mun",
+        "success"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "self_growth",
+      "text": "退掉分期买表计划，钱改存定期，开启极端防御型金钱观。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "savings",
+        "financial_literacy"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "网速慢的年头，你们在QQ上同步看MJ纪念帖，像一场数字仪式。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "digital_intimacy",
+        "ritual"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "你帮外地家属预约流感疫苗，感叹动荡年代里医疗预约也是救命事。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "care",
+        "health_tech"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "地理课用遥感对比汶川重建前后，你决定以此写大论文。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "thesis",
+        "science"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "邮件组讨论力拓案，好友说「平坦世界」正在隆起高墙。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "cyber_security",
+        "peer_talk"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "迪拜塔落成那周，父亲在阳台说全球泡沫幻灭，还是落袋为安。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family_mood",
+        "realism"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你用在线翻译读伊朗抗议报道，第一次感到信息可以绕开电视。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "translation_tech",
+        "learning"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "公司让你做第一批安卓原生应用，你感到移动互联风口微微抬头。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "coding",
+        "innovation"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "历史研讨会辩论奥巴马「改变」承诺，你感到制度韧性与民粹在角力。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "history",
+        "debate"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全家因是否抛售通用供应链股票激烈争吵，你第一次参与家庭理财。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "investment",
+        "risk"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "经济阴霾里你给恋人发Flash做的MJ致敬动画，当跨年礼物。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "pop_culture",
+        "romance"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "出口厂关停，你回老家备考公务员，寒冬里第一次懂「铁饭碗」。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career_change",
+        "stability"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "你下载金砖经济互补性论文，想在断裂时代找新的研究锚点。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "economics",
+        "foresight"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "春节取消长途旅行，全家看建国60周年阅兵录播，简约却温馨。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family_bond",
+        "simplicity"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "早期比特币挖矿创业项目因监管不明被迫关闭，你交了范式迁移学费。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "startup",
+        "failure"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "天涯帖里你们为伊朗抗议真伪吵到半夜，那是2009的精神火花。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "online_talk",
+        "clash"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "社区免费发H1N1疫苗，你陪长辈排队，感叹公共卫生真到家门口。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "health_care",
+        "tech"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "学术搜索里一篇供应链断裂风险论文，成了你科研起点。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "thesis",
+        "logic"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "2009跨年夜你盯着比特币创世块哈希，想人类或许站在金融悬崖边。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "epiphany",
+        "crypto_future"
+      ]
     }
   ],
   "sources": [
@@ -3391,7 +4066,21 @@
     "https://www.stats.gov.cn/sj/tjgb/",
     "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
     "https://www.cnnic.cn/",
-    "https://www.moe.gov.cn/jyb_xwfb/"
+    "https://www.moe.gov.cn/jyb_xwfb/",
+    "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+    "https://en.wikipedia.org/wiki/21st_century",
+    "https://www.historycentral.com/Today/21st.html"
   ],
-  "version": "2026.06.14-v1"
+  "version": "2026.06.14-v1",
+  "notebooklm_summary": "2009年是全球经济在金融海啸后的「触底年」与「复苏元年」。奥巴马就任承载「改变」希望，比特币诞生与社交媒体崛起标志数字时代萌芽；H1N1大流行与迈克尔·杰克逊离世，在公共卫生与大众文化史上留下沉重注脚。",
+  "notebooklm_social_mood": "社会情绪在危机后的疲惫、脆弱的复苏希望以及突发公共卫生事件的焦虑中交织。公众对传统工业模式感到幻灭，却在移动互联网与社交媒体的早期爆发中寻找新的表达出口。",
+  "notebooklm_sources": [
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告"
+  ],
+  "notebooklm_gaps": [
+    "2009年中国大陆具体的GDP（万亿）、CPI、房价指数、高考及毕业生人数统计数据",
+    "2009年具体的中国大陆本土流行影视剧、综艺及华语乐坛神曲清单（笔记本侧重全球文化与重大社会事件）",
+    "2009年具体的中国大陆宏观经济微调政策（笔记本主要提及四万亿计划的延续与大衰退的结束）"
+  ],
+  "notebooklm_imported_at": "2026-06-14"
 }

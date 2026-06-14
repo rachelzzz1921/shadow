@@ -27,7 +27,7 @@ const pool = JSON.parse(
 );
 
 console.log('=== 复读线 · 叙事第1年 (2019) quiet ===');
-const quiet = sampleFateContext({
+const quiet = await sampleFateContext({
   runId: 'demo-fuxu',
   calendarYear: 2019,
   narrativeYear: 1,
@@ -41,7 +41,7 @@ console.log('weights:', quiet.scenario_weights);
 console.log('micro:', quiet.micro_sample.map((m) => `[${m.scenario}] ${m.text}`));
 
 console.log('\n=== 叙事第4年 pivotal ===');
-const pivotal = sampleFateContext({
+const pivotal = await sampleFateContext({
   runId: 'demo-fuxu',
   calendarYear: 2022,
   narrativeYear: 4,

@@ -1,0 +1,532 @@
+{
+  "calendar_year": 2010,
+  "notebooklm_gaps": [
+    "2010年中国大陆具体的GDP（万亿）、CPI、房价指数、高考及毕业生人数统计数据",
+    "2010年具体的中国大陆本土流行网络用语、神曲及现象级APP清单（如微博的爆发细节）",
+    "针对中国大陆本土微观社会生活的更多日常记录"
+  ],
+  "summary": "2010年是全球秩序深度调整与风险并发的一年。中国正式超越日本成为世界第二大经济体，上海世博会展示国家崛起；美国通过平价医疗法案并重构金融监管；海地地震、深水地平线漏油与阿拉伯之春开启，人类在灾害、环境安全与政治转型上面临多重挑战。",
+  "social_mood": "大众情绪在盛会自豪感（世博会）与巨型灾难带来的同情不安（海地、玉树）中交织。WikiLeaks泄密引发对数字主权与知情权的早期觉醒，中东连锁反应展示社交媒体作为政治动员工具的威力。",
+  "atmosphere": {
+    "gdp_trillion_cny": null,
+    "gdp_growth_pct": null,
+    "cpi_pct": null,
+    "gaokao_candidates_wan": null,
+    "college_graduates_wan": null,
+    "internet_users_yi": null,
+    "housing_price_index_70_cities_pct": null,
+    "dominant_anxiety": "欧洲主权债务危机引发的二次衰退风险，以及深水地平线事故暴露的环境灾难脆弱性。",
+    "employment_pressure": "金融危机后续影响与制造业转型并存，575万毕业生与富士康事件放大就业焦虑。",
+    "education_hotspot": "世界数字图书馆带动的知识获取变革，以及中国科技人才对比SpaceX商业航天首飞的观察。",
+    "policy_keyword": "世界第二大经济体、金融监管改革、世博外交、国十条。",
+    "meme_keywords": ["上海世博会", "给力", "维基解密", "阿拉伯之春"]
+  },
+  "pop_culture": [
+    "上海世博会中国馆 (崛起的视觉符号)",
+    "南非世界杯 (非洲大陆足球庆典)",
+    "WikiLeaks (数字时代机密风暴)",
+    "SpaceX猎鹰9号首飞 (商业航天曙光)",
+    "iPad发布 (平板电脑新空间)",
+    "电影《阿凡达》 (电影工业技术跨越)",
+    "H1N1疫情后期监测与疫苗接种",
+    "冰岛火山灰 (全球交通网络脆弱性)",
+    "给力 (流行网络热词)",
+    "微博元年 (社交媒体公共讨论)"
+  ],
+  "sources": [
+    "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+    "https://en.wikipedia.org/wiki/21st_century",
+    "https://www.historycentral.com/Today/21st.html",
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告"
+  ],
+  "macro_events": [
+    {
+      "category": "disaster_crisis",
+      "title": "海地大地震",
+      "detail": "2010年1月12日海地7.0级地震致至少23万人死亡，引发全球人道主义救援与基础设施脆弱性反思。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": ["earthquake", "humanitarian"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "阿拉伯之春爆发",
+      "detail": "2010年12月突尼斯商贩自焚抗议点燃浪潮，社交媒体动员的中东变局牵动全球地缘讨论。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.3,
+      "sensitivity": "high",
+      "tags": ["revolution", "geopolitics"]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "深水地平线漏油事故",
+      "detail": "2010年4月20日墨西哥湾钻井平台爆炸致大规模原油泄漏，成为美国史上最严重生态灾难之一。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": ["pollution", "energy_crisis"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "WikiLeaks发布外交电报",
+      "detail": "2010年维基解密公开大量美国外交机密文件，引发全球外交震荡与数字时代透明度博弈。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.2,
+      "sensitivity": "high",
+      "tags": ["wikileaks", "privacy"]
+    },
+    {
+      "category": "economy",
+      "title": "欧洲主权债务危机蔓延",
+      "detail": "2010年希腊、爱尔兰等国陷入债务危机，欧元区动荡，国内财经新闻连续解读二次衰退风险。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": ["euro_crisis", "finance"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "美国平价医疗法案通过",
+      "detail": "2010年奥巴马签署ACA法案，美国社会保障制度近四十年来最大变革，引发全球医改对比讨论。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["obamacare", "social_welfare"]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "冰岛火山爆发",
+      "detail": "2010年埃亚菲亚德拉火山灰云致西北欧大面积航班取消，跨国出差与物流延误成为职场话题。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["volcano", "transport"]
+    },
+    {
+      "category": "culture_entertainment",
+      "title": "南非世界杯举行",
+      "detail": "2010年6月至7月南非举办世界杯，熬夜看球与短信竞猜成为夏日社交标配。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["world_cup", "sports"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "iPad正式发布",
+      "detail": "2010年1月苹果发布iPad，咖啡馆里看发布会直播成为科技青年仪式，纸媒黄昏被频繁讨论。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["ipad", "mobile"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "SpaceX猎鹰9号首飞",
+      "detail": "2010年6月SpaceX猎鹰9号首次发射成功，商业航天进展成为理工科论坛热议对比项。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["spacex", "aerospace"]
+    },
+    {
+      "category": "economy",
+      "title": "多德-弗兰克法案签署",
+      "detail": "2010年7月美国签署金融监管改革法案，出口贸易融资合规文档在跨国公司在华办公室流传。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["regulation", "finance"]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "上海静安特大火灾",
+      "detail": "2010年11月15日上海静安区高层公寓大火致58人死亡，引发全国高层建筑消防大检查。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "medium",
+      "tags": ["fire", "safety"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "昂山素季获释",
+      "detail": "2010年11月缅甸反对派领袖昂山素季获释，国际新闻引发家庭长谈关于权利与勇气。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "medium",
+      "tags": ["myanmar", "human_rights"]
+    },
+    {
+      "category": "economy",
+      "title": "美股闪电崩盘",
+      "detail": "2010年5月6日美股「闪崩」分钟级蒸发近万亿美元市值，算法交易恐惧传入国内财经圈。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["flash_crash", "finance"]
+    }
+  ],
+  "micro_events": [
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全家看世博开幕式，中国馆在烟火中亮起，家里爆发出久违的欢呼。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["expo", "pride"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "刚注册微博就转发海地地震捐款链接，第一次感到社交媒体跨国救援的速度。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["social_media", "charity"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "冰岛火山灰取消跨国出差，你叹一座遥远火山真能让全球航班停摆。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["volcano", "work_life"]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "5月6日闪崩那天，基金助理的你看着屏幕跳动，对算法交易生出恐惧。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["finance", "flash_crash"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "物理课展示强子对撞机首次高能碰撞数据，你觉得离宇宙奥秘又近一步。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["science", "learning"]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "玉树地震后母亲往急救箱添厚毛毯和高能饼干，叮嘱都市也要有生存意识。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["safety", "family_bond"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "QQ上你和死党聊WikiLeaks外交秘闻，「偷窥历史」成了那年冬天的主话题。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["wikileaks", "chat"]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "父母把投向欧洲基金的钱撤回来，新闻里希腊爱尔兰债务危机天天播。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["investment", "euro_crisis"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "昂山素季获释新闻让长辈眼眶发红，全家聊了一晚权利与勇气。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["politics", "family_mood"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "上海咖啡馆看完iPad发布会，你觉得纸质媒介的黄昏或许提前来了。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["ipad", "tech_shift"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "模联里你预判中东民主浪潮，获最佳代表，想报考国际关系学院。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["mun", "career_path"]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "周末全家参加社区H1N1防治讲座，感叹跨国卫生演习已成日常。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["health", "resilience"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "公司传阅多德-弗兰克对贸易融资影响，你忙着整理合规文档。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["regulation", "work_pressure"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "静安大火后你立刻买灭火器，全家排查电线老化，消防意识一下子严肃起来。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["safety_first", "family"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "视频通话里同步看世界杯决赛，卡西举杯时你们在屏幕两端许愿。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["world_cup", "romance"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "毕业论文引用中国成世界第二大经济体数据，论证多极化与新兴力量。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["thesis", "era_insight"]
+    },
+    {
+      "category": "money",
+      "scenario": "self_growth",
+      "text": "退掉新款笔记本预订，钱改买世博往返票，决定亲眼看看那个未来。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["consumption", "expo"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "宿舍模仿Google街景拍照姿势，笑说未来是不是人人网上无处遁形。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["privacy", "humor"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "2010跨年夜读被删节的博客年度总结，你想：崛起与动荡交织的时代无法回头。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["epiphany", "growth"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "微博刷屏凡客体段子，你和室友比赛谁仿写得最像，笑到熄灯。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["meme", "weibo"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "国十条后父母暂停看房，说先等等政策，饭桌上讨论房价会不会真跌。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["housing", "policy"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "同事教你装微信1.0，摇一摇加好友像魔术，你觉得短信时代在退场。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["wechat", "early_adopter"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "富士康连环跳新闻后，车间加班表被重新讨论，你第一次认真看劳动合同。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["labor", "rights"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全家看《让子弹飞》，父亲笑骂「给力」，你也把词发上刚开的新微博。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["movie", "meme"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "舟曲泥石流后班级组织捐款，你在名册上写下人生第一笔大额慈善。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["charity", "disaster"]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "联通iPhone4预约排队三小时，母亲叹一部手机抵半年工资。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["iphone", "consumption"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "恋人发来《忐忑》神曲链接，你们戴着耳机在QQ语音里笑到岔气。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["music", "romance"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "广州亚运开幕式那天，全家像看世博一样守在电视前为广东加油。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["asian_games", "pride"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "QQ农场偷菜闹钟把宿舍吵醒，死党互删好友又加回，像一场幼稚战争。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["game", "social"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "十二五规划建议进政治课，你抄关键词「转变经济发展方式」进笔记本。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["study", "policy"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "世博期间加班做场馆周边物流方案，你在黄浦江边第一次感到城市名片压力。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["expo", "work"]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "房价指数连涨，你算完公积金贷额，发现首付仍差父母半辈子积蓄。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["housing", "anxiety"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "周末陪父母看《非诚勿扰》，母亲认真记嘉宾条件，你躲进房间尴尬。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["tv", "family"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你在微博围观名人首发言论，发现公共讨论第一次比论坛更快更碎。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["weibo", "public_discourse"]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "社区医院贴出H1N1疫苗通知，你排长队接种，像完成最后一道防疫手续。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["vaccine", "health"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "地理课对比世博各国馆碳排放案例，你决定写绿色城市小论文。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["expo", "environment"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "深水地平线漏油纪录片在公司培训播放，能源岗同事讨论海上钻井风险。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["energy", "safety"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "GDP超日本的新闻播出，父亲举杯说「老二也是老二」，全家既喜且忧。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["economy", "pride"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "你和死党在BBS争论阿拉伯之春会不会蔓延，争到天涯关帖才散场。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["geopolitics", "debate"]
+    },
+    {
+      "category": "money",
+      "scenario": "self_growth",
+      "text": "你取消代购奢侈品计划，钱投入考证培训班，觉得技能比名牌抗周期。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["skills", "frugality"]
+    }
+  ]
+}

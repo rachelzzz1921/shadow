@@ -1,0 +1,631 @@
+{
+  "calendar_year": 2007,
+  "notebooklm_gaps": [
+    "2007年中国大陆具体的GDP（万亿）、CPI、房价指数、高考报名及毕业生人数等统计数据",
+    "2007年中国大陆具体的流行语、网络神曲和现象级APP清单",
+    "2007年中国大陆宏观经济的具体政策细节（笔记本侧重全球金融危机起因及国内重大社会事件）"
+  ],
+  "summary": "2007年是「现代文明的分水岭」。第一代iPhone的发布标志着互联网从桌面正式向口袋迁移；中国跃升为世界第三大经济体，并成功发射首个月球探测器「嫦娥一号」，但在繁荣之下，全球金融危机的阴影开始显现。",
+  "social_mood": "大众情绪在主权技术突破带来的自豪感与资产增值的兴奋中交织。青年开始对移动互联网产生朦胧憧憬，家庭在关注《物权法》带来的权利保障之余，也因华南虎事件对网络信息真实性产生集体反思。",
+  "atmosphere": {
+    "gdp_trillion_cny": null,
+    "gdp_growth_pct": null,
+    "cpi_pct": null,
+    "gaokao_candidates_wan": null,
+    "college_graduates_wan": null,
+    "internet_users_yi": null,
+    "housing_price_index_70_cities_pct": null,
+    "dominant_anxiety": "内容生产权社会化引发的媒体信任危机，以及次贷危机露头带来的远端经济担忧。",
+    "employment_pressure": "随着全球化达到逻辑极限，外包与出口模式开始面临初期的效率挑战。",
+    "education_hotspot": "《物权法》实施引发的法律教育热潮及「嫦娥一号」带动的航天科普兴趣。",
+    "policy_keyword": "物权保障、主权航天、资产证券化风险。",
+    "meme_keywords": ["iPhone", "华南虎", "嫦娥一号", "物权法"]
+  },
+  "pop_culture": [
+    "第一代iPhone发布 (重新定义移动通讯)",
+    "嫦娥一号绕月 (国产主权航天里程碑)",
+    "华南虎照片事件 (引发全网真相大讨论)",
+    "内容生产权向大众转移 (YouTube效应深化)",
+    "移动互联网萌芽 (互联网空间化)",
+    "2007年银河大合相话题",
+    "资产证券化衍生品热议 (次贷危机前哨)",
+    "早期视频博客 (UGC模式觉醒)",
+    "气候变化导致的「消失的海岛」报道",
+    "股市6000点全民谈股"
+  ],
+  "sources": [
+    "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告",
+    "Major Events of the 21st Century — A Timeline, 2000–2024 | HistoryCentral",
+    "https://zh.wikipedia.org/wiki/2008%E5%B9%B4%E7%92%B0%E7%90%83%E9%87%91%E8%9E%8D%E5%8D%B1%E6%9C%BA"
+  ],
+  "macro_events": [
+    {
+      "category": "tech_internet",
+      "title": "第一代iPhone发布",
+      "detail": "2007年1月乔布斯发布首款iPhone；中国科技媒体转载发布会视频，网民讨论触屏会不会「水土不服」。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": ["iphone", "mobile_revolution"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "十七大在北京召开",
+      "detail": "2007年10月中共十七大举行，科学发展观写入党章；政治课与新闻头条成为校园日常背景。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "high",
+      "tags": ["politics", "cpc"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "物权法审议通过",
+      "detail": "2007年3月十届全国人大五次会议通过物权法；法学课堂与家庭饭桌热议私有财产保护。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "medium",
+      "tags": ["law", "property_rights"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "嫦娥一号成功发射",
+      "detail": "2007年10月嫦娥一号在西昌发射并成功绕月；央视直播与校园航天科普活动同步升温。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": ["space", "lunar_probe"]
+    },
+    {
+      "category": "economy",
+      "title": "全球流动性危机爆发",
+      "detail": "2007年8月美国次贷危机蔓延引发全球流动性紧张；A股在6124点后剧烈震荡，股民开始嗅到寒意。",
+      "source_url": "https://zh.wikipedia.org/wiki/2008%E5%B9%B4%E7%92%B0%E7%90%83%E9%87%91%E8%9E%8D%E5%8D%B1%E6%9C%BA",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": ["finance", "liquidity_crisis"]
+    },
+    {
+      "category": "economy",
+      "title": "中国成第三大经济体",
+      "detail": "2007年中国经济总量超越德国，成为世界第三大经济体；财经报道与中学地理课同时引用这一里程碑。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": ["economy", "global_standing"]
+    },
+    {
+      "category": "society",
+      "title": "华南虎照片事件",
+      "detail": "2007年10月周正龙「华南虎照片」引发全网真伪辩论；天涯与博客成为民间鉴定主场。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "medium",
+      "tags": ["social_debate", "internet_truth"]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "山东华源矿难",
+      "detail": "2007年8月山东新泰华源矿难致172人死亡；安全生产与矿工家庭命运成为舆论焦点。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "high",
+      "tags": ["safety", "disaster"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "欧盟签署里斯本条约",
+      "detail": "2007年12月欧盟27国签署里斯本条约；国际关系课讨论欧洲一体化与多边主义走向。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": ["politics", "eu"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "加沙地带局势升级",
+      "detail": "2007年加沙地带哈马斯与法塔赫冲突升级；国际新闻与国内时政爱好者追踪中东变局。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.0,
+      "sensitivity": "high",
+      "tags": ["geopolitics", "middle_east"]
+    },
+    {
+      "category": "society",
+      "title": "维吉尼亚理工枪击案",
+      "detail": "2007年4月美国维吉尼亚理工大学大规模枪击案震惊全球；校园安全话题进入国内高校讨论。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 0.9,
+      "sensitivity": "medium",
+      "tags": ["safety", "gun_violence"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "视觉假体Argus II进展",
+      "detail": "2007年Argus II视觉假体进入研发应用阶段；科普杂志与生物课引用「仿生眼」案例。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": ["biotech", "innovation"]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "河南卢氏县特大洪灾",
+      "detail": "2007年7月河南卢氏县洪灾致78人死亡；内陆极端降水再次引发抗灾讨论。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.0,
+      "sensitivity": "medium",
+      "tags": ["climate", "flood"]
+    },
+    {
+      "category": "economy",
+      "title": "美国次贷危机显现",
+      "detail": "2007年美国次级贷违约率急升，复杂衍生品风险暴露；国内财经版面开始连续解读。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": ["economy", "financial_crisis"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "肯尼亚大选危机",
+      "detail": "2007年底肯尼亚大选后爆发动荡；非洲研究社团在国际政治课上作为案例讨论。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.8,
+      "sensitivity": "medium",
+      "tags": ["politics", "kenya"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "土卫六发现液体湖泊",
+      "detail": "2007年卡西尼号确认土卫六存在液体湖泊；天文社与科普论坛热议地外液体证据。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": ["space_science", "discovery"]
+    },
+    {
+      "category": "society",
+      "title": "曼谷连环爆炸案",
+      "detail": "2007年初曼谷发生连环爆炸；东南亚旅游安全成为出境家庭讨论话题。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 0.8,
+      "sensitivity": "medium",
+      "tags": ["security", "terrorism"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "格鲁吉亚大规模示威",
+      "detail": "2007年格鲁吉亚爆发反政府示威；国际新闻间接影响国内东欧观察社群讨论。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "medium",
+      "tags": ["politics", "unrest"]
+    },
+    {
+      "category": "culture_entertainment",
+      "title": "2007年银河大合相",
+      "detail": "2007年12月天文大合相引发社交媒体与论坛文化解读；天文社组织夜观活动。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": ["astronomy", "culture"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "印度首位女总统就职",
+      "detail": "2007年7月普拉蒂巴·帕蒂尔就任印度总统；南亚政治与性别议题进入国际新闻栏目。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": ["politics", "india"]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "山西新窑矿难",
+      "detail": "2007年12月山西新窑煤矿瓦斯爆炸致104人死亡；迟报瞒报引发舆论对监管的强烈不满。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "high",
+      "tags": ["disaster", "coal_mine"]
+    },
+    {
+      "category": "society",
+      "title": "改良藤田级数实施",
+      "detail": "2007年美国启用改良EF级龙卷风破坏力评估标准；大气物理课引用为科学范式更新案例。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": ["meteorology", "standards"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "缅甸僧侣示威运动",
+      "detail": "2007年缅甸「番红花革命」遭强力镇压；国内国际新闻持续跟踪东南亚局势。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.1,
+      "sensitivity": "high",
+      "tags": ["politics", "myanmar"]
+    },
+    {
+      "category": "economy",
+      "title": "道指创历史新高",
+      "detail": "2007年10月9日道琼斯收于14164点创纪录；财经评论称其为危机前「最后狂欢」。",
+      "source_url": "https://zh.wikipedia.org/wiki/2008%E5%B9%B4%E7%92%B0%E7%90%83%E9%87%91%E8%9E%8D%E5%8D%B1%E6%9C%BA",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["economy", "stock_market"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "保加利亚罗马尼亚入欧盟",
+      "detail": "2007年1月保加利亚、罗马尼亚正式加入欧盟；全球化扩张叙事进入国际政治课素材。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": ["politics", "eu"]
+    }
+  ],
+  "micro_events": [
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "法律讲座上你研读刚通过的物权法，意识到这是个人权利的法律护身符。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["study", "law"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全家围看嫦娥一号升空，父亲叹：中国也要去月亮上一探究竟了。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["space", "pride"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "网吧里你刷新华南虎照片分析帖，第一次感到互联网像真相调查场。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["internet", "controversy"]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "饭桌上传来上证指数狂飙，父母商量是否把积蓄全投进这波牛市。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["stock", "wealth"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "你敲长邮件发给心仪的人，附上iPhone发布会图片，幻想一起进触屏时代。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["iphone", "future"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "华源矿难新闻后，母亲流着泪否决了让表哥去矿区工作的计划。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": ["safety", "family_bond"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "外贸订单因次贷危机苗头出现延迟结汇，你心中隐隐不安。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["career", "economy"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "物理课谈到Argus II仿生眼，你开始幻想电路能否替代受损视网膜。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["science", "learning"]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "看到仿生眼新闻，你查资料想给视力衰退的奶奶找一线希望。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["health", "hope"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "宿舍夜谈银河大合相预言，科幻感天文话题成了那年冬天的慰藉。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["astronomy", "bonding"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "国关课复盘加沙局势变化，你查阅哈马斯夺权后的连锁反应。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["study", "middle_east"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "报社实习，主编让你连夜跟进华南虎专家鉴定会，你感到职业重量。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["journalism", "truth"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "父母庆祝你考上大学买了iPod，你说更期待还没上市的那部手机。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["family", "gift"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "气候地理课画海平面上升将淹没的小岛，变暖不再是科幻名词。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["environment", "homework"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你开设第一个网络博客，想抓住「内容生产社会化」的大潮。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["blog", "ugc"]
+    },
+    {
+      "category": "policy_touch",
+      "scenario": "career",
+      "text": "十七大后外资公司密集研究科学发展观对产业准入的新导向。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["politics", "strategy"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "模拟庭审里你辩论物权法对集体土地流转的界限，获教授当堂赞许。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["law_student", "debate"]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "道指创新高那天，你却对银行间流动性缩紧的信号感到寒意。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["finance", "risk"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "生物考场上你写人类基因组最新论点，庆幸啃了前沿论文。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["biology", "exam"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "网速仍慢，你们同步播放像素模糊的短视频，那是你们的数字浪漫。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["digital_love", "slow_web"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "模联里你对加沙局势的论证获最佳代表，第一次想走外交路线。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["mun", "politics"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你弄到iPhone发布会完整视频连看三遍，感到一种时代震颤。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["iphone", "inspiration"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "新窑矿难新闻后父亲叹安全比赚钱重要，你开始默默改职业方向。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": ["news", "safety"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "开题会上你把论文改题「互联网与公共事件真相——以华南虎为例」。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["thesis", "era_insight"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "年会上你提移动网络内容分发概念，同事似懂非懂，你却看见未来。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["workplace", "vision"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "你和好友在维基百科接力修正次贷危机词条，体验全球知识协作。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["wikipedia", "learning"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "天文社夜观土星，你满脑子都是卡西尼号传来的土卫六湖泊数据。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["astronomy", "curiosity"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "家里为是否抛售传统制造业股票争吵，你劝父母关注新能源方向。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["investment", "family_drama"]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "读到生物技术突破，你决定戒熬夜，想活到赛博修复的未来。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["health_consciousness", "future"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "社会学课讨论iPhone如何从工具变成全球身份符号，你记满笔记。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["sociology", "tech_culture"]
+    },
+    {
+      "category": "money",
+      "scenario": "self_growth",
+      "text": "退掉分期手表计划，钱改买十本经济学著作，存进知识焦虑准备金。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["savings", "learning"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "你用早期软件合成星空合相动画，当作给恋人的新年礼物。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["digital_love", "astronomy"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "初创团队放弃桌面软件转做口袋应用，你感到风口微微吹来。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["career_choice", "it"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "历史研讨会辩论里斯本条约对欧盟主权的稀释，感到全球化之纠结。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["history", "eu"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "周末看嫦娥一号首张月面照，技术自豪暂时冲淡了物价上涨担忧。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["pride", "family"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "2007跨年夜读博客年度总结，你想：被屏幕重塑的时代已无法回头。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["epiphany", "it_age"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "大气物理课讨论改良藤田级数，你惊叹数据修正对防灾的意义。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["science", "learning"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "你和好友争论iPhone没物理键盘会不会在中国水土不服，争论随处可见。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["debate", "it_trend"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "山东矿难消息后，你连夜自查三个作业面的支护结构。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": ["career_duty", "safety"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "中东局势报道后，你和德黑兰交换生对象通话报平安，许下跨越地缘的诺言。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["long_distance", "geopolitics"]
+    }
+  ]
+}

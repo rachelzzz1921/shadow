@@ -23,8 +23,11 @@
     "meme_keywords": [
       "佛系",
       "怼",
-      "吃鸡"
-    ]
+      "吃鸡",
+      "你有自由吗",
+      "扎心了"
+    ],
+    "international_anxiety": "个人信用风险与对地缘贸易摩擦的潜在担忧"
   },
   "pop_culture": [
     "人民的名义",
@@ -38,7 +41,17 @@
     "大逃杀吃鸡",
     "欢乐颂2",
     "白夜追凶",
-    "知识付费"
+    "知识付费",
+    "#MeToo运动在社交媒体引发权益讨论",
+    "雄安新区成立引发‘千年大计’热议",
+    "《战狼2》刷新影史纪录提振民族情绪",
+    "悟空号发现暗物质疑似踪迹",
+    "双一流大学名单正式向社会公布",
+    "共享单车进入清场期，押金退款潮出现",
+    "《中国有嘻哈》让小众文化进入大众视野",
+    "WannaCry勒索病毒席卷教育网络",
+    "雄安新区规划发布引发人口迁移想象",
+    "十九大报告中关于‘新矛盾’的表述刷屏"
   ],
   "macro_events": [
     {
@@ -421,6 +434,246 @@
       "sensitivity": "low",
       "tags": [
         "environment"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "孙政才被开除党籍",
+      "detail": "9月29日原政治局委员孙政才被开除党籍公职移交司法，显示反腐败不设上限。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "anti-corruption"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "悟空号发现线索",
+      "detail": "暗物质探测卫星‘悟空’首次在1TeV附近发现能谱拐折，疑似暗物质存在证据。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "science"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "WannaCry蠕虫爆发",
+      "detail": "5月全球爆发勒索病毒，大量教育网、医院网络瘫痪，引发对网络基建安全的深度担忧。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 1.2,
+      "sensitivity": "medium",
+      "tags": [
+        "internet",
+        "security"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "特朗普访华",
+      "detail": "11月美国总统特朗普访华，签署巨额经贸大单，但其孤立主义苗头亦引发贸易担忧。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "diplomacy",
+        "usa"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "#MeToo运动兴起",
+      "detail": "该运动从好莱坞蔓延至全球，大陆高校及媒体圈开始反思性别权力失衡，引发讨论潮。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.2,
+      "sensitivity": "medium",
+      "tags": [
+        "society",
+        "human rights"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "美退出巴黎协定",
+      "detail": "6月1日特朗普宣布美国退出《巴黎协定》，中国在气候领导权上的角色愈发突出。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "climate",
+        "diplomacy"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "双中子星并合观测",
+      "detail": "LIGO首次联合观测到引力波信号GW170817，开启多信使天文学时代。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "physics"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "供给侧改革深化",
+      "detail": "政府重申‘去产能、去库存、去杠杆、降成本、补短板’，资源品行业利润回升。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "economy",
+        "reform"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "巴拿马文件后续影响",
+      "detail": "关于离岸避税的持续揭秘在大陆舆论场保持高压态势，审查力度显著增强。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 1.3,
+      "sensitivity": "high",
+      "tags": [
+        "corruption",
+        "censorship"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "卡西尼号告别土星",
+      "detail": "9月美国探测器卡西尼号坠入土星大气层，结束13年任务，相关画面引发国内太空迷怀念。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "usa"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "拉斯维加斯枪击",
+      "detail": "10月美国发生史上伤亡最惨重枪击案，引发大陆对公共场所控枪与安保机制的大讨论。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "crime",
+        "usa"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "首张三维银河地图",
+      "detail": "欧洲盖亚卫星数据发布，助力迄今最精确银河系地图问世，相关科学新闻在国内刷屏。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 0.7,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "astronomy"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "中国碳中和目标雏形",
+      "detail": "政府开始通过多边外交场合释放长期减排承诺，为后来的2030/2060目标铺垫。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "climate",
+        "strategy"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "ICO监管大刀",
+      "detail": "9月七部委联合发布公告禁止代币融资（ICO），虚拟货币在大陆市场进入严监管期。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "medium",
+      "tags": [
+        "crypto",
+        "finance"
+      ]
+    },
+    {
+      "category": "employment",
+      "title": "IT研发人才饱和初现",
+      "detail": "随着移动端红利见顶，互联网基层开发岗位薪资增速放缓，运维与架构岗位更吃香。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "job",
+        "tech"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "北京大兴大火及排查",
+      "detail": "11月大兴大火后，北京开展大规模安全隐患排查，引发关于‘低端人口’的巨大争议。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.4,
+      "sensitivity": "high",
+      "tags": [
+        "urban",
+        "society"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "共享经济倒闭潮",
+      "detail": "2017年底酷骑单车、小蓝单车等相继倒闭，上亿押金难退引发全民金融安全反思。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "economy",
+        "digital"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "墨子号实现地月通信",
+      "detail": "中国科学家利用墨子号成功实现星地量子密钥分发，标志量子通讯应用化迈进一大步。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "tech",
+        "quantum"
+      ]
+    },
+    {
+      "category": "urban_life",
+      "title": "共享雨伞/充电宝兴起",
+      "detail": "继单车后，充电宝等共享场景爆发，在一线城市街头实现‘出门不带包’的可能性。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "lifestyle",
+        "startup"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "房住不炒重申",
+      "detail": "中央经济工作会议再次明确‘房子是用来住的，不是用来炒的’，楼市调控进入常态化。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "medium",
+      "tags": [
+        "housing",
+        "policy"
       ]
     }
   ],
@@ -3384,6 +3637,486 @@
         "acceptance"
       ],
       "scenario": "self_growth"
+    },
+    {
+      "category": "school",
+      "text": "十九大闭幕那天，我们在大教室收看了直播，听着‘主要矛盾转化’的表述，感觉一个新的时代真的来了。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "politics"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "雄安新区宣布那天，我爸连夜开车想去买房，结果在进县城的路口就被交警拦下来劝返了。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "housing",
+        "strategy"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "family",
+      "text": "表妹在朋友圈发长文揭露了被单位领导职场骚扰的事，全家人都在评论里支持她，感觉时代真的变了。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "metoo",
+        "family"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "digital",
+      "text": "我的电脑突然被WannaCry黑了，红色的界面吓了我一跳，最后求助了计算机系的哥们才找回数据。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "security",
+        "internet"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "health",
+      "text": "九寨沟地震后，爷爷非要把家里所有景区的纪念品都扔了，说自然灾害无情，得避讳。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "trauma"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "policy_touch",
+      "text": "看到‘双一流’名单里没有我们学校，校领导在大会上欲言又止，我们这种普通的学生也挺失落。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "campus",
+        "education"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "neighborhood",
+      "text": "小区里那个一直在北京打工的邻居全家被清理回来了，他们在群里低价卖二手家具，看着挺难受。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "urban",
+        "society"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "量子实验室的研究员来学校讲量子纠缠，我第一次觉得科学和哲学的边界原来可以这么模糊。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "quantum"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "digital",
+      "text": "我和她在《中国有嘻哈》的北京线下赛碰见，两人为了同一个选手欢呼，竟然当晚就确立了关系。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "social",
+        "love"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "money",
+      "text": "表弟在ICO里亏掉了准备留学的钱，全家人在那儿骂他胡闹，他居然还说‘这叫信仰崩塌’。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "finance",
+        "crypto"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "school",
+      "text": "由于雾霾预警，学校今天又停课了，我们已经习惯了在微信群里听老师发语音讲古诗词。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "smog",
+        "education"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "health",
+      "text": "看到江歌案的细节，我默默在包里装了一个报警器，觉得在国外读书真的要万分小心。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "safety",
+        "growth"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "digital",
+      "text": "我终于拿到了头条的Offer，去负责那个叫‘西瓜视频’的新业务，感觉公司文化真的很卷。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "job",
+        "byte"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "系里引进了新的区块链实验室，大家都在讨论怎么用这个‘去中心化’技术解决学术造假。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "blockchain",
+        "academic"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "family",
+      "text": "听说雄安要盖新房子，老家的亲戚都想把家谱改过去，说是想当‘千年大计’的原住民。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "policy"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "money",
+      "text": "因为公司涉及非法集资，老板跑路了，我成了受害者，天天去派出所蹲点等消息。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "finance",
+        "crime"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "我在图书馆查到了‘悟空’号发现暗物质的新闻，决定把考研志向从土木工程改成天文物理。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "major",
+        "dream"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "digital",
+      "text": "共享单车押金退不回来，我和哥们儿气得在微博上大骂，最后发现连公司总部都搬空了。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "finance",
+        "social"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "money",
+      "text": "妈妈为了省钱，在拼多多上拼了几十斤廉价水果，收到一开全是烂的，全家人吃了半个月腹泻。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "e-commerce",
+        "family"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "neighborhood",
+      "text": "看到小区里新装了各种人脸识别摄像头，我第一次感觉到隐私在安全面前真的不值一提。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "privacy",
+        "urban"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "school",
+      "text": "马院的讲座里提到了‘佛系青年’，我低头看了看自己的论文，觉得自己就是其中一个。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "mood",
+        "academic"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "digital",
+      "text": "我和她在《战狼2》的影厅门口因为抢最后一张票认识，竟然真的谈成了对象。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "movie",
+        "love"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "family",
+      "text": "爸爸迷上了在快手上看那种奇怪的土味视频，吃饭时总爱公放，听得我们头疼不已。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "app"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "money",
+      "text": "因为国家严控‘房住不炒’，公司原本的拿地计划被搁置，我这个项目经理闲得天天在办公室喝茶。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "job",
+        "housing"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "系里组织去参观雄安新区的规划沙盘，那种科幻感的设计让我觉得未来十年就在那里。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "urban"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "health",
+      "text": "听说美国退出巴黎协定了，爷爷非常生气，说这种国家不负责任，以后地球肯定要遭殃。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "climate",
+        "family"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "digital",
+      "text": "我们在群里疯传孙政才被查的消息，虽然真假难辨，但大家的心都一直悬着，怕祸从口出。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "rumor"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "money",
+      "text": "我通过领英认识了一个在硅谷做AI的学长，他竟然内推我去了百度实习，薪水高得吓人。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career",
+        "ai"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "毕业论文关于‘去杠杆’政策对制造业的影响，查了一个星期的财报，写得我想吐。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "economy"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "family",
+      "text": "除夕夜全家在微信上视频通话，爷爷奶奶第一次用上了4G，画面终于不再卡顿了。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "4g"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "money",
+      "text": "看到公司在雄安拿到了新基建项目，我主动申请外调，想去看看那个未来的城市长什么样。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career",
+        "urban"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "在讨论人工智能取代人类的研讨会上，我提出了‘情感算法’的看法，被教授当众夸奖。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "ai"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "digital",
+      "text": "我终于学会了用Python爬取社交媒体数据，感觉自己离真正的‘程序员’又近了一步。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "tech",
+        "growth"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "money",
+      "text": "因为国家严查环保，爸爸的小作坊被迫停产，全家开始商量转型去做农家乐。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "economy",
+        "family"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "policy_touch",
+      "text": "看到十九大报告里提到了‘碳中和’的远景，我决定把外卖的塑料袋收集起来重复利用。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "climate",
+        "self"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "digital",
+      "text": "我们在群里为了特朗普访华到底有没有带核按钮争论了一个晚上，最后大家都累得睡着了。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "politics",
+        "social"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "考前辅导员说今年不让在朋友圈发‘锦鲤’，说是封建迷信，大家瞬间都改成了发‘肖秀荣’。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "exam",
+        "campus"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "因为公司在‘双一流’建设中承接了实验室网络改造项目，我这个月忙得脚不沾地。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "job",
+        "education"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "health",
+      "text": "听说美国退出巴黎协定会导致全球变暖加剧，妈妈每天逼我少开空调，说要给北极熊留个家。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "climate"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "romance",
+      "text": "我和他在雄安建设工地的地基旁许愿，希望等这个新区盖好的时候，我们也能在这里买房安家。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "love",
+        "urban"
+      ],
+      "scenario": "love"
     }
   ],
   "sources": [
@@ -3391,7 +4124,21 @@
     "https://www.stats.gov.cn/sj/tjgb/",
     "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
     "https://www.cnnic.cn/",
-    "https://www.moe.gov.cn/jyb_xwfb/"
+    "https://www.moe.gov.cn/jyb_xwfb/",
+    "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+    "https://en.wikipedia.org/wiki/21st_century",
+    "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3"
   ],
-  "version": "2026.06.14-v1"
+  "version": "2026.06.14-v1",
+  "notebooklm_summary": "2017年是中国大陆确立新时代范式的重要节点。中共十九大召开，习近平新时代中国特色社会主义思想确立，雄安新区正式成立。国际上，#MeToo运动引发社会共振，特朗普政府开始拆解全球多边架构。国内在量子通信、悟空号探测领域取得丰硕成果，反腐败运动持续深入。",
+  "notebooklm_social_mood": "社会情绪从狂热扩张转向对秩序与规矩的适应。十九大的召开让公众对未来30年的蓝图有了初步认知，而孙政才等高层被查则显示了政治铁律的严酷性。#MeToo运动在青年群体中引发对权利意识的觉醒，同时也伴随着互联网金融（如ICO）暴利消失后的集体失落感。",
+  "notebooklm_sources": [
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告"
+  ],
+  "notebooklm_gaps": [
+    "GDP、CPI及房价指数的具体百分点",
+    "高考及毕业生精确人数统计",
+    "2017年具体的十大神曲及影视清单"
+  ],
+  "notebooklm_imported_at": "2026-06-14"
 }

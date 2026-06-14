@@ -23,8 +23,13 @@
     "meme_keywords": [
       "Hold住",
       "伤不起",
-      "你妹"
-    ]
+      "你妹",
+      "郭美美",
+      "占领华尔街",
+      "微博实名",
+      "挺住"
+    ],
+    "international_anxiety": "福岛核泄漏引发的全球核安全恐慌，以及欧债危机深化带来的经济二次探底担忧。"
   },
   "pop_culture": [
     "甄嬛传（流行文化）",
@@ -38,7 +43,17 @@
     "乔布斯去世",
     "天宫一号",
     "温州动车事故",
-    "微信（流行文化）"
+    "微信（流行文化）",
+    "李娜法网夺冠 (亚洲网球历史里程碑)",
+    "微博爆发 (社交媒体改变社会动员逻辑)",
+    "本·拉登被击毙 (反恐战争阶段性终结)",
+    "卡扎菲身亡 (阿拉伯之春暴力注脚)",
+    "天宫一号发射 (中国空间站时代序幕)",
+    "占领华尔街 (反不平等运动视觉符号)",
+    "福岛灾区空寂影像 (环境与技术灾难警世录)",
+    "乔布斯逝世 (科技偶像时代节点)",
+    "Hold住与伤不起 (年度网络热词)",
+    "甄嬛传与中国好声音 (现象级影视综艺)"
   ],
   "macro_events": [
     {
@@ -421,6 +436,164 @@
       "sensitivity": "low",
       "tags": [
         "environment"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "日本311大地震与福岛核灾",
+      "detail": "2011年3月11日日本9.0级地震引发海啸与福岛核事故，国内抢盐潮与核安全讨论持续数月。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.4,
+      "sensitivity": "low",
+      "tags": [
+        "earthquake",
+        "nuclear_crisis",
+        "energy"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "本·拉登被美军击毙",
+      "detail": "2011年5月2日美军在巴基斯坦击毙基地组织领导人，全球反恐叙事进入新阶段。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 1.3,
+      "sensitivity": "medium",
+      "tags": [
+        "terrorism",
+        "us_policy"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "占领华尔街运动爆发",
+      "detail": "2011年9月纽约爆发抗议财富不平等运动，「1%对99%」话语传入国内财经与校园讨论。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "protest",
+        "inequality",
+        "occupy"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "南苏丹独立建国",
+      "detail": "2011年7月南苏丹正式宣布独立并加入联合国，模联与人权课堂频繁引用案例。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "independence",
+        "un"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "金正日逝世",
+      "detail": "2011年12月17日朝鲜最高领导人金正日去世，东北亚地缘政治进入权力交接观察期。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.2,
+      "sensitivity": "high",
+      "tags": [
+        "north_korea",
+        "leadership"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "伊拉克战争正式结束",
+      "detail": "2011年12月15日美军结束在伊拉克作战任务，八年战争留下权力真空与地缘后患。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "medium",
+      "tags": [
+        "war_end",
+        "middle_east"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "郭美美事件",
+      "detail": "2011年6月郭美美炫富引发红十字会信任危机，公益透明化讨论席卷微博。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "medium",
+      "tags": [
+        "social_scandal",
+        "charity"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "北斗二号系统试运行",
+      "detail": "2011年12月北斗二号向亚太提供试运行服务，导航自主化进入工程验证阶段。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "beidou",
+        "tech_sovereignty"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "天宫一号成功发射",
+      "detail": "2011年9月29日天宫一号升空，与神舟对接试验拉开中国空间站建设序幕。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "infrastructure"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "卡扎菲被击毙",
+      "detail": "2011年10月利比亚前领导人卡扎菲被击毙，阿拉伯之春暴力收束引发连锁地缘讨论。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.1,
+      "sensitivity": "medium",
+      "tags": [
+        "libya",
+        "arab_spring"
+      ]
+    },
+    {
+      "category": "culture_entertainment",
+      "title": "李娜法网夺冠",
+      "detail": "2011年6月李娜夺得法网女单冠军，成为首位大满贯亚洲单打得主，全民刷屏庆祝。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "sports",
+        "tennis"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "史蒂夫·乔布斯逝世",
+      "detail": "2011年10月5日苹果创始人乔布斯去世，科技圈与大学生自发悼念并讨论创新遗产。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "tech",
+        "legacy"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "欧债危机深化",
+      "detail": "2011年希腊、意大利等国主权债务风险升级，国内讨论二次探底与黄金避险。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "euro_crisis",
+        "finance"
       ]
     }
   ],
@@ -3384,6 +3557,486 @@
         "acceptance"
       ],
       "scenario": "self_growth"
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你不断刷新微博看7·23事故播报，第一次感到普通人也能参与真相打捞。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "weibo",
+        "truth"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "福岛核泄漏后长辈超市抢盐，你解释科学原理，仍感到地缘灾难的窒息。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "panic_buying",
+        "nuclear_scare"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "毕业论文探讨占领华尔街如何重构不平等议程，导师说断裂时代要保持敏锐。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "thesis",
+        "learning"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "公司让你对接微博实名制接口，你感叹数字世界的「栅栏」正在竖起。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "coding",
+        "regulation"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "视频聊天里你和死党庆祝李娜法网夺冠，那是夏天最亮的精神火花。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "patriotism",
+        "sports"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "欧债危机波及股市，你说服父母减持银行股，改买实物黄金防信用风暴。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "savings",
+        "euro_crisis"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "视频连线里你们一起看拉登被击毙特别报道，觉得反恐叙事翻过了沉重一页。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "romance",
+        "witness"
+      ]
+    },
+    {
+      "category": "policy_touch",
+      "scenario": "academic",
+      "text": "模联辩论南苏丹建国的人道边界，你感到每个新国名背后都是沉重历史。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "diplomacy",
+        "politics"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "金正日逝世新闻让长辈整晚叹息，全家聊东北亚权力交接与秩序稳定。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "history",
+        "family_mood"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "面试里你谈后危机时代企业数字化，拿到第一份互联网大厂产品助理岗位。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "interview",
+        "career_growth"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "福岛后你坚持看进口食品产地标签，在超市建立起最初的安全习惯。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "safety_consciousness",
+        "habit"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "QQ群里你们争论郭美美背后的公益透明度，社会正义话题无处不在。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "online_talk",
+        "clash"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "self_growth",
+      "text": "退掉分期买新手机计划，钱改报三年英语网课，靠技能抵御寒冬。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "savings",
+        "learning"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "物理课引用LHC寻找希格斯玻色子进展，你觉得人类理性仍在前沿。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "passion"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "变革之年你们靠微博互粉确认价值观共鸣，数字化浪漫成了唯一坐标。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "romance",
+        "weibo"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全家因是否抛售出口导向型股票激烈辩论，你第一次参与家庭理财投票。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "investment",
+        "risk"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "你用在线检索读叙利亚局势分析，第一次感到新闻比课本更新更快。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "multilingual",
+        "insight"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "2011跨年夜刷微博年度总结，你想：真相与动荡交织的时代已无法回头。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "epiphany",
+        "growth"
+      ]
+    },
+    {
+      "category": "neighborhood",
+      "scenario": "friendship",
+      "text": "动车事故后清晨推开窗，社区白丝带让你看见集体创伤里的公共精神。",
+      "weight": 1.3,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "community",
+        "solidarity"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "微博刷屏小悦悦事件，你和室友争论路人的冷漠，争到深夜还不睡。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "morality",
+        "debate"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全家追《甄嬛传》，母亲记台词，你在微博发「Hold住」段子。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "tv",
+        "meme"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "乔布斯逝世那晚你在校内BBS写长帖，讨论创新者遗产与消费主义。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "tech",
+        "reflection"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "限购扩容后父母犹豫第二套房，饭桌上反复算通胀与调控谁会赢。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "housing",
+        "policy"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "温州民间借贷危机新闻后，你帮亲戚整理合同，第一次见识影子银行。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "finance",
+        "local_crisis"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "《中国好声音》首播后全班模仿转椅，你在KTV唱到嗓子哑。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "music",
+        "campus"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "微信刚普及，你们用语音消息说晚安，觉得比短信更像在场。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "wechat",
+        "romance"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "天宫一号发射直播时全家起立鼓掌，父亲说这是新的太空名片。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "pride"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "CPI连月走高，母亲记账本变厚，菜市场砍价像一场日常战役。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "inflation",
+        "daily_life"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "地铁建设高潮让你所在设计院加班，图纸堆满工位像城市扩张本身。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "infrastructure",
+        "work"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "608万毕业生新闻进班会，你更新简历，把实习经历写得更具体。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "employment",
+        "graduation"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "卡扎菲身亡视频在论坛疯传，你和死党争论革命代价，气氛沉重。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "geopolitics",
+        "debate"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "self_growth",
+      "text": "你取消旅游计划，钱存定抵抗通胀，同学笑称「防御型青年」。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "savings",
+        "frugality"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "建党90周年晚会全家观看，长辈讲家族史，你默默对照课本时间线。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "history",
+        "family"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你在微博围观官员下访直播，觉得问政像把信访搬到了评论区。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "weibo",
+        "governance"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "十二五开局关键词进政治课，你抄下「扩大内需」准备考试。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "study",
+        "policy"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "福岛后核电项目审查趋严，你所在能源公司暂停一份 inland 方案。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "energy",
+        "policy"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "失恋33天热映，你和死党互发「伤不起」表情包，笑里带着共鸣。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "movie",
+        "meme"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "H1N1余波未散，学校发口罩，你在食堂排队量体温像例行仪式。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "health",
+        "campus"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "伊拉克撤军新闻播出，舅舅叹八年战争留下烂摊子，全家沉默吃饭。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "war",
+        "family_mood"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "占华尔街视频火了，你写内参谈收入差距，意外被领导点名表扬。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "inequality",
+        "career"
+      ]
     }
   ],
   "sources": [
@@ -3391,7 +4044,21 @@
     "https://www.stats.gov.cn/sj/tjgb/",
     "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
     "https://www.cnnic.cn/",
-    "https://www.moe.gov.cn/jyb_xwfb/"
+    "https://www.moe.gov.cn/jyb_xwfb/",
+    "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+    "https://en.wikipedia.org/wiki/21st_century",
+    "https://www.historycentral.com/Today/21st.html"
   ],
-  "version": "2026.06.14-v1"
+  "version": "2026.06.14-v1",
+  "notebooklm_summary": "2011年是全球旧秩序在动荡中加速解构、新冲突模式深化的关键节点。日本3·11地震及福岛核灾引发对技术边界与能源安全的系统反思；本·拉登被击毙与利比亚、叙利亚局势剧变标志反恐时代与区域权力重组；微博在甬温线动车事故等议题上开启社交媒体参与社会治理的新阶段。",
+  "notebooklm_social_mood": "大众情绪在对金融精英的幻灭（占领华尔街）与对体制透明度的渴望中震荡。社交媒体首次大规模展现重塑认知的动员力，核辐射阴影的集体焦虑与见证独裁者倒台的历史震撼交织。",
+  "notebooklm_sources": [
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告"
+  ],
+  "notebooklm_gaps": [
+    "2011年中国大陆具体的GDP（万亿）、CPI、房价指数、高考及毕业生人数等统计数据",
+    "2011年具体的中国大陆本土流行语清单及年度神曲（笔记本侧重重大社会事件）",
+    "针对2011年中国大陆宏观经济微调政策的具体细节（笔记本侧重动荡与灾难记录）"
+  ],
+  "notebooklm_imported_at": "2026-06-14"
 }

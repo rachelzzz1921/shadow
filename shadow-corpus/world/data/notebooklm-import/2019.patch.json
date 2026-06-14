@@ -1,0 +1,763 @@
+{
+  "calendar_year": 2019,
+  "notebooklm_gaps": [
+    "GDP、CPI及房价指数的具体百分点",
+    "高考及毕业生精确人数统计",
+    "2019年具体的十大网络流行语清单（笔记本中多为严肃叙事）"
+  ],
+  "summary": "2019年是“断裂时代”开启的剧变之年。香港爆发长期大规模社会抗争，中美贸易战在5G与华为领域全面升级。国内庆祝建国70周年，山东号航母交付。年末，新型冠状病毒肺炎在武汉出现并初步扩散，预示着全球中断时代的突然降临。",
+  "social_mood": "社会情绪在集体主义的高昂（70周年庆）与对社会撕裂的疲惫（香港风波）中撕裂。青年群体在5G牌照发放的兴奋中感受到‘技术自主’的紧迫，而年末对不明原因肺炎的流言则在12月产生了一层薄雾般的隐忧。中产阶级在资产保值与地缘冷战苗头中更趋审慎。",
+  "atmosphere": {
+    "gdp_trillion_cny": null,
+    "gdp_growth_pct": null,
+    "cpi_pct": null,
+    "gaokao_candidates_wan": null,
+    "college_graduates_wan": null,
+    "internet_users_yi": null,
+    "housing_price_index_70_cities_pct": null,
+    "dominant_anxiety": "地缘政治脱钩风险与年末不明肺炎传闻",
+    "employment_pressure": "大型互联网企业‘裁员潮’与‘996’争议引发职场福利反思",
+    "education_hotspot": "新版《告台湾同胞书》发布后的政治教育与STEM实验室普及",
+    "policy_keyword": "建国70周年、5G商用、反送中",
+    "meme_keywords": [
+      "我太南了",
+      "996.ICU",
+      "断裂时代"
+    ],
+    "migrant_workers_wan": null,
+    "avg_urban_disposable_income_cny": null,
+    "foreign_reserves_usd_trillion": null,
+    "rural_net_income_cny": null,
+    "mobile_users_yi": null
+  },
+  "pop_culture": [
+    "建国70周年阅兵式视觉震撼刷屏",
+    "香港‘反送中’示威影像在互联网高频出现",
+    "5G牌照正式发放引发抢机热",
+    "996.ICU程序员抗议运动引发社会反思",
+    "《流浪地球》开启中国科幻电影元年",
+    "山东号航空母舰正式交付使用",
+    "嫦娥四号拍摄首张月球背面近景图",
+    "华为‘鸿蒙’系统发布应对安卓断供",
+    "李鹏逝世引发的政治回顾潮",
+    "第一张黑洞照片全球同步公开"
+  ],
+  "sources": [
+    "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+    "https://en.wikipedia.org/wiki/21st_century",
+    "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告"
+  ],
+  "macro_events": [
+    {
+      "category": "disaster_crisis",
+      "title": "新冠肺炎疫情初发",
+      "detail": "12月湖北武汉出现不明原因肺炎病例，月底李文亮等医生发出预警被‘查处’，预示全球大流行。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.5,
+      "sensitivity": "high",
+      "tags": [
+        "health",
+        "virus"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "李鹏逝世",
+      "detail": "7月22日前总理李鹏因病逝世，官方评价其为‘经受住重大政治风浪考验’。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "history"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "山东号航母服役",
+      "detail": "12月17日中国首艘国产航空母舰‘山东号’正式在三亚某军港交付海军。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": [
+        "military",
+        "navy"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "996.ICU运动",
+      "detail": "程序员在GitHub发起反996运动，引发全民对加班文化与大厂福利的深度反思。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "medium",
+      "tags": [
+        "employment",
+        "internet"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "首张黑洞照片公开",
+      "detail": "4月10日人类首张黑洞照片全球同步公开，该科学突破在大陆科普圈引发狂欢。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "astronomy"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "江苏化工厂爆炸",
+      "detail": "3月21日江苏天嘉宜化工厂发生特大爆炸，造成78人死亡，引发全国安全大检查。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "medium",
+      "tags": [
+        "accident",
+        "safety"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "习五条发布",
+      "detail": "1月《告台湾同胞书》发表40周年大会上，习近平提出探索‘两制台湾方案’。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "medium",
+      "tags": [
+        "cross-strait",
+        "politics"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "诺奖级空间发现",
+      "detail": "悟空号、嫦娥四号在2019年持续产出科研成果，标志中国空间科学原创力爆发。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "space"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "特斯拉上海交付",
+      "detail": "12月30日首批国产Model 3交付，标志着外资独资车企在华全面落地。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "economy",
+        "auto"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "华为鸿蒙系统发布",
+      "detail": "8月华为正式发布HarmonyOS系统，作为应对安卓断供的底层技术‘备份’。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": [
+        "tech",
+        "sovereignty"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "上海生活垃圾分类",
+      "detail": "7月1日上海正式施行强制垃圾分类，‘你是什么垃圾’成为全城年度梗。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "urban",
+        "society"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "互联网营收增速缓",
+      "detail": "移动端流量趋于饱和，大厂营收增长进入个位数百分比时代，进入‘存量博弈’。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "economy",
+        "internet"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "嫦娥四号地月通信",
+      "detail": "1月中国实现人类首次月球背面软着陆及地月拉格朗日L2点测控通信。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "tech"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "内蒙古普通话政策",
+      "detail": "政府在内蒙强行推行统编教材引发局部争议与冲突，相关信息在年底受到管控。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "high",
+      "tags": [
+        "education",
+        "ethnic"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "巴黎圣母院大火",
+      "detail": "4月圣母院屋顶坍塌，该消息在社交媒体引发关于文化遗产保护的全民感怀。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "culture",
+        "france"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "全球51%人口联网",
+      "detail": "联宣称人类首次实现过半人口在线，标志着数字鸿沟开始转向‘数字主权’竞争。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "internet",
+        "society"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "区块链上升战略",
+      "detail": "10月中央政治局学习明确区块链为重要突破口，引发大陆资本市场疯狂炒作。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "tech",
+        "strategy"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "李文亮训诫书",
+      "detail": "12月30日武汉卫健委发布紧急通知，随后李文亮在群里发预警，次日被依法训诫。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.5,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "virus"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "星舰SN系列测试",
+      "detail": "SpaceX开始进行大规模全系统测试，其进展在大陆B站等视频网站获得极高点击。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "tech"
+      ]
+    }
+  ],
+  "micro_events": [
+    {
+      "category": "school",
+      "text": "马院的讲座上，教授一直在讲香港风波的外部势力，大家都在台下默不做声，空气很凝重。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "academic",
+        "politics"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "12月底听说武汉有一种‘怪病’，老板赶紧给我们部门每人发了一盒口罩，说是以防万一。",
+      "weight": 1.5,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "virus",
+        "job"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "family",
+      "text": "国庆阅兵那天，爷爷穿着老军装对着电视敬礼，全家人都被那种气氛感染，哭成了一团。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "celebration",
+        "family"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "digital",
+      "text": "我的电脑突然收到了5G信号测试邀请，在楼顶跑出1000兆的那一刻，我感觉时代真的在变。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "5g",
+        "lifestyle"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "health",
+      "text": "看到江苏化工厂爆炸的新闻，我妈非要给家里装上三个空气净化器，生怕有毒气飘过来。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "safety",
+        "anxiety"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "policy_touch",
+      "text": "看到‘习五条’发布，作为台研所的学生，我连夜推翻了原本的论文提纲，改写‘两制方案’。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "academic",
+        "taiwan"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "neighborhood",
+      "text": "小区里那个一直在跑外卖的邻居因为‘996’过劳倒在了家门口，我们众筹送他回了老家。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "employment",
+        "tragedy"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "school",
+      "text": "物理系教授讲起黑洞照片的成像原理，说这就是人类智慧的‘光影之舞’，我第一次觉得科学很美。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "astronomy"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "digital",
+      "text": "我和他在《流浪地球》的首映场因为抢周边认识，两人都相信‘希望是回家的唯一路’。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "movie",
+        "love"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "money",
+      "text": "表弟因为在朋友圈转发了敏感的香港示威画面，号被封了一个月，家里长辈在那儿教育他‘祸从口出’。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "social",
+        "censorship"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "school",
+      "text": "论文初稿涉及对‘区块链’政策的制度分析，被导师夸奖‘紧跟热点’，给了个最高分。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "tech"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "health",
+      "text": "看到李鹏逝世的新闻，我默默去查了下那段历史，发现原来我们这一代人的宁静是这么来的。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "history",
+        "self"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "digital",
+      "text": "我终于拿到了字节跳动的Offer，去负责那个叫‘抖音’的海外版TikTok，感觉自己成了国际派。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "job",
+        "byte"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "系里引进了新的5G实验室，我们甚至可以在寝室远程控制实验室的机械臂，太硬核了。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "5g",
+        "tech"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "family",
+      "text": "听说山东号航母交付了，爸爸开心地拿出珍藏的白酒，说这辈子终于见到中国双航母了。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "navy"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "money",
+      "text": "因为国家严控‘996’，公司原本的加班计划取消了，我这个程序员终于可以按时回家吃晚饭。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "job",
+        "welfare"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "图书馆新进了一批关于‘断裂时代’的外文书，我看了一个下午，觉得地缘政治真的要变天。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "academic",
+        "strategy"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "digital",
+      "text": "特斯拉交付那天，我和哥们儿跑去店里围观，结果被那个自动开启的车门吓了一跳。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "tech",
+        "neighbor"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "money",
+      "text": "妈妈在拼多多上拼了几百块钱的猪肉，收到一开全是发臭的，气得她在投诉群里闹了一个月。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "economy"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "neighborhood",
+      "text": "看到小区里新装了垃圾分类分类箱，我每天都要在那儿纠结半天‘干垃圾’和‘湿垃圾’。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "urban",
+        "society"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "school",
+      "text": "教授在讨论‘脱钩’的风险，他说我们要做好吃苦的准备，因为真正的硬仗才刚刚开始。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "academic",
+        "politics"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "digital",
+      "text": "我和她在黑洞照片的评论区认识，大家都在调侃‘眼里的黑洞’，竟然真的当晚就确立了关系。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "love",
+        "science"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "family",
+      "text": "爸爸迷上了在抖音上看那种‘爱国正能量’视频，吃饭时总爱大声公放，吵得我们要复习考研的人想自闭。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "app"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "money",
+      "text": "因为国家严控‘科创板’入场，原本想靠炒新股发财的我，资金被冻结在门槛外，气得想砸电脑。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "finance",
+        "policy"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "系里组织去上海参观特斯拉超级工厂，站在那个巨大的自动化流水线旁，觉得中国制造真的无敌了。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "tech"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "health",
+      "text": "听说美国正在研制什么病毒武器，妈妈每天逼我戴口罩出门，说要是不戴就断绝母女关系。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "rumor"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "digital",
+      "text": "我们在群里疯传李文亮医生的截图，虽然很快就被删了，但那种对不明肺炎的隐忧还是停不下来。",
+      "weight": 1.5,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "virus"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "money",
+      "text": "我通过GitHub认识了一个在华为工作的学长，他竟然内推我去了鸿蒙系统的底层开发团队实习，压力爆棚。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career",
+        "tech"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "考前辅导员说今年不让发有关‘香港风波’的评论，说要统一口径，大家瞬间都闭嘴了。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "academic",
+        "politics"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "因为公司在雄安承接了智能交通项目，我被派驻到那里吃沙子，薪水翻了四倍但没地儿花。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "job",
+        "urban"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "为了研究暗物质，我甚至去蹭了物理系的专业课，结果听了十分钟就睡着了，真不是那块料。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "astronomy"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "neighborhood",
+      "text": "邻居家的二胎在化工厂爆炸后高烧不退，全家人在那儿哭喊要找企业算账，听得我们邻居心都碎了。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "family",
+        "tragedy"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "digital",
+      "text": "我在推特上看到那些支持香港示威的言论，第一次意识到原来所谓的‘真相’也有这么多滤镜。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "digital"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "neighborhood",
+      "text": "小区里新修了‘建国70周年墙’，邻居大叔天天跑去在那儿合影，说这辈子值了。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "neighbor",
+        "celebration"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "school",
+      "text": "考前辅导员说今年不让发有关‘李鹏’的评论，说要尊重历史定性，大家瞬间都噤声了。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "academic",
+        "politics"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "因为公司在深圳承接了大湾区科创中心项目，我被派驻到那里，薪水翻了倍但回不了家。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "job",
+        "urban"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "health",
+      "text": "听说武汉那边闹什么禽流感变种，妈妈每天逼我喝凉茶，说是能清热解毒，不喝就断绝母子关系。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "health",
+        "rumor"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "romance",
+      "text": "和他一起在山东号航母的下水礼直播前许愿，希望等我们结婚的时候，国家能更强大。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "love",
+        "navy"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "school",
+      "text": "我通过MOOC拿到了麻省理工的5G证书，正好赶上华为鸿蒙发布，感觉自己离未来更近了。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "learning",
+        "growth"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "看到拼多多上市这么快，我也动了离职去搞电商的心思，结果被媳妇一把按住了。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "finance",
+        "pinduoduo"
+      ],
+      "scenario": "career"
+    }
+  ]
+}

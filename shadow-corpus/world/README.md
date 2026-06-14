@@ -21,9 +21,16 @@ node scripts/demo-fate-weights.mjs
 # NotebookLM 合并 patch
 npm run import-notebooklm
 
+# 本地检索（关键词 / 六域 / 年份）
+npm run query -- --q 疫情 --year 2020
+npm run query -- --status   # 刷新 data/years/_stats.json
+
 # 写入 Supabase
 npm run seed
 ```
+
+架构总览：[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)  
+语义检索：`packages/rag-kit` → `npm run rag:query -- "…" --world`
 
 ## 目录
 

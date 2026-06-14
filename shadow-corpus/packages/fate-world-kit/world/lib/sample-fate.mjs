@@ -2,6 +2,7 @@
 
 import { inferScenario } from './scenario-domains.mjs';
 import { computeFateWeights } from './fate-weights.mjs';
+import { preparePoolForSampling } from './corpus-retrieval.mjs';
 
 /** @param {string} str */
 function hashString(str) {
@@ -60,9 +61,11 @@ function weightedSample(items, n, seed, scenarioWeights = null) {
  * @param {object} p.pool
  * @param {object} [p.profile]
  * @param {object} [p.persona_card]
+ * @param {object} [p.persona_card]
  * @param {object[]} [p.priorInterventions]
+ * @param {'none'|'local'|'rules'|'hybrid'} [p.retrieval='none']
  */
-export function sampleFateContext({
+export async function sampleFateContext({
   runId,
   calendarYear,
   narrativeYear,
@@ -70,8 +73,17 @@ export function sampleFateContext({
   pool,
   profile = null,
   persona_card = null,
-  priorInterventions = []
+  priorInterventions = [],
+  retrieval = 'none'
 }) {
+  const workingPool = await preparePoolForSampling(pool, retrieval, {
+    profile,
+    persona_card,
+    narrativeYear,
+    beatType,
+    priorInterventions
+  });
+
   const baseSeed = hashString(`${runId}:${calendarYear}:${narrativeYear}`);
   const macroN = beatType === 'pivotal' ? 10 : 6;
   const microN = beatType === 'pivotal' ? 5 : 3;
@@ -84,13 +96,13 @@ export function sampleFateContext({
     priorInterventions
   });
 
-  let microPool = pool.micro_events || [];
+  let microPool = workingPool.micro_events || [];
   if (beatType !== 'pivotal') {
     microPool = microPool.filter((m) => !m.can_pivot || (m.weight || 1) < 0.85);
   }
 
   const macro_sample = weightedSample(
-    pool.macro_events || [],
+    workingPool.macro_events || [],
     macroN,
     baseSeed,
     fateWeights.weights
@@ -103,7 +115,7 @@ export function sampleFateContext({
   );
 
   const popRand = mulberry32(baseSeed + 2);
-  const pop = [...(pool.pop_culture || [])]
+  const pop = [...(workingPool.pop_culture || [])]
     .sort(() => popRand() - 0.5)
     .slice(0, beatType === 'pivotal' ? 5 : 3);
 
@@ -134,7 +146,7 @@ export function sampleFateContext({
       category,
       scenario
     })),
-    atmosphere_slice: pool.atmosphere || {},
+    atmosphere_slice: workingPool.atmosphere || {},
     pop_culture_slice: pop,
     era_line
   };

@@ -7,7 +7,11 @@
   "scripts": {
     "generate": "node scripts/generate-era-draft.mjs",
     "validate": "node scripts/validate-era.mjs",
-    "seed": "node scripts/seed-supabase.mjs"
+    "seed": "node scripts/seed-supabase.mjs",
+    "import-notebooklm": "node scripts/import-notebooklm-patch.mjs",
+    "query": "node scripts/query-corpus.mjs",
+    "audit-duplicates": "node scripts/audit-duplicates.mjs",
+    "sync-rag": "node scripts/sync-rag-world.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",

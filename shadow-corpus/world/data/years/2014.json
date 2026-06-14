@@ -23,8 +23,12 @@
     "meme_keywords": [
       "且行且珍惜",
       "冰桶挑战",
-      "A股"
-    ]
+      "A股",
+      "新常态",
+      "4G时代",
+      "移动支付"
+    ],
+    "international_anxiety": "恐怖主义威胁与航空、公共安全焦虑。"
   },
   "pop_culture": [
     "奔跑吧兄弟",
@@ -38,7 +42,17 @@
     "阿里巴巴上市",
     "LeTV生态",
     "占中讨论",
-    "TFBOYS"
+    "TFBOYS",
+    "美剧《纸牌屋》热播",
+    "微信朋友圈彻底流行",
+    "南京青年奥林匹克运动会",
+    "4G手机换代潮",
+    "打车软件补贴大战（滴滴/快的）",
+    "手游爆发年",
+    "赴美上市潮（阿里巴巴、京东）",
+    "在线学习/慕课热潮",
+    "「一带一路」概念普及",
+    "冰桶挑战社交媒体传播"
   ],
   "macro_events": [
     {
@@ -421,6 +435,246 @@
       "sensitivity": "low",
       "tags": [
         "environment"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "劳教制度正式废止",
+      "detail": "2014年起劳动教养制度正式终结，法治建设迈出重要一步，相关案件家属迎来回家。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": [
+        "rule_of_law",
+        "reform"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "昆明火车站恐袭",
+      "detail": "2014年3月1日昆明火车站发生严重暴力恐怖袭击，造成30余人死亡，全国反恐警戒升级。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "high",
+      "tags": [
+        "terrorism",
+        "security"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "马航MH370失联",
+      "detail": "2014年3月8日MH370航班失联，载有大量中国公民，引发持续数月国际搜救与国内家庭悲痛。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "medium",
+      "tags": [
+        "aviation",
+        "missing"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "限制越级上访",
+      "detail": "2014年4月国家信访局明确不再受理越级上访，引导民众逐级走访解决诉求。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1,
+      "sensitivity": "medium",
+      "tags": [
+        "petitioning",
+        "policy"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "乌鲁木齐5·22恐袭",
+      "detail": "2014年5月22日乌鲁木齐发生暴力恐怖事件，造成43人死亡，反恐形势进一步严峻。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "high",
+      "tags": [
+        "terrorism",
+        "xinjiang"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "莎车7·28恐袭",
+      "detail": "2014年7月28日新疆莎车县发生严重恐怖袭击，37名民众遇害，59名暴徒被击毙。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "high",
+      "tags": [
+        "terrorism",
+        "xinjiang"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "鲁甸6.5级地震",
+      "detail": "2014年8月3日云南鲁甸6.5级地震致617人死亡，全国捐款与救援牵动人心。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "earthquake",
+        "disaster"
+      ]
+    },
+    {
+      "category": "culture_entertainment",
+      "title": "南京青奥会举办",
+      "detail": "2014年8月南京举办第二届夏季青奥会，展示中国年轻一代的体育与城市活力。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "sports",
+        "youth"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "徐才厚被开除党籍",
+      "detail": "2014年10月中央军委原副主席徐才厚涉嫌受贿案侦查终结，被开除党籍军籍，反腐无禁区。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "high",
+      "tags": [
+        "anti_corruption",
+        "military"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "外滩跨年踩踏事故",
+      "detail": "2014年12月31日上海外滩陈毅广场人群挤压踩踏致36人死亡，公共安全教训惨痛。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "medium",
+      "tags": [
+        "safety",
+        "accident"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "4G商用普及元年",
+      "detail": "2014年4G牌照发放后渗透率快速提升，手机上网速度改写社交与视频消费习惯。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "4g",
+        "mobile"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "手机上网用户超越电脑",
+      "detail": "2014年手机上网用户约5亿，正式超越电脑端，移动互联网时代全面降临。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "mobile",
+        "internet"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "一带一路上升国家战略",
+      "detail": "2014年「一带一路」倡议正式升级为国家战略，基建与对外开放讨论进入主流。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "belt_and_road",
+        "strategy"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "京东赴美上市",
+      "detail": "2014年5月京东在纳斯达克上市，与阿里IPO共同点燃互联网变现与期权财富想象。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "ipo",
+        "internet"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "克里米亚并入俄罗斯",
+      "detail": "2014年克里米亚危机升级，俄罗斯吞并克里米亚引发地缘裂痕与校园辩论。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "medium",
+      "tags": [
+        "geopolitics",
+        "russia"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "西非埃博拉疫情",
+      "detail": "2014年西非埃博拉疫情致数万人死亡，中国加强出入境防疫与公众科普。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "health",
+        "epidemic"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "罗塞塔号登陆彗星",
+      "detail": "2014年11月人类探测器首次在彗核受控软着陆，科普号与航天话题刷屏。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "science"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "香港占中运动",
+      "detail": "2014年9月至12月香港「雨伞运动」抗议政改方案，大陆舆论场出现高强度讨论。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "high",
+      "tags": [
+        "hong_kong",
+        "politics"
+      ]
+    },
+    {
+      "category": "employment",
+      "title": "互联网研发人才争夺",
+      "detail": "2014年移动端应用爆发，互联网产品技术岗位招聘占比上升，薪资议价权极高。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "employment",
+        "tech"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "打车软件补贴大战",
+      "detail": "2014年滴滴与快的巨额补贴抢用户，都市白领第一次习惯手机叫车出行。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "o2o",
+        "mobility"
       ]
     }
   ],
@@ -3384,6 +3638,486 @@
         "acceptance"
       ],
       "scenario": "self_growth"
+    },
+    {
+      "category": "digital",
+      "scenario": "career",
+      "text": "阿里京东在美敲钟，作为程序员的你第一次认真考虑去初创公司拿期权。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "internet",
+        "ipo"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "舍友抢到4G手机，在食堂演示秒开视频，你们都被网速惊到。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "4g",
+        "mobile"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "除夕看春晚，更多时间在微信群抢红包，家里全是手机提示音。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "wechat",
+        "festival"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "埃博拉与昆明恐袭新闻刷屏，你往包里多塞湿纸巾，出门更警惕。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "safety",
+        "health"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "academic",
+      "text": "辅导员说不能越级信访了，宿舍议论维权以后得更讲程序。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "policy",
+        "campus"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "异地恋用4G视频通话，画面终于不卡，距离像缩短了一截。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "4g",
+        "love"
+      ]
+    },
+    {
+      "category": "policy_touch",
+      "scenario": "career",
+      "text": "舅舅战友因劳教废止回家，全家松一口气，你感到法治真的在动。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "reform",
+        "family"
+      ]
+    },
+    {
+      "category": "neighborhood",
+      "scenario": "self_growth",
+      "text": "外滩踩踏后街道办禁百人聚会，社区元旦晚会被迫取消。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "safety",
+        "neighbor"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "课上提到克里米亚公投，同学就地缘政治吵得面红耳赤。",
+      "weight": 0.7,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "politics",
+        "class"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "career",
+      "text": "你注册公众号写职场见解，觉得内容创业可能是下一个风口。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "wechat",
+        "content"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "雾霾太重学校停课，你第一次在家用平板在线听课。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "online_learning",
+        "smog"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "爸爸迷上刷今日头条，吃饭时总分享马航搜救最新进展。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "news",
+        "app"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "单位传闻转型做一带一路项目，同事既慌又期待新订单。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "job",
+        "strategy"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "冰桶挑战在朋友圈疯传，被点名泼冰水，冻得够呛却觉得有意义。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "social",
+        "challenge"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "图书馆新系统支持手机扫码借书，你终于不用排长队。",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "library",
+        "digital"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "爷爷心脏检查用上国产支架，费用比进口低，全家松了口气。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "medical",
+        "family"
+      ]
+    },
+    {
+      "category": "romance",
+      "scenario": "love",
+      "text": "男友在南京青奥会当志愿者，天天发外国运动员合影，语气很自豪。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "volunteer",
+        "love"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "销售经理靠P2P理财赚第一桶金，你也心动，想把工资投进去。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "finance",
+        "risk"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "关注科普号追罗塞塔号彗星消息，觉得宇宙探索离自己很近。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "space"
+      ]
+    },
+    {
+      "category": "neighborhood",
+      "scenario": "family",
+      "text": "邻居儿子在MH370上失联，楼里人说话都轻声，怕触痛伤心事。",
+      "weight": 1.3,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "mh370",
+        "emotion"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "考研教室空调坏了，大家汗流浃背啃肖秀荣，没人敢停笔。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "postgraduate",
+        "exam"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "双十一办公室堆满快递，老板笑说我们要被马云改掉消费观。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "e_commerce",
+        "life"
+      ]
+    },
+    {
+      "category": "policy_touch",
+      "scenario": "self_growth",
+      "text": "反腐收紧，小职员也接到禁礼品卡、禁大吃大喝的通知。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "policy",
+        "discipline"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "昆山爆炸新闻后，妈妈打电话嘱咐你离大工厂远点。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "safety",
+        "advice"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "表姐婚恋网认识海归，天天微信语音，竟然打算年底结婚。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "dating",
+        "love"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "系里新开大数据课，教授说未来十年金饭碗，选修名额秒光。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "data_science",
+        "major"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "奶奶学会手机看新闻，常转发谣言，你们耐心一条条辟谣。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "aging",
+        "tech"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "中关村咖啡馆听创业路演，你觉得有App计划书就能融到钱。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "startup",
+        "entrepreneur"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "friendship",
+      "text": "哥们把年终奖存余额宝，日息比定存高，你也跟风存了点。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "fintech",
+        "saving"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "论文查联合国地表数据集，你感叹科研开放资源比往年丰富。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "research",
+        "data"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "买感冒药要实名登记，药店大姐说管得严，怕有人制毒。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "policy",
+        "pharmacy"
+      ]
+    },
+    {
+      "category": "romance",
+      "scenario": "friendship",
+      "text": "老同学聚会聊香港政改，立场不同不欢而散，心里有点堵。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "friends"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "用4G流量刷完《纸牌屋》，缓冲顺畅，你觉得移动追剧时代来了。",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "drama",
+        "mobile"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "鲁甸地震后单位组织捐款，爸爸省下烟钱全捐，全家支持。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "charity",
+        "family"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "高考前新闻抓替考团伙，你更坚信得靠实力进考场。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "gaokao",
+        "fairness"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "在五线老家网购进口零食，第一次觉得电商把日子抬高了。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "e_commerce",
+        "hometown"
+      ]
+    },
+    {
+      "category": "policy_touch",
+      "scenario": "self_growth",
+      "text": "参加一带一路宣讲会，你想这辈子得去西域看看。",
+      "weight": 0.7,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "strategy",
+        "dream"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "妈妈看埃博拉科普，现在回家就催你洗手消毒。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "health",
+        "prevention"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "群里传MH370卫星图，真假难辨，大家心一直悬着。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "news",
+        "social"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "系里上新云算力平台，跑模型从一天缩到几分钟，效率惊人。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "cloud",
+        "research"
+      ]
     }
   ],
   "sources": [
@@ -3391,7 +4125,24 @@
     "https://www.stats.gov.cn/sj/tjgb/",
     "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
     "https://www.cnnic.cn/",
-    "https://www.moe.gov.cn/jyb_xwfb/"
+    "https://www.moe.gov.cn/jyb_xwfb/",
+    "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+    "https://en.wikipedia.org/wiki/21st_century",
+    "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3"
   ],
-  "version": "2026.06.14-v1"
+  "version": "2026.06.14-v1",
+  "notebooklm_summary": "2014年是中国全面深化改革的关键之年，劳教制度正式废止，反腐败向纵深发展，徐才厚等高层落马。宏观经济进入「新常态」，4G普及带动移动互联网流量爆发，阿里、京东赴美上市开启变现新纪元；反恐形势严峻，马航失联与外滩踩踏等重大公共安全事件牵动全国。",
+  "notebooklm_social_mood": "社会情绪在技术跃迁的兴奋与公共安全的焦虑间交织。4G商用让青年沉浸在移动互联新鲜感中，MH370漫长悬念与多地恐袭让家庭安全感降至低点。法治改革推进带来公平新期待，互联网行业财富效应也加剧职场焦虑。",
+  "notebooklm_sources": [
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告"
+  ],
+  "notebooklm_gaps": [
+    "具体的GDP万亿元精确数值",
+    "具体的CPI百分比",
+    "高考报名人数及大学毕业生人数精确统计",
+    "70大城市房价指数精确变动比例",
+    "2014年具体的十大影视剧、综艺及神曲名录（笔记本中多为2000年代或2026年预测）",
+    "具体的网络流行语清单"
+  ],
+  "notebooklm_imported_at": "2026-06-14"
 }

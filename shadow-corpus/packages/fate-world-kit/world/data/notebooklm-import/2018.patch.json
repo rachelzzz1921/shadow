@@ -1,0 +1,787 @@
+{
+  "calendar_year": 2018,
+  "notebooklm_gaps": [
+    "GDP、CPI及房价指数的具体百分点",
+    "高考及毕业生精确人数统计",
+    "具体的网络流行语清单（笔记本中倾向于宏观叙事）"
+  ],
+  "summary": "2018年是中国历史范式剧烈转动的一年。宪法修正案通过废除国家主席任期限制，标志着政治体制进入新阶段；与此同时，中美贸易战全面爆发，开启了大国对抗的常态化。国内面临非洲猪瘟疫情、P2P爆雷潮及严厉的金融监管，而嫦娥四号发射与港珠澳大桥通车则展示了硬实力的持续积累。",
+  "social_mood": "社会情绪在大国博弈的危机感与内部秩序收紧的紧迫感中交织。贸易战导致的经济下行压力让中产阶级产生强烈的资产缩水焦虑，而宪法修改则在知识分子与青年群体中引发深度的未来观望。非洲猪瘟疫情影响民生价格，P2P爆雷潮重创了普通家庭对‘互联网金融’的信任，社会信用体系建设进入全面落地期。",
+  "atmosphere": {
+    "gdp_trillion_cny": null,
+    "gdp_growth_pct": null,
+    "cpi_pct": null,
+    "gaokao_candidates_wan": null,
+    "college_graduates_wan": null,
+    "internet_users_yi": null,
+    "housing_price_index_70_cities_pct": null,
+    "dominant_anxiety": "贸易战升级与个人理财安全信用崩塌",
+    "employment_pressure": "互联网巨头‘优化’背景下的中年职场危机感及去杠杆引发的降薪潮",
+    "education_hotspot": "校外培训机构整治与教育公平化改革（如新高考推广）",
+    "policy_keyword": "宪法修正、贸易战、金融去杠杆",
+    "meme_keywords": [
+      "瑞幸",
+      "转发锦鲤",
+      "逆全球化"
+    ],
+    "migrant_workers_wan": null,
+    "avg_urban_disposable_income_cny": null,
+    "foreign_reserves_usd_trillion": null,
+    "rural_net_income_cny": null,
+    "mobile_users_yi": null
+  },
+  "pop_culture": [
+    "瑞幸咖啡迅速扩张引发消费范式讨论",
+    "电影《我不是药神》引发医疗公平与格列卫热议",
+    "转发‘超越妹妹’或‘信小呆’锦鲤流行",
+    "嫦娥四号在月球背面成功着陆",
+    "港珠澳大桥正式通车",
+    "P2P爆雷潮在社交媒体大规模刷屏",
+    "中美关税清单成为金融圈必看读物",
+    "崔永元爆料陕西千亿矿权案引发司法关注",
+    "非洲猪瘟导致猪肉价格变动引发民生讨论",
+    "《如懿传》等延宕剧集终播出的文化记忆"
+  ],
+  "sources": [
+    "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+    "https://en.wikipedia.org/wiki/21st_century",
+    "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告"
+  ],
+  "macro_events": [
+    {
+      "category": "politics_policy",
+      "title": "监察法正式实施",
+      "detail": "3月国家监察委员会正式挂牌，实现对所有行使公权力的公职人员监督全覆盖。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "medium",
+      "tags": [
+        "law",
+        "politics"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "非洲猪瘟爆发",
+      "detail": "8月辽宁确诊首例疫情，随后席卷全国，重创生猪产能，引发肉价大幅波动与民生讨论。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "medium",
+      "tags": [
+        "health",
+        "society"
+      ]
+    },
+    {
+      "category": "urban_life",
+      "title": "港珠澳大桥通车",
+      "detail": "10月24日大桥正式开通，连接粤港澳三地，标志大湾区基建一体化取得重大进展。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "urban",
+        "bridge"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "嫦娥四号落背",
+      "detail": "12月中国成功发射‘嫦娥四号’，成为人类首个在月球背面着陆的探测器。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "science"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "P2P行业大洗牌",
+      "detail": "2018年夏季数百家P2P平台爆雷，涉众资产巨大，引发社会对金融平台信用的全面动摇。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.4,
+      "sensitivity": "medium",
+      "tags": [
+        "finance",
+        "crisis"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "朝美首脑新加坡会谈",
+      "detail": "6月特朗普与金正恩举行历史性会晤，大陆媒体对半岛和平局势进行全方位研判。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "diplomacy",
+        "north korea"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "马克龙访华",
+      "detail": "1月法国总统马克龙访华，探讨气候变化及‘一带一路’框架下的中欧合作。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "diplomacy",
+        "france"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "中兴通讯遭制裁",
+      "detail": "4月美国宣布禁止美企向中兴出售零部件，引发对‘芯片荒’及核心技术自研的举国讨论。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.4,
+      "sensitivity": "medium",
+      "tags": [
+        "tech",
+        "trade war"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "社会信用体系建成",
+      "detail": "2018年底中国基本建成社会信用体系，失信被执行人受到高消费限制，引发社会治理讨论。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "medium",
+      "tags": [
+        "society",
+        "law"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "蔡英文当局危机",
+      "detail": "台湾‘九合一’选举民进党惨败，韩国瑜在高雄意外胜出，大陆舆论高度关注其两岸政策变动。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.0,
+      "sensitivity": "medium",
+      "tags": [
+        "cross-strait",
+        "politics"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "个税改革方案出台",
+      "detail": "8月全国人大通过修订案，起征点提至5000元，并新增子女教育等专项扣除，减轻中产负担。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "tax",
+        "economy"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "帕克兰校园枪击影响",
+      "detail": "美国爆发史上最大规模‘为我们的生命游行’，大陆社交媒体探讨其公民参与模式。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "usa",
+        "society"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "虚拟货币大跌",
+      "detail": "2018年比特币等加密货币价格腰斩，大陆ICO清理整顿效果显现，炒作热度骤降。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.0,
+      "sensitivity": "medium",
+      "tags": [
+        "finance",
+        "crypto"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "孟晚舟在加被扣",
+      "detail": "12月华为CFO孟晚舟在温哥华过境时遭加方应美方要求扣押，中美加关系骤然紧张。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.4,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "trade war"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "崔永元爆料矿权案",
+      "detail": "12月底爆料二审案卷丢失，直指最高法院，最终以法官电视认罪结束，引发舆论高度关注。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "high",
+      "tags": [
+        "law",
+        "scandal"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "去杠杆引发股市波动",
+      "detail": "受宏观审慎监管影响，中小企业融资难，A股2018年全年表现疲软，跌幅显著。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": [
+        "finance",
+        "policy"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "第一对基因编辑婴儿",
+      "detail": "南方科技大学贺建奎宣布首对基因编辑双胞胎出生，引发全球对生物伦理的伦理声讨。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.2,
+      "sensitivity": "medium",
+      "tags": [
+        "tech",
+        "ethics"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "互联网用户过半",
+      "detail": "12月联合网宣布全球互联网使用率突破50%，标志着人类正式步入数字主导社会。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "internet",
+        "society"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "中国经济辐射力提升",
+      "detail": "亚太及欧洲内贸易流动增加，特别是以中国为中心的贸易流动成为区域化主要驱动力。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "economy",
+        "trade"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "普吉岛沉船事故",
+      "detail": "7月普吉岛海域发生游船翻沉导致47名中国游客遇难，重创暑期出境游信心。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": [
+        "travel",
+        "disaster"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "洞察号登陆火星",
+      "detail": "11月NASA洞察号成功着陆火星，相关实时探测数据在大陆科幻圈引发高强度关注。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "tech"
+      ]
+    }
+  ],
+  "micro_events": [
+    {
+      "category": "school",
+      "text": "马院的研讨会上，大家都在反复研读宪法修正案，那种严肃的政治气氛让我感觉论文每个字都要斟酌。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "academic",
+        "politics"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "贸易战开打那天，老板在全员会上说公司的主力芯片要断供了，可能面临停产，全员自愿减薪。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "job",
+        "trade war"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "family",
+      "text": "非洲猪瘟闹得凶，我妈连着三个月没买猪肉，除夕夜的红烧肉都换成了鸡肉，感觉过年都没味了。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "economy"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "digital",
+      "text": "朋友圈都在转发‘信小呆’锦鲤，我也跟风转了，结果奖没中到，手机号倒是被一堆骚扰电话打爆了。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "digital",
+        "lifestyle"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "health",
+      "text": "长生疫苗案出来后，我赶紧翻出孩子的接种本，对着批号查了一个通宵，心跳快得不行。",
+      "weight": 1.3,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "health",
+        "anxiety"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "policy_touch",
+      "text": "听说孟晚舟被扣了，我们部门原本和华为的合作项目立刻无限期搁置，我也面临被调岗。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "career"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "neighborhood",
+      "text": "邻居家的儿子在P2P平台当理财经理，爆雷后天天有受害者上门堵，搞得我们整层楼都不得安宁。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "finance",
+        "neighborhood"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "school",
+      "text": "物理课上讲起‘嫦娥四号’着陆月背，那种‘唯一’的民族自豪感确实让我想报考航天专业。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "space"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "digital",
+      "text": "我和她在《我不是药神》的影评区辩论人性，竟然真的线下见了面，还一起去给白血病基金捐了款。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "movie",
+        "love"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "money",
+      "text": "个税起征点提了，我拿到工资条发现多了一顿火锅钱，赶紧给自己买了一张瑞幸咖啡的券庆祝。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "finance",
+        "lifestyle"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "为了避开贸易战带来的芯片禁令，导师要求我们所有的算法都要在国产的申威服务器上重跑一遍。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "tech"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "health",
+      "text": "看到重庆坠江公交的新闻，我现在坐车绝不戴耳机，时刻盯着司机的一举一动，防范未然。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "safety",
+        "anxiety"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "digital",
+      "text": "我注册了一个今日头条的号开始搬运短视频，虽然每天只有几块钱收益，但感觉自己赶上了最后的尾巴。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "job",
+        "byte"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "班里那个一直在买比特币的男生最近没钱吃饭了，天天蹭我们的食堂卡，说是‘资产重组’中。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "finance",
+        "campus"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "family",
+      "text": "港珠澳大桥通车，爸爸非要开车带我们全家去兜风，结果到了珠海发现要办一大堆通行证。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "bridge"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "money",
+      "text": "因为互联网金融严监管，原本要入职的小贷公司突然倒闭了，我拿着三方协议站在写字楼前发呆。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "finance",
+        "job"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "图书馆新进了一批关于‘区块链伦理’的外文书，我看了一周，发现这个圈子的水真的太深。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "tech"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "digital",
+      "text": "舍友疯狂在群里安利‘瑞幸咖啡’，说是首单免费，我们全寝室那周下午茶全是那股奇怪的豆子味。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "lifestyle",
+        "luckin"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "money",
+      "text": "妈妈在拼多多上拼了三台‘便宜电视机’，结果送来一开全是老古董，气得她在拼单群里骂了一个月。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "pinduoduo"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "neighborhood",
+      "text": "看到社会信用体系全国联网的消息，我默默查了下自己的信用记录，生怕因为大学欠的图书馆欠费被拉黑。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "privacy",
+        "urban"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "school",
+      "text": "教授在讨论‘逆全球化’的趋势，他说我们的征途不只是大海，还有突破西方的封锁墙。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "academic",
+        "politics"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "digital",
+      "text": "我和她在转发‘锦鲤’的评论区认识，大家都在求好运，结果好运没来，缘分倒是先来了。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "love",
+        "social"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "family",
+      "text": "爷爷迷上了在西瓜视频上看抗战片，天天在客厅大声公放，吵得我们要复习考研的人想砸电脑。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "app"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "money",
+      "text": "因为国家严查P2P，我原本在高大上理财公司做文案的工作黄了，只能回家考公。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "job",
+        "finance"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "系里组织去珠海看港珠澳大桥，站在桥头听总工讲那些海底沉管的技术，觉得中国基建真的神了。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "bridge"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "health",
+      "text": "听说非洲猪瘟会导致人畜共患病（虽然是谣言），我妈半年没让家里动过一次红肉。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "rumor"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "digital",
+      "text": "我们在群里疯传崔永元爆料的新证据，虽然很快就被删了，但那种对司法的吃瓜感还是停不下来。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "censorship"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "money",
+      "text": "我通过GitHub认识了一个在阿里工作的学长，他竟然内推我去了P8级别的团队实习，压力山大。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career",
+        "tech"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "考前辅导员说今年不让在寝室挂‘佛系’的海报，说是消极避世，大家瞬间都改成了‘入世’。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "campus",
+        "politics"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "因为公司涉及中兴零部件供应链，被波及停产了，我作为采购员天天在仓库里数灰尘。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "job",
+        "trade war"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "为了研究暗物质，我甚至去蹭了物理系的专业课，结果听了十分钟就睡着了，真不是那块料。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "astronomy"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "neighborhood",
+      "text": "邻居家的二胎在疫苗案后高烧不退，全家人在那儿哭喊要找长生生物算账，听得我们邻居心都碎了。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "family",
+        "tragedy"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "digital",
+      "text": "我在推特上看到那些支持特朗普的华人论调，第一次意识到原来所谓的‘普世价值’也有这么多版本。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "politics",
+        "digital"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "neighborhood",
+      "text": "小区里新修了‘信用评分墙’，虽然只有象征意义，但邻居大叔天天跑去比谁的评分高，挺逗。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "neighbor",
+        "society"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "school",
+      "text": "考前辅导员说今年不让发有关‘贺建奎’的评论，说要等官方定性，大家瞬间都噤声了。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "academic",
+        "censorship"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "因为公司在雄安承接了地下管廊项目，我被派驻到那里吃沙子，薪水翻了三倍但没地儿花。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "job",
+        "urban"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "health",
+      "text": "听说美国正在研制什么基因武器，妈妈每天逼我吃大蒜，说是能杀菌防毒，不吃就断绝母子关系。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "rumor"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "romance",
+      "text": "和他一起在港珠澳大桥的人工岛上看夕阳，他指着远处的大海说，这就是他给我的蓝色婚礼。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "love",
+        "bridge"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "school",
+      "text": "我通过MOOC拿到了加州理工的天文证书，正好赶上嫦娥四号着陆，感觉自己离月亮更近了。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "learning",
+        "growth"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "看到瑞幸咖啡上市速度这么快，我也动了离职去搞瑞幸加盟的心思，结果被媳妇一把按住了。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "finance",
+        "luckin"
+      ],
+      "scenario": "career"
+    }
+  ]
+}

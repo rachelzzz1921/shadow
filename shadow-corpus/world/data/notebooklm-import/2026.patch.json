@@ -1,0 +1,633 @@
+{
+  "calendar_year": 2026,
+  "notebooklm_gaps": [
+    "2026年中国大陆具体的高考报名人数和高校毕业生人数",
+    "2026年中国大陆具体的70城房价指数百分比",
+    "2026年具体的中国大陆本土流行语字典（笔记本中多为描述性词汇，缺乏口语化短语）",
+    "2026年具体的中国大陆本土热播电视剧/综艺清单"
+  ],
+  "summary": "2026年是「断裂时代」的深化之年，也是技术主权与动能冲突并行的分水岭。中国在10G网络、超高速真空管道运输及钠电池等新基建领域取得显著进展，与重启的中美博弈和霍尔木兹海峡能源危机形成复杂对垒；社会认知全面从效率红利转向弹性与主权生存。",
+  "social_mood": "社会情绪呈现极端务实与数字依赖的交织。公众在频繁地缘震荡与能源成本压力下普遍采取防御型生存策略，同时对AI代理带来的生产力飞跃抱有加速主义式狂热与对主体性消失的隐秘恐惧。",
+  "atmosphere": {
+    "gdp_trillion_cny": null,
+    "gdp_growth_pct": 2.5,
+    "cpi_pct": 5.2,
+    "gaokao_candidates_wan": null,
+    "college_graduates_wan": null,
+    "internet_users_yi": null,
+    "housing_price_index_70_cities_pct": null,
+    "dominant_anxiety": "霍尔木兹海峡关闭风险引发的全球能源链断裂及结构性通胀压力。",
+    "employment_pressure": "AI代理深度介入职场后对中初级白领岗位的结构性替代与重组压力。",
+    "education_hotspot": "自主AI代理辅助科研与知识生产引发的教育评估体系彻底重构。",
+    "policy_keyword": "去风险化（De-risking）、数字主权化、弹性生存。",
+    "meme_keywords": ["AI代理", "10G网络", "防御型生存"]
+  },
+  "pop_culture": [
+    "2026 FIFA世界杯 (首次扩军至48支球队)",
+    "米兰-科尔蒂纳丹佩佐冬奥会",
+    "AI代理 (能替人执行复杂决策的主动软件)",
+    "10G网络体验 (中国内地率先启动测试)",
+    "细胞级定制医疗/个性化基因疗法",
+    "太空算力中心/在轨AI模型训练",
+    "超高速真空管道高铁 (Hyperloop 1000km/h)",
+    "钠离子电池电动车 (低成本出行方案)",
+    "「防御型生存」生活纪录Vlog",
+    "2026名古屋亚运会"
+  ],
+  "sources": [
+    "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告",
+    "12 technology trends that will shape the agenda in 2026 - Esade",
+    "Conflicts to Watch in 2026 | Council on Foreign Relations",
+    "7 Medical Sciences Trends Shaping Healthcare in 2026"
+  ],
+  "macro_events": [
+    {
+      "category": "politics_policy",
+      "title": "张又侠被查",
+      "detail": "2026年1月中央军委副主席张又侠及军委联合参谋部参谋长刘振立被宣布立案调查；军政高层人事震动成为年度时政头条。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "high",
+      "tags": ["corruption", "military"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "特朗普2026年访华",
+      "detail": "2026年5月美国总统特朗普访华与中方领导人会面；外贸、科技与关税议题占据新闻与商务社群讨论中心。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "medium",
+      "tags": ["diplomacy", "trump"]
+    },
+    {
+      "category": "society",
+      "title": "黎智英被判囚20年",
+      "detail": "2026年2月黎智英因国安相关罪名在香港被判刑20年；法治与舆论在不同圈层引发持续讨论。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.0,
+      "sensitivity": "high",
+      "tags": ["justice", "hongkong"]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "山西留神峪煤矿爆炸",
+      "detail": "2026年5月山西沁源留神峪煤矿发生特大瓦斯爆炸，造成重大伤亡；安全生产与能源转型再次成为公共议题。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "medium",
+      "tags": ["disaster", "coal_mine"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "神舟二十三号发射",
+      "detail": "2026年5月神舟二十三号载人飞船成功发射，三名航天员进入天宫空间站；全民直播对接过程。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": ["space", "shenzhou"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "10G网络中国内测",
+      "detail": "2026年中国率先启动10G移动网络测试；运营商与手机厂商在一线城市展开体验营销。",
+      "source_url": "https://dobetter.esade.edu/en/technology-trends-2026",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["telecom", "10g"]
+    },
+    {
+      "category": "economy",
+      "title": "霍尔木兹海峡风险升温",
+      "detail": "2026年中东局势推升霍尔木兹海峡关闭风险；国内油价、化工与航运成本预期牵动家庭与企业决策。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1.3,
+      "sensitivity": "medium",
+      "tags": ["energy", "economic_risk"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "AI代理化范式转移",
+      "detail": "2026年AI从问答转向代用户执行任务；国内企业试点「少数人+多Agent」混合团队，职场培训需求激增。",
+      "source_url": "https://dobetter.esade.edu/en/technology-trends-2026",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": ["ai", "agent"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "SpaceX计划IPO",
+      "detail": "2026年SpaceX推进IPO预期，估值讨论刷屏；中国民营火箭与卫星产业链投资者重新评估赛道。",
+      "source_url": "https://www.cfr.org/articles/ten-most-significant-world-events-2025",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["spacex", "finance"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "美国再次退出气候条约",
+      "detail": "2026年1月美国完成退出《巴黎协定》相关程序；国内双碳叙事与新能源出口政策成为对照讨论。",
+      "source_url": "https://eelp.law.harvard.edu/tracker/paris-climate-agreement/",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": ["climate", "us_policy"]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "中东局势急剧升级",
+      "detail": "2026年2月底中东爆发新一轮大规模军事冲突，伊朗局势牵动全球能源与航运；国内新闻滚动报道。",
+      "source_url": "https://www.cfr.org/reports/conflicts-watch-2026",
+      "weight": 1.3,
+      "sensitivity": "high",
+      "tags": ["war", "middle_east"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "中国Hyperloop试验推进",
+      "detail": "2026年中国超高速真空管道交通试验线持续曝光，时速千公里级愿景进入公众想象。",
+      "source_url": "https://dobetter.esade.edu/en/technology-trends-2026",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["transport", "hyperloop"]
+    },
+    {
+      "category": "society",
+      "title": "防御型生存成社会共识",
+      "detail": "2026年去杠杆、现金为王、国产替代成为社交媒体显学；年轻人减少冲动消费，增加储蓄与技能投资。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["paradigm_shift", "social_trend"]
+    },
+    {
+      "category": "economy",
+      "title": "钠离子电池规模化应用",
+      "detail": "2026年钠离子电池进入规模化装车；家庭讨论低成本电车与能源安全，产业链招聘扩张。",
+      "source_url": "https://dobetter.esade.edu/en/technology-trends-2026",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["energy", "battery"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "手机直连低轨卫星成熟",
+      "detail": "2026年低轨星座扩张，手机直连卫星通信在户外与应急场景普及；户外爱好者与商务人士率先体验。",
+      "source_url": "https://dobetter.esade.edu/en/technology-trends-2026",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["satellite", "telecom"]
+    },
+    {
+      "category": "society",
+      "title": "多癌早检液态活检普及",
+      "detail": "2026年液态活检多癌早筛进入更多体检套餐；中产家庭讨论「一管血查50癌」的可及性与隐私。",
+      "source_url": "https://distance.physiology.med.ufl.edu/about/articles/7-medical-sciences-trends-shaping-healthcare-in-2026/",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["medicine", "health"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "在轨AI训练演示",
+      "detail": "2026年太空算力与在轨AI训练概念进入科普与产业报道；航天+AI交叉岗位成为新热搜。",
+      "source_url": "https://dobetter.esade.edu/en/technology-trends-2026",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["space_ai", "computing"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "台海高压警戒常态化",
+      "detail": "2026年台海军事与外交摩擦频仍；东南沿海居民对局势保持长期关注，新闻推送成为日常背景。",
+      "source_url": "https://www.cfr.org/reports/conflicts-watch-2026",
+      "weight": 1.2,
+      "sensitivity": "high",
+      "tags": ["military", "taiwan"]
+    },
+    {
+      "category": "politics_policy",
+      "title": "北约东翼摩擦加剧",
+      "detail": "2026年俄罗斯与北约东翼摩擦升温；国际新闻与国内军迷社群讨论欧洲安全外溢风险。",
+      "source_url": "https://www.cfr.org/reports/conflicts-watch-2026",
+      "weight": 1.1,
+      "sensitivity": "high",
+      "tags": ["military", "nato"]
+    },
+    {
+      "category": "economy",
+      "title": "全球南方债务压力",
+      "detail": "2026年部分低收入国家债务违约风险上升；财经媒体解读对全球贸易与大宗商品价格的连锁影响。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["debt", "global_finance"]
+    },
+    {
+      "category": "tech_internet",
+      "title": "人形机器人进工厂",
+      "detail": "2026年人形机器人在工厂与物流场景试点落地；小米等企业的量产新闻引发「会不会抢饭碗」讨论。",
+      "source_url": "https://dobetter.esade.edu/en/technology-trends-2026",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["robot", "industry"]
+    },
+    {
+      "category": "economy",
+      "title": "301调查瞄准造船与芯片",
+      "detail": "2026年美国对华造船业与半导体发起301调查；出口企业评估转口、本地化与合规成本。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1.2,
+      "sensitivity": "medium",
+      "tags": ["trade_war", "regulation"]
+    },
+    {
+      "category": "culture_entertainment",
+      "title": "2026世界杯",
+      "detail": "2026年北美世界杯扩军至48队；中国球迷熬夜看球，酒吧与客厅再次形成临时共同体。",
+      "source_url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": ["sports", "world_cup"]
+    },
+    {
+      "category": "culture_entertainment",
+      "title": "米兰冬奥会",
+      "detail": "2026年2月米兰-科尔蒂纳冬奥会；冰雪项目与运动员故事在短视频平台二次传播。",
+      "source_url": "https://en.wikipedia.org/wiki/2026_Winter_Olympics",
+      "weight": 1.0,
+      "sensitivity": "low",
+      "tags": ["sports", "olympics"]
+    },
+    {
+      "category": "culture_entertainment",
+      "title": "三亚亚洲沙滩运动会",
+      "detail": "2026年4月海南三亚举办亚洲沙滩运动会；本土赛事与文旅消费形成春季热点。",
+      "source_url": "https://en.wikipedia.org/wiki/2026_in_sports",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": ["sports", "china"]
+    }
+  ],
+  "micro_events": [
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你激活第一个AI代理，看它自动谈价订好暑假旅行，感到权力释放。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["ai_agent", "efficiency"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全家在10G全息投影前与海外亲戚「共进晚餐」，母亲看清了对方鬓角白发。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["10g", "hologram"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "毕业论文写霍尔木兹能源替代方案，教授称符合防御型生存政策导向。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["study", "energy_crisis"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "两天内交出APP全面Agent化方案，你明白驾驭不了代理就会被取代。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["workplace", "ai_shift"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "视频通话里争论2026人类是否失去主体性，背景中东战事直播让讨论沉重。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": ["philosophy", "news"]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "液态活检普及，全家体检一管血筛50癌，长辈第一次露出宽慰笑容。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["health_tech", "precision"]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "父母卖燃油车换钠离子电车，担心霍尔木兹危机推高未来三年油价。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["savings", "energy"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "你们用手机直连卫星在极地发第一句「我爱你」，波长跨过高墙。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["romance", "satellite"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "301调查后工厂在墨西哥建AI影子产线绕开关税，你忙着对接数字资产。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["trade_war", "business_pivot"]
+    },
+    {
+      "category": "policy_touch",
+      "scenario": "self_growth",
+      "text": "你在线读完张又侠案通报，感叹高位人物在时代齿轮前也只是微尘。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": ["politics", "witness"]
+    },
+    {
+      "category": "neighborhood",
+      "scenario": "friendship",
+      "text": "邻居聊Hyperloop通车后的双城生活，商量是否在老家置办防御型资产。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["housing", "hyperloop"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "导师要求提交「AI代理伦理使用」认证，学界面临生成数据真实性挑战。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["ai_ethics", "university"]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "你在虚拟医院咨询个性化CRISPR疗法，想修复遗传过敏性体质。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["biotech", "future"]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "太空算力初创因中东战事卫星主权担忧估值腰斩，你交了昂贵学费。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["investment", "startup"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "模拟庭审辩论AI代理签约效力，旧法律框架被技术巨浪拆解。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["law_tech", "learning"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "山西矿难新闻后，能源国企亲戚想调去新能源组，全家商量整晚。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["career_change", "family_talk"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "10G网络同步看世界杯决赛，进球瞬间公寓里爆发出跨区域欢呼。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["world_cup", "camaraderie"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你把重要数据迁入个人主权私有云，防备关税战升级导致互联网断层。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["privacy", "tech_sovereignty"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "生物研讨会引用2026个性化医疗数据，教授夸你的综述有博士级洞察。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["biotech", "insight"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "周末全家看神舟二十三号全息对接，长辈叹断裂时代里主权高度仍在。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["pride", "space"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "你预判霍尔木兹风险推高物流附加费，帮公司省下巨额仓储费拿特别奖。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["business_strategy", "success"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "AI虚拟日落前完成跨半球全息婚礼，碎片化2026里爱仍在找出口。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["romance", "future_lifestyle"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "读完中东战后地缘重组论文，你在10G终端向海外虚拟医院投实习简历。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["career_path", "geopolitics"]
+    },
+    {
+      "category": "money",
+      "scenario": "self_growth",
+      "text": "注销信用消费平台，存款换黄金和算力券，当作2026抗震资产。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["savings", "defense"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你在加密社区备份原创思考，希望认知操纵时代思想仍属于自己。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["originality", "defense"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "能源紧张寒假，全家改开钠电池车做家乡周边微探险，取消长途游。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["family_bond", "simplicity"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "主权数据私有化方案拿到政府去风险补贴，初创团队熬过寒冬。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["startup", "policy_win"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "教授随特朗普访华智库出行，国关课改由AI代理主播代课，你感到错位。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["diplomacy", "academic_life"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "名古屋亚运会直播评论区，你们为AI辅助裁判公正性吵到深夜。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["sports", "debate"]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "AI影像系统帮长辈早期发现肺结节，你感叹技术是断裂时代的避风港。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": ["health_tech", "early_detection"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "读到中国Hyperloop主权竞争力论文，你决定以此作研一开题报告。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["hyperloop", "study"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "AI虚拟雪山前交换对2027的许愿，能源昂贵年里数字浪漫成了奢侈品。",
+      "weight": 1.0,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["ai_art", "romance"]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "公司放弃美元结算转RCEP主权货币，你忙着重对接东南亚代理商。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["currency", "career_shift"]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "模拟庭审辩论AI代理法律责任归属，知名律所合伙人向你递来offer。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["law_career", "success"]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "长辈叹美国老派领导人又回来指手画脚，你静静听着，感受时代脉搏。",
+      "weight": 1.0,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": ["news", "family"]
+    },
+    {
+      "category": "money",
+      "scenario": "self_growth",
+      "text": "退掉奢侈智能表预定，钱改买三年AI代理托管包，用算力防御寒冬。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["savings", "learning"]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "加密频道里交换霍尔木兹局势私下分析，迷雾中寻确定性让你们更亲近。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": ["privacy", "bonding"]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "SpaceX IPO预期带旺国内火箭配套项目，你所在团队获多轮跟投。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["spacex_effect", "career"]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "2026跨年夜读AI代理生成的生存总结，你想：范式迁移或已抵达彼岸。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": ["epiphany", "ai_future"]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "中东战事信号管制下，你们用加密短波保持联系，老派硬核成了感情基石。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": ["war", "romance"]
+    }
+  ]
+}

@@ -65,17 +65,42 @@ async function resolveFateContext({
   }
 
   const sample = await getSampler();
-  const ctx = sample({
+  const narrowedPool = await refinePool(pool, {
+    runId,
+    profile,
+    persona_card,
+    narrativeYear,
+    beatType,
+    priorInterventions,
+    calendarYear
+  });
+  const ctx = await sample({
     runId,
     calendarYear,
     narrativeYear,
     beatType,
-    pool,
+    pool: narrowedPool,
     profile,
     persona_card,
-    priorInterventions
+    priorInterventions,
+    retrieval: 'none'
   });
-  return { ...ctx, placeholder: false };
+  return { ...ctx, placeholder: false, rag_refine: narrowedPool._rag_refine || null };
+}
+
+let refinePoolFn = null;
+
+async function refinePool(pool, opts) {
+  try {
+    if (!refinePoolFn) {
+      const rag = require('./rag-service');
+      refinePoolFn = rag.refineWorldPoolForFate;
+    }
+    return await refinePoolFn(pool, opts);
+  } catch (err) {
+    console.warn('[fate-bridge] pool refine skipped:', err.message);
+    return pool;
+  }
 }
 
 function formatFateContextForPrompt(ctx) {

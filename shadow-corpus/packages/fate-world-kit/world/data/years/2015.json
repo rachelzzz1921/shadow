@@ -23,8 +23,12 @@
     "meme_keywords": [
       "世界那么大",
       "Duang",
-      "主要看气质"
-    ]
+      "主要看气质",
+      "A股股灾",
+      "习马会",
+      "屠呦呦"
+    ],
+    "international_anxiety": "股市崩盘导致的家庭财富缩水与公共安全事故引发的生存焦虑。"
   },
   "pop_culture": [
     "琅琊榜（流行文化）",
@@ -38,7 +42,17 @@
     "微信朋友圈",
     "大圣归来",
     "跑男2（流行文化）",
-    "天津港爆炸讨论"
+    "天津港爆炸讨论",
+    "美剧《纸牌屋》第三季热议",
+    "微信红包改变社交支付习惯",
+    "打车软件补贴大战（滴滴与Uber）",
+    "屠呦呦获诺奖引发青蒿素科普热",
+    "A股千股跌停成为股民共同记忆",
+    "朋友圈第一批广告上线",
+    "冥王星「比心」照片刷屏",
+    "二孩政策开放后的育儿段子",
+    "电影《大圣归来》国漫讨论",
+    "亚投行创始成员国扩容新闻"
   ],
   "macro_events": [
     {
@@ -421,6 +435,258 @@
       "sensitivity": "low",
       "tags": [
         "environment"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "两岸领导人新加坡会面",
+      "detail": "2015年11月7日习近平与马英九在新加坡会晤，为1949年以来两岸最高领导人首次直接会面。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": [
+        "diplomacy",
+        "cross_strait"
+      ]
+    },
+    {
+      "category": "education",
+      "title": "屠呦呦获诺贝尔医学奖",
+      "detail": "2015年10月屠呦呦因发现青蒿素获诺贝尔生理学或医学奖，成为首位获诺奖的中国籍科学家。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "nobel_prize",
+        "science"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "一带一路愿景文件发布",
+      "detail": "2015年3月三部委联合发布「一带一路」愿景与行动文件，倡议上升为国家对外开放新战略。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "belt_and_road",
+        "strategy"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "周永康被判无期徒刑",
+      "detail": "2015年6月11日原政治局常委周永康因受贿等罪被判无期，反腐进入深水区标志性案件。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "high",
+      "tags": [
+        "anti_corruption",
+        "politics"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "欧洲难民危机高峰",
+      "detail": "2015年约130万难民涌入欧洲，引发全球人道主义危机与国际治理效能争议。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "refugees",
+        "crisis"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "悟空号暗物质卫星发射",
+      "detail": "2015年12月17日中国发射暗物质粒子探测卫星「悟空」，空间科学前沿引发科普热议。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "science"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "尼泊尔8.1级地震",
+      "detail": "2015年4月25日尼泊尔7.8级地震波及西藏，数千人遇难，国内捐款与救援牵动人心。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "earthquake",
+        "disaster"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "巴黎气候协定达成",
+      "detail": "2015年12月12日195国达成《巴黎协定》，中国在多边气候外交中发挥关键推动作用。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "climate_change",
+        "diplomacy"
+      ]
+    },
+    {
+      "category": "urban_life",
+      "title": "深圳光明新区滑坡",
+      "detail": "2015年12月20日深圳渣土场滑坡致73人死亡，暴露城市高速扩张中的管理隐患。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "medium",
+      "tags": [
+        "accident",
+        "urbanization"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "709律师抓捕事件",
+      "detail": "2015年7月9日起多地大规模逮捕、约谈人权律师及维权人士，法律界与国际社会高度关注。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "high",
+      "tags": [
+        "legal",
+        "human_rights"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "伊朗核问题全面协议",
+      "detail": "2015年7月14日六国与伊朗达成核问题全面协议，地缘政治一度出现缓和曙光。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "iran_nuclear",
+        "politics"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "亚投行正式开业",
+      "detail": "2015年亚洲基础设施投资银行完成筹建并开业，标志中国参与全球经济治理能力提升。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "finance",
+        "aiib"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "人民币纳入SDR篮子",
+      "detail": "2015年IMF宣布将人民币纳入特别提款权货币篮子，国际化进程获标志性认可。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "finance",
+        "rmb"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "4G流量变现加速",
+      "detail": "2015年4G资费下降与基建完善，移动端流量爆发，短视频与O2O重塑消费场景。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "4g",
+        "mobile_internet"
+      ]
+    },
+    {
+      "category": "culture_entertainment",
+      "title": "美国同性婚姻合法化",
+      "detail": "2015年6月26日美国最高法院裁定全美同婚合法，社交媒体在大陆青年中引发文化冲击。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "medium",
+      "tags": [
+        "culture",
+        "lgbt"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "查理周刊总部遇袭",
+      "detail": "2015年1月7日巴黎查理周刊总部枪击案震惊世界，大陆舆论深度参与相关辩论。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "terrorism",
+        "france"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "全面停用死囚器官移植",
+      "detail": "2015年1月1日起中国全面停止使用死囚器官移植，公民自愿捐献成为唯一合法渠道。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1,
+      "sensitivity": "medium",
+      "tags": [
+        "policy",
+        "medical_ethics"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "新视野号飞掠冥王星",
+      "detail": "2015年7月美国探测器首次近距离飞掠冥王星，「比心」照片刷屏科普圈。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "astronomy"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "美古恢复外交关系",
+      "detail": "2015年7月20日美国与古巴恢复全面外交关系，冷战残余进一步消解。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "diplomacy",
+        "history"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "李光耀逝世",
+      "detail": "2015年3月23日新加坡开国元勋李光耀去世，大陆政界与民间深度总结其治国经验。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "singapore",
+        "history"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "811汇改与人民币贬值",
+      "detail": "2015年8月11日央行改革人民币汇率形成机制，人民币出现明显贬值预期与资本波动。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "fx",
+        "reform"
       ]
     }
   ],
@@ -3373,6 +3639,486 @@
         "acceptance"
       ],
       "scenario": "self_growth"
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "生物老师含泪讲屠呦呦诺奖，你觉得实验室瓶罐不再只是化学式。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "tu_youyou",
+        "biology"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "叔叔五月加杠杆炒股，六月爆仓后坐了一整天没说话，家里压抑到极点。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "stock_market",
+        "financial_loss"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全面二孩消息后，爷爷奶奶吃饭时总盯着妈妈看，她推碗进了卧室。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "two_child_policy",
+        "family_pressure"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "省下生活费买4G手机，被窝看视频不再转圈，3G时代像远去。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "4g",
+        "smartphone"
+      ]
+    },
+    {
+      "category": "policy_touch",
+      "scenario": "academic",
+      "text": "英语角争论美国同婚合法，同学向外教展示彩虹滤镜，讨论尺度空前。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "lgbt",
+        "campus_debate"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "同事偷偷传阅人民币贬值新闻，私下讨论要不要换点美元避险。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "finance",
+        "rmb"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "地理课看冥王星比心照片，老师说这是给宇宙的情书，你想报天文系。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "astronomy",
+        "pluto"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "天津港爆炸后妈妈非要买防毒面具，虽没用上，不安笼罩好几周。",
+      "weight": 1.3,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "safety",
+        "anxiety"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "一带一路文件发布，老板说要去中亚接项目，大家查塔什干在哪。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "belt_and_road",
+        "employment"
+      ]
+    },
+    {
+      "category": "neighborhood",
+      "scenario": "friendship",
+      "text": "法律系舍友说夏天很多律师被抓，群里发「慎言」表情包，瞬间安静。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "legal",
+        "censorship"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "4G视频里女友哭说A股亏光嫁妆，你只能隔屏安慰「牛市会回来」。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "love",
+        "stock_market"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "朋友圈查理周刊蜡烛图刷屏，评论区为言论自由与文明冲突吵翻。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "social_media",
+        "debate"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "图书馆开MOOC体验区，你用手机听哈佛讲座，感觉围墙在塌。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "online_learning",
+        "academic"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "爸爸说单位「新常态」考核变严、涨薪变慢，晚饭后总叹气。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "economy",
+        "family_life"
+      ]
+    },
+    {
+      "category": "neighborhood",
+      "scenario": "self_growth",
+      "text": "东方之星沉船后你退掉长江船票，第一次深刻感到生命脆弱。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "disaster",
+        "safety_consciousness"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "career",
+      "text": "注册O2O配送员账号穿梭抢单，虽累，收入竟比坐办公室还高。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "employment",
+        "internet_plus"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "雾霾红色预警停课两天，大家在微信群打卡交作业，移动教学来了。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "smog",
+        "digital_education"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "欧洲难民危机沙滩男孩照片让你盯屏很久，苦难既近又远。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "empathy",
+        "world_news"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "friendship",
+      "text": "聚餐全比谁抢微信红包多，单都不买，埋头点屏幕。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "wechat",
+        "friendship"
+      ]
+    },
+    {
+      "category": "policy_touch",
+      "scenario": "career",
+      "text": "得知停用死囚器官，医学生的你觉得手术台道德重量轻了一点。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "medical",
+        "ethics"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "表姐怀上二胎，除夕全家举杯，像补回多年前的一个缺憾。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "two_child_policy"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "听说亚投行招人，你把简历改三遍投过去，想参与大场面。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career",
+        "aiib"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "习马会新闻评论区不打不相识，线下见面后真的谈起恋爱。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "love",
+        "news"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "课间传《纸牌屋》第三季资源，教授推门竟也问磁力链接。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "campus_life",
+        "tv_show"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "friendship",
+      "text": "闺蜜为买iPhone在股市亏光本金，你借两千，路边摊吃麻辣烫都哭。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "friendship",
+        "stock_market"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "关注悟空卫星官微，每天看暗物质进展，觉得离宇宙秘密又近一步。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "self_growth"
+      ]
+    },
+    {
+      "category": "neighborhood",
+      "scenario": "family",
+      "text": "邻居阿姨去监利参加东方之星哀悼回来瘦一圈，社区人帮她做饭。",
+      "weight": 1.3,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "disaster",
+        "neighbor"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "研讨会上你谈人民币入SDR，被教授夸有国际视野，自豪感满满。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "finance"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "公司一带一路沿线利润增长，你拿到比去年高一倍的年终奖。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "bonus",
+        "belt_and_road"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "群里疯传天津港火球视频，虽离天津几百公里，大家互道平安。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "friendship",
+        "safety"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "妈妈淘宝买青蒿素相关补品，你笑是智商税，全家仍为屠呦呦高兴。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "science_news"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "尼泊尔余震担心，西藏夏令营取消，你改上尼泊尔文化网课。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "disaster"
+      ]
+    },
+    {
+      "category": "policy_touch",
+      "scenario": "self_growth",
+      "text": "巴黎协定签署后你收集外卖袋重复用，觉得该为地球做点什么。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "climate",
+        "self_growth"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "career",
+      "text": "HR说只收网投简历，你花半天美化在线职业档案。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career",
+        "digitalization"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "股灾那天爸爸锁起所有存折，不许妈妈再提「炒股」二字。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "family",
+        "stock_market"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "写亚洲经济论文对比中印增速，发现印度增速真的追上来了。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "research"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "哥们发冥王星直播链接，你们熬夜语音等到黑影显现，友谊地久天长。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "friendship",
+        "space"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "深圳滑坡后全家检查老房墙皮裂缝，怕遭遇「人祸」。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "family",
+        "safety_anxiety"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "法律课分析709影响，教授欲言又止，你感到无声压力。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "legal",
+        "academic_freedom"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "看阿里京东移动端特惠，你辞职做移动运营，觉得才是未来。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career",
+        "ecommerce"
+      ]
     }
   ],
   "sources": [
@@ -3380,7 +4126,24 @@
     "https://www.stats.gov.cn/sj/tjgb/",
     "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
     "https://www.cnnic.cn/",
-    "https://www.moe.gov.cn/jyb_xwfb/"
+    "https://www.moe.gov.cn/jyb_xwfb/",
+    "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+    "https://en.wikipedia.org/wiki/21st_century",
+    "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3"
   ],
-  "version": "2026.06.14-v1"
+  "version": "2026.06.14-v1",
+  "notebooklm_summary": "2015年是中国大陆历史性变革与经济剧烈波动并存的一年。政治上实现1949年以来首次两岸领导人会面，并正式决定全面二孩；经济经历A股疯涨与股灾震荡，「一带一路」愿景发布、亚投行筹建取得进展。天津港爆炸与东方之星沉船引发公共安全反思，屠呦呦获诺奖提振民族自豪。",
+  "notebooklm_social_mood": "社会情绪在财富幻觉破灭与政策转型期待中交织。上半年全民炒股在六月后化为恐慌，许多家庭财富缩水。全面二孩引发生育成本讨论，重大事故频发令公众质疑工业化底线安全，4G深度普及使社交媒体成为情绪主宣泄口。",
+  "notebooklm_sources": [
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告"
+  ],
+  "notebooklm_gaps": [
+    "2015年中国大陆GDP的万亿元精确数值",
+    "2015年中国CPI的具体百分比",
+    "2015年高考报名人数的具体万分位数字",
+    "2015年大学毕业生人数的精确统计",
+    "70大城市房价指数的精确变动百分比",
+    "2015年具体的十大流行语清单"
+  ],
+  "notebooklm_imported_at": "2026-06-14"
 }

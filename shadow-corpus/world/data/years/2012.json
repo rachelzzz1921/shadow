@@ -23,8 +23,11 @@
     "meme_keywords": [
       "元芳你怎么看",
       "江南style",
-      "屌丝"
-    ]
+      "屌丝",
+      "伦敦奥运",
+      "希格斯玻色子"
+    ],
+    "international_anxiety": "叙利亚内战升级引发的地区动荡，以及美国校园枪击案激发的社会安全恐慌。"
   },
   "pop_culture": [
     "中国好声音",
@@ -38,7 +41,17 @@
     "QQ微信",
     "钓鱼岛（流行文化）",
     "伦敦奥运",
-    "小时代（流行文化）"
+    "小时代（流行文化）",
+    "伦敦夏季奥运会 (社交媒体时代首个全民体育盛宴)",
+    "莫言获诺贝尔文学奖 (中国文学走向世界里程碑)",
+    "希格斯玻色子 (「上帝粒子」科普热潮)",
+    "神舟九号与天宫对接 (女航天员刘洋引发全民关注)",
+    "辽宁号航母交付 (国产海权象征)",
+    "电影《复仇者联盟》 (好莱坞大片持续冲击)",
+    "智能手机应用爆发 (移动互联生活化加深)",
+    "叙利亚冲突地缘政治科普",
+    "江南Style与元芳体 (年度网络迷因)",
+    "舌尖上的中国与泰囧 (本土影视现象)"
   ],
   "macro_events": [
     {
@@ -421,6 +434,150 @@
       "sensitivity": "low",
       "tags": [
         "environment"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "希格斯玻色子被发现",
+      "detail": "2012年7月4日LHC实验宣布发现希格斯玻色子，填补标准模型关键环节，引发全民「上帝粒子」科普热。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "higgs_boson"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "奥巴马连任美国总统",
+      "detail": "2012年11月6日奥巴马再次赢得美国大选，国内媒体解读后危机政策延续与政治极化。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "election",
+        "us_politics"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "飓风桑迪袭击美东",
+      "detail": "2012年10月超级飓风桑迪重创美国东海岸，数千亿美元损失引发全球气候韧性讨论。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "hurricane",
+        "climate_change"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "桑迪胡克小学枪击案",
+      "detail": "2012年12月14日康涅狄格州校园枪击致28人死亡，枪支管控与精神健康议题席卷全球新闻。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 1.1,
+      "sensitivity": "medium",
+      "tags": [
+        "school_shooting",
+        "safety"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "王立军事件",
+      "detail": "2012年2月6日王立军进入美国驻成都总领事馆，引发政坛剧烈波动并波及高层政治走向。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "controversy"
+      ]
+    },
+    {
+      "category": "culture_entertainment",
+      "title": "伦敦夏季奥运会",
+      "detail": "2012年伦敦奥运成功举办，007开场短片与社交媒体直播让全球共享竞技时刻。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "olympics",
+        "culture"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "美国JOBS法案通过",
+      "detail": "2012年美国通过初创企业融资法案，众筹与股权融资规则成为创投圈讨论热点。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "fintech",
+        "regulation"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "叙利亚内战全面升级",
+      "detail": "2012年叙利亚内战急剧升级，人道危机与大国博弈成为国际新闻与校园辩论主题。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.2,
+      "sensitivity": "medium",
+      "tags": [
+        "war",
+        "middle_east"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "辽宁号航母交付海军",
+      "detail": "2012年9月25日中国首艘航母辽宁号正式交付，海权与国防话题进入大众视野。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "navy",
+        "defense"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "中共十八大召开",
+      "detail": "2012年11月十八大举行，习近平当选中共中央总书记，反腐与改革议程进入新周期。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "leadership"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "美国STOCK法案签署",
+      "detail": "2012年美国通过禁止国会议员内幕交易法案，合规与审计行业研读新规案例。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "regulation",
+        "finance"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "马里北部冲突升级",
+      "detail": "2012年马里北部武装冲突升级，法军介入前模联与人道议题频繁引用。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "medium",
+      "tags": [
+        "africa",
+        "conflict"
       ]
     }
   ],
@@ -3384,6 +3541,486 @@
         "acceptance"
       ],
       "scenario": "self_growth"
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你看希格斯玻色子新闻直播，虽不懂方程，仍为人类捉到「上帝粒子」震撼。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "discovery"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全家看神舟九号对接，刘洋出舱挥手时母亲说：女性也能顶起半边天。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "pride",
+        "family"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "刚入行的你研读STOCK法案，感叹连议员内幕交易都要被严管。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "regulation",
+        "career_growth"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "担心全球通胀，父母把部分理财换成黄金，开启防御型存钱模式。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "investment",
+        "risk"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "你在微博给异地恋人发伦敦奥运007开场截图，那是夏天共同的记忆。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "romance",
+        "olympics"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "文学课记录莫言诺奖评论，教授说范式迁移起点要更自信讲中国故事。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "literature",
+        "culture"
+      ]
+    },
+    {
+      "category": "neighborhood",
+      "scenario": "friendship",
+      "text": "初春楼下邻居聊王立军坊间传闻，大家都在信号里揣摩时代走向。",
+      "weight": 1.4,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "chat"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "跨境电商创业者研究JOBS法案众筹条款，幻想绕开银行信贷高墙。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "startup",
+        "innovation"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "叙利亚内战新闻让长辈整晚叹息，全家聊大国博弈与人道代价。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "history",
+        "mood"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "桑迪飓风断电新闻后，你给奶奶急救箱添手摇充电器，叮嘱防灾。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "safety",
+        "care"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "你预判十八大后产业合规风险，帮公司省下公关费，获主管赏识。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "business",
+        "success"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "手机刷莫言获奖消息，你想纯文学在数字洪水里仍有撼动人心的力量。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "writing",
+        "awareness"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "模联辩论马里冲突人道边界，你感到每个干预决策都代价沉重。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "mun",
+        "global_order"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "辽宁号交付新闻让父亲买酒庆祝，全家在阳台聊海权回归的自豪。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "patriotism",
+        "family"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "self_growth",
+      "text": "退掉分期腕表计划，钱存入应急准备金，学着在动荡年建立财务弹性。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "savings",
+        "literacy"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "叙利亚断网报道后，你用加密软件联系大马士革志愿者同学报平安。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "witness",
+        "bonding"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "模拟法庭用JOBS法案逻辑辩论众筹合法性，获嘉宾律师赞许。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "law_tech",
+        "talent"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "2012跨年夜看博客调侃玛雅末日，你想权力交替与科学突破的时代已坐稳。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "epiphany",
+        "growth"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "微博刷屏「元芳你怎么看」，你和室友比赛谁的段子最像狄仁杰。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "meme",
+        "weibo"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "7·21北京暴雨那晚父亲涉水回家，全家决定备高帮雨靴和手电。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "disaster",
+        "safety"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "宿舍循环《江南Style》骑马舞，楼下阿姨上来敲门说太吵。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "music",
+        "meme"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "钓鱼岛新闻后父亲少看日货广告，全家讨论抵制与理性爱国。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "patriotism",
+        "debate"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "GDP增速破8进宏观课，你抄下「稳增长」成考试高频词。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "economics",
+        "study"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "《舌尖上的中国》首播后你注册美食博客，第一次认真写家乡味。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "food",
+        "writing"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "房地产调控后父母暂停第二套房，饭桌上计算限购还能撑几年。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "housing",
+        "policy"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "微信用户破三亿，公司让你做公众号运营，加班写第一篇推送。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "wechat",
+        "digitalization"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "泰囧热映，你和恋人包场笑到流泪，散场后互称「屌丝也要幸福」。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "movie",
+        "romance"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "625万毕业生新闻进班会，你把简历改成「移动互联网」关键词。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "employment",
+        "graduation"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "桑迪胡克枪击案后学校加保安，你在想校园安全为何总靠事后补丁。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "safety",
+        "reflection"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "十八大开幕直播时全家安静观看，长辈说换届年话要少说多做。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "family"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "你和死党在BBS争论奥巴马连任能否弥合撕裂，争到凌晨还不睡。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "us_politics",
+        "debate"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "异地高考争议上新闻，你帮表弟查政策，感到教育公平牵动全家神经。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "education",
+        "policy"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "移动互联网元年标签贴满招聘页，你转行做产品，第一次画原型图。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career_pivot",
+        "tech"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "物理课播放LHC发现发布会片段，你决定选修粒子物理通识。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "learning"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你在App Store下载第一批生活类应用，手机桌面一下子堆满图标。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "mobile",
+        "apps"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "《复仇者联盟》上映，弟弟吵着要IMAX，全家排队买爆米花。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "movie",
+        "family"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "你用遥感新闻向长辈解释极端暴雨增多，叮嘱少在汛期走地下通道。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "climate_edu",
+        "care"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "self_growth",
+      "text": "你取消换机计划，钱报在线课程，觉得技能比新手机抗周期。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "skills",
+        "frugality"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "伦敦奥运刘翔摔倒瞬间刷屏，你和球友在QQ群沉默很久才说话。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "sports",
+        "emotion"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "审计忙季里你加班到深夜，窗外十八大标语亮起，城市像换档期。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "work",
+        "era_mood"
+      ]
     }
   ],
   "sources": [
@@ -3391,7 +4028,21 @@
     "https://www.stats.gov.cn/sj/tjgb/",
     "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
     "https://www.cnnic.cn/",
-    "https://www.moe.gov.cn/jyb_xwfb/"
+    "https://www.moe.gov.cn/jyb_xwfb/",
+    "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+    "https://en.wikipedia.org/wiki/21st_century",
+    "https://www.historycentral.com/Today/21st.html"
   ],
-  "version": "2026.06.14-v1"
+  "version": "2026.06.14-v1",
+  "notebooklm_summary": "2012年是全球权力交替与科学边界突破之年。中国进入习近平时代，开启大规模反腐与深化改革新周期；美国完成大选奥巴马连任；希格斯玻色子发现补全物理学标准模型；桑迪飓风与桑迪胡克枪击案则在环境与社会安全上留下深重阴影。",
+  "notebooklm_social_mood": "大众情绪在科学发现的兴奋、伦敦奥运竞技热潮与国内政治局势剧烈变动（如王立军事件）的关注中交织。桑迪胡克惨剧引发集体悲恸，莫言获诺贝尔文学奖则极大提振本土文化自信。",
+  "notebooklm_sources": [
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告"
+  ],
+  "notebooklm_gaps": [
+    "2012年中国大陆具体的GDP（万亿）、CPI、房价指数、高考及毕业生人数统计数据",
+    "2012年具体的中国大陆本土流行网络用语、神曲（笔记本侧重重大政治与科学事件）",
+    "针对2012年中国大陆宏观经济微调政策的具体细节"
+  ],
+  "notebooklm_imported_at": "2026-06-14"
 }

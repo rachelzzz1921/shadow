@@ -23,8 +23,13 @@ shadow-corpus/world/
     ├── generate-era-draft.mjs
     ├── validate-era.mjs
     ├── seed-supabase.mjs
+    ├── import-notebooklm-patch.mjs
+    ├── query-corpus.mjs          # 本地结构化检索
     └── demo-fate-weights.mjs
 ```
+
+NotebookLM 合并：`notebooklm/00-如何使用.md` → `data/notebooklm-import/*.patch.json` → `import-notebooklm-patch.mjs`。  
+架构图：`world/docs/ARCHITECTURE.md`。语义检索：`packages/rag-kit/scripts/query.mjs`。
 
 文档：
 

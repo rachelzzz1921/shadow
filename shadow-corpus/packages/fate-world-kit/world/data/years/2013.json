@@ -23,8 +23,12 @@
     "meme_keywords": [
       "土豪我们做朋友",
       "人艰不拆",
-      "PM2.5"
-    ]
+      "PM2.5",
+      "中国梦",
+      "余额宝",
+      "自贸区"
+    ],
+    "international_anxiety": "恐怖袭击频发与空气污染问题"
   },
   "pop_culture": [
     "爸爸去哪儿",
@@ -38,7 +42,17 @@
     "神舟十号",
     "中国梦（流行文化）",
     "小时代2",
-    "全民抢购"
+    "全民抢购",
+    "余额宝掀起全民理财热",
+    "斯诺登“棱镜门”引发隐私大讨论",
+    "雾霾（PM2.5）成为全民话题",
+    "微信支付与红包雏形出现",
+    "自贸区（上海）概念火爆",
+    "4G牌照正式发放引发换机预期",
+    "《纸牌屋》第一季在国内影评圈流行",
+    "习连会开启两岸新互动",
+    "嫦娥三号与玉兔号落月",
+    "柴静雾霾纪录片引发全民讨论"
   ],
   "macro_events": [
     {
@@ -421,6 +435,258 @@
       "sensitivity": "low",
       "tags": [
         "environment"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "国家主席选举完成",
+      "detail": "3月，在第十二届全国人大一次会议上，习近平当选国家主席，李克强当选国务院总理。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.5,
+      "sensitivity": "low",
+      "tags": [
+        "governance",
+        "transition"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "一带一路战略升级",
+      "detail": "11月中共十八届三中全会将“一带一路”升级为国家战略，并提出全面深化改革等目标。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.4,
+      "sensitivity": "low",
+      "tags": [
+        "strategy",
+        "economy"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "劳教制度正式废止",
+      "detail": "12月28日全国人大常委会决定废止有关劳动教养法律规定，延续半世纪的劳教制度终结。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.4,
+      "sensitivity": "medium",
+      "tags": [
+        "law",
+        "reform"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "金水桥恐怖袭击",
+      "detail": "10月28日北京天安门金水桥发生恐怖袭击，五人死亡，引发反恐局势升级。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "high",
+      "tags": [
+        "terrorism",
+        "security"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "嫦娥三号月面软着陆",
+      "detail": "12月14日，“嫦娥三号”和“玉兔号”完成首次月面软着陆和月面巡视勘探。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "science"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "斯诺登揭秘棱镜计划",
+      "detail": "爱德华·斯诺登披露NSA全球监视计划，导致全球对网络安全与主权的重新评估。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 1.4,
+      "sensitivity": "medium",
+      "tags": [
+        "security",
+        "internet"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "东海防空识别区",
+      "detail": "11月中国宣布划设东海防空识别区，涵盖钓鱼岛等争议区域，引发外交关注。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.2,
+      "sensitivity": "medium",
+      "tags": [
+        "sovereignty",
+        "diplomacy"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "吉林禽业公司火灾",
+      "detail": "6月3日吉林宝源丰禽业公司发生液氨泄漏火灾，造成121人死亡，暴露工业隐患。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "accident",
+        "safety"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "习连会首次举行",
+      "detail": "2月25日习近平在北京会见连战，开启国共两党最高领导人的定期互动。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "cross-strait",
+        "politics"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "神舟十号对接",
+      "detail": "6月神舟十号搭载三名航天员成功发射并与天宫一号对接，王亚平进行首次太空授课。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "education"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "厦门BRT纵火案",
+      "detail": "6月7日厦门公车起火事故造成47人死亡，被定性为自杀式恐怖袭击。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "high",
+      "tags": [
+        "terrorism",
+        "crime"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "教宗本笃十六退位",
+      "detail": "2月教宗辞职，为1415年来首次，方济各随后当选，引发全球对宗教改革的关注。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "religion",
+        "world"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "英国撒切尔去世",
+      "detail": "4月8日前首相玛格丽特·撒切尔逝世，大陆学界对其治理经验展开广泛讨论。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "history",
+        "uk"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "曼德拉逝世",
+      "detail": "12月5日纳尔逊·曼德拉逝世，中国最高领导人致哀，官方评价极高。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "hero",
+        "south africa"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "希格斯玻色子确认",
+      "detail": "欧洲核子研究中心确认新粒子性质，该发现获2013年诺贝尔物理学奖。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 0.7,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "physics"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "台风海燕重创",
+      "detail": "超强台风海燕席卷菲律宾造成逾6000人死亡，引发全球人道主义救援。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.8,
+      "sensitivity": "low",
+      "tags": [
+        "typhoon",
+        "disaster"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "泰国内乱开始",
+      "detail": "10月泰国爆发反政府示威，盈拉政府解散国会，政治僵局持续至次年。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "thailand",
+        "politics"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "叙利亚接受化武削减",
+      "detail": "9月叙利亚同意销毁化学武器库以避免美国干预，暂时缓解地缘危机。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "syria",
+        "geopolitics"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "互联网人才荒",
+      "detail": "随着移动端普及，IT行业研发人才薪酬持续攀升，薪资比平均水平高出2倍。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "employment",
+        "internet"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "波士顿马拉松爆炸",
+      "detail": "4月美国波士顿发生恐袭，社交媒体实时传播救援过程，引发国内安保警惕。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 1,
+      "sensitivity": "medium",
+      "tags": [
+        "terrorism",
+        "usa"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "3D打印机枪问世",
+      "detail": "全球首支3D打印金属枪问世，引发法律与科技伦理的深度担忧。",
+      "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+      "weight": 0.7,
+      "sensitivity": "medium",
+      "tags": [
+        "tech",
+        "gun control"
       ]
     }
   ],
@@ -3384,6 +3650,486 @@
         "acceptance"
       ],
       "scenario": "self_growth"
+    },
+    {
+      "category": "school",
+      "text": "教授在思修课上滔滔不绝地讲‘中国梦’，我在笔记本上画了个玉兔号，想着什么时候能亲自看看月球。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "campus",
+        "politics"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "我把刚发的两千块工资全转进了余额宝，每天看着跳出来的几分钱收益，觉得银行定期真是弱爆了。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "finance",
+        "lifestyle"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "digital",
+      "text": "舍友整晚在聊斯诺登，搞得我也赶紧去查了查自己电脑的摄像头有没有被‘棱镜’贴掉。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "privacy",
+        "tech"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "health",
+      "text": "雾霾把天都染黑了，我妈非要寄一大包口罩到宿舍，说PM2.5会进肺，在外面必须戴上。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "smog",
+        "health"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "policy_touch",
+      "text": "听到新闻说劳教制度被废止了，法学院的哥们儿激动的请大家吃烧烤，说这是法治的春天。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "law",
+        "justice"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "family",
+      "text": "雅安地震那天，我疯狂给在成都工作的表姐打电话，直到听到她声音的那一刻才敢喘气。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "earthquake",
+        "safety"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "romance",
+      "text": "我和她在上海自贸区的招聘宣讲会上认识，大家都在畅想这个‘新改革试点’会带来什么机遇。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "job",
+        "romance"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "school",
+      "text": "王亚平在太空讲水滴实验的时候，物理系的学生全聚在食堂看电视直播，那种场面真的挺震撼。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "science"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "money",
+      "text": "听说移动应用开发是风口，我报了一个暑期Android培训班，尽管还没拿到4G手机。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "job",
+        "tech"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "neighborhood",
+      "text": "邻居家的舅舅从劳教所回来了，整个人不爱说话，大家都说因为制度废了他才捡回条命。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "policy",
+        "emotions"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "digital",
+      "text": "我通过微信第一次收到了哥们发的‘测试’信息，感觉这个App正在慢慢取代我的QQ。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "wechat",
+        "social"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "为了看《纸牌屋》，我第一次在宿舍试着用了‘科学上网’，那种突破限制的感觉很微妙。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "censorship",
+        "drama"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "health",
+      "text": "看到金水桥和厦门BRT的新闻，坐公交车时总会下意识地看一眼有没有人带易燃物。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "security",
+        "anxiety"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "school",
+      "text": "系里举办‘斯诺登与数字霸权’辩论赛，我有幸抽到了正方，在台上慷慨激昂地谈隐私权。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "debate",
+        "privacy"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "family",
+      "text": "爸爸迷上了在淘宝买土特产，说是要支持‘一带一路’沿线的小微企业，家里全是奇怪的果干。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "e-commerce",
+        "strategy"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "money",
+      "text": "公司HR说今年的年终奖可能要扣掉，因为‘三公消费’禁令让原本的大客户都不敢订餐了。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "anti-corruption",
+        "income"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "digital",
+      "text": "朋友安利比特币，说未来能涨很多倍，你笑笑没接话。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "crypto",
+        "regret"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "考研政治划重点的时候，‘五位一体’和‘四个现代化’的新提法让我们背得头大。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "postgraduate",
+        "exam"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "romance",
+      "text": "她在雅安支教回来说灾区太苦，我们决定把蜜月的钱捐给受灾小学，婚礼也简办了。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "charity",
+        "love"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "neighborhood",
+      "text": "小区里的老头老太都在传‘撒切尔死得惨’，我们这种年轻人只能在一旁尴尬地解释地缘政治。",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "neighborhood",
+        "news"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "school",
+      "text": "我通过Coursera报了一门哈佛的课程，第一次感觉在这个围墙里也能接触到世界尖端知识。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "mooc",
+        "learning"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "digital",
+      "text": "刚到手的4G手机网速比宿舍宽带还快，我第一次在回家的动车上完整看完了新闻直播。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "4g",
+        "experience"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "family",
+      "text": "除夕夜全家看着曼德拉的纪录片感叹，我弟却在旁边不停地摇一摇找附近的人聊天。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "family",
+        "digital-gap"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "policy_touch",
+      "text": "街道办事处开始推广‘防空知识’，分发的小册子里写满了遇到紧急情况的求生指南。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "defense",
+        "society"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "money",
+      "text": "我在北京中关村看到各种互联网初创公司在招兵买马，感觉只要会写两行代码就能拿到过万月薪。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career",
+        "internet"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "图书馆新进了一批关于‘大数据’的外文书，我看了一个下午，决定换个方向做毕设。",
+      "weight": 0.8,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "academic",
+        "tech-trend"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "health",
+      "text": "看到新闻里泰国内乱，妈妈果断取消了全家清迈游的计划，改成了去西安看兵马俑。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "travel",
+        "safety"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "school",
+      "text": "全班都在讨论斯诺登藏在香港哪家酒店，有同学甚至想周末组队去人肉搜索，被辅导员劝住了。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "politics",
+        "campus"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "digital",
+      "text": "我在群里分享了玉兔号的漫画形象，结果炸出了一群平时不说话的航天迷，大家聊到了半夜。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "space",
+        "fandom"
+      ],
+      "scenario": "friendship"
+    },
+    {
+      "category": "policy_touch",
+      "text": "听说因为中央反四风，很多高档会所都关门了，我也从原本的高端酒楼策划岗离职了。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "policy",
+        "employment"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "money",
+      "text": "爷爷查出白内障，医生说现在的国产晶体技术已经不比进口的差，全家商量后选了国产的。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "medical",
+        "domestic"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "romance",
+      "text": "异地恋的我们约好在雅安地震后去当志愿者，那种并肩战斗的感觉让我们更坚定了要在一起。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "love",
+        "volunteering"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "school",
+      "text": "教研室买了一台3D打印机，虽然只能打简单的塑料模型，但我们还是兴奋地围观了一整天。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "tech",
+        "experiment"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "neighborhood",
+      "text": "楼下开了一家叫‘乐视电视’的体验店，邻居大叔天天跑去研究怎么在电视上看网络视频。",
+      "weight": 0.6,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "tech",
+        "household"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "digital",
+      "text": "我通过Coursera拿到了一张斯坦福机器学习的证书，在简历上狠狠地记下了一笔。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "learning",
+        "resume"
+      ],
+      "scenario": "self_growth"
+    },
+    {
+      "category": "money",
+      "text": "听说公司要派人去‘一带一路’国家开拓业务，我犹豫要不要报名，毕竟能多赚不少津贴。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career",
+        "global"
+      ],
+      "scenario": "career"
+    },
+    {
+      "category": "school",
+      "text": "论文初稿因为引用了敏感的斯诺登报道被导师打回来重写，说要‘把握好尺度’。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "academic",
+        "censorship"
+      ],
+      "scenario": "academic"
+    },
+    {
+      "category": "health",
+      "text": "亲戚曾在2014年昆明火车站事件后心有余悸，如今进大型枢纽总会下意识找出口。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "trauma",
+        "terrorism"
+      ],
+      "scenario": "family"
+    },
+    {
+      "category": "romance",
+      "text": "和他在北京的雾霾天里戴着情侣口罩约会，竟然有一种‘末日之恋’的浪漫错觉。",
+      "weight": 0.7,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "love",
+        "smog"
+      ],
+      "scenario": "love"
+    },
+    {
+      "category": "money",
+      "text": "看到余额宝那破6%的年化收益率，我决定把银行里所有的死期存款都取出来投进去。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "finance",
+        "decision"
+      ],
+      "scenario": "career"
     }
   ],
   "sources": [
@@ -3391,7 +4137,23 @@
     "https://www.stats.gov.cn/sj/tjgb/",
     "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
     "https://www.cnnic.cn/",
-    "https://www.moe.gov.cn/jyb_xwfb/"
+    "https://www.moe.gov.cn/jyb_xwfb/",
+    "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+    "https://en.wikipedia.org/wiki/21st_century",
+    "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3"
   ],
-  "version": "2026.06.14-v1"
+  "version": "2026.06.14-v1",
+  "notebooklm_summary": "2013年是中国政坛完成权力交替的开局之年，习近平当选国家主席，提出“一带一路”战略及全面深化改革决定。社会面临雅安地震与多起恐怖袭击的严峻挑战，法治层面废止劳教制度。技术上嫦娥三号落月，而斯诺登事件则引发了对数字主权与隐私的高度关注。",
+  "notebooklm_social_mood": "社会情绪处于对“新政”与“中国梦”的政治期待与对生存环境（雾霾、恐袭、地震）的普遍忧虑之间。斯诺登事件让青年群体对网络安全产生冷战后的第一次集体觉醒，而互联网金融（如余额宝）的兴起则让普通家庭第一次感受到科技变现的魅力。",
+  "notebooklm_sources": [
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告"
+  ],
+  "notebooklm_gaps": [
+    "具体的GDP万亿元精确数值",
+    "CPI的具体百分比",
+    "具体的房价指数变动比例",
+    "高考及毕业生精确人数统计",
+    "2013年十大网络流行语（笔记本中较少提及2013年的网络模因）"
+  ],
+  "notebooklm_imported_at": "2026-06-14"
 }

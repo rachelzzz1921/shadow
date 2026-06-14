@@ -9,6 +9,7 @@ import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from 
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { dedupeByText, dedupeMacros } from '../lib/helpers.mjs';
+import { dedupeByTextFuzzy, dedupeMacrosFuzzy } from '../lib/dedupe.mjs';
 import { inferScenario } from '../lib/scenario-domains.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -107,13 +108,13 @@ function mergeYear(base, patch) {
   }
 
   const patchMacros = (patch.macro_events || []).map(normalizePatchItem);
-  out.macro_events = dedupeMacros([...(out.macro_events || []), ...patchMacros]);
+  out.macro_events = dedupeMacrosFuzzy([...(out.macro_events || []), ...patchMacros]);
 
   const patchMicros = (patch.micro_events || []).map((m) => ({
     ...m,
     scenario: m.scenario || inferScenario(m)
   }));
-  out.micro_events = dedupeByText([...(out.micro_events || []), ...patchMicros]);
+  out.micro_events = dedupeByTextFuzzy([...(out.micro_events || []), ...patchMicros]);
 
   if (patch.notebooklm_gaps?.length) {
     out.notebooklm_gaps = patch.notebooklm_gaps;

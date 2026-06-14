@@ -23,8 +23,12 @@
     "meme_keywords": [
       "北京奥运会",
       "汶川抗震",
-      "北京欢迎你"
-    ]
+      "北京欢迎你",
+      "众志成城",
+      "金融海啸",
+      "范跑跑"
+    ],
+    "international_anxiety": "次贷危机蔓延引发的全球衰退预期及奶粉安全导致的育儿恐慌。"
   },
   "pop_culture": [
     "北京奥运会",
@@ -38,7 +42,17 @@
     "神舟七号",
     "魔杰座（流行文化）",
     "网络募捐",
-    "非诚勿扰"
+    "非诚勿扰",
+    "北京奥运开幕式 (全球实力对比迁移的视觉注脚)",
+    "菲尔普斯八金纪录 (奥运体育偶像巅峰)",
+    "Android系统面世 (移动互联新纪元前哨)",
+    "Google Chrome浏览器发布 (桌面浏览器格局重塑)",
+    "「北京欢迎你」 (大街小巷的现象级旋律)",
+    "志愿者热潮 (全民参与抗震与奥运的社会景观)",
+    "次贷危机大讨论 (全民金融科普期)",
+    "华南虎照片真相曝光 (互联网监督权觉醒)",
+    "神舟七号出舱影像 (民族自豪感载体)",
+    "QQ群募捐与网络监督"
   ],
   "macro_events": [
     {
@@ -423,6 +437,282 @@
       "sensitivity": "low",
       "tags": [
         "environment"
+      ]
+    },
+    {
+      "category": "culture_entertainment",
+      "title": "北京夏季奥运会",
+      "detail": "2008年8月8日北京奥运开幕，李宁点燃主火炬；中国51金居首，全民经历百年圆梦时刻。",
+      "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": [
+        "olympics",
+        "soft_power"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "四万亿刺激计划出台",
+      "detail": "2008年11月国常会推出四万亿扩大内需计划；高铁、基建与家电下乡成为家庭与企业的共同话题。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": [
+        "economic_stimulus",
+        "infrastructure"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "三聚氰胺奶粉危机",
+      "detail": "2008年三鹿等奶粉含三聚氰胺曝光，多名婴幼儿受害；超市货架前家长仔细核对成分表。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.2,
+      "sensitivity": "medium",
+      "tags": [
+        "food_safety",
+        "crisis"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "雷曼兄弟破产",
+      "detail": "2008年9月15日雷曼兄弟申请破产，全球金融危机失控；A股与外贸订单连锁受挫。",
+      "source_url": "https://zh.wikipedia.org/wiki/2008%E5%B9%B4%E7%92%B0%E7%90%83%E9%87%91%E8%9E%8D%E5%8D%B1%E6%9C%BA",
+      "weight": 1.3,
+      "sensitivity": "low",
+      "tags": [
+        "financial_crisis",
+        "wall_street"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "奥巴马赢得美国大选",
+      "detail": "2008年11月奥巴马当选美国总统；国内媒体解读种族政治与全球经济走出危机的路径。",
+      "source_url": "https://www.historycentral.com/Today/21st.html",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "us_election",
+        "obama"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "十一届人大一次会议",
+      "detail": "2008年3月十一届全国人大一次会议举行，胡锦涛、温家宝连任；金融危机应对进入国家议程。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "leadership"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "南方低温雨雪冰冻灾害",
+      "detail": "2008年1月南方罕见雪灾致129人死亡，春运电力铁路大面积瘫痪；除夕分食囤菜成记忆。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "snowstorm",
+        "disaster"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "胶济铁路列车相撞",
+      "detail": "2008年4月28日山东胶济线两列客车相撞致72人死亡；提速时代的安全制度受质疑。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1,
+      "sensitivity": "medium",
+      "tags": [
+        "railway_accident",
+        "safety"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "襄汾尾矿库溃坝",
+      "detail": "2008年9月山西襄汾尾矿库溃坝致277人死亡；瞒报与问责再次震动舆论。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1,
+      "sensitivity": "medium",
+      "tags": [
+        "mining_disaster",
+        "corruption"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "深圳舞王俱乐部火灾",
+      "detail": "2008年9月20日深圳舞王俱乐部大火致43人死亡；公共场所消防隐患引发讨论。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 0.9,
+      "sensitivity": "medium",
+      "tags": [
+        "fire",
+        "shenzhen"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "谷歌Chrome发布",
+      "detail": "2008年12月Google发布Chrome 1.0；网吧与办公室开始讨论「换浏览器」的速度体验。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "it",
+        "browser"
+      ]
+    },
+    {
+      "category": "tech_internet",
+      "title": "Android系统推出",
+      "detail": "2008年首款Android手机问世；开源移动系统为后来国产智能机普及铺路。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "mobile",
+        "android"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "次贷危机蔓延欧洲",
+      "detail": "2008年雷曼倒闭后冰岛、爱尔兰等金融体系濒临崩溃；全球央行10月同步降息。",
+      "source_url": "https://zh.wikipedia.org/wiki/2008%E5%B9%B4%E7%92%B0%E7%90%83%E9%87%91%E8%9E%8D%E5%8D%B1%E6%9C%BA",
+      "weight": 1.2,
+      "sensitivity": "low",
+      "tags": [
+        "global_recession",
+        "central_banks"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "科索沃单方面独立",
+      "detail": "2008年2月科索沃宣布独立；模联与外交课堂讨论主权完整原则。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "sovereignty"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "缅甸纳尔吉斯飓风",
+      "detail": "2008年5月缅甸遭纳尔吉斯飓风袭击致超13万人死亡；国际援助与灾害脆弱性成为新闻主题。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "disaster",
+        "cyclone"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "孟买恐怖袭击",
+      "detail": "2008年11月孟买连环恐袭致175人死亡；国内国际新闻称「印度的9·11」。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1,
+      "sensitivity": "medium",
+      "tags": [
+        "terrorism",
+        "india"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "美国汽车三巨头纾困",
+      "detail": "2008年底美国通用、福特、克莱斯勒获紧急贷款；全球汽车产业链订单震荡。",
+      "source_url": "https://zh.wikipedia.org/wiki/2008%E5%B9%B4%E7%92%B0%E7%90%83%E9%87%91%E8%9E%8D%E5%8D%B1%E6%9C%BA",
+      "weight": 1.1,
+      "sensitivity": "low",
+      "tags": [
+        "auto_industry",
+        "bailout"
+      ]
+    },
+    {
+      "category": "economy",
+      "title": "中日韩福冈金融峰会",
+      "detail": "2008年12月中日韩领导人在福冈会晤，讨论区域金融合作应对全球危机。",
+      "source_url": "https://zh.wikipedia.org/wiki/2008%E5%B9%B4%E7%92%B0%E7%90%83%E9%87%91%E8%9E%8D%E5%8D%B1%E6%9C%BA",
+      "weight": 0.9,
+      "sensitivity": "low",
+      "tags": [
+        "diplomacy",
+        "regional_cooperation"
+      ]
+    },
+    {
+      "category": "disaster_crisis",
+      "title": "俄格武装冲突",
+      "detail": "2008年8月俄格爆发武装冲突，南奥塞梯局势牵动国际新闻；奥运期间地缘阴影并存。",
+      "source_url": "https://en.wikipedia.org/wiki/21st_century",
+      "weight": 1.1,
+      "sensitivity": "high",
+      "tags": [
+        "war",
+        "geopolitics"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "华国锋逝世",
+      "detail": "2008年8月20日华国锋在北京逝世；奥运喧嚣中一代人悄然完成历史交接。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 0.9,
+      "sensitivity": "medium",
+      "tags": [
+        "politics",
+        "history"
+      ]
+    },
+    {
+      "category": "society",
+      "title": "黑瞎子岛部分回归",
+      "detail": "2008年10月14日中俄正式完成黑瞎子岛一半领土交接；中学地理课引用边界解决案例。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1,
+      "sensitivity": "low",
+      "tags": [
+        "territory",
+        "diplomacy"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "拉萨三一四事件",
+      "detail": "2008年3月拉萨发生严重骚乱并波及周边；网络信息与官方报道形成强烈对照。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1.1,
+      "sensitivity": "high",
+      "tags": [
+        "tibet",
+        "unrest"
+      ]
+    },
+    {
+      "category": "politics_policy",
+      "title": "零八宪章发表",
+      "detail": "2008年12月刘晓波等发布《零八宪章》；引发广泛社会与网络讨论，后受严厉管制。",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+      "weight": 1,
+      "sensitivity": "high",
+      "tags": [
+        "politics",
+        "ideology"
       ]
     }
   ],
@@ -3397,6 +3687,498 @@
         "acceptance"
       ],
       "scenario": "self_growth"
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "三聚氰胺新闻后，你和母亲在超市逐行核对奶粉成分，家里给侄子停国产奶粉。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "food_safety",
+        "care"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "班会公布地震捐款总额，你在地图上标记灾区，写下第一篇「众志成城」日记。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "charity",
+        "growth"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "网吧里你装上Chrome 1.0，网页瞬间打开，像旧互联时代突然结束。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "internet",
+        "tech_experience"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "雷曼破产那晚主管通宵开会，说海外订单可能腰斩，你开始自学财务软件。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career_anxiety",
+        "financial_crisis"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "全家看李宁点燃主火炬，长辈叹这辈子在家门口看到了奥运开幕式。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "olympics",
+        "pride"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "物理课画神舟七号轨道，你幻想像翟志刚一样太空漫步挥国旗。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "science",
+        "aspiration"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "四万亿新闻后父母讨论是否趁政策窗口买房，全家估算基建红利。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "investment",
+        "housing"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "论坛帖子大量被删，你和死党在QQ上互传截屏，讨论信息从哪来。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "censorship",
+        "peer_talk"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "self_growth",
+      "text": "地震伤亡特写后你参加社区急救培训，床头柜多了应急逃生包。",
+      "weight": 0.9,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "emergency_preparedness",
+        "safety"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "你下载次贷危机论文，想弄明白 distant 金融如何影响家里收入。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "economics",
+        "learning"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "四万亿刺激后设计院接到特大型高铁项目，你取消年假赶图纸。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "infrastructure_boom",
+        "work_life"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "灾区亲戚因校舍倒塌失联，父母整晚守收音机，煎熬持续了三天。",
+      "weight": 1.4,
+      "can_pivot": false,
+      "sensitivity": "high",
+      "tags": [
+        "tragedy",
+        "family_bond"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "2G网络上你用塞班手机给恋人发短信：菲尔普斯又夺金了。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "romance",
+        "old_tech"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "政治课讨论科学发展观，你把灾后重建写进论文提纲。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "study",
+        "politics"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "career",
+      "text": "雷曼倒闭后基金腰斩，你第一次交了沉重的「金融课学费」。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "investment_failure",
+        "risk"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你在维基上查阅零八宪章条目，搜索多次中断，却开始想公民权利。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "high",
+      "tags": [
+        "ideology",
+        "independent_thinking"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "南方雪灾物资短缺，除夕全家分食仅存白菜，感叹平安即是幸福。",
+      "weight": 0.9,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "survival",
+        "resilience"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "天文社会上引用信使号飞越水星数据，向新生展示深空探测未来。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "astronomy",
+        "passion"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "面试里你分析全球化逻辑极限，打动打算收缩业务的跨国企业负责人。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "interview",
+        "foresight"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "华国锋逝世新闻在奥运喧嚣中低调传来，全家聊了一代人的交接。",
+      "weight": 1,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "history",
+        "family_mood"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "天涯上你们激烈争论普世价值，大分歧里你开始学会保留意见。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "debate",
+        "online_community"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "地震心理援助需求激增，你申请去灾区实习，想走辅导者路线。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "volunteer",
+        "career_path"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "family",
+      "text": "家里因是否抛售银行股激烈争吵，你第一次感到成人财务责任。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "family_finance",
+        "risk"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "Android早期模拟器里你写下Hello World，感到移动互联的微弱震动。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "coding",
+        "innovation"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "模联辩论科索沃独立与主权完整，你获最佳口才奖。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "mun",
+        "success"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "襄汾矿难后父亲拒绝高薪私营矿山邀约，全家说安全才是财富。",
+      "weight": 1.3,
+      "can_pivot": true,
+      "sensitivity": "medium",
+      "tags": [
+        "safety_first",
+        "family"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "love",
+      "text": "拨号上网年代，你们同步看画质模糊的奥运夺金短片。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "digital_intimacy",
+        "slow_web"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "雷曼倒闭收紧全球合规，你被迫自学全套美国公认会计准则。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career_growth",
+        "professionalism"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "地理课对比震前震后地形，你意识到遥感在减灾里的核心地位。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "geography",
+        "science"
+      ]
+    },
+    {
+      "category": "money",
+      "scenario": "self_growth",
+      "text": "退掉预定的iPod，钱改买黄金，开启防御型金钱观。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "financial_literacy",
+        "defense"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "四万亿刺激下全家贷款买下社区旁新房，畅想高铁带来的便利。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "housing_boom",
+        "family_future"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "生物课后你追问大熊猫人工授精细节，想以此为研究方向。",
+      "weight": 1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "biology",
+        "curiosity"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "小吃摊前你们讨论银行内幕资料，争论资本主义是否已到尽头。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "medium",
+      "tags": [
+        "truth_seeking",
+        "bonding"
+      ]
+    },
+    {
+      "category": "health",
+      "scenario": "family",
+      "text": "你用遥感信息帮家乡规划雪灾后电力抢修路线，感叹技术救命。",
+      "weight": 1.2,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "tech_care",
+        "safety"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "你在博客系统记录对金融危机的观察，想在断裂时代保持清醒。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "writing",
+        "reflection"
+      ]
+    },
+    {
+      "category": "work",
+      "scenario": "career",
+      "text": "出口厂转内销，你调研中西部市场需求，忙到深夜。",
+      "weight": 1.2,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "career_pivot",
+        "localization"
+      ]
+    },
+    {
+      "category": "family",
+      "scenario": "family",
+      "text": "奥运成功后的周日，全家阳台放烟花，父亲说中国站稳了世界舞台。",
+      "weight": 1.1,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "patriotism",
+        "family_pride"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "毕业论文引用汶川地震社会动员数据，论证灾害管理里的制度意义。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "thesis",
+        "era_insight"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "friendship",
+      "text": "QQ群里你们争论奥巴马能否解决美国种族撕裂，聊到深夜。",
+      "weight": 0.8,
+      "can_pivot": false,
+      "sensitivity": "low",
+      "tags": [
+        "global_politics",
+        "chat"
+      ]
+    },
+    {
+      "category": "digital",
+      "scenario": "self_growth",
+      "text": "2008跨年夜读被删节的博客年度总结，你想：巨震与圆梦交织的时代无法回头。",
+      "weight": 1.4,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "epiphany",
+        "growth"
+      ]
+    },
+    {
+      "category": "school",
+      "scenario": "academic",
+      "text": "你下载次贷危机论文，想弄明白遥远金融风暴如何影响家里收入。",
+      "weight": 1.1,
+      "can_pivot": true,
+      "sensitivity": "low",
+      "tags": [
+        "economics",
+        "learning"
+      ]
     }
   ],
   "sources": [
@@ -3404,7 +4186,21 @@
     "https://www.stats.gov.cn/sj/tjgb/",
     "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
     "https://www.cnnic.cn/",
-    "https://www.moe.gov.cn/jyb_xwfb/"
+    "https://www.moe.gov.cn/jyb_xwfb/",
+    "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+    "https://zh.wikipedia.org/wiki/2008%E5%B9%B4%E7%92%B0%E7%90%83%E9%87%91%E8%9E%8D%E5%8D%B1%E6%9C%BA"
   ],
-  "version": "2026.06.14-v1"
+  "version": "2026.06.14-v1",
+  "notebooklm_summary": "2008年是中国极具张力的一年。从汶川地震的民族创伤到北京奥运的百年圆梦，社会在巨震中凝聚，同时深陷三聚氰胺奶粉危机与全球金融危机的多重考验，正式拉开了「四万亿」刺激时代的序幕。",
+  "notebooklm_social_mood": "社会情绪在大悲（地震）与大喜（奥运）间剧烈震荡。公众对体制应对危机的动员力产生强烈认同，但对食品安全及全球金融危机带来的经济前景感到普遍不安。",
+  "notebooklm_sources": [
+    "二十年大变局：2006-2026年全球范式迁移与关键事件深度研判报告",
+    "Major Events of the 21st Century — A Timeline, 2000–2024 | HistoryCentral"
+  ],
+  "notebooklm_gaps": [
+    "2008年中国大陆具体的GDP（万亿）、CPI、房价指数、高考及毕业生人数等统计数据",
+    "2008年具体的主流影视剧名、流行歌曲清单、国产APP名称",
+    "笔记本资料虽提及北京奥运会，但缺乏具体的比赛细节或金牌榜统计"
+  ],
+  "notebooklm_imported_at": "2026-06-14"
 }
