@@ -25,7 +25,7 @@ Shadow **检索工程包**，与叙事写作、Fate 语料扩库分工明确。
 - 全 repo `.md` 索引、harness 语料检索、时代语料语义检索
 - M0 验收、DashScope、Recall@5、本地 fallback、`RAG_ENABLED=false`
 
-**暂停期（默认）**：不接 demo 新后端；只演进 `packages/rag-kit` + 文档。恢复条件见 [`reference.md`](reference.md) § 恢复清单。
+**暂停期（默认）**：demo 已自动接线；向量层待 `service_role` + DashScope 恢复后跑 `rag:verify:m0 -- --full`。
 
 ## 第一步：选任务类型
 

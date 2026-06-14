@@ -1,6 +1,7 @@
 'use strict';
 
 require('./lib/load-env').loadDemoEnv();
+require('./lib/rag-bootstrap').bootstrapRag();
 
 const http = require('node:http');
 const path = require('node:path');
@@ -257,10 +258,30 @@ async function handleScenarioClassify(req, res) {
 async function handleIntakePreview(req, res) {
   const body = await readJson(req);
   const { buildShadowPreview } = require('./lib/intake-profile');
+  const { matchFromIntakeBody } = require('./lib/character-matcher');
   const preview = buildShadowPreview(body.layerA || {}, body.selectedTags || []);
+  const visual_character = matchFromIntakeBody(body);
   sendJson(res, 200, {
-    preview: `${preview}\n\n*这只是初步印象，真正的影子会在七年里慢慢看清你。*`
+    preview: `${preview}\n\n*这只是初步印象，真正的影子会在七年里慢慢看清你。*`,
+    visual_character
   });
+}
+
+async function handleIntakeCharacterMatch(req, res) {
+  const body = await readJson(req);
+  const { matchFromIntakeBody, matchCharacter } = require('./lib/character-matcher');
+  const visual_character = body.full_profile
+    ? matchCharacter({
+        gender: body.full_profile.raw?.gender,
+        age_at_fork: body.full_profile.temporal?.age_at_fork,
+        choice_text: body.full_profile.raw?.choice_text,
+        self_description: body.full_profile.raw?.self_description,
+        selectedTags: body.selectedTags,
+        scenario_weights: body.full_profile.scenario_weights,
+        archetype: body.full_profile.persona_signals?.archetype
+      })
+    : matchFromIntakeBody(body);
+  sendJson(res, 200, { visual_character });
 }
 
 async function handleIntakeComplete(req, res) {
@@ -277,6 +298,20 @@ async function handleIntakeComplete(req, res) {
     scenarioFromText: body.scenarioFromText || null,
     meta: body.meta || {}
   });
+
+  const { matchCharacter } = require('./lib/character-matcher');
+  const visual_character = matchCharacter({
+    gender: full_profile.raw?.gender || body.layerA?.gender,
+    age_at_fork: full_profile.temporal?.age_at_fork,
+    choice_text: full_profile.raw?.choice_text,
+    self_description: full_profile.raw?.self_description,
+    one_liner: body.layerA?.one_liner,
+    selectedTags: body.selectedTags,
+    scenario_weights: full_profile.scenario_weights,
+    scenario_domain: full_profile.profile?.scenario_domain,
+    archetype: full_profile.persona_signals?.archetype
+  });
+  full_profile.visual_character = visual_character;
 
   let persona = null;
   let persona_card = null;
@@ -301,6 +336,7 @@ async function handleIntakeComplete(req, res) {
 
   sendJson(res, 200, {
     full_profile,
+    visual_character,
     persona,
     persona_card,
     persona_source,
@@ -464,6 +500,21 @@ function serveStatic(req, res) {
     .replace(/^(\.\.[/\\])+/, '');
   const requested = safePath === '/' ? '/index.html' : safePath;
 
+  /** docs/ 与 demo 同套 UI — 优先于 archive/public 旧版 intake */
+  const DOCS_FIRST = new Set([
+    '/intake.html',
+    '/demo.html',
+    '/demo-hub.html',
+    '/demo-live.html',
+    '/demo-phaser.html'
+  ]);
+  if (DOCS_FIRST.has(requested)) {
+    const docsFirst = path.join(DOCS_DIR, requested);
+    if (docsFirst.startsWith(DOCS_DIR) && fs.existsSync(docsFirst) && fs.statSync(docsFirst).isFile()) {
+      return serveStaticFromDir(res, docsFirst, req);
+    }
+  }
+
   const publicPath = path.join(PUBLIC_DIR, requested);
   if (publicPath.startsWith(PUBLIC_DIR) && fs.existsSync(publicPath) && fs.statSync(publicPath).isFile()) {
     return serveStaticFromDir(res, publicPath, req);
@@ -498,6 +549,7 @@ const ROUTES = {
   'POST /api/scenario/classify': handleScenarioClassify,
   'POST /api/intake/preview': handleIntakePreview,
   'POST /api/intake/complete': handleIntakeComplete,
+  'POST /api/intake/character-match': handleIntakeCharacterMatch,
   'POST /api/story': handleStoryStream,
   'POST /api/story/start': handleStoryStart,
   'POST /api/story/year': handleStoryYear,
@@ -556,12 +608,19 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Shadow demo running at http://localhost:${PORT}`);
-  console.log(`  Intake:  http://localhost:${PORT}/intake.html`);
-  console.log(`  Demo:    http://localhost:${PORT}/demo.html`);
+  const base = `http://localhost:${PORT}`;
+  console.log(`Shadow local preview → ${base}`);
+  console.log(`  Hub:     ${base}/demo-hub.html`);
+  console.log(`  Intake:  ${base}/intake.html`);
+  console.log(`  Live:    ${base}/demo-live.html`);
+  console.log(`  Mock 四条 Golden 线:`);
+  console.log(`    复读线  ${base}/demo.html`);
+  console.log(`    林晚    ${base}/demo.html?story=linwan`);
+  console.log(`    许星遥  ${base}/demo.html?story=heartbeat_line`);
+  console.log(`    周染    ${base}/demo.html?story=zhoudran`);
   console.log(
     hasAnyKey()
-      ? `Live agents available. Provider: set SHADOW_PROVIDER or keys (anthropic / openai / stepfun).`
-      : 'No API key detected. Local mode only — set ANTHROPIC_API_KEY, OPENAI_API_KEY, or STEPFUN_API_KEY.'
+      ? 'Live agents: API key detected — Intake / demo-live 可走 LLM。'
+      : 'Mock only: 无 API key — Golden Mock 可浏览；Intake 走规则 Persona。'
   );
 });

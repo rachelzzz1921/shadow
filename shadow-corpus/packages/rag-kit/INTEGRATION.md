@@ -1,6 +1,7 @@
 # rag-kit → demo 接入缝（恢复后端时读本文）
 
-> **暂停期间不要改 demo 接线。** 工程包在 `packages/rag-kit/` 独立演进；demo 仅通过 `rag-service.js` 消费。
+> **demo 已自动接入**：`server.js` → `load-env` + `rag-bootstrap` → `rag-service.js`  
+> 启动日志：`[rag] enabled · mode=… · local_chunks=…`
 
 ## 唯一适配层
 

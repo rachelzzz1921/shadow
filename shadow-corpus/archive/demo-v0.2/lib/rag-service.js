@@ -66,24 +66,35 @@ function isConfiguredSecret(value) {
   return true;
 }
 
+function isServiceRoleKey(key) {
+  if (!isConfiguredSecret(key)) return false;
+  try {
+    const payload = key.split('.')[1];
+    const role = JSON.parse(
+      Buffer.from(payload.replace(/-/g, '+').replace(/_/g, '/'), 'base64')
+    ).role;
+    return role === 'service_role';
+  } catch {
+    return false;
+  }
+}
+
 function isRagLive(cfg) {
   if (!cfg.enabled) return false;
-  if (isConfiguredSecret(cfg.supabaseUrl) && isConfiguredSecret(cfg.supabaseServiceKey)) return true;
+  if (isConfiguredSecret(cfg.supabaseUrl) && isServiceRoleKey(cfg.supabaseServiceKey)) return true;
   return hasLocalRagIndex();
 }
 
 async function canHybridRetrieve(namespace) {
   const k = await loadKit();
   if (!isEmbedLive(k.config)) return false;
-  if (isConfiguredSecret(k.config.supabaseUrl) && isConfiguredSecret(k.config.supabaseServiceKey)) {
-    return true;
-  }
   try {
     const { localIndexHasEmbeddings } = await import(path.join(__dirname, '../../../packages/rag-kit/lib/local-index.mjs'));
-    return localIndexHasEmbeddings(namespace);
+    if (localIndexHasEmbeddings(namespace)) return true;
   } catch {
-    return false;
+    /* ignore */
   }
+  return isConfiguredSecret(k.config.supabaseUrl) && isServiceRoleKey(k.config.supabaseServiceKey);
 }
 
 function isEmbedLive(cfg) {
@@ -349,10 +360,18 @@ function indexSessionAfterYear({ run_id, memory, year }) {
       if (!rows.length) return;
 
       if (isEmbedLive(k.config)) {
+        let embedLive = true;
         for (const row of rows) {
-          row.embedding = await k.embedOne(row.content, {
-            instruction: '为影子人生跨时空对话检索记忆与叙事'
-          });
+          if (embedLive) {
+            try {
+              row.embedding = await k.embedOne(row.content, {
+                instruction: '为影子人生跨时空对话检索记忆与叙事'
+              });
+            } catch {
+              embedLive = false;
+              row.embedding = null;
+            }
+          }
           await k.upsertChunks([row]);
         }
       } else {
@@ -374,9 +393,13 @@ function indexTraceAfterFinal({ trace, session, storyEval }) {
       const row = k.buildTraceSummary({ trace, session, storyEval });
       row.corpus_version = k.config.corpusVersion;
       if (isEmbedLive(k.config)) {
-        row.embedding = await k.embedOne(row.content, {
-          instruction: '为 Shadow 叙事 run 复盘检索'
-        });
+        try {
+          row.embedding = await k.embedOne(row.content, {
+            instruction: '为 Shadow 叙事 run 复盘检索'
+          });
+        } catch {
+          row.embedding = null;
+        }
       }
       await k.upsertChunks([row]);
     } catch (err) {
@@ -430,16 +453,19 @@ async function getRagStatus() {
   } catch {
     local = null;
   }
-  const supabase = isConfiguredSecret(k.config.supabaseUrl) && isConfiguredSecret(k.config.supabaseServiceKey);
+  const supabase = isServiceRoleKey(k.config.supabaseServiceKey) && isConfiguredSecret(k.config.supabaseUrl);
   const embedOk = isEmbedLive(k.config);
   const localChunks = local?.total_chunks || 0;
   return {
     enabled: k.config.enabled,
     supabase,
+    supabase_read: isConfiguredSecret(k.config.supabaseUrl) && isConfiguredSecret(k.config.supabaseAnonKey),
     local_index: local,
     embed_provider: k.config.embeddingProvider,
     embed_configured: embedOk,
-    live: k.config.enabled && embedOk && (supabase || localChunks > 0),
+    mode: embedOk && localChunks ? 'rules-index-or-hybrid' : localChunks ? 'rules-index' : 'rules-local',
+    local_chunks: localChunks,
+    live: k.config.enabled && (supabase || localChunks > 0),
     corpus_version: k.config.corpusVersion
   };
 }

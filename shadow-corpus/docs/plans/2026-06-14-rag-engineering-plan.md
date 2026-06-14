@@ -4,16 +4,16 @@
 > **Change**：CHG-RAG001 · **方案**：[`02-technical-design/05-rag-system.md`](../../02-technical-design/05-rag-system.md)  
 > **更新**：2026-06-14
 
-## 决策（2026-06-14）
+## 决策（2026-06-14 更新）
 
-**暂停 demo 后端接线与 Supabase 云端写入**，先把 RAG 作为独立工程包做完、验完、文档化。
+**demo 已自动接入** `rag-service.js`：启动时合并 env、探测本地索引、缺失时后台 `rag:embed:local`。
 
 | 项 | 结论 |
 |----|------|
-| 工程范围 | **`packages/rag-kit`** + CLI + 本地索引 + eval + `verify-rag-m0` |
-| 暂停项 | `archive/demo-v0.2` 内 Fate/Dialogue/session/trace 的**进一步**向量接线、Supabase 生产写入 |
-| 不破坏 | `RAG_ENABLED=false` 时 demo 行为与现网一致；已写的 `rag-service.js` **保留不动** |
-| 恢复条件 | `service_role` key 正确 + DashScope 账户正常 + `npm run rag:verify:m0 -- --full` 通过 |
+| 工程范围 | **`packages/rag-kit`** + CLI + 本地索引 |
+| demo 接线 | **已启用** — Fate / Dialogue / session / trace / `/api/rag/*` |
+| 云端向量 | ⏸ 待 `service_role` key + DashScope 账户正常 |
+| 硬约束 | `RAG_ENABLED=false` 仍全规则 fallback |
 
 恢复后端时只读 [`packages/rag-kit/INTEGRATION.md`](../../packages/rag-kit/INTEGRATION.md)，**不要**在 demo 里重写检索逻辑。
 
