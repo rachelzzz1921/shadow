@@ -9,6 +9,7 @@
     "board": "node shadow-corpus/06-task-progress/scripts/shadow-tasks.js sync && node shadow-corpus/06-task-progress/scripts/shadow-tasks.js board",
     "board:publish": "node shadow-corpus/tooling/scripts/build-visual-demo-pack.mjs && node shadow-corpus/06-task-progress/scripts/shadow-tasks.js sync && node shadow-corpus/06-task-progress/scripts/build-board-site.mjs",
     "demo:preview": "python3 -m http.server 5199 --directory docs",
+    "demo:live": "npm run start --prefix shadow-corpus/archive/demo-v0.2",
     "demo:phaser": "python3 -m http.server 5199 --directory docs",
     "pack:stories": "node shadow-corpus/06-task-progress/scripts/pack-four-stories.mjs",
     "pack:assets": "node shadow-corpus/06-task-progress/scripts/pack-pixel-assets.mjs",
@@ -29,7 +30,11 @@
     "rag:embed:world": "node shadow-corpus/packages/rag-kit/scripts/embed-world.mjs",
     "rag:embed:repo": "node shadow-corpus/packages/rag-kit/scripts/embed-repo.mjs",
     "rag:eval:embedding": "node shadow-corpus/packages/rag-kit/scripts/eval-embedding-cn.mjs",
-    "rag:query": "node shadow-corpus/packages/rag-kit/scripts/query.mjs"
+    "rag:embed:all": "node shadow-corpus/packages/rag-kit/scripts/embed-all.mjs",
+    "rag:embed:local": "node shadow-corpus/packages/rag-kit/scripts/embed-all.mjs --no-embed",
+    "rag:index:runs": "node shadow-corpus/packages/rag-kit/scripts/index-runs.mjs",
+    "rag:query": "node shadow-corpus/packages/rag-kit/scripts/query.mjs",
+    "rag:verify:m0": "node scripts/verify-rag-m0.mjs"
   },
   "engines": {
     "node": ">=20"

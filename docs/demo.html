@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="demo-theme.css" />
 <link rel="stylesheet" href="demo-scenarios.css" />
 <link rel="stylesheet" href="demo-ui-polish.css" />
+<link rel="stylesheet" href="demo-ui-polish-r2.css" />
 </head>
 <body>
 
@@ -25,6 +26,7 @@
 <button type="button" class="nav-arrow" id="nav-prev" aria-label="上一页">‹</button>
 <button type="button" class="nav-arrow" id="nav-next" aria-label="下一页">›</button>
 <div id="nav-hint-bar" aria-hidden="true">← 方向键翻页 · 顶部圆点跳年 →</div>
+<div id="page-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
 
 <div id="viewport">
   <div id="slider">
@@ -38,9 +40,13 @@
       <div class="profile-teaser snes enter-item" id="profile-teaser"></div>
 
       <button type="button" class="btn-start enter-item" id="btn-start">进入阿岚的七年</button>
+      <p class="landing-intake enter-item" style="margin-top:14px;font-size:14px;color:var(--ink-muted)">
+        <a href="intake.html" style="color:var(--amber);text-decoration:none;font-weight:600">告诉影子你是谁</a>
+        <span style="opacity:.75"> · 三层采集 → Persona agent</span>
+      </p>
       <div class="year-preview enter-item" id="year-dots-landing"></div>
 
-      <p class="landing-foot enter-item">shadow-corpus/fixtures/golden-stories/复读线.json · <a href="demo-phaser.html" style="color:var(--amber)">Phaser layout v1 预览</a></p>
+      <p class="landing-foot enter-item"><a href="demo-hub.html" style="color:var(--amber)">Demo 入口</a> · <a href="demo-phaser.html" style="color:var(--amber)">Phaser</a> · <a href="intake.html" style="color:var(--amber)">Intake</a> · <a href="demo-live.html" style="color:var(--amber)">Live</a></p>
     </div>
   </div>
 </div>

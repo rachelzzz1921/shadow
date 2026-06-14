@@ -296,6 +296,96 @@ function shadowDisplayName() {
   return `影 · ${STORY.persona_card.name}`;
 }
 
+/** 若 intake.html 已写入 sessionStorage，覆盖 landing 人格卡预览 */
+function applyIntakeFromSession() {
+  try {
+    const rawPersona = sessionStorage.getItem('shadow_persona');
+    const rawProfile = sessionStorage.getItem('shadow_full_profile');
+    if (!rawPersona) return false;
+
+    const persona = JSON.parse(rawPersona);
+    const full = rawProfile ? JSON.parse(rawProfile) : null;
+
+    STORY.persona_card = {
+      name: persona.shadow_name || STORY.persona_card.name,
+      core_traits: persona.core_traits || STORY.persona_card.core_traits,
+      soft_spots: persona.soft_spots || STORY.persona_card.soft_spots,
+      decision_tendency: persona.decision_tendency || STORY.persona_card.decision_tendency,
+      growth_seed: persona.growth_seed || STORY.persona_card.growth_seed,
+      core_tension: persona.core_tension,
+      voice_notes: persona.voice_notes,
+      narrative_warnings: persona.narrative_warnings,
+      value_hierarchy: persona.value_hierarchy,
+      defense_mechanism: persona.defense_mechanism,
+      _from_intake: true
+    };
+
+    if (full?.raw) {
+      STORY.profile = {
+        ...STORY.profile,
+        choice: full.raw.choice_text || STORY.profile.choice,
+        description: full.raw.self_description || STORY.profile.description,
+        quote: full.raw.one_liner || STORY.profile.quote,
+        age: full.temporal?.age_at_fork ?? STORY.profile.age,
+        keywords: (full.raw.selected_tags || []).slice(0, 5)
+      };
+    }
+
+    if (full?.scenario_weights) {
+      STORY.scenario_weights = full.scenario_weights;
+      const top = Object.entries(full.scenario_weights).sort((a, b) => b[1] - a[1])[0];
+      if (top) {
+        STORY.scenario_primary = top[0];
+        const secondary = Object.entries(full.scenario_weights).sort((a, b) => b[1] - a[1])[1];
+        if (secondary) STORY.scenario_secondary = secondary[0];
+      }
+    }
+
+    if (full?.raw?.choice_text) {
+      STORY.premise = `影子走这条路：${full.raw.choice_text.slice(0, 36)}${full.raw.choice_text.length > 36 ? '…' : ''}`;
+    }
+
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
+
+applyIntakeFromSession();
+
+/** Live 全链生成结果注入（demo-live.html → demo.html?live=1） */
+function applyLiveFromSession() {
+  try {
+    const raw = sessionStorage.getItem('shadow_live_session');
+    if (!raw) return false;
+    const live = JSON.parse(raw);
+    const session = live.session;
+    if (!session?.years?.length) return false;
+
+    STORY.years = session.years;
+    STORY.beats = session.beats || STORY.beats;
+    STORY.pivotal_years = session.pivotal_years || STORY.pivotal_years;
+    STORY.memory_stream = session.memory_stream || [];
+    STORY.persona_card = session.persona_card || STORY.persona_card;
+    STORY.shadow = session.shadow || STORY.shadow;
+    if (live.profile) STORY.profile = { ...STORY.profile, ...live.profile };
+    if (live.final) STORY.final = live.final;
+    if (session.scenario) {
+      STORY.scenario_primary = session.scenario?.domain || STORY.scenario_primary;
+    }
+    STORY.premise = live.final?.message?.slice(0, 48) || STORY.premise;
+    STORY._from_live = true;
+    STORY._live_run_id = session.run_id || null;
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
+
+if (typeof URLSearchParams !== 'undefined' && new URLSearchParams(location.search).get('live') === '1') {
+  applyLiveFromSession();
+}
+
 window.ShadowDemo = {
   STORY,
   ENV_LABELS,
@@ -303,5 +393,7 @@ window.ShadowDemo = {
   normalizeYear,
   getBeatForYear,
   getMemoriesForYear,
-  shadowDisplayName
+  shadowDisplayName,
+  applyIntakeFromSession,
+  applyLiveFromSession
 };

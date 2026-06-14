@@ -138,6 +138,7 @@ function applyScenario(key) {
   root.style.setProperty('--amber-deep', c.accentDeep);
   root.style.setProperty('--amber-glow', c.glow);
   root.style.setProperty('--scenario-wipe', c.wipe);
+  root.style.setProperty('--scenario-wipe-deep', c.accentDeep || c.wipe);
   root.style.setProperty('--sage', c.sage);
   root.style.setProperty('--sprite-char', `url('${t.sprite}')`);
   document.body.dataset.scenario = t.id;

@@ -1,15 +1,15 @@
 /**
- * Shadow Demo — 拟人化场景过场 + 像素 wipe
- * 六域各一种过场形态（door / walk / pulse / wave / commute / step）
+ * Shadow Demo — 拟人化场景过场（编排：演员退场 → 像素翻页 → 轻量入场）
  */
 'use strict';
 
 (function initShadowTransitions() {
   const WIPE_COLS = 20;
   const WIPE_ROWS = 12;
-  const WIPE_MS = 680;
-  const ACTOR_MS = 820;
-  const STAGGER_MS = 55;
+  const ACTOR_COVER_MS = 480;
+  const ACTOR_EXIT_MS = 180;
+  const WIPE_MS = 440;
+  const STAGGER_MS = 48;
 
   let wipeRoot = null;
   let actorRoot = null;
@@ -17,6 +17,10 @@
 
   function prefersReducedMotion() {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  function wait(ms) {
+    return new Promise(r => setTimeout(r, ms));
   }
 
   function ensureWipe() {
@@ -45,15 +49,21 @@
     actorRoot.id = 'actor-transition';
     actorRoot.setAttribute('aria-hidden', 'true');
     actorRoot.innerHTML = `
+      <div class="actor-vignette" aria-hidden="true"></div>
       <div class="actor-curtain actor-curtain-l"></div>
       <div class="actor-curtain actor-curtain-r"></div>
+      <div class="actor-pulse-ring" aria-hidden="true"></div>
       <div class="actor-friend actor-friend-a" aria-hidden="true"></div>
       <div class="actor-friend actor-friend-b" aria-hidden="true"></div>
       <div class="actor-friend actor-friend-c" aria-hidden="true"></div>
-      <div class="actor-body">
-        <div class="actor-bubble"></div>
-        <div class="actor-sprite"></div>
-        <div class="actor-ground"></div>
+      <div class="actor-wave-bubble" aria-hidden="true"></div>
+      <div class="actor-stage">
+        <div class="actor-stage-floor" aria-hidden="true"></div>
+        <div class="actor-body">
+          <div class="actor-bubble"></div>
+          <div class="actor-sprite"></div>
+          <div class="actor-ground"></div>
+        </div>
       </div>
     `;
     document.body.appendChild(actorRoot);
@@ -62,12 +72,23 @@
 
   function resetOverlays() {
     if (wipeRoot) wipeRoot.classList.remove('active', 'wipe-in', 'wipe-out');
-    if (actorRoot) {
-      actorRoot.className = '';
-      actorRoot.id = 'actor-transition';
-      actorRoot.removeAttribute('aria-hidden');
-      actorRoot.setAttribute('aria-hidden', 'true');
+    if (!actorRoot) return;
+    actorRoot.className = '';
+    actorRoot.id = 'actor-transition';
+    actorRoot.setAttribute('aria-hidden', 'true');
+    const body = actorRoot.querySelector('.actor-body');
+    const stage = actorRoot.querySelector('.actor-stage');
+    const waveBubble = actorRoot.querySelector('.actor-wave-bubble');
+    if (body) {
+      body.style.display = '';
+      body.classList.remove('actor-exiting', 'actor-entering');
     }
+    if (stage) stage.classList.remove('actor-exiting', 'actor-entering');
+    if (waveBubble) waveBubble.textContent = '';
+    actorRoot.querySelectorAll('.actor-friend').forEach(f => {
+      f.style.backgroundImage = '';
+      f.classList.remove('actor-exiting');
+    });
   }
 
   const FALLBACK_THEME = {
@@ -81,6 +102,10 @@
     return window.ShadowScenarios?.getTheme(scenarioKey || 'academic') || FALLBACK_THEME;
   }
 
+  function usesWipe(mode) {
+    return ['walk', 'commute', 'step'].includes(mode);
+  }
+
   function playWipe(phase, direction) {
     return new Promise(resolve => {
       if (prefersReducedMotion()) {
@@ -89,68 +114,125 @@
       }
       const el = ensureWipe();
       el.dataset.dir = direction >= 0 ? 'fwd' : 'back';
+      el.dataset.phase = phase;
       el.classList.remove('wipe-in', 'wipe-out');
       void el.offsetWidth;
-      if (phase === 'in') {
-        el.classList.add('active', 'wipe-in');
-      } else {
-        el.classList.add('wipe-out');
-      }
+      el.classList.add('active', phase === 'in' ? 'wipe-in' : 'wipe-out');
       setTimeout(() => {
         el.classList.remove('wipe-in', 'wipe-out');
         if (phase === 'out') el.classList.remove('active');
         resolve();
-      }, WIPE_MS + 80);
+      }, WIPE_MS + 60);
     });
   }
 
-  /**
-   * @param {object} theme ShadowScenarios theme
-   * @param {'cover'|'reveal'} phase
-   * @param {number} direction
-   */
-  function playActorPhase(theme, phase, direction) {
+  function prepareActor(theme, phase, direction) {
+    const mode = theme?.transition || 'walk';
+    const el = ensureActorStage();
+    const bubble = el.querySelector('.actor-bubble');
+    const waveBubble = el.querySelector('.actor-wave-bubble');
+    const sprite = el.querySelector('.actor-sprite');
+    const body = el.querySelector('.actor-body');
+    const stage = el.querySelector('.actor-stage');
+    const friends = el.querySelectorAll('.actor-friend');
+
+    el.className = '';
+    el.id = 'actor-transition';
+    el.classList.add('active', `mode-${mode}`, phase);
+    el.setAttribute('aria-hidden', 'false');
+
+    if (sprite) sprite.style.backgroundImage = `url('${theme.sprite}')`;
+
+    const line = phase === 'cover'
+      ? (direction >= 0 ? theme.walkLine : theme.walkLineBack)
+      : (direction >= 0 ? theme.walkLineBack : theme.walkLine);
+
+    if (mode === 'wave') {
+      if (body) body.style.display = 'none';
+      if (waveBubble) waveBubble.textContent = line;
+      friends.forEach((f, i) => {
+        f.style.backgroundImage = `url('${theme.sprite}')`;
+        f.style.backgroundPosition = `${i * -4}px center`;
+      });
+    } else {
+      if (body) body.style.display = '';
+      if (bubble) bubble.textContent = line;
+      if (waveBubble) waveBubble.textContent = '';
+    }
+
+    body?.classList.remove('actor-exiting', 'actor-entering');
+    stage?.classList.remove('actor-exiting', 'actor-entering');
+    el.classList.toggle('actor-on', phase === 'cover' || phase === 'reveal');
+
+    return { el, mode, body, stage };
+  }
+
+  /** 演员 cover：只在底部舞台，不挡全屏 */
+  function playActorCover(theme, direction) {
+    return new Promise(resolve => {
+      if (prefersReducedMotion()) {
+        resolve();
+        return;
+      }
+      const { mode, stage } = prepareActor(theme, 'cover', direction);
+      const ms = mode === 'door' ? 640 : mode === 'wave' ? 680 : ACTOR_COVER_MS;
+      setTimeout(resolve, ms + 40);
+    });
+  }
+
+  /** 演员退场：在 wipe 开始前淡出，避免双层遮挡 */
+  function playActorExit(theme) {
+    return new Promise(resolve => {
+      if (prefersReducedMotion()) {
+        resolve();
+        return;
+      }
+      const el = actorRoot;
+      if (!el) {
+        resolve();
+        return;
+      }
+      const mode = theme?.transition || 'walk';
+      el.classList.add('actor-exiting');
+      el.querySelector('.actor-body')?.classList.add('actor-exiting');
+      el.querySelector('.actor-stage')?.classList.add('actor-exiting');
+      el.querySelectorAll('.actor-friend').forEach(f => f.classList.add('actor-exiting'));
+
+      const ms = mode === 'door' ? 480 : mode === 'wave' ? 360 : ACTOR_EXIT_MS;
+      setTimeout(() => {
+        el.classList.remove('active', 'actor-on', 'actor-exiting');
+        resolve();
+      }, ms + 30);
+    });
+  }
+
+  /** 轻量 reveal：新页入场前的短促演员探头 */
+  function playActorReveal(theme, direction) {
     return new Promise(resolve => {
       if (prefersReducedMotion()) {
         resolve();
         return;
       }
       const mode = theme?.transition || 'walk';
-      const el = ensureActorStage();
-      const bubble = el.querySelector('.actor-bubble');
-      const friends = el.querySelectorAll('.actor-friend');
-
-      el.className = '';
-      el.id = 'actor-transition';
-      el.classList.add('active', `mode-${mode}`, phase);
-
-      if (mode === 'wave') {
-        friends.forEach(f => {
-          f.style.backgroundImage = `url('${theme.sprite}')`;
-        });
-        el.querySelector('.actor-body').style.display = 'none';
-      } else {
-        el.querySelector('.actor-body').style.display = '';
-        if (bubble) {
-          bubble.textContent = phase === 'cover'
-            ? (direction >= 0 ? theme.walkLine : theme.walkLineBack)
-            : (direction >= 0 ? theme.walkLineBack : theme.walkLine);
-        }
+      if (mode === 'door' || mode === 'pulse') {
+        prepareActor(theme, 'reveal', direction);
+        const ms = mode === 'door' ? 560 : 420;
+        setTimeout(() => {
+          actorRoot?.classList.remove('active', 'actor-on');
+          resolve();
+        }, ms + 30);
+        return;
       }
 
-      if (phase === 'cover') {
-        el.classList.add('actor-on');
-      } else {
-        el.classList.remove('actor-on');
-      }
-
-      const ms = mode === 'pulse' ? 680 : ACTOR_MS;
+      const { body, stage } = prepareActor(theme, 'reveal', direction);
+      body?.classList.add('actor-entering');
+      stage?.classList.add('actor-entering');
       setTimeout(() => {
-        if (phase === 'reveal') {
-          el.classList.remove('active', 'actor-on');
-        }
+        actorRoot?.classList.remove('active', 'actor-on');
+        body?.classList.remove('actor-entering');
+        stage?.classList.remove('actor-entering');
         resolve();
-      }, ms + 60);
+      }, ACTOR_REVEAL_MS + 30);
     });
   }
 
@@ -158,12 +240,14 @@
    * @param {() => void} mutateDom
    * @param {number} direction
    * @param {string} [scenarioKey]
-   * @returns {Promise<boolean>} false = skipped (already transitioning)
+   * @returns {Promise<boolean>}
    */
   async function pageTransition(mutateDom, direction, scenarioKey) {
     if (busy) return false;
 
     const theme = resolveTheme(scenarioKey);
+    const mode = theme.transition || 'walk';
+    const withWipe = usesWipe(mode);
 
     if (prefersReducedMotion()) {
       mutateDom();
@@ -174,25 +258,31 @@
     resetOverlays();
 
     try {
-      if (window.ShadowScenarios) {
-        window.ShadowScenarios.applyScenario(scenarioKey || 'academic');
+      window.ShadowScenarios?.applyScenario(scenarioKey || 'academic');
+
+      await playActorCover(theme, direction);
+
+      if (withWipe) {
+        await playActorExit(theme);
+        await playWipe('in', direction);
+      } else if (mode === 'door') {
+        await wait(120);
+        mutateDom();
+        await playActorReveal(theme, direction);
+        return true;
+      } else if (mode === 'pulse' || mode === 'wave') {
+        await playActorExit(theme);
       }
 
-      await playActorPhase(theme, 'cover', direction);
+      if (withWipe || mode === 'pulse' || mode === 'wave') {
+        mutateDom();
+        await wait(16);
+        if (withWipe) await playWipe('out', direction);
+      }
 
-      const useWipe = ['walk', 'commute', 'step'].includes(theme.transition);
-      if (useWipe) await playWipe('in', direction);
-
-      mutateDom();
-
-      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-
-      if (useWipe) await playWipe('out', direction);
-      await playActorPhase(theme, 'reveal', direction);
       return true;
     } catch (err) {
       console.error('[ShadowTransitions]', err);
-      resetOverlays();
       mutateDom();
       return true;
     } finally {
@@ -228,11 +318,9 @@
   function initLanding() {
     const landing = document.getElementById('p-landing');
     if (!landing || prefersReducedMotion()) return;
-    if (window.ShadowScenarios && window.ShadowDemo?.STORY) {
-      window.ShadowScenarios.applyScenario(
-        window.ShadowDemo.STORY.scenario_primary || 'academic'
-      );
-    }
+    window.ShadowScenarios?.applyScenario(
+      window.ShadowDemo?.STORY?.scenario_primary || 'academic'
+    );
     staggerEnter(landing);
   }
 

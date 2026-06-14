@@ -928,6 +928,7 @@ img { image-rendering: pixelated; image-rendering: crisp-edges; }
 
 /* ─── Final / reconciliation ─── */
 #p-final {
+  position: relative;
   padding: 52px 14px 72px;
   display: flex;
   flex-direction: column;

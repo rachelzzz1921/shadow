@@ -17,6 +17,8 @@ profile → Persona   → persona_card
 
 | 端点 | 说明 |
 |------|------|
+| `POST /api/persona/analyze` | **Intake → Persona**：`full_profile` → persona JSON（阶跃/Claude/GPT） |
+| `POST /api/intake/complete` | 聚合 full_profile，可选 `analyze:true` 附带 LLM persona |
 | `POST /api/story/start` | 创建 session，返回 `run_id` |
 | `POST /api/story/year` | 生成单年（可带 `user_intervention`） |
 | `POST /api/story/final` | 收尾 + eval + trace 落盘 |
@@ -48,8 +50,9 @@ profile → Persona   → persona_card
 ```bash
 ANTHROPIC_API_KEY=...        # 推荐
 OPENAI_API_KEY=...
-SHADOW_PROVIDER=anthropic
-SHADOW_MODEL=claude-sonnet-4-5-20250929
+STEPFUN_API_KEY=...          # 阶跃星辰（OpenAI 兼容）
+SHADOW_PROVIDER=stepfun      # anthropic|openai|stepfun
+STEPFUN_MODEL=step-2-16k
 PORT=3000
 ```
 

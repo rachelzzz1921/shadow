@@ -4,13 +4,10 @@
  * 5 agents wired to Vercel AI SDK + Anthropic / OpenAI providers.
  *
  * Provider selection precedence:
- *   1. ANTHROPIC_API_KEY -> Claude (recommended for narrative + strict JSON)
- *   2. OPENAI_API_KEY    -> GPT-4o fallback
- *   3. neither           -> throw "no provider"
- *
- * Override via env:
- *   SHADOW_PROVIDER=anthropic|openai
- *   SHADOW_MODEL=claude-sonnet-4-5-20250929 / gpt-4o / ...
+ *   1. SHADOW_PROVIDER=anthropic|openai|stepfun (when matching key set)
+ *   2. ANTHROPIC_API_KEY -> Claude
+ *   3. OPENAI_API_KEY    -> GPT-4o
+ *   4. STEPFUN_API_KEY / STEP_API_KEY -> 阶跃星辰 (OpenAI-compatible)
  */
 
 const {
@@ -31,6 +28,7 @@ const {
 const { createLiveRuntime, pickProvider } = require('./llm-runtime');
 const { selectMemories } = require('./memory-retrieval');
 const { memoryFromYear } = require('./story-contract');
+const { runPersonaAnalyze, personaToPersonaCard } = require('./persona-agent');
 
 // ------------------------------------------------------------
 // Provider resolution
@@ -154,12 +152,24 @@ async function runFinal(input) {
 // Agent 5: cross-time dialogue
 // ------------------------------------------------------------
 async function runDialogue(input) {
-  const memory_stream = selectMemories(input.memory_stream || [], {
-    limit: 3,
+  const rag = require('./rag-service');
+  const ctx = await rag.buildDialogueContext({
+    memory_stream: input.memory_stream || [],
+    years: input.years || [],
+    user_question: input.user_question || '',
     at_year: input.at_year || 7,
-    query: input.user_question || ''
+    run_id: input.run_id || 'local',
+    profile: input.profile || {},
+    persona_card: input.persona_card,
+    last_fate_context: input.last_fate_context || null
   });
-  const { system, prompt } = buildDialoguePrompt({ ...input, memory_stream });
+
+  const { system, prompt } = buildDialoguePrompt({
+    ...input,
+    memory_stream: ctx.memory_stream,
+    year_snippets: ctx.year_snippets,
+    era_citations: ctx.era_citations
+  });
   return callAgent({
     schema: DialogueSchema,
     system,
@@ -266,6 +276,8 @@ function deriveShadow(persona) {
 
 module.exports = {
   runPersona,
+  runPersonaAnalyze,
+  personaToPersonaCard,
   runBeats,
   runYear,
   runFinal,

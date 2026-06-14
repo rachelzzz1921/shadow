@@ -17,7 +17,10 @@ https://<你的用户名>.github.io/<仓库名>/
 | 页面 | GitHub Pages URL |
 |------|------------------|
 | 团队看板 | `https://rachelzzz1921.github.io/shadow/` |
-| 叙事 Demo（v1 overlay） | `https://rachelzzz1921.github.io/shadow/demo.html` |
+| **Demo 入口（Hub）** | `https://rachelzzz1921.github.io/shadow/demo-hub.html` |
+| 三层 Intake | `https://rachelzzz1921.github.io/shadow/intake.html` |
+| 叙事 Demo（Mock / Live 浏览） | `https://rachelzzz1921.github.io/shadow/demo.html` |
+| Live 全链生成（需 API） | `https://rachelzzz1921.github.io/shadow/demo-live.html` |
 | Phaser layout v1 | `https://rachelzzz1921.github.io/shadow/demo-phaser.html` |
 | Phaser legacy 占位 | `https://rachelzzz1921.github.io/shadow/demo-phaser.html?legacy=1` |
 
@@ -30,6 +33,23 @@ npm run board:publish   # 含 build:visual-demo → docs/demo-layouts-v1.json
 例如仓库 `chenzhiwei/shadow` → `https://chenzhiwei.github.io/shadow/`
 
 ## 本地预览
+
+```bash
+# 静态 only（5199）— Intake 用规则版 Persona，无 LLM
+npm run demo:preview
+# → http://localhost:5199/demo.html · http://localhost:5199/intake.html
+
+# Live API + 静态（3000）— Intake 走阶跃星辰 LLM
+# 先在 shadow-corpus/archive/demo-v0.2/.env 配置 STEPFUN_API_KEY
+npm run demo:live
+# → http://localhost:3000/intake.html · POST /api/persona/analyze
+```
+
+| 页面 | 静态 (5199) | Live (3000) |
+|------|-------------|-------------|
+| 叙事 Demo | `/demo.html` | `/demo.html` |
+| 三层 Intake | `/intake.html`（规则 Persona） | `/intake.html`（**真实 LLM**） |
+| Persona API | — | `POST /api/persona/analyze` |
 
 ```bash
 # 1. 填写 GitHub 仓库（用于跳转链接）

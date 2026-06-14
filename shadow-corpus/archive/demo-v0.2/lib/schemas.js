@@ -126,7 +126,32 @@ const ProfileSchema = z.object({
   photo_context: z.string().optional()
 });
 
+/** Persona agent 输出 — 对齐 repo 根 persona_agent_prompt.md */
+const PersonaAgentSchema = z.object({
+  shadow_name: z.string().min(1).max(8)
+    .describe('影子独立中文名，不叫「影子」'),
+  core_traits: z.array(z.string()).min(3).max(4)
+    .describe('推导后的特质措辞，非 tag 原文'),
+  core_tension: z.string().min(12)
+    .describe('最根本的内在矛盾，叙事引擎'),
+  soft_spots: z.array(z.string()).min(2).max(4)
+    .describe('达到「怕 X 所以 Y 代价 Z」深度'),
+  decision_tendency: z.string().min(20)
+    .describe('可套到 pivotal 年的决策规则'),
+  defense_mechanism: z.string().min(8)
+    .describe('主要自我保护方式'),
+  growth_seed: z.string().min(12)
+    .describe('允许不发芽的成长方向'),
+  value_hierarchy: z.array(z.string()).min(2).max(8)
+    .describe('真实价值优先级'),
+  voice_notes: z.string().min(8)
+    .describe('说话方式供 Dialogue agent 模仿'),
+  narrative_warnings: z.array(z.string()).min(2).max(6)
+    .describe('提醒下游勿鸡汤、勿强行和解')
+});
+
 module.exports = {
+  PersonaAgentSchema,
   PersonaCardSchema,
   BeatSchema,
   BeatsSchema,

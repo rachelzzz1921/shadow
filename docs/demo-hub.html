@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shadow — 平行人生 Demo 入口</title>
+<link rel="stylesheet" href="demo-theme.css" />
+<style>
+.hub-wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+.hub-title { font-size: 2rem; margin-bottom: 8px; }
+.hub-sub { color: var(--ink-muted); margin-bottom: 36px; line-height: 1.7; }
+.hub-grid { display: grid; gap: 16px; }
+.hub-card {
+  display: block; text-decoration: none; color: inherit;
+  padding: 22px 24px; border: 2px solid var(--line);
+  border-radius: 12px; background: var(--paper);
+  transition: border-color .2s, transform .15s;
+}
+.hub-card:hover { border-color: var(--amber); transform: translateY(-2px); }
+.hub-card h2 { margin: 0 0 8px; font-size: 1.15rem; color: var(--ink); }
+.hub-card p { margin: 0; font-size: 14px; color: var(--ink-muted); line-height: 1.6; }
+.hub-card .tag { font-size: 11px; color: var(--amber); font-family: var(--font-mono, monospace); margin-bottom: 8px; }
+.hub-status { margin-top: 28px; padding: 14px 18px; border-radius: 10px; background: #f5f0e8; font-size: 13px; }
+.hub-chain { margin-top: 40px; font-size: 13px; color: var(--ink-muted); line-height: 1.8; }
+.hub-chain code { font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="hub-wrap">
+  <p class="hub-tag" style="font-family:monospace;font-size:11px;color:var(--amber);letter-spacing:2px">SHADOW HARNESS</p>
+  <h1 class="hub-title">平行人生 Demo</h1>
+  <p class="hub-sub">先告诉影子你的岔路口，再选 Mock 预览或 Live 全链生成。GitHub Pages 上 Intake 走规则 Persona；Live 生成需自建 API（阶跃星辰）。</p>
+
+  <div class="hub-grid">
+    <a class="hub-card" href="intake.html">
+      <div class="tag">STEP 1 · 推荐</div>
+      <h2>告诉影子，你是谁</h2>
+      <p>三层采集：自由文本 → 标签库 → 十道行为题 → Persona agent 推导人格。</p>
+    </a>
+    <a class="hub-card" href="demo.html">
+      <div class="tag">STEP 2A · 静态</div>
+      <h2>Mock 七年叙事</h2>
+      <p>复读线 Golden .fixture 驱动。若已完成 Intake，landing 会显示<strong>你的人格卡</strong>与岔路口。</p>
+    </a>
+    <a class="hub-card" href="demo-live.html">
+      <div class="tag">STEP 2B · Live API</div>
+      <h2>Live 全 Agent 生成</h2>
+      <p>Persona → Beats → Year×7（含 Pivotal 介入）→ Final → 可进 Demo 浏览。需 <code>npm run demo:live</code>。</p>
+    </a>
+    <a class="hub-card" href="demo-phaser.html">
+      <div class="tag">VISUAL</div>
+      <h2>Phaser 场景预览</h2>
+      <p>六域 UI + 像素场景 layout v1。</p>
+    </a>
+    <a class="hub-card" href="index.html">
+      <div class="tag">TEAM</div>
+      <h2>团队看板</h2>
+      <p>任务、进度、Harness 文档入口。</p>
+    </a>
+  </div>
+
+  <div class="hub-status" id="hub-status">检测 Live API…</div>
+
+  <div class="hub-chain">
+    <strong>Agent 链路</strong><br>
+    Intake → <code>full_profile</code> → <strong>Persona</strong> → <strong>Beats</strong> →
+    <strong>Year×7</strong>（+ <strong>Fate</strong> 时代层 + Pivotal 介入）→ <strong>Final</strong> →
+    任意时刻 <strong>Dialogue</strong>（RAG 记忆检索）
+  </div>
+</div>
+<script>
+(function () {
+  const el = document.getElementById('hub-status');
+  const hasIntake = !!(sessionStorage.getItem('shadow_persona'));
+  fetch('/api/health').then(r => r.json()).then(d => {
+    el.innerHTML = hasIntake
+      ? '✓ 已采集人格 · Live API 可用（' + (d.provider || 'ok') + '）— 可直接 <a href="demo-live.html">Live 生成</a>'
+      : '✓ Live API 可用（' + (d.provider || 'ok') + '）— 建议先 <a href="intake.html">Intake</a>';
+  }).catch(() => {
+    el.innerHTML = hasIntake
+      ? '✓ 已采集人格 · Live API 未连接（Pages 静态模式）— 可用 <a href="demo.html?from=intake">Mock 预览</a>'
+      : '○ GitHub Pages 静态模式 · Live 需本地 <code>npm run demo:live</code> 或部署 API 服务';
+  });
+})();
+</script>
+</body>
+</html>

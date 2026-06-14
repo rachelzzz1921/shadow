@@ -33,6 +33,16 @@
     return `${env} · ${year.city || ''}`.replace(/ · $/, '');
   }
 
+  function buildYearTimeline(currentYear) {
+    return `<div class="yr-timeline enter-item" aria-hidden="true">${STORY.years.map(y => {
+      let cls = 'yr-timeline-seg';
+      if (y.year < currentYear) cls += ' past';
+      if (y.year === currentYear) cls += ' current';
+      if (y.is_pivotal && y.year === currentYear) cls += ' pivotal';
+      return `<span class="${cls}"></span>`;
+    }).join('')}</div>`;
+  }
+
   /** @param {object} year normalized */
   function buildPixelScene(year) {
     const env = year.environment || 'classroom';
@@ -83,10 +93,11 @@
     page.dataset.scenario = scenario;
 
     const emo = year.emotion;
-    const emoPct = (emo.value / 10) * 100;
+    const moodPct = (year.new_mood / 10) * 100;
+    const esteemPct = (year.new_esteem / 10) * 100;
     const yearMemories = getMemoriesForYear(year.year);
     const memHtml = yearMemories.length
-      ? yearMemories.map(m => `<li class="mem-${m.type}"><span class="mem-id">${esc(m.id)}</span>${esc(m.content)}</li>`).join('')
+      ? yearMemories.map(m => `<li class="mem-${m.type}${m.type === 'pivotal' ? ' mem-pivotal' : ''}"><span class="mem-id">${esc(m.id)}</span>${esc(m.content)}</li>`).join('')
       : `<li class="mem-empty">${esc(year.memory_summary || '—')}</li>`;
 
     const interventionBlock = year.intervention_prompt
@@ -123,6 +134,7 @@
         <div class="yr-location">${esc(sceneTag(year))}</div>
         <div class="yr-scenario-badge enter-item">${esc(theme?.label || scenario)} Agent</div>
         <div class="yr-scenario-brief enter-item">${esc(theme?.brief || '')}</div>
+        ${buildYearTimeline(year.year)}
       </div>
 
       ${visualBlock}
@@ -141,12 +153,17 @@
           ${interventionBlock}
         </div>
 
-        <div class="emo-bar-wrap enter-item">
-          <div class="emo-label-row">
-            <span>♥ ${esc(emo.label)}</span>
-            <span>mood ${year.new_mood}/10 · esteem ${year.new_esteem}/10</span>
+        <div class="emo-bar-wrap enter-item emo-dual">
+          <div class="emo-row-mini">
+            <span class="emo-row-label">♥ ${esc(emo.label)}</span>
+            <div class="emo-track thin"><div class="emo-fill" style="width:${moodPct}%"></div></div>
+            <span class="emo-row-val">${year.new_mood}/10</span>
           </div>
-          <div class="emo-track"><div class="emo-fill" style="width:${emoPct}%"></div></div>
+          <div class="emo-row-mini">
+            <span class="emo-row-label">◎ 自我</span>
+            <div class="emo-track thin esteem"><div class="emo-fill" style="width:${esteemPct}%"></div></div>
+            <span class="emo-row-val">${year.new_esteem}/10</span>
+          </div>
         </div>
 
         <details class="memory-panel enter-item">
@@ -173,6 +190,9 @@
     const f = STORY.final;
     const scenario = STORY.scenario_secondary || 'self_growth';
     const theme = Sc?.getTheme(scenario);
+    const arcSteps = STORY.years.map(y =>
+      `<span class="arc-step" style="--h:${Math.max(8, y.new_mood * 10)}%" data-y="${y.year}"></span>`
+    ).join('');
     const page = document.createElement('div');
     page.className = 'page';
     page.id = 'p-final';
@@ -227,6 +247,7 @@
         <div class="emo-arc enter-item">
           <div class="section-label">── 情绪轨迹 ──</div>
           <p class="emotion-arc-text">${esc(f.emotion_arc)}</p>
+          <div class="emo-arc-viz" aria-label="七年情绪高度">${arcSteps}</div>
         </div>
 
         <div class="closing-block enter-item">
@@ -256,12 +277,14 @@
       <div class="pt-meta">${esc(p.mbti || '')} · ${p.age} 岁 · ${(p.keywords || []).join(' · ')}</div>
       <div class="pt-concept">${esc(STORY.premise)}</div>
       <details class="persona-details">
-        <summary>人格卡 persona_card</summary>
+        <summary>人格卡 persona_card${c._from_intake ? ' · 来自 Intake' : ''}</summary>
         <ul class="persona-list">
+          ${c.core_tension ? `<li><b>矛盾</b> ${esc(c.core_tension)}</li>` : ''}
           <li><b>特质</b> ${(c.core_traits || []).map(esc).join(' · ')}</li>
           <li><b>软肋</b> ${(c.soft_spots || []).map(esc).join('；')}</li>
           <li><b>倾向</b> ${esc(c.decision_tendency)}</li>
           <li><b>成长</b> ${esc(c.growth_seed)}</li>
+          ${c.voice_notes ? `<li><b>语气</b> ${esc(c.voice_notes)}</li>` : ''}
         </ul>
       </details>
     `;
@@ -337,6 +360,7 @@
 
     const after = () => {
       Sc?.applyScenario(scenarioKey);
+      syncScenarioChrome(currentPage, scenarioKey);
       onPageEnter(currentPage);
       const pages = document.querySelectorAll('.page');
       if (pages[currentPage]) T.staggerEnter(pages[currentPage]);
@@ -351,6 +375,43 @@
   function nextPage() { goToPage(currentPage + 1); }
   function startJourney(yearOffset) { goToPage(YEAR_START + (yearOffset || 0)); }
   function goLanding() { goToPage(LANDING_PAGE); }
+
+  function updateSourceTag(scenarioKey) {
+    const tag = document.getElementById('source-tag');
+    if (!tag || currentPage === LANDING_PAGE) return;
+    const theme = Sc?.getTheme(scenarioKey);
+    tag.textContent = `📦 ${theme?.label || scenarioKey} · 复读线`;
+  }
+
+  function announcePage(pageIdx, scenarioKey) {
+    const live = document.getElementById('page-announcer');
+    if (!live) return;
+    if (pageIdx === LANDING_PAGE) {
+      live.textContent = 'Shadow 平行人生 Demo 首页';
+      return;
+    }
+    if (pageIdx === FINAL_PAGE) {
+      live.textContent = '七年后的回信 · 和解';
+      return;
+    }
+    const raw = STORY.years[pageIdx - YEAR_START];
+    const theme = Sc?.getTheme(raw?.scenario || scenarioKey);
+    if (raw) {
+      live.textContent = `第 ${raw.year} 年，${raw.title}，${theme?.label || ''} Agent`;
+    }
+  }
+
+  function tuneParticles(scenarioKey) {
+    const root = document.getElementById('ambient-particles');
+    if (!root) return;
+    root.classList.toggle('dense', ['family', 'self_growth', 'love'].includes(scenarioKey));
+  }
+
+  function syncScenarioChrome(pageIdx, scenarioKey) {
+    updateSourceTag(scenarioKey);
+    announcePage(pageIdx, scenarioKey);
+    tuneParticles(scenarioKey);
+  }
 
   function updateNav() {
     const isLanding = currentPage === LANDING_PAGE;
@@ -609,11 +670,31 @@
     buildScenarioLegend();
     buildYearDots();
     buildLandingYearDots();
+
+    if (STORY.persona_card._from_intake) {
+      const btn = document.getElementById('btn-start');
+      if (btn) btn.textContent = `进入${STORY.persona_card.name}的七年（Mock）`;
+      const tag = document.getElementById('source-tag');
+      if (tag) tag.textContent = '🧬 Intake · Persona agent';
+      const tagline = document.querySelector('.landing-tagline');
+      if (tagline && STORY.profile?.choice) {
+        tagline.textContent = `你的岔路口 · ${STORY.scenario_primary || '平行'}域`;
+      }
+    }
+
+    if (STORY._from_live) {
+      const btn = document.getElementById('btn-start');
+      if (btn) btn.textContent = `进入${STORY.persona_card.name}的七年（Live）`;
+      const tag = document.getElementById('source-tag');
+      if (tag) tag.textContent = '⚡ Live · 全 Agent 生成';
+    }
+
     bindGlobalEvents();
     updateNav();
 
     T.spawnAmbientParticles(document.getElementById('ambient-particles'), 14);
     Sc?.applyScenario(STORY.scenario_primary || 'academic');
+    syncScenarioChrome(LANDING_PAGE, STORY.scenario_primary || 'academic');
     T.initLanding();
 
     window.ShadowDemo.goToPage = goToPage;
