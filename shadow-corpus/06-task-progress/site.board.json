@@ -1,0 +1,45 @@
+{
+  "harnessPhases": [
+    { "id": "01", "label": "01 需求", "path": "01-requirements/index.md", "summary": "产品目标、介入需求、验收口径" },
+    { "id": "02", "label": "02 方案", "path": "02-technical-design/index.md", "summary": "Harness 架构、API、5-agent 管线" },
+    { "id": "03", "label": "03 编码", "path": "03-coding/index.md", "summary": "叙事 Prompt 协议" },
+    { "id": "04", "label": "04 自测", "path": "04-dev-testing/index.md", "summary": "Evaluator、golden、npm test" },
+    { "id": "05", "label": "05 QA", "path": "05-qa-testing/index.md", "summary": "story-review、E2E" },
+    { "id": "06", "label": "06 进度", "path": "06-task-progress/index.md", "summary": "Run trace、任务看板" },
+    { "id": "07", "label": "07 纠错", "path": "07-debug-and-correction/index.md", "summary": "Stop 策略、trace 复盘" }
+  ],
+  "visualPipeline": [
+    { "step": 1, "name": "寻源", "owner": "P5", "artifact": "visual/registry/assets.csv" },
+    { "step": 2, "name": "建档", "owner": "P5", "artifact": "visual/02-asset-registry-spec.md" },
+    { "step": 3, "name": "标杆", "owner": "P2", "artifact": "visual/references/aesthetic-cases.md" },
+    { "step": 4, "name": "叙事", "owner": "P2", "artifact": "visual/stories/fuxduxian/narrative-draft-v2.md" },
+    { "step": 5, "name": "AI 布局", "owner": "P3", "artifact": "visual/scenes/fuxduxian/" },
+    { "step": 6, "name": "人审", "owner": "P2+P4", "artifact": "visual/stories/fuxduxian/scene-briefs.md" },
+    { "step": 7, "name": "渲染", "owner": "P3", "artifact": "visual/engine/" },
+    { "step": 8, "name": "挂流程", "owner": "P1+P3", "artifact": "visual/04-ux-flow.md" }
+  ],
+  "visualDeliverables": [
+    { "id": "B-scenes", "label": "7 特殊场景 (B)", "target": 7 },
+    { "id": "A-loops", "label": "7 日常动画 (A)", "target": 7 },
+    { "id": "C-sequences", "label": "pivotal 短片 (C)", "target": "1+4年" },
+    { "id": "cases", "label": "审美标杆案例", "target": "10–20" },
+    { "id": "assets", "label": "素材 CSV 行", "target": "30+" },
+    { "id": "layouts", "label": "layout JSON", "target": 7 }
+  ],
+  "uxTypes": [
+    { "type": "A", "name": "日常 loop", "desc": "2–4 帧小动画", "trigger": "quiet 年背景循环" },
+    { "type": "B", "name": "特殊场景", "desc": "每年 1 主景", "trigger": "进入该年卡片" },
+    { "type": "C", "name": "pivotal 短片", "desc": "3–5 步 sequence", "trigger": "介入前后 / final" }
+  ],
+  "knowledgeLinks": [
+    { "label": "Stanford Generative Agents", "path": "knowledge/research/stanford-generative-agents.md" },
+    { "label": "MiroFish 沙盒", "path": "knowledge/research/mirofish-swarm-simulation.md" },
+    { "label": "迁移路线图 P0–P3", "path": "knowledge/research/migration-roadmap-p0-p3.md" },
+    { "label": "Harness 框架图", "path": "02-technical-design/00-harness-framework-diagram.md" }
+  ],
+  "demo": {
+    "label": "归档 Demo v0.2",
+    "path": "archive/demo-v0.2/README.md",
+    "run": "npm run dev"
+  }
+}
