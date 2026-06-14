@@ -29,7 +29,8 @@ shadow-corpus/world/
 ```
 
 NotebookLM 合并：`notebooklm/00-如何使用.md` → `data/notebooklm-import/*.patch.json` → `import-notebooklm-patch.mjs`。  
-架构图：`world/docs/ARCHITECTURE.md`。语义检索：`packages/rag-kit/scripts/query.mjs`。
+架构图：`world/docs/ARCHITECTURE.md`。  
+**语义检索 / embed**：invoke skill **`rag-kit`** · `npm run rag:query` · [`packages/rag-kit/INTEGRATION.md`](../../../packages/rag-kit/INTEGRATION.md)
 
 文档：
 

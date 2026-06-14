@@ -30,6 +30,8 @@ Harness 闭环：[`02-technical-design/01-shadow-harness-loop.md`](02-technical-
 
 **持续迭代（Wave 4）**：[`docs/plans/2026-06-14-harness-wave4-iteration.md`](docs/plans/2026-06-14-harness-wave4-iteration.md) · 日志 [`06-task-progress/harness-iteration-log.md`](06-task-progress/harness-iteration-log.md)
 
+**RAG 工程（本地优先）**：[`docs/plans/2026-06-14-rag-engineering-plan.md`](docs/plans/2026-06-14-rag-engineering-plan.md) · skill **`rag-kit`** · `npm run rag:verify:m0`
+
 ```bash
 npm test                    # 归档 demo 16 tests
 npm run test:golden
@@ -72,6 +74,7 @@ npm run board:publish
 |------|-------|
 | 写故事 / golden | `story-authoring` |
 | 命运 agent / world 语料 | `fate-agent` |
+| RAG / 向量检索 / `rag:*` | `rag-kit` |
 | 审叙事 / trace | `story-review` |
 | 改 lib / prompt | `tdd` |
 | 架构改进 | `improve-codebase-architecture` |

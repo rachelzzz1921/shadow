@@ -11,7 +11,7 @@
   },
   "tiers": {
     "T0_router": ["shadow-router"],
-    "T1_shadow": ["story-authoring", "story-review", "fate-agent", "scene-agents", "harness-init"],
+    "T1_shadow": ["story-authoring", "story-review", "fate-agent", "rag-kit", "scene-agents", "harness-init"],
     "T2_harness": ["design-generator", "progress-tracker"],
     "T3_architecture": [
       "improve-codebase-architecture",
@@ -147,6 +147,12 @@
       "rule": "七年正文/golden 用 story-authoring；2006–2026 语料/命运权重/seed 用 fate-agent；审叙事质量用 story-review"
     },
     {
+      "topic": "RAG vs Fate 语料",
+      "skills": ["rag-kit", "fate-agent"],
+      "primary": "rag-kit",
+      "rule": "embed/检索/eval/verify 用 rag-kit；扩 world JSON/六域子池/seed 用 fate-agent；demo 接线读 packages/rag-kit/INTEGRATION.md"
+    },
+    {
       "topic": "Harness Init",
       "skills": ["harness-init", "setup-matt-pocock-skills"],
       "primary": "harness-init",
@@ -165,6 +171,6 @@
   },
   "manual_canonical": {
     "note": "以下 skill 源码在 skills/shadow 或 skills/harness，编辑后运行 skills/sync-shadow-skills.sh",
-    "skills": ["story-authoring", "story-review", "fate-agent", "harness-init", "design-generator", "progress-tracker"]
+    "skills": ["story-authoring", "story-review", "fate-agent", "rag-kit", "harness-init", "design-generator", "progress-tracker"]
   }
 }

@@ -17,7 +17,7 @@
 | 阶段 | 目录 | 首选 Skill |
 |------|------|-----------|
 | 需求 | [`01-requirements/`](01-requirements/) | `brainstorming` |
-| 方案 | [`02-technical-design/`](02-technical-design/) | `design-generator` |
+| 方案 | [`02-technical-design/`](02-technical-design/) | `design-generator` · RAG → `rag-kit` |
 | 编码 | [`03-coding/`](03-coding/) | `tdd` |
 | 自测 | [`04-dev-testing/`](04-dev-testing/) | `tdd`, `story-authoring` |
 | QA | [`05-qa-testing/`](05-qa-testing/) | `story-review` |

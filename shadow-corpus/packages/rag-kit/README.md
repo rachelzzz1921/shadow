@@ -1,6 +1,10 @@
 # @shadow/rag-kit
 
-Shadow 混合 RAG：国产 Embedding（DashScope）+ Supabase pgvector + **本地 JSON 索引 fallback**。
+Shadow 混合 RAG 工程包：**本地 JSON 索引优先**，可选 DashScope + Supabase pgvector。
+
+> **工程计划**：[`docs/plans/2026-06-14-rag-engineering-plan.md`](../../docs/plans/2026-06-14-rag-engineering-plan.md)  
+> **demo 接入**（恢复后端时）：[`INTEGRATION.md`](./INTEGRATION.md)  
+> **Agent skill**：[`skills/shadow/rag-kit/SKILL.md`](../../skills/shadow/rag-kit/SKILL.md)
 
 ## 三种运行模式
 
@@ -10,25 +14,37 @@ Shadow 混合 RAG：国产 Embedding（DashScope）+ Supabase pgvector + **本�
 | **rules-index** | 本地/Supabase 索引，无 embedding key | 规则，走缓存索引（快） |
 | **rules-local** | 无索引 | 每次扫 repo（慢） |
 
-## 快速开始
+## 快速开始（不接后端）
 
 ```bash
-cd shadow-corpus/packages/rag-kit && npm install
+# 仓库根
+npm run rag:install
+npm run rag:embed:local          # world + repo .md → data/local-index/
 
-# 无需 Supabase：先建规则索引（已在本机跑过 world 7405 + trace 105）
-npm run embed:local          # 或 npm run embed:world -- --no-embed
+npm run rag:query -- --json "intervention re-plan 规则"
+npm run rag:query -- --world --json "高考改革"
 
-# 有 DashScope 后开向量层
-# DASHSCOPE_API_KEY=... npm run embed:all
-
-# 索引历史 runs
-npm run index:runs
-
-# 查询
-npm run query -- "intervention re-plan 规则"
-npm run query -- "高考改革" --world   # 需改 query.mjs 或 API namespace=world
+npm run rag:verify:m0            # 环境 · schema · smoke · demo test
 ```
 
-Demo API：`GET /api/rag/status` · `POST /api/rag/query`（`namespace`: harness|world|trace|session）
+## 向量层（密钥就绪后）
+
+```bash
+npm run rag:embed:world          # 支持断点 resume
+npm run rag:embed:repo
+npm run rag:eval:embedding       # Recall@5 ≥ 80%
+npm run rag:verify:m0 -- --full
+```
+
+## 脚本一览
+
+| 命令 | 说明 |
+|------|------|
+| `rag:embed:local` | `--no-embed` 规则索引 |
+| `rag:embed:world` | 时代 JSON chunks |
+| `rag:embed:repo` | 全 repo `.md` |
+| `rag:index:runs` | trace 规则索引 |
+| `rag:query` | CLI；加 `--json` |
+| `rag:verify:m0` | M0 验收 |
 
 技术方案：[`02-technical-design/05-rag-system.md`](../../02-technical-design/05-rag-system.md)

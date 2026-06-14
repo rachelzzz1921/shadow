@@ -2,7 +2,9 @@
 
 更新时间：2026-06-14  
 任务：**T-RAG** · Gate **G2**  
-状态：需求已对齐，M0 脚手架进行中
+状态：**E0 工程包完成**；demo 后端接线 **暂停**（见 [`docs/plans/2026-06-14-rag-engineering-plan.md`](../docs/plans/2026-06-14-rag-engineering-plan.md)）
+
+> **Agent**：invoke skill **`rag-kit`** · 接入缝 [`packages/rag-kit/INTEGRATION.md`](../packages/rag-kit/INTEGRATION.md)
 
 ## 0. 需求确认（2026-06-14）
 
@@ -36,11 +38,13 @@ Shadow Harness 有五类「需要找东西」的场景，数据形态与延迟�
 索引（离线/CI）                    运行时（archive/demo-v0.2）
 ─────────────────                 ─────────────────────────────
 world JSON ──┐                    Year / Final / Dialogue / Fate
-repo .md  ───┼→ chunk → embed ──→  lib/rag-bridge.js → retrieve()
+repo .md  ───┼→ chunk → embed ──→  lib/rag-service.js → retrieve()
 runs JSON ───┘       ↓                    ↓
               Supabase rag_chunks    规则粗筛 → 向量精排 → prompt 注入
-              (+ world_* 业务表)     RAG_ENABLED=false → 纯规则 fallback
+              (+ 本地 local-index)   RAG_ENABLED=false → 纯规则 fallback
 ```
+
+**暂停期**：工程在 `packages/rag-kit` 独立演进；`rag-service.js` 已写、**冻结**，恢复时按 INTEGRATION.md 验收。
 
 ### 2.1 统一检索接口
 
@@ -235,28 +239,27 @@ RAG_CORPUS_VERSION=2026.06.14-rag-v1
 
 ## 8. 分阶段交付
 
-| 阶段 | 交付 | demo 效果 | 状态 |
-|------|------|-----------|------|
-| **M0 基建** | SQL + rag-kit + embed-world/repo + eval 脚本 | 无 UI 变化；`npm run rag:eval:embedding` 可跑 | ✅ 脚手架就绪 |
-| **M1 Fate** | `fate-bridge` + `rag-service.refineWorldPoolForFate` | 际遇更贴 profile；trace 可解释 | ✅ 后端已接 |
-| **M2 Dialogue** | `agents.runDialogue` + `prompts` + `/api/dialogue` | 跨时空问答 + 时代来源标注 | ✅ 后端已接 |
-| **M3 CLI/API** | `POST /api/rag/query` + `npm run rag:query` | 开发检索协议/golden | ✅ 已接 |
-| **M4 Trace** | `indexTraceAfterFinal` + session 逐年索引 | story-review 检索历史 | ✅ 后端已接（待 Supabase 写入） |
+| 阶段 | 交付 | 状态 |
+|------|------|------|
+| **E0 工程包** | rag-kit + CLI + local-index + verify + skill | ✅ 见 [工程计划](../docs/plans/2026-06-14-rag-engineering-plan.md) |
+| **E1 向量层** | 全量 embed + Recall@5≥80% | ⏸ DashScope / 密钥 |
+| **E2 云端层** | Supabase service_role 写入 | ⏸ JWT role 须为 service_role |
+| **M0 基建** | SQL + rag-kit + eval 脚本 | ✅ 脚手架就绪 |
+| **M1–M4 demo** | `rag-service.js` 五条链路 | 🔒 已接、**暂停扩展** |
 
-### M0 验收
+### M0 验收（工程包）
 
 - [x] `002_rag_embeddings.sql` 可在 Supabase SQL Editor 执行
-- [ ] `npm run rag:embed:world` 写入 ~7284 chunks（**待你配置 API + Supabase**）
-- [ ] `npm run rag:embed:repo` 索引全 repo `.md`
-- [ ] `npm run rag:eval:embedding` 输出 Recall@5 报告
-- [x] `RAG_ENABLED=false` 时 demo 测试仍通过（当前 39/39）
+- [x] `npm run rag:embed:local` 规则索引可跑
+- [x] `npm run rag:verify:m0` 脚本
+- [x] `RAG_ENABLED=false` 时 demo 测试通过
+- [ ] 全量向量 embed + Recall@5≥80%（恢复 E1/E2 后）
 
-### 第一期 demo 总验收（M1+M2 后端已接，向量层待你配置）
+### demo 总验收（恢复后端时）
 
 - [x] 复读线 golden eval 0 error
-- [x] Dialogue 后端接收 `years` / `run_id` / `profile` / `last_fate_context`
-- [x] Fate 同 `runId` 同年两次结果一致（规则 refine 不破坏 seed）
-- [x] 时代补充逻辑带 `source_url` 字段（prompt + `buildEraCitations`）
+- [x] Dialogue / Fate / trace 接线已写在 `rag-service.js`
+- [ ] 云端 `rag_chunks` 含 embedding + hybrid 命中（待 E2）
 
 ## 9. npm 脚本（根 package.json）
 
@@ -283,3 +286,6 @@ npm run rag:query -- "..."   # harness 语料检索 CLI
 - [`02-p0-memory-reflection-replan.md`](./02-p0-memory-reflection-replan.md)
 - [`03-fate-agent-and-world-db.md`](./03-fate-agent-and-world-db.md)
 - [`packages/rag-kit/README.md`](../packages/rag-kit/README.md)
+- [`packages/rag-kit/INTEGRATION.md`](../packages/rag-kit/INTEGRATION.md)
+- [`docs/plans/2026-06-14-rag-engineering-plan.md`](../docs/plans/2026-06-14-rag-engineering-plan.md)
+- Skill：**`rag-kit`**（`skills/shadow/rag-kit/SKILL.md`）
