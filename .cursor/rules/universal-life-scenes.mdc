@@ -1,0 +1,44 @@
+---
+description: 六域 Agent 通用生活像素素材 — 按 story_tags/type 筛选，非故事线专用
+alwaysApply: false
+globs: docs/demo*.**,shadow-corpus/visual/**
+---
+
+# 通用生活场景素材（universal-life-scenes-v1）
+
+**先读：**
+- `shadow-corpus/visual/registry/universal-life-scenes-sourcing-notes.md`
+- `shadow-corpus/visual/registry/packs/universal-life-scenes-v1.csv`
+- `shadow-corpus/visual/registry/packs/universal-agent-ui-map.json`
+
+## 定位
+
+- **不是**复读线或任一故事的专用资源
+- **是**六类 Agent 的通用视觉底座：亲情 / 爱情 / 友情 / 学业 / 事业 / 自我成长
+- 故事线专属素材用 `fuxduxian-v1` 等独立 pack
+
+## 筛选
+
+1. `story_tags` 匹配 Agent 域
+2. `type`：`background` 底图 · `prop`/`fx` 情绪物件 · `ui` 对话/选择/状态 · `character` NPC 占位
+
+## 授权
+
+| tier | UI |
+|------|-----|
+| `cc0_ready` | 可预览纹理 |
+| `cc0_pending` | asset_id 占位，待下载 raw |
+| `review_required` | 候选，标「待复核」 |
+| `license_pending` | 候选，标「待授权」 |
+
+**排除：** Pinterest/Pixilart/Playabit/Steam 截图；纯评论区授权；奇幻/战斗/怪物包（除非隐喻）。
+
+## 接入
+
+- `universal-agent-ui-map.json` → 每 Agent：background + prop/fx + ui
+- Demo：`ShadowUniversalAssets.paintScenario(mount, scenarioKey)`
+- 人审前**不**写入 `registry/assets.csv`
+
+```bash
+npm run build:visual-demo
+```

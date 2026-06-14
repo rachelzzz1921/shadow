@@ -46,6 +46,7 @@ visual/
 - Excel 规范：[`02-asset-registry-spec.md`](./02-asset-registry-spec.md)
 - 复读线场景清单：[`stories/fuxduxian/scene-briefs.md`](./stories/fuxduxian/scene-briefs.md)
 - 复读线 v1 寻源包：[`registry/packs/fuxduxian-v1.csv`](./registry/packs/fuxduxian-v1.csv) · draft layout 在 [`scenes/fuxduxian/draft/`](./scenes/fuxduxian/draft/)
+- **六域通用包**：[`universal-life-scenes-sourcing-notes.md`](./registry/universal-life-scenes-sourcing-notes.md) · [`packs/universal-life-scenes-v1.csv`](./registry/packs/universal-life-scenes-v1.csv) · Agent 映射 [`packs/universal-agent-ui-map.json`](./registry/packs/universal-agent-ui-map.json)
 - 叙事待加强：[`stories/fuxduxian/narrative-gaps.md`](./stories/fuxduxian/narrative-gaps.md)
 
 ## Demo 打包

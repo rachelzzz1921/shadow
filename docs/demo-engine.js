@@ -51,6 +51,11 @@
 
     return `
       <div class="pixel-scene enter-item scene-env-${env} scene-mood-${mood} scene-scenario-${scenario}" data-environment="${env}" data-scenario="${scenario}">
+        <span class="scene-corner tl" aria-hidden="true"></span>
+        <span class="scene-corner tr" aria-hidden="true"></span>
+        <span class="scene-corner bl" aria-hidden="true"></span>
+        <span class="scene-corner br" aria-hidden="true"></span>
+        <div class="scene-scanlines" aria-hidden="true"></div>
         <div class="scene-backdrop"></div>
         <div class="scene-floor"></div>
         ${extras.join('')}
@@ -175,6 +180,11 @@
 
     page.innerHTML = `
       <div class="pixel-scene enter-item scene-env-postoffice scene-mood-city scene-scenario-${scenario}" data-environment="postoffice" data-scenario="${scenario}">
+        <span class="scene-corner tl" aria-hidden="true"></span>
+        <span class="scene-corner tr" aria-hidden="true"></span>
+        <span class="scene-corner bl" aria-hidden="true"></span>
+        <span class="scene-corner br" aria-hidden="true"></span>
+        <div class="scene-scanlines" aria-hidden="true"></div>
         <div class="scene-backdrop"></div>
         <div class="scene-floor"></div>
         <div class="scene-sage"></div>
@@ -257,6 +267,14 @@
     `;
   }
 
+  function buildScenarioLegend() {
+    const el = document.getElementById('scenario-legend');
+    if (!el || !window.ShadowScenarios) return;
+    el.innerHTML = Object.values(window.ShadowScenarios.SCENARIO_THEMES)
+      .map(t => `<span class="scenario-chip" data-domain="${t.id}">${esc(t.label)}</span>`)
+      .join('');
+  }
+
   function buildYearDots() {
     const indicator = document.getElementById('page-indicator');
     indicator.innerHTML = '';
@@ -266,6 +284,7 @@
       dot.className = 'dot' + (node.is_pivotal ? ' key' : '');
       dot.title = `第 ${node.year} 年 · ${node.title}`;
       dot.setAttribute('aria-label', dot.title);
+      if (node.scenario) dot.dataset.scenario = node.scenario;
       dot.onclick = () => goToPage(YEAR_START + i);
       indicator.appendChild(dot);
     });
@@ -338,6 +357,7 @@
     document.getElementById('nav-back').classList.toggle('visible', !isLanding);
     document.getElementById('page-indicator').classList.toggle('visible', !isLanding);
     document.getElementById('source-tag').classList.toggle('visible', !isLanding);
+    document.getElementById('nav-hint-bar')?.classList.toggle('visible', !isLanding);
 
     const prev = document.getElementById('nav-prev');
     const next = document.getElementById('nav-next');
@@ -379,6 +399,12 @@
 
     if (window.ShadowVisual) {
       window.ShadowVisual.paintYear(year.year, year.year, year);
+    }
+
+    const scenarioKey = year.scenario || STORY.scenario_primary || 'academic';
+    if (window.ShadowUniversalAssets) {
+      const scene = document.querySelector(`#p-year-${year.year} .pixel-scene`);
+      await window.ShadowUniversalAssets.paintScenarioAsync(scene, scenarioKey);
     }
 
     if (year.is_pivotal && year.intervention_prompt && !interventionShown.has(year.year)) {
@@ -580,6 +606,7 @@
     slider.appendChild(buildFinalPage());
 
     buildLandingProfile();
+    buildScenarioLegend();
     buildYearDots();
     buildLandingYearDots();
     bindGlobalEvents();

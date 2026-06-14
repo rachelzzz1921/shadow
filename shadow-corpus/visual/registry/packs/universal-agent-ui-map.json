@@ -1,0 +1,171 @@
+{
+  "pack_id": "universal-life-scenes-v1",
+  "status": "draft_candidate",
+  "source": "registry/packs/universal-life-scenes-v1.csv",
+  "notes": "六域 Agent 通用视觉占位 — 非故事线专用。人审前不写入 assets.csv。",
+  "agents": {
+    "family": {
+      "label": "亲情",
+      "story_tags": ["亲情", "家庭期待", "父母关系"],
+      "slots": {
+        "background": {
+          "asset_id": "PX-UNI-002",
+          "name": "普通住宅客厅厨房 CC0",
+          "usage_case": "父母坐在客厅两侧，中间留空给主角"
+        },
+        "prop": {
+          "asset_id": "PX-UNI-011",
+          "name": "家庭聚餐食物 CC0",
+          "usage_case": "桌上一份没动的食物表达冷场"
+        },
+        "fx": {
+          "asset_id": "PX-UNI-023",
+          "name": "透明雨幕 CC0",
+          "usage_case": "争执后的情绪滤镜，不写字幕"
+        },
+        "ui": {
+          "asset_id": "PX-UNI-018",
+          "name": "手机聊天图标 CC0",
+          "usage_case": "未接电话/家庭消息角标"
+        }
+      },
+      "candidates_pending": ["PX-UNI-001", "PX-UNI-006", "PX-UNI-010"]
+    },
+    "love": {
+      "label": "爱情",
+      "story_tags": ["爱情", "异地", "分手", "复合"],
+      "slots": {
+        "background": {
+          "asset_id": "PX-UNI-014",
+          "name": "异地车站站台",
+          "usage_case": "两人隔站台或车门，离别 loop",
+          "candidate_only": true
+        },
+        "prop": {
+          "asset_id": "PX-UNI-024",
+          "name": "礼物与情绪图标 CC0",
+          "usage_case": "关系选择卡片上的小图标"
+        },
+        "fx": {
+          "asset_id": "PX-UNI-023",
+          "name": "透明雨幕 CC0",
+          "usage_case": "分手/雨夜叠层"
+        },
+        "ui": {
+          "asset_id": "PX-UNI-019",
+          "name": "像素对话框与头像 UI",
+          "usage_case": "分支选择用 portrait + dialogue box",
+          "candidate_only": true
+        }
+      },
+      "candidates_pending": ["PX-UNI-013", "PX-UNI-016", "PX-UNI-020"]
+    },
+    "friendship": {
+      "label": "友情",
+      "story_tags": ["友情", "朋友分流", "圈子变化"],
+      "slots": {
+        "background": {
+          "asset_id": "PX-UNI-026",
+          "name": "学校食堂朋友桌",
+          "usage_case": "长桌逐步减少坐着的人",
+          "candidate_only": true
+        },
+        "prop": {
+          "asset_id": "PX-UNI-031",
+          "name": "零食饮料 CC0",
+          "usage_case": "两份零食，后续只剩一份未拆"
+        },
+        "fx": null,
+        "ui": {
+          "asset_id": "PX-UNI-034",
+          "name": "群聊与心情图标 CC0",
+          "usage_case": "群聊未读与圈子变化角标"
+        }
+      },
+      "candidates_pending": ["PX-UNI-027", "PX-UNI-028", "PX-UNI-036"]
+    },
+    "academic": {
+      "label": "学业",
+      "story_tags": ["学业", "复读", "考研", "课堂"],
+      "slots": {
+        "background": {
+          "asset_id": "PX-UNI-037",
+          "name": "教室主背景 CC0",
+          "usage_case": "最后一排课桌和黑板"
+        },
+        "prop": {
+          "asset_id": "PX-UNI-044",
+          "name": "课桌黑板书本 CC0",
+          "usage_case": "桌上堆书构成考试压力"
+        },
+        "fx": null,
+        "ui": {
+          "asset_id": "PX-UNI-046",
+          "name": "考试选择 UI CC0",
+          "usage_case": "复读/考研/转专业选项面板"
+        }
+      },
+      "candidates_pending": ["PX-UNI-039", "PX-UNI-047", "PX-UNI-094"]
+    },
+    "career": {
+      "label": "事业",
+      "story_tags": ["事业", "就业", "城市机会", "面试"],
+      "slots": {
+        "background": {
+          "asset_id": "PX-UNI-049",
+          "name": "现代办公室主场景",
+          "usage_case": "工位排列表现职场秩序",
+          "candidate_only": true
+        },
+        "prop": {
+          "asset_id": "PX-UNI-060",
+          "name": "学校办公室文件柜 CC0",
+          "usage_case": "考公/校务咨询过渡行政场景"
+        },
+        "fx": null,
+        "ui": {
+          "asset_id": "PX-UNI-062",
+          "name": "办公对话 UI",
+          "usage_case": "面试/汇报统一对话框",
+          "candidate_only": true
+        }
+      },
+      "candidates_pending": ["PX-UNI-051", "PX-UNI-053", "PX-UNI-058"]
+    },
+    "self_growth": {
+      "label": "自我成长",
+      "story_tags": ["自我成长", "身份认同", "人生方向"],
+      "slots": {
+        "background": {
+          "asset_id": "PX-UNI-066",
+          "name": "独处卧室 CC0",
+          "usage_case": "舒适区里绕圈或床边不动"
+        },
+        "prop": {
+          "asset_id": "PX-UNI-074",
+          "name": "路上食物/咖啡 CC0",
+          "usage_case": "舒适区外短暂停靠恢复"
+        },
+        "fx": {
+          "asset_id": "PX-UNI-065",
+          "name": "雨后自省 CC0",
+          "usage_case": "长期遗憾回看，角色不动只有雨"
+        },
+        "ui": {
+          "asset_id": "PX-UNI-071",
+          "name": "心情状态图标 CC0",
+          "usage_case": "压力/恢复/犹豫状态角标"
+        }
+      },
+      "candidates_pending": ["PX-UNI-064", "PX-UNI-067", "PX-UNI-096"]
+    }
+  },
+  "shared_anchors": {
+    "PX-UNI-077": "Modern Interiors 室内母包 — 候选",
+    "PX-UNI-080": "Kenney UI CC0 — 六域选择/导航占位",
+    "PX-UNI-081": "Kenney 角色 CC0 — NPC 占位",
+    "PX-UNI-085": "Rain FX CC0 — 共用情绪层",
+    "PX-UNI-086": "BTL Home CC0 — 家居低风险底座",
+    "PX-UNI-092": "Reakain Convenience — 六域夜间碰头点候选"
+  }
+}

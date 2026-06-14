@@ -748,7 +748,32 @@ img { image-rendering: pixelated; image-rendering: crisp-edges; }
 .visual-layout-overlay .vlo-pack { display: block; font-size: 10px; color: rgba(120, 180, 140, 0.85); margin-bottom: 2px; }
 .visual-layout-overlay .vlo-seq { opacity: 0.75; margin-left: 6px; font-size: 11px; }
 
-.pixel-scene { position: relative; }
+/* universal-life-scenes-v1 — 六域 Agent 通用素材占位（场景顶部） */
+.universal-asset-overlay {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 8px;
+  font-size: 10px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  z-index: 5;
+}
+.universal-asset-overlay .uao-pack {
+  display: block;
+  width: 100%;
+  font-size: 10px;
+  color: rgba(160, 200, 180, 0.85);
+  margin-bottom: 2px;
+}
+.universal-asset-overlay .uao-slot[data-tier="cc0_ready"] { color: rgba(140, 200, 160, 0.9); }
+.universal-asset-overlay .uao-slot[data-tier="cc0_pending"] { color: rgba(160, 180, 200, 0.85); }
+.universal-asset-overlay .uao-slot[data-tier="review_required"] { color: rgba(220, 190, 120, 0.9); }
+.universal-asset-overlay .uao-slot[data-tier="license_pending"] { color: rgba(200, 140, 120, 0.85); }
 
 .yr-header {
   text-align: center;

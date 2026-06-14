@@ -5,6 +5,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -70,6 +71,28 @@ function main() {
   console.log('wrote docs/fuxduxian-v1-manifest.json');
 
   copyAssets();
+  copyUniversalPack();
+}
+
+function copyUniversalPack() {
+  execSync('node shadow-corpus/tooling/scripts/build-universal-manifest.mjs', {
+    cwd: ROOT,
+    stdio: 'inherit'
+  });
+
+  const uniManifest = path.join(
+    ROOT,
+    'shadow-corpus/visual/registry/packs/universal-life-scenes-v1-manifest.json'
+  );
+  const uniMap = path.join(
+    ROOT,
+    'shadow-corpus/visual/registry/packs/universal-agent-ui-map.json'
+  );
+
+  fs.copyFileSync(uniManifest, path.join(DOCS, 'universal-life-scenes-v1-manifest.json'));
+  fs.copyFileSync(uniMap, path.join(DOCS, 'universal-agent-ui-map.json'));
+  console.log('wrote docs/universal-life-scenes-v1-manifest.json');
+  console.log('wrote docs/universal-agent-ui-map.json');
 }
 
 main();

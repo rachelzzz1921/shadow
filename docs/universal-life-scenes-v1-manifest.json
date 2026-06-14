@@ -1,0 +1,606 @@
+{
+  "pack_id": "universal-life-scenes-v1",
+  "status": "draft_candidate",
+  "source_csv": "packs/universal-life-scenes-v1.csv",
+  "notes": "六域 Agent 通用底座；未合并 registry/assets.csv。付费/署名/禁再分发/需复核 → 仅占位候选。",
+  "license_tiers": {
+    "cc0_ready": "已下载 CC0，demo 可预览纹理",
+    "cc0_pending": "CSV 标 CC0，待下载 raw/",
+    "review_required": "可商用但需人工复核许可截图",
+    "license_pending": "付费、非商业免费或授权不明 — 仅候选态"
+  },
+  "assets": {
+    "PX-UNI-001": {
+      "license": "license_pending",
+      "type": "background",
+      "story_tags": "亲情,家庭期待,父母关系,home",
+      "source_url": "https://limezu.itch.io/moderninteriors"
+    },
+    "PX-UNI-002": {
+      "license": "cc0_pending",
+      "type": "background",
+      "story_tags": "亲情,家庭,责任与愧疚,home",
+      "source_url": "https://btl-games.itch.io/topdown"
+    },
+    "PX-UNI-003": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "亲情,家庭期待,晚饭,厨房",
+      "source_url": "https://reakain.itch.io/kitchen-assets"
+    },
+    "PX-UNI-004": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "亲情,童年,身份认同,home",
+      "source_url": "https://graduation-cat.itch.io/house-interior-tileset-32x32"
+    },
+    "PX-UNI-005": {
+      "license": "license_pending",
+      "type": "background",
+      "story_tags": "亲情,自我成长,身份认同,mirror",
+      "source_url": "https://graduation-cat.itch.io/house-interior-tileset-32x32"
+    },
+    "PX-UNI-006": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "亲情,责任与愧疚,父母关系,hospital",
+      "source_url": "https://jackburton84.itch.io/pixel-hospital-tileset-modern-medical-pixel-art-32x32"
+    },
+    "PX-UNI-007": {
+      "license": "cc0_pending",
+      "type": "background",
+      "story_tags": "亲情,离家,城市机会,town",
+      "source_url": "https://kenney.nl/assets/tiny-town"
+    },
+    "PX-UNI-008": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "亲情,友情,家庭,零售",
+      "source_url": "https://reakain.itch.io/gb-studio-7-11-tileset"
+    },
+    "PX-UNI-009": {
+      "license": "license_pending",
+      "type": "prop",
+      "story_tags": "亲情,父母关系,学业,沟通",
+      "source_url": "https://graduation-cat.itch.io/house-interior-tileset-32x32"
+    },
+    "PX-UNI-010": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "亲情,友情,同居,home",
+      "source_url": "https://apple-dog.itch.io/modern-tileset-by-appledog"
+    },
+    "PX-UNI-011": {
+      "license": "cc0_pending",
+      "type": "prop",
+      "story_tags": "亲情,友情,聚餐,餐桌",
+      "source_url": "https://kenney.nl/assets/pixel-platformer-food-expansion"
+    },
+    "PX-UNI-012": {
+      "license": "license_pending",
+      "type": "prop",
+      "story_tags": "亲情,家庭期待,长期遗憾,童年",
+      "source_url": "https://graduation-cat.itch.io/house-interior-tileset-32x32"
+    },
+    "PX-UNI-013": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "爱情,分手,异地,城市",
+      "source_url": "https://gandalfhardcore.itch.io/free-pixel-art-sidescroller-asset-pack-32x32-city"
+    },
+    "PX-UNI-014": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "爱情,异地,复合,事业,通勤",
+      "source_url": "https://reakain.itch.io/gb-studio-trains"
+    },
+    "PX-UNI-015": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "爱情,友情,复合,选择",
+      "source_url": "https://ferd-dev.itch.io/plastic-interiors"
+    },
+    "PX-UNI-016": {
+      "license": "license_pending",
+      "type": "background",
+      "story_tags": "爱情,亲密关系选择,约会,复合",
+      "source_url": "https://limezu.itch.io/moderninteriors"
+    },
+    "PX-UNI-017": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "爱情,同居,分手,home",
+      "source_url": "https://apple-dog.itch.io/modern-tileset-by-appledog"
+    },
+    "PX-UNI-018": {
+      "license": "cc0_pending",
+      "type": "ui",
+      "story_tags": "爱情,异地,友情,聊天,通知",
+      "source_url": "https://opengameart.org/content/lucid-icon-pack"
+    },
+    "PX-UNI-019": {
+      "license": "review_required",
+      "type": "ui",
+      "story_tags": "爱情,复合,亲密关系选择,dialogue",
+      "source_url": "https://limezu.itch.io/modernuserinterface"
+    },
+    "PX-UNI-020": {
+      "license": "license_pending",
+      "type": "background",
+      "story_tags": "爱情,复合,告别,礼物",
+      "source_url": "https://limezu.itch.io/moderninteriors"
+    },
+    "PX-UNI-021": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "爱情,异地,事业,城市机会",
+      "source_url": "https://reakain.itch.io/gb-studio-buildings"
+    },
+    "PX-UNI-022": {
+      "license": "license_pending",
+      "type": "background",
+      "story_tags": "爱情,友情,城市,分流",
+      "source_url": "https://gandalfhardcore.itch.io/free-pixel-art-sidescroller-asset-pack-32x32-city"
+    },
+    "PX-UNI-023": {
+      "license": "cc0_ready",
+      "type": "fx",
+      "story_tags": "爱情,分手,亲情,自我成长,雨",
+      "source_url": "https://opengameart.org/content/rain-1",
+      "local_raw": "visual/assets/raw/opengameart-rain/rain_overlay_0.png",
+      "demo_path": "visual-assets/rain_overlay_0.png"
+    },
+    "PX-UNI-024": {
+      "license": "cc0_pending",
+      "type": "ui",
+      "story_tags": "爱情,复合,亲密关系选择,礼物",
+      "source_url": "https://opengameart.org/content/lucid-icon-pack"
+    },
+    "PX-UNI-025": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "友情,朋友分流,陪伴与疏远,home",
+      "source_url": "https://limezu.itch.io/moderninteriors"
+    },
+    "PX-UNI-026": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "友情,朋友分流,学业,食堂",
+      "source_url": "https://oceansdream.itch.io/nostalgia-school-time"
+    },
+    "PX-UNI-027": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "友情,陪伴,圈子变化,零售",
+      "source_url": "https://reakain.itch.io/gb-studio-7-11-tileset"
+    },
+    "PX-UNI-028": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "友情,圈子变化,事业,城市",
+      "source_url": "https://reakain.itch.io/gb-studio-buildings"
+    },
+    "PX-UNI-029": {
+      "license": "license_pending",
+      "type": "background",
+      "story_tags": "友情,陪伴与疏远,聚会,home",
+      "source_url": "https://graduation-cat.itch.io/house-interior-tileset-32x32"
+    },
+    "PX-UNI-030": {
+      "license": "cc0_pending",
+      "type": "background",
+      "story_tags": "友情,圈子变化,自我成长,road",
+      "source_url": "https://kenney.nl/assets/tiny-town"
+    },
+    "PX-UNI-031": {
+      "license": "cc0_pending",
+      "type": "prop",
+      "story_tags": "友情,便利店,聚会,陪伴",
+      "source_url": "https://kenney.nl/assets/pixel-platformer-food-expansion"
+    },
+    "PX-UNI-032": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "友情,学业,圈子变化,校园",
+      "source_url": "https://oceansdream.itch.io/nostalgia-school-time"
+    },
+    "PX-UNI-033": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "友情,爱情,事业,谈话",
+      "source_url": "https://ferd-dev.itch.io/plastic-interiors"
+    },
+    "PX-UNI-034": {
+      "license": "cc0_pending",
+      "type": "ui",
+      "story_tags": "友情,圈子变化,聊天,通知",
+      "source_url": "https://opengameart.org/content/lucid-icon-pack"
+    },
+    "PX-UNI-035": {
+      "license": "cc0_pending",
+      "type": "character",
+      "story_tags": "友情,亲情,事业,NPC",
+      "source_url": "https://kenney.nl/assets/roguelike-characters"
+    },
+    "PX-UNI-036": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "友情,圈子变化,爱情,聚会",
+      "source_url": "https://limezu.itch.io/moderninteriors"
+    },
+    "PX-UNI-037": {
+      "license": "cc0_ready",
+      "type": "background",
+      "story_tags": "学业,复读,考研,课堂",
+      "source_url": "https://opengameart.org/content/cool-school-tileset",
+      "local_raw": "visual/assets/raw/opengameart-cool-school/coolschool_tileset.png",
+      "demo_path": "visual-assets/coolschool_tileset.png"
+    },
+    "PX-UNI-038": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "学业,复读,朋友,校园",
+      "source_url": "https://oceansdream.itch.io/nostalgia-school-time"
+    },
+    "PX-UNI-039": {
+      "license": "license_pending",
+      "type": "background",
+      "story_tags": "学业,考研,出国读书,自习",
+      "source_url": "https://limezu.itch.io/moderninteriors"
+    },
+    "PX-UNI-040": {
+      "license": "review_required",
+      "type": "prop",
+      "story_tags": "学业,考研,转专业,查资料",
+      "source_url": "https://graduation-cat.itch.io/house-interior-tileset-32x32"
+    },
+    "PX-UNI-041": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "学业,复读,友情,食堂",
+      "source_url": "https://oceansdream.itch.io/nostalgia-school-time"
+    },
+    "PX-UNI-042": {
+      "license": "cc0_pending",
+      "type": "background",
+      "story_tags": "学业,考研,复读,宿舍",
+      "source_url": "https://btl-games.itch.io/topdown"
+    },
+    "PX-UNI-043": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "学业,友情,校园活动,疏离",
+      "source_url": "https://oceansdream.itch.io/nostalgia-school-time"
+    },
+    "PX-UNI-044": {
+      "license": "cc0_ready",
+      "type": "prop",
+      "story_tags": "学业,复读,课堂,考试",
+      "source_url": "https://opengameart.org/content/cool-school-tileset",
+      "local_raw": "visual/assets/raw/opengameart-cool-school/coolschool_tileset.png",
+      "demo_path": "visual-assets/coolschool_tileset.png"
+    },
+    "PX-UNI-045": {
+      "license": "cc0_ready",
+      "type": "prop",
+      "story_tags": "学业,转专业,事业,办公室",
+      "source_url": "https://opengameart.org/content/cool-school-tileset",
+      "local_raw": "visual/assets/raw/opengameart-cool-school/coolschool_tileset.png",
+      "demo_path": "visual-assets/coolschool_tileset.png"
+    },
+    "PX-UNI-046": {
+      "license": "cc0_pending",
+      "type": "ui",
+      "story_tags": "学业,选择,考研,转专业",
+      "source_url": "https://kenney.nl/assets/ui-pack-pixel-adventure"
+    },
+    "PX-UNI-047": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "学业,出国读书,事业,面试",
+      "source_url": "https://limezu.itch.io/moderninteriors"
+    },
+    "PX-UNI-048": {
+      "license": "review_required",
+      "type": "character",
+      "story_tags": "学业,友情,课堂,NPC",
+      "source_url": "https://oceansdream.itch.io/nostalgia-school-time"
+    },
+    "PX-UNI-049": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "事业,就业,转行,职场",
+      "source_url": "https://limezu.itch.io/modernoffice"
+    },
+    "PX-UNI-050": {
+      "license": "license_pending",
+      "type": "prop",
+      "story_tags": "事业,就业,考公,职场",
+      "source_url": "https://masalimov-ilnur.itch.io/pixel-office"
+    },
+    "PX-UNI-051": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "事业,就业,考公,面试",
+      "source_url": "https://limezu.itch.io/moderninteriors"
+    },
+    "PX-UNI-052": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "事业,城市机会,转行,城市",
+      "source_url": "https://reakain.itch.io/gb-studio-buildings"
+    },
+    "PX-UNI-053": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "事业,就业,城市机会,异地",
+      "source_url": "https://reakain.itch.io/gb-studio-trains"
+    },
+    "PX-UNI-054": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "事业,亲情,医院,责任",
+      "source_url": "https://jackburton84.itch.io/pixel-hospital-tileset-modern-medical-pixel-art-32x32"
+    },
+    "PX-UNI-055": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "事业,就业,创业,零售",
+      "source_url": "https://reakain.itch.io/gb-studio-7-11-tileset"
+    },
+    "PX-UNI-056": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "事业,创业,转行,被看见",
+      "source_url": "https://limezu.itch.io/moderninteriors"
+    },
+    "PX-UNI-057": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "事业,考公,就业,汇报",
+      "source_url": "https://limezu.itch.io/moderninteriors"
+    },
+    "PX-UNI-058": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "事业,城市机会,爱情,友情",
+      "source_url": "https://limezu.itch.io/modernexteriors"
+    },
+    "PX-UNI-059": {
+      "license": "review_required",
+      "type": "prop",
+      "story_tags": "事业,城市机会,转行,road",
+      "source_url": "https://gandalfhardcore.itch.io/free-pixel-art-sidescroller-asset-pack-32x32-city"
+    },
+    "PX-UNI-060": {
+      "license": "cc0_ready",
+      "type": "prop",
+      "story_tags": "事业,考公,学业,办公室",
+      "source_url": "https://opengameart.org/content/cool-school-tileset",
+      "local_raw": "visual/assets/raw/opengameart-cool-school/coolschool_tileset.png",
+      "demo_path": "visual-assets/coolschool_tileset.png"
+    },
+    "PX-UNI-061": {
+      "license": "license_pending",
+      "type": "character",
+      "story_tags": "事业,就业,同事,NPC",
+      "source_url": "https://masalimov-ilnur.itch.io/pixel-office"
+    },
+    "PX-UNI-062": {
+      "license": "review_required",
+      "type": "ui",
+      "story_tags": "事业,面试,汇报,选择",
+      "source_url": "https://limezu.itch.io/modernuserinterface"
+    },
+    "PX-UNI-063": {
+      "license": "cc0_pending",
+      "type": "background",
+      "story_tags": "自我成长,人生方向,离开舒适区,road",
+      "source_url": "https://kenney.nl/assets/tiny-town"
+    },
+    "PX-UNI-064": {
+      "license": "license_pending",
+      "type": "background",
+      "story_tags": "自我成长,离开舒适区,人生方向,nature",
+      "source_url": "https://cupnooble.itch.io/sprout-lands-asset-pack"
+    },
+    "PX-UNI-065": {
+      "license": "cc0_ready",
+      "type": "fx",
+      "story_tags": "自我成长,长期遗憾,爱情,亲情",
+      "source_url": "https://opengameart.org/content/rain-1",
+      "local_raw": "visual/assets/raw/opengameart-rain/rain_overlay_0.png",
+      "demo_path": "visual-assets/rain_overlay_0.png"
+    },
+    "PX-UNI-066": {
+      "license": "cc0_pending",
+      "type": "background",
+      "story_tags": "自我成长,身份认同,舒适区,home",
+      "source_url": "https://btl-games.itch.io/topdown"
+    },
+    "PX-UNI-067": {
+      "license": "license_pending",
+      "type": "background",
+      "story_tags": "自我成长,身份认同,亲情,mirror",
+      "source_url": "https://graduation-cat.itch.io/house-interior-tileset-32x32"
+    },
+    "PX-UNI-068": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "自我成长,事业,城市机会,方向",
+      "source_url": "https://reakain.itch.io/gb-studio-buildings"
+    },
+    "PX-UNI-069": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "自我成长,友情,爱情,深夜",
+      "source_url": "https://reakain.itch.io/gb-studio-7-11-tileset"
+    },
+    "PX-UNI-070": {
+      "license": "license_pending",
+      "type": "background",
+      "story_tags": "自我成长,学业,长期遗憾,学习",
+      "source_url": "https://limezu.itch.io/moderninteriors"
+    },
+    "PX-UNI-071": {
+      "license": "cc0_pending",
+      "type": "ui",
+      "story_tags": "自我成长,身份认同,长期遗憾,UI",
+      "source_url": "https://opengameart.org/content/lucid-icon-pack"
+    },
+    "PX-UNI-072": {
+      "license": "cc0_pending",
+      "type": "character",
+      "story_tags": "自我成长,身份认同,亲情,友情",
+      "source_url": "https://kenney.nl/assets/roguelike-characters"
+    },
+    "PX-UNI-073": {
+      "license": "license_pending",
+      "type": "character",
+      "story_tags": "自我成长,学业,事业,shared",
+      "source_url": "https://limezu.itch.io/moderninteriors"
+    },
+    "PX-UNI-074": {
+      "license": "cc0_pending",
+      "type": "prop",
+      "story_tags": "自我成长,友情,爱情,休息",
+      "source_url": "https://kenney.nl/assets/pixel-platformer-food-expansion"
+    },
+    "PX-UNI-075": {
+      "license": "license_pending",
+      "type": "background",
+      "story_tags": "自我成长,人生方向,离开舒适区,nature",
+      "source_url": "https://cupnooble.itch.io/sprout-lands-asset-pack"
+    },
+    "PX-UNI-076": {
+      "license": "license_pending",
+      "type": "background",
+      "story_tags": "亲情,友情,自我成长,home",
+      "source_url": "https://penzilla.itch.io/top-down-retro-interior"
+    },
+    "PX-UNI-077": {
+      "license": "license_pending",
+      "type": "background",
+      "story_tags": "亲情,爱情,友情,学业,事业,自我成长",
+      "source_url": "https://limezu.itch.io/moderninteriors"
+    },
+    "PX-UNI-078": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "爱情,友情,事业,自我成长,城市",
+      "source_url": "https://limezu.itch.io/modernexteriors"
+    },
+    "PX-UNI-079": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "事业,就业,转行,考公",
+      "source_url": "https://limezu.itch.io/modernoffice"
+    },
+    "PX-UNI-080": {
+      "license": "cc0_pending",
+      "type": "ui",
+      "story_tags": "shared,选择,状态,导航",
+      "source_url": "https://kenney.nl/assets/ui-pack-pixel-adventure"
+    },
+    "PX-UNI-081": {
+      "license": "cc0_pending",
+      "type": "character",
+      "story_tags": "shared,NPC,亲情,友情,事业",
+      "source_url": "https://kenney.nl/assets/roguelike-characters"
+    },
+    "PX-UNI-082": {
+      "license": "review_required",
+      "type": "ui",
+      "story_tags": "shared,dialogue,choice,portrait",
+      "source_url": "https://limezu.itch.io/modernuserinterface"
+    },
+    "PX-UNI-083": {
+      "license": "cc0_pending",
+      "type": "ui",
+      "story_tags": "shared,通知,心情,工具",
+      "source_url": "https://opengameart.org/content/lucid-icon-pack"
+    },
+    "PX-UNI-084": {
+      "license": "cc0_ready",
+      "type": "background",
+      "story_tags": "学业,事业,校园,办公室",
+      "source_url": "https://opengameart.org/content/cool-school-tileset",
+      "local_raw": "visual/assets/raw/opengameart-cool-school/coolschool_tileset.png",
+      "demo_path": "visual-assets/coolschool_tileset.png"
+    },
+    "PX-UNI-085": {
+      "license": "cc0_ready",
+      "type": "fx",
+      "story_tags": "shared,雨,分手,离家",
+      "source_url": "https://opengameart.org/content/rain-1",
+      "local_raw": "visual/assets/raw/opengameart-rain/rain_overlay_0.png",
+      "demo_path": "visual-assets/rain_overlay_0.png"
+    },
+    "PX-UNI-086": {
+      "license": "cc0_pending",
+      "type": "background",
+      "story_tags": "亲情,爱情,友情,自我成长,home",
+      "source_url": "https://btl-games.itch.io/topdown"
+    },
+    "PX-UNI-087": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "亲情,爱情,自我成长,home",
+      "source_url": "https://graduation-cat.itch.io/house-interior-tileset-32x32"
+    },
+    "PX-UNI-088": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "亲情,爱情,友情,home",
+      "source_url": "https://apple-dog.itch.io/modern-tileset-by-appledog"
+    },
+    "PX-UNI-089": {
+      "license": "review_required",
+      "type": "prop",
+      "story_tags": "亲情,爱情,友情,厨房",
+      "source_url": "https://reakain.itch.io/kitchen-assets"
+    },
+    "PX-UNI-090": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "爱情,事业,自我成长,异地",
+      "source_url": "https://reakain.itch.io/gb-studio-trains"
+    },
+    "PX-UNI-091": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "事业,爱情,友情,城市",
+      "source_url": "https://reakain.itch.io/gb-studio-buildings"
+    },
+    "PX-UNI-092": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "亲情,友情,事业,自我成长",
+      "source_url": "https://reakain.itch.io/gb-studio-7-11-tileset"
+    },
+    "PX-UNI-093": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "亲情,事业,责任与愧疚,hospital",
+      "source_url": "https://jackburton84.itch.io/pixel-hospital-tileset-modern-medical-pixel-art-32x32"
+    },
+    "PX-UNI-094": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "学业,友情,复读,校园",
+      "source_url": "https://oceansdream.itch.io/nostalgia-school-time"
+    },
+    "PX-UNI-095": {
+      "license": "review_required",
+      "type": "background",
+      "story_tags": "爱情,事业,城市,分手",
+      "source_url": "https://gandalfhardcore.itch.io/free-pixel-art-sidescroller-asset-pack-32x32-city"
+    },
+    "PX-UNI-096": {
+      "license": "license_pending",
+      "type": "background",
+      "story_tags": "自我成长,离开舒适区,恢复,nature",
+      "source_url": "https://cupnooble.itch.io/sprout-lands-asset-pack"
+    }
+  }
+}
