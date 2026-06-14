@@ -1,0 +1,94 @@
+{
+  "story_id": "fuxduxian",
+  "year": 1,
+  "pack": "fuxduxian-v1",
+  "pack_status": "draft_review",
+  "scene_type": "special",
+  "visual_anchor": "雨天，最后一排靠窗，书包在空桌",
+  "mood": "灰冷·退缩",
+  "status": "draft",
+  "narrative_ref": {
+    "memory_id": "m1",
+    "event_summary": "雨天最后一排"
+  },
+  "background": {
+    "asset_id": "PX-FDX-001",
+    "parallax": 0.12,
+    "tint": "#7a8494"
+  },
+  "layers": [
+    {
+      "asset_id": "PX-FDX-007",
+      "role": "prop",
+      "x": 500,
+      "y": 248,
+      "depth": 1,
+      "note": "最后一排空桌、黑板/窗锚点"
+    },
+    {
+      "asset_id": "PX-FDX-008",
+      "role": "prop",
+      "x": 518,
+      "y": 238,
+      "depth": 2,
+      "note": "书包在空桌 — LimeZu 待授权，fallback PX-FDX-007"
+    },
+    {
+      "asset_id": "PX-FDX-006",
+      "role": "protagonist",
+      "x": 468,
+      "y": 252,
+      "depth": 3,
+      "animation": "read_idle"
+    },
+    {
+      "asset_id": "PX-FDX-004",
+      "role": "fx",
+      "x": 320,
+      "y": 120,
+      "depth": 10,
+      "alpha": 0.32,
+      "note": "窗雨半透明覆盖"
+    }
+  ],
+  "daily_loops": [
+    {
+      "id": "read_idle",
+      "asset_id": "PX-FDX-006",
+      "animation": "read_idle",
+      "trigger": "year_idle",
+      "note": "翻书 2-4 帧，不抢文字"
+    },
+    {
+      "id": "look_window",
+      "asset_id": "PX-FDX-006",
+      "animation": "look_window",
+      "trigger": "between_years"
+    }
+  ],
+  "sequence": [
+    {
+      "duration_ms": 1000,
+      "camera": "fade_in",
+      "beat": "进教室"
+    },
+    {
+      "duration_ms": 1400,
+      "camera": "pan",
+      "beat": "落座",
+      "layers_delta": {
+        "protagonist": { "x": 468, "y": 252 }
+      }
+    },
+    {
+      "duration_ms": 1200,
+      "camera": "hold",
+      "beat": "同桌侧目"
+    }
+  ],
+  "intervention_ui": {
+    "asset_id": "PX-FDX-036",
+    "trigger": "pivotal"
+  },
+  "human_notes": "B=教室全景 CC0；A=翻书/望窗；C=开学走廊三拍。人审前不合并主 layout。"
+}

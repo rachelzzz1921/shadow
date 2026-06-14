@@ -45,4 +45,12 @@ visual/
 - 流水线：[`01-pipeline.md`](./01-pipeline.md)
 - Excel 规范：[`02-asset-registry-spec.md`](./02-asset-registry-spec.md)
 - 复读线场景清单：[`stories/fuxduxian/scene-briefs.md`](./stories/fuxduxian/scene-briefs.md)
+- 复读线 v1 寻源包：[`registry/packs/fuxduxian-v1.csv`](./registry/packs/fuxduxian-v1.csv) · draft layout 在 [`scenes/fuxduxian/draft/`](./scenes/fuxduxian/draft/)
 - 叙事待加强：[`stories/fuxduxian/narrative-gaps.md`](./stories/fuxduxian/narrative-gaps.md)
+
+## Demo 打包
+
+```bash
+npm run build:visual-demo   # draft layout + manifest → docs/
+npm run demo:preview        # /demo-phaser.html
+```

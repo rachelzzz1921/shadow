@@ -1,0 +1,61 @@
+{
+  "story_id": "fuxduxian",
+  "year": 2,
+  "pack": "fuxduxian-v1",
+  "pack_status": "draft_review",
+  "scene_type": "special",
+  "visual_anchor": "查分夜，桌上有撕碎准考证",
+  "mood": "麻木·夜",
+  "status": "draft",
+  "narrative_ref": {
+    "memory_id": "m2",
+    "event_summary": "查分夜撕准考证"
+  },
+  "background": {
+    "asset_id": "PX-FDX-009",
+    "parallax": 0.08,
+    "tint": "#3a3a48"
+  },
+  "layers": [
+    {
+      "asset_id": "PX-FDX-012",
+      "role": "prop",
+      "x": 120,
+      "y": 160,
+      "depth": 1,
+      "note": "台灯左上单光源 — LimeZu 待授权"
+    },
+    {
+      "asset_id": "PX-FDX-011",
+      "role": "prop",
+      "x": 280,
+      "y": 268,
+      "depth": 2,
+      "note": "准考证碎片 CC0 自切"
+    },
+    {
+      "asset_id": "PX-FDX-006",
+      "role": "protagonist",
+      "x": 320,
+      "y": 260,
+      "depth": 3,
+      "animation": "tear_paper"
+    }
+  ],
+  "daily_loops": [
+    {
+      "id": "tear_paper",
+      "asset_id": "PX-FDX-011",
+      "animation": "tear_paper",
+      "trigger": "year_idle",
+      "note": "撕纸 2-4 帧 loop"
+    },
+    {
+      "id": "still",
+      "asset_id": "PX-FDX-006",
+      "animation": "still",
+      "trigger": "between_years"
+    }
+  ],
+  "human_notes": "窄画幅：桌+床；BTL 卧室 CC0 待下载。台灯 PX-FDX-012 仅占位。"
+}

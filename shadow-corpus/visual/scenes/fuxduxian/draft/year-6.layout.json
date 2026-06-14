@@ -1,0 +1,88 @@
+{
+  "story_id": "fuxduxian",
+  "year": 6,
+  "pack": "fuxduxian-v1",
+  "pack_status": "draft_review",
+  "scene_type": "special",
+  "visual_anchor": "出站雨棚，行李箱，对面校服小孩睡",
+  "mood": "崩·雨",
+  "status": "draft",
+  "narrative_ref": {
+    "memory_id": "m6",
+    "event_summary": "出站雨棚"
+  },
+  "background": {
+    "asset_id": "PX-FDX-026",
+    "parallax": 0.18,
+    "tint": "#5a6270",
+    "note": "Reakain 车站包待授权；雨层 CC0 可预览"
+  },
+  "layers": [
+    {
+      "asset_id": "PX-FDX-029",
+      "role": "prop",
+      "x": 240,
+      "y": 270,
+      "depth": 2,
+      "note": "行李箱 — LimeZu Exteriors 待授权"
+    },
+    {
+      "asset_id": "PX-FDX-006",
+      "role": "protagonist",
+      "x": 220,
+      "y": 278,
+      "depth": 3,
+      "animation": "hold_bag"
+    },
+    {
+      "asset_id": "PX-FDX-006",
+      "role": "npc",
+      "x": 440,
+      "y": 282,
+      "depth": 3,
+      "animation": "sleep",
+      "note": "对面校服小孩 — Kenney 角色待改"
+    },
+    {
+      "asset_id": "PX-FDX-030",
+      "role": "fx",
+      "x": 320,
+      "y": 80,
+      "depth": 10,
+      "alpha": 0.38,
+      "note": "雨棚前景斜雨 CC0"
+    }
+  ],
+  "daily_loops": [
+    {
+      "id": "hold_bag",
+      "asset_id": "PX-FDX-029",
+      "animation": "hold_bag",
+      "trigger": "year_idle",
+      "note": "抱箱蹲坐 loop"
+    }
+  ],
+  "sequence": [
+    {
+      "duration_ms": 1200,
+      "camera": "hold",
+      "beat": "走廊「眼神不在」"
+    },
+    {
+      "duration_ms": 1400,
+      "camera": "pan",
+      "beat": "火车窗",
+      "layers_delta": { "background": { "asset_id": "PX-FDX-026" } }
+    },
+    {
+      "duration_ms": 800,
+      "camera": "fade_out",
+      "beat": "雨棚定帧"
+    }
+  ],
+  "intervention_ui": {
+    "asset_id": "PX-FDX-036",
+    "trigger": "pivotal"
+  },
+  "human_notes": "低饱和雨夜；C=走廊→火车窗。Reakain 待下载后统一色板。"
+}

@@ -34,9 +34,11 @@ Harness 闭环：[`02-technical-design/01-shadow-harness-loop.md`](02-technical-
 npm test                    # 归档 demo 16 tests
 npm run test:golden
 npm run harness:smoke       # mock live 一条龙
-npm run demo:preview        # 静态复读线 demo
+npm run demo:preview        # 静态复读线 demo · Pages 见 site.config.json
 npm run board:publish
 ```
+
+**部署：** 改 demo / visual / 看板后 `board:publish` 并 push `main`（`.cursor/rules/github-pages-deploy.mdc`）。
 
 ## Do Not
 

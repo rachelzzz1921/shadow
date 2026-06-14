@@ -40,5 +40,6 @@ const game = new Phaser.Game({
 - [x] layout 校验 CLI
 - [x] 占位 Scene（无真实 sprite）
 - [x] `docs/demo-phaser.html` 七年 layout 切换（CDN Phaser）
+- [x] fuxduxian-v1 draft 包接入（`demo-layouts-v1.json` + CC0 纹理预览）
 - [x] 挂进 archive index 侧栏入口 → `visual-preview.html`
 - [ ] 挂进 archive 主舞台 fate overlay（I-8）→ **index topbar `#fateOverlay`**

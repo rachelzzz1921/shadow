@@ -1,0 +1,57 @@
+{
+  "story_id": "fuxduxian",
+  "year": 3,
+  "pack": "fuxduxian-v1",
+  "pack_status": "draft_review",
+  "scene_type": "special",
+  "visual_anchor": "食堂最里角，双份餐盘只有一个有人",
+  "mood": "钝·孤独",
+  "status": "draft",
+  "narrative_ref": {
+    "memory_id": "m3",
+    "event_summary": "食堂角落"
+  },
+  "background": {
+    "asset_id": "PX-FDX-013",
+    "parallax": 0.1,
+    "tint": "#6a7568",
+    "note": "Ocean 食堂包待授权；props 先用 CC0 占位"
+  },
+  "layers": [
+    {
+      "asset_id": "PX-FDX-016",
+      "role": "prop",
+      "x": 380,
+      "y": 255,
+      "depth": 1,
+      "note": "对面空椅 CC0 BTL"
+    },
+    {
+      "asset_id": "PX-FDX-015",
+      "role": "prop",
+      "x": 260,
+      "y": 268,
+      "depth": 2,
+      "note": "双份餐盘 — 一份 untouched"
+    },
+    {
+      "asset_id": "PX-FDX-006",
+      "role": "protagonist",
+      "x": 240,
+      "y": 258,
+      "depth": 3,
+      "animation": "eat_slow",
+      "flip_x": true
+    }
+  ],
+  "daily_loops": [
+    {
+      "id": "eat_slow",
+      "asset_id": "PX-FDX-015",
+      "animation": "eat_slow",
+      "trigger": "year_idle",
+      "note": "慢吃 loop，另一份餐盘不动"
+    }
+  ],
+  "human_notes": "最里角长桌构图；背景 Ocean 待核商用，CC0 椅盘先行。"
+}

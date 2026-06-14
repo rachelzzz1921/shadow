@@ -7,7 +7,7 @@
   "main": "src/index.mjs",
   "scripts": {
     "validate": "node src/validate-layout.mjs",
-    "validate:all": "node src/validate-layout.mjs ../scenes/fuxduxian/year-*.layout.json"
+    "validate:all": "node src/validate-layout.mjs ../scenes/fuxduxian/year-*.layout.json ../scenes/fuxduxian/draft/year-*.layout.json"
   },
   "dependencies": {
     "phaser": "^3.80.1"

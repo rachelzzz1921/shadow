@@ -7,7 +7,7 @@
     "sync-skills": "bash shadow-corpus/skills/sync-cursor-links.sh",
     "tasks": "node shadow-corpus/06-task-progress/scripts/shadow-tasks.js",
     "board": "node shadow-corpus/06-task-progress/scripts/shadow-tasks.js sync && node shadow-corpus/06-task-progress/scripts/shadow-tasks.js board",
-    "board:publish": "node shadow-corpus/06-task-progress/scripts/shadow-tasks.js sync && node shadow-corpus/06-task-progress/scripts/build-board-site.mjs",
+    "board:publish": "node shadow-corpus/tooling/scripts/build-visual-demo-pack.mjs && node shadow-corpus/06-task-progress/scripts/shadow-tasks.js sync && node shadow-corpus/06-task-progress/scripts/build-board-site.mjs",
     "demo:preview": "python3 -m http.server 5199 --directory docs",
     "demo:phaser": "python3 -m http.server 5199 --directory docs",
     "pack:stories": "node shadow-corpus/06-task-progress/scripts/pack-four-stories.mjs",
@@ -20,9 +20,16 @@
     "sync:golden-v2:apply": "node shadow-corpus/tooling/scripts/sync-golden-from-v2.mjs --story fuxduxian --apply",
     "harness:smoke": "node shadow-corpus/tooling/scripts/harness-live-smoke.mjs",
     "harness:smoke:full": "node shadow-corpus/tooling/scripts/harness-live-smoke.mjs --full",
+    "build:visual-demo": "node shadow-corpus/tooling/scripts/build-visual-demo-pack.mjs",
+    "validate:visual-draft": "node shadow-corpus/visual/engine/src/validate-layout.mjs shadow-corpus/visual/scenes/fuxduxian/draft/year-*.layout.json",
     "sync:visual-layouts": "cp docs/demo-layouts.json shadow-corpus/archive/demo-v0.2/public/visual-layouts.json",
     "sync:era-snippets": "cp docs/demo-era-snippets.json shadow-corpus/archive/demo-v0.2/public/era-snippets.json",
-    "install:demo": "npm install --prefix shadow-corpus/archive/demo-v0.2"
+    "install:demo": "npm install --prefix shadow-corpus/archive/demo-v0.2",
+    "rag:install": "npm install --prefix shadow-corpus/packages/rag-kit",
+    "rag:embed:world": "node shadow-corpus/packages/rag-kit/scripts/embed-world.mjs",
+    "rag:embed:repo": "node shadow-corpus/packages/rag-kit/scripts/embed-repo.mjs",
+    "rag:eval:embedding": "node shadow-corpus/packages/rag-kit/scripts/eval-embedding-cn.mjs",
+    "rag:query": "node shadow-corpus/packages/rag-kit/scripts/query.mjs"
   },
   "engines": {
     "node": ">=20"

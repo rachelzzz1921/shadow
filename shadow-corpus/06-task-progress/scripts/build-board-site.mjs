@@ -73,6 +73,26 @@ function githubUrl(repo, filePath) {
   return `https://github.com/${repo}/blob/main/${filePath}`;
 }
 
+function githubPagesBase(config, repo) {
+  if (config.githubPagesBase) return config.githubPagesBase.replace(/\/$/, '');
+  if (!repo) return null;
+  const [owner, name] = repo.split('/');
+  return `https://${owner}.github.io/${name}`;
+}
+
+function enrichDocsEntry(entry, pagesBase) {
+  if (!entry) return null;
+  const localPath = entry.path?.startsWith('docs/')
+    ? `./${entry.path.replace(/^docs\//, '')}`
+    : entry.path;
+  const pagesPath = entry.pagesPath || (entry.path?.startsWith('docs/') ? entry.path.replace(/^docs\//, '') : null);
+  return {
+    ...entry,
+    url: localPath,
+    pagesUrl: pagesBase && pagesPath ? `${pagesBase}/${pagesPath}` : null,
+  };
+}
+
 function depsDone(tasks, task) {
   return (task.depends_on || []).every((id) => {
     const d = tasks.find((x) => x.id === id);
@@ -303,10 +323,28 @@ function buildVisualModule(data, changeMap, repo, siteBoard) {
     }));
 
   const assetsPath = path.join(CORPUS_ROOT, 'visual/registry/assets.csv');
+  const packPath = path.join(CORPUS_ROOT, 'visual/registry/packs/fuxduxian-v1.csv');
   let assetCount = 0;
+  let packAssetCount = 0;
   if (fs.existsSync(assetsPath)) {
     assetCount = fs.readFileSync(assetsPath, 'utf8').split('\n').filter((l) => l.trim() && !l.startsWith('asset_id')).length;
   }
+  if (fs.existsSync(packPath)) {
+    packAssetCount = fs.readFileSync(packPath, 'utf8').split('\n').filter((l) => l.trim() && !l.startsWith('asset_id')).length;
+  }
+
+  const pagesBase = githubPagesBase(loadConfig(), repo);
+  const previewLinks = [
+    enrichDocsEntry({ label: '叙事 Demo', path: 'docs/demo.html', pagesPath: 'demo.html' }, pagesBase),
+    enrichDocsEntry(
+      { label: 'Phaser layout v1', path: 'docs/demo-phaser.html', pagesPath: 'demo-phaser.html' },
+      pagesBase
+    ),
+    enrichDocsEntry(
+      { label: 'Phaser legacy 占位', path: 'docs/demo-phaser.html', pagesPath: 'demo-phaser.html?legacy=1' },
+      pagesBase
+    ),
+  ].filter(Boolean);
 
   const chgProgress = parseProgressFile('CHG-V001-visual-fuxduxian');
 
@@ -326,23 +364,29 @@ function buildVisualModule(data, changeMap, repo, siteBoard) {
     pipeline,
     deliverables: siteBoard.visualDeliverables || [],
     assetCount,
-    sceneBriefs,
-    narrativeGaps,
-    uxScenes,
-    uxTypes: siteBoard.uxTypes || [],
-    checklist: chgProgress.checklist,
+    packAssetCount,
+    packId: 'fuxduxian-v1',
+    previewLinks,
     links: [
       { label: 'Visual README', path: corpusFileUrl(repo, 'visual/README.md') },
       { label: '流水线', path: corpusFileUrl(repo, 'visual/01-pipeline.md') },
       { label: 'UX 流程', path: corpusFileUrl(repo, 'visual/04-ux-flow.md') },
       { label: 'scene-briefs', path: corpusFileUrl(repo, 'visual/stories/fuxduxian/scene-briefs.md') },
       { label: 'narrative-gaps', path: corpusFileUrl(repo, 'visual/stories/fuxduxian/narrative-gaps.md') },
-      { label: 'assets.csv', path: corpusFileUrl(repo, 'visual/registry/assets.csv') },
+      { label: 'fuxduxian-v1.csv', path: corpusFileUrl(repo, 'visual/registry/packs/fuxduxian-v1.csv') },
+      { label: 'draft layouts', path: corpusFileUrl(repo, 'visual/scenes/fuxduxian/draft/') },
+      { label: 'assets.csv（主库）', path: corpusFileUrl(repo, 'visual/registry/assets.csv') },
     ].filter((l) => l.path),
+    sceneBriefs,
+    narrativeGaps,
+    uxScenes,
+    uxTypes: siteBoard.uxTypes || [],
+    checklist: chgProgress.checklist,
   };
 }
 
-function buildCorpusModules(siteBoard, repo) {
+function buildCorpusModules(siteBoard, repo, config) {
+  const pagesBase = githubPagesBase(config, repo);
   const phases = (siteBoard.harnessPhases || []).map((p) => ({
     ...p,
     url: corpusFileUrl(repo, p.path),
@@ -354,14 +398,15 @@ function buildCorpusModules(siteBoard, repo) {
   const demo = siteBoard.demo
     ? { ...siteBoard.demo, url: corpusFileUrl(repo, siteBoard.demo.path) }
     : null;
-  const staticDemo = siteBoard.staticDemo
-    ? { ...siteBoard.staticDemo, url: siteBoard.staticDemo.path.startsWith('docs/') ? siteBoard.staticDemo.path.replace(/^docs\//, './') : corpusFileUrl(repo, siteBoard.staticDemo.path) }
-    : null;
+  const staticDemo = enrichDocsEntry(siteBoard.staticDemo, pagesBase);
+  const phaserDemo = enrichDocsEntry(siteBoard.phaserDemo, pagesBase);
   return {
     phases,
     knowledge,
     demo,
     staticDemo,
+    phaserDemo,
+    pagesBase,
     manifestUrl: corpusFileUrl(repo, 'MANIFEST.md'),
     agentsUrl: corpusFileUrl(repo, 'AGENTS.md'),
   };
@@ -411,13 +456,14 @@ function build() {
   const taskLibrary = buildTaskLibrary(data, changeMap, repo);
   const changeDetails = buildChangeDetails(data, changeMap, repo);
   const visual = buildVisualModule(data, changeMap, repo, siteBoard);
-  const corpus = buildCorpusModules(siteBoard, repo);
+  const corpus = buildCorpusModules(siteBoard, repo, config);
 
   const payload = {
     builtAt: new Date().toISOString(),
     siteTitle: config.siteTitle,
     githubRepo: repo,
     githubRepoUrl: repo ? `https://github.com/${repo}` : null,
+    githubPagesUrl: githubPagesBase(config, repo),
     planId: data.plan_id,
     updatedAt: data.updated_at,
     catalog: data.catalog || {},

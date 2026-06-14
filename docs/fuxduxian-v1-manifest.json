@@ -1,0 +1,132 @@
+{
+  "pack_id": "fuxduxian-v1",
+  "status": "draft_review",
+  "source_csv": "packs/fuxduxian-v1.csv",
+  "notes": "人审通过后再合并进 registry/assets.csv 与 scenes/fuxduxian/year-*.layout.json",
+  "license_tiers": {
+    "cc0_ready": "已下载 CC0，demo 可预览",
+    "cc0_pending": "CC0 但未下载到 raw/",
+    "license_pending": "待授权/付费确认，layout 仅占位"
+  },
+  "assets": {
+    "PX-FDX-001": {
+      "license": "cc0_ready",
+      "local_raw": "visual/assets/raw/opengameart-cool-school/coolschool_tileset.png",
+      "demo_path": "visual-assets/coolschool_tileset.png"
+    },
+    "PX-FDX-004": {
+      "license": "cc0_ready",
+      "local_raw": "visual/assets/raw/opengameart-rain/rain_overlay_0.png",
+      "demo_path": "visual-assets/rain_overlay_0.png"
+    },
+    "PX-FDX-006": {
+      "license": "cc0_pending",
+      "source_url": "https://kenney.nl/assets/roguelike-characters"
+    },
+    "PX-FDX-007": {
+      "license": "cc0_ready",
+      "local_raw": "visual/assets/raw/opengameart-cool-school/coolschool_tileset.png",
+      "demo_path": "visual-assets/coolschool_tileset.png",
+      "sprite_hint": "desk/book tiles from Cool School sheet"
+    },
+    "PX-FDX-008": {
+      "license": "license_pending",
+      "source_url": "https://limezu.itch.io/moderninteriors",
+      "fallback_asset_id": "PX-FDX-007"
+    },
+    "PX-FDX-009": {
+      "license": "cc0_pending",
+      "source_url": "https://btl-games.itch.io/topdown"
+    },
+    "PX-FDX-011": {
+      "license": "cc0_ready",
+      "local_raw": "visual/assets/raw/opengameart-cool-school/coolschool_tileset.png",
+      "demo_path": "visual-assets/coolschool_tileset.png",
+      "sprite_hint": "paper tiles — slice for tear loop"
+    },
+    "PX-FDX-012": {
+      "license": "license_pending",
+      "source_url": "https://limezu.itch.io/moderninteriors"
+    },
+    "PX-FDX-013": {
+      "license": "license_pending",
+      "source_url": "https://oceansdream.itch.io/nostalgia-school-time"
+    },
+    "PX-FDX-015": {
+      "license": "cc0_pending",
+      "source_url": "https://kenney.nl/assets/pixel-platformer-food-expansion"
+    },
+    "PX-FDX-016": {
+      "license": "cc0_pending",
+      "source_url": "https://btl-games.itch.io/topdown"
+    },
+    "PX-FDX-017": {
+      "license": "license_pending",
+      "source_url": "https://limezu.itch.io/moderninteriors"
+    },
+    "PX-FDX-018": {
+      "license": "license_pending",
+      "source_url": "https://limezu.itch.io/moderninteriors"
+    },
+    "PX-FDX-019": {
+      "license": "cc0_pending",
+      "local_raw": "visual/assets/raw/opengameart-lucid-icons/lucid-v1.2.zip",
+      "source_url": "https://opengameart.org/content/lucid-icon-pack"
+    },
+    "PX-FDX-020": {
+      "license": "cc0_ready",
+      "local_raw": "visual/assets/raw/opengameart-cool-school/coolschool_tileset.png",
+      "demo_path": "visual-assets/coolschool_tileset.png",
+      "sprite_hint": "paper stack from Cool School"
+    },
+    "PX-FDX-021": {
+      "license": "license_pending",
+      "source_url": "https://limezu.itch.io/moderninteriors"
+    },
+    "PX-FDX-023": {
+      "license": "cc0_pending",
+      "source_url": "https://btl-games.itch.io/topdown"
+    },
+    "PX-FDX-024": {
+      "license": "cc0_pending",
+      "source_url": "https://opengameart.org/content/lucid-icon-pack"
+    },
+    "PX-FDX-025": {
+      "license": "cc0_pending",
+      "source_url": "https://btl-games.itch.io/topdown"
+    },
+    "PX-FDX-026": {
+      "license": "license_pending",
+      "source_url": "https://reakain.itch.io/gb-studio-trains"
+    },
+    "PX-FDX-029": {
+      "license": "license_pending",
+      "source_url": "https://limezu.itch.io/modernexteriors"
+    },
+    "PX-FDX-030": {
+      "license": "cc0_ready",
+      "local_raw": "visual/assets/raw/opengameart-rain/rain_overlay_0.png",
+      "demo_path": "visual-assets/rain_overlay_0.png"
+    },
+    "PX-FDX-032": {
+      "license": "cc0_pending",
+      "source_url": "https://kenney.nl/assets/tiny-town"
+    },
+    "PX-FDX-033": {
+      "license": "cc0_pending",
+      "source_url": "https://opengameart.org/content/lucid-icon-pack"
+    },
+    "PX-FDX-034": {
+      "license": "cc0_pending",
+      "source_url": "https://btl-games.itch.io/topdown"
+    },
+    "PX-FDX-035": {
+      "license": "cc0_pending",
+      "source_url": "https://kenney.nl/assets/roguelike-characters"
+    },
+    "PX-FDX-036": {
+      "license": "cc0_pending",
+      "source_url": "https://kenney.nl/assets/ui-pack-pixel-adventure"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "story_id": "fuxduxian",
+  "year": 5,
+  "pack": "fuxduxian-v1",
+  "pack_status": "draft_review",
+  "scene_type": "special",
+  "visual_anchor": "凌晨 4 点，手机 4:03，窗帘缝光",
+  "mood": "压·insomnia",
+  "status": "draft",
+  "narrative_ref": {
+    "memory_id": "m5",
+    "event_summary": "凌晨宿舍"
+  },
+  "background": {
+    "asset_id": "PX-FDX-023",
+    "parallax": 0.06,
+    "tint": "#2a2a38"
+  },
+  "layers": [
+    {
+      "asset_id": "PX-FDX-025",
+      "role": "prop",
+      "x": 80,
+      "y": 100,
+      "depth": 1,
+      "note": "窗帘缝光 BTL CC0 待下载"
+    },
+    {
+      "asset_id": "PX-FDX-024",
+      "role": "prop",
+      "x": 420,
+      "y": 280,
+      "depth": 2,
+      "note": "手机 4:03 画面唯一亮点"
+    },
+    {
+      "asset_id": "PX-FDX-006",
+      "role": "protagonist",
+      "x": 360,
+      "y": 268,
+      "depth": 3,
+      "animation": "eyes_open"
+    }
+  ],
+  "daily_loops": [
+    {
+      "id": "eyes_open",
+      "asset_id": "PX-FDX-006",
+      "animation": "eyes_open",
+      "trigger": "year_idle",
+      "note": "睁眼几乎不动"
+    },
+    {
+      "id": "curtain_glow",
+      "asset_id": "PX-FDX-025",
+      "animation": "curtain_glow",
+      "trigger": "year_idle",
+      "note": "缝光 2 帧微变"
+    }
+  ],
+  "human_notes": "窄画幅床+窗；BTL 卧室 CC0 优先于 AppleDog。"
+}

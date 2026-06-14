@@ -10,6 +10,23 @@
 https://<你的用户名>.github.io/<仓库名>/
 ```
 
+当前仓库配置见 `site.config.json` → `githubPagesBase`。
+
+### 复读线 Demo（fuxduxian-v1）
+
+| 页面 | GitHub Pages URL |
+|------|------------------|
+| 团队看板 | `https://rachelzzz1921.github.io/shadow/` |
+| 叙事 Demo（v1 overlay） | `https://rachelzzz1921.github.io/shadow/demo.html` |
+| Phaser layout v1 | `https://rachelzzz1921.github.io/shadow/demo-phaser.html` |
+| Phaser legacy 占位 | `https://rachelzzz1921.github.io/shadow/demo-phaser.html?legacy=1` |
+
+推送前请打包视觉素材：
+
+```bash
+npm run board:publish   # 含 build:visual-demo → docs/demo-layouts-v1.json
+```
+
 例如仓库 `chenzhiwei/shadow` → `https://chenzhiwei.github.io/shadow/`
 
 ## 本地预览
@@ -65,13 +82,15 @@ git push
 # 改 tasks/registry.json 或用 CLI
 npm run tasks -- done T-007
 
-# 刷新 markdown 看板 + 网站
+# 刷新 markdown 看板 + 网站（含 visual demo 打包）
 npm run board:publish
 
 git add docs shadow-corpus/06-task-progress
 git commit -m "Update board"
-git push
+git push origin main
 ```
+
+**规则：** 改 `docs/`、Visual draft 或预览相关文件后，同一会话内 push 到 `main`，让 GitHub Pages 及时更新。详见 `.cursor/rules/github-pages-deploy.mdc`。
 
 ## 自动部署（可选）
 

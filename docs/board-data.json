@@ -1,8 +1,9 @@
 {
-  "builtAt": "2026-06-14T06:53:49.476Z",
+  "builtAt": "2026-06-14T07:02:08.293Z",
   "siteTitle": "Shadow 团队看板",
   "githubRepo": "rachelzzz1921/shadow",
   "githubRepoUrl": "https://github.com/rachelzzz1921/shadow",
+  "githubPagesUrl": "https://rachelzzz1921.github.io/shadow",
   "planId": "PLAN-2026Q2-shadow-corpus",
   "updatedAt": "2026-06-14",
   "catalog": {
@@ -6300,6 +6301,65 @@
       }
     ],
     "assetCount": 30,
+    "packAssetCount": 42,
+    "packId": "fuxduxian-v1",
+    "previewLinks": [
+      {
+        "label": "叙事 Demo",
+        "path": "docs/demo.html",
+        "pagesPath": "demo.html",
+        "url": "./demo.html",
+        "pagesUrl": "https://rachelzzz1921.github.io/shadow/demo.html"
+      },
+      {
+        "label": "Phaser layout v1",
+        "path": "docs/demo-phaser.html",
+        "pagesPath": "demo-phaser.html",
+        "url": "./demo-phaser.html",
+        "pagesUrl": "https://rachelzzz1921.github.io/shadow/demo-phaser.html"
+      },
+      {
+        "label": "Phaser legacy 占位",
+        "path": "docs/demo-phaser.html",
+        "pagesPath": "demo-phaser.html?legacy=1",
+        "url": "./demo-phaser.html",
+        "pagesUrl": "https://rachelzzz1921.github.io/shadow/demo-phaser.html?legacy=1"
+      }
+    ],
+    "links": [
+      {
+        "label": "Visual README",
+        "path": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/visual/README.md"
+      },
+      {
+        "label": "流水线",
+        "path": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/visual/01-pipeline.md"
+      },
+      {
+        "label": "UX 流程",
+        "path": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/visual/04-ux-flow.md"
+      },
+      {
+        "label": "scene-briefs",
+        "path": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/visual/stories/fuxduxian/scene-briefs.md"
+      },
+      {
+        "label": "narrative-gaps",
+        "path": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/visual/stories/fuxduxian/narrative-gaps.md"
+      },
+      {
+        "label": "fuxduxian-v1.csv",
+        "path": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/visual/registry/packs/fuxduxian-v1.csv"
+      },
+      {
+        "label": "draft layouts",
+        "path": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/visual/scenes/fuxduxian/draft/"
+      },
+      {
+        "label": "assets.csv（主库）",
+        "path": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/visual/registry/assets.csv"
+      }
+    ],
     "sceneBriefs": [
       {
         "year": "1",
@@ -6459,32 +6519,6 @@
         "done": false,
         "text": "G-N1 人审 → layout `approved`"
       }
-    ],
-    "links": [
-      {
-        "label": "Visual README",
-        "path": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/visual/README.md"
-      },
-      {
-        "label": "流水线",
-        "path": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/visual/01-pipeline.md"
-      },
-      {
-        "label": "UX 流程",
-        "path": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/visual/04-ux-flow.md"
-      },
-      {
-        "label": "scene-briefs",
-        "path": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/visual/stories/fuxduxian/scene-briefs.md"
-      },
-      {
-        "label": "narrative-gaps",
-        "path": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/visual/stories/fuxduxian/narrative-gaps.md"
-      },
-      {
-        "label": "assets.csv",
-        "path": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/visual/registry/assets.csv"
-      }
     ]
   },
   "corpus": {
@@ -6568,11 +6602,23 @@
       "url": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/archive/demo-v0.2/README.md"
     },
     "staticDemo": {
-      "label": "复读线静态 Demo",
+      "label": "复读线叙事 Demo（fuxduxian-v1 overlay）",
       "path": "docs/demo.html",
-      "run": "npm run demo:preview，然后打开 http://localhost:5199/demo.html",
-      "url": "./demo.html"
+      "pagesPath": "demo.html",
+      "run": "npm run build:visual-demo && npm run demo:preview → /demo.html",
+      "url": "./demo.html",
+      "pagesUrl": "https://rachelzzz1921.github.io/shadow/demo.html"
     },
+    "phaserDemo": {
+      "label": "Phaser layout · fuxduxian-v1 draft",
+      "path": "docs/demo-phaser.html",
+      "pagesPath": "demo-phaser.html",
+      "run": "npm run build:visual-demo && npm run demo:preview → /demo-phaser.html",
+      "note": "PX-FDX-* · CC0 纹理预览 · ?legacy=1 回退旧占位",
+      "url": "./demo-phaser.html",
+      "pagesUrl": "https://rachelzzz1921.github.io/shadow/demo-phaser.html"
+    },
+    "pagesBase": "https://rachelzzz1921.github.io/shadow",
     "manifestUrl": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/MANIFEST.md",
     "agentsUrl": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/AGENTS.md"
   },

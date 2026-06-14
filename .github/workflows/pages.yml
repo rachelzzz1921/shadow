@@ -6,7 +6,12 @@ on:
     paths:
       - 'shadow-corpus/06-task-progress/tasks/registry.json'
       - 'shadow-corpus/06-task-progress/site.config.json'
+      - 'shadow-corpus/06-task-progress/site.board.json'
       - 'shadow-corpus/06-task-progress/scripts/**'
+      - 'shadow-corpus/visual/scenes/fuxduxian/draft/**'
+      - 'shadow-corpus/visual/registry/packs/**'
+      - 'shadow-corpus/tooling/scripts/build-visual-demo-pack.mjs'
+      - 'docs/**'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -33,6 +38,7 @@ jobs:
         env:
           GITHUB_REPO: ${{ github.repository }}
         run: |
+          node shadow-corpus/tooling/scripts/build-visual-demo-pack.mjs
           node shadow-corpus/06-task-progress/scripts/shadow-tasks.js sync
           node shadow-corpus/06-task-progress/scripts/build-board-site.mjs
 

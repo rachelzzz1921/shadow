@@ -1,0 +1,567 @@
+{
+  "story_id": "fuxduxian",
+  "pack": "fuxduxian-v1",
+  "pack_status": "draft_review",
+  "years": {
+    "1": {
+      "story_id": "fuxduxian",
+      "year": 1,
+      "pack": "fuxduxian-v1",
+      "pack_status": "draft_review",
+      "scene_type": "special",
+      "visual_anchor": "雨天，最后一排靠窗，书包在空桌",
+      "mood": "灰冷·退缩",
+      "status": "draft",
+      "narrative_ref": {
+        "memory_id": "m1",
+        "event_summary": "雨天最后一排"
+      },
+      "background": {
+        "asset_id": "PX-FDX-001",
+        "parallax": 0.12,
+        "tint": "#7a8494"
+      },
+      "layers": [
+        {
+          "asset_id": "PX-FDX-007",
+          "role": "prop",
+          "x": 500,
+          "y": 248,
+          "depth": 1,
+          "note": "最后一排空桌、黑板/窗锚点"
+        },
+        {
+          "asset_id": "PX-FDX-008",
+          "role": "prop",
+          "x": 518,
+          "y": 238,
+          "depth": 2,
+          "note": "书包在空桌 — LimeZu 待授权，fallback PX-FDX-007"
+        },
+        {
+          "asset_id": "PX-FDX-006",
+          "role": "protagonist",
+          "x": 468,
+          "y": 252,
+          "depth": 3,
+          "animation": "read_idle"
+        },
+        {
+          "asset_id": "PX-FDX-004",
+          "role": "fx",
+          "x": 320,
+          "y": 120,
+          "depth": 10,
+          "alpha": 0.32,
+          "note": "窗雨半透明覆盖"
+        }
+      ],
+      "daily_loops": [
+        {
+          "id": "read_idle",
+          "asset_id": "PX-FDX-006",
+          "animation": "read_idle",
+          "trigger": "year_idle",
+          "note": "翻书 2-4 帧，不抢文字"
+        },
+        {
+          "id": "look_window",
+          "asset_id": "PX-FDX-006",
+          "animation": "look_window",
+          "trigger": "between_years"
+        }
+      ],
+      "sequence": [
+        {
+          "duration_ms": 1000,
+          "camera": "fade_in",
+          "beat": "进教室"
+        },
+        {
+          "duration_ms": 1400,
+          "camera": "pan",
+          "beat": "落座",
+          "layers_delta": {
+            "protagonist": {
+              "x": 468,
+              "y": 252
+            }
+          }
+        },
+        {
+          "duration_ms": 1200,
+          "camera": "hold",
+          "beat": "同桌侧目"
+        }
+      ],
+      "intervention_ui": {
+        "asset_id": "PX-FDX-036",
+        "trigger": "pivotal"
+      },
+      "human_notes": "B=教室全景 CC0；A=翻书/望窗；C=开学走廊三拍。人审前不合并主 layout。"
+    },
+    "2": {
+      "story_id": "fuxduxian",
+      "year": 2,
+      "pack": "fuxduxian-v1",
+      "pack_status": "draft_review",
+      "scene_type": "special",
+      "visual_anchor": "查分夜，桌上有撕碎准考证",
+      "mood": "麻木·夜",
+      "status": "draft",
+      "narrative_ref": {
+        "memory_id": "m2",
+        "event_summary": "查分夜撕准考证"
+      },
+      "background": {
+        "asset_id": "PX-FDX-009",
+        "parallax": 0.08,
+        "tint": "#3a3a48"
+      },
+      "layers": [
+        {
+          "asset_id": "PX-FDX-012",
+          "role": "prop",
+          "x": 120,
+          "y": 160,
+          "depth": 1,
+          "note": "台灯左上单光源 — LimeZu 待授权"
+        },
+        {
+          "asset_id": "PX-FDX-011",
+          "role": "prop",
+          "x": 280,
+          "y": 268,
+          "depth": 2,
+          "note": "准考证碎片 CC0 自切"
+        },
+        {
+          "asset_id": "PX-FDX-006",
+          "role": "protagonist",
+          "x": 320,
+          "y": 260,
+          "depth": 3,
+          "animation": "tear_paper"
+        }
+      ],
+      "daily_loops": [
+        {
+          "id": "tear_paper",
+          "asset_id": "PX-FDX-011",
+          "animation": "tear_paper",
+          "trigger": "year_idle",
+          "note": "撕纸 2-4 帧 loop"
+        },
+        {
+          "id": "still",
+          "asset_id": "PX-FDX-006",
+          "animation": "still",
+          "trigger": "between_years"
+        }
+      ],
+      "human_notes": "窄画幅：桌+床；BTL 卧室 CC0 待下载。台灯 PX-FDX-012 仅占位。"
+    },
+    "3": {
+      "story_id": "fuxduxian",
+      "year": 3,
+      "pack": "fuxduxian-v1",
+      "pack_status": "draft_review",
+      "scene_type": "special",
+      "visual_anchor": "食堂最里角，双份餐盘只有一个有人",
+      "mood": "钝·孤独",
+      "status": "draft",
+      "narrative_ref": {
+        "memory_id": "m3",
+        "event_summary": "食堂角落"
+      },
+      "background": {
+        "asset_id": "PX-FDX-013",
+        "parallax": 0.1,
+        "tint": "#6a7568",
+        "note": "Ocean 食堂包待授权；props 先用 CC0 占位"
+      },
+      "layers": [
+        {
+          "asset_id": "PX-FDX-016",
+          "role": "prop",
+          "x": 380,
+          "y": 255,
+          "depth": 1,
+          "note": "对面空椅 CC0 BTL"
+        },
+        {
+          "asset_id": "PX-FDX-015",
+          "role": "prop",
+          "x": 260,
+          "y": 268,
+          "depth": 2,
+          "note": "双份餐盘 — 一份 untouched"
+        },
+        {
+          "asset_id": "PX-FDX-006",
+          "role": "protagonist",
+          "x": 240,
+          "y": 258,
+          "depth": 3,
+          "animation": "eat_slow",
+          "flip_x": true
+        }
+      ],
+      "daily_loops": [
+        {
+          "id": "eat_slow",
+          "asset_id": "PX-FDX-015",
+          "animation": "eat_slow",
+          "trigger": "year_idle",
+          "note": "慢吃 loop，另一份餐盘不动"
+        }
+      ],
+      "human_notes": "最里角长桌构图；背景 Ocean 待核商用，CC0 椅盘先行。"
+    },
+    "4": {
+      "story_id": "fuxduxian",
+      "year": 4,
+      "pack": "fuxduxian-v1",
+      "pack_status": "draft_review",
+      "scene_type": "special",
+      "visual_anchor": "舞台侧幕，领带打反，稿纸五叠",
+      "mood": "试探·暖",
+      "status": "draft",
+      "narrative_ref": {
+        "memory_id": "m4",
+        "event_summary": "舞台侧幕"
+      },
+      "background": {
+        "asset_id": "PX-FDX-017",
+        "parallax": 0.15,
+        "tint": "#8a7060",
+        "note": "LimeZu 讲堂/会议厅待授权"
+      },
+      "layers": [
+        {
+          "asset_id": "PX-FDX-018",
+          "role": "fx",
+          "x": 520,
+          "y": 140,
+          "depth": 1,
+          "alpha": 0.5,
+          "note": "侧幕阴影 → 灯从右侧压入"
+        },
+        {
+          "asset_id": "PX-FDX-020",
+          "role": "prop",
+          "x": 180,
+          "y": 272,
+          "depth": 2,
+          "note": "五叠稿纸 CC0"
+        },
+        {
+          "asset_id": "PX-FDX-019",
+          "role": "prop",
+          "x": 560,
+          "y": 200,
+          "depth": 3,
+          "note": "舞台立麦 Lucid icon 待像素化"
+        },
+        {
+          "asset_id": "PX-FDX-021",
+          "role": "prop",
+          "x": 300,
+          "y": 248,
+          "depth": 4,
+          "note": "领带打反 — 角色服饰层 LimeZu 待授权"
+        },
+        {
+          "asset_id": "PX-FDX-006",
+          "role": "protagonist",
+          "x": 280,
+          "y": 256,
+          "depth": 5,
+          "animation": "edit_speech"
+        }
+      ],
+      "daily_loops": [
+        {
+          "id": "edit_speech",
+          "asset_id": "PX-FDX-020",
+          "animation": "edit_speech",
+          "trigger": "year_idle",
+          "note": "改稿 loop"
+        }
+      ],
+      "sequence": [
+        {
+          "duration_ms": 900,
+          "camera": "hold",
+          "beat": "侧幕阴影",
+          "layers_delta": {
+            "fx": {
+              "alpha": 0.7
+            }
+          }
+        },
+        {
+          "duration_ms": 800,
+          "camera": "hold",
+          "beat": "上台"
+        },
+        {
+          "duration_ms": 600,
+          "camera": "hold",
+          "beat": "台下笑"
+        },
+        {
+          "duration_ms": 1000,
+          "camera": "fade_in",
+          "beat": "灯亮",
+          "layers_delta": {
+            "fx": {
+              "alpha": 0.25
+            }
+          }
+        }
+      ],
+      "intervention_ui": {
+        "asset_id": "PX-FDX-036",
+        "trigger": "pivotal"
+      },
+      "human_notes": "年4略暖；C=上台→笑→灯亮。麦/稿纸 CC0 优先。"
+    },
+    "5": {
+      "story_id": "fuxduxian",
+      "year": 5,
+      "pack": "fuxduxian-v1",
+      "pack_status": "draft_review",
+      "scene_type": "special",
+      "visual_anchor": "凌晨 4 点，手机 4:03，窗帘缝光",
+      "mood": "压·insomnia",
+      "status": "draft",
+      "narrative_ref": {
+        "memory_id": "m5",
+        "event_summary": "凌晨宿舍"
+      },
+      "background": {
+        "asset_id": "PX-FDX-023",
+        "parallax": 0.06,
+        "tint": "#2a2a38"
+      },
+      "layers": [
+        {
+          "asset_id": "PX-FDX-025",
+          "role": "prop",
+          "x": 80,
+          "y": 100,
+          "depth": 1,
+          "note": "窗帘缝光 BTL CC0 待下载"
+        },
+        {
+          "asset_id": "PX-FDX-024",
+          "role": "prop",
+          "x": 420,
+          "y": 280,
+          "depth": 2,
+          "note": "手机 4:03 画面唯一亮点"
+        },
+        {
+          "asset_id": "PX-FDX-006",
+          "role": "protagonist",
+          "x": 360,
+          "y": 268,
+          "depth": 3,
+          "animation": "eyes_open"
+        }
+      ],
+      "daily_loops": [
+        {
+          "id": "eyes_open",
+          "asset_id": "PX-FDX-006",
+          "animation": "eyes_open",
+          "trigger": "year_idle",
+          "note": "睁眼几乎不动"
+        },
+        {
+          "id": "curtain_glow",
+          "asset_id": "PX-FDX-025",
+          "animation": "curtain_glow",
+          "trigger": "year_idle",
+          "note": "缝光 2 帧微变"
+        }
+      ],
+      "human_notes": "窄画幅床+窗；BTL 卧室 CC0 优先于 AppleDog。"
+    },
+    "6": {
+      "story_id": "fuxduxian",
+      "year": 6,
+      "pack": "fuxduxian-v1",
+      "pack_status": "draft_review",
+      "scene_type": "special",
+      "visual_anchor": "出站雨棚，行李箱，对面校服小孩睡",
+      "mood": "崩·雨",
+      "status": "draft",
+      "narrative_ref": {
+        "memory_id": "m6",
+        "event_summary": "出站雨棚"
+      },
+      "background": {
+        "asset_id": "PX-FDX-026",
+        "parallax": 0.18,
+        "tint": "#5a6270",
+        "note": "Reakain 车站包待授权；雨层 CC0 可预览"
+      },
+      "layers": [
+        {
+          "asset_id": "PX-FDX-029",
+          "role": "prop",
+          "x": 240,
+          "y": 270,
+          "depth": 2,
+          "note": "行李箱 — LimeZu Exteriors 待授权"
+        },
+        {
+          "asset_id": "PX-FDX-006",
+          "role": "protagonist",
+          "x": 220,
+          "y": 278,
+          "depth": 3,
+          "animation": "hold_bag"
+        },
+        {
+          "asset_id": "PX-FDX-006",
+          "role": "npc",
+          "x": 440,
+          "y": 282,
+          "depth": 3,
+          "animation": "sleep",
+          "note": "对面校服小孩 — Kenney 角色待改"
+        },
+        {
+          "asset_id": "PX-FDX-030",
+          "role": "fx",
+          "x": 320,
+          "y": 80,
+          "depth": 10,
+          "alpha": 0.38,
+          "note": "雨棚前景斜雨 CC0"
+        }
+      ],
+      "daily_loops": [
+        {
+          "id": "hold_bag",
+          "asset_id": "PX-FDX-029",
+          "animation": "hold_bag",
+          "trigger": "year_idle",
+          "note": "抱箱蹲坐 loop"
+        }
+      ],
+      "sequence": [
+        {
+          "duration_ms": 1200,
+          "camera": "hold",
+          "beat": "走廊「眼神不在」"
+        },
+        {
+          "duration_ms": 1400,
+          "camera": "pan",
+          "beat": "火车窗",
+          "layers_delta": {
+            "background": {
+              "asset_id": "PX-FDX-026"
+            }
+          }
+        },
+        {
+          "duration_ms": 800,
+          "camera": "fade_out",
+          "beat": "雨棚定帧"
+        }
+      ],
+      "intervention_ui": {
+        "asset_id": "PX-FDX-036",
+        "trigger": "pivotal"
+      },
+      "human_notes": "低饱和雨夜；C=走廊→火车窗。Reakain 待下载后统一色板。"
+    },
+    "7": {
+      "story_id": "fuxduxian",
+      "year": 7,
+      "pack": "fuxduxian-v1",
+      "pack_status": "draft_review",
+      "scene_type": "special",
+      "visual_anchor": "邮局小窗，信封与笔，老太太半脸",
+      "mood": "稳·留白",
+      "status": "draft",
+      "narrative_ref": {
+        "memory_id": "m7",
+        "event_summary": "邮局小窗"
+      },
+      "background": {
+        "asset_id": "PX-FDX-034",
+        "parallax": 0.05,
+        "tint": "#c8c4b8",
+        "note": "BTL 柜台 CC0 改邮局小窗；外景 PX-FDX-032 可选"
+      },
+      "layers": [
+        {
+          "asset_id": "PX-FDX-032",
+          "role": "prop",
+          "x": 520,
+          "y": 180,
+          "depth": 0,
+          "alpha": 0.35,
+          "note": "县城外观缩略 — 留白大，仅占 1/3"
+        },
+        {
+          "asset_id": "PX-FDX-033",
+          "role": "prop",
+          "x": 300,
+          "y": 268,
+          "depth": 2,
+          "note": "信封+笔 Lucid 待像素化"
+        },
+        {
+          "asset_id": "PX-FDX-006",
+          "role": "protagonist",
+          "x": 280,
+          "y": 260,
+          "depth": 3,
+          "animation": "write_idle"
+        },
+        {
+          "asset_id": "PX-FDX-035",
+          "role": "npc",
+          "x": 180,
+          "y": 240,
+          "depth": 4,
+          "note": "老太太半脸/小手 — 不煽情"
+        }
+      ],
+      "daily_loops": [
+        {
+          "id": "write_idle",
+          "asset_id": "PX-FDX-033",
+          "animation": "write_idle",
+          "trigger": "year_idle",
+          "note": "窗口内写字 loop"
+        }
+      ],
+      "sequence": [
+        {
+          "duration_ms": 1000,
+          "camera": "fade_in",
+          "beat": "递信"
+        },
+        {
+          "duration_ms": 1600,
+          "camera": "hold",
+          "beat": "字真好看"
+        },
+        {
+          "duration_ms": 800,
+          "camera": "hold",
+          "beat": "小窗定帧"
+        }
+      ],
+      "human_notes": "留白最大；final C 收束。Pixel Office PX-FDX-031 作付费备选。"
+    }
+  }
+}

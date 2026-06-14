@@ -1,0 +1,101 @@
+{
+  "story_id": "fuxduxian",
+  "year": 4,
+  "pack": "fuxduxian-v1",
+  "pack_status": "draft_review",
+  "scene_type": "special",
+  "visual_anchor": "舞台侧幕，领带打反，稿纸五叠",
+  "mood": "试探·暖",
+  "status": "draft",
+  "narrative_ref": {
+    "memory_id": "m4",
+    "event_summary": "舞台侧幕"
+  },
+  "background": {
+    "asset_id": "PX-FDX-017",
+    "parallax": 0.15,
+    "tint": "#8a7060",
+    "note": "LimeZu 讲堂/会议厅待授权"
+  },
+  "layers": [
+    {
+      "asset_id": "PX-FDX-018",
+      "role": "fx",
+      "x": 520,
+      "y": 140,
+      "depth": 1,
+      "alpha": 0.5,
+      "note": "侧幕阴影 → 灯从右侧压入"
+    },
+    {
+      "asset_id": "PX-FDX-020",
+      "role": "prop",
+      "x": 180,
+      "y": 272,
+      "depth": 2,
+      "note": "五叠稿纸 CC0"
+    },
+    {
+      "asset_id": "PX-FDX-019",
+      "role": "prop",
+      "x": 560,
+      "y": 200,
+      "depth": 3,
+      "note": "舞台立麦 Lucid icon 待像素化"
+    },
+    {
+      "asset_id": "PX-FDX-021",
+      "role": "prop",
+      "x": 300,
+      "y": 248,
+      "depth": 4,
+      "note": "领带打反 — 角色服饰层 LimeZu 待授权"
+    },
+    {
+      "asset_id": "PX-FDX-006",
+      "role": "protagonist",
+      "x": 280,
+      "y": 256,
+      "depth": 5,
+      "animation": "edit_speech"
+    }
+  ],
+  "daily_loops": [
+    {
+      "id": "edit_speech",
+      "asset_id": "PX-FDX-020",
+      "animation": "edit_speech",
+      "trigger": "year_idle",
+      "note": "改稿 loop"
+    }
+  ],
+  "sequence": [
+    {
+      "duration_ms": 900,
+      "camera": "hold",
+      "beat": "侧幕阴影",
+      "layers_delta": { "fx": { "alpha": 0.7 } }
+    },
+    {
+      "duration_ms": 800,
+      "camera": "hold",
+      "beat": "上台"
+    },
+    {
+      "duration_ms": 600,
+      "camera": "hold",
+      "beat": "台下笑"
+    },
+    {
+      "duration_ms": 1000,
+      "camera": "fade_in",
+      "beat": "灯亮",
+      "layers_delta": { "fx": { "alpha": 0.25 } }
+    }
+  ],
+  "intervention_ui": {
+    "asset_id": "PX-FDX-036",
+    "trigger": "pivotal"
+  },
+  "human_notes": "年4略暖；C=上台→笑→灯亮。麦/稿纸 CC0 优先。"
+}

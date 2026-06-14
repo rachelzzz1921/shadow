@@ -140,7 +140,7 @@ img { image-rendering: pixelated; image-rendering: crisp-edges; }
 .pixel-wipe {
   position: fixed;
   inset: 0;
-  z-index: 300;
+  z-index: 295;
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
@@ -148,7 +148,6 @@ img { image-rendering: pixelated; image-rendering: crisp-edges; }
 .pixel-wipe.active {
   visibility: visible;
   opacity: 1;
-  pointer-events: auto;
 }
 .pixel-wipe-grid {
   display: grid;
@@ -156,33 +155,39 @@ img { image-rendering: pixelated; image-rendering: crisp-edges; }
   grid-template-rows: repeat(12, 1fr);
   width: 100%;
   height: 100%;
+  gap: 1px;
+  background: rgba(58, 50, 40, 0.06);
 }
 .pixel-wipe-block {
-  background: var(--amber);
+  background: var(--scenario-wipe, var(--amber));
   transform: scale(0);
+  opacity: 0;
   image-rendering: pixelated;
-  box-shadow: inset 0 0 0 1px rgba(154, 99, 40, 0.35);
+  box-shadow: inset 0 0 0 1px rgba(255, 253, 248, 0.12);
 }
 .pixel-wipe.wipe-in .pixel-wipe-block {
-  animation: wipe-in-block 420ms var(--ease-pixel) forwards;
-  animation-delay: calc((var(--col) + var(--row)) * 14ms);
+  animation: wipe-in-block 380ms steps(5, end) forwards;
+  animation-delay: calc((var(--col) * 0.55 + var(--row) * 0.9) * 11ms);
 }
 .pixel-wipe.wipe-out .pixel-wipe-block {
-  animation: wipe-out-block 420ms var(--ease-pixel) forwards;
-  animation-delay: calc((19 - var(--col) + 11 - var(--row)) * 12ms);
+  animation: wipe-out-block 360ms steps(5, end) forwards;
+  animation-delay: calc(((19 - var(--col)) * 0.55 + (11 - var(--row)) * 0.9) * 9ms);
 }
 .pixel-wipe[data-dir="back"].wipe-in .pixel-wipe-block {
-  animation-delay: calc((19 - var(--col) + 11 - var(--row)) * 14ms);
+  animation-delay: calc(((19 - var(--col)) * 0.55 + (11 - var(--row)) * 0.9) * 11ms);
 }
 .pixel-wipe[data-dir="back"].wipe-out .pixel-wipe-block {
-  animation-delay: calc((var(--col) + var(--row)) * 12ms);
+  animation-delay: calc((var(--col) * 0.55 + var(--row) * 0.9) * 9ms);
 }
 @keyframes wipe-in-block {
-  to { transform: scale(1.08); background: var(--amber-deep); }
+  0% { transform: scale(0); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: scale(1.02); opacity: 1; background: var(--scenario-wipe-deep, var(--amber-deep)); }
 }
 @keyframes wipe-out-block {
-  from { transform: scale(1.08); background: var(--amber-deep); }
-  to { transform: scale(0); }
+  0% { transform: scale(1.02); opacity: 1; background: var(--scenario-wipe-deep, var(--amber-deep)); }
+  70% { opacity: 1; }
+  100% { transform: scale(0); opacity: 0; }
 }
 
 /* ─── Enter animations (无 JS 时也可见) ─── */
@@ -723,22 +728,25 @@ img { image-rendering: pixelated; image-rendering: crisp-edges; }
 
 .visual-layout-overlay {
   position: absolute;
-  bottom: 4px;
-  left: 4px;
-  right: 4px;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 8px;
-  font-size: 8px;
-  letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.45);
+  gap: 6px 10px;
+  font-size: 11px;
+  line-height: 1.45;
+  letter-spacing: 0.03em;
+  color: rgba(255, 255, 255, 0.55);
   pointer-events: none;
   z-index: 4;
 }
-.visual-layout-overlay .vlo-mood { color: rgba(255, 220, 160, 0.55); }
-.visual-layout-overlay .vlo-anchor { display: block; color: rgba(255, 235, 200, 0.85); margin-bottom: 4px; font-size: 0.85em; }
-.visual-layout-overlay .vlo-meta { opacity: 0.7; }
-.visual-layout-overlay .vlo-loop { opacity: 0.5; }
+.visual-layout-overlay .vlo-mood { color: rgba(255, 220, 160, 0.65); }
+.visual-layout-overlay .vlo-anchor { display: block; color: rgba(255, 235, 200, 0.9); margin-bottom: 4px; font-size: 12px; }
+.visual-layout-overlay .vlo-meta { opacity: 0.85; font-size: 11px; }
+.visual-layout-overlay .vlo-loop { opacity: 0.75; font-size: 11px; }
+.visual-layout-overlay .vlo-pack { display: block; font-size: 10px; color: rgba(120, 180, 140, 0.85); margin-bottom: 2px; }
+.visual-layout-overlay .vlo-seq { opacity: 0.75; margin-left: 6px; font-size: 11px; }
 
 .pixel-scene { position: relative; }
 
