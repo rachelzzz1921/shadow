@@ -55,8 +55,11 @@ function loadEnvFiles() {
         const trimmed = line.trim();
         if (!trimmed || trimmed.startsWith('#')) continue;
         const m = trimmed.match(/^([A-Z_][A-Z0-9_]*)=(.*)$/);
-        if (m && process.env[m[1]] === undefined) {
-          process.env[m[1]] = m[2].replace(/^["']|["']$/g, '');
+        if (!m) continue;
+        const val = m[2].replace(/^["']|["']$/g, '');
+        const existing = process.env[m[1]];
+        if (existing === undefined || !isConfiguredSecret(existing)) {
+          process.env[m[1]] = val;
         }
       }
     } catch {
