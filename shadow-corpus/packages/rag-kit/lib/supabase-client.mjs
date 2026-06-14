@@ -2,6 +2,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { ragConfig, isConfiguredSecret } from './config.mjs';
+import { isLocalProvider } from './embed-local.mjs';
 import {
   upsertLocalChunks,
   fetchLocalCandidates,
@@ -34,7 +35,7 @@ export async function upsertChunks(rows) {
     chunk_index: r.chunk_index ?? 0,
     content: r.content,
     metadata: r.metadata || {},
-    embedding: r.embedding ?? null,
+    embedding: supabaseEmbedding(r.embedding, cfg),
     corpus_version: r.corpus_version || cfg.corpusVersion,
     updated_at: new Date().toISOString()
   }));
@@ -45,7 +46,7 @@ export async function upsertChunks(rows) {
     localCount = upsertLocalChunks(payload);
   }
 
-  const client = createRagClient({ service: true });
+  const client = isLocalProvider(cfg.embeddingProvider) ? null : createRagClient({ service: true });
   if (!client) {
     if (!mirrorLocal || !localCount) {
       throw new Error('Missing SUPABASE credentials; enable RAG_LOCAL_INDEX or configure Supabase');
@@ -65,6 +66,14 @@ export async function upsertChunks(rows) {
     throw error;
   }
   return payload.length;
+}
+
+/** Supabase schema is vector(1024); local ONNX uses 384 — mirror local only. */
+function supabaseEmbedding(embedding, cfg) {
+  if (embedding == null) return null;
+  if (isLocalProvider(cfg.embeddingProvider)) return null;
+  if (Array.isArray(embedding) && embedding.length !== 1024) return null;
+  return embedding;
 }
 
 /**

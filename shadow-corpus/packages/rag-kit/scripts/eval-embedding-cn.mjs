@@ -13,6 +13,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { loadEnv, ragConfig, worldYearsDir, isConfiguredSecret } from '../lib/config.mjs';
+import { isLocalProvider } from '../lib/embed-local.mjs';
 import { chunkWorldYear } from '../lib/chunk-world.mjs';
 import { embedTexts, cosineSimilarity } from '../lib/embed.mjs';
 import { walkRepoMarkdown } from '../lib/chunk-repo.mjs';
@@ -102,8 +103,13 @@ async function main() {
   const { world, harness } = await buildCorpus();
   console.log(`  world chunks: ${world.length}, harness chunks: ${harness.length}`);
 
-  if (!isConfiguredSecret(cfg.dashscopeApiKey) && provider === 'dashscope' && !isConfiguredSecret(cfg.zhipuApiKey)) {
-    console.error('\nMissing DASHSCOPE_API_KEY — eval requires live embedding API.');
+  if (
+    provider === 'dashscope' &&
+    !isConfiguredSecret(cfg.dashscopeApiKey) &&
+    !isConfiguredSecret(cfg.zhipuApiKey) &&
+    !isLocalProvider(provider)
+  ) {
+    console.error('\nMissing DASHSCOPE_API_KEY — use RAG_EMBEDDING_PROVIDER=local for offline eval.');
     console.error('Set key in world/.env, or run with --dry-skeleton to print query set only.');
     if (process.argv.includes('--dry-skeleton')) {
       console.log('\nGolden queries:', GOLDEN_QUERIES.map(q => q.id).join(', '));
@@ -125,10 +131,17 @@ async function main() {
   );
   printResults(worldEval);
 
+  const harnessPool = isLocalProvider(provider)
+    ? harness.filter(c => /shadow-corpus|\.agents\/skills/.test(c.metadata?.file_path || '')).slice(0, 1200)
+    : harness;
+  if (isLocalProvider(provider) && harness.length > harnessPool.length) {
+    console.log(`  (local eval: harness pool ${harnessPool.length} shadow-corpus/skills chunks)`);
+  }
+
   console.log('\n--- harness ---');
   const harnessEval = await evalNamespace(
     harnessQueries,
-    harness,
+    harnessPool,
     provider,
     model,
     '为 Shadow Harness 开发文档检索'

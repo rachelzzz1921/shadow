@@ -1,6 +1,7 @@
 'use strict';
 
-import { ragConfig } from './config.mjs';
+import { ragConfig, isConfiguredSecret } from './config.mjs';
+import { embedLocalTexts, isLocalProvider } from './embed-local.mjs';
 
 const BATCH_SIZE = 10;
 
@@ -18,13 +19,32 @@ export async function embedTexts(texts, opts = {}) {
 
   if (!cleaned.length) return [];
 
+  try {
+    return await embedWithProvider(provider, cleaned, { model, cfg, instruction: opts.instruction });
+  } catch (err) {
+    const fallback = process.env.RAG_EMBEDDING_FALLBACK || 'local';
+    if (provider !== fallback && isLocalProvider(fallback)) {
+      console.warn(`[rag-kit] ${provider} embed failed → local (${err.message.slice(0, 80)})`);
+      return embedLocalTexts(cleaned, {
+        model: process.env.RAG_LOCAL_EMBED_MODEL,
+        instruction: opts.instruction
+      });
+    }
+    throw err;
+  }
+}
+
+async function embedWithProvider(provider, cleaned, { model, cfg, instruction }) {
   switch (provider) {
+    case 'local':
+    case 'xenova':
+      return embedLocalTexts(cleaned, { model: model || process.env.RAG_LOCAL_EMBED_MODEL, instruction });
     case 'dashscope':
-      return embedDashScope(cleaned, { model, apiKey: cfg.dashscopeApiKey, instruction: opts.instruction });
+      return embedDashScope(cleaned, { model, apiKey: cfg.dashscopeApiKey, instruction });
     case 'zhipu':
       return embedZhipu(cleaned, { model: model || 'embedding-3', apiKey: cfg.zhipuApiKey });
     case 'stepfun':
-      return embedStepFun(cleaned, { model, apiKey: cfg.stepfunApiKey, instruction: opts.instruction });
+      return embedStepFun(cleaned, { model, apiKey: cfg.stepfunApiKey, instruction });
     default:
       throw new Error(`Unknown RAG_EMBEDDING_PROVIDER: ${provider}`);
   }

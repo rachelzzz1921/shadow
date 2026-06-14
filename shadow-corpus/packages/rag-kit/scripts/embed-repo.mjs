@@ -2,6 +2,7 @@
 'use strict';
 
 import { loadEnv, ragConfig, isConfiguredSecret } from '../lib/config.mjs';
+import { isLocalProvider } from '../lib/embed-local.mjs';
 import { walkRepoMarkdown } from '../lib/chunk-repo.mjs';
 import { embedTexts } from '../lib/embed.mjs';
 import { upsertChunks } from '../lib/supabase-client.mjs';
@@ -22,9 +23,11 @@ async function main() {
 
   const noEmbed = process.argv.includes('--no-embed');
   const embedReady =
-    isConfiguredSecret(cfg.dashscopeApiKey) || isConfiguredSecret(cfg.zhipuApiKey);
+    isLocalProvider(cfg.embeddingProvider) ||
+    isConfiguredSecret(cfg.dashscopeApiKey) ||
+    isConfiguredSecret(cfg.zhipuApiKey);
   if (!noEmbed && !embedReady) {
-    console.error('Missing DASHSCOPE_API_KEY — or pass --no-embed for rules-only local index');
+    console.error('Set RAG_EMBEDDING_PROVIDER=local or configure a cloud embedding API key');
     process.exit(1);
   }
 

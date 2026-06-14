@@ -97,9 +97,13 @@ async function canHybridRetrieve(namespace) {
   return isConfiguredSecret(k.config.supabaseUrl) && isServiceRoleKey(k.config.supabaseServiceKey);
 }
 
+function isLocalProvider(provider) {
+  return provider === 'local' || provider === 'xenova';
+}
+
 function isEmbedLive(cfg) {
+  if (isLocalProvider(cfg.embeddingProvider)) return true;
   return isConfiguredSecret(cfg.dashscopeApiKey) || isConfiguredSecret(cfg.zhipuApiKey);
-  // 阶跃暂无可用 embedding 模型；STEPFUN 仅用于叙事 LLM（见 llm-runtime.js）
 }
 
 /**
