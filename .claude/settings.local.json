@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(extract-text \"Shadow 项目文档\\(1\\).docx\")",
+      "Bash(find \"/Users/chenzhiwei/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/33dbf653-dfa7-4423-b9af-eec11395968d/43e00f0b-6311-42fd-beaa-6e49c4c9f406/skills/docx\" -name \"extract-text*\" -o -name \"unpack*\" 2>/dev/null | head -20)",
+      "Read(//private/tmp/**)",
+      "Bash(python3 \"/Users/chenzhiwei/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/33dbf653-dfa7-4423-b9af-eec11395968d/43e00f0b-6311-42fd-beaa-6e49c4c9f406/skills/docx/scripts/office/unpack.py\" \"/Users/chenzhiwei/Documents/shadow/Shadow 项目文档\\(1\\).docx\" /tmp/shadow_doc_unpacked/)",
+      "Bash(mkdir -p /tmp/shadow_doc)",
+      "Read(//tmp/**)",
+      "Bash(unzip -o \"/Users/chenzhiwei/Documents/shadow/Shadow 项目文档\\(1\\).docx\" -d /tmp/shadow_doc/)",
+      "Read(//tmp/shadow_doc/**)",
+      "Bash(unzip -l \"/Users/chenzhiwei/Documents/shadow/free-city-backgrounds-pixel-art.zip\")",
+      "Bash(npm install *)",
+      "Bash(node -e \"const ai = require\\('ai'\\); const a = require\\('@ai-sdk/anthropic'\\); const o = require\\('@ai-sdk/openai'\\); console.log\\('ai:', Object.keys\\(ai\\).slice\\(0,15\\)\\); console.log\\('anthropic:', Object.keys\\(a\\)\\); console.log\\('openai:', Object.keys\\(o\\)\\);\")",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(awk '{print $5/1024/1024 \" MB\\\\t\" $NF}')",
+      "Bash(unzip -l \"小型室内场景16×16 Tileset像素游戏贴图素材.zip\")",
+      "Bash(unzip -l \"室内像素风格地图场景图块元素游戏素材.zip\")",
+      "Bash(unzip -l \"RPG像素现代城市地图游戏场景素材.zip\")",
+      "Bash(unzip -l \"GuttyKreum_CleanCityv3.zip\")",
+      "Bash(unzip -l \"农场生活.zip\")",
+      "Bash(mkdir -p /tmp/shadow_assets)",
+      "Bash(unzip -q -o \"/Users/chenzhiwei/Downloads/农场生活.zip\" -d sunnyside/)",
+      "Bash(unzip -q -o \"/Users/chenzhiwei/Downloads/室内像素风格地图场景图块元素游戏素材.zip\" -d pixinteriors/)",
+      "Bash(unzip -q -o \"/Users/chenzhiwei/Downloads/GuttyKreum_CleanCityv3.zip\" -d cleancity/)",
+      "Bash(unzip -q -o \"/Users/chenzhiwei/Downloads/小型室内场景16×16 Tileset像素游戏贴图素材.zip\" -d small_tileset/)",
+      "Bash(unzip -q -o \"/Users/chenzhiwei/Documents/shadow/free-city-backgrounds-pixel-art.zip\" -d cities/)",
+      "Bash(node -e \"const {YearSchema} = require\\('./lib/schemas'\\); const r = YearSchema.safeParse\\({year:1,age:19,is_pivotal:true,title:'再坐一年',scene:'rain',environment:'classroom',pose:'wait',prop:'desk',city:'city2',event:'复读班开学那天下雨。你提前半小时到，把书包放在最后一排靠窗的位置，心想这样没人能从背后看见你。',decision_made:'选了最后一排',intervention_prompt:{question:'告诉父母自己其实不想复读，还是继续撑下去？',options:['告诉父母','继续撑']},emotion:{label:'退缩',value:4},new_mood:4,new_esteem:5,reflection:'原来我怕的不是失败',shadow_dialogue:'你看，我还是坐回来了。',memory_summary:'复读班坐到最后一排'}\\); console.log\\(r.success ? 'OK classroom + wait pass Zod' : JSON.stringify\\(r.error.format\\(\\),null,2\\)\\)\")",
+      "Read(//Users/chenzhiwei/Downloads/**)",
+      "Bash(ls -la *.zip *.rar)",
+      "Bash(unrar)",
+      "Bash(7z)",
+      "Bash(python3 -m pip install --break-system-packages -q Pillow)",
+      "Bash(python3 make_xlsx.py)"
+    ]
+  }
+}

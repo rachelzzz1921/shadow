@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ShadowVisualLayout",
+  "description": "AI 布局输出 + Phaser 场景描述",
+  "type": "object",
+  "required": ["story_id", "year", "scene_type", "background", "layers"],
+  "properties": {
+    "story_id": { "type": "string", "example": "fuxduxian" },
+    "year": { "type": "integer", "minimum": 1, "maximum": 7 },
+    "scene_type": {
+      "enum": ["special", "daily", "pivotal_sequence"],
+      "description": "special=年主景, daily=小动画, pivotal_sequence=C类短片"
+    },
+    "narrative_ref": {
+      "type": "object",
+      "properties": {
+        "memory_id": { "type": "string" },
+        "event_summary": { "type": "string" }
+      }
+    },
+    "mood": { "type": "string" },
+    "background": {
+      "type": "object",
+      "required": ["asset_id"],
+      "properties": {
+        "asset_id": { "type": "string" },
+        "parallax": { "type": "number" }
+      }
+    },
+    "layers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["asset_id", "role"],
+        "properties": {
+          "asset_id": { "type": "string" },
+          "role": { "enum": ["protagonist", "npc", "prop", "fx"] },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "depth": { "type": "integer" },
+          "animation": { "type": "string", "description": "registry 或 anims 键名" },
+          "flip_x": { "type": "boolean" }
+        }
+      }
+    },
+    "daily_loops": {
+      "type": "array",
+      "description": "A 类日常小动画",
+      "items": {
+        "type": "object",
+        "required": ["id", "asset_id", "animation"],
+        "properties": {
+          "id": { "type": "string" },
+          "asset_id": { "type": "string" },
+          "animation": { "type": "string" },
+          "trigger": { "enum": ["year_idle", "between_years", "dialogue"] }
+        }
+      }
+    },
+    "sequence": {
+      "type": "array",
+      "description": "C 类 pivotal 多步",
+      "items": {
+        "type": "object",
+        "properties": {
+          "duration_ms": { "type": "integer" },
+          "camera": { "enum": ["hold", "pan", "fade_in", "fade_out"] },
+          "layers_delta": { "type": "object" }
+        }
+      }
+    },
+    "human_notes": { "type": "string", "description": "人审修改说明" },
+    "status": { "enum": ["draft", "review", "approved"] }
+  }
+}

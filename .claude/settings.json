@@ -1,0 +1,33 @@
+{
+  "_comment": "Shadow Harness Hook Configuration — copy to .claude/settings.json at repo root",
+
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit",
+        "hooks": [{ "type": "command", "command": "bash shadow-corpus/tooling/hooks/scripts/pre-coding-spec-check.sh" }]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [{ "type": "command", "command": "bash shadow-corpus/tooling/hooks/scripts/pre-coding-spec-check.sh" }]
+      },
+      {
+        "matcher": "Bash(git commit*)",
+        "hooks": [{ "type": "command", "command": "bash shadow-corpus/tooling/hooks/scripts/pre-commit-test.sh" }]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit",
+        "hooks": [{ "type": "command", "command": "bash shadow-corpus/tooling/hooks/scripts/post-edit-test.sh" }]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          { "type": "command", "command": "bash shadow-corpus/tooling/hooks/scripts/post-edit-test.sh" },
+          { "type": "command", "command": "bash shadow-corpus/tooling/hooks/scripts/post-progress-update.sh" }
+        ]
+      }
+    ]
+  }
+}

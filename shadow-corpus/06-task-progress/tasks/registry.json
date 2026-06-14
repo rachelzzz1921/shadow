@@ -1,0 +1,1120 @@
+{
+  "version": 1,
+  "plan_id": "PLAN-2026Q2-shadow-corpus",
+  "updated_at": "2026-06-14",
+  "team": [
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "P5"
+  ],
+  "phases": [
+    "01-requirements",
+    "02-design",
+    "03-coding",
+    "04-dev-testing",
+    "05-qa",
+    "06-progress",
+    "07-debug",
+    "done",
+    "backlog"
+  ],
+  "gates": {
+    "G0": {
+      "name": "P0 scope 签字",
+      "owner": "P1",
+      "unlocks": [
+        "02-design for CHG-001"
+      ]
+    },
+    "G1": {
+      "name": "叙事口径",
+      "owner": "P2",
+      "unlocks": [
+        "03-coding prompts"
+      ]
+    },
+    "G2": {
+      "name": "技术方案",
+      "owner": "P3+P1",
+      "unlocks": [
+        "writing-plans",
+        "Codex"
+      ]
+    },
+    "G3": {
+      "name": "Eval 绿",
+      "owner": "P4",
+      "unlocks": [
+        "05-qa live"
+      ]
+    },
+    "G4": {
+      "name": "叙事质量",
+      "owner": "P4+P2",
+      "unlocks": [
+        "go/no-go"
+      ]
+    },
+    "G5": {
+      "name": "发布演示",
+      "owner": "P1",
+      "unlocks": [
+        "对外 demo"
+      ]
+    },
+    "G-N1": {
+      "name": "复读线叙事 v2 签字",
+      "owner": "P2",
+      "unlocks": [
+        "visual AI 布局批量"
+      ]
+    }
+  },
+  "catalog": {
+    "legend": {
+      "required": "● 必做 — 挡主线",
+      "optional": "◇ 可选 — 不挡发布",
+      "human": "👤 人工",
+      "agent": "🤖 CC/Codex",
+      "ready": "绿框/✓ = 依赖已满足，可立即开始"
+    },
+    "team_roles": {
+      "P1": "产品 / PM",
+      "P2": "叙事 / 内容",
+      "P3": "工程 Lead",
+      "P4": "QA / 评测",
+      "P5": "工具 / 集成"
+    },
+    "changes": {
+      "INFRA-001": {
+        "title": "团队 Onboarding",
+        "summary": "Kickoff、花名册、Agent 分工、共读 golden"
+      },
+      "CHG-000": {
+        "title": "Corpus 整合",
+        "summary": "唯一入口确认、gap 扫描、skills 基线"
+      },
+      "CHG-001": {
+        "title": "P0 三项迁移",
+        "summary": "memory 检索 · reflection · intervention re-plan"
+      },
+      "CHG-V001": {
+        "title": "Visual 复读线",
+        "summary": "叙事 v2 · 像素素材 · Phaser · 7 年 layout"
+      },
+      "CHG-002": {
+        "title": "第二条 Golden",
+        "summary": "Wave 5 可选 backlog"
+      },
+      "CHG-003": {
+        "title": "多 Run 对比",
+        "summary": "Wave 5 可选 backlog"
+      }
+    },
+    "waves": {
+      "0": "Kickoff & P0 scope 签字",
+      "1": "基线建立 & 并行准备",
+      "2": "需求/方案锁定",
+      "3": "编码 & Visual 实现",
+      "4": "自测 · QA · 发布签字",
+      "5": "可选增强 backlog"
+    },
+    "change_order": [
+      "INFRA-001",
+      "CHG-000",
+      "CHG-001",
+      "CHG-V001",
+      "CHG-002",
+      "CHG-003"
+    ]
+  },
+  "tasks": [
+    {
+      "id": "T-001",
+      "title": "Kickoff：五人角色与本周目标",
+      "change_id": "INFRA-001",
+      "phase": "01-requirements",
+      "status": "in_progress",
+      "priority": "P0",
+      "wave": 0,
+      "assignee": "P1",
+      "executor": "human",
+      "skill": "planning-and-task-breakdown",
+      "depends_on": [],
+      "gates": [],
+      "artifact": "team-roster.md",
+      "estimate_h": 0.5,
+      "due": null,
+      "tags": [
+        "kickoff",
+        "infra"
+      ],
+      "parallel_ok": true,
+      "optional": false
+    },
+    {
+      "id": "T-002",
+      "title": "共读 MANIFEST + 复读线 golden（每人 3 条不可退让）",
+      "change_id": "INFRA-001",
+      "phase": "01-requirements",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 0,
+      "assignee": "P1",
+      "executor": "human",
+      "skill": null,
+      "depends_on": [],
+      "gates": [],
+      "artifact": null,
+      "estimate_h": 0.75,
+      "due": null,
+      "tags": [
+        "kickoff",
+        "all-hands"
+      ],
+      "parallel_ok": true,
+      "optional": false
+    },
+    {
+      "id": "T-003",
+      "title": "确认 CC / Codex 分工与分支策略",
+      "change_id": "INFRA-001",
+      "phase": "01-requirements",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 0,
+      "assignee": "P3",
+      "executor": "human",
+      "skill": null,
+      "depends_on": [],
+      "gates": [],
+      "artifact": "team-roster.md#Agent账号",
+      "estimate_h": 0.25,
+      "due": null,
+      "tags": [
+        "infra",
+        "agent"
+      ],
+      "parallel_ok": true,
+      "optional": false
+    },
+    {
+      "id": "T-004",
+      "title": "P1 签字：P0 三项 scope 与顺序",
+      "change_id": "CHG-001",
+      "phase": "01-requirements",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 0,
+      "assignee": "P1",
+      "executor": "human",
+      "skill": null,
+      "depends_on": [
+        "T-001",
+        "T-002"
+      ],
+      "gates": [
+        "G0"
+      ],
+      "artifact": "changes/CHG-001-p0-migration/progress.md",
+      "estimate_h": 0.25,
+      "due": null,
+      "tags": [
+        "gate"
+      ],
+      "parallel_ok": false,
+      "optional": false
+    },
+    {
+      "id": "T-005",
+      "title": "skills sync + npm test 基线报告",
+      "change_id": "CHG-000",
+      "phase": "04-dev-testing",
+      "status": "done",
+      "priority": "P0",
+      "wave": 1,
+      "assignee": "P5",
+      "executor": "cx",
+      "skill": "tdd",
+      "depends_on": [],
+      "gates": [],
+      "artifact": null,
+      "estimate_h": 0.5,
+      "due": null,
+      "tags": [
+        "baseline"
+      ],
+      "parallel_ok": true,
+      "completed_at": "2026-06-14",
+      "optional": false
+    },
+    {
+      "id": "T-006",
+      "title": "Corpus gap 扫描",
+      "change_id": "CHG-000",
+      "phase": "06-progress",
+      "status": "todo",
+      "priority": "P1",
+      "wave": 1,
+      "assignee": "P3",
+      "executor": "cc",
+      "skill": "harness-init",
+      "depends_on": [],
+      "gates": [],
+      "artifact": null,
+      "estimate_h": 1,
+      "due": null,
+      "tags": [
+        "baseline"
+      ],
+      "parallel_ok": true,
+      "optional": false
+    },
+    {
+      "id": "T-007",
+      "title": "复读线红线清单（6 条质量标准）",
+      "change_id": "CHG-001",
+      "phase": "01-requirements",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 1,
+      "assignee": "P2",
+      "executor": "human",
+      "skill": "story-authoring",
+      "depends_on": [
+        "T-002"
+      ],
+      "gates": [
+        "G1"
+      ],
+      "artifact": "fixtures/golden-stories/复读线.md",
+      "estimate_h": 1,
+      "due": null,
+      "tags": [
+        "narrative"
+      ],
+      "parallel_ok": true,
+      "optional": false
+    },
+    {
+      "id": "T-008",
+      "title": "Eval rubric 与 golden 字段对齐",
+      "change_id": "CHG-001",
+      "phase": "04-dev-testing",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 1,
+      "assignee": "P4",
+      "executor": "human",
+      "skill": "qa",
+      "depends_on": [
+        "T-002"
+      ],
+      "gates": [],
+      "artifact": "04-dev-testing/01-narrative-eval-rubric.md",
+      "estimate_h": 1,
+      "due": null,
+      "tags": [
+        "qa"
+      ],
+      "parallel_ok": true,
+      "optional": false
+    },
+    {
+      "id": "T-009",
+      "title": "更新 roster + 各 CHG assignee",
+      "change_id": "INFRA-001",
+      "phase": "06-progress",
+      "status": "todo",
+      "priority": "P1",
+      "wave": 1,
+      "assignee": "P5",
+      "executor": "human",
+      "skill": "progress-tracker",
+      "depends_on": [
+        "T-001"
+      ],
+      "gates": [],
+      "artifact": "team-roster.md",
+      "estimate_h": 0.25,
+      "due": null,
+      "tags": [
+        "infra"
+      ],
+      "parallel_ok": true,
+      "optional": false
+    },
+    {
+      "id": "T-010",
+      "title": "P0 需求写入 02/03 文档",
+      "change_id": "CHG-001",
+      "phase": "01-requirements",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 2,
+      "assignee": "P2",
+      "executor": "human",
+      "skill": null,
+      "depends_on": [
+        "T-004",
+        "T-007"
+      ],
+      "gates": [],
+      "artifact": "03-coding/01-narrative-prompt-protocol.md",
+      "estimate_h": 2,
+      "due": null,
+      "tags": [
+        "narrative",
+        "p0"
+      ],
+      "parallel_ok": false,
+      "optional": false
+    },
+    {
+      "id": "T-011",
+      "title": "P0 技术方案文档",
+      "change_id": "CHG-001",
+      "phase": "02-design",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 2,
+      "assignee": "P3",
+      "executor": "cc",
+      "skill": "design-generator",
+      "depends_on": [
+        "T-010"
+      ],
+      "gates": [
+        "G2"
+      ],
+      "artifact": "02-technical-design/02-p0-memory-reflection-replan.md",
+      "estimate_h": 2,
+      "due": null,
+      "tags": [
+        "p0",
+        "design"
+      ],
+      "parallel_ok": false,
+      "optional": false
+    },
+    {
+      "id": "T-012",
+      "title": "P0 实现计划（writing-plans）",
+      "change_id": "CHG-001",
+      "phase": "02-design",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 2,
+      "assignee": "P3",
+      "executor": "cc",
+      "skill": "writing-plans",
+      "depends_on": [
+        "T-011"
+      ],
+      "gates": [],
+      "artifact": "docs/plans/2026-06-14-p0-implementation.md",
+      "estimate_h": 1.5,
+      "due": null,
+      "tags": [
+        "p0",
+        "agent-handoff"
+      ],
+      "parallel_ok": false,
+      "optional": false
+    },
+    {
+      "id": "T-013",
+      "title": "方案评审会 + P1/P3 签字",
+      "change_id": "CHG-001",
+      "phase": "02-design",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 2,
+      "assignee": "P1",
+      "executor": "human",
+      "skill": null,
+      "depends_on": [
+        "T-011"
+      ],
+      "gates": [
+        "G2"
+      ],
+      "artifact": null,
+      "estimate_h": 0.5,
+      "due": null,
+      "tags": [
+        "gate",
+        "meeting"
+      ],
+      "parallel_ok": false,
+      "optional": false
+    },
+    {
+      "id": "T-014",
+      "title": "实现 memory 检索",
+      "change_id": "CHG-001",
+      "phase": "03-coding",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 3,
+      "assignee": "P3",
+      "executor": "cx",
+      "skill": "tdd",
+      "depends_on": [
+        "T-012",
+        "T-013"
+      ],
+      "gates": [],
+      "artifact": "archive/demo-v0.2/lib/",
+      "estimate_h": 4,
+      "due": null,
+      "tags": [
+        "p0",
+        "impl"
+      ],
+      "parallel_ok": true,
+      "optional": false
+    },
+    {
+      "id": "T-015",
+      "title": "实现 reflection 步骤",
+      "change_id": "CHG-001",
+      "phase": "03-coding",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 3,
+      "assignee": "P3",
+      "executor": "cx",
+      "skill": "tdd",
+      "depends_on": [
+        "T-012",
+        "T-013"
+      ],
+      "gates": [],
+      "artifact": "archive/demo-v0.2/lib/",
+      "estimate_h": 4,
+      "due": null,
+      "tags": [
+        "p0",
+        "impl"
+      ],
+      "parallel_ok": true,
+      "optional": false
+    },
+    {
+      "id": "T-016",
+      "title": "intervention re-plan prompt（人写）+ Codex 接线",
+      "change_id": "CHG-001",
+      "phase": "03-coding",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 3,
+      "assignee": "P2",
+      "executor": "human+cx",
+      "skill": "executing-plans",
+      "depends_on": [
+        "T-012",
+        "T-013",
+        "T-010"
+      ],
+      "gates": [
+        "G1"
+      ],
+      "artifact": "archive/demo-v0.2/lib/prompts.js",
+      "estimate_h": 3,
+      "due": null,
+      "tags": [
+        "p0",
+        "impl",
+        "narrative"
+      ],
+      "parallel_ok": false,
+      "optional": false
+    },
+    {
+      "id": "T-017",
+      "title": "Code Review gate（P0 三项）",
+      "change_id": "CHG-001",
+      "phase": "03-coding",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 3,
+      "assignee": "P3",
+      "executor": "human",
+      "skill": "review",
+      "depends_on": [
+        "T-014",
+        "T-015",
+        "T-016"
+      ],
+      "gates": [],
+      "artifact": null,
+      "estimate_h": 1,
+      "due": null,
+      "tags": [
+        "gate",
+        "review"
+      ],
+      "parallel_ok": false,
+      "optional": false
+    },
+    {
+      "id": "T-018",
+      "title": "合并 + npm test 全绿",
+      "change_id": "CHG-001",
+      "phase": "04-dev-testing",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 3,
+      "assignee": "P5",
+      "executor": "cx",
+      "skill": "tdd",
+      "depends_on": [
+        "T-017"
+      ],
+      "gates": [
+        "G3"
+      ],
+      "artifact": null,
+      "estimate_h": 0.5,
+      "due": null,
+      "tags": [
+        "baseline"
+      ],
+      "parallel_ok": false,
+      "optional": false
+    },
+    {
+      "id": "T-019",
+      "title": "Golden 复读线 eval 回归",
+      "change_id": "CHG-001",
+      "phase": "04-dev-testing",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 4,
+      "assignee": "P4",
+      "executor": "cx",
+      "skill": "tdd",
+      "depends_on": [
+        "T-018"
+      ],
+      "gates": [],
+      "artifact": "fixtures/golden-stories/复读线.json",
+      "estimate_h": 0.5,
+      "due": null,
+      "tags": [
+        "qa"
+      ],
+      "parallel_ok": true,
+      "optional": false
+    },
+    {
+      "id": "T-020",
+      "title": "Live 3 条 profile 抽检",
+      "change_id": "CHG-001",
+      "phase": "05-qa",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 4,
+      "assignee": "P4",
+      "executor": "human",
+      "skill": "story-review",
+      "depends_on": [
+        "T-018"
+      ],
+      "gates": [
+        "G4"
+      ],
+      "artifact": null,
+      "estimate_h": 2,
+      "due": null,
+      "tags": [
+        "qa",
+        "narrative"
+      ],
+      "parallel_ok": true,
+      "optional": false
+    },
+    {
+      "id": "T-021",
+      "title": "Prompt 实验日志合并有效变体",
+      "change_id": "CHG-001",
+      "phase": "06-progress",
+      "status": "todo",
+      "priority": "P1",
+      "wave": 4,
+      "assignee": "P2",
+      "executor": "human",
+      "skill": null,
+      "depends_on": [
+        "T-020"
+      ],
+      "gates": [],
+      "artifact": "02-prompt-experiments-log.md",
+      "estimate_h": 1,
+      "due": null,
+      "tags": [
+        "narrative"
+      ],
+      "parallel_ok": true,
+      "optional": false
+    },
+    {
+      "id": "T-022",
+      "title": "P1 go/no-go 演示签字",
+      "change_id": "CHG-001",
+      "phase": "05-qa",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 4,
+      "assignee": "P1",
+      "executor": "human",
+      "skill": null,
+      "depends_on": [
+        "T-019",
+        "T-020"
+      ],
+      "gates": [
+        "G5"
+      ],
+      "artifact": null,
+      "estimate_h": 0.5,
+      "due": null,
+      "tags": [
+        "gate"
+      ],
+      "parallel_ok": false,
+      "optional": false
+    },
+    {
+      "id": "T-023",
+      "title": "P1 确认 corpus 为唯一入口",
+      "change_id": "CHG-000",
+      "phase": "05-qa",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 1,
+      "assignee": "P1",
+      "executor": "human",
+      "skill": null,
+      "depends_on": [
+        "T-005"
+      ],
+      "gates": [],
+      "artifact": "changes/CHG-000-corpus-reorg/progress.md",
+      "estimate_h": 0.25,
+      "due": null,
+      "tags": [
+        "corpus"
+      ],
+      "parallel_ok": true,
+      "optional": false
+    },
+    {
+      "id": "T-024",
+      "title": "多 run 对比模板 + 首表",
+      "change_id": "CHG-003",
+      "phase": "backlog",
+      "status": "todo",
+      "priority": "P1",
+      "wave": 5,
+      "assignee": "P4",
+      "executor": "human+cx",
+      "skill": "progress-tracker",
+      "depends_on": [
+        "T-022"
+      ],
+      "gates": [],
+      "artifact": "03-run-comparison-template.md",
+      "estimate_h": 2,
+      "due": null,
+      "tags": [
+        "p1"
+      ],
+      "parallel_ok": true,
+      "optional": true
+    },
+    {
+      "id": "T-025",
+      "title": "第二条 golden 大纲",
+      "change_id": "CHG-002",
+      "phase": "backlog",
+      "status": "todo",
+      "priority": "P1",
+      "wave": 5,
+      "assignee": "P2",
+      "executor": "human",
+      "skill": "story-authoring",
+      "depends_on": [
+        "T-022"
+      ],
+      "gates": [],
+      "artifact": null,
+      "estimate_h": 1.5,
+      "due": null,
+      "tags": [
+        "p1",
+        "narrative"
+      ],
+      "parallel_ok": true,
+      "optional": true
+    },
+    {
+      "id": "W-01",
+      "title": "Persona prompt 变体 ×3",
+      "change_id": null,
+      "phase": "backlog",
+      "status": "todo",
+      "priority": "P2",
+      "wave": null,
+      "assignee": "P2",
+      "executor": "human",
+      "skill": null,
+      "depends_on": [],
+      "gates": [],
+      "artifact": "02-prompt-experiments-log.md",
+      "estimate_h": 1,
+      "due": null,
+      "tags": [
+        "waiting-pool",
+        "prompt"
+      ],
+      "parallel_ok": true,
+      "optional": true
+    },
+    {
+      "id": "W-02",
+      "title": "Beats 节奏示例 ×2",
+      "change_id": null,
+      "phase": "backlog",
+      "status": "todo",
+      "priority": "P2",
+      "wave": null,
+      "assignee": "P2",
+      "executor": "human",
+      "skill": null,
+      "depends_on": [],
+      "gates": [],
+      "artifact": null,
+      "estimate_h": 1,
+      "due": null,
+      "tags": [
+        "waiting-pool",
+        "prompt"
+      ],
+      "parallel_ok": true,
+      "optional": true
+    },
+    {
+      "id": "W-03",
+      "title": "Dialogue bad/good 对照表",
+      "change_id": null,
+      "phase": "backlog",
+      "status": "todo",
+      "priority": "P2",
+      "wave": null,
+      "assignee": "P2",
+      "executor": "human",
+      "skill": null,
+      "depends_on": [],
+      "gates": [],
+      "artifact": null,
+      "estimate_h": 0.75,
+      "due": null,
+      "tags": [
+        "waiting-pool",
+        "prompt"
+      ],
+      "parallel_ok": true,
+      "optional": true
+    },
+    {
+      "id": "W-04",
+      "title": "story-review 空白抽检表",
+      "change_id": null,
+      "phase": "backlog",
+      "status": "todo",
+      "priority": "P2",
+      "wave": null,
+      "assignee": "P4",
+      "executor": "human",
+      "skill": "story-review",
+      "depends_on": [],
+      "gates": [],
+      "artifact": null,
+      "estimate_h": 0.5,
+      "due": null,
+      "tags": [
+        "waiting-pool",
+        "qa"
+      ],
+      "parallel_ok": true,
+      "optional": true
+    },
+    {
+      "id": "W-06",
+      "title": "skills sync + manifest 核对",
+      "change_id": "CHG-000",
+      "phase": "06-progress",
+      "status": "todo",
+      "priority": "P2",
+      "wave": null,
+      "assignee": "P5",
+      "executor": "human",
+      "skill": null,
+      "depends_on": [],
+      "gates": [],
+      "artifact": "skills/skills-lock.json",
+      "estimate_h": 0.33,
+      "due": null,
+      "tags": [
+        "waiting-pool",
+        "infra"
+      ],
+      "parallel_ok": true,
+      "optional": true
+    },
+    {
+      "id": "W-07",
+      "title": "对外 5min 话术",
+      "change_id": null,
+      "phase": "backlog",
+      "status": "todo",
+      "priority": "P2",
+      "wave": null,
+      "assignee": "P1",
+      "executor": "human",
+      "skill": null,
+      "depends_on": [],
+      "gates": [],
+      "artifact": null,
+      "estimate_h": 0.5,
+      "due": null,
+      "tags": [
+        "waiting-pool"
+      ],
+      "parallel_ok": true,
+      "optional": true
+    },
+    {
+      "id": "W-10",
+      "title": "eval warn 决策树",
+      "change_id": null,
+      "phase": "backlog",
+      "status": "todo",
+      "priority": "P2",
+      "wave": null,
+      "assignee": "P4",
+      "executor": "human",
+      "skill": "qa",
+      "depends_on": [],
+      "gates": [],
+      "artifact": null,
+      "estimate_h": 0.75,
+      "due": null,
+      "tags": [
+        "waiting-pool",
+        "qa"
+      ],
+      "parallel_ok": true,
+      "optional": true
+    },
+    {
+      "id": "V-001",
+      "title": "复读线叙事 v2 改稿（visual_anchor + props）",
+      "change_id": "CHG-V001",
+      "phase": "01-requirements",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 1,
+      "assignee": "P2",
+      "executor": "human",
+      "skill": "story-authoring",
+      "depends_on": [],
+      "gates": [
+        "G-N1"
+      ],
+      "artifact": "visual/stories/fuxduxian/narrative-draft-v2.md",
+      "estimate_h": 8,
+      "due": null,
+      "tags": [
+        "visual",
+        "narrative"
+      ],
+      "parallel_ok": true,
+      "optional": false
+    },
+    {
+      "id": "V-002",
+      "title": "像素素材寻源（不用旧 zip，优质免费库）",
+      "change_id": "CHG-V001",
+      "phase": "01-requirements",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 1,
+      "assignee": "P5",
+      "executor": "human",
+      "skill": null,
+      "depends_on": [],
+      "gates": [],
+      "artifact": "visual/registry/assets.csv",
+      "estimate_h": 6,
+      "due": null,
+      "tags": [
+        "visual"
+      ],
+      "parallel_ok": true,
+      "optional": false
+    },
+    {
+      "id": "V-003",
+      "title": "10–20 审美标杆案例入库",
+      "change_id": "CHG-V001",
+      "phase": "05-qa",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 1,
+      "assignee": "P2",
+      "executor": "human",
+      "skill": null,
+      "depends_on": [
+        "V-002"
+      ],
+      "gates": [],
+      "artifact": "visual/references/aesthetic-cases.md",
+      "estimate_h": 4,
+      "due": null,
+      "tags": [
+        "visual"
+      ],
+      "parallel_ok": false,
+      "optional": false
+    },
+    {
+      "id": "V-004",
+      "title": "Phaser engine 脚手架（读 layout JSON）",
+      "change_id": "CHG-V001",
+      "phase": "03-coding",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 2,
+      "assignee": "P3",
+      "executor": "cx",
+      "skill": "tdd",
+      "depends_on": [],
+      "gates": [],
+      "artifact": "visual/engine/",
+      "estimate_h": 8,
+      "due": null,
+      "tags": [
+        "visual"
+      ],
+      "parallel_ok": true,
+      "optional": false
+    },
+    {
+      "id": "V-005",
+      "title": "AI 生成 7 年 layout JSON",
+      "change_id": "CHG-V001",
+      "phase": "02-design",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 2,
+      "assignee": "P3",
+      "executor": "cc",
+      "skill": null,
+      "depends_on": [
+        "V-001",
+        "V-003"
+      ],
+      "gates": [
+        "G-N1"
+      ],
+      "artifact": "visual/scenes/fuxduxian/",
+      "estimate_h": 4,
+      "due": null,
+      "tags": [
+        "visual"
+      ],
+      "parallel_ok": false,
+      "optional": false
+    },
+    {
+      "id": "V-006",
+      "title": "7 特殊场景 + 7 日常动画人审",
+      "change_id": "CHG-V001",
+      "phase": "05-qa",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 3,
+      "assignee": "P2",
+      "executor": "human",
+      "skill": null,
+      "depends_on": [
+        "V-005",
+        "V-004"
+      ],
+      "gates": [],
+      "artifact": null,
+      "estimate_h": 6,
+      "due": null,
+      "tags": [
+        "visual"
+      ],
+      "parallel_ok": false,
+      "optional": false
+    },
+    {
+      "id": "V-007",
+      "title": "挂进 Shadow 体验流程（A/B/C 触发）",
+      "change_id": "CHG-V001",
+      "phase": "03-coding",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 3,
+      "assignee": "P3",
+      "executor": "cx",
+      "skill": null,
+      "depends_on": [
+        "V-006"
+      ],
+      "gates": [],
+      "artifact": "visual/04-ux-flow.md",
+      "estimate_h": 6,
+      "due": null,
+      "tags": [
+        "visual"
+      ],
+      "parallel_ok": false,
+      "optional": false
+    },
+    {
+      "id": "V-008",
+      "title": "叙事 v2 回写 golden JSON",
+      "change_id": "CHG-V001",
+      "phase": "04-dev-testing",
+      "status": "todo",
+      "priority": "P0",
+      "wave": 3,
+      "assignee": "P2",
+      "executor": "human+cx",
+      "skill": "story-authoring",
+      "depends_on": [
+        "V-001",
+        "V-006"
+      ],
+      "gates": [],
+      "artifact": "fixtures/golden-stories/复读线.json",
+      "estimate_h": 3,
+      "due": null,
+      "tags": [
+        "visual",
+        "narrative"
+      ],
+      "parallel_ok": false,
+      "optional": false
+    }
+  ]
+}

@@ -1,0 +1,3864 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Shadow｜平行人生叙事 Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #f7f2df;
+      --muted: #b8ad94;
+      --panel: rgba(14, 16, 22, 0.82);
+      --panel-edge: rgba(247, 242, 223, 0.08);
+      --line: rgba(247, 242, 223, 0.16);
+      --gold: #f0c05a;
+      --cyan: #65d6d0;
+      --rose: #eb6b78;
+      --green: #8ccf68;
+      --shadow: rgba(0, 0, 0, 0.55);
+      --display: "Noto Serif SC", "Songti SC", serif;
+      --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      font-family: var(--mono);
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background: #0a0c10;
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 12px;
+      top: -48px;
+      z-index: 20;
+      padding: 10px 14px;
+      background: var(--gold);
+      color: #111318;
+      font-weight: 700;
+      text-decoration: none;
+      transition: top 160ms ease;
+    }
+
+    .skip-link:focus-visible {
+      top: 12px;
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .app {
+      position: relative;
+      min-height: 100vh;
+      isolation: isolate;
+    }
+
+    .pixel-scene {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      image-rendering: pixelated;
+      transition: background 700ms ease, filter 700ms ease;
+    }
+
+    .pixel-scene::before,
+    .pixel-scene::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .pixel-scene::before {
+      background-image:
+        linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+      background-size: 16px 16px;
+      mix-blend-mode: screen;
+      opacity: 0.4;
+    }
+
+    .pixel-scene::after {
+      background:
+        radial-gradient(circle at 50% 52%, transparent 0 28%, rgba(0,0,0,0.18) 42%, rgba(0,0,0,0.68) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.5));
+    }
+
+    .scene-city {
+      background:
+        linear-gradient(to top, #1b1d2e 0 26%, transparent 26%),
+        repeating-linear-gradient(to right, #252844 0 42px, #1f2239 42px 78px, #2e3356 78px 116px),
+        linear-gradient(#26325a, #d16f5c 55%, #1a1b2b);
+    }
+
+    .scene-home {
+      background:
+        linear-gradient(to top, #3d271d 0 28%, transparent 28%),
+        repeating-linear-gradient(90deg, #7c4b2b 0 32px, #6e3f26 32px 64px),
+        linear-gradient(#2a1b20, #734442 52%, #27171b);
+    }
+
+    .scene-office {
+      background:
+        linear-gradient(to top, #1d2430 0 24%, transparent 24%),
+        repeating-linear-gradient(90deg, transparent 0 60px, rgba(116,196,190,0.35) 60px 72px),
+        linear-gradient(#172436, #32455b 58%, #111720);
+    }
+
+    .scene-nature {
+      background:
+        linear-gradient(to top, #17361f 0 26%, transparent 26%),
+        repeating-linear-gradient(115deg, rgba(140,207,104,0.4) 0 24px, transparent 24px 72px),
+        linear-gradient(#456b79, #d7a964 58%, #24452a);
+    }
+
+    .scene-night {
+      background:
+        radial-gradient(circle at 72% 18%, #f2dda3 0 3%, transparent 4%),
+        repeating-linear-gradient(90deg, transparent 0 36px, rgba(101,214,208,0.18) 36px 40px),
+        linear-gradient(#091226, #121d36 62%, #080b12);
+    }
+
+    .scene-rain {
+      background:
+        repeating-linear-gradient(112deg, rgba(180,214,230,0.2) 0 2px, transparent 2px 15px),
+        linear-gradient(to top, #171b24 0 26%, transparent 26%),
+        linear-gradient(#1b2b3c, #4f6575 55%, #111820);
+      animation: rainShift 700ms linear infinite;
+    }
+
+    @keyframes rainShift {
+      from { background-position: 0 0, 0 0, 0 0; }
+      to { background-position: 28px 48px, 0 0, 0 0; }
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+      min-height: 100vh;
+      gap: 22px;
+      padding: max(22px, env(safe-area-inset-top)) max(22px, env(safe-area-inset-right)) max(22px, env(safe-area-inset-bottom)) max(22px, env(safe-area-inset-left));
+    }
+
+    .control,
+    .stage,
+    .curve-card {
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.04), transparent 42%),
+        var(--panel);
+      border: 1px solid var(--line);
+      box-shadow:
+        0 1px 0 var(--panel-edge) inset,
+        0 24px 70px var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .control {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 18px;
+      max-height: calc(100vh - 44px);
+      overflow: auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+    }
+
+    .brand-sub {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+
+    .badge {
+      color: #111318;
+      background: linear-gradient(135deg, var(--gold), #e8a832);
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      box-shadow: 0 2px 0 rgba(0,0,0,0.25);
+    }
+
+    label {
+      display: grid;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid rgba(247, 242, 223, 0.22);
+      background: rgba(4, 6, 10, 0.5);
+      color: var(--ink);
+      padding: 11px 12px;
+      outline: none;
+      resize: vertical;
+      min-width: 0;
+    }
+
+    textarea { min-height: 112px; }
+
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 2px rgba(101, 214, 208, 0.2);
+    }
+
+    button:focus-visible,
+    .progress button:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 112px;
+      gap: 10px;
+      align-items: end;
+    }
+
+    .avatar-tools {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .avatar-preview {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      background: rgba(4, 6, 10, 0.36);
+    }
+
+    .avatar-preview-frame {
+      flex-shrink: 0;
+      width: 48px;
+      height: 64px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      background: rgba(4, 6, 10, 0.5);
+      overflow: hidden;
+    }
+
+    .avatar-preview-figure {
+      /* sprite sheet: 16×32 per frame; scale 2× → exactly one frame, no bleed */
+      --preview-scale: 2;
+      width: calc(16px * var(--preview-scale));
+      height: calc(32px * var(--preview-scale));
+      background-image: var(--preview-url);
+      background-position: 0 0;
+      background-size: auto calc(32px * var(--preview-scale));
+      background-repeat: no-repeat;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      filter: var(--avatar-filter, none);
+    }
+    /* v2: when previewing Sunnyside, frame is 96x64; show first frame in larger box */
+    .avatar-preview-figure.sunny {
+      width: 96px;
+      height: 64px;
+      background-size: auto 64px;
+    }
+    .avatar-preview-frame:has(.avatar-preview-figure.sunny) {
+      width: 96px;
+      height: 64px;
+    }
+
+    .avatar-preview-text {
+      min-width: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .switch {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+
+    .switch input {
+      width: 46px;
+      inline-size: 46px;
+      block-size: 24px;
+      accent-color: var(--cyan);
+      cursor: pointer;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 44px;
+      gap: 10px;
+    }
+
+    .primary,
+    .icon-button,
+    .ghost {
+      cursor: pointer;
+      border: 1px solid rgba(247,242,223,0.26);
+      color: var(--ink);
+      background: rgba(247,242,223,0.08);
+      min-height: 44px;
+      transition: transform 120ms ease, border-color 120ms ease, background 120ms ease, box-shadow 120ms ease;
+    }
+
+    .primary {
+      background: linear-gradient(180deg, #fff8e8, var(--ink));
+      color: #111318;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+    }
+
+    .primary:disabled {
+      opacity: 0.55;
+      cursor: wait;
+      transform: none;
+    }
+
+    .primary.loading {
+      position: relative;
+      color: transparent;
+    }
+
+    .primary.loading::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(17,19,24,0.2);
+      border-top-color: #111318;
+      border-radius: 50%;
+      animation: spin 700ms linear infinite;
+    }
+
+    .icon-button {
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+    }
+
+    .ghost {
+      min-height: 38px;
+      color: var(--muted);
+    }
+
+    .primary:hover,
+    .icon-button:hover,
+    .ghost:hover {
+      transform: translateY(-1px);
+      border-color: var(--cyan);
+    }
+
+    .primary:active,
+    .icon-button:active,
+    .ghost:active {
+      transform: translateY(1px);
+    }
+
+    .status {
+      min-height: 40px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .stage {
+      position: relative;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      min-height: calc(100vh - 44px);
+      overflow: hidden;
+    }
+
+    .stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(13,15,20,0.96), rgba(13,15,20,0.72) 42%, transparent 70%),
+        repeating-linear-gradient(0deg, rgba(247,242,223,0.06) 0 2px, transparent 2px 8px);
+      transform: translateX(-105%);
+    }
+
+    .stage.transitioning::before {
+      animation: sceneWipe 760ms cubic-bezier(.7, 0, .2, 1);
+    }
+
+    .stage.story-ready .story {
+      animation: storyRise 560ms cubic-bezier(.2, .7, .1, 1) both;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .year-pill {
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    .progress {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      width: min(300px, 48vw);
+    }
+
+    .progress button {
+      appearance: none;
+      border: 0;
+      height: 6px;
+      background: rgba(247,242,223,0.18);
+      padding: 0;
+      min-height: 6px;
+      cursor: pointer;
+      box-shadow: none;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+
+    .progress button.seen {
+      background: rgba(240,192,90,0.42);
+    }
+
+    .progress button.active {
+      background: var(--gold);
+      transform: scaleY(1.8);
+      box-shadow: 0 0 12px rgba(240, 192, 90, 0.35);
+    }
+
+    .progress button:disabled {
+      cursor: default;
+      opacity: 0.45;
+    }
+
+    .scene-body {
+      position: relative;
+      display: grid;
+      align-content: end;
+      padding: 32px 28px 150px;
+      min-height: 0;
+    }
+
+    .life-room {
+      position: absolute;
+      left: clamp(12px, 4vw, 48px);
+      right: clamp(12px, 4vw, 48px);
+      bottom: 52px;
+      height: min(48vh, 340px);
+      border: 4px solid rgba(247,242,223,0.2);
+      background: #0a0c10;
+      box-shadow: 0 16px 0 rgba(0,0,0,0.2);
+      image-rendering: pixelated;
+      overflow: hidden;
+      transition: border-color 600ms ease;
+    }
+
+    .room-backdrop {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .room-wall {
+      position: absolute;
+      inset: 0 0 30% 0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), transparent 38%),
+        var(--wall-bg, #3a4a5c);
+    }
+
+    .room-floor {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 30%;
+      background: var(--floor-bg, #5a6a78);
+      border-top: 4px solid rgba(0,0,0,0.28);
+      box-shadow: inset 0 8px 0 rgba(255,255,255,0.04);
+    }
+
+    .room-stage {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .environment-office {
+      --wall-bg: linear-gradient(180deg, #4a6178 0%, #32455b 100%);
+      --floor-bg: repeating-linear-gradient(90deg, #6a8498 0 24px, #5d7688 24px 48px);
+    }
+
+    .environment-home {
+      --wall-bg: linear-gradient(180deg, #6a4a3a 0%, #4a3228 100%);
+      --floor-bg: repeating-linear-gradient(90deg, #8a6248 0 20px, #7a5640 20px 40px);
+    }
+
+    .environment-hospital {
+      --wall-bg: linear-gradient(180deg, #d8e8e8 0%, #a8c4c4 100%);
+      --floor-bg: repeating-linear-gradient(0deg, #b8d0d0 0 24px, #a8c0c0 24px 48px);
+    }
+
+    .environment-seaside {
+      --wall-bg: linear-gradient(180deg, #5a7a8a 0%, #3a5a6a 100%);
+      --floor-bg: repeating-linear-gradient(90deg, #7a6a58 0 22px, #6e5e4e 22px 44px);
+    }
+
+    .environment-stage {
+      --wall-bg: linear-gradient(180deg, #5a2838 0%, #2a1820 100%);
+      --floor-bg: repeating-linear-gradient(90deg, #6a4048 0 18px, #5a343c 18px 36px);
+    }
+
+    .environment-studio {
+      --wall-bg: linear-gradient(180deg, #5a4a38 0%, #3a3028 100%);
+      --floor-bg: repeating-linear-gradient(90deg, #4a4038 0 20px, #3e342c 20px 40px);
+    }
+
+    .room-fx-rain {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+      opacity: 0;
+      background: repeating-linear-gradient(112deg, rgba(210,245,242,0.28) 0 2px, transparent 2px 14px);
+      animation: roomRain 900ms linear infinite;
+    }
+
+    .environment-seaside .room-fx-rain,
+    .scene-rain ~ .shell .life-room .room-fx-rain {
+      opacity: 0.75;
+    }
+
+    .environment-office {
+      border-color: rgba(101,214,208,0.24);
+    }
+
+    .environment-home,
+    .environment-hospital {
+      border-color: rgba(240,192,90,0.24);
+    }
+
+    .environment-hospital {
+      border-color: rgba(101,214,208,0.24);
+    }
+
+    .environment-seaside {
+      border-color: rgba(101,214,208,0.28);
+    }
+
+    .environment-stage {
+      border-color: rgba(235,107,120,0.26);
+    }
+
+    .environment-studio {
+      border-color: rgba(240,192,90,0.28);
+    }
+
+    .furniture-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .furniture {
+      position: absolute;
+      background-image: url("assets/modern/Interiors_free_48x48.png");
+      background-repeat: no-repeat;
+      background-size: 768px 4272px;
+      image-rendering: pixelated;
+      transform-origin: left bottom;
+      filter: drop-shadow(4px 6px 0 rgba(0,0,0,0.22));
+    }
+
+    .life-room .sprite-wrap {
+      position: absolute;
+      left: 8%;
+      bottom: 22%;
+      z-index: 3;
+      transform: none;
+    }
+
+    .life-room .dialogue-slot {
+      position: absolute;
+      left: 22%;
+      bottom: 58%;
+      max-width: min(280px, 52%);
+      z-index: 4;
+    }
+
+    .room-light {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at var(--light-x, 68%) 18%, rgba(240,192,90,0.18), transparent 24%),
+        linear-gradient(180deg, transparent 58%, rgba(0,0,0,0.24));
+      mix-blend-mode: screen;
+      animation: lightBreath 1800ms ease-in-out infinite;
+    }
+
+    .environment-office .room-light {
+      background:
+        radial-gradient(circle at 70% 54%, rgba(101,214,208,0.2), transparent 15%),
+        linear-gradient(180deg, transparent 58%, rgba(0,0,0,0.22));
+      animation: monitorBlink 2400ms steps(3) infinite;
+    }
+
+    .environment-hospital .room-light {
+      background:
+        linear-gradient(180deg, rgba(210,245,242,0.16), transparent 42%),
+        radial-gradient(circle at 50% 34%, rgba(101,214,208,0.16), transparent 22%);
+      animation-duration: 2600ms;
+    }
+
+    .environment-stage .room-light {
+      background:
+        radial-gradient(circle at 38% 18%, rgba(240,192,90,0.28), transparent 19%),
+        radial-gradient(circle at 72% 22%, rgba(235,107,120,0.24), transparent 18%),
+        linear-gradient(180deg, transparent 42%, rgba(0,0,0,0.26));
+      animation: stagePulse 1100ms ease-in-out infinite;
+    }
+
+    .environment-seaside .room-light {
+      background:
+        linear-gradient(90deg, rgba(101,214,208,0.16), transparent 28%),
+        radial-gradient(circle at 24% 26%, rgba(247,242,223,0.18), transparent 18%);
+      animation: seaLight 2200ms ease-in-out infinite;
+    }
+
+    .prop { display: none; }
+
+    @keyframes roomRain {
+      to { background-position: 28px 48px; }
+    }
+
+    @keyframes lightBreath {
+      50% { opacity: 0.56; }
+    }
+
+    @keyframes monitorBlink {
+      0%, 100% { opacity: 0.72; }
+      48% { opacity: 0.34; }
+      52% { opacity: 0.9; }
+    }
+
+    @keyframes stagePulse {
+      50% { opacity: 0.42; filter: hue-rotate(18deg); }
+    }
+
+    @keyframes seaLight {
+      50% { transform: translateX(8px); opacity: 0.58; }
+    }
+
+    .sprite-wrap {
+      width: 96px;
+      height: 136px;
+      filter: drop-shadow(0 14px 0 rgba(0,0,0,0.24));
+      transition: transform 420ms ease, filter 420ms ease;
+    }
+
+    .sprite-wrap.entering {
+      animation: spriteEnter 760ms cubic-bezier(.2,.7,.2,1) both;
+    }
+
+    .sprite-wrap.speaking .glow {
+      background: rgba(101,214,208,0.42);
+      animation-duration: 780ms;
+    }
+
+    .glow {
+      position: absolute;
+      left: 8px;
+      bottom: -4px;
+      width: 84px;
+      height: 28px;
+      background: rgba(240,192,90,0.35);
+      animation: pulse 1500ms ease-in-out infinite;
+    }
+
+    .sprite {
+      position: absolute;
+      left: 16px;
+      bottom: 10px;
+      width: 64px;
+      height: 128px;
+      background-image: var(--sprite-url);
+      background-repeat: no-repeat;
+      background-position: 0 0;
+      background-size: auto 128px;
+      animation: none;
+      filter: var(--avatar-filter, none);
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    .sprite-wrap.speaking .sprite {
+      animation: speak 560ms steps(2) infinite;
+    }
+
+    .sprite-wrap.pose-tired .sprite {
+      opacity: 0.78;
+      transform: translateY(2px);
+      filter: var(--avatar-filter, none) brightness(0.88) saturate(0.85);
+    }
+
+    .sprite-wrap.pose-celebrate .sprite {
+      animation: celebrate 720ms steps(2) infinite;
+    }
+
+    .sprite-wrap.pose-write .sprite,
+    .sprite-wrap.pose-type .sprite {
+      animation: workNod 1100ms steps(2) infinite;
+    }
+
+    .sprite-wrap.pose-run .glow,
+    .sprite-wrap.pose-carry .glow {
+      animation-duration: 520ms;
+    }
+
+    @keyframes pulse {
+      50% { transform: scaleX(1.18); opacity: 0.55; }
+    }
+
+    @keyframes speak {
+      50% { transform: translateY(-3px); }
+    }
+
+    @keyframes workNod {
+      50% { transform: translateY(2px); }
+    }
+
+    @keyframes celebrate {
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes spriteEnter {
+      from { transform: translateX(-80px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes sceneWipe {
+      0% { transform: translateX(-105%); }
+      48% { transform: translateX(0); }
+      100% { transform: translateX(105%); }
+    }
+
+    @keyframes storyRise {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .story {
+      justify-self: end;
+      width: min(720px, 100%);
+      display: grid;
+      gap: 16px;
+      text-shadow: 0 2px 0 rgba(0,0,0,0.35);
+    }
+
+    .story h2 {
+      margin: 0;
+      font-family: var(--display);
+      color: var(--gold);
+      font-size: clamp(24px, 4vw, 46px);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+      text-wrap: balance;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .meta span {
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.28);
+      padding: 6px 10px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .emotion-meter {
+      height: 10px;
+      width: min(360px, 100%);
+      background: rgba(247,242,223,0.12);
+      border: 1px solid rgba(247,242,223,0.16);
+      overflow: hidden;
+    }
+
+    .emotion-meter span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--rose), var(--gold), var(--cyan));
+      transition: width 760ms cubic-bezier(.2,.7,.2,1);
+    }
+
+    .event {
+      min-height: 130px;
+      padding: 18px;
+      background: rgba(4, 6, 10, 0.58);
+      border: 1px solid rgba(247,242,223,0.2);
+      font-size: clamp(16px, 2.1vw, 20px);
+      line-height: 1.8;
+      position: relative;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+      transition: border-color 300ms ease, box-shadow 300ms ease;
+    }
+
+    .event.typing {
+      border-color: rgba(101,214,208,0.44);
+      box-shadow:
+        inset 0 0 0 1px rgba(101,214,208,0.12),
+        0 0 34px rgba(101,214,208,0.08);
+    }
+
+    .event.typing::after {
+      content: "";
+      display: inline-block;
+      width: 9px;
+      height: 1.1em;
+      margin-left: 4px;
+      background: var(--gold);
+      vertical-align: -0.18em;
+      animation: caret 780ms steps(1) infinite;
+    }
+
+    .reflection {
+      min-height: 44px;
+      color: var(--cyan);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 500ms ease, transform 500ms ease;
+    }
+
+    .reflection.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes caret {
+      50% { opacity: 0; }
+    }
+
+    .dialogue {
+      padding: 12px 14px;
+      color: #101318;
+      background: var(--ink);
+      box-shadow: 6px 6px 0 rgba(0,0,0,0.3);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 500ms ease, transform 500ms ease;
+    }
+
+    .dialogue.show {
+      opacity: 1;
+      transform: translateY(0);
+      animation: bubblePop 360ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .dialogue::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      bottom: -10px;
+      width: 0;
+      height: 0;
+      border-top: 10px solid var(--ink);
+      border-right: 12px solid transparent;
+    }
+
+    .footerbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border-top: 1px solid var(--line);
+      background: rgba(0,0,0,0.22);
+    }
+
+    .pulse-next {
+      animation: pulseButton 1300ms ease-in-out infinite;
+    }
+
+    @keyframes bubblePop {
+      0% { transform: translateY(12px) scale(0.96); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    @keyframes pulseButton {
+      50% {
+        box-shadow: 0 0 0 5px rgba(240,192,90,0.16);
+      }
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .curve-card {
+      position: absolute;
+      inset: 68px 28px 82px;
+      display: none;
+      place-items: center;
+      padding: 28px;
+      background: rgba(9, 11, 16, 0.92);
+      z-index: 4;
+      overscroll-behavior: contain;
+    }
+
+    .curve-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(240,192,90,0.08), transparent 55%);
+      pointer-events: none;
+    }
+
+    .curve-card.show {
+      display: grid;
+      animation: finalReveal 520ms ease both;
+    }
+
+    .curve-inner {
+      width: min(780px, 100%);
+      display: grid;
+      gap: 18px;
+      text-align: center;
+    }
+
+    .curve-inner h2 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(24px, 4vw, 42px);
+      font-weight: 900;
+      color: var(--gold);
+      text-wrap: balance;
+    }
+
+    .curve-inner p {
+      margin: 0;
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    svg {
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .curve-line {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: drawLine 1300ms cubic-bezier(.2,.7,.1,1) forwards;
+    }
+
+    .curve-point {
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: pointPop 420ms cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    @keyframes drawLine {
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes pointPop {
+      from { opacity: 0; transform: scale(0.4); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes finalReveal {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .hidden { display: none !important; }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .scene-rain { animation: none; }
+      .primary.loading::after { animation: none; border-top-color: transparent; }
+    }
+
+    @media (max-width: 860px) {
+      body { overflow: auto; }
+      .shell {
+        grid-template-columns: 1fr;
+        padding: 12px;
+      }
+      .control,
+      .stage {
+        min-height: auto;
+        max-height: none;
+      }
+      .stage {
+        min-height: 720px;
+      }
+      .scene-body {
+        padding: 26px 16px 148px;
+      }
+      .story {
+        justify-self: stretch;
+      }
+      .event {
+        min-height: 168px;
+      }
+      .life-room .sprite-wrap {
+        left: 4%;
+        bottom: 20%;
+        transform: scale(0.82);
+        transform-origin: bottom left;
+      }
+      .life-room .dialogue-slot {
+        left: 18%;
+        bottom: 54%;
+        max-width: 62%;
+      }
+      .footerbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+      .progress {
+        width: 44vw;
+      }
+    }
+
+    /* ============ v2 additions: city backdrops as full-page background ============ */
+    .pixel-scene.backdrop-on::before { opacity: 0; }
+    .pixel-scene[data-backdrop] {
+      background: #0a0c10;
+    }
+    .pixel-scene[data-backdrop]::after {
+      background-image: var(--backdrop-url, none);
+      background-size: cover;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+      opacity: 0.78;
+      filter: var(--backdrop-filter, contrast(1.05) saturate(0.95) brightness(0.88));
+      mix-blend-mode: normal;
+    }
+    .scene-classroom { background: linear-gradient(180deg, #2a2f44 0%, #3d3a30 100%); }
+    .scene-dorm_night { background: linear-gradient(180deg, #0c0f1a 0%, #1a1322 100%); }
+    .scene-trainstation { background: linear-gradient(180deg, #1c2434 0%, #11151f 100%); }
+    .scene-postoffice { background: linear-gradient(180deg, #2c2618 0%, #3a2d20 100%); }
+    .scene-cafeteria { background: linear-gradient(180deg, #2a2018 0%, #3a2c1f 100%); }
+
+    /* ============ v2: layered sprite system (base + hair) ============ */
+    .sprite-layer {
+      position: absolute;
+      inset: 0;
+      background-repeat: no-repeat;
+      background-image: var(--layer-url);
+      background-size: var(--layer-bg-size, auto 100%);
+      background-position: var(--layer-bg-pos, 0 0);
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      pointer-events: none;
+    }
+    .sprite.layered {
+      background: none !important;
+      filter: var(--avatar-filter, none);
+    }
+    .sprite.layered::before { content: none; }
+
+    /* sunnyside frame box override (96x64 base, scaled 1.6x) */
+    .sprite-wrap.family-sunny .sprite {
+      width: 154px;
+      height: 102px;
+      left: -16px;
+      bottom: 4px;
+    }
+    .sprite-wrap.family-sunny .sprite-layer {
+      --layer-bg-size: auto 102px;
+    }
+    .sprite-wrap.family-sunny .glow {
+      width: 130px;
+      bottom: -2px;
+    }
+
+    /* ============ v2: hair picker ============ */
+    .character-builder {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 8px 0;
+    }
+    .family-picker {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .family-picker label {
+      flex: 1;
+      min-width: 86px;
+      padding: 6px 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 11.5px;
+      color: var(--muted);
+      text-align: center;
+      background: rgba(247,242,223,0.03);
+      display: flex;
+      flex-direction: row;
+      gap: 4px;
+      align-items: center;
+      justify-content: center;
+    }
+    .family-picker label:has(input:checked) {
+      color: var(--gold);
+      border-color: var(--gold);
+      background: rgba(240,192,90,0.08);
+    }
+    .family-picker input { display: none; }
+    .hair-picker {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 4px;
+    }
+    .hair-picker[hidden] { display: none; }
+    .hair-btn {
+      padding: 5px 0;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: rgba(247,242,223,0.03);
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 10.5px;
+      letter-spacing: 0.04em;
+      transition: border-color 140ms, color 140ms, background 140ms;
+    }
+    .hair-btn:hover {
+      color: var(--ink);
+      border-color: rgba(247,242,223,0.32);
+    }
+    .hair-btn.active {
+      color: var(--gold);
+      border-color: var(--gold);
+      background: rgba(240,192,90,0.10);
+    }
+
+    /* ============ v2 additions: psyche fieldset ============ */
+    fieldset.psyche {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px 12px;
+      margin: 6px 0 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: rgba(247, 242, 223, 0.03);
+    }
+    fieldset.psyche legend {
+      font-family: var(--display);
+      color: var(--gold);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      padding: 0 6px;
+    }
+    .psyche-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .psyche-row select {
+      flex: 1;
+      background: rgba(247,242,223,0.04);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 6px 10px;
+    }
+    .psyche-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .psyche-quotes {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .quote-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--ink);
+      font-size: 12.5px;
+      line-height: 1.4;
+      transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
+      background: rgba(247,242,223,0.02);
+    }
+    .quote-chip input { accent-color: var(--gold); }
+    .quote-chip:hover { border-color: rgba(240,192,90,0.55); color: var(--gold); }
+    .quote-chip:has(input:checked) {
+      border-color: var(--gold);
+      background: rgba(240,192,90,0.10);
+      color: var(--gold);
+    }
+
+    /* ============ v2 additions: memory wall ============ */
+    .memory-wall {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 220px;
+      max-height: calc(100% - 28px);
+      padding: 12px 12px 10px;
+      border-radius: 12px;
+      background: rgba(14, 16, 22, 0.78);
+      border: 1px solid var(--panel-edge);
+      backdrop-filter: blur(6px);
+      z-index: 6;
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      overflow: hidden;
+      pointer-events: auto;
+      transition: opacity 280ms ease, transform 280ms ease;
+    }
+    .memory-wall header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .memory-wall h3 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+    }
+    .memory-count {
+      font-size: 10.5px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+    .memory-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+    .memory-list li {
+      padding: 7px 9px;
+      border-left: 2px solid var(--cyan);
+      background: rgba(101, 214, 208, 0.06);
+      font-size: 11.5px;
+      line-height: 1.45;
+      color: var(--ink);
+      border-radius: 0 6px 6px 0;
+      opacity: 0;
+      transform: translateX(8px);
+      animation: memoryIn 460ms cubic-bezier(.2,.7,.2,1) forwards;
+    }
+    .memory-list li.pivotal {
+      border-left-color: var(--gold);
+      background: rgba(240, 192, 90, 0.08);
+    }
+    .memory-list li.faded {
+      opacity: 0.45;
+    }
+    .memory-list li .mem-year {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      margin-right: 6px;
+      letter-spacing: 0.06em;
+    }
+    .memory-empty {
+      font-size: 11.5px;
+      color: var(--muted);
+      padding: 6px 4px;
+    }
+    .memory-list:not(:empty) + .memory-empty { display: none; }
+    @keyframes memoryIn {
+      from { opacity: 0; transform: translateX(8px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ============ v2 additions: intervention modal ============ */
+    .intervention-modal {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(10,12,16,0.65), rgba(0,0,0,0.92));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 30;
+      animation: fadeIn 240ms ease;
+    }
+    .intervention-modal[hidden] { display: none; }
+    .intervention-card {
+      max-width: 460px;
+      width: calc(100% - 48px);
+      padding: 28px 30px 24px;
+      border-radius: 14px;
+      background: rgba(20, 22, 30, 0.96);
+      border: 1px solid rgba(240, 192, 90, 0.4);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(240,192,90,0.15) inset;
+      color: var(--ink);
+      animation: liftIn 360ms cubic-bezier(.2,.7,.2,1);
+    }
+    .intervention-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .intervention-card p {
+      font-family: var(--display);
+      font-size: 18px;
+      line-height: 1.55;
+      margin: 4px 0 20px;
+    }
+    .intervention-options {
+      display: flex;
+      gap: 12px;
+    }
+    .intervention-options button {
+      flex: 1;
+      padding: 14px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: rgba(247,242,223,0.04);
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: 15px;
+      cursor: pointer;
+      transition: border-color 180ms ease, background 180ms ease, color 180ms ease, transform 160ms ease;
+    }
+    .intervention-options button:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(240, 192, 90, 0.08);
+      transform: translateY(-2px);
+    }
+    .intervention-hint {
+      margin-top: 14px;
+      font-size: 11.5px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes liftIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ============ v2 additions: agent meeting ============ */
+    .agent-meeting {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 10, 14, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 28;
+      animation: fadeIn 220ms ease;
+    }
+    .agent-meeting[hidden] { display: none; }
+    .meeting-card {
+      width: min(520px, calc(100% - 48px));
+      padding: 28px 32px;
+      border-radius: 14px;
+      background: rgba(20, 22, 30, 0.96);
+      border: 1px solid var(--panel-edge);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.55);
+      color: var(--ink);
+    }
+    .meeting-card header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+    .meeting-card h3 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+    }
+    .meeting-sub {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+    }
+    .agent-log {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      min-height: 220px;
+      max-height: 280px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .agent-log li {
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--ink);
+      padding: 7px 10px;
+      border-left: 2px solid var(--cyan);
+      background: rgba(101, 214, 208, 0.06);
+      border-radius: 0 6px 6px 0;
+      opacity: 0;
+      transform: translateY(6px);
+      animation: memoryIn 420ms ease forwards;
+    }
+    .agent-log li.persona { border-left-color: var(--rose); background: rgba(235,107,120,0.06); }
+    .agent-log li.beats   { border-left-color: var(--gold); background: rgba(240,192,90,0.06); }
+    .agent-log li.year    { border-left-color: var(--cyan); }
+    .agent-log li.final   { border-left-color: var(--green); background: rgba(140,207,104,0.06); }
+    .agent-log li .tag {
+      display: inline-block;
+      padding: 1px 6px;
+      margin-right: 8px;
+      border-radius: 3px;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: #111318;
+      background: var(--cyan);
+    }
+    .agent-log li.persona .tag { background: var(--rose); }
+    .agent-log li.beats   .tag { background: var(--gold); }
+    .agent-log li.final   .tag { background: var(--green); }
+    .meeting-dots {
+      margin-top: 14px;
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+    }
+    .meeting-dots span {
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: bounce 1.2s infinite ease;
+    }
+    .meeting-dots span:nth-child(2) { animation-delay: 0.18s; }
+    .meeting-dots span:nth-child(3) { animation-delay: 0.36s; }
+    @keyframes bounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.3; }
+      40% { transform: translateY(-6px); opacity: 1; }
+    }
+
+    /* ============ v2 additions: cross-time dialogue modal ============ */
+    .dialogue-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 10, 14, 0.86);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 32;
+      animation: fadeIn 220ms ease;
+    }
+    .dialogue-modal[hidden] { display: none; }
+    .dialogue-card {
+      width: min(520px, calc(100% - 48px));
+      padding: 22px 24px;
+      border-radius: 14px;
+      background: rgba(20, 22, 30, 0.97);
+      border: 1px solid var(--panel-edge);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.55);
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .dialogue-card header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .dialogue-card h3 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: 16px;
+      color: var(--cyan);
+      letter-spacing: 0.06em;
+    }
+    .dialogue-card .ghost {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .dialogue-history {
+      min-height: 140px;
+      max-height: 280px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 6px 0;
+    }
+    .dialogue-history .turn {
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.5;
+      max-width: 90%;
+    }
+    .dialogue-history .turn.user {
+      align-self: flex-end;
+      background: rgba(240,192,90,0.12);
+      border: 1px solid rgba(240,192,90,0.3);
+    }
+    .dialogue-history .turn.shadow {
+      align-self: flex-start;
+      background: rgba(101,214,208,0.08);
+      border: 1px solid rgba(101,214,208,0.25);
+    }
+    .dialogue-history .turn.shadow .cite {
+      display: block;
+      margin-top: 6px;
+      font-size: 10.5px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      font-family: var(--mono);
+    }
+    .dialogue-form {
+      display: flex;
+      gap: 8px;
+    }
+    .dialogue-form input {
+      flex: 1;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(247,242,223,0.04);
+      color: var(--ink);
+    }
+    .dialogue-form .primary {
+      padding: 8px 18px;
+    }
+    .dialogue-hint {
+      margin: 0;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* ============ v2: stage badge for pivotal year ============ */
+    .year-pill.pivotal {
+      background: linear-gradient(90deg, var(--gold), var(--rose));
+      color: #111318;
+    }
+    .pivotal-flash {
+      animation: pivotalGlow 1.6s ease;
+    }
+    @keyframes pivotalGlow {
+      0% { box-shadow: 0 0 0 rgba(240,192,90,0); }
+      30% { box-shadow: 0 0 80px rgba(240,192,90,0.45); }
+      100% { box-shadow: 0 0 0 rgba(240,192,90,0); }
+    }
+
+    /* ============ v2: dialogue-cue chip ============ */
+    .dialogue-cue {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 7;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(101,214,208,0.14);
+      border: 1px solid rgba(101,214,208,0.35);
+      color: var(--cyan);
+      font-size: 11.5px;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      pointer-events: auto;
+      transition: transform 160ms ease, background 160ms ease;
+    }
+    .dialogue-cue:hover { transform: translateY(-1px); background: rgba(101,214,208,0.24); }
+    .dialogue-cue[hidden] { display: none; }
+
+    /* ============ v2: final card line hierarchy ============ */
+    #finalMessage .final-line {
+      display: inline-block;
+      font-family: var(--display);
+      line-height: 1.6;
+    }
+    #finalMessage .final-line:first-child { font-size: 16px; color: var(--ink); }
+    #finalMessage .final-line:nth-child(n+2) {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* shrink stage padding to make room for memory wall */
+    @media (min-width: 960px) {
+      .scene-body { padding-right: 248px; }
+    }
+    @media (max-width: 959px) {
+      .memory-wall {
+        position: static;
+        width: 100%;
+        max-height: 200px;
+        margin-bottom: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#stagePanel">跳到叙事舞台</a>
+  <main class="app">
+    <div id="pixelScene" class="pixel-scene scene-rain" aria-hidden="true"></div>
+
+    <div class="shell">
+      <aside class="control">
+        <div class="brand">
+          <div>
+            <h1 translate="no">Shadow</h1>
+            <p class="brand-sub">平行人生叙事引擎</p>
+          </div>
+          <span class="badge">7 YEARS</span>
+        </div>
+
+        <label for="choice">
+          人生选择
+          <input id="choice" name="choice" autocomplete="off" spellcheck="false" placeholder="如果当年我没有复读…" value="如果当年我去复读了">
+        </label>
+
+        <div class="row">
+          <label for="keywords">
+            关键词
+            <input id="keywords" name="keywords" autocomplete="off" spellcheck="false" placeholder="要强、怕被看穿、不甘…" value="要强、怕被看穿、不甘">
+          </label>
+          <label for="age">
+            年龄
+            <input id="age" name="age" type="number" inputmode="numeric" min="12" max="90" value="18">
+          </label>
+        </div>
+
+        <div class="character-builder">
+          <span class="psyche-label">角色风格</span>
+          <div class="family-picker" role="radiogroup" aria-label="角色风格">
+            <label><input type="radio" name="characterFamily" value="modern"><span>现代室内</span></label>
+            <label><input type="radio" name="characterFamily" value="sunny" checked><span>Sunnyside（可换发型）</span></label>
+          </div>
+          <label for="character" style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)">
+            <span class="psyche-label">底模</span>
+            <select id="character" name="character" style="flex:1">
+              <option value="Sunny" data-family="sunny">Sunnyside 小人</option>
+              <option value="Adam" data-family="modern">Adam（现代）</option>
+              <option value="Alex" data-family="modern">Alex（现代）</option>
+              <option value="Amelia" data-family="modern">Amelia（现代）</option>
+              <option value="Bob" data-family="modern">Bob（现代）</option>
+            </select>
+          </label>
+          <div class="hair-picker" id="hairPicker" aria-label="发型">
+            <button type="button" class="hair-btn" data-hair="shorthair">短发</button>
+            <button type="button" class="hair-btn active" data-hair="curlyhair">卷发</button>
+            <button type="button" class="hair-btn" data-hair="longhair">长发</button>
+            <button type="button" class="hair-btn" data-hair="bowlhair">齐刘海</button>
+            <button type="button" class="hair-btn" data-hair="mophair">乱毛</button>
+            <button type="button" class="hair-btn" data-hair="spikeyhair">尖发</button>
+          </div>
+        </div>
+
+        <div class="avatar-tools">
+          <button id="generateAvatarBtn" class="ghost" type="button">生成形象</button>
+          <button id="randomAvatarBtn" class="ghost" type="button">随机形象</button>
+        </div>
+        <div class="avatar-preview">
+          <div class="avatar-preview-frame">
+            <div id="avatarPreview" class="avatar-preview-figure" aria-hidden="true"></div>
+          </div>
+          <div id="avatarHint" class="avatar-preview-text">会根据关键词和自我描述生成一个像素化的“另一个你”。</div>
+        </div>
+
+        <label for="description">
+          自我描述
+          <textarea id="description" name="description" autocomplete="off" placeholder="我总是很晚才承认自己想要什么…">我习惯用成绩证明自己，但每次靠近一个目标，又会怀疑自己是不是真的想要它。</textarea>
+        </label>
+
+        <fieldset class="psyche">
+          <legend>心理拼图（可选，喂给 Agent）</legend>
+          <label class="psyche-row" for="mbti">
+            <span class="psyche-label">MBTI</span>
+            <select id="mbti" name="mbti">
+              <option value="">未指定</option>
+              <option>INFP</option><option>ENFP</option>
+              <option>INFJ</option><option>ENFJ</option>
+              <option>INTJ</option><option>ENTJ</option>
+              <option>INTP</option><option>ENTP</option>
+              <option>ISFP</option><option>ESFP</option>
+              <option>ISFJ</option><option>ESFJ</option>
+              <option>ISTJ</option><option>ESTJ</option>
+              <option>ISTP</option><option>ESTP</option>
+            </select>
+          </label>
+          <div class="psyche-quotes" role="radiogroup" aria-label="最像你的一句话">
+            <span class="psyche-label">最像你的一句话</span>
+            <label class="quote-chip"><input type="radio" name="quote" value="我宁愿后悔做过，也不后悔没做。"><span>我宁愿后悔做过，也不后悔没做。</span></label>
+            <label class="quote-chip"><input type="radio" name="quote" value="稳定比冒险更重要。"><span>稳定比冒险更重要。</span></label>
+            <label class="quote-chip"><input type="radio" name="quote" value="我经常想象另一种人生。"><span>我经常想象另一种人生。</span></label>
+            <label class="quote-chip"><input type="radio" name="quote" value="别人觉得我理性，但其实我很感性。"><span>别人觉得我理性，但其实我很感性。</span></label>
+          </div>
+        </fieldset>
+
+        <label class="switch" for="localMode">
+          <span>本地预生成</span>
+          <input id="localMode" name="localMode" type="checkbox" checked>
+        </label>
+
+        <div class="actions">
+          <button id="startBtn" class="primary" type="button">生成影子人生</button>
+          <button id="shuffleBtn" class="icon-button" type="button" title="切换示例故事" aria-label="切换示例故事">↻</button>
+        </div>
+        <button id="resetBtn" class="ghost" type="button">重置舞台</button>
+
+        <div id="status" class="status" role="status">默认使用本地示例（3 套），现场断网也能演示。关闭开关后会请求 /api/generate。</div>
+      </aside>
+
+      <section id="stagePanel" class="stage" aria-live="polite">
+        <header class="topbar">
+          <div>
+            <div class="year-pill" id="yearLabel">等待开始</div>
+            <div id="premise">输入一个岔路口，让另一个你走完七年。</div>
+          </div>
+          <div id="progress" class="progress" aria-label="七年进度"></div>
+        </header>
+
+        <div class="scene-body">
+          <div id="lifeRoom" class="life-room environment-office" aria-hidden="true">
+            <div class="room-backdrop">
+              <div class="room-wall"></div>
+              <div class="room-floor"></div>
+              <div class="room-fx-rain"></div>
+            </div>
+            <div class="room-stage">
+              <div id="furnitureLayer" class="furniture-layer"></div>
+              <div class="sprite-wrap" aria-hidden="true">
+                <div class="glow"></div>
+                <div class="sprite">
+                  <div class="sprite-layer" data-layer="base"></div>
+                  <div class="sprite-layer" data-layer="hair"></div>
+                </div>
+              </div>
+              <div class="dialogue-slot">
+                <div id="dialogue" class="dialogue"></div>
+              </div>
+            </div>
+            <div id="roomLight" class="room-light"></div>
+          </div>
+
+          <aside class="memory-wall" id="memoryWall" aria-label="Memory Stream">
+            <header>
+              <h3>Memory Stream</h3>
+              <span class="memory-count" id="memoryCount">0 / 7</span>
+            </header>
+            <ol id="memoryList" class="memory-list"></ol>
+            <div class="memory-empty" id="memoryEmpty">影子还没走完任何一年。</div>
+          </aside>
+
+          <article class="story">
+            <h2 id="title">按下开始</h2>
+            <div class="meta">
+              <span id="ageLabel">年龄 --</span>
+              <span id="emotionLabel">情绪 --</span>
+              <span id="environmentLabel">环境 --</span>
+            </div>
+            <div class="emotion-meter" aria-hidden="true">
+              <span id="emotionFill"></span>
+            </div>
+            <div id="event" class="event">一条没有被选择的人生，会先从一个很小的瞬间开始发亮。</div>
+            <div id="reflection" class="reflection"></div>
+          </article>
+        </div>
+
+        <footer class="footerbar">
+          <span class="hint">事件结束后点击下一年，也可按空格/回车；曲线页按 Esc 关闭。</span>
+          <button id="nextBtn" class="primary" type="button">下一年</button>
+        </footer>
+
+        <div id="curveCard" class="curve-card">
+          <div class="curve-inner">
+            <h2 id="finalTitle">影子的七年</h2>
+            <svg id="curve" viewBox="0 0 760 280" role="img" aria-label="七年情绪曲线"></svg>
+            <p id="finalMessage"></p>
+            <button id="againBtn" class="primary" type="button">再看一次</button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div id="interventionModal" class="intervention-modal" hidden>
+      <div class="intervention-card" role="dialog" aria-modal="true" aria-labelledby="interventionQuestion">
+        <div class="intervention-label">命运的岔口</div>
+        <p id="interventionQuestion">影子站在路口，等你替他选。</p>
+        <div class="intervention-options" id="interventionOptions"></div>
+        <div class="intervention-hint">你的选择会写进下一年的推演。</div>
+      </div>
+    </div>
+
+    <div id="agentMeeting" class="agent-meeting" hidden>
+      <div class="meeting-card">
+        <header>
+          <h3>多智能体推演中</h3>
+          <span class="meeting-sub">Persona → Beats → Year × 7 → Final</span>
+        </header>
+        <ul id="agentLog" class="agent-log"></ul>
+        <div class="meeting-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+
+    <div id="dialogueModal" class="dialogue-modal" hidden>
+      <div class="dialogue-card" role="dialog" aria-modal="true">
+        <header>
+          <h3>跨时空对话</h3>
+          <button id="dialogueCloseBtn" class="ghost" type="button" aria-label="关闭对话">×</button>
+        </header>
+        <div id="dialogueHistory" class="dialogue-history"></div>
+        <form id="dialogueForm" class="dialogue-form">
+          <input id="dialogueInput" name="dialogueInput" autocomplete="off" placeholder="问影子一句话…" maxlength="60">
+          <button class="primary" type="submit">发送</button>
+        </form>
+        <p class="dialogue-hint">影子会引用一条 memory stream 来回答你。</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const USE_LOCAL_DEFAULT = true;
+
+    const SYSTEM_PROMPT = `你是一个"平行人生叙事引擎"。用户会给你一个人生岔路口的选择、几个关键词、以及一段自我描述。你要为用户生成一条"如果当初这样选"的平行人生——一个名叫"影子"的角色，替用户过完这个选择之后的七年。所有年度 event 必须使用第二人称"你"叙述，让用户感觉是在亲眼看见另一个自己。
+
+# 你的内在工作方式（不要输出这部分，只在内部完成）
+在写每一年之前，你在内部依次扮演四个视角：
+1. 编剧：这一年应该发生什么关键事件？要符合前因后果，不能突兀。
+2. 心理顾问：另一个你此刻的真实情绪是什么？要有矛盾、有不甘、有微小的快乐，不能脸谱化。
+3. 细节导演：找一个具体的、感官的、能让人记住的小细节（一句话、一个物件、一个场景），而不是抽象总结。
+4. 记忆官：这一年要呼应或反转之前哪一年发生的事？让七年成为一个整体，而不是七个孤立片段。
+
+# 写作铁律
+- 写具体的小事，不写概括的人生。
+- 每一年必须有一个"情绪锚点"——一个具体瞬间，让读者心里一动。
+- 七年要有完整的情绪弧线：不要一路向上或一路向下。
+- event 必须用第二人称"你"，不要用"他/她"称呼主角。
+- environment / pose / prop 要和年度事件强相关：加班写版本用 office + type + laptop；电话/语音用 phone；病房陪护用 hospital + tired；海边/小城写作用 seaside + write；发布/首映用 stage + celebrate；搬家/通勤/雨夜入职用 run/carry + suitcase。
+- 另一个你的性格要从用户给的关键词和描述里长出来，贯穿七年保持一致。
+- reflection 控制在 40 字以内，是另一个你的内心独白，第一人称，不要重复事件描述，每年的主题不能重复。
+- shadow_dialogue 是七年后的你隔着时间对"现在的你"说的一句话，要有钩子、有情绪、像真人，不超过 30 字。
+
+# 输出格式
+只输出 JSON，不要任何额外文字、不要 markdown 代码块标记。严格遵循以下结构：
+{
+  "shadow_name": "影子的名字",
+  "premise": "一句话概括这条平行人生的起点（用户的选择）",
+  "years": [
+    {
+      "year": 1,
+      "age": 用户当前年龄+1,
+      "title": "这一年的小标题（6字以内，有画面感）",
+      "scene": "city/home/office/nature/night/rain 之一",
+      "environment": "生活环境标签：office/home/hospital/seaside/stage/studio 之一",
+      "pose": "人物动作标签：idle/run/sit/phone/type/write/tired/celebrate/carry 之一，要贴合 event",
+      "prop": "场景道具标签：desk/laptop/phone/hospital/suitcase/stage 之一，要贴合 event",
+      "event": "这一年发生的事，80-120字，必须用第二人称'你'，写具体的小事和感官细节",
+      "emotion": "这一年的主导情绪，单个词",
+      "emotion_value": 1-10的整数,
+      "reflection": "另一个你的年度内心独白，40字以内",
+      "shadow_dialogue": "七年后的你对现在的你说的一句话，30字以内"
+    }
+  ],
+  "final_message": "七年走完，另一个你留给现在的你的最后一句话，要收束整条情绪弧线，50字以内"
+}`;
+
+    const DEMO_INPUTS = [
+      {
+        choice: '如果当年我去复读了',
+        keywords: '要强、怕被看穿、不甘',
+        description: '我习惯用成绩证明自己，但每次靠近一个目标，又会怀疑自己是不是真的想要它。',
+        age: 18,
+        mbti: 'INFJ',
+        quote: '我宁愿后悔做过，也不后悔没做。'
+      },
+      {
+        choice: '如果当年我没有出国，留在上海做游戏策划',
+        keywords: '敏感、执拗、怕让人失望',
+        description: '我总是很晚才承认自己想要什么。做选择时看起来理性，其实最怕的是让重要的人失望。',
+        age: 26
+      },
+      {
+        choice: '如果当年我没有考研，而是留在成都做住院医师',
+        keywords: '克制、责任感、怕落后',
+        description: '我习惯用成绩和证书证明自己，但面对病人的时候，才发现安静比优秀更难。',
+        age: 23
+      },
+      {
+        choice: '如果当年我没有去深圳，而是和爱人一起留在武汉',
+        keywords: '犹豫、忠诚、怕错过',
+        description: '我在「更好的未来」和「此刻身边的人」之间来回摇摆，总想选一个不会后悔的答案。',
+        age: 28
+      }
+    ];
+
+    const LOCAL_STORIES = [
+      {
+        shadow_name: "阿岚",
+        premise: "你又坐回到教室最后一排。七年后才知道，那年决定的不只是分数。",
+        persona_card: {
+          name: "阿岚",
+          core_traits: ["要强", "习惯藏话", "迟到的自我"],
+          soft_spots: ["把父母的期待当成自己的想要", "被否定时第一反应是再加倍努力"],
+          decision_tendency: "在'再努力一次'和'承认就这样'之间永远选前者",
+          growth_seed: "她需要一次允许自己说'够了'"
+        },
+        beats: [
+          { year: 1, type: "pivotal", seed: "复读班开学，雨天" },
+          { year: 2, type: "quiet",   seed: "二战分数比一战低 7 分" },
+          { year: 3, type: "quiet",   seed: "上了不甘心的二本" },
+          { year: 4, type: "pivotal", seed: "被推选当学生会主席" },
+          { year: 5, type: "quiet",   seed: "开始失眠" },
+          { year: 6, type: "pivotal", seed: "考研复试被刷" },
+          { year: 7, type: "quiet",   seed: "县城邮局" }
+        ],
+        pivotal_years: [1, 4, 6],
+        memory_stream_template: [
+          { id: "m1", year: 1, type: "decision",   content: "复读班坐到最后一排，没告诉父母自己想直接走", weight: 0.85 },
+          { id: "m2", year: 2, type: "event",      content: "二战分数比一战低 7 分，撕了准考证", weight: 0.7 },
+          { id: "m3", year: 3, type: "reflection", content: "一个人吃饭，开始接受不是最好的那个", weight: 0.5 },
+          { id: "m4", year: 4, type: "decision",   content: "接下学生会主席，第一次试着让自己被看见", weight: 0.9 },
+          { id: "m5", year: 5, type: "event",      content: "连续三个月失眠，没告诉任何人", weight: 0.6 },
+          { id: "m6", year: 6, type: "decision",   content: "考研复试被刷，没再战", weight: 0.95 },
+          { id: "m7", year: 7, type: "reflection", content: "邮局窗口听到一句'你字真好看'，第一次说够了", weight: 0.75 }
+        ],
+        years: [
+          {
+            year: 1, age: 19, is_pivotal: true,
+            title: "再坐一年",
+            scene: "rain", environment: "classroom", pose: "wait", prop: "desk", city: "city2",
+            event: "复读班开学那天下雨。你提前半小时到，把书包放在最后一排靠窗的位置，心想这样没人能从背后看见你。同桌是去年坐你后面那个男生的弟弟，他看见你愣了一下，没说话。下课你去走廊喝水，听见两个老师说：今年这批又来一个二战的。你低头笑了一下，那个笑你自己都听不见。",
+            decision_made: "选了最后一排，因为不想让任何人看见自己又坐回来了",
+            intervention_prompt: { question: "告诉父母自己其实不想复读，还是继续撑下去？", options: ["告诉父母", "继续撑"] },
+            emotion: "退缩", emotion_value: 4, new_mood: 4, new_esteem: 5,
+            reflection: "原来我怕的不是失败，是被看见还在原地。",
+            shadow_dialogue: "你看，我还是坐回来了。",
+            memory_summary: "复读班坐到最后一排，没告诉父母自己想直接走"
+          },
+          {
+            year: 2, age: 20, is_pivotal: false,
+            title: "低 7 分",
+            scene: "night", environment: "dorm_night", pose: "hurt", prop: "desk", city: "city4",
+            event: "二战分数下来那个晚上，你撕了准考证。撕的时候没哭。",
+            decision_made: "撕的时候没哭，是因为早就预感到了",
+            intervention_prompt: null,
+            emotion: "麻木", emotion_value: 3, new_mood: 3, new_esteem: 4,
+            reflection: "再努力一次不一定有用，我第一次知道。",
+            shadow_dialogue: "有些纸，撕了反而轻。",
+            memory_summary: "二战分数比一战低 7 分，撕了准考证"
+          },
+          {
+            year: 3, age: 21, is_pivotal: false,
+            title: "一个人吃饭",
+            scene: "city", environment: "cafeteria", pose: "wait", prop: "desk", city: "city5",
+            event: "你上了那所听都没听过的二本，开始一个人吃饭。",
+            decision_made: "没去加任何社团，因为不想再被推到前面",
+            intervention_prompt: null,
+            emotion: "钝", emotion_value: 4, new_mood: 4, new_esteem: 4,
+            reflection: "我开始接受'我不是最好的那个'。",
+            shadow_dialogue: "食堂角落的灯光，原来也挺好。",
+            memory_summary: "一个人吃饭，开始接受不是最好的那个"
+          },
+          {
+            year: 4, age: 22, is_pivotal: true,
+            title: "推上主席",
+            scene: "office", environment: "stage", pose: "cast", prop: "stage", city: "city8",
+            event: "辅导员把你叫到办公室，说你'稳重'。你其实想说我不擅长，但还是点了头。第一次开会，你把发言稿改了五遍，临上台前发现领带打反了。台下有人笑，你也笑了，那一刻你忽然想——原来被看见也不是死。",
+            decision_made: "因为不忍心拒绝而接下主席，第一次试着让自己被看见",
+            intervention_prompt: { question: "让阿岚现在就说'我不擅长'，还是硬撑到任期结束？", options: ["承认不擅长", "硬撑到底"] },
+            emotion: "试探", emotion_value: 6, new_mood: 6, new_esteem: 6,
+            reflection: "原来不擅长，也可以站到那里。",
+            shadow_dialogue: "你也偷偷喜欢过被看见，对吧。",
+            memory_summary: "接下学生会主席，第一次试着让自己被看见"
+          },
+          {
+            year: 5, age: 23, is_pivotal: false,
+            title: "整宿不睡",
+            scene: "night", environment: "dorm_night", pose: "wait", prop: "desk", city: "city4",
+            event: "连续三个月凌晨四点醒来，没告诉任何人。",
+            decision_made: "把失眠藏起来，因为不想被父母看见自己撑不住",
+            intervention_prompt: null,
+            emotion: "压", emotion_value: 3, new_mood: 3, new_esteem: 4,
+            reflection: "我把'还行'练得太熟了。",
+            shadow_dialogue: "夜里那盏灯，我留给你了。",
+            memory_summary: "连续三个月失眠，没告诉任何人"
+          },
+          {
+            year: 6, age: 24, is_pivotal: true,
+            title: "复试被刷",
+            scene: "rain", environment: "trainstation", pose: "hurt", prop: "suitcase", city: "city6",
+            event: "考研复试出来下雨。导师在走廊里说了一句'你眼神不在'，没回头。你坐在回程的火车上，对面一个穿校服的小孩睡得很沉。你想：是不是该停一停了。可行李夹层里还塞着第二年要用的政治真题。",
+            decision_made: "复试被刷后，第一次认真考虑'不再战'",
+            intervention_prompt: { question: "让阿岚再考一年，还是接受这个结果？", options: ["再战一年", "接受结果"] },
+            emotion: "崩", emotion_value: 2, new_mood: 3, new_esteem: 3,
+            reflection: "原来'停下来'比'再来一次'更难说出口。",
+            shadow_dialogue: "你想问我后悔吗？我想问你呢。",
+            memory_summary: "考研复试被刷，没再战"
+          },
+          {
+            year: 7, age: 25, is_pivotal: false,
+            title: "邮局窗口",
+            scene: "city", environment: "postoffice", pose: "doing", prop: "desk", city: "city7",
+            event: "你回到县城，在邮局窗口写汇款单。一个老太太说你字真好看。",
+            decision_made: "没再回学校。挑了一份能安静写字的工作",
+            intervention_prompt: null,
+            emotion: "稳", emotion_value: 5, new_mood: 5, new_esteem: 5,
+            reflection: "够了。这句话我学了七年。",
+            shadow_dialogue: "你的字也很好看。",
+            memory_summary: "邮局窗口听到一句'你字真好看'，第一次说够了"
+          }
+        ],
+        final: {
+          title: "阿岚的七年",
+          message: "我没有变成你想象的样子。但有一天我在邮局窗口给一个老太太写汇款单，她说我字真好看。那一刻我突然觉得，够了。",
+          regret: "没有早一点告诉自己'不想要也可以'。",
+          scene: "home",
+          emotion_arc: "从撑着的高位一路下落，最后在低处找到一种安静的平稳"
+        },
+        final_message: "我没有变成你想象的样子。但有一天我在邮局窗口给一个老太太写汇款单，她说我字真好看。那一刻我突然觉得，够了。"
+      },
+      {
+        shadow_name: "林屿",
+        premise: "你没有出国，留在上海，从一张游戏策划表开始，把未选的人生写成七年。",
+        years: [
+          {
+            year: 1,
+            age: 27,
+            title: "雨夜入职",
+            scene: "rain",
+            environment: "office",
+            pose: "carry",
+            prop: "suitcase",
+            event: "入职那天雨很大，你把护照压在出租屋抽屉最底层，带着一袋便利店饭团去公司。凌晨两点，主策划把你的第一版关卡全删了，只留下一句批注：太想证明自己。回家路上，你在地铁玻璃里看见自己笑了一下。",
+            emotion: "刺痛",
+            emotion_value: 4,
+            reflection: "我原来不是害怕失败，是害怕没人看见。",
+            shadow_dialogue: "你看，我还是留下来了。"
+          },
+          {
+            year: 2,
+            age: 28,
+            title: "署名第三",
+            scene: "office",
+            environment: "office",
+            pose: "type",
+            prop: "laptop",
+            event: "春天，项目上线。你的名字第一次出现在制作人员名单第三行，字体小得像一粒灰。庆功宴结束后，你没去唱歌，一个人坐在公司楼下花坛边，打开那瓶最贵的啤酒，泡沫涌出来沾湿了袖口。你拍了照片，又删掉。",
+            emotion: "微亮",
+            emotion_value: 6,
+            reflection: "被承认的瞬间，比想象中安静。",
+            shadow_dialogue: "有些奖章，只能自己知道。"
+          },
+          {
+            year: 3,
+            age: 29,
+            title: "旧人来电",
+            scene: "night",
+            environment: "home",
+            pose: "phone",
+            prop: "phone",
+            event: "深夜十点，前任从国外打来电话，说路过你们曾经计划合租的街区。你站在茶水间，听着饮水机咕噜作响，没说自己刚被升职，也没说这三年最难的夜里都想过她。挂断后，你把会议室白板擦得很干净。",
+            emotion: "空落",
+            emotion_value: 3,
+            reflection: "我把体面练熟了，却没练会告别。",
+            shadow_dialogue: "别急着替我说不遗憾。"
+          },
+          {
+            year: 4,
+            age: 30,
+            title: "母亲病房",
+            scene: "home",
+            environment: "hospital",
+            pose: "tired",
+            prop: "hospital",
+            event: "母亲住院那个月，你每天把电脑带到病房走廊改版本。护士叫号时，你还在调一个新手教程的按钮文案。母亲醒来，问你是不是很累。你说不累，然后把屏幕亮度调到最低，免得她看见表格里密密麻麻的红色延期。",
+            emotion: "绷紧",
+            emotion_value: 2,
+            reflection: "我终于明白，留下也不等于陪伴。",
+            shadow_dialogue: "你会怪我没有更早回头吗？"
+          },
+          {
+            year: 5,
+            age: 31,
+            title: "小城风口",
+            scene: "nature",
+            environment: "seaside",
+            pose: "write",
+            prop: "laptop",
+            event: "项目失败后，你辞职去了海边小城，给一家独立团队写剧情。办公室窗外有晾晒的渔网，午后风里有盐味。你写下一个不肯出海的角色，写到结尾时突然停住，给母亲发了条语音：今晚我早点回家吃饭。",
+            emotion: "松动",
+            emotion_value: 7,
+            reflection: "输掉一些头衔后，我听见了自己的声音。",
+            shadow_dialogue: "慢一点，并不等于退后。"
+          },
+          {
+            year: 6,
+            age: 32,
+            title: "首映灯下",
+            scene: "city",
+            environment: "stage",
+            pose: "celebrate",
+            prop: "stage",
+            event: "你们的小游戏下载量不高，却收到一封很长的玩家邮件。首映分享会上，你念到一半哽住，因为那个玩家说，游戏里的母亲像她去年去世的妈妈。散场后，你把旧护照从抽屉里翻出来，夹进了剧本笔记本。",
+            emotion: "回潮",
+            emotion_value: 8,
+            reflection: "我做的不是游戏，是给遗憾留门。",
+            shadow_dialogue: "那条没走的路，也在发光。"
+          },
+          {
+            year: 7,
+            age: 33,
+            title: "清晨署名",
+            scene: "home",
+            environment: "studio",
+            pose: "write",
+            prop: "desk",
+            event: "第七年清晨，你把新作结尾改成开放式。窗台上的薄荷长歪了，你没有扶正。母亲在厨房煮粥，电饭煲冒着白气。你在感谢名单里写下自己的真名，又在下一行写：献给所有当年没走的人。",
+            emotion: "释然",
+            emotion_value: 9,
+            reflection: "我不再证明选择正确，只愿承担它。",
+            shadow_dialogue: "你不用羡慕我，也别可怜我。"
+          }
+        ],
+        final_message: "这七年没有替你证明哪条路更好，只证明：认真活过的选择，都会长出自己的答案。"
+      },
+      {
+        shadow_name: "沈念",
+        premise: "你没有去读研，而是留在成都，从一间小诊所开始，把另一种人生走成七年。",
+        years: [
+          {
+            year: 1,
+            age: 24,
+            title: "白大褂初穿",
+            scene: "office",
+            environment: "hospital",
+            pose: "carry",
+            prop: "suitcase",
+            event: "规培第一个月，你凌晨四点被叫去换药。走廊灯管嗡嗡响，你手抖得差点打翻托盘。带教医生没骂你，只说：怕是正常的，别装作不怕。那天你在值班室写下第一页病历，字迹歪得像雨痕。",
+            emotion: "惶恐",
+            emotion_value: 3,
+            reflection: "我以为勇敢是不发抖，后来才知是发抖还往前走。",
+            shadow_dialogue: "别怕，你比想象中更稳。"
+          },
+          {
+            year: 2,
+            age: 25,
+            title: "夜班咖啡",
+            scene: "night",
+            environment: "hospital",
+            pose: "type",
+            prop: "laptop",
+            event: "你开始习惯夜班。凌晨两点，护士站只有咖啡机咕噜声。你在电子病历里给一位老人补了家属没写清的过敏史，第二天他女儿握着你的手说谢谢。你点点头，把感谢折进袖口，像折一张不会丢的纸条。",
+            emotion: "踏实",
+            emotion_value: 6,
+            reflection: "被需要的感觉，比奖状更暖。",
+            shadow_dialogue: "你留下来了，也在救人。"
+          },
+          {
+            year: 3,
+            age: 26,
+            title: "论文未投",
+            scene: "rain",
+            environment: "home",
+            pose: "write",
+            prop: "desk",
+            event: "昔日同学发来顶刊录用截图，你刚结束一台四小时手术。洗澡水冲过肩膀，你盯着镜子里发红的眼睛，把写了一半的病例报告存进草稿箱。不是不想证明，是你发现病房里的沉默比引用数更急。",
+            emotion: "酸涩",
+            emotion_value: 4,
+            reflection: "比较是偷时间的贼，我差点让它进门。",
+            shadow_dialogue: "别用别人的地图审判自己。"
+          },
+          {
+            year: 4,
+            age: 27,
+            title: "父亲复诊",
+            scene: "home",
+            environment: "hospital",
+            pose: "tired",
+            prop: "hospital",
+            event: "父亲复查那天，你亲自带他做超声。影像里那颗结节还在，你却第一次能平静地解释每一个指标。父亲问：你是不是很累？你说不累，然后把检查单折好放进他外套内袋，像小时候他替你收成绩单。",
+            emotion: "沉重",
+            emotion_value: 5,
+            reflection: "成为家人的医生，比成为名医更难。",
+            shadow_dialogue: "你陪他，也在陪自己。"
+          },
+          {
+            year: 5,
+            age: 28,
+            title: "小城义诊",
+            scene: "nature",
+            environment: "seaside",
+            pose: "phone",
+            prop: "phone",
+            event: "你跟医疗队去了川西小镇。帐篷外是晒干的玉米，风里有柴火味。你给一位阿婆量完血压，她塞给你两个烤土豆。晚上你拨通许久没联系的同学电话，只说：我好像找到想一直做下去的事了。",
+            emotion: "清亮",
+            emotion_value: 7,
+            reflection: "离开实验室后，我反而更接近答案。",
+            shadow_dialogue: "慢一点的路，也能到达。"
+          },
+          {
+            year: 6,
+            age: 29,
+            title: "晨会发言",
+            scene: "city",
+            environment: "stage",
+            pose: "celebrate",
+            prop: "stage",
+            event: "科室青年医师分享会上，你讲的是一个误诊差点发生、却被护士拦下的病例。讲到一半你停住，因为台下有人悄悄抹眼泪。散场后主任拍拍你肩：这才是医生该讲的故事。你把旧考研资料捐给了图书馆。",
+            emotion: "被看见",
+            emotion_value: 8,
+            reflection: "我终于不再为没走那条路道歉。",
+            shadow_dialogue: "你的七年，没有白过。"
+          },
+          {
+            year: 7,
+            age: 30,
+            title: "门诊清晨",
+            scene: "home",
+            environment: "studio",
+            pose: "sit",
+            prop: "desk",
+            event: "第七年清晨，你提前半小时到门诊，把窗打开。阳光落在病历夹上，你写下新一年的计划：少熬夜，多陪家人，继续写那本没人催的病例集。手机震了一下，是当年劝你考研的导师发来的消息——听说你做得很好。你回：谢谢，我选了另一条路。",
+            emotion: "笃定",
+            emotion_value: 9,
+            reflection: "我不需要赢过谁，只需要对得起每一个称呼。",
+            shadow_dialogue: "你不必成为我，但请相信我。"
+          }
+        ],
+        final_message: "七年里你没有成为论文里的名字，却成为了别人生命里记得住的那一位医生。"
+      },
+      {
+        shadow_name: "周原",
+        premise: "你没有分手，也没有去深圳，而是和爱人一起留在了武汉，把日子过成七年。",
+        years: [
+          {
+            year: 1,
+            age: 28,
+            title: "合租第一夜",
+            scene: "home",
+            environment: "home",
+            pose: "carry",
+            prop: "suitcase",
+            event: "搬家那晚下起小雨，纸箱堆满客厅。爱人边擦头发边笑：这就是我们要过的一辈子吗？你把吹风机递过去，说：至少今晚先别感冒。窗外霓虹映在积水里，你们谁也没再提那份深圳 offer。",
+            emotion: "忐忑",
+            emotion_value: 5,
+            reflection: "爱不是答案，是共同提问的勇气。",
+            shadow_dialogue: "我们留下了，你呢？"
+          },
+          {
+            year: 2,
+            age: 29,
+            title: "工资日火锅",
+            scene: "city",
+            environment: "home",
+            pose: "sit",
+            prop: "desk",
+            event: "工资日到，你们去吃火锅。红油溅到白衬衫上，爱人拿湿巾给你擦，动作比任何誓言都自然。邻桌情侣在吵架，你们对视一眼，突然都笑了。回家路上，你把本月结余转进共同账户，备注只写：继续。",
+            emotion: "温热",
+            emotion_value: 7,
+            reflection: "原来幸福常常是安静的重复。",
+            shadow_dialogue: "别小看一顿火锅的分量。"
+          },
+          {
+            year: 3,
+            age: 30,
+            title: "深夜来电",
+            scene: "night",
+            environment: "home",
+            pose: "phone",
+            prop: "phone",
+            event: "深夜，前同事从深圳打来电话，说新项目缺人，年薪翻倍。你走到阳台，江风很冷。爱人递来外套，没问是谁。你挂断后说：我拒绝了。她只回：我知道。那一刻你明白，留下不是退缩，是选择。",
+            emotion: "摇摆",
+            emotion_value: 4,
+            reflection: "诱惑来时，我更看清了谁在身边。",
+            shadow_dialogue: "你也在等一个留下的理由吗？"
+          },
+          {
+            year: 4,
+            age: 31,
+            title: "手术室外",
+            scene: "rain",
+            environment: "hospital",
+            pose: "tired",
+            prop: "hospital",
+            event: "爱人生病住院那周，你每天下班就赶去医院。走廊长椅上的咖啡凉透，你在门外等到凌晨。她醒来第一句是：对不起，耽误你升职了。你摇头，把保温壶里的粥吹凉。窗外雨线斜着，像你们没走散的那条路。",
+            emotion: "揪心",
+            emotion_value: 3,
+            reflection: "原来陪伴的代价，是心甘情愿。",
+            shadow_dialogue: "最难的不是选，是扛住选之后的夜。"
+          },
+          {
+            year: 5,
+            age: 32,
+            title: "小店开张",
+            scene: "nature",
+            environment: "seaside",
+            pose: "run",
+            prop: "suitcase",
+            event: "你们辞职开了间小书店。开业第一天只卖出三本旧诗集，爱人有点失落。你把最厚那本《百年孤独》摆上橱窗，说：我们卖的不是书，是让人停下来的时间。傍晚第一位常客是个高中生，买走一本《挪威的森林》。",
+            emotion: "冒险",
+            emotion_value: 6,
+            reflection: "一起冒险，比一个人赢更像我想要的生活。",
+            shadow_dialogue: "敢一起输，才配一起赢。"
+          },
+          {
+            year: 6,
+            age: 33,
+            title: "旧友婚礼",
+            scene: "city",
+            environment: "stage",
+            pose: "celebrate",
+            prop: "stage",
+            event: "当年劝你分手的朋友结婚，请你当伴郎。敬酒时他低声说：你们居然还在。你举杯：还在，不等于没吵过。全场笑开。回家地铁上，爱人靠着你肩膀睡着，你把她的头发别到耳后，像第七年仍是一次新的确认。",
+            emotion: "释然",
+            emotion_value: 8,
+            reflection: "长久不是没风浪，是风浪后还选择靠岸。",
+            shadow_dialogue: "别羡慕表面的稳定，问问背后的修补。"
+          },
+          {
+            year: 7,
+            age: 34,
+            title: "窗台两杯茶",
+            scene: "home",
+            environment: "studio",
+            pose: "write",
+            prop: "desk",
+            event: "第七年秋天，书店终于盈利。清晨你们在窗台喝茶，阳光照在账本和未拆的信上——那是深圳那家公司第七年发来的合作邀请。你把信折好收进抽屉，写下给未来自己的话：留下，不是错过世界，是把世界缩小到值得的人身边。",
+            emotion: "安宁",
+            emotion_value: 9,
+            reflection: "我不后悔没成为更成功的那个，只庆幸没成为更孤单的那个。",
+            shadow_dialogue: "你若也在犹豫，先问问想和谁共度七年。"
+          }
+        ],
+        final_message: "七年过去，你没有赢得更大的城市，却守住了那个想一起变老的人——这本身就是一种辽阔。"
+      }
+    ];
+
+    const CHARACTER_ASSETS = {
+      Adam: {
+        idle: 'assets/modern/Adam_idle_anim_16x16.png',
+        run: 'assets/modern/Adam_run_16x16.png',
+        sit: 'assets/modern/Adam_sit_16x16.png',
+        sit2: 'assets/modern/Adam_sit2_16x16.png',
+        sit3: 'assets/modern/Adam_sit3_16x16.png',
+        phone: 'assets/modern/Adam_phone_16x16.png'
+      },
+      Alex: {
+        idle: 'assets/modern/Alex_idle_anim_16x16.png',
+        run: 'assets/modern/Alex_run_16x16.png',
+        sit: 'assets/modern/Alex_sit_16x16.png',
+        sit2: 'assets/modern/Alex_sit2_16x16.png',
+        sit3: 'assets/modern/Alex_sit3_16x16.png',
+        phone: 'assets/modern/Alex_phone_16x16.png'
+      },
+      Amelia: {
+        idle: 'assets/modern/Amelia_idle_anim_16x16.png',
+        run: 'assets/modern/Amelia_run_16x16.png',
+        sit: 'assets/modern/Amelia_sit_16x16.png',
+        sit2: 'assets/modern/Amelia_sit2_16x16.png',
+        sit3: 'assets/modern/Amelia_sit3_16x16.png',
+        phone: 'assets/modern/Amelia_phone_16x16.png'
+      },
+      Bob: {
+        idle: 'assets/modern/Bob_idle_anim_16x16.png',
+        run: 'assets/modern/Bob_run_16x16.png',
+        sit: 'assets/modern/Bob_sit_16x16.png',
+        sit2: 'assets/modern/Bob_sit2_16x16.png',
+        sit3: 'assets/modern/Bob_sit3_16x16.png',
+        phone: 'assets/modern/Bob_phone_16x16.png'
+      }
+    };
+
+    const POSE_META = {
+      idle: { source: 'idle', frames: 24, speed: 1100 },
+      run: { source: 'run', frames: 24, speed: 620 },
+      sit: { source: 'sit', frames: 24, speed: 1400 },
+      phone: { source: 'phone', frames: 9, speed: 980 },
+      type: { source: 'sit2', frames: 24, speed: 960 },
+      write: { source: 'sit3', frames: 12, speed: 1200 },
+      tired: { source: 'sit', frames: 24, speed: 1800 },
+      celebrate: { source: 'idle', frames: 24, speed: 760 },
+      carry: { source: 'run', frames: 24, speed: 720 }
+    };
+
+    const AVATAR_FILTERS = {
+      amber: 'hue-rotate(0deg) saturate(1.08) brightness(1.05)',
+      teal: 'hue-rotate(45deg) saturate(1.18) brightness(1.02)',
+      violet: 'hue-rotate(120deg) saturate(1.04) brightness(1.04)',
+      slate: 'hue-rotate(180deg) saturate(0.82) brightness(0.96)',
+      rose: 'hue-rotate(310deg) saturate(1.16) brightness(1.04)'
+    };
+
+    const ENVIRONMENT_LABELS = {
+      office: '办公室',
+      home: '出租屋',
+      hospital: '病房',
+      seaside: '海边工作室',
+      stage: '首映现场',
+      studio: '清晨工作室',
+      // v2 new
+      classroom: '复读班',
+      dorm_night: '宿舍夜',
+      trainstation: '火车站',
+      postoffice: '邮局窗口',
+      cafeteria: '食堂'
+    };
+
+    const INTERIOR_CELL = 48;
+    const INTERIOR_SPRITES = {
+      pcDesk: { col: 4, row: 3, cols: 2, rows: 2 },
+      bookshelf: { col: 9, row: 0, cols: 2, rows: 3 },
+      plant: { col: 12, row: 58, cols: 1, rows: 2 },
+      sofa: { col: 0, row: 76, cols: 4, rows: 2 },
+      tv: { col: 8, row: 16, cols: 2, rows: 2 },
+      window: { col: 7, row: 14, cols: 2, rows: 2 },
+      bed: { col: 0, row: 0, cols: 2, rows: 2 },
+      rug: { col: 4, row: 10, cols: 3, rows: 1 },
+      classDesk: { col: 0, row: 20, cols: 2, rows: 2 },
+      blackboard: { col: 4, row: 24, cols: 3, rows: 2 },
+      lamp: { col: 11, row: 52, cols: 1, rows: 2 }
+    };
+
+    const ROOM_PRESETS = {
+      office: {
+        lightX: '68%',
+        furniture: [
+          { sprite: 'rug', left: '28%', bottom: '28%', scale: 0.92, z: 0 },
+          { sprite: 'window', left: '8%', bottom: '32%', scale: 0.82, z: 1 },
+          { sprite: 'pcDesk', left: '40%', bottom: '28%', scale: 0.86, z: 2 },
+          { sprite: 'bookshelf', left: '68%', bottom: '30%', scale: 0.84, z: 2 },
+          { sprite: 'plant', left: '86%', bottom: '28%', scale: 0.88, z: 3 }
+        ]
+      },
+      home: {
+        lightX: '36%',
+        furniture: [
+          { sprite: 'rug', left: '24%', bottom: '28%', scale: 0.95, z: 0 },
+          { sprite: 'tv', left: '10%', bottom: '30%', scale: 0.8, z: 1 },
+          { sprite: 'sofa', left: '48%', bottom: '28%', scale: 0.72, z: 2 },
+          { sprite: 'bookshelf', left: '72%', bottom: '30%', scale: 0.78, z: 2 },
+          { sprite: 'lamp', left: '82%', bottom: '28%', scale: 0.9, z: 3 }
+        ]
+      },
+      hospital: {
+        lightX: '50%',
+        furniture: [
+          { sprite: 'bed', left: '46%', bottom: '28%', scale: 0.88, z: 2 },
+          { sprite: 'classDesk', left: '10%', bottom: '28%', scale: 0.76, z: 2 },
+          { sprite: 'plant', left: '78%', bottom: '28%', scale: 0.86, z: 3 }
+        ]
+      },
+      seaside: {
+        lightX: '22%',
+        furniture: [
+          { sprite: 'rug', left: '22%', bottom: '28%', scale: 0.9, z: 0 },
+          { sprite: 'window', left: '6%', bottom: '32%', scale: 0.88, z: 1 },
+          { sprite: 'classDesk', left: '36%', bottom: '28%', scale: 0.8, z: 2 },
+          { sprite: 'plant', left: '80%', bottom: '28%', scale: 0.9, z: 3 }
+        ]
+      },
+      stage: {
+        lightX: '70%',
+        furniture: [
+          { sprite: 'rug', left: '30%', bottom: '28%', scale: 0.88, z: 0 },
+          { sprite: 'blackboard', left: '34%', bottom: '30%', scale: 0.78, z: 2 },
+          { sprite: 'plant', left: '12%', bottom: '28%', scale: 0.86, z: 3 },
+          { sprite: 'lamp', left: '78%', bottom: '28%', scale: 0.92, z: 3 }
+        ]
+      },
+      studio: {
+        lightX: '56%',
+        furniture: [
+          { sprite: 'rug', left: '26%', bottom: '28%', scale: 0.92, z: 0 },
+          { sprite: 'classDesk', left: '38%', bottom: '28%', scale: 0.82, z: 2 },
+          { sprite: 'bookshelf', left: '8%', bottom: '30%', scale: 0.8, z: 2 },
+          { sprite: 'plant', left: '82%', bottom: '28%', scale: 0.88, z: 3 }
+        ]
+      },
+      // v2 environments
+      classroom: {
+        lightX: '50%',
+        furniture: [
+          { sprite: 'classDesk', left: '14%', bottom: '28%', scale: 0.82, z: 2 },
+          { sprite: 'classDesk', left: '36%', bottom: '28%', scale: 0.82, z: 2 },
+          { sprite: 'classDesk', left: '58%', bottom: '28%', scale: 0.82, z: 2 },
+          { sprite: 'classDesk', left: '80%', bottom: '28%', scale: 0.82, z: 2 },
+          { sprite: 'blackboard', left: '40%', bottom: '54%', scale: 0.82, z: 1 }
+        ]
+      },
+      dorm_night: {
+        lightX: '18%',
+        furniture: [
+          { sprite: 'rug', left: '22%', bottom: '28%', scale: 0.92, z: 0 },
+          { sprite: 'bed', left: '8%', bottom: '30%', scale: 0.82, z: 2 },
+          { sprite: 'classDesk', left: '52%', bottom: '28%', scale: 0.84, z: 2 },
+          { sprite: 'lamp', left: '74%', bottom: '28%', scale: 0.88, z: 3 },
+          { sprite: 'bookshelf', left: '86%', bottom: '30%', scale: 0.76, z: 2 }
+        ]
+      },
+      trainstation: {
+        lightX: '60%',
+        furniture: [
+          { sprite: 'rug', left: '30%', bottom: '26%', scale: 1.05, z: 0 },
+          { sprite: 'classDesk', left: '14%', bottom: '28%', scale: 0.78, z: 1 },
+          { sprite: 'classDesk', left: '70%', bottom: '28%', scale: 0.78, z: 1 },
+          { sprite: 'plant', left: '88%', bottom: '28%', scale: 0.74, z: 3 }
+        ]
+      },
+      postoffice: {
+        lightX: '52%',
+        furniture: [
+          { sprite: 'rug', left: '24%', bottom: '28%', scale: 0.95, z: 0 },
+          { sprite: 'pcDesk', left: '40%', bottom: '28%', scale: 0.88, z: 2 },
+          { sprite: 'lamp', left: '14%', bottom: '28%', scale: 0.9, z: 3 },
+          { sprite: 'bookshelf', left: '76%', bottom: '30%', scale: 0.78, z: 2 }
+        ]
+      },
+      cafeteria: {
+        lightX: '40%',
+        furniture: [
+          { sprite: 'rug', left: '22%', bottom: '28%', scale: 1.0, z: 0 },
+          { sprite: 'classDesk', left: '14%', bottom: '28%', scale: 0.78, z: 2 },
+          { sprite: 'classDesk', left: '42%', bottom: '28%', scale: 0.78, z: 2 },
+          { sprite: 'classDesk', left: '70%', bottom: '28%', scale: 0.78, z: 2 },
+          { sprite: 'plant', left: '88%', bottom: '28%', scale: 0.86, z: 3 }
+        ]
+      }
+    };
+
+    const sceneEl = document.getElementById('pixelScene');
+    const stageEl = document.querySelector('.stage');
+    const storyEl = document.querySelector('.story');
+    const spriteWrapEl = document.querySelector('.sprite-wrap');
+    const spriteEl = document.querySelector('.sprite');
+    const avatarPreviewEl = document.getElementById('avatarPreview');
+    const avatarHintEl = document.getElementById('avatarHint');
+    const lifeRoomEl = document.getElementById('lifeRoom');
+    const furnitureLayerEl = document.getElementById('furnitureLayer');
+    const roomLightEl = document.getElementById('roomLight');
+    const progressEl = document.getElementById('progress');
+    const statusEl = document.getElementById('status');
+    const premiseEl = document.getElementById('premise');
+    const yearLabelEl = document.getElementById('yearLabel');
+    const titleEl = document.getElementById('title');
+    const ageLabelEl = document.getElementById('ageLabel');
+    const emotionLabelEl = document.getElementById('emotionLabel');
+    const environmentLabelEl = document.getElementById('environmentLabel');
+    const emotionFillEl = document.getElementById('emotionFill');
+    const eventEl = document.getElementById('event');
+    const reflectionEl = document.getElementById('reflection');
+    const dialogueEl = document.getElementById('dialogue');
+    const curveCardEl = document.getElementById('curveCard');
+    const curveEl = document.getElementById('curve');
+    const finalTitleEl = document.getElementById('finalTitle');
+    const finalMessageEl = document.getElementById('finalMessage');
+    const localModeEl = document.getElementById('localMode');
+    const nextBtnEl = document.getElementById('nextBtn');
+
+    let activeStory = null;
+    let activeIndex = -1;
+    let pendingIntervention = null;
+    let liveBusy = false;
+    let typing = false;
+    let typeTimer = null;
+    let localStoryIndex = 0;
+    let avatarProfile = { character: 'Sunny', palette: 'teal', label: '安静的少年', hair: 'curlyhair' };
+    let spriteAnimationId = null;
+    let spriteAnimationState = { frame: -1, lastTick: 0, frames: 24, speed: 1000, scale: 4 };
+
+    localModeEl.checked = USE_LOCAL_DEFAULT;
+
+    function initProgress() {
+      progressEl.innerHTML = '';
+      for (let i = 0; i < 7; i += 1) {
+        const node = document.createElement('button');
+        node.type = 'button';
+        node.disabled = true;
+        node.title = `第 ${i + 1} 年`;
+        node.setAttribute('aria-label', `跳到第 ${i + 1} 年`);
+        node.addEventListener('click', () => {
+          if (!activeStory || i > Math.max(activeIndex, 0)) return;
+          finishTypingNow();
+          renderYear(i);
+        });
+        progressEl.appendChild(node);
+      }
+    }
+
+    function setProgress(index) {
+      [...progressEl.children].forEach((node, i) => {
+        node.disabled = !activeStory || i > Math.max(index, 0);
+        node.classList.toggle('seen', i < index);
+        node.classList.toggle('active', i === index);
+        if (activeStory?.years[i]) {
+          const year = activeStory.years[i];
+          node.title = `第 ${i + 1} 年 · ${year.title}`;
+          node.setAttribute('aria-label', `跳到第 ${i + 1} 年：${year.title}`);
+        }
+      });
+    }
+
+    function setStatus(message, kind = 'normal') {
+      statusEl.textContent = message;
+      statusEl.style.color = kind === 'error' ? 'var(--rose)' : 'var(--muted)';
+    }
+
+    function getInputs() {
+      const checkedQuote = document.querySelector('input[name="quote"]:checked');
+      return {
+        choice: document.getElementById('choice').value.trim(),
+        keywords: document.getElementById('keywords').value.trim(),
+        description: document.getElementById('description').value.trim(),
+        age: Number(document.getElementById('age').value || 26),
+        character: document.getElementById('character').value || 'Adam',
+        mbti: document.getElementById('mbti').value || '',
+        quote: checkedQuote ? checkedQuote.value : ''
+      };
+    }
+
+    function hashText(text) {
+      let hash = 2166136261;
+      for (let i = 0; i < text.length; i += 1) {
+        hash ^= text.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+      }
+      return Math.abs(hash >>> 0);
+    }
+
+    function generateAvatar(randomize = false) {
+      const inputs = getInputs();
+      const seedText = randomize ? `${Date.now()}-${Math.random()}` : `${inputs.choice}|${inputs.keywords}|${inputs.description}|${inputs.age}`;
+      const seed = hashText(seedText);
+      const palettes = Object.keys(AVATAR_FILTERS);
+      const lower = `${inputs.keywords}${inputs.description}`.toLowerCase();
+
+      // Respect the user's family choice; only randomize within-family characters
+      const family = (document.querySelector('input[name="characterFamily"]:checked')?.value) || avatarProfile.family || 'sunny';
+      let character;
+      let hair = avatarProfile.hair || 'curlyhair';
+      if (family === 'sunny') {
+        character = 'Sunny';
+        if (randomize) hair = SUNNY_HAIRS[seed % SUNNY_HAIRS.length];
+      } else {
+        const modernChars = ['Adam', 'Alex', 'Amelia', 'Bob'];
+        character = modernChars[seed % modernChars.length];
+      }
+
+      let palette = palettes[Math.floor(seed / 7) % palettes.length];
+      if (/敏感|温柔|怀念|遗憾/.test(lower)) palette = 'teal';
+      if (/执拗|野心|证明|不甘|要强/.test(lower)) palette = 'amber';
+      if (/孤独|夜|离开|告别/.test(lower)) palette = 'slate';
+      if (/爱|关系|前任|分手/.test(lower)) palette = 'rose';
+      const labels = ['城市漂流者', '安静的行动派', '迟到的冒险家', '把话藏起来的人', '不肯认输的创作者', '在路上的人'];
+      avatarProfile = {
+        character,
+        family,
+        hair,
+        palette,
+        label: labels[Math.floor(seed / 13) % labels.length]
+      };
+      document.getElementById('character').value = character;
+      // sync hair-picker highlight
+      document.querySelectorAll('.hair-btn').forEach(b => b.classList.toggle('active', b.dataset.hair === hair));
+      applyAvatarProfile();
+      setStatus(`已生成形象：${avatarProfile.label}。`);
+    }
+
+    const PREVIEW_SPRITE = { scale: 2, frame: 18, frameWidth: 16 };
+
+    function applyAvatarProfile() {
+      const filter = AVATAR_FILTERS[avatarProfile.palette] || AVATAR_FILTERS.teal;
+      document.documentElement.style.setProperty('--avatar-filter', filter);
+
+      const fam = characterFamily(avatarProfile.character);
+      // hair picker visibility
+      const hairPicker = document.getElementById('hairPicker');
+      if (hairPicker) hairPicker.hidden = fam !== 'sunny';
+
+      if (fam === 'sunny') {
+        // Build a static preview using sunny idle frame 0
+        const hair = avatarProfile.hair && SUNNY_HAIRS.includes(avatarProfile.hair) ? avatarProfile.hair : 'curlyhair';
+        avatarPreviewEl.classList.add('sunny');
+        avatarPreviewEl.style.setProperty('--preview-url', `url("assets/sunny/idle/${hair}_idle_strip9.png")`);
+        avatarPreviewEl.style.backgroundPosition = `0 0`;
+        avatarPreviewEl.style.backgroundSize = '';
+        avatarHintEl.textContent = `Sunny / ${hair} / ${avatarProfile.label}`;
+      } else {
+        avatarPreviewEl.classList.remove('sunny');
+        const offset = PREVIEW_SPRITE.frame * PREVIEW_SPRITE.frameWidth * PREVIEW_SPRITE.scale;
+        avatarPreviewEl.style.setProperty('--preview-url', `url("${CHARACTER_ASSETS[avatarProfile.character].idle}")`);
+        avatarPreviewEl.style.backgroundPosition = `-${offset}px 0`;
+        avatarPreviewEl.style.backgroundSize = '';
+        avatarHintEl.textContent = `${avatarProfile.character} / ${avatarProfile.label} / ${avatarProfile.palette}`;
+      }
+
+      if (activeStory && activeIndex >= 0) {
+        setCharacterPose(avatarProfile.character, activeStory.years[activeIndex].pose);
+      } else {
+        setCharacterPose(avatarProfile.character, 'idle');
+      }
+    }
+
+    function inferStageDetails(year) {
+      const text = `${year.title || ''}${year.scene || ''}${year.event || ''}`;
+      if (/复读|教室|高考|后排|课桌|班/.test(text)) return { environment: 'classroom', pose: 'wait', prop: 'desk' };
+      if (/失眠|凌晨|宿舍|夜里|寝室/.test(text)) return { environment: 'dorm_night', pose: 'tired', prop: 'desk' };
+      if (/火车|站台|候车|出站|复试/.test(text)) return { environment: 'trainstation', pose: 'carry', prop: 'suitcase' };
+      if (/邮局|窗口|汇款|字真好看|柜台/.test(text)) return { environment: 'postoffice', pose: 'doing', prop: 'desk' };
+      if (/食堂|吃饭|餐厅|盒饭/.test(text)) return { environment: 'cafeteria', pose: 'wait', prop: 'desk' };
+      if (/病|护士|母亲|住院|疲|累/.test(text)) return { environment: 'hospital', pose: 'tired', prop: 'hospital' };
+      if (/电话|来电|语音/.test(text)) return { environment: 'home', pose: 'phone', prop: 'phone' };
+      if (/海|渔网|写剧情|剧本/.test(text)) return { environment: 'seaside', pose: 'write', prop: 'laptop' };
+      if (/首映|分享|观众|庆功|发言|讲台/.test(text)) return { environment: 'stage', pose: 'celebrate', prop: 'stage' };
+      if (/雨|地铁|路上|入职|搬|护照/.test(text)) return { environment: 'office', pose: 'carry', prop: 'suitcase' };
+      if (/清晨|窗台|名单/.test(text)) return { environment: 'studio', pose: 'write', prop: 'desk' };
+      if (/公司|项目|上线|版本|关卡|电脑/.test(text)) return { environment: 'office', pose: 'type', prop: 'laptop' };
+      return { environment: 'home', pose: 'idle', prop: 'desk' };
+    }
+
+    function normalizeStory(story, inputs) {
+      if (!story || !Array.isArray(story.years) || story.years.length !== 7) {
+        throw new Error('故事 JSON 缺少 years，或不是七年。');
+      }
+      const pivotalSet = new Set(Array.isArray(story.pivotal_years) ? story.pivotal_years : []);
+      const beats = Array.isArray(story.beats) ? story.beats : null;
+
+      return {
+        ...story,
+        premise: story.premise || `如果当初选择：${inputs.choice}`,
+        beats,
+        pivotal_years: Array.from(pivotalSet),
+        persona_card: story.persona_card || null,
+        final: story.final || (story.final_message ? { title: `${story.shadow_name || '影子'}的七年`, message: story.final_message } : null),
+        years: story.years.map((year, index) => {
+          const inferred = inferStageDetails(year);
+          const environment = ['office', 'home', 'hospital', 'seaside', 'stage', 'studio', 'classroom', 'dorm_night', 'trainstation', 'postoffice', 'cafeteria'].includes(year.environment) ? year.environment : inferred.environment;
+          const pose = ['idle', 'run', 'sit', 'phone', 'type', 'write', 'tired', 'celebrate', 'carry', 'doing', 'wait', 'hurt', 'cast', 'reel', 'think', 'read', 'walk'].includes(year.pose) ? year.pose : inferred.pose;
+          const prop = ['desk', 'laptop', 'phone', 'hospital', 'suitcase', 'stage'].includes(year.prop) ? year.prop : inferred.prop;
+          const yearN = index + 1;
+          let is_pivotal = typeof year.is_pivotal === 'boolean' ? year.is_pivotal : pivotalSet.has(yearN);
+          // If beats present and disagrees with is_pivotal, beats wins
+          if (beats && beats[index]) is_pivotal = beats[index].type === 'pivotal';
+          const emotionLabel = typeof year.emotion === 'object' ? year.emotion.label : year.emotion;
+          const emotionValue = typeof year.emotion === 'object' ? year.emotion.value : year.emotion_value;
+          return {
+            year: yearN,
+            age: Number(year.age || inputs.age + yearN),
+            title: year.title || `第${yearN}年`,
+            scene: ['city', 'home', 'office', 'nature', 'night', 'rain'].includes(year.scene) ? year.scene : 'city',
+            environment,
+            pose,
+            prop,
+            event: year.event || '这一年的故事还没有写完。',
+            emotion: emotionLabel || '未知',
+            emotion_value: Math.max(1, Math.min(10, Number(emotionValue || 5))),
+            reflection: year.reflection || '',
+            shadow_dialogue: year.shadow_dialogue || '',
+            // v2 fields (passthrough)
+            is_pivotal,
+            decision_made: year.decision_made || '',
+            intervention_prompt: year.intervention_prompt || null,
+            new_mood: typeof year.new_mood === 'number' ? year.new_mood : emotionValue,
+            new_esteem: typeof year.new_esteem === 'number' ? year.new_esteem : 5,
+            memory_summary: year.memory_summary || (year.reflection || year.event || '').slice(0, 28),
+            user_intervention: null
+          };
+        })
+      };
+    }
+
+    function stopSpriteAnimation() {
+      if (spriteAnimationId) {
+        cancelAnimationFrame(spriteAnimationId);
+        spriteAnimationId = null;
+      }
+    }
+
+    // ============================================================
+    // v2: Sunnyside character family — layered (base + hair), 8 actions
+    // ============================================================
+    const SUNNY_ACTIONS = {
+      idle:    { dir: 'idle',    suffix: '_idle_strip9.png',     frames: 9,  speed: 1100 },
+      walk:    { dir: 'walk',    suffix: '_walk_strip8.png',     frames: 8,  speed: 720 },
+      doing:   { dir: 'doing',   suffix: '_doing_strip8.png',    frames: 8,  speed: 820 },
+      wait:    { dir: 'wait',    suffix: '_waiting_strip9.png',  frames: 9,  speed: 1400 },
+      hurt:    { dir: 'hurt',    suffix: '_hurt_strip8.png',     frames: 8,  speed: 880 },
+      carry:   { dir: 'carry',   suffix: '_carry_strip8.png',    frames: 8,  speed: 700 },
+      casting: { dir: 'casting', suffix: '_casting_strip15.png', frames: 15, speed: 1200 },
+      reeling: { dir: 'reeling', suffix: '_reeling_strip13.png', frames: 13, speed: 1000 }
+    };
+
+    // Shadow story pose → Sunny action
+    const SUNNY_POSE_MAP = {
+      idle: 'idle', run: 'walk', walk: 'walk', sit: 'wait',
+      phone: 'doing', type: 'doing', write: 'doing',
+      tired: 'wait', celebrate: 'casting', carry: 'carry',
+      hurt: 'hurt', think: 'reeling', read: 'wait',
+      // new poses for richer story expression
+      doing: 'doing', wait: 'wait', cast: 'casting', reel: 'reeling'
+    };
+
+    const SUNNY_FRAME_W = 96;
+    const SUNNY_FRAME_H = 64;
+    const SUNNY_DISPLAY_H = 102; // matches CSS height
+    const SUNNY_HAIRS = ['shorthair', 'curlyhair', 'longhair', 'bowlhair', 'mophair', 'spikeyhair'];
+
+    function characterFamily(character) {
+      if (character === 'Sunny') return 'sunny';
+      return 'modern';
+    }
+
+    function startSpriteAnimation(meta) {
+      stopSpriteAnimation();
+      spriteAnimationState = {
+        frame: -1,
+        lastTick: 0,
+        frames: meta.frames,
+        speed: meta.speed,
+        scale: meta.scale || 4,
+        frameWidth: meta.frameWidth || 16,
+        family: meta.family || 'modern'
+      };
+
+      const baseLayer = spriteEl.querySelector('[data-layer="base"]');
+      const hairLayer = spriteEl.querySelector('[data-layer="hair"]');
+
+      function animate(now) {
+        const st = spriteAnimationState;
+        const frameDuration = st.speed / st.frames;
+        if (!st.lastTick || now - st.lastTick >= frameDuration) {
+          st.frame = (st.frame + 1) % st.frames;
+          st.lastTick = now;
+          if (st.family === 'sunny') {
+            const ratio = SUNNY_DISPLAY_H / SUNNY_FRAME_H; // display scale
+            const offset = -(st.frame * SUNNY_FRAME_W * ratio);
+            const pos = `${offset.toFixed(1)}px 0`;
+            if (baseLayer) baseLayer.style.setProperty('--layer-bg-pos', pos);
+            if (hairLayer) hairLayer.style.setProperty('--layer-bg-pos', pos);
+          } else {
+            spriteEl.style.backgroundPosition = `${-(st.frame * st.frameWidth * st.scale)}px 0`;
+          }
+        }
+        spriteAnimationId = requestAnimationFrame(animate);
+      }
+      spriteAnimationId = requestAnimationFrame(animate);
+    }
+
+    function setCharacterPose(character, pose) {
+      const fam = characterFamily(character);
+      spriteWrapEl.classList.remove('family-modern', 'family-sunny');
+      spriteWrapEl.classList.add(`family-${fam}`);
+      spriteWrapEl.classList.remove('pose-idle', 'pose-run', 'pose-sit', 'pose-phone', 'pose-type', 'pose-write', 'pose-tired', 'pose-celebrate', 'pose-carry', 'pose-hurt', 'pose-think', 'pose-read', 'pose-doing', 'pose-wait', 'pose-cast', 'pose-reel');
+
+      if (fam === 'sunny') {
+        const safePose = SUNNY_POSE_MAP[pose] ? pose : 'idle';
+        const action = SUNNY_POSE_MAP[safePose] || 'idle';
+        const def = SUNNY_ACTIONS[action];
+        const hair = avatarProfile.hair && SUNNY_HAIRS.includes(avatarProfile.hair) ? avatarProfile.hair : 'curlyhair';
+        const baseUrl = `assets/sunny/${def.dir}/base${def.suffix}`;
+        const hairUrl = `assets/sunny/${def.dir}/${hair}${def.suffix}`;
+        spriteEl.classList.add('layered');
+        const baseLayer = spriteEl.querySelector('[data-layer="base"]');
+        const hairLayer = spriteEl.querySelector('[data-layer="hair"]');
+        if (baseLayer) baseLayer.style.setProperty('--layer-url', `url("${baseUrl}")`);
+        if (hairLayer) hairLayer.style.setProperty('--layer-url', `url("${hairUrl}")`);
+        spriteWrapEl.classList.add(`pose-${safePose}`);
+        startSpriteAnimation({ ...def, frames: def.frames, speed: def.speed, family: 'sunny' });
+      } else {
+        // Modern Interiors (16x16)
+        const selected = CHARACTER_ASSETS[character] ? character : 'Adam';
+        const safePose = POSE_META[pose] ? pose : 'idle';
+        const meta = POSE_META[safePose] || POSE_META.idle;
+        const source = CHARACTER_ASSETS[selected][meta.source] ? meta.source : 'idle';
+        spriteEl.classList.remove('layered');
+        spriteEl.style.setProperty('--sprite-url', `url("${CHARACTER_ASSETS[selected][source]}")`);
+        spriteWrapEl.classList.add(`pose-${safePose}`);
+        startSpriteAnimation({ ...meta, frames: meta.frames, speed: meta.speed, scale: 4, frameWidth: 16, family: 'modern' });
+      }
+    }
+
+    function spriteRect(name) {
+      const def = INTERIOR_SPRITES[name];
+      if (!def) return null;
+      return {
+        x: def.col * INTERIOR_CELL,
+        y: def.row * INTERIOR_CELL,
+        w: def.cols * INTERIOR_CELL,
+        h: def.rows * INTERIOR_CELL
+      };
+    }
+
+    function renderFurniture(preset) {
+      furnitureLayerEl.innerHTML = '';
+      const items = [...preset.furniture].sort((a, b) => (a.z || 1) - (b.z || 1));
+      items.forEach(item => {
+        const sprite = spriteRect(item.sprite);
+        if (!sprite) return;
+        const el = document.createElement('div');
+        el.className = 'furniture';
+        el.style.left = item.left;
+        el.style.bottom = item.bottom;
+        el.style.width = `${sprite.w}px`;
+        el.style.height = `${sprite.h}px`;
+        el.style.backgroundPosition = `-${sprite.x}px -${sprite.y}px`;
+        el.style.zIndex = String(item.z ?? 1);
+        el.style.transform = `scale(${item.scale || 1})`;
+        furnitureLayerEl.appendChild(el);
+      });
+    }
+
+    function renderRoom(environment) {
+      const preset = ROOM_PRESETS[environment] || ROOM_PRESETS.home;
+      renderFurniture(preset);
+      roomLightEl.style.setProperty('--light-x', preset.lightX || '60%');
+    }
+
+    // v2: environment → optional backdrop image overlay
+    const SCENE_BACKDROPS = {
+      classroom:    { city: 'city2', filter: 'contrast(1.1) saturate(0.85) brightness(0.78)' },
+      dorm_night:   { city: 'city4', filter: 'contrast(1.1) saturate(0.6) brightness(0.42) hue-rotate(-15deg)' },
+      trainstation: { city: 'city6', filter: 'contrast(1.05) saturate(0.7) brightness(0.65)' },
+      postoffice:   { city: 'city7', filter: 'contrast(1.0) saturate(1.05) brightness(0.92)' },
+      cafeteria:    { city: 'city5', filter: 'contrast(1.05) saturate(0.95) brightness(0.78)' },
+      seaside:      { city: 'city3', filter: 'contrast(1.0) saturate(1.1) brightness(0.95)' },
+      stage:        { city: 'city8', filter: 'contrast(1.15) saturate(1.15) brightness(0.82)' },
+      studio:       { city: 'city1', filter: 'contrast(1.05) saturate(0.95) brightness(0.82)' },
+      office:       { city: 'city2', filter: 'contrast(1.05) saturate(0.85) brightness(0.7)' },
+      home:         { city: null, filter: null },
+      hospital:     { city: null, filter: null }
+    };
+
+    function applySceneBackdrop(environment) {
+      const bd = SCENE_BACKDROPS[environment];
+      if (bd && bd.city) {
+        sceneEl.dataset.backdrop = bd.city;
+        sceneEl.style.setProperty('--backdrop-url', `url("assets/cities/${bd.city}.png")`);
+        sceneEl.style.setProperty('--backdrop-filter', bd.filter || 'contrast(1.05)');
+        sceneEl.classList.add('backdrop-on');
+      } else {
+        sceneEl.removeAttribute('data-backdrop');
+        sceneEl.style.removeProperty('--backdrop-url');
+        sceneEl.style.removeProperty('--backdrop-filter');
+        sceneEl.classList.remove('backdrop-on');
+      }
+    }
+
+    function setEnvironment(year) {
+      lifeRoomEl.className = `life-room environment-${year.environment}`;
+      environmentLabelEl.textContent = ENVIRONMENT_LABELS[year.environment] || year.environment;
+      renderRoom(year.environment);
+      applySceneBackdrop(year.environment);
+      setCharacterPose(avatarProfile.character, year.pose);
+    }
+
+    function buildProfile(inputs) {
+      return {
+        choice: inputs.choice,
+        age: inputs.age,
+        mbti: inputs.mbti || undefined,
+        keywords: inputs.keywords
+          ? inputs.keywords.split(/[,，、\s]+/).map(s => s.trim()).filter(Boolean)
+          : undefined,
+        quote: inputs.quote || undefined,
+        description: inputs.description || undefined
+      };
+    }
+
+    async function postJson(url, body) {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const data = await res.json().catch(() => null);
+      if (!res.ok) throw new Error(data?.error || `请求失败 (HTTP ${res.status})`);
+      return data;
+    }
+
+    async function fetchLiveStory(inputs) {
+      // v3 path: stepwise session so pivotal choices can shape later years.
+      showAgentMeeting();
+      pushAgentLog('persona', 'Persona', '解析人格…');
+      try {
+        const profile = buildProfile(inputs);
+        const data = await postJson('/api/story/start', { profile });
+        pushAgentLog('persona', 'Persona', `${data.session.persona_card?.name || '影子'}：${(data.session.persona_card?.core_traits || []).join('、')}`);
+        pushAgentLog('beats', 'Beats', `pivotal 年：${(data.session.pivotal_years || []).join(', ')}`);
+        await sleep(420);
+        hideAgentMeeting();
+        return {
+          profile,
+          persona_card: data.session.persona_card,
+          shadow: data.session.shadow,
+          beats: data.session.beats,
+          pivotal_years: data.session.pivotal_years,
+          memory_stream: [],
+          years: [],
+          final: null,
+          _liveSession: { ...data.session, run_id: data.run_id || data.session.run_id },
+          _live: true,
+          run_id: data.run_id || data.session.run_id,
+          shadow_name: data.session.persona_card?.name || '影子',
+          premise: `如果当初选择：${profile.choice}`
+        };
+      } catch (error) {
+        hideAgentMeeting();
+        throw error;
+      }
+    }
+
+    async function runStoryPipeline(inputs) {
+      const profile = {
+        choice: inputs.choice,
+        age: inputs.age,
+        mbti: inputs.mbti || undefined,
+        keywords: inputs.keywords
+          ? inputs.keywords.split(/[,，、\s]+/).map(s => s.trim()).filter(Boolean)
+          : undefined,
+        quote: inputs.quote || undefined,
+        description: inputs.description || undefined
+      };
+
+      const response = await fetch('/api/story', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
+        body: JSON.stringify({ profile })
+      });
+
+      if (!response.ok || !response.body) {
+        const fallback = await response.json().catch(() => null);
+        throw new Error(fallback?.error || `Live agents 不可用 (HTTP ${response.status})`);
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+      let story = null;
+      let lastError = null;
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+
+        let sepIdx;
+        while ((sepIdx = buffer.indexOf('\n\n')) !== -1) {
+          const block = buffer.slice(0, sepIdx);
+          buffer = buffer.slice(sepIdx + 2);
+          const event = (block.match(/event: ([^\n]+)/) || [])[1];
+          const dataMatch = block.match(/data: ([\s\S]+)/);
+          if (!event || !dataMatch) continue;
+          let data;
+          try { data = JSON.parse(dataMatch[1]); } catch { continue; }
+          handleAgentEvent(event, data);
+          if (event === 'story:done') story = data;
+          if (event === 'error') lastError = new Error(data.message || '生成失败');
+        }
+      }
+      if (lastError) throw lastError;
+      if (!story) throw new Error('管线没有返回 story。');
+      // Convert server-side persona_card.name -> shadow_name + final.message -> final_message
+      return {
+        ...story,
+        shadow_name: story.persona_card?.name || '影子',
+        final_message: story.final?.message || ''
+      };
+    }
+
+    async function generateLiveYear(userIntervention = null) {
+      if (!activeStory?._live || !activeStory._liveSession) {
+        throw new Error('缺少 live story session');
+      }
+      showAgentMeeting();
+      const nextYear = (activeStory.years.length || 0) + 1;
+      const beat = activeStory.beats?.[nextYear - 1];
+      pushAgentLog('year', `Year ${nextYear}`, `${beat?.type === 'pivotal' ? '重锤' : '掠过'}…`);
+      try {
+        const data = await postJson('/api/story/year', {
+          session: activeStory._liveSession,
+          user_intervention: userIntervention
+        });
+        activeStory._liveSession = data.session;
+        if (data.session.run_id) activeStory.run_id = data.session.run_id;
+        activeStory.memory_stream = data.session.memory_stream || [];
+        activeStory.years.push(data.year);
+        pushAgentLog('year', `Year ${data.year.year}`, `${data.year.title || ''} — ${data.year.emotion || ''}`);
+        await sleep(240);
+        hideAgentMeeting();
+        return data.year;
+      } catch (error) {
+        hideAgentMeeting();
+        throw error;
+      }
+    }
+
+    async function generateLiveFinal() {
+      if (!activeStory?._live || !activeStory._liveSession) {
+        throw new Error('缺少 live story session');
+      }
+      showAgentMeeting();
+      pushAgentLog('final', 'Final', '收束情绪弧线…');
+      try {
+        const data = await postJson('/api/story/final', {
+          session: activeStory._liveSession
+        });
+        activeStory._liveSession = data.session;
+        if (data.session.run_id) activeStory.run_id = data.session.run_id;
+        activeStory.final = data.final;
+        activeStory.final_message = data.final?.message || '';
+        pushAgentLog('final', 'Final', data.final?.title || '影子的七年');
+        await sleep(240);
+        hideAgentMeeting();
+        return data.final;
+      } catch (error) {
+        hideAgentMeeting();
+        throw error;
+      }
+    }
+
+    function handleAgentEvent(event, data) {
+      switch (event) {
+        case 'persona:start':
+          pushAgentLog('persona', 'Persona', '正在写人格卡…');
+          break;
+        case 'persona:done':
+          pushAgentLog('persona', 'Persona', `${data.name || '影子'}：${(data.core_traits || []).join('、')}`);
+          break;
+        case 'beats:start':
+          pushAgentLog('beats', 'Beats', '排七年的节奏…');
+          break;
+        case 'beats:done':
+          pushAgentLog('beats', 'Beats', `pivotal 年：${(data.pivotal_years || []).join(', ')}`);
+          break;
+        case 'year:start':
+          pushAgentLog('year', `Year ${data.year}`, `${data.type === 'pivotal' ? '重锤' : '掠过'}…`);
+          break;
+        case 'year:done':
+          pushAgentLog('year', `Year ${data.year}`, `${data.title || ''} — ${data.emotion?.label || data.emotion || ''}`);
+          break;
+        case 'final:start':
+          pushAgentLog('final', 'Final', '收束情绪弧线…');
+          break;
+        case 'final:done':
+          pushAgentLog('final', 'Final', data.title || '影子的七年');
+          break;
+        case 'error':
+          pushAgentLog('final', 'Error', data.message || '失败');
+          break;
+        default:
+          break;
+      }
+    }
+
+    function getLocalStory() {
+      const story = structuredClone(LOCAL_STORIES[localStoryIndex % LOCAL_STORIES.length]);
+      localStoryIndex += 1;
+      return story;
+    }
+
+    function typeText(text, target, done) {
+      clearTimeout(typeTimer);
+      typing = true;
+      target.classList.add('typing');
+      target.textContent = '';
+      let i = 0;
+      const speed = text.length > 95 ? 24 : 34;
+      nextBtnEl.textContent = '跳过';
+      nextBtnEl.classList.remove('pulse-next');
+
+      function tick() {
+        target.textContent = text.slice(0, i);
+        i += 1;
+        if (i <= text.length) {
+          typeTimer = setTimeout(tick, speed);
+        } else {
+          typing = false;
+          target.classList.remove('typing');
+          done?.();
+        }
+      }
+      tick();
+    }
+
+    function revealAfterTyping(year) {
+      reflectionEl.textContent = `“${year.reflection}”`;
+      dialogueEl.textContent = year.shadow_dialogue;
+      reflectionEl.classList.add('show');
+      dialogueEl.classList.add('show');
+      spriteWrapEl.classList.add('speaking');
+      nextBtnEl.textContent = activeIndex === 6 ? '看见曲线' : '下一年';
+      nextBtnEl.classList.add('pulse-next');
+      setStatus(year.is_pivotal ? '命运的岔口在等你做选择。' : '这一年结束了。点击下一年继续。');
+
+      // v2 hooks
+      pushMemoryFromYear(year);
+      showDialogueCue();
+      if (year.is_pivotal && year.intervention_prompt) {
+        // small delay so the typing reveal lands first
+        setTimeout(() => openIntervention(year), 350);
+      }
+    }
+
+    function renderYear(index) {
+      if (!activeStory || !activeStory.years[index]) return;
+      clearTimeout(typeTimer);
+      activeIndex = index;
+      const year = activeStory.years[index];
+
+      stageEl.classList.remove('story-ready');
+      stageEl.classList.add('transitioning');
+      spriteWrapEl.classList.remove('entering', 'speaking');
+      void stageEl.offsetWidth;
+      setTimeout(() => stageEl.classList.remove('transitioning'), 780);
+      setTimeout(() => {
+        stageEl.classList.add('story-ready');
+        spriteWrapEl.classList.add('entering');
+      }, 180);
+
+      curveCardEl.classList.remove('show');
+      sceneEl.className = `pixel-scene scene-${year.scene}`;
+      yearLabelEl.textContent = `第 ${year.year} 年${year.is_pivotal ? ' · 命运节点' : ''}`;
+      yearLabelEl.classList.toggle('pivotal', !!year.is_pivotal);
+      if (year.is_pivotal) {
+        stageEl.classList.add('pivotal-flash');
+        setTimeout(() => stageEl.classList.remove('pivotal-flash'), 1600);
+      }
+      hideDialogueCue();
+      if (index === 0) resetMemoryWall();
+      premiseEl.textContent = activeStory.premise;
+      titleEl.textContent = year.title;
+      ageLabelEl.textContent = `${year.age} 岁`;
+      emotionLabelEl.textContent = `${year.emotion} / ${year.emotion_value}`;
+      setEnvironment(year);
+      emotionFillEl.style.width = '0%';
+      reflectionEl.textContent = '';
+      dialogueEl.textContent = '';
+      eventEl.classList.remove('typing');
+      reflectionEl.classList.remove('show');
+      dialogueEl.classList.remove('show');
+      setProgress(index);
+      setStatus('影子正在走进这一年…');
+      nextBtnEl.textContent = '跳过';
+      nextBtnEl.classList.remove('pulse-next');
+
+      requestAnimationFrame(() => {
+        emotionFillEl.style.width = `${year.emotion_value * 10}%`;
+      });
+
+      typeText(year.event, eventEl, () => revealAfterTyping(year));
+    }
+
+    function finishTypingNow() {
+      if (!typing || !activeStory) return false;
+      clearTimeout(typeTimer);
+      const year = activeStory.years[activeIndex];
+      eventEl.textContent = year.event;
+      eventEl.classList.remove('typing');
+      typing = false;
+      revealAfterTyping(year);
+      return true;
+    }
+
+    function drawCurve(story) {
+      const values = story.years.map(year => year.emotion_value);
+      const width = 760;
+      const height = 280;
+      const pad = 44;
+      const step = (width - pad * 2) / (values.length - 1);
+      const y = value => height - pad - ((value - 1) / 9) * (height - pad * 2);
+      const points = values.map((value, i) => [pad + i * step, y(value)]);
+      const polyline = points.map(point => point.join(',')).join(' ');
+
+      curveEl.innerHTML = `
+        <defs>
+          <linearGradient id="lineGradient" x1="0" x2="1" y1="0" y2="0">
+            <stop stop-color="#eb6b78" offset="0"/>
+            <stop stop-color="#f0c05a" offset="0.5"/>
+            <stop stop-color="#65d6d0" offset="1"/>
+          </linearGradient>
+        </defs>
+        ${[1,3,5,7,9].map(v => `<line x1="${pad}" y1="${y(v)}" x2="${width - pad}" y2="${y(v)}" stroke="rgba(247,242,223,0.12)" />`).join('')}
+        <polyline class="curve-line" points="${polyline}" fill="none" stroke="url(#lineGradient)" stroke-width="5" stroke-linecap="square" stroke-linejoin="round"/>
+        ${points.map((point, i) => `
+          <g class="curve-point" style="animation-delay:${360 + i * 120}ms">
+            <rect x="${point[0] - 6}" y="${point[1] - 6}" width="12" height="12" fill="#f7f2df"/>
+            <text x="${point[0]}" y="${height - 14}" fill="#c9bea5" font-size="12" text-anchor="middle">${story.years[i].title}</text>
+            <text x="${point[0]}" y="${point[1] - 14}" fill="#f0c05a" font-size="14" text-anchor="middle">${values[i]}</text>
+          </g>
+        `).join('')}
+      `;
+    }
+
+    function showFinal() {
+      if (!activeStory) return;
+      drawCurve(activeStory);
+      const final = activeStory.final || {};
+      finalTitleEl.textContent = final.title || `${activeStory.shadow_name || '影子'}的七年`;
+      const parts = [];
+      if (final.message || activeStory.final_message) parts.push(final.message || activeStory.final_message);
+      if (final.regret) parts.push(`遗憾：${final.regret}`);
+      if (final.emotion_arc) parts.push(`情绪弧线：${final.emotion_arc}`);
+      finalMessageEl.innerHTML = parts.length
+        ? parts.map(p => `<span class="final-line">${p}</span>`).join('<br><br>')
+        : '另一个你走完了这条路，也把沉默还给了现在的你。';
+      curveCardEl.classList.add('show');
+      nextBtnEl.classList.remove('pulse-next');
+      setStatus('七年结束。情绪曲线已经生成。');
+    }
+
+    async function startStory() {
+      const inputs = getInputs();
+      if (!inputs.choice || !inputs.keywords || !inputs.description) {
+        setStatus('请先填完人生选择、关键词和自我描述。', 'error');
+        return;
+      }
+
+      const startBtn = document.getElementById('startBtn');
+      startBtn.disabled = true;
+      startBtn.classList.add('loading');
+      generateAvatar(false);
+      setStatus(localModeEl.checked ? '正在载入本地预生成故事…' : '正在启动实时故事 session，可能需要几十秒…');
+
+      try {
+        const rawStory = localModeEl.checked ? getLocalStory() : await fetchLiveStory(inputs);
+        activeStory = rawStory._live ? rawStory : normalizeStory(rawStory, inputs);
+        if (activeStory._live) {
+          await generateLiveYear();
+        }
+        renderYear(0);
+      } catch (error) {
+        setStatus(`${error.message}。建议切回本地预生成模式。`, 'error');
+      } finally {
+        startBtn.disabled = false;
+        startBtn.classList.remove('loading');
+      }
+    }
+
+    async function next() {
+      if (!activeStory) {
+        startStory();
+        return;
+      }
+      if (finishTypingNow()) return;
+      if (liveBusy) return;
+      if (activeIndex < activeStory.years.length - 1) {
+        renderYear(activeIndex + 1);
+        return;
+      }
+      if (activeStory._live && activeStory.years.length < 7) {
+        try {
+          liveBusy = true;
+          nextBtnEl.disabled = true;
+          setStatus('正在把你的选择写进下一年…');
+          await generateLiveYear(pendingIntervention);
+          pendingIntervention = null;
+          renderYear(activeStory.years.length - 1);
+        } catch (error) {
+          setStatus(`${error.message}。建议切回本地预生成模式。`, 'error');
+        } finally {
+          liveBusy = false;
+          nextBtnEl.disabled = false;
+        }
+        return;
+      }
+      if (activeStory._live && !activeStory.final) {
+        try {
+          liveBusy = true;
+          nextBtnEl.disabled = true;
+          setStatus('正在生成七年收尾…');
+          await generateLiveFinal();
+        } catch (error) {
+          setStatus(`${error.message}。收尾生成失败。`, 'error');
+          return;
+        } finally {
+          liveBusy = false;
+          nextBtnEl.disabled = false;
+        }
+      }
+      showFinal();
+    }
+
+    function showFinalIfReady() {
+      if (!activeStory?._live || activeStory.final) {
+        showFinal();
+      }
+    }
+
+    function resetStage() {
+      clearTimeout(typeTimer);
+      typing = false;
+      activeStory = null;
+      activeIndex = -1;
+      pendingIntervention = null;
+      liveBusy = false;
+      stageEl.classList.remove('transitioning', 'story-ready', 'pivotal-flash');
+      spriteWrapEl.classList.remove('entering', 'speaking');
+      sceneEl.className = 'pixel-scene scene-rain';
+      resetMemoryWall();
+      closeIntervention();
+      closeDialogueModal();
+      hideAgentMeeting();
+      hideDialogueCue();
+      yearLabelEl.classList.remove('pivotal');
+      premiseEl.textContent = '输入一个岔路口，让另一个你走完七年。';
+      yearLabelEl.textContent = '等待开始';
+      titleEl.textContent = '按下开始';
+      ageLabelEl.textContent = '年龄 --';
+      emotionLabelEl.textContent = '情绪 --';
+      environmentLabelEl.textContent = '环境 --';
+      lifeRoomEl.className = 'life-room environment-office';
+      renderRoom('office');
+      setCharacterPose(avatarProfile.character, 'idle');
+      emotionFillEl.style.width = '0%';
+      eventEl.textContent = '一条没有被选择的人生，会先从一个很小的瞬间开始发亮。';
+      eventEl.classList.remove('typing');
+      reflectionEl.textContent = '';
+      dialogueEl.textContent = '';
+      reflectionEl.classList.remove('show');
+      dialogueEl.classList.remove('show');
+      curveCardEl.classList.remove('show');
+      nextBtnEl.textContent = '下一年';
+      nextBtnEl.classList.remove('pulse-next');
+      setProgress(-1);
+      setStatus('默认使用本地示例，现场断网也能演示。关闭开关后会请求实时 story session。');
+    }
+
+    document.getElementById('startBtn').addEventListener('click', startStory);
+    document.getElementById('nextBtn').addEventListener('click', next);
+    document.getElementById('againBtn').addEventListener('click', () => renderYear(0));
+    document.getElementById('resetBtn').addEventListener('click', resetStage);
+    document.getElementById('character').addEventListener('change', () => {
+      const sel = document.getElementById('character');
+      const char = sel.value || 'Sunny';
+      avatarProfile.character = char;
+      avatarProfile.family = characterFamily(char);
+      // Sync family radio
+      const familyRadio = document.querySelector(`input[name="characterFamily"][value="${avatarProfile.family}"]`);
+      if (familyRadio) familyRadio.checked = true;
+      applyAvatarProfile();
+    });
+    document.querySelectorAll('input[name="characterFamily"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        if (!radio.checked) return;
+        const fam = radio.value;
+        // When switching family, pick a sane default character
+        if (fam === 'sunny') {
+          avatarProfile.character = 'Sunny';
+          document.getElementById('character').value = 'Sunny';
+        } else {
+          avatarProfile.character = 'Adam';
+          document.getElementById('character').value = 'Adam';
+        }
+        avatarProfile.family = fam;
+        applyAvatarProfile();
+      });
+    });
+    document.querySelectorAll('.hair-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const hair = btn.dataset.hair;
+        if (!SUNNY_HAIRS.includes(hair)) return;
+        avatarProfile.hair = hair;
+        document.querySelectorAll('.hair-btn').forEach(b => b.classList.toggle('active', b === btn));
+        applyAvatarProfile();
+      });
+    });
+    document.getElementById('generateAvatarBtn').addEventListener('click', () => generateAvatar(false));
+    document.getElementById('randomAvatarBtn').addEventListener('click', () => generateAvatar(true));
+    function applyDemoInputs(index) {
+      const demo = DEMO_INPUTS[index % DEMO_INPUTS.length];
+      if (!demo) return;
+      document.getElementById('choice').value = demo.choice;
+      document.getElementById('keywords').value = demo.keywords;
+      document.getElementById('description').value = demo.description;
+      document.getElementById('age').value = demo.age;
+      if (demo.mbti) document.getElementById('mbti').value = demo.mbti;
+      if (demo.quote) {
+        document.querySelectorAll('input[name="quote"]').forEach(radio => {
+          radio.checked = radio.value === demo.quote;
+        });
+      } else {
+        document.querySelectorAll('input[name="quote"]').forEach(radio => { radio.checked = false; });
+      }
+      generateAvatar(false);
+    }
+
+    document.getElementById('shuffleBtn').addEventListener('click', () => {
+      if (!localModeEl.checked) {
+        setStatus('切换示例需先开启「本地预生成」。', 'error');
+        return;
+      }
+      localStoryIndex = (localStoryIndex + 1) % LOCAL_STORIES.length;
+      const preview = LOCAL_STORIES[localStoryIndex];
+      applyDemoInputs(localStoryIndex);
+      setStatus(`已切换到示例 ${localStoryIndex + 1}/${LOCAL_STORIES.length}：${preview.shadow_name} — ${preview.premise.slice(0, 28)}…`);
+      if (activeStory) {
+        resetStage();
+      }
+    });
+
+    window.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && curveCardEl.classList.contains('show')) {
+        curveCardEl.classList.remove('show');
+        setStatus('已关闭情绪曲线。');
+        return;
+      }
+      if (event.key === ' ' || event.key === 'Enter') {
+        const tag = document.activeElement?.tagName;
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+        event.preventDefault();
+        next();
+      }
+    });
+
+    // ====================================================
+    // v2 controller: memory wall, intervention, dialogue, agent meeting
+    // ====================================================
+    const memoryListEl = document.getElementById('memoryList');
+    const memoryCountEl = document.getElementById('memoryCount');
+    const memoryEmptyEl = document.getElementById('memoryEmpty');
+    const interventionModalEl = document.getElementById('interventionModal');
+    const interventionQuestionEl = document.getElementById('interventionQuestion');
+    const interventionOptionsEl = document.getElementById('interventionOptions');
+    const agentMeetingEl = document.getElementById('agentMeeting');
+    const agentLogEl = document.getElementById('agentLog');
+    const dialogueModalEl = document.getElementById('dialogueModal');
+    const dialogueHistoryEl = document.getElementById('dialogueHistory');
+    const dialogueFormEl = document.getElementById('dialogueForm');
+    const dialogueInputEl = document.getElementById('dialogueInput');
+    const dialogueCloseBtnEl = document.getElementById('dialogueCloseBtn');
+
+    let dialogueCueEl = null;
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    // ------- memory wall -------
+    function resetMemoryWall() {
+      memoryListEl.innerHTML = '';
+      memoryCountEl.textContent = `0 / 7`;
+      if (memoryEmptyEl) memoryEmptyEl.style.display = '';
+    }
+
+    function pushMemoryFromYear(year) {
+      // Prefer story-provided memory_stream_template entry; fall back to year fields.
+      let entry = null;
+      if (activeStory?.memory_stream_template) {
+        entry = activeStory.memory_stream_template.find(m => m.year === year.year) || null;
+      }
+      if (!entry) {
+        entry = {
+          id: `m${year.year}`,
+          year: year.year,
+          type: year.is_pivotal ? 'decision' : 'event',
+          content: year.memory_summary || (year.reflection || year.event || '').slice(0, 28),
+          weight: year.is_pivotal ? 0.85 : 0.5
+        };
+      }
+      // Avoid duplicates if user re-renders the same year
+      const existing = memoryListEl.querySelector(`[data-mid="${entry.id}"]`);
+      if (existing) return;
+
+      const li = document.createElement('li');
+      li.dataset.mid = entry.id;
+      if (year.is_pivotal) li.classList.add('pivotal');
+      li.innerHTML = `<span class="mem-year">年${entry.year}</span>${escapeHtml(entry.content)}`;
+      memoryListEl.appendChild(li);
+      // Fade older memories
+      const items = memoryListEl.querySelectorAll('li');
+      items.forEach((item, idx) => {
+        item.classList.toggle('faded', idx < items.length - 3);
+      });
+      memoryCountEl.textContent = `${items.length} / 7`;
+      if (memoryEmptyEl) memoryEmptyEl.style.display = 'none';
+      memoryListEl.scrollTop = memoryListEl.scrollHeight;
+    }
+
+    function getCurrentMemoryStream() {
+      const items = memoryListEl.querySelectorAll('li');
+      return Array.from(items).map(item => ({
+        id: item.dataset.mid,
+        year: Number(item.querySelector('.mem-year')?.textContent?.replace(/[^\d]/g, '') || 0),
+        type: item.classList.contains('pivotal') ? 'decision' : 'event',
+        content: item.textContent.replace(/^年\d+/, '').trim(),
+        weight: item.classList.contains('pivotal') ? 0.85 : 0.5
+      }));
+    }
+
+    // ------- intervention modal -------
+    function openIntervention(year) {
+      const ip = year.intervention_prompt;
+      if (!ip) return;
+      interventionQuestionEl.textContent = ip.question;
+      interventionOptionsEl.innerHTML = '';
+      (ip.options || []).forEach(opt => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = opt;
+        btn.addEventListener('click', () => {
+          year.user_intervention = {
+            from_year: year.year,
+            question: ip.question,
+            choice: opt
+          };
+          if (activeStory?._live) {
+            pendingIntervention = year.user_intervention;
+          } else if (activeStory) {
+            // Local stories are pre-generated, so annotate the next year for display only.
+            const next = activeStory.years[year.year]; // next year index
+            if (next) next.user_intervention = year.user_intervention;
+          }
+          setStatus(`你为影子选了：「${opt}」。这条选择会写进下一年。`);
+          closeIntervention();
+        });
+        interventionOptionsEl.appendChild(btn);
+      });
+      interventionModalEl.hidden = false;
+    }
+
+    function closeIntervention() {
+      interventionModalEl.hidden = true;
+    }
+
+    // ------- agent meeting overlay -------
+    function showAgentMeeting() {
+      agentLogEl.innerHTML = '';
+      agentMeetingEl.hidden = false;
+    }
+
+    function hideAgentMeeting() {
+      agentMeetingEl.hidden = true;
+    }
+
+    function pushAgentLog(kind, tag, text) {
+      const li = document.createElement('li');
+      li.className = kind;
+      li.innerHTML = `<span class="tag">${escapeHtml(tag)}</span>${escapeHtml(text)}`;
+      agentLogEl.appendChild(li);
+      agentLogEl.scrollTop = agentLogEl.scrollHeight;
+    }
+
+    // ------- cross-time dialogue modal -------
+    let dialogueHistory = [];
+
+    function showDialogueCue() {
+      if (!activeStory) return;
+      if (!dialogueCueEl) {
+        dialogueCueEl = document.createElement('button');
+        dialogueCueEl.type = 'button';
+        dialogueCueEl.className = 'dialogue-cue';
+        dialogueCueEl.textContent = '↳ 点击影子，对话';
+        dialogueCueEl.addEventListener('click', openDialogueModal);
+        document.getElementById('lifeRoom').appendChild(dialogueCueEl);
+      }
+      dialogueCueEl.hidden = false;
+    }
+
+    function hideDialogueCue() {
+      if (dialogueCueEl) dialogueCueEl.hidden = true;
+    }
+
+    function openDialogueModal() {
+      dialogueHistoryEl.innerHTML = '';
+      // Render existing turns
+      dialogueHistory.forEach(turn => appendDialogueTurn(turn));
+      dialogueModalEl.hidden = false;
+      setTimeout(() => dialogueInputEl.focus(), 50);
+    }
+
+    function closeDialogueModal() {
+      dialogueModalEl.hidden = true;
+    }
+
+    function appendDialogueTurn(turn) {
+      const div = document.createElement('div');
+      div.className = `turn ${turn.role}`;
+      if (turn.role === 'shadow' && turn.cite_memory_ids?.length) {
+        div.innerHTML = `${escapeHtml(turn.content)}<span class="cite">引用记忆：${turn.cite_memory_ids.join(', ')}</span>`;
+      } else {
+        div.textContent = turn.content;
+      }
+      dialogueHistoryEl.appendChild(div);
+      dialogueHistoryEl.scrollTop = dialogueHistoryEl.scrollHeight;
+    }
+
+    dialogueFormEl.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const question = dialogueInputEl.value.trim();
+      if (!question || !activeStory) return;
+      dialogueInputEl.value = '';
+      const userTurn = { role: 'user', content: question };
+      dialogueHistory.push(userTurn);
+      appendDialogueTurn(userTurn);
+
+      let reply;
+      if (!localModeEl.checked && activeStory.persona_card) {
+        // Live: call /api/dialogue
+        try {
+          const res = await fetch('/api/dialogue', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              persona_card: activeStory.persona_card,
+              memory_stream: getCurrentMemoryStream(),
+              current_mood: activeStory.years[activeIndex]?.new_mood ?? 5,
+              current_esteem: activeStory.years[activeIndex]?.new_esteem ?? 5,
+              at_year: activeStory.years[activeIndex]?.year || 7,
+              user_question: question
+            })
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || '对话失败');
+          reply = data;
+        } catch (err) {
+          reply = { reply: `（对话 agent 失败：${err.message}）`, cite_memory_ids: [], mood_after: '错' };
+        }
+      } else {
+        // Local fallback: use current year's shadow_dialogue + a memory pick
+        const year = activeStory.years[activeIndex] || activeStory.years[activeStory.years.length - 1];
+        const stream = getCurrentMemoryStream();
+        const pick = stream[stream.length - 1];
+        reply = {
+          reply: year?.shadow_dialogue || '我在想，那扇门是什么时候关上的。',
+          cite_memory_ids: pick ? [pick.id] : [],
+          mood_after: year?.emotion || '钝'
+        };
+      }
+      const shadowTurn = { role: 'shadow', content: reply.reply, cite_memory_ids: reply.cite_memory_ids };
+      dialogueHistory.push(shadowTurn);
+      appendDialogueTurn(shadowTurn);
+    });
+
+    dialogueCloseBtnEl.addEventListener('click', closeDialogueModal);
+    interventionModalEl.addEventListener('click', (e) => {
+      if (e.target === interventionModalEl) closeIntervention();
+    });
+    dialogueModalEl.addEventListener('click', (e) => {
+      if (e.target === dialogueModalEl) closeDialogueModal();
+    });
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
+    // reset dialogue history when story resets
+    const _originalReset = resetStage;
+    resetStage = function() {
+      dialogueHistory = [];
+      _originalReset();
+    };
+
+    initProgress();
+    applyAvatarProfile();
+    resetStage();
+  </script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shadow 团队看板</title>
+  <meta name="description" content="Shadow Harness 五人团队进度看板" />
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #181b24;
+      --border: #2a2f3d;
+      --text: #e8eaef;
+      --muted: #8b93a7;
+      --accent: #6b9fff;
+      --green: #3dd68c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 24px 20px 48px; }
+    header { margin-bottom: 24px; }
+    header h1 { font-size: 1.5rem; font-weight: 600; }
+    .meta { color: var(--muted); font-size: 0.85rem; margin-top: 6px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .stat b { display: block; font-size: 1.35rem; }
+    .stat span { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; }
+    .stat.highlight b { color: var(--green); }
+    .legend, .team-row {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+    }
+    .team-row b { color: var(--text); }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 20px; }
+    select, button {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 0.85rem;
+    }
+    button { cursor: pointer; }
+    .tabs { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
+    .tab {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+    .tab.active { border-color: var(--accent); color: var(--text); background: #1e2433; }
+    .links { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .links a {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+    }
+    .section { margin-bottom: 32px; }
+    .section h2 { font-size: 1rem; margin-bottom: 8px; font-weight: 600; }
+    .change-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .change-head {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .change-head .sub { color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+    th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { color: var(--muted); font-weight: 500; font-size: 0.72rem; text-transform: uppercase; background: #141820; }
+    tr:last-child td { border-bottom: none; }
+    tr.ready-row td { background: rgba(61, 214, 140, 0.06); }
+    tr.optional-row td { opacity: 0.88; }
+    .id-cell { white-space: nowrap; font-weight: 600; }
+    .title-cell { min-width: 200px; max-width: 420px; }
+    .deps-done { text-decoration: line-through; color: var(--muted); }
+    .badge-ready { color: var(--green); font-size: 0.75rem; margin-left: 4px; }
+    .empty { color: var(--muted); padding: 12px; }
+    footer { margin-top: 40px; font-size: 0.75rem; color: var(--muted); text-align: center; }
+    .loading { text-align: center; padding: 80px; color: var(--muted); }
+    @media (max-width: 720px) {
+      table { font-size: 0.78rem; }
+      th:nth-child(4), td:nth-child(4),
+      th:nth-child(5), td:nth-child(5) { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="app"><p class="loading">加载看板…</p></div>
+  <script>
+    const STATUS = { done: '✅', in_progress: '🟡', todo: '⬜', blocked: '🔴' };
+
+    function esc(s) {
+      return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+    }
+
+    function taskLink(t) {
+      const url = t.github?.artifact || t.github?.change;
+      const label = (t.optional ? '◇ ' : '') + t.id;
+      return url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>` : esc(label);
+    }
+
+    function renderTaskTable(tasks, showChange) {
+      if (!tasks.length) return '<p class="empty">无</p>';
+      const headers = ['状态', 'ID', '任务', '波次', '阶段', '负责', '执行', '依赖'];
+      if (showChange) headers.splice(3, 0, 'Change');
+      let html = `<table><thead><tr>${headers.map((h) => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>`;
+      for (const t of tasks) {
+        const cls = [t.ready ? 'ready-row' : '', t.optional ? 'optional-row' : ''].filter(Boolean).join(' ');
+        const readyMark = t.ready ? '<span class="badge-ready">✓</span>' : '';
+        html += `<tr class="${cls}">
+          <td>${STATUS[t.status] || ''}${readyMark}</td>
+          <td class="id-cell">${taskLink(t)}</td>
+          <td class="title-cell">${esc(t.title)}</td>
+          ${showChange ? `<td>${esc(t.change_id || '—')}</td>` : ''}
+          <td>W${t.wave ?? '—'}</td>
+          <td>${esc(t.phaseLabel)}</td>
+          <td>${esc(t.assignee)}</td>
+          <td>${esc(t.execIcon)}</td>
+          <td>${esc((t.depends_on || []).join(', ') || '—')}</td>
+        </tr>`;
+      }
+      return html + '</tbody></table>';
+    }
+
+    function renderByChange(data, filterAssignee) {
+      return (data.byChange || []).map((g) => {
+        let tasks = g.tasks;
+        if (filterAssignee) tasks = tasks.filter((t) => t.assignee === filterAssignee);
+        if (!tasks.length) return '';
+        const headLink = g.url ? `<a href="${esc(g.url)}" target="_blank">${esc(g.id)}</a>` : esc(g.id);
+        return `<div class="change-block">
+          <div class="change-head">
+            <div><strong>${headLink}</strong> — ${esc(g.title)}</div>
+            ${g.summary ? `<div class="sub">${esc(g.summary)}</div>` : ''}
+          </div>
+          ${renderTaskTable(tasks, false)}
+        </div>`;
+      }).join('');
+    }
+
+    function render(data) {
+      const app = document.getElementById('app');
+      let filterAssignee = '';
+      let view = 'change';
+
+      function allActiveTasks() {
+        return (data.byChange || []).flatMap((g) => g.tasks);
+      }
+
+      function draw() {
+        const roles = data.catalog?.team_roles || {};
+        const teamLine = (data.teamLoad || []).map((t) =>
+          `<span><b>${esc(t.member)}</b> ${esc(roles[t.member] || '')}</span>`
+        ).join('');
+
+        let mainContent = '';
+        if (view === 'change') {
+          mainContent = renderByChange(data, filterAssignee) || '<p class="empty">无匹配任务</p>';
+        } else if (view === 'critical') {
+          let tasks = data.criticalPath || [];
+          if (filterAssignee) tasks = tasks.filter((t) => t.assignee === filterAssignee);
+          mainContent = renderTaskTable(tasks, false);
+        } else if (view === 'ready') {
+          let tasks = data.ready || [];
+          if (filterAssignee) tasks = tasks.filter((t) => t.assignee === filterAssignee);
+          mainContent = renderTaskTable(tasks, true);
+        }
+
+        app.innerHTML = `
+          <header>
+            <h1>${esc(data.siteTitle)}</h1>
+            <div class="meta">
+              <span>${esc(data.planId)}</span>
+              <span>更新 ${esc(data.updatedAt)}</span>
+              <span>构建 ${esc(data.builtAt.slice(0, 16).replace('T', ' '))}</span>
+              ${data.githubRepoUrl ? `<a href="${esc(data.githubRepoUrl)}" target="_blank">GitHub</a>` : ''}
+            </div>
+          </header>
+
+          <div class="legend">
+            <span>● 必做</span><span>◇ 可选</span>
+            <span>👤 人工</span><span>🤖 Agent</span>
+            <span>✓ = 可立即开始</span>
+          </div>
+
+          <div class="team-row">${teamLine}</div>
+
+          <div class="stats">
+            <div class="stat"><b>${data.stats.total}</b><span>总计</span></div>
+            <div class="stat"><b>${data.stats.done}</b><span>完成</span></div>
+            <div class="stat"><b>${data.stats.in_progress}</b><span>进行中</span></div>
+            <div class="stat"><b>${data.stats.blocked}</b><span>阻塞</span></div>
+            <div class="stat highlight"><b>${data.stats.ready}</b><span>可开干</span></div>
+          </div>
+
+          ${data.quickLinks?.length ? `<div class="links">${data.quickLinks.map((l) =>
+            `<a href="${esc(l.path)}" target="_blank">${esc(l.label)}</a>`).join('')}</div>` : ''}
+
+          <div class="toolbar">
+            <label>成员</label>
+            <select id="assignee-filter">
+              <option value="">全部</option>
+              ${(data.teamLoad || []).map((t) => `<option value="${esc(t.member)}">${esc(t.member)}</option>`).join('')}
+            </select>
+            <button type="button" onclick="location.reload()">刷新</button>
+          </div>
+
+          <div class="tabs" id="tabs">
+            <button class="tab ${view === 'change' ? 'active' : ''}" data-view="change">按 Change</button>
+            <button class="tab ${view === 'critical' ? 'active' : ''}" data-view="critical">关键路径</button>
+            <button class="tab ${view === 'ready' ? 'active' : ''}" data-view="ready">可开干 (${data.stats.ready})</button>
+          </div>
+
+          <section class="section" id="main-view">${mainContent}</section>
+
+          <section class="section">
+            <h2>按人负载</h2>
+            <table>
+              <thead><tr><th>成员</th><th>角色</th><th>todo</th><th>进行中</th><th>可开干</th><th>等待池</th></tr></thead>
+              <tbody>
+                ${(data.teamLoad || []).map((t) => `<tr>
+                  <td><b>${esc(t.member)}</b></td>
+                  <td>${esc(roles[t.member] || '—')}</td>
+                  <td>${t.todo}</td><td>${t.in_progress}</td><td>${t.ready}</td><td>${t.waiting}</td>
+                </tr>`).join('')}
+              </tbody>
+            </table>
+          </section>
+
+          <footer>registry.json · npm run board:publish · TASK-LIBRARY.md</footer>
+        `;
+
+        document.getElementById('assignee-filter').value = filterAssignee;
+        document.getElementById('assignee-filter').onchange = (e) => {
+          filterAssignee = e.target.value;
+          draw();
+        };
+        document.getElementById('tabs').onclick = (e) => {
+          const btn = e.target.closest('[data-view]');
+          if (!btn) return;
+          view = btn.dataset.view;
+          draw();
+        };
+      }
+
+      draw();
+    }
+
+    fetch('./board-data.json')
+      .then((r) => r.json())
+      .then(render)
+      .catch((e) => {
+        document.getElementById('app').innerHTML =
+          `<p class="loading">加载失败：${esc(e.message)}<br>请先运行 npm run board:publish</p>`;
+      });
+  </script>
+</body>
+</html>

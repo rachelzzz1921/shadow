@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "updated": "2026-06-14",
+  "canonical": {
+    "shadow_domain": "skills/shadow/",
+    "harness_framework": "skills/harness/",
+    "installed_pool": ".agents/skills/",
+    "cursor_discovery": ".cursor/skills -> .agents/skills",
+    "governance": ".agents/SKILLS-GOVERNANCE.md",
+    "lock_file": "skills-lock.json"
+  },
+  "tiers": {
+    "T0_router": ["shadow-router"],
+    "T1_shadow": ["story-authoring", "story-review", "harness-init"],
+    "T2_harness": ["design-generator", "progress-tracker"],
+    "T3_architecture": [
+      "improve-codebase-architecture",
+      "grill-with-docs",
+      "zoom-out",
+      "setup-matt-pocock-skills",
+      "design-an-interface",
+      "request-refactor-plan",
+      "ubiquitous-language",
+      "documentation-and-adrs"
+    ],
+    "T4_engineering": [
+      "api-and-interface-design",
+      "spec-driven-development",
+      "planning-and-task-breakdown",
+      "incremental-implementation",
+      "code-simplification",
+      "code-review-and-quality",
+      "context-engineering",
+      "test-driven-development",
+      "debugging-and-error-recovery",
+      "frontend-ui-engineering",
+      "security-and-hardening",
+      "performance-optimization",
+      "using-agent-skills"
+    ],
+    "T5_workflow": [
+      "brainstorming",
+      "writing-plans",
+      "executing-plans",
+      "subagent-driven-development",
+      "systematic-debugging",
+      "verification-before-completion",
+      "using-superpowers",
+      "using-git-worktrees",
+      "finishing-a-development-branch"
+    ],
+    "T6_mattpocock_ops": ["diagnose", "tdd", "to-prd", "to-issues", "triage", "review", "qa", "prototype"],
+    "T7_vercel": [
+      "vercel-composition-patterns",
+      "vercel-react-best-practices",
+      "web-design-guidelines",
+      "vercel-optimize",
+      "deploy-to-vercel"
+    ],
+    "T8_optional": [
+      "caveman",
+      "grill-me",
+      "handoff",
+      "teach",
+      "write-a-skill",
+      "writing-beats",
+      "writing-fragments",
+      "writing-shape",
+      "obsidian-vault",
+      "migrate-to-shoehorn",
+      "scaffold-exercises",
+      "setup-pre-commit",
+      "edit-article",
+      "git-guardrails-claude-code"
+    ]
+  },
+  "sdlc_routing": {
+    "01-requirements": {
+      "primary": ["brainstorming", "interview-me", "idea-refine", "spec-driven-development"],
+      "secondary": ["to-prd", "ubiquitous-language"]
+    },
+    "02-technical-design": {
+      "primary": ["design-generator", "improve-codebase-architecture", "grill-with-docs", "api-and-interface-design"],
+      "secondary": ["zoom-out", "design-an-interface", "documentation-and-adrs"]
+    },
+    "03-coding": {
+      "primary": ["incremental-implementation", "tdd", "context-engineering"],
+      "secondary": ["source-driven-development", "doubt-driven-development", "git-workflow-and-versioning"]
+    },
+    "04-dev-testing": {
+      "primary": ["tdd", "test-driven-development", "story-authoring"],
+      "secondary": ["browser-testing-with-devtools"]
+    },
+    "05-qa-testing": {
+      "primary": ["story-review", "verification-before-completion"],
+      "secondary": ["web-design-guidelines", "qa"]
+    },
+    "06-task-progress": {
+      "primary": ["progress-tracker", "to-issues", "planning-and-task-breakdown"],
+      "secondary": ["executing-plans", "writing-plans"]
+    },
+    "07-debug-and-correction": {
+      "primary": ["systematic-debugging", "diagnose", "debugging-and-error-recovery"],
+      "secondary": ["receiving-code-review"]
+    },
+    "cross_cutting": {
+      "init": ["harness-init", "setup-matt-pocock-skills"],
+      "review": ["review", "code-review-and-quality", "requesting-code-review"],
+      "ship": ["shipping-and-launch", "ci-cd-and-automation", "observability-and-instrumentation"]
+    }
+  },
+  "conflicts": [
+    {
+      "topic": "TDD",
+      "skills": ["tdd", "test-driven-development"],
+      "primary": "tdd",
+      "rule": "改 example/shadow-demo/lib 或 evaluator 时用 tdd；新功能全流程用 test-driven-development（superpowers）"
+    },
+    {
+      "topic": "Debug",
+      "skills": ["systematic-debugging", "diagnose", "debugging-and-error-recovery"],
+      "primary": "systematic-debugging",
+      "rule": "Live bug 先 systematic-debugging；性能/回归用 diagnose；通用工程流程用 debugging-and-error-recovery"
+    },
+    {
+      "topic": "Code Review",
+      "skills": ["story-review", "review", "code-review-and-quality", "requesting-code-review"],
+      "primary": "story-review",
+      "rule": "叙事产物用 story-review；PR/分支 diff 用 review；通用 merge 前用 code-review-and-quality"
+    },
+    {
+      "topic": "需求澄清",
+      "skills": ["brainstorming", "interview-me", "grill-me", "idea-refine"],
+      "primary": "brainstorming",
+      "rule": "创意/功能用 brainstorming；模糊 one-liner 用 interview-me；已有方案拷问用 grill-me"
+    },
+    {
+      "topic": "架构文档",
+      "skills": ["grill-with-docs", "documentation-and-adrs", "ubiquitous-language"],
+      "primary": "grill-with-docs",
+      "rule": "设计讨论用 grill-with-docs；决策落盘用 documentation-and-adrs；术语表用 ubiquitous-language"
+    },
+    {
+      "topic": "Harness Init",
+      "skills": ["harness-init", "setup-matt-pocock-skills"],
+      "primary": "harness-init",
+      "rule": "Shadow 文档树用 harness-init；CONTEXT.md + ADR 布局用 setup-matt-pocock-skills"
+    }
+  ],
+  "managed_by_npx": {
+    "sources": [
+      "mattpocock/skills",
+      "addyosmani/agent-skills",
+      "vercel-labs/agent-skills",
+      "obra/superpowers"
+    ],
+    "update": "npx skills update",
+    "list": "npx skills list"
+  },
+  "manual_canonical": {
+    "note": "以下 skill 源码在 skills/shadow 或 skills/harness，编辑后运行 skills/sync-shadow-skills.sh",
+    "skills": ["story-authoring", "story-review", "harness-init", "design-generator", "progress-tracker"]
+  }
+}

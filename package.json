@@ -1,0 +1,19 @@
+{
+  "name": "shadow-harness",
+  "version": "0.4.0",
+  "private": true,
+  "description": "Shadow parallel-life narrative — Harness corpus (docs + skills)",
+  "scripts": {
+    "sync-skills": "bash shadow-corpus/skills/sync-cursor-links.sh",
+    "tasks": "node shadow-corpus/06-task-progress/scripts/shadow-tasks.js",
+    "board": "node shadow-corpus/06-task-progress/scripts/shadow-tasks.js sync && node shadow-corpus/06-task-progress/scripts/shadow-tasks.js board",
+    "board:publish": "node shadow-corpus/06-task-progress/scripts/shadow-tasks.js sync && node shadow-corpus/06-task-progress/scripts/build-board-site.mjs",
+    "dev": "npm run dev --prefix shadow-corpus/archive/demo-v0.2",
+    "start": "npm run start --prefix shadow-corpus/archive/demo-v0.2",
+    "test": "npm run test --prefix shadow-corpus/archive/demo-v0.2",
+    "install:demo": "npm install --prefix shadow-corpus/archive/demo-v0.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
