@@ -107,6 +107,14 @@ const DialogueSchema = z.object({
     .describe('回答后影子的情绪状态，单词')
 });
 
+const SuggestQuestionsSchema = z.object({
+  questions: z.array(
+    z.string().min(4).max(28)
+      .describe('一句话追问，第一人称「我」问影子，口语、具体、互不重复，钩住刚才那句话或那一年的某个细节')
+  ).min(3).max(4)
+    .describe('给用户点击继续对话的下一批推荐问题，扣住当下语境，不要套话')
+});
+
 const MemoryEntrySchema = z.object({
   id: z.string(),
   year: z.number().int().min(1).max(7),
@@ -200,6 +208,7 @@ module.exports = {
   FinalSchema,
   RelaxedFinalSchema,
   DialogueSchema,
+  SuggestQuestionsSchema,
   MemoryEntrySchema,
   ProfileSchema,
   enums: { SCENES, ENVIRONMENTS, POSES, PROPS, CITIES, MEMORY_TYPES }

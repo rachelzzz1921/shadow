@@ -335,6 +335,7 @@ function buildVisualModule(data, changeMap, repo, siteBoard) {
 
   const pagesBase = githubPagesBase(loadConfig(), repo);
   const previewLinks = [
+    enrichDocsEntry({ label: '路演 Pitch', path: 'docs/pitch.html', pagesPath: 'pitch.html' }, pagesBase),
     enrichDocsEntry({ label: '叙事 Demo', path: 'docs/demo.html', pagesPath: 'demo.html' }, pagesBase),
     enrichDocsEntry(
       { label: 'Phaser layout v1', path: 'docs/demo-phaser.html', pagesPath: 'demo-phaser.html' },
@@ -400,12 +401,14 @@ function buildCorpusModules(siteBoard, repo, config) {
     : null;
   const staticDemo = enrichDocsEntry(siteBoard.staticDemo, pagesBase);
   const phaserDemo = enrichDocsEntry(siteBoard.phaserDemo, pagesBase);
+  const pitchDemo = enrichDocsEntry(siteBoard.pitchDemo, pagesBase);
   return {
     phases,
     knowledge,
     demo,
     staticDemo,
     phaserDemo,
+    pitchDemo,
     pagesBase,
     manifestUrl: corpusFileUrl(repo, 'MANIFEST.md'),
     agentsUrl: corpusFileUrl(repo, 'AGENTS.md'),

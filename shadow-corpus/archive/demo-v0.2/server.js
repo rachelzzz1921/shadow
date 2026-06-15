@@ -54,6 +54,19 @@ function sendJson(res, status, body) {
   res.end(JSON.stringify(body));
 }
 
+function beginSse(res) {
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache, no-transform',
+    Connection: 'keep-alive',
+    'X-Accel-Buffering': 'no'
+  });
+  return (event, payload) => {
+    res.write(`event: ${event}\n`);
+    res.write(`data: ${JSON.stringify(payload ?? {})}\n\n`);
+  };
+}
+
 function readBody(req) {
   return new Promise((resolve, reject) => {
     let data = '';
@@ -217,6 +230,39 @@ async function handleDialogue(req, res) {
   }
   const reply = await getAgents().runDialogue({ ...input, runtime: undefined });
   sendJson(res, 200, reply);
+}
+
+async function handleDialogueSuggest(req, res) {
+  const body = await readJson(req);
+  if (!body.persona_card) {
+    sendJson(res, 400, { error: 'Missing persona_card' });
+    return;
+  }
+  const input = {
+    persona_card: body.persona_card,
+    memory_stream: body.memory_stream || [],
+    years: body.years || [],
+    year: body.year || null,
+    at_year: body.at_year ?? 7,
+    recent_dialogue: body.recent_dialogue || [],
+    last_reply: body.last_reply || '',
+    current_mood: body.current_mood ?? 5,
+    current_esteem: body.current_esteem ?? 5
+  };
+  const { suggestQuestionsPlaceholder } = require('./lib/dialogue-hook');
+  if (!hasAnyKey()) {
+    sendJson(res, 200, suggestQuestionsPlaceholder(input));
+    return;
+  }
+  // Suggested questions are a nice-to-have: never let an LLM hiccup break the
+  // dialogue UI — fall back to the rule-based pool on any failure.
+  try {
+    const result = await getAgents().runSuggestQuestions({ ...input, runtime: undefined });
+    sendJson(res, 200, { ...result, _placeholder: false });
+  } catch (error) {
+    console.warn(`[/api/dialogue/suggest] ${error.message} — falling back`);
+    sendJson(res, 200, { ...suggestQuestionsPlaceholder(input), _error: error.message });
+  }
 }
 
 async function handleRagQuery(req, res) {
@@ -402,6 +448,33 @@ async function handleStoryStart(req, res) {
   }
 }
 
+async function handleStoryStartStream(req, res) {
+  const body = await readJson(req);
+  if (!body.profile || !body.profile.choice) {
+    sendJson(res, 400, { error: 'Missing profile.choice' });
+    return;
+  }
+  const send = beginSse(res);
+  const { createRunTrace, persistTrace, finishRunTrace } = require('./lib/run-trace');
+  const trace = createRunTrace({ profile: body.profile, mode: 'live' });
+  try {
+    const session = await getStorySession().startStorySession({
+      profile: body.profile,
+      persona_card: body.persona_card || null,
+      full_profile: body.full_profile || null,
+      trace,
+      onStage: (stage, payload) => send(stage, payload)
+    });
+    persistTrace(trace);
+    send('start:done', { session, run_id: trace.run_id });
+    res.end();
+  } catch (error) {
+    finishRunTrace(trace, { stop_reason: 'start_failed' });
+    send('error', { message: error.message });
+    res.end();
+  }
+}
+
 async function handleStoryYear(req, res) {
   const body = await readJson(req);
   if (!body.session) {
@@ -417,6 +490,31 @@ async function handleStoryYear(req, res) {
   });
   if (trace) persistTrace(trace);
   sendJson(res, 200, result);
+}
+
+async function handleStoryYearStream(req, res) {
+  const body = await readJson(req);
+  if (!body.session) {
+    sendJson(res, 400, { error: 'Missing story session' });
+    return;
+  }
+  const send = beginSse(res);
+  const { loadRunTrace, persistTrace } = require('./lib/run-trace');
+  const trace = body.session.run_id ? loadRunTrace(body.session.run_id) : null;
+  try {
+    const result = await getStorySession().generateNextYear({
+      session: body.session,
+      user_intervention: body.user_intervention || null,
+      trace,
+      onStage: (stage, payload) => send(stage, payload)
+    });
+    if (trace) persistTrace(trace);
+    send('year:complete', result);
+    res.end();
+  } catch (error) {
+    send('error', { message: error.message });
+    res.end();
+  }
 }
 
 async function handleStoryFinal(req, res) {
@@ -566,6 +664,7 @@ const ROUTES = {
   'POST /api/year': handleYear,
   'POST /api/final': handleFinal,
   'POST /api/dialogue': handleDialogue,
+  'POST /api/dialogue/suggest': handleDialogueSuggest,
   'POST /api/rag/query': handleRagQuery,
   'GET /api/rag/status': handleRagStatus,
   'POST /api/fate/context': handleFateContext,
@@ -575,7 +674,9 @@ const ROUTES = {
   'POST /api/intake/character-match': handleIntakeCharacterMatch,
   'POST /api/story': handleStoryStream,
   'POST /api/story/start': handleStoryStart,
+  'POST /api/story/start/stream': handleStoryStartStream,
   'POST /api/story/year': handleStoryYear,
+  'POST /api/story/year/stream': handleStoryYearStream,
   'POST /api/story/final': handleStoryFinal,
   'POST /api/generate': handleLegacyGenerate
 };

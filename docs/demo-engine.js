@@ -769,22 +769,64 @@
     return texts.length ? `凭着这段记忆 · ${texts.join('、')}` : '';
   }
 
-  /** 给对话冷启动几个可点的好问题（年份相关 + 终极问） */
-  function suggestedQuestions(year) {
-    const qs = [];
-    if (year?.title) qs.push(`「${year.title}」那年，到底是什么感觉？`);
-    if (year?.is_pivotal) qs.push('那个岔路口，你怎么熬过来的？');
-    qs.push('这七年，你后悔过吗？');
-    qs.push('如果重来一次，你还会这么选吗？');
-    qs.push('对现在的我，你最想说哪句话？');
-    return qs.slice(0, 4);
+  /** 取一句话里最有"抓手"感的短片段（去标点，截断） */
+  function pickFragment(text, max = 9) {
+    const parts = String(text || '')
+      .replace(/[，。！？、；：…—\s「」『』""''（）()]/g, ' ')
+      .split(' ')
+      .filter(Boolean)
+      .sort((a, b) => b.length - a.length);
+    return (parts[0] || String(text || '')).slice(0, max);
   }
 
-  function renderDialogSuggestions(year, statusEl, closeBtn) {
-    const box = document.getElementById('dlg-suggest');
-    if (!box) return;
+  /**
+   * 本地兜底的推荐问题 —— 仅在 /api/dialogue/suggest 不可用（静态站 / 断网）时使用。
+   * 比写死的四句更贴语境：扣住年份、人格软肋、记忆、以及影子刚说的那句话，并按
+   * 年份+轮次轮换，让不同年 / 不同轮拿到不同组合，避免"太同质化"。
+   */
+  function suggestedQuestions(year, turns) {
+    const story = getStory();
+    const pc = story.persona_card || {};
+    const asked = new Set((turns || []).filter(t => t.role !== 'shadow').map(t => t.text));
+    const lastShadow = (turns || []).slice().reverse().find(t => t.role === 'shadow');
+
+    // anchored = 扣住语境的高相关问句，永远排在前面、不参与轮换
+    const anchored = [];
+    if (lastShadow?.text) {
+      const frag = pickFragment(lastShadow.text);
+      if (frag) anchored.push(`你说的「${frag}」，后来呢？`);
+    }
+    if (year?.title) anchored.push(`「${year.title}」那年，最难熬的是哪一刻？`);
+    if (year?.is_pivotal) anchored.push('那个岔路口，你有过一秒想反悔吗？');
+    const soft = (pc.soft_spots || [])[0];
+    if (soft) anchored.push(`你到现在，还会被「${pickFragment(soft, 7)}」绊住吗？`);
+    const mems = getMemoriesForYear(year?.year) || [];
+    if (mems[0]?.content) anchored.push(`${pickFragment(mems[0].content, 8)}那件事，你怎么过去的？`);
+
+    // generic = 通用填充，按年份+轮次轮换，避免每次都一样
+    const generic = [
+      '那一刻，你身边有人懂你吗？',
+      '这一路，你失去的和得到的，哪个更重？',
+      '能给那年的我带一句话，你会说什么？',
+      '有没有一个人，你一直没机会说谢谢？'
+    ];
+    const freshAnchored = anchored.filter(q => !asked.has(q));
+    const freshGeneric = generic.filter(q => !asked.has(q));
+    const off = freshGeneric.length ? ((year?.year || 1) + (turns?.length || 0)) % freshGeneric.length : 0;
+    const rotated = freshGeneric.slice(off).concat(freshGeneric.slice(0, off));
+
+    const out = freshAnchored.concat(rotated).slice(0, 4);
+    return out.length >= 3 ? out : anchored.concat(generic).slice(0, 4);
+  }
+
+  /** 把一组问题渲染成可点击的 chip */
+  function renderSuggestChips(box, questions, statusEl, closeBtn) {
+    box.classList.remove('dlg-suggest-loading');
     box.innerHTML = '';
-    suggestedQuestions(year).forEach(q => {
+    const asked = new Set((dialogSession?.turns || []).filter(t => t.role !== 'shadow').map(t => t.text));
+    const fresh = questions.filter(q => q && !asked.has(q)).slice(0, 4);
+    if (!fresh.length) { box.hidden = true; return; }
+    fresh.forEach(q => {
       const chip = document.createElement('button');
       chip.type = 'button';
       chip.className = 'dlg-suggest-chip';
@@ -796,6 +838,7 @@
         Sfx()?.playUiClick?.();
         appendDialogTurn('user', q);
         await requestShadowReply(q, statusEl, closeBtn);
+        await refreshSuggestions(statusEl, closeBtn);
         const inp = document.getElementById('dialog-input');
         if (inp) inp.focus();
       });
@@ -804,9 +847,49 @@
     box.hidden = false;
   }
 
+  /**
+   * 刷新推荐问题：先尝试小 agent（/api/dialogue/suggest），按当前对话上下文生成；
+   * 失败 / 为空则退回本地兜底。每次影子回完话都会调一次，所以 chip 会跟着对话走。
+   */
+  async function refreshSuggestions(statusEl, closeBtn) {
+    const box = document.getElementById('dlg-suggest');
+    if (!box || !dialogSession) return;
+    const session = dialogSession;
+    const year = session.year;
+
+    box.classList.add('dlg-suggest-loading');
+    box.innerHTML = '<span class="dlg-suggest-hint">影子在想，你大概还想问…</span>';
+    box.hidden = false;
+
+    let questions = null;
+    try {
+      if (ShadowAgents.dialogue.enabled && typeof ShadowAgents.dialogue.suggest === 'function') {
+        const out = await ShadowAgents.dialogue.suggest({
+          story: getStory(),
+          year,
+          turns: (session.turns || []).slice(-6),
+          lastReply: session.lastReply || '',
+          atYear: year.year
+        });
+        if (out?.questions?.length) questions = out.questions;
+      }
+    } catch (err) {
+      console.warn('[suggest]', err.message);
+    }
+
+    // 若期间对话已关闭 / 切换，丢弃这次结果，避免覆盖新上下文
+    if (dialogSession !== session) return;
+
+    if (!questions || !questions.length) {
+      questions = suggestedQuestions(year, session.turns);
+    }
+    renderSuggestChips(box, questions, statusEl, closeBtn);
+  }
+
   function appendDialogTurn(role, text, citeIds) {
     const thread = document.getElementById('dlg-thread');
     if (!thread) return null;
+    if (dialogSession) (dialogSession.turns ||= []).push({ role, text });
     const turn = document.createElement('div');
     turn.className = `dlg-turn dlg-turn-${role}`;
     if (role === 'shadow' && citeIds?.length) {
@@ -882,6 +965,12 @@
       }
     }
 
+    // 记下影子这一轮的回答，喂给追问向导 + 兜底问题
+    if (dialogSession) {
+      (dialogSession.turns ||= []).push({ role: 'shadow', text });
+      dialogSession.lastReply = text;
+    }
+
     const citeEl = document.getElementById('dlg-cite');
     if (citeEl) citeEl.hidden = true;
 
@@ -924,7 +1013,7 @@
     const statusEl = document.getElementById('dlg-status');
     const closeBtn = document.getElementById('btn-dlg-close');
 
-    dialogSession = { yearIdx, year, busy: false };
+    dialogSession = { yearIdx, year, busy: false, turns: [], lastReply: '' };
     if (thread) thread.innerHTML = '';
     if (form) form.hidden = true;
     if (input) input.value = '';
@@ -937,7 +1026,7 @@
     const openingQ = `第 ${year.year} 年「${year.title}」—— Shadow，你想对现在的我说什么？`;
     await requestShadowReply(openingQ, statusEl, closeBtn);
     if (form) form.hidden = false;
-    renderDialogSuggestions(year, statusEl, closeBtn);
+    await refreshSuggestions(statusEl, closeBtn);
     if (input) input.focus();
   }
 
@@ -952,6 +1041,7 @@
     input.value = '';
     appendDialogTurn('user', question);
     await requestShadowReply(question, statusEl, closeBtn);
+    await refreshSuggestions(statusEl, closeBtn);
     input.focus();
   }
 

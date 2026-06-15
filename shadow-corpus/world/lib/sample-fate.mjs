@@ -74,7 +74,8 @@ export async function sampleFateContext({
   profile = null,
   persona_card = null,
   priorInterventions = [],
-  retrieval = 'none'
+  retrieval = 'none',
+  intakeScenarioWeights = null
 }) {
   const workingPool = await preparePoolForSampling(pool, retrieval, {
     profile,
@@ -93,7 +94,8 @@ export async function sampleFateContext({
     persona_card,
     narrativeYear,
     beatType,
-    priorInterventions
+    priorInterventions,
+    intakeScenarioWeights
   });
 
   let microPool = workingPool.micro_events || [];

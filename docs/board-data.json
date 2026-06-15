@@ -1,5 +1,5 @@
 {
-  "builtAt": "2026-06-15T15:12:27.648Z",
+  "builtAt": "2026-06-15T15:47:15.239Z",
   "siteTitle": "Shadow 团队看板",
   "githubRepo": "rachelzzz1921/shadow",
   "githubRepoUrl": "https://github.com/rachelzzz1921/shadow",
@@ -6305,6 +6305,13 @@
     "packId": "fuxduxian-v1",
     "previewLinks": [
       {
+        "label": "路演 Pitch",
+        "path": "docs/pitch.html",
+        "pagesPath": "pitch.html",
+        "url": "./pitch.html",
+        "pagesUrl": "https://rachelzzz1921.github.io/shadow/pitch.html"
+      },
+      {
         "label": "叙事 Demo",
         "path": "docs/demo.html",
         "pagesPath": "demo.html",
@@ -6617,6 +6624,14 @@
       "note": "PX-FDX-* · CC0 纹理预览 · ?legacy=1 回退旧占位",
       "url": "./demo-phaser.html",
       "pagesUrl": "https://rachelzzz1921.github.io/shadow/demo-phaser.html"
+    },
+    "pitchDemo": {
+      "label": "路演 · 沿路看看（pitch）",
+      "path": "docs/pitch.html",
+      "pagesPath": "pitch.html",
+      "run": "npm run demo:preview → /pitch.html",
+      "url": "./pitch.html",
+      "pagesUrl": "https://rachelzzz1921.github.io/shadow/pitch.html"
     },
     "pagesBase": "https://rachelzzz1921.github.io/shadow",
     "manifestUrl": "https://github.com/rachelzzz1921/shadow/blob/main/shadow-corpus/MANIFEST.md",

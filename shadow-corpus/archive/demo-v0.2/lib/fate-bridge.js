@@ -44,11 +44,13 @@ async function getSampler() {
  * @param {number} p.narrativeYear
  * @param {'pivotal'|'quiet'} p.beatType
  * @param {object[]} [p.priorInterventions]
+ * @param {object} [p.full_profile]
  */
 async function resolveFateContext({
   runId = 'local',
   profile,
   persona_card = null,
+  full_profile = null,
   narrativeYear,
   beatType,
   priorInterventions = []
@@ -83,7 +85,8 @@ async function resolveFateContext({
     profile,
     persona_card,
     priorInterventions,
-    retrieval: 'none'
+    retrieval: 'none',
+    intakeScenarioWeights: full_profile?.scenario_weights || null
   });
   return { ...ctx, placeholder: false, rag_refine: narrowedPool._rag_refine || null };
 }

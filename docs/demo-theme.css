@@ -1303,6 +1303,20 @@ img { image-rendering: pixelated; image-rendering: crisp-edges; }
   color: var(--ink);
 }
 .dlg-suggest-chip:disabled { opacity: 0.4; cursor: not-allowed; }
+.dlg-suggest-hint {
+  font-size: 11px;
+  color: var(--ink-muted);
+  opacity: 0.85;
+  padding: 6px 2px;
+  animation: dlg-suggest-pulse 1.1s ease-in-out infinite;
+}
+@keyframes dlg-suggest-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dlg-suggest-hint { animation: none; }
+}
 
 .dlg-turn-cite {
   display: block;

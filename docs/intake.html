@@ -27,6 +27,7 @@
       <p class="landing-tagline">四层采集 → Persona agent → <a href="generate.html">API 纯文字七年</a> 或 Mock Demo</p>
       <nav id="storyPresetPicker" class="story-picker intake-preset-picker enter-item" aria-label="Demo 预设情景"></nav>
       <p class="intake-preset-hint enter-item">自己写岔路口 → <strong>生成我的七年</strong>（规则合成，无需 API）；配置 Key 后可走 LLM 全链。</p>
+      <p class="intake-preset-hint enter-item intake-quick-hint">不想做题？填好上方岔路口后，点底部 <strong>跳过做题，直接玩</strong> —— 标签与行为题可整段跳过。</p>
       <p class="intake-preset-hint enter-item">服务没开？先在终端跑 <code>npm run demo:local</code>，保持窗口不关。也可 <a href="demo-hub.html">Demo 入口</a> 一键进故事。</p>
       <div id="serverBanner" class="intake-server-banner intake-hidden" role="alert"></div>
     </header>
@@ -126,7 +127,8 @@
       <p id="stepHint" class="intake-step-hint intake-hidden" role="status" aria-live="polite"></p>
       <div class="intake-footer-actions">
         <button type="button" id="btnBack" class="btn-ghost">上一步</button>
-        <button type="button" id="btnSkipDemo" class="btn-ghost intake-hidden">跳过采集，直达 Demo →</button>
+        <button type="button" id="btnSkipDemo" class="btn-ghost intake-hidden">玩样例故事 →</button>
+        <button type="button" id="btnQuickPlay" class="btn-ghost intake-quick-play">跳过做题，直接玩 →</button>
         <button type="button" id="btnNext" class="btn-start">继续</button>
       </div>
     </footer>
@@ -172,6 +174,6 @@
 <script src="demo-intake-profile.js"></script>
 <script src="demo-persona-agent.js"></script>
 <script src="demo-custom-story.js?v=20260615a"></script>
-<script src="demo-intake-app.js?v=20260615a"></script>
+<script src="demo-intake-app.js?v=20260615b"></script>
 </body>
 </html>

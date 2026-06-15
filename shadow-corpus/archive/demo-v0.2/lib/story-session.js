@@ -25,24 +25,31 @@ const {
   finishRunTrace
 } = require('./run-trace');
 
+function emitStage(onStage, stage, payload) {
+  if (typeof onStage === 'function') onStage(stage, payload || {});
+}
+
 async function startStorySession({
   profile,
   persona_card: intakePersonaCard = null,
   full_profile = null,
   runtime = createLiveRuntime(),
-  trace = null
+  trace = null,
+  onStage = null
 }) {
   try {
     const scenario = await classifyProfile(profile);
+    const scenarioPayload = {
+      domain: scenario.domain,
+      label: scenario.label,
+      agent: scenario.agent,
+      confidence: scenario.confidence
+    };
     appendEvent(trace, {
       stage: 'scenario:classified',
-      payload: {
-        domain: scenario.domain,
-        label: scenario.label,
-        agent: scenario.agent,
-        confidence: scenario.confidence
-      }
+      payload: scenarioPayload
     });
+    emitStage(onStage, 'scenario:classified', scenarioPayload);
 
     const enrichedProfile = {
       ...profile,
@@ -53,24 +60,37 @@ async function startStorySession({
 
     let persona_card = intakePersonaCard;
     if (persona_card?.name) {
+      const skippedPayload = { name: persona_card.name, from: 'intake' };
       appendEvent(trace, {
         stage: 'persona:skipped',
-        payload: { name: persona_card.name, from: 'intake' }
+        payload: skippedPayload
       });
+      emitStage(onStage, 'persona:skipped', skippedPayload);
     } else {
       appendEvent(trace, { stage: 'persona:start' });
+      emitStage(onStage, 'persona:start');
       persona_card = await agents.runPersona({ profile: enrichedProfile, runtime });
-      appendEvent(trace, { stage: 'persona:done', payload: { name: persona_card.name } });
+      const personaPayload = { name: persona_card.name };
+      appendEvent(trace, { stage: 'persona:done', payload: personaPayload });
+      emitStage(onStage, 'persona:done', personaPayload);
     }
 
     appendEvent(trace, { stage: 'beats:start' });
-    const beatsResult = await agents.runBeats({ persona_card, profile, runtime });
+    emitStage(onStage, 'beats:start');
+    const beatsResult = await agents.runBeats({
+      persona_card,
+      profile: enrichedProfile,
+      full_profile,
+      runtime
+    });
     const beatsEval = wrapFindings(evaluateBeats(beatsResult.beats, beatsResult.pivotal_years));
+    const beatsPayload = { pivotal_years: beatsResult.pivotal_years };
     appendEvent(trace, {
       stage: 'beats:done',
-      payload: { pivotal_years: beatsResult.pivotal_years },
+      payload: beatsPayload,
       eval: beatsEval
     });
+    emitStage(onStage, 'beats:done', beatsPayload);
 
     const session = {
       profile: enrichedProfile,
@@ -82,8 +102,8 @@ async function startStorySession({
       pivotal_years: beatsResult.pivotal_years,
       memory_stream: [],
       years: [],
-      mood: 5,
-      esteem: 5,
+      mood: full_profile?.baseline?.initial_mood ?? 5,
+      esteem: full_profile?.baseline?.initial_esteem ?? 5,
       run_id: trace?.run_id || null,
       visual_character: full_profile?.visual_character || null
     };
@@ -94,7 +114,13 @@ async function startStorySession({
   }
 }
 
-async function generateNextYear({ session, user_intervention = null, runtime = createLiveRuntime(), trace = null }) {
+async function generateNextYear({
+  session,
+  user_intervention = null,
+  runtime = createLiveRuntime(),
+  trace = null,
+  onStage = null
+}) {
   if (!session || !Array.isArray(session.beats)) {
     throw new Error('Missing story session');
   }
@@ -130,21 +156,32 @@ async function generateNextYear({ session, user_intervention = null, runtime = c
   }
 
   try {
-    appendEvent(trace, { stage: 'year:start', payload: { year: beat.year, type: beat.type } });
+    const yearStartPayload = { year: beat.year, type: beat.type };
+    appendEvent(trace, { stage: 'year:start', payload: yearStartPayload });
+    emitStage(onStage, 'year:start', yearStartPayload);
+    emitStage(onStage, 'fate:start', yearStartPayload);
 
     const fate_context = await resolveFateContext({
       runId: session.run_id || trace?.run_id || 'local',
       profile: session.profile,
       persona_card: session.persona_card,
+      full_profile: session.full_profile || null,
       narrativeYear: beat.year,
       beatType: beat.type,
       priorInterventions: replanLog.map(r => r.intervention)
     });
+    const fatePayload = {
+      year: beat.year,
+      era_line: fate_context?.era_line,
+      placeholder: fate_context?.placeholder
+    };
     appendEvent(trace, {
       stage: 'fate:sampled',
-      payload: { year: beat.year, era_line: fate_context?.era_line, placeholder: fate_context?.placeholder }
+      payload: fatePayload
     });
+    emitStage(onStage, 'fate:sampled', fatePayload);
 
+    emitStage(onStage, 'year:generating', yearStartPayload);
     const rawYear = await agents.runYear({
       persona_card: session.persona_card,
       memory_stream: session.memory_stream || [],
@@ -158,6 +195,7 @@ async function generateNextYear({ session, user_intervention = null, runtime = c
       full_beats: beats,
       pivotal_years,
       fate_context,
+      full_profile: session.full_profile || null,
       runtime
     });
     const year = normalizeYear(
@@ -175,11 +213,13 @@ async function generateNextYear({ session, user_intervention = null, runtime = c
       yearFindings.push(...evaluateInterventionThread(session.years[nextIndex - 1], year));
     }
     const yearEval = wrapFindings(yearFindings);
+    const yearDonePayload = { year: year.year, title: year.title };
     appendEvent(trace, {
       stage: 'year:done',
-      payload: { year: year.year, title: year.title },
+      payload: yearDonePayload,
       eval: yearEval
     });
+    emitStage(onStage, 'year:done', yearDonePayload);
 
     const nextSession = {
       ...session,
@@ -218,10 +258,12 @@ async function finishStorySession({ session, runtime = createLiveRuntime(), trac
       final_mood: session.mood ?? 5,
       final_esteem: session.esteem ?? 5,
       profile: session.profile,
+      full_profile: session.full_profile || null,
       runtime
     });
     const story = {
       profile: session.profile,
+      full_profile: session.full_profile || null,
       persona_card: session.persona_card,
       shadow: session.shadow,
       beats: session.beats,

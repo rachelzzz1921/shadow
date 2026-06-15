@@ -1,6 +1,8 @@
 # Shadow Agent 路演一页说明
 
-更新时间：2026-06-14
+更新时间：2026-06-15
+
+> **交互路演页（推荐）：** [pitch.html](../../docs/pitch.html) — 参照 I Ching「沿路看看」纵向翻页，GitHub Pages：`/pitch.html`
 
 ## 一句话
 

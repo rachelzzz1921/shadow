@@ -17,7 +17,8 @@ const {
   RelaxedYearSchema,
   FinalSchema,
   RelaxedFinalSchema,
-  DialogueSchema
+  DialogueSchema,
+  SuggestQuestionsSchema
 } = require('./schemas');
 
 const {
@@ -25,7 +26,8 @@ const {
   buildBeatsPrompt,
   buildYearPrompt,
   buildFinalPrompt,
-  buildDialoguePrompt
+  buildDialoguePrompt,
+  buildSuggestPrompt
 } = require('./prompts');
 const { createLiveRuntime, pickProvider } = require('./llm-runtime');
 const { selectMemories } = require('./memory-retrieval');
@@ -145,8 +147,8 @@ async function runPersona({ profile, runtime }) {
 // ------------------------------------------------------------
 // Agent 2: beats / rhythm
 // ------------------------------------------------------------
-async function runBeats({ persona_card, profile, runtime }) {
-  const { system, prompt } = buildBeatsPrompt({ persona_card, profile });
+async function runBeats({ persona_card, profile, full_profile = null, runtime }) {
+  const { system, prompt } = buildBeatsPrompt({ persona_card, profile, full_profile });
   const result = await callAgent({
     schema: BeatsSchema,
     system,
@@ -248,6 +250,28 @@ async function runDialogue(input) {
     system,
     prompt,
     temperature: 0.9,
+    runtime: input.runtime
+  });
+}
+
+// ------------------------------------------------------------
+// Agent 5.5: suggested follow-up questions（追问向导）
+// ------------------------------------------------------------
+async function runSuggestQuestions(input) {
+  const { system, prompt } = buildSuggestPrompt({
+    persona_card: input.persona_card,
+    memory_stream: input.memory_stream || [],
+    year: input.year || null,
+    at_year: input.at_year ?? 7,
+    recent_dialogue: input.recent_dialogue || [],
+    last_reply: input.last_reply || ''
+  });
+  return callAgent({
+    schema: SuggestQuestionsSchema,
+    system,
+    prompt,
+    // high temperature so chips stay fresh turn-to-turn, not the same 4 lines
+    temperature: 1.0,
     runtime: input.runtime
   });
 }
@@ -355,6 +379,7 @@ module.exports = {
   runYear,
   runFinal,
   runDialogue,
+  runSuggestQuestions,
   runFullStory,
   deriveShadow,
   pickProvider,

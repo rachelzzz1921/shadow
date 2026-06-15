@@ -31,7 +31,8 @@
     scenario: null,
     previewText: '',
     activePresetId: null,
-    openTagCats: null
+    openTagCats: null,
+    quickPath: false
   };
 
   let nudgeTimer = null;
@@ -48,6 +49,7 @@
     btnBack: document.getElementById('btnBack'),
     btnNext: document.getElementById('btnNext'),
     btnSkipDemo: document.getElementById('btnSkipDemo'),
+    btnQuickPlay: document.getElementById('btnQuickPlay'),
     serverBanner: document.getElementById('serverBanner'),
     stepLayerA: document.getElementById('stepLayerA'),
     stepLayerB: document.getElementById('stepLayerB'),
@@ -120,6 +122,10 @@
         goDemoFromPreset(presetId);
       });
     }
+    if (el.btnQuickPlay && !el.btnQuickPlay.dataset.bound) {
+      el.btnQuickPlay.dataset.bound = '1';
+      el.btnQuickPlay.addEventListener('click', () => submitQuickPath());
+    }
   }
 
   function resolveSkipPresetId() {
@@ -149,12 +155,32 @@
   function setSkipDemoLoading(loading) {
     if (!el.btnSkipDemo) return;
     el.btnSkipDemo.disabled = loading;
-    el.btnSkipDemo.textContent = loading ? '进入 Demo…' : '跳过采集，直达 Demo →';
+    el.btnSkipDemo.textContent = loading ? '进入样例…' : '玩样例故事 →';
+  }
+
+  function setQuickPlayLoading(loading) {
+    if (!el.btnQuickPlay) return;
+    el.btnQuickPlay.disabled = loading;
+    el.btnQuickPlay.textContent = loading ? '正在合成七年…' : quickPlayLabel();
+    if (el.btnNext) el.btnNext.disabled = loading;
+    if (el.btnBack) el.btnBack.disabled = loading || state.step === 0;
+    if (el.btnSkipDemo) el.btnSkipDemo.disabled = loading;
+  }
+
+  function quickPlayLabel() {
+    return state.step === 0 ? '跳过做题，直接玩 →' : '跳过剩余题目，直接玩 →';
   }
 
   function updateSkipDemoButton() {
     if (!el.btnSkipDemo) return;
     el.btnSkipDemo.classList.toggle('intake-hidden', state.step >= 4);
+  }
+
+  function updateQuickPlayButton() {
+    if (!el.btnQuickPlay) return;
+    el.btnQuickPlay.classList.toggle('intake-hidden', state.step >= 4);
+    el.btnQuickPlay.textContent = quickPlayLabel();
+    el.btnQuickPlay.disabled = false;
   }
 
   function showServerBanner(message, tone) {
@@ -240,6 +266,7 @@
     renderStoryPresets();
     schedulePreview();
     updateSkipDemoButton();
+    updateQuickPlayButton();
 
     flushLayerAFromDom();
     updateCharRing(el.choiceInput?.value || '', el.choiceRing, 10, 120);
@@ -350,6 +377,7 @@
     const presetId = presetFromLocation();
     if (presetId) applyPreset(presetId);
     else setGender(state.layerA.gender || 'female');
+    updateQuickPlayButton();
   }
 
   function bindLayerA() {
@@ -363,6 +391,7 @@
           window.ShadowDemoMock?.markCustomIntake?.();
           renderStoryPresets();
           updateSkipDemoButton();
+          updateQuickPlayButton();
         }
       }
       updateCharRing(el.choiceInput.value, el.choiceRing, 10, 120);
@@ -778,6 +807,7 @@
     if (step === 1) schedulePreview();
     updateCharacterPreviewForStep(step);
     updateSkipDemoButton();
+    updateQuickPlayButton();
   }
 
   function currentQuestion() {
@@ -1180,6 +1210,137 @@
     await routeCustomToDemo(result);
   }
 
+  function personaCardFromPersona(persona) {
+    if (!persona) return null;
+    return {
+      name: persona.shadow_name || '影',
+      core_traits: persona.core_traits || [],
+      soft_spots: persona.soft_spots || [],
+      decision_tendency: persona.decision_tendency || '',
+      growth_seed: persona.growth_seed || '',
+      core_tension: persona.core_tension,
+      defense_mechanism: persona.defense_mechanism,
+      value_hierarchy: persona.value_hierarchy,
+      voice_notes: persona.voice_notes,
+      narrative_warnings: persona.narrative_warnings,
+      _from_persona_agent: true
+    };
+  }
+
+  function ensureScenarioForQuickPath() {
+    if (state.scenario) return state.scenario;
+    if (window.ShadowScenarioClassify?.classifyProfile) {
+      state.scenario = window.ShadowScenarioClassify.classifyProfile({
+        choice: state.layerA.choice_text,
+        description: state.layerA.self_description
+      });
+    }
+    return state.scenario;
+  }
+
+  async function buildQuickIntakeResult() {
+    ensureScenarioForQuickPath();
+    const full_profile = window.ShadowIntakeProfile?.buildFullProfile({
+      layerA: state.layerA,
+      selectedTags: state.selectedTags,
+      answersObj: answersObjFromState(),
+      domainDetect: state.scenario,
+      meta: { total_duration_ms: Date.now() - state.startedAt, quick_path: true }
+    });
+    if (!full_profile) throw new Error('无法构建 profile');
+
+    let persona = null;
+    let persona_source = 'rule_local';
+    let persona_card = null;
+
+    try {
+      const res = await fetch('/api/intake/complete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          layerA: state.layerA,
+          selectedTags: state.selectedTags,
+          questionAnswers: [],
+          scenarioFromText: state.scenario,
+          meta: { total_duration_ms: Date.now() - state.startedAt, quick_path: true },
+          analyze: true,
+          fallback: true
+        })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.full_profile) {
+          persona = data.persona || null;
+          persona_card = data.persona_card || personaCardFromPersona(persona);
+          persona_source = data.persona_source || 'llm';
+          return { full_profile: data.full_profile, persona, persona_card, persona_source, visual_character: data.visual_character };
+        }
+      }
+    } catch (_) { /* offline */ }
+
+    if (window.ShadowPersonaAgent?.analyze) {
+      persona = window.ShadowPersonaAgent.analyze(full_profile);
+      persona_card = personaCardFromPersona(persona);
+    }
+
+    return { full_profile, persona, persona_card, persona_source, visual_character: full_profile.visual_character || null };
+  }
+
+  /** 只填岔路口基本信息 → 跳过标签与行为题 → 进入七年 */
+  async function submitQuickPath() {
+    flushLayerAFromDom();
+    if (state.layerA.choice_text.length < 10) {
+      if (state.step !== 0) showStep(0);
+      flagInvalid(el.choiceInput);
+      el.choiceInput?.focus();
+      showStepHint(
+        state.layerA.choice_text.length === 0
+          ? '请先写清岔路口（至少 10 字），再点「跳过做题，直接玩」。'
+          : '岔路口再多说一点——影子需要一个具体的分叉（至少 10 字）。',
+        'warn'
+      );
+      return;
+    }
+    if (!state.layerA.birth_year || !state.layerA.fork_year) {
+      if (state.step !== 0) showStep(0);
+      showStepHint('请选择出生年份和岔路口年份。', 'warn');
+      return;
+    }
+    if (!state.layerA.gender) {
+      if (state.step !== 0) showStep(0);
+      showStepHint('请选择性别，方便后续像素动画匹配。', 'warn');
+      return;
+    }
+
+    state.activePresetId = null;
+    window.ShadowDemoMock?.clearDemoMode?.();
+    window.ShadowDemoMock?.markCustomIntake?.();
+    sessionStorage.removeItem('shadow_intake_story_id');
+
+    setQuickPlayLoading(true);
+    state.quickPath = true;
+    showStepHint('跳过标签与行为题，正在用你的岔路口合成七年…', 'ok');
+
+    try {
+      const result = await buildQuickIntakeResult();
+      if (!result.persona && window.ShadowPersonaAgent?.analyze) {
+        result.persona = window.ShadowPersonaAgent.analyze(result.full_profile);
+        result.persona_card = personaCardFromPersona(result.persona);
+        result.persona_source = result.persona_source || 'rule_local';
+      }
+      persistHandoff(result);
+      if (el.previewBody) {
+        el.previewBody.textContent = result.persona?.core_tension ||
+          '已按你的岔路口生成人格，正在进入七年…';
+      }
+      await routeCustomToDemo(result);
+    } catch (err) {
+      console.error('[quick path]', err);
+      showStepHint('快速进入失败：' + (err.message || '请刷新后重试'), 'error');
+      setQuickPlayLoading(false);
+    }
+  }
+
   // 自定义采集 → 七年呈现。两条链路都落进 demo.html 分层 UI：
   //  · API 可用 → generate.html 真实全链生成（进度屏，完成后自动跳 demo.html?live=1）
   //  · API 不可用 → ShadowCustomStory 规则即时合成 → 直达 demo.html?live=1
@@ -1193,7 +1354,10 @@
         duration_ms: state.answerMeta[q.id]?.duration_ms || 0
       })),
       scenarioFromText: state.scenario,
-      meta: { total_duration_ms: Date.now() - state.startedAt }
+      meta: {
+        total_duration_ms: Date.now() - state.startedAt,
+        quick_path: Boolean(state.quickPath)
+      }
     };
 
     let apiOk = false;

@@ -59,6 +59,58 @@ function buildSceneAgentSystem(scene, opts = {}) {
   return parts.join('\n');
 }
 
+const SCENARIO_DOMAINS = Object.keys(SCENE_FILES);
+
+function topDomainFromWeights(weights) {
+  if (!weights || typeof weights !== 'object') return null;
+  const ranked = Object.entries(weights)
+    .filter(([d]) => SCENARIO_DOMAINS.includes(d))
+    .sort((a, b) => b[1] - a[1]);
+  return ranked[0]?.[0] || null;
+}
+
+/**
+ * @param {object|null|undefined} full_profile
+ * @returns {{ primary: string, secondary: string|null, source: 'intake_weights'|'none' }}
+ */
+function resolveSceneFromFullProfile(full_profile) {
+  const primary = topDomainFromWeights(full_profile?.scenario_weights);
+  if (primary) {
+    const ranked = Object.entries(full_profile.scenario_weights)
+      .filter(([d]) => SCENARIO_DOMAINS.includes(d))
+      .sort((a, b) => b[1] - a[1]);
+    return {
+      primary,
+      secondary: ranked[1]?.[0] || null,
+      source: 'intake_weights'
+    };
+  }
+  return { primary: null, secondary: null, source: 'none' };
+}
+
+/**
+ * @param {object|null|undefined} full_profile
+ * @param {object} profile
+ */
+async function buildSceneYearSystemFromFullProfile(full_profile, profile) {
+  const routed = resolveSceneFromFullProfile(full_profile);
+  if (routed.primary) {
+    return {
+      scene: routed.primary,
+      secondary: routed.secondary,
+      source: routed.source,
+      system: buildSceneAgentSystem(routed.primary)
+    };
+  }
+  const scene = await resolveSceneFromProfile(profile);
+  return {
+    scene,
+    secondary: null,
+    source: 'classify',
+    system: buildSceneAgentSystem(scene)
+  };
+}
+
 let classifyProfileFn = null;
 
 async function resolveSceneFromProfile(profile) {
@@ -78,9 +130,12 @@ async function buildSceneYearSystem(profile, sceneOverride) {
   const scene = sceneOverride || (await resolveSceneFromProfile(profile));
   return {
     scene,
+    source: 'classify',
     system: buildSceneAgentSystem(scene)
   };
 }
+
+let classifyProfileFn = null;
 
 module.exports = {
   PROMPTS_DIR,
@@ -91,5 +146,7 @@ module.exports = {
   loadScenePrompt,
   buildSceneAgentSystem,
   buildSceneYearSystem,
-  resolveSceneFromProfile
+  buildSceneYearSystemFromFullProfile,
+  resolveSceneFromProfile,
+  resolveSceneFromFullProfile
 };

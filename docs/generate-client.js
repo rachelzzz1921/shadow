@@ -15,6 +15,43 @@
 
   let lastExport = null;
   let intakeHandoff = null;
+  const pendingLog = new Map();
+  let waitTimer = null;
+
+  function stopWaitTimer() {
+    if (waitTimer) {
+      clearInterval(waitTimer);
+      waitTimer = null;
+    }
+  }
+
+  function startWaitTimer(stage, baseMsg, onTick) {
+    stopWaitTimer();
+    const started = Date.now();
+    waitTimer = setInterval(() => {
+      const secs = Math.floor((Date.now() - started) / 1000);
+      onTick(secs);
+      logPending(stage, `${baseMsg} · 已等待 ${secs}s`);
+    }, 1000);
+  }
+
+  function logPending(stage, msg) {
+    let li = pendingLog.get(stage);
+    if (!li) {
+      li = document.createElement('li');
+      li.className = 'gen-log-pending';
+      logEl?.appendChild(li);
+      pendingLog.set(stage, li);
+    }
+    li.textContent = `[${stage}] ${msg}`;
+    if (logEl) logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  function clearPending(stage) {
+    const li = pendingLog.get(stage);
+    if (li) li.remove();
+    pendingLog.delete(stage);
+  }
 
   function show(el) {
     el?.classList.remove('gen-hidden');
@@ -62,6 +99,117 @@
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || res.statusText || `HTTP ${res.status}`);
     return data;
+  }
+
+  /** POST + SSE (fetch ReadableStream — implementing-realtime-sync pattern) */
+  async function postSse(path, body, onEvent) {
+    const res = await fetch(path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok || !res.body) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || res.statusText || `HTTP ${res.status}`);
+    }
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let finalPayload = null;
+    let lastError = null;
+
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+
+      let sepIdx;
+      while ((sepIdx = buffer.indexOf('\n\n')) !== -1) {
+        const block = buffer.slice(0, sepIdx);
+        buffer = buffer.slice(sepIdx + 2);
+        const event = (block.match(/^event: (.+)$/m) || [])[1];
+        const dataMatch = block.match(/^data: (.+)$/ms);
+        if (!event || !dataMatch) continue;
+        let data;
+        try {
+          data = JSON.parse(dataMatch[1]);
+        } catch {
+          continue;
+        }
+        if (event === 'error') {
+          lastError = new Error(data.message || '生成失败');
+        } else if (event === 'start:done' || event === 'year:complete') {
+          finalPayload = data;
+        }
+        if (typeof onEvent === 'function') onEvent(event, data);
+      }
+    }
+
+    if (lastError) throw lastError;
+    if (!finalPayload) throw new Error('SSE 流未返回结果');
+    return finalPayload;
+  }
+
+  function handleStartStage(event, data) {
+    switch (event) {
+      case 'scenario:classified':
+        setProgress(8);
+        log('scenario', `${data.label || data.domain || '—'} · ${data.agent || '命运'}`);
+        break;
+      case 'persona:skipped':
+        log('persona', `沿用 Intake · ${data.name || '影子'}`);
+        setProgress(9);
+        break;
+      case 'persona:start':
+        logPending('persona', 'Persona agent 写人格卡…');
+        setProgress(9);
+        break;
+      case 'persona:done':
+        clearPending('persona');
+        log('persona', `${data.name || '影子'}`);
+        setProgress(10);
+        break;
+      case 'beats:start':
+        logPending('beats', 'Beats agent 编排七年节奏…');
+        setProgress(11);
+        startWaitTimer('beats', 'Beats agent 编排七年节奏…', (secs) => {
+          setProgress(11 + Math.min(6, secs / 15));
+        });
+        break;
+      case 'beats:done':
+        stopWaitTimer();
+        clearPending('beats');
+        log('beats', `pivotal · ${(data.pivotal_years || []).join(', ')}`);
+        setProgress(18);
+        break;
+      default:
+        break;
+    }
+  }
+
+  function handleYearStage(event, data, beat) {
+    switch (event) {
+      case 'year:start':
+        logPending('year', `Year agent 生成中 (${beat?.type || data.type})…`);
+        break;
+      case 'fate:start':
+        logPending('fate', `第 ${data.year ?? beat?.year} 年 · 命运 agent 采样…`);
+        break;
+      case 'fate:sampled':
+        clearPending('fate');
+        log('fate', (data.era_line || '时代层已注入').slice(0, 80));
+        break;
+      case 'year:generating':
+        break;
+      case 'year:done':
+        stopWaitTimer();
+        clearPending('year');
+        log('year', `✓ ${data.title || '第' + (data.year ?? beat?.year) + '年'}`);
+        break;
+      default:
+        break;
+    }
   }
 
   function readHandoffFromSession() {
@@ -244,6 +392,8 @@
 
   function resetResults() {
     lastExport = null;
+    stopWaitTimer();
+    pendingLog.clear();
     ['gen-persona', 'gen-beats', 'gen-years', 'gen-final'].forEach((id) => {
       const el = $(id);
       if (el) el.innerHTML = '';
@@ -378,17 +528,16 @@
 
     let session;
     try {
-      log('beats', 'Beats agent 编排七年节奏…');
-      const start = await post('/api/story/start', {
+      const startPayload = {
         profile,
         persona_card: intakeResult.persona_card || null,
         full_profile: intakeResult.full_profile || null
-      });
+      };
+      const start = await postSse('/api/story/start/stream', startPayload, handleStartStage);
       session = start.session;
       renderBeats(session);
-      log('beats', `pivotal · ${(session.pivotal_years || []).join(', ')}`);
-      setProgress(18);
     } catch (e) {
+      stopWaitTimer();
       showError('Story 启动失败：' + e.message);
       if (btnRun) {
         btnRun.disabled = false;
@@ -401,24 +550,33 @@
 
     for (let i = 0; i < totalYears; i++) {
       const beat = session.beats[i];
-      log('fate', `第 ${beat.year} 年 · 命运 agent 采样…`);
-      log('year', `Year agent 生成中 (${beat.type})…`);
+      startWaitTimer('year', `Year agent 生成中 (${beat.type})…`, (secs) => {
+        setProgress(18 + ((i + secs / 90) / totalYears) * 68);
+      });
 
       let result;
       let yearErr = null;
       for (let attempt = 0; attempt < 3; attempt++) {
         try {
-          result = await post('/api/story/year', { session, user_intervention: null });
+          result = await postSse(
+            '/api/story/year/stream',
+            { session, user_intervention: null },
+            (event, data) => handleYearStage(event, data, beat)
+          );
           yearErr = null;
           break;
         } catch (e) {
           yearErr = e;
+          stopWaitTimer();
+          clearPending('year');
+          clearPending('fate');
           if (attempt < 2) {
             log('year', `第 ${beat.year} 年 schema 未通过，重试 ${attempt + 2}/3…`);
             await new Promise((r) => setTimeout(r, 800));
           }
         }
       }
+      stopWaitTimer();
       if (yearErr) {
         showError(`第 ${beat.year} 年失败：${yearErr.message}`);
         if (btnRun) {
@@ -429,10 +587,8 @@
       }
 
       session = result.session;
-      const eraLine = session.last_fate_context?.era_line || result.session?.last_fate_context?.era_line || '';
+      const eraLine = session.last_fate_context?.era_line || '';
       appendYear(result.year, eraLine, beat.type);
-      log('fate', eraLine.slice(0, 80) || '时代层已注入');
-      log('year', `✓ ${result.year?.title || '第' + beat.year + '年'}`);
       setProgress(18 + ((i + 1) / totalYears) * 68);
     }
 

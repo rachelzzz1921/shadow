@@ -73,6 +73,19 @@ function fromInterventions(interventions, raw) {
   }
 }
 
+function fromIntakeWeights(intakeWeights, raw, rationale) {
+  if (!intakeWeights || typeof intakeWeights !== 'object') return;
+  let applied = false;
+  for (const domain of SCENARIO_DOMAINS) {
+    const v = Number(intakeWeights[domain]);
+    if (Number.isFinite(v) && v > 0) {
+      addBoost(raw, domain, v * 0.5);
+      applied = true;
+    }
+  }
+  if (applied) rationale.push('intake:scenario_weights');
+}
+
 function applyNudge(raw, nudgeMap) {
   for (const [domain, amt] of Object.entries(nudgeMap || {})) {
     addBoost(raw, domain, amt);
@@ -98,6 +111,7 @@ function sharpenForBeat(weights, beatType) {
  * @param {number} p.narrativeYear 0..7
  * @param {'pivotal'|'quiet'} p.beatType
  * @param {object[]} [p.priorInterventions]
+ * @param {Record<string,number>} [p.intakeScenarioWeights]
  * @returns {{ weights: Record<string,number>, primary: string, secondary: string, emphasis_line: string, rationale: string[] }}
  */
 export function computeFateWeights({
@@ -105,11 +119,13 @@ export function computeFateWeights({
   persona_card,
   narrativeYear = 0,
   beatType = 'quiet',
-  priorInterventions = []
+  priorInterventions = [],
+  intakeScenarioWeights = null
 }) {
   const raw = uniformWeights();
   const rationale = ['base:uniform'];
 
+  fromIntakeWeights(intakeScenarioWeights, raw, rationale);
   fromProfile(profile, raw);
   rationale.push('profile:choice+keywords');
   fromPersona(persona_card, raw);

@@ -14,15 +14,72 @@
  * Schema 已经通过 generateObject 强制结构，prompt 里再叮嘱一次是为了模型自检。
  */
 
+const SCENARIO_LABELS = {
+  family: '亲情',
+  love: '爱情',
+  friendship: '友情',
+  academic: '学业',
+  career: '事业',
+  self_growth: '自我成长'
+};
+
 function formatPersonaCard(p) {
   if (!p) return '（暂无）';
-  return [
+  const lines = [
     `名字：${p.name}`,
     `核心特质：${(p.core_traits || []).join('、')}`,
     `软肋：${(p.soft_spots || []).join('；')}`,
     `决策倾向：${p.decision_tendency}`,
     `成长课题：${p.growth_seed}`
-  ].join('\n');
+  ];
+  if (p.core_tension) lines.push(`核心张力：${p.core_tension}`);
+  if (p.defense_mechanism) lines.push(`防御机制：${p.defense_mechanism}`);
+  if (p.value_hierarchy) lines.push(`价值排序：${p.value_hierarchy}`);
+  if (p.voice_notes) lines.push(`说话方式：${p.voice_notes}`);
+  if (p.narrative_warnings) lines.push(`叙事禁忌：${p.narrative_warnings}`);
+  return lines.join('\n');
+}
+
+function formatIntakeContext(full_profile) {
+  if (!full_profile) return '（无 Intake 信号）';
+  const lines = ['# Intake 信号（行为题 > 标签 > 自我叙述）'];
+
+  const weights = full_profile.scenario_weights;
+  if (weights && typeof weights === 'object') {
+    const ranked = Object.entries(weights)
+      .filter(([, v]) => Number(v) > 0)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 2);
+    if (ranked.length) {
+      lines.push(
+        '六域侧重：' +
+          ranked
+            .map(([d, w]) => `${SCENARIO_LABELS[d] || d}（${Math.round(Number(w) * 100)}%）`)
+            .join(' · ')
+      );
+    }
+  }
+
+  const signals = full_profile.persona_signals || {};
+  if (signals.archetype) lines.push(`原型：${signals.archetype}`);
+  if (signals.defense_mechanism) lines.push(`防御机制（Intake）：${signals.defense_mechanism}`);
+
+  const baseline = full_profile.baseline;
+  if (baseline) {
+    lines.push(
+      `岔路口基线：情绪 ${baseline.initial_mood ?? '—'}/10 · 自我认同 ${baseline.initial_esteem ?? '—'}/10`
+    );
+  }
+
+  const tensions = (full_profile.tension_flags || []).slice(0, 3);
+  for (const t of tensions) {
+    lines.push(`张力：${t.detail}${t.note ? `（${t.note}）` : ''}`);
+  }
+
+  const dwell = full_profile.meta?.longest_dwell_question;
+  if (dwell) lines.push(`停留最久的行为题：${dwell}`);
+
+  return lines.length > 1 ? lines.join('\n') : '（无 Intake 信号）';
 }
 
 function formatMemoryStream(stream) {
@@ -107,10 +164,12 @@ const BEATS_SYSTEM = `你是「人生节奏师」。真实人生不是每年都�
 严格按 schema 输出 JSON。pivotal_years 数组必须与 beats 中 type=pivotal 的 year 一致。`;
 
 function buildBeatsPrompt(input) {
-  const { persona_card, profile } = input;
+  const { persona_card, profile, full_profile } = input;
   const lines = [
     '# 影子人格卡',
     formatPersonaCard(persona_card),
+    '',
+    formatIntakeContext(full_profile),
     '',
     '# 用户选择的岔路口',
     `${profile.choice}（起始年龄：${profile.age}，七年覆盖年龄 ${profile.age + 1} 到 ${profile.age + 7}）`,
@@ -182,12 +241,15 @@ function buildYearPrompt(input) {
     user_intervention,
     full_beats,
     pivotal_years,
-    fate_context
+    fate_context,
+    full_profile
   } = input;
 
   const lines = [
     `# 影子人格卡（不可违背）`,
     formatPersonaCard(persona_card),
+    '',
+    formatIntakeContext(full_profile),
     '',
     `# 已发生的记忆流（必须呼应，不能矛盾）`,
     formatMemoryStream(memory_stream),
@@ -236,10 +298,12 @@ const FINAL_SYSTEM = `你是「收尾师」。七年走完，你要为这条平�
 严格按 schema 输出 JSON。`;
 
 function buildFinalPrompt(input) {
-  const { persona_card, memory_stream, final_mood, final_esteem, profile } = input;
+  const { persona_card, memory_stream, final_mood, final_esteem, profile, full_profile } = input;
   const lines = [
     '# 影子人格卡',
     formatPersonaCard(persona_card),
+    '',
+    formatIntakeContext(full_profile),
     '',
     '# 七年完整记忆流',
     formatMemoryStream(memory_stream),
@@ -301,11 +365,14 @@ function buildDialoguePrompt(input) {
     current_mood,
     current_esteem,
     user_question,
-    at_year
+    at_year,
+    full_profile
   } = input;
   const lines = [
     '# 影子人格卡',
     formatPersonaCard(persona_card),
+    '',
+    formatIntakeContext(full_profile),
     '',
     '# 影子的记忆流（回答必须引用其中至少一条）',
     formatMemoryStream(memory_stream),
@@ -328,6 +395,79 @@ function buildDialoguePrompt(input) {
     '以影子的身份回答，必须引用至少一条记忆。'
   ];
   return { system: DIALOGUE_SYSTEM, prompt: lines.join('\n') };
+}
+
+// ============================================================
+// Agent 5.5: 追问向导（生成用户的下一批可点击问题）
+// ============================================================
+const SUGGEST_SYSTEM = `你是「追问向导」。用户（现在的他/她）正在和影子（七年后的另一个自己）对话。你的任务：站在**用户**的角度，写出 3-4 句他此刻最可能想点开、追着影子继续问下去的话。
+
+# 这是谁在问谁
+- 问题由"现在的我"发出，问"七年后的影子"。第一人称口吻，称影子为"你"。
+- 不是采访提纲，是一个人对另一个自己的好奇、不甘、心疼或试探。
+
+# 必须扣住当下语境（最重要）
+- 紧贴影子**刚说的那句话**：抓住其中一个具体的物件 / 瞬间 / 人名 / 动作，顺着它往下追，让人觉得"对，我就想接着问这个"。
+- 也可扣住这一年的事件、或记忆流里某段具体的事。
+- 让每条问题都像是只有在这个故事、这一年、这句话之后才会冒出来的——换一个故事就问不出来。
+
+# 角度要散开，别同质
+四条之间尽量覆盖不同方向：① 追一个没说透的细节 ② 戳软肋 / 问代价 ③ 关系（某个具体的人）④ 假设 / 不甘（"如果当时…"）⑤ 情绪（"那一刻你疼吗"）。不要四条都是同一种。
+
+# 禁止
+- 禁止套话与万能问句，尤其这几类：「你后悔吗」「如果重来你还会这么选吗」「你最想对我说什么」「这七年你快乐吗」——除非语境把它逼到非问不可，否则一律不要。
+- 不要重复用户已经问过的话。
+- 不要写成影子的台词，写的是**用户要问出口的问题**。
+
+# 形式
+- 每条 ≤18 字，口语，像真人脱口而出，可以带一点情绪。
+- 不加引号、不加序号、不加解释。
+
+# 输出
+严格按 schema 输出 JSON：{ "questions": ["…", "…", "…"] }。`;
+
+function formatRecentDialogue(turns, lastReply) {
+  const lines = [];
+  const recent = (turns || []).slice(-6);
+  for (const t of recent) {
+    const who = t.role === 'shadow' ? '影子' : '我';
+    lines.push(`${who}：${t.text}`);
+  }
+  if (lastReply && !recent.some(t => t.role === 'shadow' && t.text === lastReply)) {
+    lines.push(`影子（刚刚）：${lastReply}`);
+  }
+  return lines.length ? lines.join('\n') : '（对话刚开始，影子还没说话）';
+}
+
+function buildSuggestPrompt(input) {
+  const {
+    persona_card,
+    memory_stream,
+    year,
+    at_year,
+    recent_dialogue,
+    last_reply
+  } = input;
+  const yearLine = year
+    ? `第 ${year.year} 年「${year.title || '—'}」${year.is_pivotal ? '（岔路口年）' : ''}${year.event ? '：' + year.event : ''}`
+    : `身处第 ${at_year ?? 7} 年往回看`;
+  const lines = [
+    '# 影子人格卡（追问要能戳到这个人）',
+    formatPersonaCard(persona_card),
+    '',
+    '# 影子的记忆流（可从里面挑具体的事来追问）',
+    formatMemoryStream(memory_stream),
+    '',
+    '# 当前所在的年份',
+    yearLine,
+    '',
+    '# 刚刚的对话（你要顺着影子最后那句话往下追）',
+    formatRecentDialogue(recent_dialogue, last_reply),
+    '',
+    '# 任务',
+    '写出现在的"我"接下来最想点开、问影子的 3-4 句话。扣住刚才那句话和这一年，角度散开，不要套话。'
+  ];
+  return { system: SUGGEST_SYSTEM, prompt: lines.join('\n') };
 }
 
 // ============================================================
@@ -368,9 +508,11 @@ module.exports = {
   buildYearPrompt,
   buildFinalPrompt,
   buildDialoguePrompt,
+  buildSuggestPrompt,
   buildInterventionReplanPrompt,
   // helpers exposed for tests / debugging
   formatPersonaCard,
+  formatIntakeContext,
   formatMemoryStream,
   formatBeats,
   formatFateContext

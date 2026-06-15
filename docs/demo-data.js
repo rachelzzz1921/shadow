@@ -294,6 +294,43 @@ const ShadowAgents = {
         console.warn('[ShadowAgents.dialogue]', err.message);
         return { ...fallback, _error: err.message };
       }
+    },
+
+    /**
+     * 追问向导 — 给"现在的我"生成下一批可点击的推荐问题。
+     * 扣住影子刚说的那句话 + 这一年 + 已聊过的内容；后端 /api/dialogue/suggest
+     * 走小 agent，无 key 时走规则版。抛错则由 demo-engine 退回本地兜底。
+     * @returns {Promise<{questions:string[], _placeholder:boolean}>}
+     */
+    async suggest(ctx) {
+      const year = ctx.year || null;
+      const story = ctx.story || window.ShadowDemo?.STORY;
+      const res = await fetch('/api/dialogue/suggest', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          persona_card: story?.persona_card,
+          memory_stream: story?.memory_stream || [],
+          years: story?.years || [],
+          year: year ? {
+            year: year.year,
+            title: year.title,
+            event: year.event,
+            is_pivotal: year.is_pivotal
+          } : null,
+          at_year: ctx.atYear ?? year?.year ?? 7,
+          recent_dialogue: (ctx.turns || []).map(t => ({ role: t.role, text: t.text })),
+          last_reply: ctx.lastReply || '',
+          current_mood: year?.new_mood ?? 5,
+          current_esteem: year?.new_esteem ?? 5
+        })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+      return {
+        questions: Array.isArray(data.questions) ? data.questions.filter(Boolean) : [],
+        _placeholder: Boolean(data._placeholder)
+      };
     }
   },
 

@@ -48,6 +48,12 @@
     "pagesPath": "demo.html",
     "run": "npm run build:visual-demo && npm run demo:preview → /demo.html"
   },
+  "pitchDemo": {
+    "label": "路演 · 沿路看看（pitch）",
+    "path": "docs/pitch.html",
+    "pagesPath": "pitch.html",
+    "run": "npm run demo:preview → /pitch.html"
+  },
   "phaserDemo": {
     "label": "Phaser layout · fuxduxian-v1 draft",
     "path": "docs/demo-phaser.html",

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light" />
+<title>Shadow · 平行人生叙事 Harness — 路演</title>
+<meta name="description" content="Shadow 不是单 prompt 故事生成器，而是一套可被干预、能记住、可复盘的平行人生叙事 Harness。" />
+<link rel="stylesheet" href="pitch.css?v=20260615" />
+</head>
+<body>
+<div class="pitch-shell">
+  <div class="pitch-frame">
+    <div class="pitch-card">
+      <header class="pitch-top">
+        <div class="pitch-brand-row">
+          <a class="pitch-brand" href="demo-hub.html" aria-label="Shadow 主页">
+            <span class="pitch-brand-name">Shadow</span>
+            <span class="pitch-brand-sub">如影 · 平行人生</span>
+          </a>
+          <nav class="pitch-util" aria-label="快捷入口">
+            <a href="demo.html">Demo</a>
+            <a href="intake.html">写我的</a>
+            <a href="index.html">看板</a>
+          </nav>
+        </div>
+        <nav class="pitch-guide" aria-label="导览导航">
+          <div class="pitch-guide-head">
+            <div>
+              <span class="pitch-guide-kicker">沿路</span>
+              <span class="pitch-guide-trail" id="pitch-trail"></span>
+            </div>
+            <span class="pitch-guide-count" id="pitch-count"></span>
+          </div>
+          <div class="pitch-guide-groups" id="pitch-tabs"></div>
+          <div class="pitch-guide-rail" id="pitch-rail" aria-hidden="true"></div>
+        </nav>
+      </header>
+
+      <div class="pitch-deck">
+        <div class="pitch-deck-viewport" id="pitch-viewport">
+          <button type="button" class="pitch-deck-side pitch-deck-side--prev" id="side-prev" aria-label="上一页">‹</button>
+          <button type="button" class="pitch-deck-side pitch-deck-side--next" id="side-next" aria-label="下一页">›</button>
+
+          <div class="pitch-deck-track" id="pitch-track">
+            <!-- 0 入内 -->
+            <div class="pitch-deck-page" aria-hidden="false">
+              <div class="pitch-page is-vcenter">
+                <p class="pitch-kicker">Along the Way</p>
+                <h1 class="pitch-title">岔路口悬着，就该看一眼影子</h1>
+                <p class="pitch-lead">
+                  Shadow 不是「会写故事的 AI」，而是一套<strong style="font-weight:normal;color:var(--ink)">平行人生叙事 Harness</strong>：
+                  用户输入一个人生岔路口，多 Agent 协作生成一条可回放、可追问、可审计的七年影子人生。
+                </p>
+                <div class="pitch-actions">
+                  <a class="pitch-btn-gold" href="intake.html">开始我的平行人生 →</a>
+                  <button type="button" class="pitch-btn-ghost" data-goto="1">先认困局 ↓</button>
+                  <button type="button" class="pitch-btn-ghost" data-goto="6">看样例故事</button>
+                </div>
+                <p class="pitch-footnote">免费静态 Demo · Live 生成需 API · 团队看板独立入口</p>
+              </div>
+            </div>
+
+            <!-- 1 困局 -->
+            <div class="pitch-deck-page" aria-hidden="true">
+              <div class="pitch-page">
+                <p class="pitch-kicker">The Problem</p>
+                <h2 class="pitch-title">会写，但不可控</h2>
+                <p class="pitch-lead">大多数 AI 叙事 demo 的通病：</p>
+                <ul class="pitch-list">
+                  <li>情绪忽高忽低，每年都有大事</li>
+                  <li>结尾变鸡汤，缺乏真实遗憾</li>
+                  <li>用户介入不影响后续——按钮是假的</li>
+                  <li>生成失败后无法复盘，只能重 roll</li>
+                </ul>
+                <aside class="pitch-aside">
+                  Shadow 的核心思路：把创作拆成受约束的生产线。模型负责「写」，Harness 负责结构、记忆、反馈和停止条件。
+                </aside>
+                <div class="pitch-quote">
+                  <em>我们不是在做一个会写故事的 AI，</em>而是在做一个能被干预、能记住、能复盘、能持续变好的叙事 Agent Harness。
+                </div>
+              </div>
+            </div>
+
+            <!-- 2 管线 -->
+            <div class="pitch-deck-page" aria-hidden="true">
+              <div class="pitch-page">
+                <p class="pitch-kicker">Agent Pipeline</p>
+                <h2 class="pitch-title">五步成文，逐年推进</h2>
+                <div class="pitch-pipeline" aria-label="Agent 管线">
+                  <span>Persona</span><span class="arrow">→</span>
+                  <span>Beats</span><span class="arrow">→</span>
+                  <span>Year×7</span><span class="arrow">→</span>
+                  <span>Final</span><span class="arrow">→</span>
+                  <span>Dialogue</span>
+                </div>
+                <div class="pitch-cards">
+                  <div class="pitch-card-item">
+                    <h3>Persona · 人格卡</h3>
+                    <p>软肋、决策倾向、成长种子——决定后续七年的心理动力。</p>
+                  </div>
+                  <div class="pitch-card-item">
+                    <h3>Beats · 七年节奏</h3>
+                    <p>2–3 个 pivotal 年，其余 quiet 年，避免「年年大事」。</p>
+                  </div>
+                  <div class="pitch-card-item">
+                    <h3>Year · 逐年生成</h3>
+                    <p>每次只写一年：读人格、memory、时代背景与用户介入。</p>
+                  </div>
+                  <div class="pitch-card-item">
+                    <h3>Final · 收束</h3>
+                    <p>不复述剧情，必须有 regret，不写「另一条路也好」。</p>
+                  </div>
+                  <div class="pitch-card-item">
+                    <h3>Dialogue · 跨时空对话</h3>
+                    <p>随时问影子；回答必须引用 memory_stream，像走过七年的人。</p>
+                  </div>
+                </div>
+                <p class="pitch-footnote" style="margin-top:1rem">增强层：Fate Agent（时代语料）· Scene Agents（六域 lens）· RAG Kit（记忆检索）</p>
+              </div>
+            </div>
+
+            <!-- 3 底座 -->
+            <div class="pitch-deck-page" aria-hidden="true">
+              <div class="pitch-page">
+                <p class="pitch-kicker">Narrative Harness</p>
+                <h2 class="pitch-title">七阶底座，不是散落 prompt</h2>
+                <p class="pitch-lead">从需求到纠错，整条生产线可审计、可迭代：</p>
+                <div class="pitch-steps">
+                  <button type="button" class="pitch-step" data-goto="4">
+                    <span class="pitch-step-num">壹</span>
+                    <span class="pitch-step-body">
+                      <h3>需求 → 方案 → 编码</h3>
+                      <p>定义 pivotal 年、介入、final 重量感；Goal / Actor / Feedback / Memory / Stop 闭环；prompt 写成协议。</p>
+                    </span>
+                  </button>
+                  <button type="button" class="pitch-step" data-goto="5">
+                    <span class="pitch-step-num">贰</span>
+                    <span class="pitch-step-body">
+                      <h3>自测 → QA → 进度</h3>
+                      <p>Golden story + evaluator 检查节奏；story-review 审 trace；prompt 实验与任务状态可追溯。</p>
+                    </span>
+                  </button>
+                  <button type="button" class="pitch-step" data-goto="5">
+                    <span class="pitch-step-num">叁</span>
+                    <span class="pitch-step-body">
+                      <h3>纠错层</h3>
+                      <p>Schema fail、eval error、敏感输入时停止并复盘——不 silent fail 上线。</p>
+                    </span>
+                  </button>
+                </div>
+                <div class="pitch-quote">
+                  路演只讲一个技术点：<em>Prompt 负责表达，Harness 负责因果。</em> Shadow 的产品力来自二者分工。
+                </div>
+              </div>
+            </div>
+
+            <!-- 4 介入 -->
+            <div class="pitch-deck-page" aria-hidden="true">
+              <div class="pitch-page">
+                <p class="pitch-kicker">User Intervention</p>
+                <h2 class="pitch-title">岔路口，不是 UI 假按钮</h2>
+                <p class="pitch-lead">在 pivotal 年，用户可以选择影子的下一步。这条选择会：</p>
+                <ul class="pitch-list">
+                  <li>写入 session，成为「已发生事实」</li>
+                  <li>进入下一年 Year Agent 的 prompt 上下文</li>
+                  <li>沉淀进 memory_stream，供 Final 与 Dialogue 引用</li>
+                </ul>
+                <aside class="pitch-aside">
+                  quiet 年必须短、pivotal 年才重；pivotal 年才有 intervention 弹窗；用户选择下一年不能忽略——这些由 evaluator 规则强制，而非靠模型自觉。
+                </aside>
+                <div class="pitch-actions" style="align-items:flex-start;margin-top:1.25rem">
+                  <a class="pitch-btn-gold" href="demo.html?story=wufuxdu">在 Demo 里试 pivotal 介入 →</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5 质量 -->
+            <div class="pitch-deck-page" aria-hidden="true">
+              <div class="pitch-page">
+                <p class="pitch-kicker">Quality Gates</p>
+                <h2 class="pitch-title">三道门，不靠感觉</h2>
+                <div class="pitch-cards">
+                  <div class="pitch-card-item">
+                    <h3>① Schema</h3>
+                    <p>Zod 契约强制 Persona、Beats、Year、Final、Dialogue 字段结构——生成即合法 JSON。</p>
+                  </div>
+                  <div class="pitch-card-item">
+                    <h3>② Evaluator</h3>
+                    <p>规则检查 pivotal 数量、quiet 长度、介入位置、memory 抽象度、final 鸡汤等反模式。</p>
+                  </div>
+                  <div class="pitch-card-item">
+                    <h3>③ Golden Story</h3>
+                    <p>「复读线」作人工标定样本；prompt 改动必须过 eval，防止核心体验漂移。</p>
+                  </div>
+                </div>
+                <p class="pitch-lead" style="margin-top:1rem">每次 live run 落盘 trace：stage、intervention、eval、stop_reason——失败可复盘，不是黑盒重 roll。</p>
+                <div class="pitch-tags">
+                  <span class="pitch-tag">memory_stream</span>
+                  <span class="pitch-tag">world corpus 2006–2026</span>
+                  <span class="pitch-tag">hybrid RAG</span>
+                  <span class="pitch-tag">run trace</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6 先例 -->
+            <div class="pitch-deck-page" aria-hidden="true">
+              <div class="pitch-page">
+                <p class="pitch-kicker">Sample Stories</p>
+                <h2 class="pitch-title">先看一条影子走过的路</h2>
+                <p class="pitch-lead">静态 Mock 可离线跑通契约字段与介入 UI；选一条进入七年回放。</p>
+                <div class="pitch-cards" style="margin-top:1rem">
+                  <a class="pitch-story-link" href="demo.html?story=linwan">
+                    <div class="pitch-story-tag">STORY · 林晚</div>
+                    <div class="pitch-story-name">出国读研线</div>
+                    <p class="pitch-story-hook">瞒着所有人，买了一张伦敦的机票。</p>
+                    <span class="pitch-story-arrow">›</span>
+                  </a>
+                  <a class="pitch-story-link" href="demo.html?story=heartbeat_line">
+                    <div class="pitch-story-tag">STORY · 许星遥</div>
+                    <div class="pitch-story-name">心动爱情线</div>
+                    <p class="pitch-story-hook">选了心动的人，放弃了更稳的那条路。</p>
+                    <span class="pitch-story-arrow">›</span>
+                  </a>
+                  <a class="pitch-story-link" href="demo.html?story=zhoudran">
+                    <div class="pitch-story-tag">STORY · 周染</div>
+                    <div class="pitch-story-name">插画师线</div>
+                    <p class="pitch-story-hook">高考志愿没有填计算机，填了美术。</p>
+                    <span class="pitch-story-arrow">›</span>
+                  </a>
+                  <a class="pitch-story-link" href="demo.html?story=wufuxdu">
+                    <div class="pitch-story-tag">STORY · 阿岚</div>
+                    <div class="pitch-story-name">未复读线 · Golden</div>
+                    <p class="pitch-story-hook">没有回到那间教室，直接去了 211。</p>
+                    <span class="pitch-story-arrow">›</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 7 起行 -->
+            <div class="pitch-deck-page" aria-hidden="true">
+              <div class="pitch-page is-vcenter">
+                <p class="pitch-kicker">Begin</p>
+                <h2 class="pitch-title">那个没走的选择<br>值得看一眼</h2>
+                <p class="pitch-lead">
+                  告诉影子你的岔路口——学校、城市、工作、一个人，<br>
+                  或任何你偶尔还会想起的「如果当年」。
+                </p>
+                <div class="pitch-actions">
+                  <a class="pitch-btn-gold" href="intake.html">写我的平行人生 →</a>
+                  <a class="pitch-btn-ghost" href="demo.html">或先逛静态 Demo</a>
+                </div>
+                <p class="pitch-footnote">约 3 分钟 intake · 或只写岔路口后「跳过做题，直接玩」</p>
+                <p class="pitch-footnote" style="margin-top:1.25rem">
+                  <a href="index.html" style="color:var(--amber-deep);text-decoration:none">团队看板</a>
+                  · Harness 文档 · Corpus
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pitch-deck-controls">
+          <button type="button" class="pitch-deck-ctrl" id="btn-prev">↑ 上一页</button>
+          <div class="pitch-deck-hint">
+            <p id="pitch-hint">上滑 / 下滑翻页</p>
+            <p class="pitch-deck-hint-sub" id="pitch-hint-sub"></p>
+          </div>
+          <button type="button" class="pitch-deck-ctrl" id="btn-next">下一页 ↓</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="shadow-api-prefix.js"></script>
+<script src="pitch.js?v=20260615"></script>
+</body>
+</html>
