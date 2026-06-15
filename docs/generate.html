@@ -15,7 +15,7 @@
 <div id="crt-overlay" aria-hidden="true"></div>
 <div id="ambient-particles" aria-hidden="true"></div>
 
-<button type="button" id="nav-back" class="visible">← Demo 入口</button>
+<button type="button" id="nav-back" class="visible">← 首页</button>
 <div id="source-tag" class="visible">⚡ Intake + Generate · API</div>
 
 <div id="gen-viewport">
@@ -184,12 +184,22 @@
   </section>
 </div>
 
+<div id="intervention-modal" hidden>
+  <div class="intervention-card snes modal-cutin" role="dialog" aria-modal="true" aria-labelledby="intervention-question">
+    <div class="intervention-label">PIVOTAL · 岔路口</div>
+    <p id="intervention-question"></p>
+    <div id="intervention-options"></div>
+    <p class="intervention-hint">你的选择会写入下一年叙事。可跳过。</p>
+    <button type="button" id="intervention-skip">跳过</button>
+  </div>
+</div>
+
 <script>
   if (location.protocol === 'file:') {
     document.body.insertAdjacentHTML('afterbegin',
       '<div style="position:fixed;inset:0;z-index:9999;background:#fff5f0;padding:24px;font:16px/1.6 sans-serif;color:#5a2a22">' +
       '<strong>不能双击打开 HTML 文件。</strong><br><br>请在终端执行：<code style="background:#eee;padding:2px 6px">npm run demo:local</code><br>' +
-      '然后打开 <a href="http://localhost:3000/generate.html">http://localhost:3000/generate.html</a></div>');
+      '然后打开 <a href="http://localhost:3000/">http://localhost:3000/</a></div>');
   }
   (function fillYearSelects() {
     const birth = document.getElementById('birthYear');

@@ -115,13 +115,14 @@ button:focus-visible,
 .main-event {
   border-left: 3px solid var(--amber);
   padding-left: 16px;
+  white-space: pre-wrap;
 }
 .pivotal-year .main-event {
   border-left-color: var(--amber-deep);
   box-shadow: inset 0 0 0 1px rgba(200, 134, 58, 0.08);
 }
 .quiet-year .main-event {
-  border-left-color: var(--panel-edge);
+  border-left-color: var(--amber);
 }
 
 /* ═══ 轮6 · 像素美学：场景框 SNES 螺丝角 ═══ */

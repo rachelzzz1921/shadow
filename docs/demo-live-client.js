@@ -420,7 +420,8 @@
         const choice = await openInterventionModal(result.year.intervention_prompt);
         if (choice) {
           pendingIntervention = {
-            year: result.year.year,
+            from_year: result.year.year,
+            question: result.year.intervention_prompt?.question,
             choice: choice.choice,
             option_index: choice.option_index
           };

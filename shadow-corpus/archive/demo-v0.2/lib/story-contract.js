@@ -39,6 +39,26 @@ function inferStageDetails(year) {
   return { environment: 'home', pose: 'idle', prop: 'desk' };
 }
 
+function inferVisualAnchor(event) {
+  const text = String(event || '').trim();
+  if (!text) return '';
+  const firstPara = (text.split(/\n\n/)[0] || text).replace(/\s+/g, ' ');
+  return firstPara.length <= 48 ? firstPara : firstPara.slice(0, 47) + '…';
+}
+
+function inferKeyProps(year) {
+  const text = `${year?.event || ''}${year?.decision_made || ''}`;
+  const hints = ['手机', '电话', '书包', '准考证', '名单', '电脑', '泡面', '啤酒', '拿铁', '行李箱', '课桌', '窗口', '汇款单', '渔网', '剧本'];
+  const props = hints.filter((p) => text.includes(p));
+  if (props.length < 2) {
+    const propMap = { phone: '手机', desk: '课桌', laptop: '电脑', suitcase: '行李箱', hospital: '病床' };
+    const fromProp = propMap[year?.prop];
+    if (fromProp && !props.includes(fromProp)) props.push(fromProp);
+  }
+  while (props.length < 2) props.push(props.length ? '窗外的光' : '桌上的东西');
+  return props.slice(0, 3);
+}
+
 function normalizeYear(year, { index = 0, startAge = 26, beats = null, pivotalYears = [] } = {}) {
   const inferred = inferStageDetails(year || {});
   const yearN = clampInt(year?.year, 1, 7, index + 1);
@@ -74,6 +94,11 @@ function normalizeYear(year, { index = 0, startAge = 26, beats = null, pivotalYe
     reflection: year?.reflection || '',
     shadow_dialogue: year?.shadow_dialogue || '',
     memory_summary: year?.memory_summary || (year?.reflection || year?.event || '').slice(0, 28),
+    visual_anchor: year?.visual_anchor || inferVisualAnchor(year?.event),
+    key_props: Array.isArray(year?.key_props) && year.key_props.length >= 2
+      ? year.key_props.slice(0, 3)
+      : inferKeyProps(year),
+    daily_micro: year?.daily_micro || null,
     user_intervention: year?.user_intervention || null
   };
 }
@@ -138,6 +163,8 @@ function normalizeStory(story, { profile } = {}) {
 
 module.exports = {
   inferStageDetails,
+  inferVisualAnchor,
+  inferKeyProps,
   inferMemoryType,
   inferMemoryWeight,
   memoryFromYear,

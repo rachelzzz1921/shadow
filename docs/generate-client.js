@@ -90,6 +90,45 @@
       .replace(/>/g, '&gt;');
   }
 
+  function openInterventionModal(prompt) {
+    return new Promise((resolve) => {
+      const modal = document.getElementById('intervention-modal');
+      const qEl = document.getElementById('intervention-question');
+      const optsEl = document.getElementById('intervention-options');
+      const skipBtn = document.getElementById('intervention-skip');
+
+      if (!prompt?.question || !modal) {
+        resolve(null);
+        return;
+      }
+
+      qEl.textContent = prompt.question;
+      optsEl.innerHTML = '';
+      (prompt.options || []).forEach((label, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'btn-start';
+        btn.style.margin = '6px 6px 0 0';
+        btn.textContent = label;
+        btn.onclick = () => {
+          modal.hidden = true;
+          modal.classList.remove('open');
+          resolve({ choice: label, option_index: i });
+        };
+        optsEl.appendChild(btn);
+      });
+
+      skipBtn.onclick = () => {
+        modal.hidden = true;
+        modal.classList.remove('open');
+        resolve(null);
+      };
+
+      modal.hidden = false;
+      modal.classList.add('open');
+    });
+  }
+
   async function post(path, body) {
     const res = await fetch(path, {
       method: 'POST',
@@ -636,6 +675,7 @@
     }
 
     const totalYears = (session.beats || []).length || 7;
+    let pendingIntervention = null;
 
     for (let i = 0; i < totalYears; i++) {
       const beat = session.beats[i];
@@ -649,7 +689,7 @@
         try {
           result = await postSse(
             '/api/story/year/stream',
-            { session, user_intervention: null },
+            { session, user_intervention: pendingIntervention },
             (event, data) => handleYearStage(event, data, beat)
           );
           yearErr = null;
@@ -675,10 +715,24 @@
         return;
       }
 
+      pendingIntervention = null;
       session = result.session;
       const eraLine = session.last_fate_context?.era_line || '';
       appendYear(result.year, eraLine, beat.type);
       setProgress(18 + ((i + 1) / totalYears) * 68);
+
+      if (result.year?.is_pivotal && result.year?.intervention_prompt && i < totalYears - 1) {
+        const choice = await openInterventionModal(result.year.intervention_prompt);
+        if (choice) {
+          pendingIntervention = {
+            from_year: result.year.year,
+            question: result.year.intervention_prompt?.question,
+            choice: choice.choice,
+            option_index: choice.option_index
+          };
+          log('year', `介入：${choice.choice}`);
+        }
+      }
     }
 
     log('final', 'Final agent 收束…');
@@ -706,6 +760,11 @@
       ...result,
       intake_request: result.intake_request || null
     };
+    try {
+      if (result.intake_request) {
+        sessionStorage.setItem('shadow_intake_request', JSON.stringify(result.intake_request));
+      }
+    } catch (_) { /* quota */ }
     renderIntakeSummary(intakeHandoff);
     showPipelineSection();
     const tag = document.getElementById('source-tag');
@@ -726,7 +785,7 @@
   window.ShadowGenerateBridge = { onIntakeComplete };
 
   $('nav-back')?.addEventListener('click', () => {
-    window.location.href = 'demo-hub.html';
+    window.location.href = 'index.html';
   });
   $('btn-edit-intake')?.addEventListener('click', showIntakeSection);
   btnRun?.addEventListener('click', runPipeline);

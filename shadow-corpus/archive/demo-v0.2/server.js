@@ -622,11 +622,13 @@ function serveStatic(req, res) {
 
   /** docs/ 与 demo 同套 UI — 优先于 archive/public 旧版 intake */
   const DOCS_FIRST = new Set([
+    '/index.html',
+    '/board.html',
     '/intake.html',
     '/generate.html',
     '/demo.html',
     '/demo-hub.html',
-    '/demo-live.html',
+    '/pitch.html',
     '/demo-phaser.html'
   ]);
   if (DOCS_FIRST.has(requested)) {
@@ -734,9 +736,10 @@ const server = http.createServer(async (req, res) => {
 server.listen(PORT, () => {
   const base = `http://localhost:${PORT}`;
   console.log(`Shadow local preview → ${base}`);
-  console.log(`  Hub:     ${base}/demo-hub.html`);
-  console.log(`  Generate: ${base}/generate.html`);
-  console.log(`  Live:    ${base}/demo-live.html`);
+  console.log(`  首页:    ${base}/`);
+  console.log(`  Pitch:   ${base}/pitch.html`);
+  console.log(`  Generate:${base}/generate.html`);
+  console.log(`  看板:    ${base}/board.html`);
   console.log(`  Mock 四条 Golden 线:`);
   console.log(`    复读线  ${base}/demo.html`);
   console.log(`    林晚    ${base}/demo.html?story=linwan`);

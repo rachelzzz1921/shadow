@@ -1,463 +1,277 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Shadow 团队看板</title>
-  <meta name="description" content="Shadow Harness 团队看板 — 进度 · 任务库 · Visual · Corpus" />
-  <style>
-    :root {
-      --bg: #0f1117; --surface: #181b24; --surface2: #1e2433;
-      --border: #2a2f3d; --text: #e8eaef; --muted: #8b93a7;
-      --accent: #6b9fff; --green: #3dd68c; --yellow: #f5c542; --rose: #f07178;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 15px; background: var(--bg); color: var(--text); line-height: 1.6; }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .wrap { max-width: 1240px; margin: 0 auto; padding: 20px 16px 48px; }
-    header { margin-bottom: 16px; }
-    header h1 { font-size: 1.6rem; font-weight: 600; }
-    .meta { color: var(--muted); font-size: 0.92rem; margin-top: 4px; display: flex; flex-wrap: wrap; gap: 10px; }
-    .nav { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
-    .nav-btn {
-      padding: 8px 18px; border-radius: 999px; border: 1px solid var(--border);
-      background: var(--surface); color: var(--muted); cursor: pointer; font-size: 0.95rem;
-    }
-    .nav-btn.active { border-color: var(--accent); color: var(--text); background: var(--surface2); }
-    .sub-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
-    .tab { padding: 6px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer; font-size: 0.9rem; }
-    .tab.active { border-color: var(--accent); color: var(--text); }
-    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap: 8px; margin-bottom: 16px; }
-    .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
-    .stat b { display: block; font-size: 1.35rem; }
-    .stat span { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; }
-    .stat.highlight b { color: var(--green); }
-    .legend, .team-row { font-size: 0.92rem; color: var(--muted); margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 10px 16px; }
-    .team-row b { color: var(--text); }
-    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
-    select, button { background: var(--surface); border: 1px solid var(--border); color: var(--text); border-radius: 6px; padding: 6px 12px; font-size: 0.92rem; }
-    button { cursor: pointer; }
-    .section { margin-bottom: 28px; }
-    .section h2 { font-size: 1.05rem; margin-bottom: 10px; font-weight: 600; }
-    .section h3 { font-size: 0.95rem; color: var(--muted); margin: 14px 0 8px; font-weight: 500; }
-    .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 14px; overflow: hidden; }
-    .panel-head { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
-    .panel-head .sub { color: var(--muted); font-size: 0.88rem; margin-top: 2px; }
-    .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 16px; }
-    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px; font-size: 0.92rem; line-height: 1.5; }
-    .card .label { color: var(--muted); font-size: 0.82rem; margin-bottom: 4px; }
-    .card .val { font-weight: 600; }
-    .card.done { border-color: rgba(61,214,140,0.35); }
-    .card.todo { opacity: 0.85; }
-    .pipeline { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; margin-bottom: 16px; }
-    .pipe-step { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-size: 0.88rem; }
-    .pipe-step .num { color: var(--accent); font-weight: 700; font-size: 0.82rem; }
-    .pipe-step .owner { color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
-    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
-    th { color: var(--muted); font-weight: 500; font-size: 0.82rem; text-transform: uppercase; background: #141820; }
-    tr:last-child td { border-bottom: none; }
-    tr.ready-row td { background: rgba(61,214,140,0.06); }
-    tr.optional-row td { opacity: 0.88; }
-    tr.done-row td { opacity: 0.65; }
-    .id-cell { white-space: nowrap; font-weight: 600; }
-    .title-cell { min-width: 160px; max-width: 360px; }
-    .badge-ready { color: var(--green); font-size: 0.82rem; }
-    .badge-done { color: var(--muted); }
-    .badge-block { color: var(--rose); font-size: 0.85rem; }
-    .check-done { color: var(--green); }
-    .check-todo { color: var(--muted); }
-    .links { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-    .links a { font-size: 0.88rem; padding: 5px 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; }
-    .empty { color: var(--muted); padding: 12px; font-size: 0.95rem; }
-    .gate-pill { display: inline-block; font-size: 0.82rem; padding: 3px 10px; border-radius: 999px; background: #2a2030; border: 1px solid #4a3050; color: var(--yellow); margin-left: 6px; }
-    footer { margin-top: 32px; font-size: 0.85rem; color: var(--muted); text-align: center; }
-    .loading { text-align: center; padding: 80px; color: var(--muted); }
-    @media (max-width: 720px) {
-      .hide-sm { display: none; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>影子 · Shadow — 平行人生叙事</title>
+<meta name="description" content="输入一个人生岔路口，生成可回放、可介入、可追问的七年影子人生。" />
+<link rel="stylesheet" href="demo-theme.css" />
+<style>
+html, body { height: auto; overflow: auto; }
+body { user-select: auto; }
+
+.hub { max-width: 680px; margin: 0 auto; padding: 56px 24px 96px; }
+
+.hub-top {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 24px; font-size: 12px;
+}
+.hub-top a {
+  color: var(--ink-muted); text-decoration: none; letter-spacing: 0.06em;
+}
+.hub-top a:hover { color: var(--amber-deep); }
+.hub-top .is-primary { color: var(--amber-deep); font-weight: 600; }
+
+.hero { text-align: center; margin-bottom: 56px; }
+.hero-eyebrow {
+  font-family: monospace; font-size: 11px; letter-spacing: 3px;
+  color: var(--amber); margin-bottom: 18px;
+}
+.hero-headline {
+  font-size: 12px; transform: scale(2.15); transform-origin: center;
+  display: block; color: var(--ink); line-height: 1.55; margin-bottom: 44px;
+}
+.hero-sub {
+  color: var(--ink-soft); font-size: 12px; line-height: 1.9;
+  max-width: 500px; margin: 0 auto 10px;
+}
+.hero-sub em { font-style: normal; color: var(--amber-deep); }
+.hero-note {
+  color: var(--ink-muted); font-size: 12px; transform: scale(0.9);
+  display: inline-block; margin-top: 4px;
+}
+.hero-pitch {
+  margin-top: 22px; font-size: 12px;
+}
+.hero-pitch a {
+  color: var(--amber-deep); text-decoration: none; letter-spacing: 0.08em;
+}
+
+.domain-row {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+  margin: 28px 0 0; padding: 0; list-style: none;
+}
+.domain-row li {
+  font-family: monospace; font-size: 10px; letter-spacing: 0.08em;
+  padding: 5px 10px; border: 1px solid var(--paper-shadow);
+  color: var(--ink-muted); background: rgba(255, 252, 245, 0.6);
+}
+
+.section-head {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+}
+.section-head-line { flex: 1; height: 1px; background: var(--paper-shadow); opacity: 0.5; }
+.section-head-label {
+  font-family: monospace; font-size: 11px; letter-spacing: 2px;
+  color: var(--ink-muted); white-space: nowrap;
+}
+
+.story-section { margin-bottom: 52px; scroll-margin-top: 24px; }
+.story-grid { display: grid; gap: 12px; }
+
+.story-card {
+  display: block; text-decoration: none; color: inherit;
+  padding: 20px 22px; border: 2px solid var(--line, var(--paper-shadow));
+  background: var(--paper); transition: border-color .2s, transform .15s;
+  position: relative;
+}
+.story-card:hover { border-color: var(--amber); transform: translateX(3px); }
+.story-card-tag {
+  font-family: monospace; font-size: 10px; letter-spacing: 1.5px;
+  color: var(--amber); margin-bottom: 6px;
+}
+.story-card-name {
+  font-size: 12px; transform: scale(1.2); transform-origin: left center;
+  display: inline-block; color: var(--ink); margin-bottom: 10px;
+}
+.story-card-hook { font-size: 12px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 6px; }
+.story-card-teaser {
+  font-size: 12px; color: var(--ink-muted); line-height: 1.55;
+  transform: scale(0.92); transform-origin: left center; display: block;
+}
+.story-card-arrow {
+  position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+  color: var(--paper-shadow); font-size: 14px;
+  transition: color .2s, transform .2s;
+}
+.story-card:hover .story-card-arrow {
+  color: var(--amber); transform: translateY(-50%) translateX(2px);
+}
+
+.cta-section {
+  text-align: center; padding: 44px 32px;
+  border: 2px solid var(--paper-shadow); background: var(--paper); position: relative;
+}
+.cta-section::before {
+  content: ""; position: absolute; inset: 4px;
+  border: 1px solid var(--paper-shadow); opacity: 0.4; pointer-events: none;
+}
+.cta-head {
+  font-size: 12px; transform: scale(1.35); transform-origin: center;
+  display: inline-block; color: var(--ink); margin-bottom: 20px;
+}
+.cta-desc {
+  color: var(--ink-soft); line-height: 1.8; max-width: 420px; margin: 0 auto 28px;
+}
+.btn-cta {
+  display: inline-block; text-decoration: none;
+  padding: 14px 44px; font-family: inherit; font-size: 12px; letter-spacing: 0.12em;
+  color: var(--highlight);
+  background: linear-gradient(180deg, var(--amber-bright), var(--amber));
+  border: 3px solid var(--amber-deep);
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 255, 255, 0.35),
+    inset -2px -2px 0 rgba(0, 0, 0, 0.12),
+    3px 3px 0 rgba(58, 50, 40, 0.18);
+  transition: transform .12s steps(3, end), box-shadow .12s; cursor: pointer;
+}
+.btn-cta:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 255, 255, 0.4),
+    4px 4px 0 rgba(58, 50, 40, 0.22);
+}
+.cta-foot {
+  margin-top: 16px; color: var(--ink-muted); font-size: 12px;
+  transform: scale(0.88); display: inline-block;
+}
+.cta-secondary {
+  display: block; margin-top: 14px; font-size: 12px;
+}
+.cta-secondary a { color: var(--amber-deep); text-decoration: none; }
+
+.hub-status {
+  display: flex; align-items: flex-start; gap: 10px;
+  margin-bottom: 28px; padding: 12px 14px;
+  border: 1px solid var(--paper-shadow);
+  background: rgba(255, 252, 245, 0.85);
+  font-size: 12px; line-height: 1.65; color: var(--ink-soft);
+}
+.hub-status-dot {
+  flex-shrink: 0; width: 8px; height: 8px; margin-top: 5px;
+  border-radius: 50%; background: var(--ink-muted);
+}
+.hub-status.is-ok { border-color: rgba(90, 140, 90, 0.45); }
+.hub-status.is-ok .hub-status-dot { background: #4a9b5c; box-shadow: 0 0 0 3px rgba(74, 155, 92, 0.2); }
+.hub-status.is-warn { border-color: rgba(200, 134, 58, 0.45); }
+.hub-status.is-warn .hub-status-dot { background: var(--amber); }
+.hub-status.is-off .hub-status-dot { background: var(--ink-muted); opacity: 0.5; }
+.hub-status a { color: var(--amber-deep); }
+.hub-status code {
+  font-family: monospace; font-size: 11px;
+  background: rgba(0, 0, 0, 0.04); padding: 1px 4px;
+}
+
+.hub-footer {
+  margin-top: 64px; text-align: center; color: var(--ink-muted);
+  font-size: 12px; transform: scale(0.88); display: block; opacity: 0.65;
+}
+.hub-team-link {
+  display: block; margin-top: 20px; text-align: center;
+  font-size: 11px; color: var(--ink-muted); opacity: 0.75;
+}
+.hub-team-link a { color: var(--ink-muted); text-decoration: underline; text-underline-offset: 2px; }
+</style>
 </head>
 <body>
-  <div class="wrap" id="app"><p class="loading">加载看板…</p></div>
-  <script>
-    const STATUS = { done: '✅', in_progress: '🟡', todo: '⬜', blocked: '🔴' };
+<div class="hub">
 
-    function esc(s) {
-      return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
-    }
+  <nav class="hub-top" aria-label="站点导航">
+    <span style="font-family:monospace;letter-spacing:2px;color:var(--amber)">SHADOW</span>
+    <span>
+      <a href="pitch.html">沿路路演</a>
+      · <a href="generate.html" class="is-primary">写我的七年</a>
+      · <a href="demo-phaser.html">视觉预览</a>
+      · <a href="board.html">团队看板</a>
+    </span>
+  </nav>
 
-    function ghLink(url, label) {
-      return url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>` : esc(label);
-    }
+  <div id="hub-status" class="hub-status is-off" role="status" aria-live="polite">
+    <span class="hub-status-dot" aria-hidden="true"></span>
+    <span class="hub-status-text">检测 API 与 RAG…</span>
+  </div>
 
-    function taskLink(t) {
-      const url = t.github?.artifact || t.github?.change;
-      const label = (t.optional ? '◇ ' : '') + t.id;
-      return ghLink(url, label);
-    }
+  <div class="hero">
+    <p class="hero-eyebrow">SHADOW · 平行人生 Harness</p>
+    <span class="hero-headline">如果当年，你选了另一条路<br>七年后，你会在哪里？</span>
+    <p class="hero-sub">
+      不是模板运势，也不是一次性作文。<br>
+      <em>影子</em> 接收你的岔路口，经多 Agent 协作生成一条<br>
+      可回放、可介入、可追问的七年平行人生。
+    </p>
+    <span class="hero-note">先读别人的故事，再写你自己的 —— 同一条叙事引擎，两种进入方式。</span>
+    <ul class="domain-row" aria-label="六域场景 Agent">
+      <li>亲情</li><li>爱情</li><li>友情</li><li>学业</li><li>事业</li><li>自我</li>
+    </ul>
+    <p class="hero-pitch">
+      <a href="pitch.html">沿路看看 · 路演版（投资人 / 合作方）→</a>
+    </p>
+  </div>
 
-    function renderTaskTable(tasks, opts = {}) {
-      if (!tasks.length) return '<p class="empty">无</p>';
-      const { showChange = false, showDone = true } = opts;
-      let rows = tasks;
-      if (!showDone) rows = rows.filter((t) => t.status !== 'done');
-      if (!rows.length) return '<p class="empty">无</p>';
-      const headers = ['状态', 'ID', '任务', '波次', '阶段', '负责', '执行', '依赖'];
-      if (showChange) headers.splice(3, 0, 'Change');
-      let html = `<table><thead><tr>${headers.map((h) => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>`;
-      for (const t of rows) {
-        const cls = [t.ready ? 'ready-row' : '', t.optional ? 'optional-row' : '', t.status === 'done' ? 'done-row' : ''].filter(Boolean).join(' ');
-        const mark = t.ready ? '<span class="badge-ready">✓</span>' : '';
-        html += `<tr class="${cls}">
-          <td>${STATUS[t.status] || ''}${mark}</td>
-          <td class="id-cell">${taskLink(t)}</td>
-          <td class="title-cell">${esc(t.title)}${(t.gates||[]).length ? `<span class="gate-pill">${esc((t.gates||[]).join(','))}</span>` : ''}</td>
-          ${showChange ? `<td>${esc(t.change_id || '—')}</td>` : ''}
-          <td>W${t.wave ?? '—'}</td>
-          <td>${esc(t.phaseLabel)}</td>
-          <td>${esc(t.assignee)}</td>
-          <td>${esc(t.execIcon)}</td>
-          <td class="hide-sm">${esc((t.depends_on || []).join(', ') || '—')}</td>
-        </tr>`;
-      }
-      return html + '</tbody></table>';
-    }
+  <div id="stories" class="story-section">
+    <div class="section-head">
+      <div class="section-head-line"></div>
+      <span class="section-head-label">STEP 01 · 先读一条 Golden 线</span>
+      <div class="section-head-line"></div>
+    </div>
 
-    function renderByChange(data, filterAssignee) {
-      return (data.byChange || []).map((g) => {
-        let tasks = g.tasks;
-        if (filterAssignee) tasks = tasks.filter((t) => t.assignee === filterAssignee);
-        if (!tasks.length) return '';
-        return `<div class="panel">
-          <div class="panel-head">
-            <div><strong>${ghLink(g.url, g.id)}</strong> — ${esc(g.title)}</div>
-            ${g.summary ? `<div class="sub">${esc(g.summary)}</div>` : ''}
-          </div>
-          ${renderTaskTable(tasks)}
-        </div>`;
-      }).join('');
-    }
+    <div class="story-grid">
+      <a class="story-card" href="demo.html?story=linwan">
+        <div class="story-card-tag">STORY · 林晚</div>
+        <div class="story-card-name">出国读研线</div>
+        <p class="story-card-hook">瞒着所有人，买了一张伦敦的机票。</p>
+        <span class="story-card-teaser">挂断的电话、两万块的争吵、没有回复的消息 —— 七年异乡，影子陪她走了一遍。</span>
+        <span class="story-card-arrow">›</span>
+      </a>
 
-    function renderLibrary(data) {
-      const lib = data.taskLibrary || {};
-      let html = `<div class="section"><h2>Change 目录</h2>
-        <table><thead><tr><th>ID</th><th>名称</th><th>说明</th><th>进度</th></tr></thead><tbody>`;
-      for (const c of lib.changeCatalog || []) {
-        html += `<tr><td>${ghLink(c.url, c.id)}</td><td>${esc(c.title)}</td><td>${esc(c.summary)}</td><td><b>${c.done}/${c.total}</b></td></tr>`;
-      }
-      html += '</tbody></table></div>';
+      <a class="story-card" href="demo.html?story=heartbeat_line">
+        <div class="story-card-tag">STORY · 许星遥</div>
+        <div class="story-card-name">心动爱情线</div>
+        <p class="story-card-hook">选了心动的人，放弃了更稳的那条路。</p>
+        <span class="story-card-teaser">十八平出租屋、五百块的争吵、没有等来的戒指 —— 七年后她说，值得。</span>
+        <span class="story-card-arrow">›</span>
+      </a>
 
-      html += `<div class="section"><h2>Gates（人工签字）</h2>
-        <table><thead><tr><th>Gate</th><th>名称</th><th>负责人</th><th>解锁</th></tr></thead><tbody>`;
-      for (const g of lib.gates || []) {
-        html += `<tr><td><b>${esc(g.id)}</b></td><td>${esc(g.name)}</td><td>${esc(g.owner)}</td><td>${esc((g.unlocks||[]).join('；'))}</td></tr>`;
-      }
-      html += '</tbody></table></div>';
+      <a class="story-card" href="demo.html?story=zhoudran">
+        <div class="story-card-tag">STORY · 周染</div>
+        <div class="story-card-name">插画师线</div>
+        <p class="story-card-hook">高考志愿没有填计算机，填了美术。</p>
+        <span class="story-card-teaser">两百块的首单、改稿二十次、AI 冲击来的那年 —— 凌晨那棵歪树，她一个人画完的。</span>
+        <span class="story-card-arrow">›</span>
+      </a>
 
-      html += `<div class="section"><h2>Wave 说明</h2><div class="card-grid">`;
-      for (const w of lib.waves || []) {
-        html += `<div class="card"><div class="label">Wave ${esc(w.wave)}</div><div class="val">${esc(w.desc)}</div></div>`;
-      }
-      html += '</div></div>';
+      <a class="story-card" href="demo.html?story=wufuxdu">
+        <div class="story-card-tag">STORY · 阿岚</div>
+        <div class="story-card-name">未复读线</div>
+        <p class="story-card-hook">没有回到那间教室，直接去了 211。</p>
+        <span class="story-card-teaser">七年里她也走出了自己的路 —— 只是和另一个平行的自己，永远不会相遇。</span>
+        <span class="story-card-arrow">›</span>
+      </a>
+    </div>
+  </div>
 
-      html += `<div class="section"><h2>全部任务（${(lib.allTasks||[]).length}）</h2>${renderTaskTable(lib.allTasks || [], { showChange: true })}</div>`;
-      return html;
-    }
+  <div id="play" class="cta-section">
+    <div class="section-head" style="margin-bottom:28px">
+      <div class="section-head-line"></div>
+      <span class="section-head-label">STEP 02 · 写你自己的</span>
+      <div class="section-head-line"></div>
+    </div>
+    <div class="cta-head">把岔路口交给影子</div>
+    <p class="cta-desc">
+      四层采集写入 <code style="font-size:11px">full_profile</code> → Persona agent →
+      Beats → 命运层 → Year×7（pivotal 可介入）→ Final。
+      有 API 时在本页一气呵成；离线则规则合成后进入阅读器。
+    </p>
+    <a class="btn-cta" href="generate.html">开始我的平行人生 →</a>
+    <p class="cta-foot">约 3 分钟 · 可跳过行为题，只写岔路口也能玩</p>
+    <p class="cta-secondary"><a href="demo.html?story=wufuxdu">或先打开阿岚线，体验 pivotal 介入 →</a></p>
+  </div>
 
-    function renderChanges(data) {
-      return (data.changeDetails || []).map((c) => {
-        const active = c.tasks.filter((t) => t.status !== 'done');
-        let checkHtml = '';
-        if (c.checklist?.length) {
-          checkHtml = '<ul style="list-style:none;padding:12px 16px;font-size:0.92rem">';
-          for (const item of c.checklist) {
-            checkHtml += `<li class="${item.done ? 'check-done' : 'check-todo'}">${item.done ? '✅' : '⬜'} ${esc(item.text)}</li>`;
-          }
-          checkHtml += '</ul>';
-        }
-        return `<div class="panel">
-          <div class="panel-head">
-            <div><strong>${ghLink(c.url, c.id)}</strong> — ${esc(c.title)}
-              ${c.blocked ? '<span class="badge-block">阻塞</span>' : ''}
-              <span style="color:var(--muted);margin-left:8px">任务 ${esc(c.taskProgress)}</span>
-            </div>
-            <div class="sub">${esc(c.summary)} · 阶段 ${esc(c.phase)} · 负责 ${esc(c.assignee)}</div>
-          </div>
-          ${checkHtml}
-          ${active.length ? renderTaskTable(active) : '<p class="empty">全部完成 🎉</p>'}
-        </div>`;
-      }).join('');
-    }
+  <span class="hub-footer">Shadow Harness · 平行叙事引擎</span>
+  <p class="hub-team-link">研发进度、Corpus 与 Visual 流水线 → <a href="board.html">团队看板</a></p>
 
-    function renderVisual(data) {
-      const v = data.visual || {};
-      let html = `<div class="stats">
-        <div class="stat"><b>${v.stats?.total||0}</b><span>Visual 任务</span></div>
-        <div class="stat highlight"><b>${v.stats?.ready||0}</b><span>可开干</span></div>
-        <div class="stat"><b>${v.packAssetCount||v.assetCount||0}</b><span>${esc(v.packId||'素材')} 行</span></div>
-        <div class="stat"><b>${(v.sceneBriefs||[]).length}</b><span>场景 brief</span></div>
-      </div>`;
-
-      if (v.previewLinks?.length) {
-        html += `<div class="section"><h2>GitHub Pages 预览</h2><div class="card-grid">`;
-        for (const p of v.previewLinks) {
-          html += `<div class="card">
-            <div class="label"><a href="${esc(p.url)}" target="_blank">${esc(p.label)}</a></div>
-            ${p.pagesUrl ? `<div style="margin-top:6px"><a href="${esc(p.pagesUrl)}" target="_blank" style="font-size:0.88rem">${esc(p.pagesUrl)}</a></div>` : ''}
-          </div>`;
-        }
-        html += '</div>';
-        if (data.githubPagesUrl) {
-          html += `<p style="font-size:0.88rem;color:var(--muted);margin-top:8px">看板首页 <a href="${esc(data.githubPagesUrl)}" target="_blank">${esc(data.githubPagesUrl)}</a></p>`;
-        }
-        html += '</div>';
-      }
-
-      html += `<div class="links">${(v.links||[]).map((l) => `<a href="${esc(l.path)}" target="_blank">${esc(l.label)}</a>`).join('')}</div>`;
-
-      html += `<p style="font-size:0.92rem;color:var(--muted);margin-bottom:14px">
-        ${esc(v.changeId)} · Gate <b>${esc(v.gate)}</b> — ${esc(v.gateNote)}
-      </p>`;
-
-      html += `<div class="section"><h2>八步流水线</h2><div class="pipeline">`;
-      for (const s of v.pipeline || []) {
-        const tid = s.task ? s.task.id : '';
-        const st = s.task ? STATUS[s.task.status] : '⬜';
-        html += `<div class="pipe-step">
-          <div class="num">Step ${esc(String(s.step))}</div>
-          <div><b>${esc(s.name)}</b></div>
-          <div class="owner">${esc(s.owner)} ${tid ? `· ${st} ${esc(tid)}` : ''}</div>
-        </div>`;
-      }
-      html += '</div></div>';
-
-      html += `<div class="section"><h2>交付清单</h2><div class="card-grid">`;
-      for (const d of v.deliverables || []) {
-        html += `<div class="card"><div class="label">${esc(d.label)}</div><div class="val">目标 ${esc(String(d.target))}</div></div>`;
-      }
-      html += '</div></div>';
-
-      if (v.checklist?.length) {
-        html += `<div class="section"><h2>CHG-V001 进度</h2><div class="panel"><ul style="list-style:none;padding:12px 16px;font-size:0.92rem">`;
-        for (const item of v.checklist) {
-          html += `<li class="${item.done ? 'check-done' : 'check-todo'}">${item.done ? '✅' : '⬜'} ${esc(item.text)}</li>`;
-        }
-        html += '</ul></div></div>';
-      }
-
-      html += `<div class="section"><h2>A / B / C 呈现类型</h2><div class="card-grid">`;
-      for (const u of v.uxTypes || []) {
-        html += `<div class="card"><div class="label">${esc(u.type)} · ${esc(u.name)}</div><div>${esc(u.desc)}</div><div class="owner" style="margin-top:4px">${esc(u.trigger)}</div></div>`;
-      }
-      html += '</div></div>';
-
-      html += `<div class="section"><h2>七年场景（UX + Brief）</h2>`;
-      html += `<table><thead><tr><th>年</th><th>类型</th><th>B 特殊场景</th><th>A 日常</th><th>C 短片</th></tr></thead><tbody>`;
-      const uxMap = Object.fromEntries((v.uxScenes||[]).map((u) => [String(u.year), u]));
-      for (const b of v.sceneBriefs || []) {
-        const ux = uxMap[String(b.year)] || {};
-        html += `<tr>
-          <td><b>${esc(b.year)}</b></td>
-          <td>${esc(ux.type || '—')}</td>
-          <td>${esc(b.sceneB || ux.sceneB)}</td>
-          <td class="hide-sm">${esc(b.dailyA || ux.dailyA)}</td>
-          <td class="hide-sm">${esc(b.sequenceC || ux.sequenceC || '—')}</td>
-        </tr>`;
-      }
-      html += '</tbody></table></div>';
-
-      if (v.narrativeGaps?.length) {
-        html += `<div class="section"><h2>叙事待改（P2）</h2>`;
-        html += `<table><thead><tr><th>#</th><th>问题</th><th>举例</th><th>视觉影响</th></tr></thead><tbody>`;
-        for (const g of v.narrativeGaps) {
-          html += `<tr><td>${esc(g.num)}</td><td>${esc(g.issue)}</td><td class="hide-sm">${esc(g.example)}</td><td>${esc(g.impact)}</td></tr>`;
-        }
-        html += '</tbody></table></div>';
-      }
-
-      html += `<div class="section"><h2>Visual 任务</h2>${renderTaskTable(v.tasks || [])}</div>`;
-      return html;
-    }
-
-    function renderCorpus(data) {
-      const c = data.corpus || {};
-      let html = `<div class="links">
-        ${ghLink(c.manifestUrl, 'MANIFEST')}
-        ${ghLink(c.agentsUrl, 'AGENTS')}
-        ${c.demo ? ghLink(c.demo.url, c.demo.label) : ''}
-      </div>`;
-
-      html += `<div class="section"><h2>Harness 七阶段</h2><div class="card-grid">`;
-      for (const p of c.phases || []) {
-        html += `<div class="card">
-          <div class="label">${ghLink(p.url, p.label)}</div>
-          <div style="margin-top:6px;font-size:0.88rem;color:var(--muted)">${esc(p.summary)}</div>
-        </div>`;
-      }
-      html += '</div></div>';
-
-      html += `<div class="section"><h2>研究与参考</h2><div class="links">`;
-      for (const k of c.knowledge || []) {
-        html += `<a href="${esc(k.url)}" target="_blank">${esc(k.label)}</a>`;
-      }
-      html += '</div></div>';
-
-      if (c.demo) {
-        html += `<div class="section"><h2>归档 Demo</h2>
-          <div class="card"><div class="label">${ghLink(c.demo.url, c.demo.label)}</div>
-          <div style="margin-top:6px;font-family:monospace;font-size:0.88rem">${esc(c.demo.run)}</div></div></div>`;
-      }
-
-      if (c.staticDemo || c.phaserDemo || c.pitchDemo) {
-        html += `<div class="section"><h2>GitHub Pages 预览</h2><div class="card-grid">`;
-        for (const d of [c.pitchDemo, c.staticDemo, c.phaserDemo].filter(Boolean)) {
-          html += `<div class="card">
-            <div class="label"><a href="${esc(d.url)}" target="_blank">${esc(d.label)}</a></div>
-            ${d.pagesUrl ? `<div style="margin-top:6px"><a href="${esc(d.pagesUrl)}" target="_blank" style="font-size:0.88rem">${esc(d.pagesUrl)}</a></div>` : ''}
-            <div style="margin-top:6px;font-family:monospace;font-size:0.85rem;color:var(--muted)">${esc(d.run || '')}</div>
-            ${d.note ? `<div style="margin-top:4px;font-size:0.85rem;color:var(--muted)">${esc(d.note)}</div>` : ''}
-          </div>`;
-        }
-        if (c.pagesBase) {
-          html += `</div><p style="font-size:0.88rem;color:var(--muted);margin-top:8px">Pages 根路径 <a href="${esc(c.pagesBase)}" target="_blank">${esc(c.pagesBase)}</a></p></div>`;
-        } else {
-          html += '</div></div>';
-        }
-      }
-      return html;
-    }
-
-    function render(data) {
-      const app = document.getElementById('app');
-      let page = 'progress';
-      let subView = 'change';
-      let filterAssignee = '';
-
-      const pages = [
-        { id: 'progress', label: '进度' },
-        { id: 'library', label: '任务库' },
-        { id: 'visual', label: 'Visual' },
-        { id: 'changes', label: 'Changes' },
-        { id: 'corpus', label: 'Corpus' },
-      ];
-
-      function draw() {
-        const roles = data.catalog?.team_roles || {};
-        const teamLine = (data.teamLoad || []).map((t) =>
-          `<span><b>${esc(t.member)}</b> ${esc(roles[t.member] || '')}</span>`
-        ).join('');
-
-        let main = '';
-        let subTabs = '';
-
-        if (page === 'progress') {
-          subTabs = `<div class="sub-tabs" id="sub-tabs">
-            <button class="tab ${subView==='change'?'active':''}" data-sub="change">按 Change</button>
-            <button class="tab ${subView==='critical'?'active':''}" data-sub="critical">关键路径</button>
-            <button class="tab ${subView==='ready'?'active':''}" data-sub="ready">可开干 (${data.stats.ready})</button>
-          </div>`;
-          if (subView === 'change') main = renderByChange(data, filterAssignee) || '<p class="empty">无</p>';
-          else if (subView === 'critical') {
-            let tasks = data.criticalPath || [];
-            if (filterAssignee) tasks = tasks.filter((t) => t.assignee === filterAssignee);
-            main = renderTaskTable(tasks);
-          } else {
-            let tasks = data.ready || [];
-            if (filterAssignee) tasks = tasks.filter((t) => t.assignee === filterAssignee);
-            main = renderTaskTable(tasks, { showChange: true });
-          }
-        } else if (page === 'library') {
-          main = renderLibrary(data);
-        } else if (page === 'visual') {
-          main = renderVisual(data);
-        } else if (page === 'changes') {
-          main = renderChanges(data);
-        } else if (page === 'corpus') {
-          main = renderCorpus(data);
-        }
-
-        const showProgressToolbar = page === 'progress';
-
-        app.innerHTML = `
-          <header>
-            <h1>${esc(data.siteTitle)}</h1>
-            <div class="meta">
-              <span>${esc(data.planId)}</span>
-              <span>更新 ${esc(data.updatedAt)}</span>
-              <span>构建 ${esc(data.builtAt.slice(0,16).replace('T',' '))}</span>
-              ${data.githubRepoUrl ? `<a href="${esc(data.githubRepoUrl)}" target="_blank">GitHub</a>` : ''}
-              ${data.githubPagesUrl ? `<a href="${esc(data.githubPagesUrl)}/demo-phaser.html" target="_blank">Visual 预览</a>` : ''}
-            </div>
-          </header>
-
-          <nav class="nav" id="nav">
-            ${pages.map((p) => `<button class="nav-btn ${page===p.id?'active':''}" data-page="${p.id}">${esc(p.label)}</button>`).join('')}
-          </nav>
-
-          ${page === 'progress' ? `
-          <div class="legend"><span>● 必做</span><span>◇ 可选</span><span>👤 人工</span><span>🤖 Agent</span><span>✓ 可开干</span></div>
-          <div class="team-row">${teamLine}</div>
-          <div class="stats">
-            <div class="stat"><b>${data.stats.total}</b><span>总计</span></div>
-            <div class="stat"><b>${data.stats.done}</b><span>完成</span></div>
-            <div class="stat"><b>${data.stats.in_progress}</b><span>进行中</span></div>
-            <div class="stat highlight"><b>${data.stats.ready}</b><span>可开干</span></div>
-          </div>` : ''}
-
-          ${showProgressToolbar ? `
-          <div class="toolbar">
-            <label>成员</label>
-            <select id="assignee-filter">
-              <option value="">全部</option>
-              ${(data.teamLoad||[]).map((t) => `<option value="${esc(t.member)}">${esc(t.member)}</option>`).join('')}
-            </select>
-            <button type="button" onclick="location.reload()">刷新</button>
-          </div>` : ''}
-
-          ${subTabs}
-          <div id="main">${main}</div>
-
-          ${page === 'progress' ? `
-          <section class="section" style="margin-top:24px">
-            <h2>按人负载</h2>
-            <table><thead><tr><th>成员</th><th>角色</th><th>todo</th><th>进行中</th><th>可开干</th><th>等待池</th></tr></thead><tbody>
-              ${(data.teamLoad||[]).map((t) => `<tr><td><b>${esc(t.member)}</b></td><td>${esc(roles[t.member]||'—')}</td><td>${t.todo}</td><td>${t.in_progress}</td><td>${t.ready}</td><td>${t.waiting}</td></tr>`).join('')}
-            </tbody></table>
-          </section>` : ''}
-
-          <footer>npm run board:publish · registry.json · site.board.json</footer>
-        `;
-
-        document.getElementById('nav').onclick = (e) => {
-          const btn = e.target.closest('[data-page]');
-          if (!btn) return;
-          page = btn.dataset.page;
-          draw();
-        };
-
-        const subEl = document.getElementById('sub-tabs');
-        if (subEl) subEl.onclick = (e) => {
-          const btn = e.target.closest('[data-sub]');
-          if (!btn) return;
-          subView = btn.dataset.sub;
-          draw();
-        };
-
-        const af = document.getElementById('assignee-filter');
-        if (af) {
-          af.value = filterAssignee;
-          af.onchange = (e) => { filterAssignee = e.target.value; draw(); };
-        }
-      }
-
-      draw();
-    }
-
-    fetch('./board-data.json').then((r) => r.json()).then(render).catch((e) => {
-      document.getElementById('app').innerHTML = `<p class="loading">加载失败：${esc(e.message)}</p>`;
-    });
-  </script>
+</div>
+<script src="shadow-api-prefix.js"></script>
+<script src="demo-hub-status.js"></script>
 </body>
 </html>

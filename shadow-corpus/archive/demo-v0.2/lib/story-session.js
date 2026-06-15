@@ -29,6 +29,55 @@ function emitStage(onStage, stage, payload) {
   if (typeof onStage === 'function') onStage(stage, payload || {});
 }
 
+function normalizeUserIntervention(iv, session) {
+  if (!iv) return null;
+  const from_year = iv.from_year ?? iv.year;
+  if (!from_year || !iv.choice) return null;
+
+  const prevIndex = from_year - 1;
+  const prevYear = session?.years?.[prevIndex];
+  let question = iv.question;
+  if (!question && prevYear?.intervention_prompt?.question) {
+    question = prevYear.intervention_prompt.question;
+  }
+
+  const options = prevYear?.intervention_prompt?.options || [];
+  let choice = iv.choice;
+  if (options.length && !options.includes(choice)) {
+    if (typeof iv.option_index === 'number' && options[iv.option_index]) {
+      choice = options[iv.option_index];
+    }
+  }
+
+  return {
+    from_year,
+    question: question || '',
+    choice,
+    option_index: iv.option_index
+  };
+}
+
+function buildInterventionHistory(replanLog, currentIv) {
+  const history = (replanLog || [])
+    .map((entry) => entry.intervention)
+    .filter((iv) => iv?.from_year && iv?.choice);
+  if (currentIv?.from_year && currentIv?.choice) {
+    const dup = history.some((iv) => iv.from_year === currentIv.from_year && iv.choice === currentIv.choice);
+    if (!dup) history.push(currentIv);
+  }
+  return history;
+}
+
+function decisionMemoryFromIntervention(iv) {
+  return {
+    id: `mdec${iv.from_year}`,
+    year: iv.from_year,
+    type: 'decision',
+    content: `选择了「${iv.choice}」${iv.question ? `：${iv.question}` : ''}`,
+    weight: 0.9
+  };
+}
+
 async function startStorySession({
   profile,
   persona_card: intakePersonaCard = null,
@@ -134,21 +183,52 @@ async function generateNextYear({
     recordIntervention(trace, user_intervention);
   }
 
+  const normalizedIv = normalizeUserIntervention(user_intervention, session);
+
   let beats = session.beats;
   let pivotal_years = session.pivotal_years;
-  const replanLog = session.replan_log || [];
+  const replanLog = [...(session.replan_log || [])];
+  let yearsSoFar = [...(session.years || [])];
+  let memoryStream = [...(session.memory_stream || [])];
 
-  if (user_intervention) {
-    const replanned = replanBeatsAfterIntervention({
-      beats,
-      pivotal_years,
-      intervention: user_intervention
-    });
+  if (normalizedIv) {
+    const pivotalIndex = yearsSoFar.length - 1;
+    if (pivotalIndex >= 0 && yearsSoFar[pivotalIndex]?.year === normalizedIv.from_year) {
+      yearsSoFar[pivotalIndex] = {
+        ...yearsSoFar[pivotalIndex],
+        user_intervention: normalizedIv
+      };
+      const decisionMem = decisionMemoryFromIntervention(normalizedIv);
+      if (!memoryStream.some((m) => m.id === decisionMem.id)) {
+        memoryStream.push(decisionMem);
+      }
+    }
+
+    const interventionHistory = buildInterventionHistory(replanLog, normalizedIv);
+    let replanned;
+    try {
+      replanned = await agents.runInterventionReplan({
+        persona_card: session.persona_card,
+        beats,
+        pivotal_years,
+        intervention: normalizedIv,
+        intervention_history: interventionHistory,
+        runtime
+      });
+    } catch {
+      replanned = replanBeatsAfterIntervention({
+        beats,
+        pivotal_years,
+        intervention: normalizedIv
+      });
+    }
+
     if (replanned.replanned) {
       beats = replanned.beats;
+      pivotal_years = replanned.pivotal_years;
       replanLog.push({
         at_year: beat.year,
-        intervention: user_intervention,
+        intervention: normalizedIv,
         placeholder: replanned.placeholder,
         note: replanned.note
       });
@@ -182,17 +262,19 @@ async function generateNextYear({
     emitStage(onStage, 'fate:sampled', fatePayload);
 
     emitStage(onStage, 'year:generating', yearStartPayload);
+    const interventionHistory = buildInterventionHistory(replanLog, normalizedIv);
     const rawYear = await agents.runYear({
       persona_card: session.persona_card,
       profile: session.profile,
-      memory_stream: session.memory_stream || [],
+      memory_stream: memoryStream,
       current_mood: session.mood ?? 5,
       current_esteem: session.esteem ?? 5,
       year_n: beat.year,
       age: session.profile.age + beat.year,
       beat_type: beat.type,
       beat_seed: beat.seed,
-      user_intervention,
+      user_intervention: normalizedIv,
+      intervention_history: interventionHistory,
       full_beats: beats,
       pivotal_years,
       fate_context,
@@ -200,7 +282,7 @@ async function generateNextYear({
       runtime
     });
     const year = normalizeYear(
-      { ...rawYear, user_intervention },
+      rawYear,
       {
         index: nextIndex,
         startAge: session.profile.age,
@@ -209,9 +291,12 @@ async function generateNextYear({
       }
     );
     const memory = memoryFromYear(year);
-    const yearFindings = evaluateYear(year, beat, { lengthStandard: 'v2' });
-    if (nextIndex > 0 && session.years[nextIndex - 1]) {
-      yearFindings.push(...evaluateInterventionThread(session.years[nextIndex - 1], year));
+    const yearFindings = evaluateYear(year, beat, { lengthStandard: 'v2', isLive: true });
+    if (nextIndex > 0 && yearsSoFar[nextIndex - 1]) {
+      yearFindings.push(...evaluateInterventionThread(yearsSoFar[nextIndex - 1], year, {
+        lengthStandard: 'v2',
+        isLive: true
+      }));
     }
     const yearEval = wrapFindings(yearFindings);
     const yearDonePayload = { year: year.year, title: year.title };
@@ -227,8 +312,8 @@ async function generateNextYear({
       beats,
       pivotal_years,
       replan_log: replanLog,
-      years: [...(session.years || []), year],
-      memory_stream: [...(session.memory_stream || []), memory],
+      years: [...yearsSoFar, year],
+      memory_stream: [...memoryStream, memory],
       mood: year.new_mood,
       esteem: year.new_esteem,
       last_fate_context: fate_context
@@ -273,7 +358,7 @@ async function finishStorySession({ session, runtime = createLiveRuntime(), trac
       years: session.years,
       final
     };
-    const storyEval = evaluateStory(story, { lengthStandard: 'v2' });
+    const storyEval = evaluateStory(story, { lengthStandard: 'v2', isLive: true });
     appendEvent(trace, { stage: 'final:done', payload: { title: final.title }, eval: storyEval });
 
     const finishedSession = { ...session, final };
@@ -311,5 +396,7 @@ async function finishStorySession({ session, runtime = createLiveRuntime(), trac
 module.exports = {
   startStorySession,
   generateNextYear,
-  finishStorySession
+  finishStorySession,
+  normalizeUserIntervention,
+  buildInterventionHistory
 };

@@ -1,6 +1,6 @@
 # Shadow 介入设计规则
 
-更新时间：2026-06-14
+更新时间：2026-06-16
 
 Pivotal 介入是 Shadow 核心体验。本文档定义何时介入、如何写、选择如何影响后续。
 
@@ -9,6 +9,7 @@ Pivotal 介入是 Shadow 核心体验。本文档定义何时介入、如何写�
 - 仅 **pivotal 年**（beats.type = pivotal）。
 - quiet 年禁止 intervention。
 - 一年最多一个 intervention 弹窗（在当年叙事 reveal 后弹出）。
+- **Generate / Live**：逐年 SSE 在 pivotal 年生成完成后暂停弹窗，用户选择后写入 `pendingIntervention`，下一年请求携带。
 
 ## 好的 intervention question
 
@@ -36,14 +37,15 @@ Pivotal 介入是 Shadow 核心体验。本文档定义何时介入、如何写�
 
 ## 用户选择之后
 
-Live mode 流程：
+Live / Generate mode 流程：
 
-1. 用户在 pivotal 年弹窗选择 → 写入 `user_intervention`。
-2. 用户点「下一年」→ `POST /api/story/year` 携带 `user_intervention`。
-3. Year agent prompt 必须包含：`用户选择了：「…」`。
-4. 下一年 `event` / `decision_made` 须从该选择后果展开。
+1. 用户在 pivotal 年弹窗选择 → 规范化 `user_intervention`（`from_year` + `question` + `choice`）。
+2. 写入 pivotal 年对象；`memory_stream` 追加 `type: decision` 条目。
+3. 调用 **LLM re-plan** 修订后续 beat seed（失败回退规则占位）。
+4. 下一年 Year prompt 含 **介入因果硬约束** + **累积 intervention_history**。
+5. 下一年 `event` **第一段**须写选择的即时后果；`decision_made` 体现后果驱动的下一步。
 
-本地预生成故事：选择仅标注在 story 对象上，不重新生成（演示用）。
+本地预生成故事：若 session 已含 `user_intervention`，Demo 展示「已选」不再重复弹窗。
 
 ## 用户不选时
 
@@ -53,5 +55,7 @@ Live mode 流程：
 
 ## 验收
 
-- 规则 eval：`intervention.thread` 检查下一年是否承接选择（warn）。
-- 人工：读 golden story `04-dev-testing/golden-stories/复读线.md` 对照。
+- 规则 eval（v2 / live）：`intervention.thread` 为 **error**——下一年 event 前 80 字须承接选择。
+- 规则 eval：`year.event_volume` 全年 160–240 字；`visual_anchor` / `key_props` 必填。
+- 自动：`intervention-replan.test.js` mock A/B 分叉；`未复读线-阿岚.json` v2 eval 无 error。
+- 人工：读标杆 `docs/stories/未复读线-阿岚.json` 与 generate 全流程对照。

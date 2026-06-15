@@ -55,7 +55,7 @@
 
   function handleNavBack() {
     if (skipLandingMode || shouldSkipLanding()) {
-      window.location.href = 'intake.html';
+      window.location.href = 'generate.html';
       return;
     }
     goLanding();
@@ -252,7 +252,7 @@
       <div class="yr-card snes">
         <div class="enter-item">
           <div class="section-label">◈ 这一年发生了</div>
-          <div class="main-event snes-inset${year.is_pivotal ? '' : ' quiet-event'}">${esc(year.event)}</div>
+          <div class="main-event snes-inset">${esc(year.event)}</div>
         </div>
 
         ${dailyHtml}
@@ -663,13 +663,20 @@
 
     if (year.is_pivotal && year.intervention_prompt && !interventionShown.has(year.year)) {
       interventionShown.add(year.year);
-      const pageAtSchedule = pageIdx;
-      if (interventionTimer) clearTimeout(interventionTimer);
-      interventionTimer = setTimeout(() => {
-        interventionTimer = null;
-        if (currentPage !== pageAtSchedule) return;
-        openIntervention(yearIdx);
-      }, 520);
+      if (year.user_intervention?.choice) {
+        const badge = document.querySelector(`#p-year-${year.year} .intervention-teaser`);
+        if (badge) {
+          badge.innerHTML = `<div class="section-label">◆ 你的选择</div><p class="choice-made">${esc(year.user_intervention.choice)}</p>`;
+        }
+      } else {
+        const pageAtSchedule = pageIdx;
+        if (interventionTimer) clearTimeout(interventionTimer);
+        interventionTimer = setTimeout(() => {
+          interventionTimer = null;
+          if (currentPage !== pageAtSchedule) return;
+          openIntervention(yearIdx);
+        }, 520);
+      }
     }
   }
 

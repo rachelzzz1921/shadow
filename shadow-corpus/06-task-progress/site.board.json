@@ -42,6 +42,18 @@
     "path": "archive/demo-v0.2/README.md",
     "run": "npm run dev"
   },
+  "publicHub": {
+    "label": "对外首页",
+    "path": "docs/index.html",
+    "pagesPath": "index.html",
+    "run": "npm run demo:preview → /"
+  },
+  "teamBoard": {
+    "label": "团队看板",
+    "path": "docs/board.html",
+    "pagesPath": "board.html",
+    "run": "npm run board:publish → /board.html"
+  },
   "staticDemo": {
     "label": "复读线叙事 Demo（fuxduxian-v1 overlay）",
     "path": "docs/demo.html",

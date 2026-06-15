@@ -92,11 +92,11 @@
     if (back) {
       back.addEventListener('click', () => {
         if (state.step === 4) {
-          window.location.href = 'demo-hub.html';
+          window.location.href = 'index.html';
           return;
         }
         if (state.step > 0) goBack();
-        else window.location.href = 'demo-hub.html';
+        else window.location.href = 'index.html';
       });
     }
     bindNavigation();
@@ -281,7 +281,8 @@
 
     try {
       const q = preset.id === 'fuxduxian' ? '' : `?preset=${encodeURIComponent(preset.id)}`;
-      history.replaceState(null, '', `intake.html${q}`);
+      const page = document.body.classList.contains('generate-unified') ? 'generate.html' : 'intake.html';
+      history.replaceState(null, '', `${page}${q}`);
     } catch (_) { /* ignore */ }
 
     updateSourceTag(`${preset.line_name} · 预设`);
@@ -360,7 +361,7 @@
         'error'
       );
       showServerBanner(
-        '采集数据加载失败。请运行 npm run demo:local 后刷新；或打开 demo-hub.html 直达 Demo。',
+        '采集数据加载失败。请运行 npm run demo:local 后刷新；或打开首页直达 Demo。',
         'error'
       );
       return;
@@ -1069,7 +1070,7 @@
         <a href="${mockHref}" class="btn-ghost">Mock 预览七年</a>
         <button type="button" class="btn-ghost" id="btn-restart-intake">重新采集</button>
       </div>
-      <p class="intake-foot-link"><a href="demo-hub.html">← Demo 入口</a> · <a href="demo.html">叙事 Demo</a></p>`;
+      <p class="intake-foot-link"><a href="index.html">← 首页</a> · <a href="demo.html">叙事 Demo</a></p>`;
   }
 
   async function showCompletion(result, errMsg) {
@@ -1341,11 +1342,8 @@
     }
   }
 
-  // 自定义采集 → 七年呈现。两条链路都落进 demo.html 分层 UI：
-  //  · API 可用 → generate.html 真实全链生成（进度屏，完成后自动跳 demo.html?live=1）
-  //  · API 不可用 → ShadowCustomStory 规则即时合成 → 直达 demo.html?live=1
-  async function routeCustomToDemo(result) {
-    const intakeRequest = {
+  function buildIntakeRequest(result) {
+    return {
       layerA: state.layerA,
       selectedTags: state.selectedTags,
       questionAnswers: state.questions.map((q) => ({
@@ -1359,7 +1357,31 @@
         quick_path: Boolean(state.quickPath)
       }
     };
+  }
 
+  async function handoffToGeneratePipeline(result) {
+    const intakeRequest = buildIntakeRequest(result);
+    try {
+      sessionStorage.setItem('shadow_intake_request', JSON.stringify(intakeRequest));
+    } catch (_) { /* quota */ }
+    if (window.ShadowGenerateBridge?.onIntakeComplete) {
+      window.ShadowGenerateBridge.onIntakeComplete({
+        ...result,
+        intake_request: intakeRequest
+      });
+      return true;
+    }
+    return false;
+  }
+
+  // 自定义采集 → 七年呈现。两条链路都落进 demo.html 分层 UI：
+  //  · 在 generate 统一页 → ShadowGenerateBridge 本页 API 全链
+  //  · API 可用但独立页 → generate.html?autostart=1
+  //  · API 不可用 → ShadowCustomStory 规则即时合成 → demo.html?live=1
+  async function routeCustomToDemo(result) {
+    if (await handoffToGeneratePipeline(result)) return;
+
+    const intakeRequest = buildIntakeRequest(result);
     let apiOk = false;
     try {
       const res = await fetch('/api/health', { cache: 'no-store' });

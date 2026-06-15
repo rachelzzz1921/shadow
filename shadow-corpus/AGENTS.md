@@ -50,6 +50,8 @@ npm run dev --prefix archive/demo-v0.2
 npm test --prefix archive/demo-v0.2
 ```
 
+**对外站点架构（GitHub Pages `docs/`）：** [`../docs/SITE.md`](../docs/SITE.md) — 页面地图、Intake 映射、部署规则。
+
 ## Live API（归档 demo）
 
 - `POST /api/story/start` → session + `run_id`

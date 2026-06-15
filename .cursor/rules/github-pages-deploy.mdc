@@ -1,49 +1,39 @@
 ---
-description: docs/ 或 Visual 预览变更后及时构建并 push，保持 GitHub Pages 在线
+description: docs/ 站点架构与 GitHub Pages 部署 — 详见 docs/SITE.md
 alwaysApply: true
 ---
 
 # GitHub Pages — 及时推送
 
-团队看板与复读线 Demo 部署在 `docs/`（GitHub Pages，分支 `main`）。**本地改完不等于队友能看见**——必须 push 后 Pages 才更新。
+对外 Demo 与团队看板在 `docs/`（分支 `main`）。**架构、Intake 映射、页面分工 → [`docs/SITE.md`](docs/SITE.md)**。
+
+## 页面分工（速记）
+
+| 路径 | 用途 |
+|------|------|
+| `/` | 对外首页 `index.html` |
+| `/generate.html` | 唯一采集 + API 七年入口 |
+| `/demo.html` | 七年阅读器 |
+| `/pitch.html` | 路演 |
+| `/board.html` | 团队看板（`board:publish` 生成） |
+
+兼容跳转：`intake.html` → `generate.html`，`demo-hub.html` → `/`。
 
 ## 何时必须 push
 
-改动以下任一内容后，**同一会话内**完成构建、提交、推送到 `main`（除非用户明确说不要 push）：
-
-- `docs/`（demo、看板、`demo-layouts-v1.json`、`visual-assets/`）
-- `shadow-corpus/visual/scenes/fuxduxian/draft/`
-- `shadow-corpus/visual/registry/packs/`
-- `shadow-corpus/06-task-progress/site.board.json` / `site.config.json`
-- 看板构建脚本或 `board-site.template.html`
+改动 `docs/`、visual draft/registry、`site.board.json`、看板构建脚本后，同一会话内构建并 push（除非用户明确不要）。
 
 ## 标准流程
 
 ```bash
-npm run board:publish          # 含 build:visual-demo
-git add docs shadow-corpus .github package.json
+npm run board:publish
+git add docs shadow-corpus .github package.json .cursor/rules
 git commit -m "…"
 git push origin main
 ```
-
-仅改 visual draft、未改 registry 时，至少：
-
-```bash
-npm run build:visual-demo
-git add docs shadow-corpus/visual
-git commit -m "…"
-git push origin main
-```
-
-## 预览 URL（`site.config.json` → `githubPagesBase`）
-
-- 看板：`/`
-- 叙事 Demo：`/demo.html`
-- Phaser v1：`/demo-phaser.html`
-
-push 后在 commit 信息或回复里附上上述 Pages 链接，方便人审。
 
 ## 禁止
 
-- 只改本地 `docs/` 不 push，然后声称「预览已更新」
-- 跳过 `board:publish` / `build:visual-demo` 直接 push 过期的 `board-data.json` 或 layout JSON
+- 只改本地 `docs/` 不 push却声称预览已更新
+- 跳过 `board:publish` / `build:visual-demo` 推送过期 `board-data.json` 或 layout JSON
+- 新建 `demo-live.html` / 独立 `intake.html` 对外链接（兼容跳转除外）

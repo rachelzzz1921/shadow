@@ -82,6 +82,10 @@ test('story session advances year-by-year and threads intervention into runtime 
       is_pivotal: true,
       intervention_prompt: { question: '告诉父母吗？', options: ['告诉', '不说'] }
     }),
+    {
+      beats: beats.beats.map((b) => ({ ...b, seed: `${b.seed}·replan` })),
+      pivotal_years: beats.pivotal_years
+    },
     year(2, { is_pivotal: false }),
     {
       title: '阿岚的七年',
@@ -119,8 +123,9 @@ test('story session advances year-by-year and threads intervention into runtime 
   result = await generateNextYear({ session, user_intervention: intervention, runtime: observingRuntime });
   session = result.session;
   assert.equal(result.year.year, 2);
-  assert.equal(result.year.user_intervention.choice, '告诉');
-  assert.match(generatedPrompts.at(-1), /用户选择了：「告诉」/);
+  assert.equal(session.years[0].user_intervention.choice, '告诉');
+  assert.match(generatedPrompts.at(-1), /用户上一步选择了：「告诉」/);
+  assert.ok(session.replan_log?.length >= 1);
 
   const finalResult = await finishStorySession({ session, runtime: observingRuntime });
   assert.equal(finalResult.final.title, '阿岚的七年');

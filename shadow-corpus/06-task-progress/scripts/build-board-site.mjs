@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * build-board-site.mjs — 从 registry.json 生成 GitHub Pages 静态看板
- * 输出：docs/index.html + docs/board-data.json
+ * 输出：docs/board.html + docs/board-data.json（对外首页为 docs/index.html，勿覆盖）
  *
  * GITHUB_REPO=chenzhiwei/shadow node build-board-site.mjs
  */
@@ -335,7 +335,9 @@ function buildVisualModule(data, changeMap, repo, siteBoard) {
 
   const pagesBase = githubPagesBase(loadConfig(), repo);
   const previewLinks = [
+    enrichDocsEntry({ label: '对外首页', path: 'docs/index.html', pagesPath: 'index.html' }, pagesBase),
     enrichDocsEntry({ label: '路演 Pitch', path: 'docs/pitch.html', pagesPath: 'pitch.html' }, pagesBase),
+    enrichDocsEntry({ label: '采集 + API 生成', path: 'docs/generate.html', pagesPath: 'generate.html' }, pagesBase),
     enrichDocsEntry({ label: '叙事 Demo', path: 'docs/demo.html', pagesPath: 'demo.html' }, pagesBase),
     enrichDocsEntry(
       { label: 'Phaser layout v1', path: 'docs/demo-phaser.html', pagesPath: 'demo-phaser.html' },
@@ -497,10 +499,10 @@ function build() {
   fs.writeFileSync(path.join(OUT_DIR, 'board-data.json'), JSON.stringify(payload, null, 2) + '\n');
 
   const html = fs.readFileSync(path.join(__dirname, 'board-site.template.html'), 'utf8');
-  fs.writeFileSync(path.join(OUT_DIR, 'index.html'), html);
+  fs.writeFileSync(path.join(OUT_DIR, 'board.html'), html);
 
   console.log(`Built → ${OUT_DIR}/`);
-  console.log(`  index.html`);
+  console.log(`  board.html`);
   console.log(`  board-data.json (${payload.stats.total} tasks, ${payload.stats.ready} ready, visual ${visual.stats.done}/${visual.stats.total})`);
   if (!repo) {
     console.log('\n⚠  Set githubRepo in site.config.json or GITHUB_REPO=owner/repo for GitHub links');

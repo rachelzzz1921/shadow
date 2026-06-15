@@ -20,7 +20,9 @@ Demo Mock 共 **4 条**已入库 Golden JSON（`docs/stories/` 同步副本供�
 | 故事切换 UI | [`docs/demo.html`](../../../docs/demo.html) · `?story=linwan` 等 |
 | Catalog + 适配器 | [`docs/demo-stories.js`](../../../docs/demo-stories.js) |
 | 静态 JSON | [`docs/stories/`](../../../docs/stories/) |
-| Hub 入口 | [`docs/demo-hub.html`](../../../docs/demo-hub.html) |
+| 对外首页 | [`docs/index.html`](../../../docs/index.html) |
+| 采集 + API | [`docs/generate.html`](../../../docs/generate.html) |
+| 站点架构 | [`docs/SITE.md`](../../../docs/SITE.md) |
 
 本地预览：`npm run demo:preview` → http://localhost:5199/demo.html
 

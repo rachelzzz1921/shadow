@@ -62,20 +62,50 @@ function evaluateYear(year, beat, opts = {}) {
   if (!year) return [issue('year.missing', '缺少年份对象', 'error')];
 
   const lengthStandard = opts.lengthStandard || 'legacy';
+  const isLive = opts.isLive || lengthStandard === 'v2';
   const beatType = beat?.type || (year.is_pivotal ? 'pivotal' : 'quiet');
   const eventLen = (year.event || '').length;
 
-  if (beatType === 'quiet') {
-    if (lengthStandard === 'v2') {
-      if (eventLen < 45) {
-        findings.push(issue('year.quiet_short', `quiet 年 event 建议 55–75 字，当前 ${eventLen}`, 'warn'));
-      }
-      if (eventLen > 85) {
-        findings.push(issue('year.quiet_length', `quiet 年 event 应 ≤75 字左右，当前 ${eventLen}`, 'warn'));
-      }
-    } else if (eventLen > 35) {
+  if (lengthStandard === 'v2') {
+    if (eventLen < 160) {
+      findings.push(issue(
+        'year.event_volume',
+        `全年 event 建议 160–240 字，当前 ${eventLen}`,
+        isLive ? 'error' : 'warn'
+      ));
+    }
+    if (eventLen > 280) {
+      findings.push(issue(
+        'year.event_long',
+        `全年 event 建议 ≤240 字左右，当前 ${eventLen}`,
+        'warn'
+      ));
+    }
+    const anchorLen = (year.visual_anchor || '').length;
+    if (anchorLen < 12) {
+      findings.push(issue(
+        'year.visual_anchor',
+        `年${year.year} 缺少 visual_anchor（12–48 字）`,
+        isLive ? 'error' : 'warn'
+      ));
+    }
+    const props = Array.isArray(year.key_props) ? year.key_props : [];
+    if (props.length < 2) {
+      findings.push(issue(
+        'year.key_props',
+        `年${year.year} 缺少 key_props（须 2–3 个物件）`,
+        isLive ? 'error' : 'warn'
+      ));
+    }
+  } else if (beatType === 'quiet') {
+    if (eventLen > 35) {
       findings.push(issue('year.quiet_length', `quiet 年 event 应 ≤30 字左右，当前 ${eventLen}`, 'warn'));
     }
+  } else if (eventLen < 40) {
+    findings.push(issue('year.pivotal_length', `pivotal 年 event 应更完整，当前 ${eventLen} 字`, 'warn'));
+  }
+
+  if (beatType === 'quiet') {
     if (year.intervention_prompt) {
       findings.push(issue('year.quiet_intervention', 'quiet 年不应有 intervention_prompt', 'error'));
     }
@@ -85,16 +115,6 @@ function evaluateYear(year, beat, opts = {}) {
   }
 
   if (beatType === 'pivotal') {
-    if (lengthStandard === 'v2') {
-      if (eventLen < 160) {
-        findings.push(issue('year.pivotal_length', `pivotal 年 event 建议 200–260 字，当前 ${eventLen}`, 'warn'));
-      }
-      if (eventLen > 280) {
-        findings.push(issue('year.pivotal_long', `pivotal 年 event 建议 ≤260 字，当前 ${eventLen}`, 'warn'));
-      }
-    } else if (eventLen < 40) {
-      findings.push(issue('year.pivotal_length', `pivotal 年 event 应更完整，当前 ${eventLen} 字`, 'warn'));
-    }
     if (!year.intervention_prompt?.question || !Array.isArray(year.intervention_prompt?.options)) {
       findings.push(issue('year.pivotal_intervention', 'pivotal 年缺少 intervention_prompt', 'error'));
     } else if (year.intervention_prompt.options.length !== 2) {
@@ -137,14 +157,40 @@ function evaluateYear(year, beat, opts = {}) {
   return findings;
 }
 
-function evaluateVisualConsistency(years) {
+function interventionConsequenceMatches(choice, eventText, decisionText) {
+  if (!choice) return false;
+  const opening = (eventText || '').slice(0, 80);
+  const full = `${opening}${decisionText || ''}`;
+  if (full.includes(choice)) return true;
+
+  const choiceChars = [...choice].filter((c) => c.trim() && !/[，。、；：？！\s]/.test(c));
+  const minHits = Math.max(2, Math.ceil(choiceChars.length * 0.35));
+  const hits = choiceChars.filter((c) => full.includes(c)).length;
+  if (hits >= minHits) return true;
+
+  const CONSEQUENCE_HINTS = [
+    /告诉|撑|承认|再战|接受|消化|打电话|挂断|转身|留下|离开|开口|沉默/,
+    /因为|于是|从此|那晚|第二天|接下来|你选|你决定/
+  ];
+  return CONSEQUENCE_HINTS.some((re) => re.test(opening));
+}
+
+function evaluateVisualConsistency(years, opts = {}) {
   const findings = [];
   if (!Array.isArray(years) || !years.length) return findings;
 
+  const lengthStandard = opts.lengthStandard || 'legacy';
+  const isLive = opts.isLive || lengthStandard === 'v2';
   const withAnchor = years.filter(y => y?.visual_anchor);
-  if (!withAnchor.length) return findings;
 
-  if (withAnchor.length !== years.length) {
+  if (lengthStandard === 'v2' && withAnchor.length !== years.length) {
+    const missing = years.filter(y => !y?.visual_anchor).map(y => y.year);
+    findings.push(issue(
+      'visual.partial',
+      `部分年份缺 visual_anchor：年 ${missing.join(',')}`,
+      isLive ? 'error' : 'warn'
+    ));
+  } else if (withAnchor.length && withAnchor.length !== years.length) {
     const missing = years.filter(y => !y?.visual_anchor).map(y => y.year);
     findings.push(issue(
       'visual.partial',
@@ -154,11 +200,11 @@ function evaluateVisualConsistency(years) {
   }
 
   for (const year of years) {
-    if (year?.visual_anchor && (!Array.isArray(year.key_props) || !year.key_props.length)) {
+    if (year?.visual_anchor && (!Array.isArray(year.key_props) || year.key_props.length < 2)) {
       findings.push(issue(
         'visual.key_props',
-        `年${year.year} 有 visual_anchor 但缺 key_props`,
-        'warn'
+        `年${year.year} 有 visual_anchor 但缺 key_props（须 2–3 个）`,
+        isLive ? 'error' : 'warn'
       ));
     }
   }
@@ -166,16 +212,26 @@ function evaluateVisualConsistency(years) {
   return findings;
 }
 
-function evaluateInterventionThread(prevYear, nextYear) {
+function evaluateInterventionThread(prevYear, nextYear, opts = {}) {
   const findings = [];
   const iv = prevYear?.user_intervention;
   if (!iv?.choice) return findings;
 
-  const haystack = `${nextYear?.event || ''}${nextYear?.decision_made || ''}`;
-  if (!haystack.includes(iv.choice) && !/(告诉|撑|承认|再战|接受)/.test(haystack)) {
+  const eventText = nextYear?.event || '';
+  const opening = eventText.slice(0, 80);
+  const matched = interventionConsequenceMatches(iv.choice, eventText, nextYear?.decision_made);
+  const severity = (opts.isLive || opts.lengthStandard === 'v2') ? 'error' : 'warn';
+
+  if (!matched) {
     findings.push(issue(
       'intervention.thread',
-      `年${nextYear?.year} 的叙事未明显承接年${iv.from_year} 的介入选择「${iv.choice}」`,
+      `年${nextYear?.year} event 开篇（前 80 字）未承接年${iv.from_year} 的介入「${iv.choice}」`,
+      severity
+    ));
+  } else if (!opening.trim() && eventText.length) {
+    findings.push(issue(
+      'intervention.thread_opening',
+      `年${nextYear?.year} 应在 event 第一段写清介入后果，而非仅在末尾提及`,
       'warn'
     ));
   }
@@ -251,6 +307,9 @@ function evaluateStory(story, opts = {}) {
   const findings = [];
   const lengthStandard = opts.lengthStandard
     || (story?._from_live || story?._from_generate ? 'v2' : 'legacy');
+  const isLive = opts.isLive ?? !!(story?._from_live || story?._from_generate);
+  const evalOpts = { lengthStandard, isLive };
+
   findings.push(...evaluateBeats(story.beats, story.pivotal_years));
   if (story.full_profile) {
     findings.push(...evaluateIntakeConsistency(story.full_profile, story.persona_card));
@@ -258,14 +317,14 @@ function evaluateStory(story, opts = {}) {
 
   const beats = story.beats || [];
   (story.years || []).forEach((year, index) => {
-    findings.push(...evaluateYear(year, beats[index], { lengthStandard }));
+    findings.push(...evaluateYear(year, beats[index], evalOpts));
     if (index > 0) {
-      findings.push(...evaluateInterventionThread(story.years[index - 1], year));
+      findings.push(...evaluateInterventionThread(story.years[index - 1], year, evalOpts));
     }
   });
 
   if ((story.years || []).length === 7) {
-    findings.push(...evaluateVisualConsistency(story.years));
+    findings.push(...evaluateVisualConsistency(story.years, evalOpts));
     findings.push(...evaluateFinal(story.final));
   }
 
@@ -287,5 +346,6 @@ module.exports = {
   evaluateStory,
   evaluateIntakeConsistency,
   evaluateInterventionThread,
-  evaluateVisualConsistency
+  evaluateVisualConsistency,
+  interventionConsequenceMatches
 };

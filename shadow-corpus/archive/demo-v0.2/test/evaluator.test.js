@@ -41,10 +41,26 @@ test('evaluateYear rejects quiet year with intervention', () => {
 
 test('evaluateVisualConsistency warns when only some years have visual_anchor', () => {
   const years = [
-    { year: 1, visual_anchor: '雨窗', key_props: ['书包'] },
+    { year: 1, visual_anchor: '雨窗', key_props: ['书包', '课桌'] },
     { year: 2 },
     { year: 3 }
   ];
   const findings = evaluateVisualConsistency(years);
   assert.ok(findings.some(f => f.code === 'visual.partial'));
+});
+
+test('未复读线标杆 JSON passes v2 rule eval without errors', () => {
+  const benchmarkPath = path.join(__dirname, '../../../../docs/stories/未复读线-阿岚.json');
+  const benchmark = JSON.parse(fs.readFileSync(benchmarkPath, 'utf8'));
+  const result = evaluateStory(benchmark, { lengthStandard: 'v2' });
+  assert.equal(result.errors.length, 0, result.errors.map((e) => e.message).join('; '));
+});
+
+test('v2 evaluateYear flags short event as error on live path', () => {
+  const findings = evaluateYear(
+    { year: 2, is_pivotal: false, event: '太短。', visual_anchor: '教室举手', key_props: ['课桌', '阳光'] },
+    { type: 'quiet' },
+    { lengthStandard: 'v2', isLive: true }
+  );
+  assert.ok(findings.some((f) => f.code === 'year.event_volume' && f.severity === 'error'));
 });

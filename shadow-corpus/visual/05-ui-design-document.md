@@ -32,15 +32,19 @@ Landing（选故事线）
   → 可选：与 Shadow 对话 / 记忆流展开
 ```
 
-**旁路入口：**
+**旁路入口（2026-06-16 站点重组后）：**
 
 | 入口 | 文件 | 说明 |
 |------|------|------|
-| Intake 三层采集 | `docs/intake.html` | profile → Persona agent（Mock / Live 桥接） |
-| Live 生成 | `docs/demo-live.html` | 需 archive demo + API key |
+| 对外首页 | `docs/index.html` | Golden 故事卡 + 写我的 CTA |
+| 采集 + API 七年 | `docs/generate.html` | **唯一采集入口**；Intake → Persona → API → `demo.html?live=1` |
+| 路演 Pitch | `docs/pitch.html` | 沿路翻页路演 |
+| 叙事阅读器 | `docs/demo.html` | Mock `?story=` / Live `?live=1` |
 | Phaser 布局预览 | `docs/demo-phaser.html` | 七年 layout + CC0 纹理 |
-| Demo Hub | `docs/demo-hub.html` | 各入口聚合 |
-| 团队看板 | `docs/index.html` | GitHub Pages 首页 + 预览链接 |
+| 团队看板 | `docs/board.html` | 任务 / Visual / Corpus |
+| 站点架构全文 | `docs/SITE.md` | 页面地图、Intake 映射、部署规则 |
+
+兼容跳转：`intake.html` → `generate.html`，`demo-hub.html` → `index.html`。
 
 ### 2.3 运行模式与 UI 差异
 

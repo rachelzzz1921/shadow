@@ -73,6 +73,16 @@
     };
   }
 
+  function padEventParagraphs(core, extra) {
+    let text = core;
+    if (extra) text += `\n\n${extra}`;
+    while (text.length < 160) {
+      text += `\n\n你把这一刻记了很久——不是因为轰轰烈烈，而是因为它悄悄改变了你往后几年的节奏。`;
+      if (text.length >= 160) break;
+    }
+    return text.length > 280 ? text.slice(0, 277) + '…' : text;
+  }
+
   function build({ profile, persona, persona_card, full_profile, eraSnippets = {} }) {
     const card = buildPersonaCard({ persona, persona_card });
     const name = card.name;
@@ -98,12 +108,28 @@
 
       let event;
       if (y === 1) {
-        event = `${calYear}年，岔路口之后的第一年。\n\n你记得自己说过：${choice}\n\n${desc ? desc + '\n\n' : ''}那年 ${era.replace(/^[\d]+年 · /, '')}。你还没有证明自己选对了，但已经开始用日常回答这个问题。`;
+        event = padEventParagraphs(
+          `${calYear}年，岔路口之后的第一年。\n\n你记得自己说过：${choice}`,
+          `${desc ? desc + '\n\n' : ''}那年 ${era.replace(/^[\d]+年 · /, '')}。你还没有证明自己选对了，但已经开始用日常回答这个问题。窗外的光、课桌上的划痕、手机里没发出去的消息，都成了这一年的底片。`
+        );
       } else if (y === 7) {
-        event = `第七年（${calYear}），你很少再向别人解释当初的选择。\n\n${keywords.length ? '你身上还留着这些词：' + keywords.join('、') + '。' : ''}\n\n你未必赢了什么，但这条平行线已经长成了只有你能辨认的形状。`;
+        event = padEventParagraphs(
+          `第七年（${calYear}），你很少再向别人解释当初的选择。`,
+          `${keywords.length ? '你身上还留着这些词：' + keywords.join('、') + '。\n\n' : ''}你未必赢了什么，但这条平行线已经长成了只有你能辨认的形状。回头看，最响的转折往往发生在那些你以为只是平常的一天。`
+        );
       } else {
-        event = `第 ${y} 年（${calYear}）。${beat.seed}。\n\n${era}\n\n影子在这一年记住的是：你如何在「${card.decision_tendency.slice(0, 24)}…」里继续往前走。`;
+        event = padEventParagraphs(
+          `第 ${y} 年（${calYear}）。${beat.seed}。`,
+          `${era}\n\n影子在这一年记住的是：你如何在「${card.decision_tendency.slice(0, 24)}…」里继续往前走。有些日子平淡得像水，但情绪会在夜里涨起来，你又得决定明天先顾哪一头。`
+        );
       }
+
+      const propLabels = {
+        desk: '课桌', phone: '手机', laptop: '电脑', suitcase: '行李箱'
+      };
+      const keyProps = keywords.length >= 2
+        ? keywords.slice(0, 3)
+        : [propLabels[visual.prop] || visual.prop, title.slice(0, 6)];
 
       return {
         year: y,
@@ -114,15 +140,15 @@
         event,
         event_summary: event.slice(0, 80),
         opening: event.slice(0, 120),
-        decision_made: y === 1 ? choice.slice(0, 48) : (isPivotal ? `在第 ${y} 年做了一个不会回头的小决定` : ''),
+        decision_made: y === 1 ? choice.slice(0, 40) : (isPivotal ? `在第 ${y} 年做了一个不会回头的小决定` : '继续把日子往前推'),
         reflection: y === 7 ? quote : `第 ${y} 年，${card.growth_seed.slice(0, 36)}…`,
         memory_summary: title,
         emotion: y < 3 ? '紧' : y < 6 ? '稳' : '轻',
         emotion_value: mood,
         new_mood: mood,
         new_esteem: esteem,
-        visual_anchor: `「${ENV_LABEL[visual.environment] || '此刻'} · ${title} · ${calYear}年」`,
-        key_props: (keywords.length ? keywords.slice(0, 2) : [visual.prop]).filter(Boolean),
+        visual_anchor: `${ENV_LABEL[visual.environment] || '此刻'} · ${title} · ${calYear}年`,
+        key_props: keyProps,
         ...visual,
         intervention_prompt: isPivotal && y < 7 ? {
           question: `第 ${y} 年：让${name}先顾自己，还是先顾重要的人？`,

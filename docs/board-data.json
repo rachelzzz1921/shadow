@@ -1,5 +1,5 @@
 {
-  "builtAt": "2026-06-15T16:39:59.294Z",
+  "builtAt": "2026-06-15T17:17:53.387Z",
   "siteTitle": "Shadow 团队看板",
   "githubRepo": "rachelzzz1921/shadow",
   "githubRepoUrl": "https://github.com/rachelzzz1921/shadow",
@@ -6305,11 +6305,25 @@
     "packId": "fuxduxian-v1",
     "previewLinks": [
       {
+        "label": "对外首页",
+        "path": "docs/index.html",
+        "pagesPath": "index.html",
+        "url": "./index.html",
+        "pagesUrl": "https://rachelzzz1921.github.io/shadow/index.html"
+      },
+      {
         "label": "路演 Pitch",
         "path": "docs/pitch.html",
         "pagesPath": "pitch.html",
         "url": "./pitch.html",
         "pagesUrl": "https://rachelzzz1921.github.io/shadow/pitch.html"
+      },
+      {
+        "label": "采集 + API 生成",
+        "path": "docs/generate.html",
+        "pagesPath": "generate.html",
+        "url": "./generate.html",
+        "pagesUrl": "https://rachelzzz1921.github.io/shadow/generate.html"
       },
       {
         "label": "叙事 Demo",

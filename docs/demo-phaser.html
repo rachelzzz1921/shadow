@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shadow Visual — Phaser 场景预览</title>
+<link rel="stylesheet" href="demo-theme.css" />
+<style>
+html, body { height: auto; overflow: auto; user-select: auto; }
+.wrap { max-width: 720px; margin: 0 auto; padding: 32px 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 20px; font-size: 12px; }
+.top a { color: var(--amber-deep); text-decoration: none; }
+h1 { font-size: 1.35rem; margin: 0 0 8px; }
+.lead { color: var(--ink-muted); line-height: 1.7; margin-bottom: 20px; font-size: 14px; }
+#pack-badge {
+  font-family: monospace; font-size: 11px; color: var(--amber);
+  margin-bottom: 12px; letter-spacing: 0.06em;
+}
+#year-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+#year-btns button {
+  font-family: inherit; font-size: 12px; padding: 6px 14px;
+  border: 2px solid var(--paper-shadow); background: var(--paper); cursor: pointer;
+}
+#year-btns button.active { border-color: var(--amber); color: var(--amber-deep); }
+#game-mount {
+  border: 2px solid var(--paper-shadow); background: #0a0a12;
+  min-height: 360px; border-radius: 4px; overflow: hidden;
+}
+#visual-anchor {
+  margin-top: 12px; font-size: 12px; color: var(--ink-muted); line-height: 1.6;
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a href="index.html">← 首页</a>
+    <span>
+      <a href="demo.html?story=wufuxdu">叙事 Demo</a>
+      · <a href="board.html">团队看板</a>
+    </span>
+  </div>
+  <p style="font-family:monospace;font-size:11px;color:var(--amber);letter-spacing:2px;margin:0 0 8px">SHADOW VISUAL</p>
+  <h1>Phaser 场景 layout 预览</h1>
+  <p class="lead">fuxduxian-v1 七年主景 + CC0 纹理占位。本地请先 <code>npm run build:visual-demo</code>，再 <code>npm run demo:local</code> 或静态预览。</p>
+  <div id="pack-badge">加载中…</div>
+  <div id="year-btns" aria-label="切换年份"></div>
+  <div id="game-mount" aria-label="Phaser 画布"></div>
+  <p id="visual-anchor"></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+<script>
+(function loadPhaserDemo() {
+  var s = document.createElement('script');
+  s.src = new URLSearchParams(location.search).get('legacy') === '1'
+    ? 'demo-phaser.js'
+    : 'demo-phaser-v1.js';
+  document.body.appendChild(s);
+})();
+</script>
+</body>
+</html>

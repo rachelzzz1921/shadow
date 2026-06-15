@@ -28,12 +28,14 @@ const {
   buildFinalPrompt,
   buildDialoguePrompt,
   buildSuggestPrompt,
+  buildInterventionReplanPrompt,
   YEAR_SYSTEM
 } = require('./prompts');
+const { replanBeatsAfterIntervention } = require('./beats-replan');
 const sceneBridge = require('./scene-agents-bridge');
 const { createLiveRuntime, pickProvider } = require('./llm-runtime');
 const { selectMemories } = require('./memory-retrieval');
-const { memoryFromYear } = require('./story-contract');
+const { memoryFromYear, inferVisualAnchor, inferKeyProps } = require('./story-contract');
 const { runPersonaAnalyze, personaToPersonaCard } = require('./persona-agent');
 const { enums: schemaEnums } = require('./schemas');
 
@@ -67,7 +69,7 @@ function sanitizeYearFromLlm(raw, input) {
     };
   }
 
-  return {
+  const sanitized = {
     year: yearN,
     age: Number(raw?.age) || input.age,
     is_pivotal: beatType === 'pivotal',
@@ -86,10 +88,15 @@ function sanitizeYearFromLlm(raw, input) {
     },
     new_mood: Math.max(1, Math.min(10, Math.round(Number(raw?.new_mood ?? emotion.value) || 5))),
     new_esteem: Math.max(1, Math.min(10, Math.round(Number(raw?.new_esteem) || (input.current_esteem ?? 5)))),
-    reflection: clip(raw?.reflection, 45, '原来有些路只能自己走完'),
-    shadow_dialogue: clip(raw?.shadow_dialogue, 35, '如果重来，我会更早对自己诚实'),
-    memory_summary: clip(raw?.memory_summary, 30, clip(raw?.event, 30, `第${yearN}年的转折`))
+    reflection: clip(raw?.reflection, 85, '原来有些路只能自己走完'),
+    shadow_dialogue: clip(raw?.shadow_dialogue, 65, '如果重来，我会更早对自己诚实'),
+    memory_summary: clip(raw?.memory_summary, 48, clip(raw?.event, 42, `第${yearN}年的转折`)),
+    visual_anchor: clip(raw?.visual_anchor, 48, inferVisualAnchor(raw?.event || input.beat_seed)),
+    key_props: Array.isArray(raw?.key_props) && raw.key_props.length >= 2
+      ? raw.key_props.slice(0, 3).map((p) => clip(p, 12, '物件'))
+      : inferKeyProps({ event: raw?.event, decision_made: raw?.decision_made, prop: raw?.prop })
   };
+  return sanitized;
 }
 
 function sanitizeFinalFromLlm(raw) {
@@ -128,7 +135,7 @@ async function callAgent({ schema, system, prompt, temperature = 0.85, maxRetrie
     } catch (error) {
       lastError = error;
       if (attempt < maxRetries) {
-        prompt += '\n\n# 注意：上一次输出未通过 schema 校验。请严格按字段长度与 enum 约束重新输出（title≤8字、reflection≤45字、memory_summary≤30字、intervention 仅 pivotal 年）。';
+        prompt += '\n\n# 注意：上一次输出未通过 schema 校验。请严格按字段长度与 enum 约束重新输出（title≤8字、event 160–240字、visual_anchor 12–48字、key_props 2–3个、reflection 55–75字、memory_summary 32–42字、intervention 仅 pivotal 年）。';
         temp = Math.max(0.55, temp - 0.12);
         continue;
       }
@@ -216,6 +223,59 @@ async function runYear(input) {
     }
   }
   return result;
+}
+
+// ------------------------------------------------------------
+// Agent 2.5: intervention re-plan
+// ------------------------------------------------------------
+async function runInterventionReplan(input) {
+  const { persona_card, beats, pivotal_years, intervention, intervention_history, runtime } = input;
+  const fallback = () => replanBeatsAfterIntervention({ beats, pivotal_years, intervention });
+
+  if (!intervention?.from_year || !intervention?.choice) {
+    return { ...fallback(), replanned: false };
+  }
+  if (!runtime?.generateStructured) {
+    return fallback();
+  }
+
+  const { system, prompt } = buildInterventionReplanPrompt({
+    persona_card,
+    beats,
+    pivotal_years,
+    intervention,
+    intervention_history
+  });
+
+  try {
+    const result = await callAgent({
+      schema: BeatsSchema,
+      system,
+      prompt,
+      temperature: 0.75,
+      maxRetries: 2,
+      runtime
+    });
+    const declaredPivotal = new Set(result.pivotal_years);
+    const actualPivotal = result.beats
+      .filter((b) => b.type === 'pivotal')
+      .map((b) => b.year);
+    if (
+      actualPivotal.length !== declaredPivotal.size
+      || !actualPivotal.every((y) => declaredPivotal.has(y))
+    ) {
+      result.pivotal_years = actualPivotal;
+    }
+    return {
+      beats: result.beats,
+      pivotal_years: result.pivotal_years,
+      replanned: true,
+      placeholder: false,
+      note: 'LLM re-plan'
+    };
+  } catch {
+    return fallback();
+  }
 }
 
 // ------------------------------------------------------------
@@ -396,6 +456,7 @@ module.exports = {
   runPersonaAnalyze,
   personaToPersonaCard,
   runBeats,
+  runInterventionReplan,
   runYear,
   runFinal,
   runDialogue,

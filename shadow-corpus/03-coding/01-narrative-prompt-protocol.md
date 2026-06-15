@@ -1,6 +1,6 @@
 # Shadow Prompt 叙事协议
 
-更新时间：2026-06-15
+更新时间：2026-06-16
 
 本文档说明 `shadow-corpus/archive/demo-v0.2/lib/prompts.js` 中各 agent 的**写作口径**。改 prompt 时，先改这里，再改代码。
 
@@ -51,38 +51,48 @@
 **七年迭代总则**（`SEVEN_YEAR_NARRATIVE_CORE` · 每年共用）
 
 - 第二人称「你」写 event；reflection 用影子第一人称「我」；shadow_dialogue 是七年后的影子对「现在的你」说。
-- 必须呼应 memory_stream；user_intervention 是已发生事实，event 从后果展开。
-- Fate 层作背景压力，勿照抄标题。
-- **字数铁律（汉字，含标点；写完后自检）**：
+- 必须呼应 memory_stream；Fate 层作背景压力，勿照抄标题。
+- **节奏与篇幅解耦**：beats 层仍分 pivotal / quiet；**全年 event 体量统一**，标杆见 `fixtures/golden-stories` 与 `docs/stories/未复读线-阿岚.json`。
 
-| 字段 | quiet 年 | pivotal 年 |
-|------|----------|------------|
-| event | **55–75 字** | **200–260 字** |
-| decision_made | 12–28 字 | **22–45 字** |
-| reflection | **55–75 字** | **55–75 字** |
-| shadow_dialogue | **45–58 字** | **45–58 字** |
-| memory_summary | **32–42 字** | **32–42 字** |
+**全年叙事块（汉字，含标点；写完后自检）**
+
+| 字段 | 全年标准 | 仅 pivotal 额外 |
+|------|----------|----------------|
+| event | **160–240 字**，2–3 段，段间空行 | intervention_prompt 必填 |
+| decision_made | **18–40 字** | 须写关键选择 + 人格动因 |
+| reflection | **55–75 字** | — |
+| shadow_dialogue | **45–58 字** | — |
+| memory_summary | **32–42 字** | — |
+| visual_anchor | **12–48 字**，一句可画锚点 | — |
+| key_props | **2–3 个**具体物件 | — |
+
+**event 结构（标杆：未复读线）**
+
+1. 可画瞬间（时间 / 地点 / 动作）
+2. 时代 / Fate 背景溶入（不写新闻标题）
+3. 情绪收束或伏笔（物件 / 对话 / 身体感受）
 
 **quiet 年**
 
-- event **55–75 字**，轻轻掠过，留白。
-- new_mood / new_esteem 与上一年差距 ≤1。
+- event 篇幅与 pivotal **相同**；仅戏剧张力可轻，不强行制造大事件。
+- new_mood / new_esteem 与上一年差距 ≤2。
 - intervention_prompt 必须为 null。
 
 **pivotal 年**
 
-- event **200–260 字**：场景 + 至少两种感官 + 情绪锚点。
-- decision_made **22–45 字**：关键选择 + 人格动因。
-- intervention_prompt 必填：question + 两个互斥 options。
+- intervention_prompt 必填：question + 两个互斥、都有代价的 options。
+- new_mood / new_esteem 可大幅变动。
 
 **共同铁律**
 
-- reflection / shadow_dialogue / memory_summary 按上表区间；Live 生成走 evaluator `lengthStandard: v2`。
+- Live 生成走 evaluator `lengthStandard: v2`。
 - environment / pose / prop / city 与 event 强相关。
 
-**user_intervention**
+**介入因果链（user_intervention）**
 
-- 若存在，是**已发生事实**，本年 event 必须从后果展开，不能忽略。
+- 若存在，是**已发生事实**；本年 **event 第一段**必须从该选择的即时后果展开（动作 / 对话 / 情绪），不能只末尾提一句。
+- decision_made 体现后果驱动的下一步。
+- 累积介入史传入 Year prompt；后续 beat seed 经 LLM re-plan 修订（`runInterventionReplan`）。
 
 ---
 
@@ -132,12 +142,12 @@ Skill：`skills/shadow/scene-agents/SKILL.md`
 
 ---
 
-## Intervention re-plan（占位 · T-016）
+## Intervention re-plan
 
-- 用户 pivotal 选择后，修订 **之后年份** beat seed（类型不变）。
-- 规则占位：`lib/beats-replan.js`。
-- LLM prompt 占位：`buildInterventionReplanPrompt`（队友替换文案）。
-- Live：`story-session.generateNextYear` 在 `user_intervention` 时触发。
+- 用户 pivotal 选择后，修订 **之后年份** beat seed（`type` 不变，`pivotal_years` 数量不变）。
+- 主路径：`agents.runInterventionReplan` + `buildInterventionReplanPrompt`。
+- 回退：`lib/beats-replan.js` 规则占位。
+- Live：`story-session.generateNextYear` 在 `user_intervention` 时触发；`normalizeUserIntervention` 统一 `from_year` / `question`。
 
 ---
 
@@ -149,7 +159,7 @@ Skill：`skills/shadow/scene-agents/SKILL.md`
 | Reflection type | `memoryFromYear` | ✅ |
 | Generate → Demo | `generate-client.js` → `sessionStorage` → `demo.html?live=1&from=generate` | ✅ |
 | SSE 进度 | `POST /api/story/start/stream` · `year/stream` + `onStage` | ✅ |
-| re-plan | `beats-replan.js` + prompt 占位 | 🟡 |
+| re-plan | `runInterventionReplan` + `beats-replan.js` 回退 | ✅ |
 | Fate 层 | `fate-bridge.js` + `fate-hook.js` | 🟡 placeholder |
 | Dialogue 层 | `dialogue-hook.js` | 🟡 placeholder |
 

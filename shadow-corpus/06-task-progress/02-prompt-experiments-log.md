@@ -143,3 +143,35 @@ Harness Memory：每次改 prompt、模型或 narrative 规则，在此记录，
 
 - 浏览器端 `docs/demo-intake-profile.js` 由 `npm run build:intake-browser` 生成，勿手改。
 
+---
+
+## 2026-06-16 — 统一七年叙事体量 + 强化介入因果
+
+**Change**
+
+- `01-narrative-prompt-protocol.md`：全年 event 160–240；visual_anchor / key_props；介入因果链
+- `prompts.js`：YEAR_SYSTEM / buildYearPrompt 统一篇幅 + intervention_history + 标杆 few-shot
+- `schemas.js` / `evaluator.js` / `story-contract.js`：visual 必填、event_volume 全年统一、intervention.thread → error（live）
+- `agents.runInterventionReplan` + `story-session.normalizeUserIntervention`：LLM re-plan 接线
+- `docs/generate-client.js`：逐年 SSE pivotal 暂停介入；`demo-engine` pre-wrap + 已选展示
+
+**Expected**
+
+- API 通路叙事密度对齐 `docs/stories/未复读线-阿岚.json`
+- 介入选择改变下一年开篇 + 后续 beat seed（mock A/B 可 diff）
+- generate 全流程：pivotal 弹窗 → 下一年因果链
+
+**Result**
+
+- `npm test --prefix shadow-corpus/archive/demo-v0.2`：72 pass（两轮）
+- `未复读线-阿岚.json` v2 eval 无 error
+- `intervention-replan.test.js`：A/B seed 分叉 + intervention_history 接线通过
+
+**Keep / Revert**
+
+- Keep
+
+**Notes**
+
+- Token 成本上升（全年长 event + intervention 区块）；schema 重试上限保持 3 次
+

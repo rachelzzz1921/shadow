@@ -954,8 +954,9 @@ img { image-rendering: pixelated; image-rendering: crisp-edges; }
   line-height: 1.75;
   color: var(--ink);
   padding: 12px 14px;
+  white-space: pre-wrap;
 }
-.main-event.quiet-event { color: var(--ink-soft); }
+.main-event.quiet-event { color: var(--ink); }
 
 .two-col {
   display: grid;

@@ -99,6 +99,19 @@ function formatBeats(beats, pivotalYears) {
     .join('\n');
 }
 
+function formatInterventionHistory(history) {
+  if (!history?.length) return '（无历史介入）';
+  return history
+    .map(iv => `年${iv.from_year}：「${iv.choice}」${iv.question ? `（${iv.question}）` : ''}`)
+    .join('\n');
+}
+
+/** 未复读线标杆 few-shot（结构参考，勿照抄剧情） */
+const BENCHMARK_QUIET_EVENT_HINT =
+  '大二英语课，全班沉默二十秒。你举了手，声音抖了。…摸索本身不是缺点。…举手后来成了大学里最常做的动作。';
+const BENCHMARK_INTERVENTION_OPEN_HINT =
+  '若用户上一步选了「打电话告诉父母」：开篇须写拨号/通话中的具体瞬间与情绪，再展开本年事件。';
+
 function formatFateContext(ctx) {
   if (!ctx) return '（无时代际遇层）';
   const lines = [
@@ -204,13 +217,17 @@ const SEVEN_YEAR_NARRATIVE_CORE = `# 七年平行人生 · 叙事总则（每年
 - 命运 agent 给的 era_line / 宏观微观样本是**背景压力**，溶进 event 的质感里，不要照抄标题或写成新闻摘要。
 
 ## 字数铁律（汉字计数，含标点；不足或超出均不合格）
-| 字段 | quiet 年 | pivotal 年 |
-|------|----------|------------|
-| event | **55–75 字** | **200–260 字** |
-| decision_made | 12–28 字（可轻写） | **22–45 字**（关键选择 + 人格动因） |
-| reflection | **55–75 字** | **55–75 字** |
-| shadow_dialogue | **45–58 字** | **45–58 字** |
-| memory_summary | **32–42 字** | **32–42 字** |
+| 字段 | 全年标准 | 仅 pivotal 额外 |
+|------|----------|----------------|
+| event | **160–240 字**，2–3 段，段间用空行 | intervention_prompt 必填 |
+| decision_made | **18–40 字** | 须写关键选择 + 人格动因 |
+| reflection | **55–75 字** | — |
+| shadow_dialogue | **45–58 字** | — |
+| memory_summary | **32–42 字** | — |
+| visual_anchor | **12–48 字**，一句可画锚点 | — |
+| key_props | **2–3 个**具体物件 | — |
+
+event 结构：可画瞬间 → 时代/Fate 溶入 → 情绪收束。标杆质感参考未复读线（quiet 年同样够量）。
 
 写完后自检：数一遍各字段字数，落在区间内再输出。
 
@@ -234,17 +251,17 @@ const SEVEN_YEAR_NARRATIVE_CORE = `# 七年平行人生 · 叙事总则（每年
 
 const YEAR_SYSTEM = `${SEVEN_YEAR_NARRATIVE_CORE}
 
-# 本年展开程度（按 beat_type 严格区分）
+# 本年展开程度（按 beat_type 区分节奏，不区分篇幅）
 
 ## type=quiet（平淡年）
-- event **55–75 字**：一句话掠过，留白，营造时间流逝；不要强行制造戏剧。
-- new_mood / new_esteem 与上一年差距 ≤1。
+- event 篇幅与 pivotal **相同**（160–240 字）；戏剧张力可轻，但必须写满场景与感官细节。
+- new_mood / new_esteem 与上一年差距 ≤2。
 - is_pivotal 必为 false，intervention_prompt 必为 null。
 
 ## type=pivotal（大事件年）
-- event **200–260 字**：完整场景 + 至少两种感官细节 + 一个情绪锚点（物件或动作）。
-- decision_made **22–45 字**：写出关键选择与人格动因。
-- intervention_prompt 必填：question 让用户面对影子此刻的抉择，options 两个互斥选项。
+- event **160–240 字**：完整场景 + 至少两种感官细节 + 一个情绪锚点（物件或动作）。
+- decision_made **18–40 字**：写出关键选择与人格动因。
+- intervention_prompt 必填：question 让用户面对影子此刻的抉择，options 两个互斥、都有代价。
 - new_mood / new_esteem 可大幅变动。
 - is_pivotal 必为 true。`;
 
@@ -259,11 +276,25 @@ function buildYearPrompt(input) {
     beat_type,
     beat_seed,
     user_intervention,
+    intervention_history,
     full_beats,
     pivotal_years,
     fate_context,
     full_profile
   } = input;
+
+  const interventionBlock = user_intervention
+    ? [
+        `用户上一步选择了：「${user_intervention.choice}」`,
+        `针对年${user_intervention.from_year}的问题：「${user_intervention.question || '—'}」`,
+        '',
+        '## 介入因果（硬约束）',
+        '- event **第一段**必须写该选择的即时后果（动作/对话/情绪），不能只末尾提一句。',
+        '- decision_made 须体现后果驱动的下一步。',
+        '- 不得忽略、推翻或淡化该选择。',
+        BENCHMARK_INTERVENTION_OPEN_HINT
+      ].join('\n')
+    : '（无本步介入；若有历史介入见下）';
 
   const lines = [
     `# 影子人格卡（不可违背）`,
@@ -290,13 +321,17 @@ function buildYearPrompt(input) {
     `节拍类型：${beat_type}`,
     `节拍种子：${beat_seed}`,
     '',
-    `# 用户上一步的介入选择（若有）`,
-    user_intervention
-      ? `用户选择了：「${user_intervention.choice}」（针对年${user_intervention.from_year}的问题："${user_intervention.question}"）`
-      : '（无介入）',
+    `# 用户介入`,
+    interventionBlock,
+    '',
+    `# 历史介入（累积因果，须与 memory_stream 一致）`,
+    formatInterventionHistory(intervention_history),
+    '',
+    '# 标杆质感（结构参考，勿照抄）',
+    `quiet 年 event 示例密度：${BENCHMARK_QUIET_EVENT_HINT}`,
     '',
     '# 任务',
-    `按 beat_type 与上表字数区间，写出第 ${year_n} 年。输出前自检各字段汉字数。`
+    `写出第 ${year_n} 年。全年 event 160–240 字、2–3 段；必填 visual_anchor 与 key_props。输出前自检各字段汉字数。`
   ];
   return { system: YEAR_SYSTEM, prompt: lines.join('\n') };
 }
@@ -493,24 +528,28 @@ function buildSuggestPrompt(input) {
 // ============================================================
 // Agent 6: Intervention re-plan（PLACEHOLDER · T-016 队友替换）
 // ============================================================
-const REPLAN_SYSTEM = `你是「节奏修订师」。用户在 pivotal 年做了介入选择，你需要修订**之后年份**的 beat seed，使七年节奏仍合理。
+const REPLAN_SYSTEM = `你是「节奏修订师」。用户在 pivotal 年做了介入选择，你需要修订**之后年份**的 beat seed，使七年节奏仍合理且因果链清晰。
 
 # 原则
-- 只改 intervention 年之后的 seed，不动 pivotal_years 数量。
+- 只改 intervention 年之后的 seed，不动 pivotal_years 数量与 beat type。
 - 每个 seed 8-40 字，保留 quiet/pivotal 类型不变。
-- 让后续 seed 能从用户选择后果长出来，不要写具体剧情。
+- 选择必须**改变后续两年的方向**（关系/学业/事业/自我认同的不同后果），不是简单在 seed 前贴标签。
+- 不要写具体剧情句子，只写方向性种子。
 
 # 输出
 严格 JSON：{ "beats": [7条], "pivotal_years": [2-3个数字] }`;
 
 function buildInterventionReplanPrompt(input) {
-  const { persona_card, beats, pivotal_years, intervention } = input;
+  const { persona_card, beats, pivotal_years, intervention, intervention_history } = input;
   const lines = [
     '# 人格卡',
     formatPersonaCard(persona_card),
     '',
     '# 当前七年节拍',
     formatBeats(beats, pivotal_years),
+    '',
+    '# 历史介入（累积因果，勿推翻）',
+    formatInterventionHistory(intervention_history),
     '',
     '# 用户介入',
     `年${intervention.from_year}：用户选择了「${intervention.choice}」`,
@@ -537,5 +576,6 @@ module.exports = {
   formatIntakeContext,
   formatMemoryStream,
   formatBeats,
-  formatFateContext
+  formatFateContext,
+  formatInterventionHistory
 };

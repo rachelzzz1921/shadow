@@ -14,6 +14,17 @@
 </head>
 <body>
 
+<script>
+(function hubRedirectBareDemo() {
+  var p = new URLSearchParams(location.search);
+  if (p.get('story') || p.get('live') === '1' || p.get('from') === 'intake' || p.get('from') === 'generate' || p.get('skipLanding') === '1') return;
+  try {
+    if (sessionStorage.getItem('shadow_intake_story_id') || sessionStorage.getItem('shadow_live_session')) return;
+  } catch (_) { /* ignore */ }
+  window.location.replace('index.html#stories');
+})();
+</script>
+
 <a class="skip-demo" href="#btn-start">跳过装饰，进入内容</a>
 <p id="boot-error" hidden></p>
 <noscript><p style="position:fixed;inset:16px;z-index:999;padding:12px;background:#fff3e0;border:2px solid #c8863a;">需要启用 JavaScript。请在项目根目录运行 <code>npm run demo:local</code> 后访问 <code>http://localhost:3000/demo.html</code></p></noscript>
@@ -42,12 +53,12 @@
 
       <button type="button" class="btn-start enter-item" id="btn-start">进入影子的七年</button>
       <p class="landing-intake enter-item" style="margin-top:14px;font-size:14px;color:var(--ink-muted)">
-        <a href="intake.html" style="color:var(--amber);text-decoration:none;font-weight:600">告诉影子你是谁</a>
-        <span style="opacity:.75"> · 三层采集 → Persona agent</span>
+        <a href="generate.html" style="color:var(--amber);text-decoration:none;font-weight:600">告诉影子你是谁</a>
+        <span style="opacity:.75"> · 四层采集 → Persona → API 七年</span>
       </p>
       <div class="year-preview enter-item" id="year-dots-landing"></div>
 
-      <p class="landing-foot enter-item"><a href="pitch.html" style="color:var(--amber)">沿路看看 · 路演</a> · <a href="demo-hub.html" style="color:var(--amber)">Demo 入口</a> · <a href="intake.html" style="color:var(--amber)">写我的岔路口</a></p>
+      <p class="landing-foot enter-item"><a href="pitch.html" style="color:var(--amber)">沿路看看 · 路演</a> · <a href="index.html" style="color:var(--amber)">首页</a> · <a href="generate.html" style="color:var(--amber)">写我的岔路口</a></p>
     </div>
   </div>
 </div>

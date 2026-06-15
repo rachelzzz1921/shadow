@@ -64,10 +64,10 @@ const YearSchema = z.object({
   prop: z.enum(PROPS),
   city: z.enum(CITIES)
     .describe('city1..city8 之一，按当年环境氛围选'),
-  event: z.string()
-    .describe('quiet 年：55–75 字一句话掠过；pivotal 年：200–260 字，完整场景+感官细节+情绪锚点。第二人称"你"叙述'),
-  decision_made: z.string().min(8).max(50)
-    .describe('quiet 年 12–28 字可轻写；pivotal 年 22–45 字，关键选择+人格动因'),
+  event: z.string().min(120).max(280)
+    .describe('全年 160–240 字，2–3 段，第二人称「你」。可画瞬间→时代溶入→情绪收束'),
+  decision_made: z.string().min(12).max(50)
+    .describe('全年 18–40 字；pivotal 年须写关键选择与人格动因'),
   intervention_prompt: InterventionPromptSchema.nullable()
     .describe('仅 is_pivotal=true 时填写，否则为 null'),
   emotion: z.object({
@@ -75,7 +75,7 @@ const YearSchema = z.object({
     value: z.number().int().min(1).max(10)
   }),
   new_mood: z.number().int().min(1).max(10)
-    .describe('本年结束后的情绪值。quiet 年与上一年差距 ≤1，pivotal 年可大幅变动'),
+    .describe('本年结束后的情绪值。quiet 年与上一年差距 ≤2，pivotal 年可大幅变动'),
   new_esteem: z.number().int().min(1).max(10)
     .describe('本年结束后的自我认同值。规则同 new_mood'),
   reflection: z.string().min(45).max(85)
@@ -83,7 +83,11 @@ const YearSchema = z.object({
   shadow_dialogue: z.string().min(35).max(65)
     .describe('七年后的影子对"现在的你"说的一句话，45–58 字，有钩子有情绪'),
   memory_summary: z.string().min(25).max(48)
-    .describe('存进 memory_stream，32–42 字，写关键转折（物件/人/瞬间）不写 event 全文')
+    .describe('存进 memory_stream，32–42 字，写关键转折（物件/人/瞬间）不写 event 全文'),
+  visual_anchor: z.string().min(12).max(48)
+    .describe('一句可画锚点，从 event 提炼，供视觉层与动画绑定'),
+  key_props: z.array(z.string().min(2).max(12)).min(2).max(3)
+    .describe('2–3 个具体物件，须出现在 event 或 decision_made 中')
 });
 
 const FinalSchema = z.object({
@@ -186,7 +190,9 @@ const RelaxedYearSchema = z.object({
   new_esteem: z.number().optional(),
   reflection: z.string().optional(),
   shadow_dialogue: z.string().optional(),
-  memory_summary: z.string().optional()
+  memory_summary: z.string().optional(),
+  visual_anchor: z.string().optional(),
+  key_props: z.array(z.string()).optional()
 });
 
 const RelaxedFinalSchema = z.object({
