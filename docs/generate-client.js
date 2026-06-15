@@ -460,18 +460,84 @@
     };
   }
 
+  function compactLivePayload(payload) {
+    const s = payload.session || {};
+    return {
+      session: {
+        run_id: s.run_id,
+        years: s.years || [],
+        beats: s.beats,
+        pivotal_years: s.pivotal_years,
+        memory_stream: s.memory_stream || [],
+        persona_card: s.persona_card,
+        shadow: s.shadow,
+        profile: s.profile,
+        mood: s.mood,
+        esteem: s.esteem,
+        scenario: s.scenario,
+        visual_character: s.visual_character || payload.visual_character || null,
+        replan_log: s.replan_log,
+        _demo_mock: false
+      },
+      final: payload.final,
+      profile: payload.profile,
+      persona: payload.persona,
+      visual_character: payload.visual_character || s.visual_character || null,
+      generated_at: payload.generated_at,
+      _from_generate: true
+    };
+  }
+
   function persistLiveSession(payload) {
-    try {
-      sessionStorage.setItem('shadow_live_session', JSON.stringify(payload));
-      return true;
-    } catch (err) {
-      console.warn('[generate] sessionStorage failed', err);
-      return false;
+    const attempts = [
+      () => payload,
+      () => compactLivePayload(payload)
+    ];
+    for (const build of attempts) {
+      try {
+        const slim = build();
+        sessionStorage.setItem('shadow_live_session', JSON.stringify(slim));
+        return true;
+      } catch (err) {
+        console.warn('[generate] sessionStorage persist failed', err);
+      }
+    }
+    return false;
+  }
+
+  function showCompleteOverlay(message, seconds) {
+    let overlay = document.getElementById('gen-complete-overlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'gen-complete-overlay';
+      overlay.className = 'gen-complete-overlay';
+      overlay.innerHTML = '<p class="gen-complete-title"></p><p class="gen-complete-sub"></p>';
+      document.body.appendChild(overlay);
+    }
+    const title = overlay.querySelector('.gen-complete-title');
+    const sub = overlay.querySelector('.gen-complete-sub');
+    if (title) title.textContent = '七年已生成';
+    if (sub) sub.textContent = message;
+    overlay.hidden = false;
+    overlay.classList.add('is-visible');
+    if (seconds > 0 && sub) {
+      let left = seconds;
+      const tick = () => {
+        sub.textContent = `${message}（${left}s）`;
+        left -= 1;
+        if (left >= 0) setTimeout(tick, 1000);
+      };
+      tick();
     }
   }
 
   function enterDemoLive({ storedOk }) {
     const demoUrl = 'demo.html?live=1&from=generate';
+    showCompleteOverlay(
+      storedOk ? '正在进入七年浏览…' : '缓存失败，请点击下方按钮进入',
+      storedOk ? 2 : 0
+    );
+    $('gen-final-panel')?.scrollIntoView({ behavior: 'smooth', block: 'end' });
     if (btnRun) {
       btnRun.textContent = storedOk ? '完成，正在进入七年…' : '完成 — 请点击下方进入七年';
       btnRun.disabled = true;
@@ -488,24 +554,29 @@
     if (storedOk) {
       setTimeout(() => {
         window.location.replace(demoUrl);
-      }, 600);
+      }, 1200);
     } else {
       showError('七年数据过大未能自动缓存，请点击「进入七年浏览」手动打开。');
     }
   }
 
-  function finishAndEnterDemo(session, fin, intakeResult, profile, health) {
+  function finishAndEnterDemo(activeSession, fin, intakeResult, profile, health) {
+    const mergedSession = {
+      ...(fin.session || activeSession),
+      years: (fin.session?.years?.length ? fin.session.years : activeSession?.years) || [],
+      final: fin.final
+    };
     lastExport = {
       profile,
       full_profile: intakeResult.full_profile,
       persona: intakeResult.persona,
-      persona_card: session.persona_card || intakeResult.persona_card,
-      session,
+      persona_card: mergedSession.persona_card || intakeResult.persona_card,
+      session: mergedSession,
       final: fin.final,
       generated_at: new Date().toISOString(),
-      provider: health.provider
+      provider: health?.provider
     };
-    const livePayload = buildApiLivePayload(session, fin, intakeResult, profile);
+    const livePayload = buildApiLivePayload(mergedSession, fin, intakeResult, profile);
     if (!livePayload.session?.years?.length) {
       showError('生成完成但缺少年份数据，无法进入 Demo。');
       if (btnRun) {
@@ -514,8 +585,14 @@
       }
       return;
     }
-    const storedOk = persistLiveSession(livePayload);
-    enterDemoLive({ storedOk });
+    try {
+      const storedOk = persistLiveSession(livePayload);
+      enterDemoLive({ storedOk });
+    } catch (err) {
+      console.error('[generate] finishAndEnterDemo', err);
+      showError('进入 Demo 失败：' + (err.message || '未知错误'));
+      enterDemoLive({ storedOk: false });
+    }
   }
 
   function resetResults() {

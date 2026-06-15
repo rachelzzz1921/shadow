@@ -251,7 +251,10 @@ async function bootstrapDemoStory() {
     );
     const allowIntake =
       !explicitGoldenStory &&
-      (params.get('from') === 'intake' || storyId === 'wufuxdu' || storyId === 'fuxduxian');
+      (params.get('from') === 'intake' ||
+        params.get('from') === 'generate' ||
+        storyId === 'wufuxdu' ||
+        storyId === 'fuxduxian');
     if (allowIntake && typeof window.ShadowDemo.applyIntakeFromSession === 'function') {
       window.ShadowDemo.applyIntakeFromSession();
     }
