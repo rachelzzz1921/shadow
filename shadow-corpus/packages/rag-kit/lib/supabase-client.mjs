@@ -6,7 +6,8 @@ import { isLocalProvider } from './embed-local.mjs';
 import {
   upsertLocalChunks,
   fetchLocalCandidates,
-  hasLocalIndex
+  hasLocalIndex,
+  localIndexHasEmbeddings
 } from './local-index.mjs';
 
 /** @returns {import('@supabase/supabase-js').SupabaseClient | null} */
@@ -28,14 +29,14 @@ export function canUseSupabase() {
  */
 export async function upsertChunks(rows) {
   const cfg = ragConfig();
-  const payload = rows.map(r => ({
+  const localPayload = rows.map(r => ({
     namespace: r.namespace,
     source_type: r.source_type,
     source_id: r.source_id,
     chunk_index: r.chunk_index ?? 0,
     content: r.content,
     metadata: r.metadata || {},
-    embedding: supabaseEmbedding(r.embedding, cfg),
+    embedding: r.embedding ?? null,
     corpus_version: r.corpus_version || cfg.corpusVersion,
     updated_at: new Date().toISOString()
   }));
@@ -43,7 +44,7 @@ export async function upsertChunks(rows) {
   const mirrorLocal = process.env.RAG_LOCAL_INDEX !== 'false';
   let localCount = 0;
   if (mirrorLocal) {
-    localCount = upsertLocalChunks(payload);
+    localCount = upsertLocalChunks(localPayload);
   }
 
   const client = isLocalProvider(cfg.embeddingProvider) ? null : createRagClient({ service: true });
@@ -54,9 +55,14 @@ export async function upsertChunks(rows) {
     return localCount;
   }
 
+  const supabasePayload = localPayload.map(r => ({
+    ...r,
+    embedding: supabaseEmbedding(r.embedding, cfg)
+  }));
+
   const { error } = await client
     .from('rag_chunks')
-    .upsert(payload, { onConflict: 'namespace,source_id,chunk_index,corpus_version' });
+    .upsert(supabasePayload, { onConflict: 'namespace,source_id,chunk_index,corpus_version' });
 
   if (error) {
     if (mirrorLocal && localCount) {
@@ -65,7 +71,7 @@ export async function upsertChunks(rows) {
     }
     throw error;
   }
-  return payload.length;
+  return supabasePayload.length;
 }
 
 /** Supabase schema is vector(1024); local ONNX uses 384 — mirror local only. */
@@ -80,6 +86,13 @@ function supabaseEmbedding(embedding, cfg) {
  * Fetch candidates: Supabase first, else local JSON index.
  */
 export async function fetchCandidates({ namespace, filters = {}, limit = 200 }) {
+  const cfg = ragConfig();
+
+  // Local ONNX embeddings live only in JSON index — prefer it over Supabase rows without vectors.
+  if (isLocalProvider(cfg.embeddingProvider) && localIndexHasEmbeddings(namespace)) {
+    return fetchLocalCandidates({ namespace, filters }).slice(0, limit);
+  }
+
   const client = createRagClient({ service: false });
   if (client) {
     try {

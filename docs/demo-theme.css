@@ -1280,6 +1280,42 @@ img { image-rendering: pixelated; image-rendering: crisp-edges; }
   transform: scale(0.92);
   transform-origin: left top;
 }
+.dlg-suggest {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.dlg-suggest-chip {
+  padding: 6px 11px;
+  font-family: inherit;
+  font-size: 11px;
+  color: var(--ink-soft);
+  background: var(--paper-deep);
+  border: 2px solid var(--panel-edge);
+  box-shadow: inset 1px 1px 0 var(--highlight);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.dlg-suggest-chip:hover {
+  border-color: var(--amber);
+  background: var(--amber-glow);
+  color: var(--ink);
+}
+.dlg-suggest-chip:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.dlg-turn-cite {
+  display: block;
+  margin-top: 6px;
+  padding-left: 8px;
+  border-left: 2px solid var(--amber-glow);
+  color: var(--ink-muted);
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.5;
+  transform: none;
+}
+
 .dlg-form {
   display: flex;
   gap: 8px;

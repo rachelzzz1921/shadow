@@ -257,6 +257,48 @@
     clearError();
   }
 
+  // API 不可用 / 无 Key 时的兜底：本地规则合成七年 → demo.html 分层 UI（与离线 intake 一致）
+  async function synthLocalAndGoDemo(handoff) {
+    if (!window.ShadowCustomStory?.build) {
+      showError('本地合成模块未加载，请刷新后重试。');
+      return false;
+    }
+    const full = handoff.full_profile || {};
+    const raw = full.raw || {};
+    const temporal = full.temporal || {};
+    const profile = {
+      choice: raw.choice_text || '',
+      description: raw.self_description || '',
+      quote: raw.one_liner || '',
+      fork_year: temporal.fork_year || raw.fork_year || 2019,
+      birth_year: temporal.birth_year || raw.birth_year,
+      age: temporal.age_at_fork || raw.age || 18,
+      gender: raw.gender || temporal.gender,
+      keywords: (raw.selected_tags || []).slice(0, 6)
+    };
+    let eraSnippets = window.__shadowEraSnippets;
+    if (!eraSnippets) {
+      try { eraSnippets = await (await fetch('demo-era-snippets.json')).json(); }
+      catch { eraSnippets = {}; }
+    }
+    try {
+      const story = window.ShadowCustomStory.build({
+        profile,
+        persona: handoff.persona,
+        persona_card: handoff.persona_card,
+        full_profile: full,
+        eraSnippets
+      });
+      const payload = window.ShadowCustomStory.buildLivePayload(story, handoff);
+      sessionStorage.setItem('shadow_live_session', JSON.stringify(payload));
+      window.location.href = 'demo.html?live=1';
+      return true;
+    } catch (err) {
+      showError('本地合成失败：' + err.message);
+      return false;
+    }
+  }
+
   async function runPipeline() {
     let handoff = intakeHandoff || readHandoffFromSession();
     if (!handoff?.full_profile) {
@@ -284,20 +326,14 @@
     try {
       health = await (await fetch('/api/health')).json();
     } catch {
-      showError('API 不可用。请先运行 npm run demo:local');
-      if (btnRun) {
-        btnRun.disabled = false;
-        btnRun.textContent = '开始 API 生成';
-      }
+      log('intake', 'API 不可用 — 用本地规则即时合成七年，进入分层浏览');
+      await synthLocalAndGoDemo(handoff);
       return;
     }
 
     if (!health.has_key) {
-      showError('未检测到 LLM Key。请在 shadow-corpus/archive/demo-v0.2/.env 配置 DEEPSEEK_API_KEY 或 STEPFUN_API_KEY。');
-      if (btnRun) {
-        btnRun.disabled = false;
-        btnRun.textContent = '开始 API 生成';
-      }
+      log('intake', '未检测到 LLM Key — 用本地规则即时合成七年，进入分层浏览');
+      await synthLocalAndGoDemo(handoff);
       return;
     }
 

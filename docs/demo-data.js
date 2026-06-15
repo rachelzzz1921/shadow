@@ -311,18 +311,24 @@ const ShadowAgents = {
       }
       return this._snippets;
     },
-    _calendarYear(narrativeYear) {
-      return 2018 + narrativeYear;
+    _calendarYear(narrativeYear, story) {
+      // 用真实岔路口年份（fork_year）锚定，而非写死 2018
+      const fork = story?.profile?.fork_year
+        || story?.profile?.story_start_year
+        || 2019;
+      return fork + narrativeYear - 1;
     },
     async onYearEnter(ctx) {
       const snippets = await this._loadSnippets();
-      const cal = this._calendarYear(ctx.year.year);
+      const cal = this._calendarYear(ctx.year.year, ctx.story);
       const snip = snippets[String(cal)];
-      if (!snip) return { hint: '命运层 · 语料加载中', _placeholder: true };
+      if (!snip) {
+        return { overlay: `${cal}年 · 你的平行人生在这一年继续`, hint: `时代锚点 · ${cal}年`, _placeholder: false };
+      }
       return {
         overlay: snip.era_line,
-        hint: `时代 ${cal} · placeholder`,
-        _placeholder: true
+        hint: `时代锚点 · ${cal}年`,
+        _placeholder: false
       };
     },
     async onIntervention(ctx) {
@@ -438,8 +444,8 @@ function applyLiveFromSession() {
       STORY.scenario_primary = session.scenario?.domain || STORY.scenario_primary;
     }
     STORY.premise = live.final?.message?.slice(0, 48) || STORY.premise;
-    // 自定义合成 / 真实 Live 不套用预设线的视觉包（否则会串入复读线锚点）
-    if (live._custom_synthetic || session._custom_synthetic) {
+    // 自定义合成 / 真实 Live（generate）不套用预设线的视觉包（否则会串入复读线锚点）
+    if (live._custom_synthetic || session._custom_synthetic || live._from_generate) {
       STORY.id = 'custom';
       if (window.ShadowDemo) window.ShadowDemo._activeStoryId = 'custom';
     }

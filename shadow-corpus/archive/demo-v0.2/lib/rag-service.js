@@ -460,6 +460,12 @@ async function getRagStatus() {
   const supabase = isServiceRoleKey(k.config.supabaseServiceKey) && isConfiguredSecret(k.config.supabaseUrl);
   const embedOk = isEmbedLive(k.config);
   const localChunks = local?.total_chunks || 0;
+  const vectorChunks = local?.namespaces
+    ? Object.values(local.namespaces).reduce((n, s) => n + (s.with_embeddings || 0), 0)
+    : 0;
+  let mode = 'rules-local';
+  if (embedOk && vectorChunks > 100) mode = 'hybrid';
+  else if (localChunks) mode = 'rules-index';
   return {
     enabled: k.config.enabled,
     supabase,
@@ -467,7 +473,8 @@ async function getRagStatus() {
     local_index: local,
     embed_provider: k.config.embeddingProvider,
     embed_configured: embedOk,
-    mode: embedOk && localChunks ? 'rules-index-or-hybrid' : localChunks ? 'rules-index' : 'rules-local',
+    vector_chunks: vectorChunks,
+    mode,
     local_chunks: localChunks,
     live: k.config.enabled && (supabase || localChunks > 0),
     corpus_version: k.config.corpusVersion

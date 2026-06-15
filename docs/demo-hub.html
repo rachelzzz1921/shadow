@@ -207,10 +207,58 @@ body { user-select: auto; }
   opacity: 0.65;
 }
 .hub-footer a { color: var(--amber-deep); text-decoration: none; }
+
+/* ── API / RAG 状态条 ── */
+.hub-status {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 28px;
+  padding: 12px 14px;
+  border: 1px solid var(--paper-shadow);
+  background: rgba(255, 252, 245, 0.85);
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+.hub-status-dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--ink-muted);
+}
+.hub-status.is-ok { border-color: rgba(90, 140, 90, 0.45); }
+.hub-status.is-ok .hub-status-dot { background: #4a9b5c; box-shadow: 0 0 0 3px rgba(74, 155, 92, 0.2); }
+.hub-status.is-warn { border-color: rgba(200, 134, 58, 0.45); }
+.hub-status.is-warn .hub-status-dot { background: var(--amber); }
+.hub-status.is-off .hub-status-dot { background: var(--ink-muted); opacity: 0.5; }
+.hub-status a { color: var(--amber-deep); }
+.hub-status code {
+  font-family: monospace;
+  font-size: 11px;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 1px 4px;
+}
+.hub-team-link {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink-muted);
+  opacity: 0.75;
+}
+.hub-team-link a { color: var(--ink-muted); text-decoration: underline; text-underline-offset: 2px; }
 </style>
 </head>
 <body>
 <div class="hub">
+
+  <div id="hub-status" class="hub-status is-off" role="status" aria-live="polite">
+    <span class="hub-status-dot" aria-hidden="true"></span>
+    <span class="hub-status-text">检测 API 与 RAG…</span>
+  </div>
 
   <!-- Hero -->
   <div class="hero">
@@ -284,7 +332,10 @@ body { user-select: auto; }
   </div>
 
   <span class="hub-footer">Shadow Harness · 平行叙事引擎</span>
+  <p class="hub-team-link">团队进度与 Corpus 文档 → <a href="index.html">团队看板</a>（独立入口）</p>
 
 </div>
+<script src="shadow-api-prefix.js"></script>
+<script src="demo-hub-status.js"></script>
 </body>
 </html>

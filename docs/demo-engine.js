@@ -751,6 +751,57 @@
     if (input) input.disabled = busy;
     if (send) send.disabled = busy;
     if (closeBtn) closeBtn.disabled = busy;
+    document.querySelectorAll('#dlg-suggest .dlg-suggest-chip')
+      .forEach(c => { if (!c.dataset.used) c.disabled = busy; });
+  }
+
+  /** 把引用的 memory id 解析成真实记忆内容（而非裸 id，给用户"它真的记得"的实感） */
+  function memoryCiteText(citeIds) {
+    if (!citeIds?.length) return '';
+    const stream = getStory().memory_stream || [];
+    const texts = citeIds
+      .map(id => {
+        const m = stream.find(mm => mm.id === id);
+        return m ? (m.content || m.memory_summary || m.summary || '') : '';
+      })
+      .filter(Boolean)
+      .map(t => `「${t.length > 42 ? t.slice(0, 42) + '…' : t}」`);
+    return texts.length ? `凭着这段记忆 · ${texts.join('、')}` : '';
+  }
+
+  /** 给对话冷启动几个可点的好问题（年份相关 + 终极问） */
+  function suggestedQuestions(year) {
+    const qs = [];
+    if (year?.title) qs.push(`「${year.title}」那年，到底是什么感觉？`);
+    if (year?.is_pivotal) qs.push('那个岔路口，你怎么熬过来的？');
+    qs.push('这七年，你后悔过吗？');
+    qs.push('如果重来一次，你还会这么选吗？');
+    qs.push('对现在的我，你最想说哪句话？');
+    return qs.slice(0, 4);
+  }
+
+  function renderDialogSuggestions(year, statusEl, closeBtn) {
+    const box = document.getElementById('dlg-suggest');
+    if (!box) return;
+    box.innerHTML = '';
+    suggestedQuestions(year).forEach(q => {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'dlg-suggest-chip';
+      chip.textContent = q;
+      chip.addEventListener('click', async () => {
+        if (dialogSession?.busy) return;
+        chip.dataset.used = '1';
+        chip.disabled = true;
+        Sfx()?.playUiClick?.();
+        appendDialogTurn('user', q);
+        await requestShadowReply(q, statusEl, closeBtn);
+        const inp = document.getElementById('dialog-input');
+        if (inp) inp.focus();
+      });
+      box.appendChild(chip);
+    });
+    box.hidden = false;
   }
 
   function appendDialogTurn(role, text, citeIds) {
@@ -759,7 +810,8 @@
     const turn = document.createElement('div');
     turn.className = `dlg-turn dlg-turn-${role}`;
     if (role === 'shadow' && citeIds?.length) {
-      turn.innerHTML = `${esc(text)}<span class="dlg-turn-cite">引用记忆 · ${citeIds.map(id => esc(id)).join(', ')}</span>`;
+      const citeText = memoryCiteText(citeIds);
+      turn.innerHTML = esc(text) + (citeText ? `<span class="dlg-turn-cite">${esc(citeText)}</span>` : '');
     } else {
       turn.textContent = text;
     }
@@ -843,10 +895,13 @@
     const body = document.createElement('span');
     turn.appendChild(body);
     if (citeIds.length) {
-      const cite = document.createElement('span');
-      cite.className = 'dlg-turn-cite';
-      cite.textContent = `引用记忆 · ${citeIds.join(', ')}`;
-      turn.appendChild(cite);
+      const citeText = memoryCiteText(citeIds);
+      if (citeText) {
+        const cite = document.createElement('span');
+        cite.className = 'dlg-turn-cite';
+        cite.textContent = citeText;
+        turn.appendChild(cite);
+      }
     }
     thread.appendChild(turn);
     if (moodAfter) statusEl.textContent = `▼ mood · ${moodAfter}`;
@@ -882,6 +937,7 @@
     const openingQ = `第 ${year.year} 年「${year.title}」—— Shadow，你想对现在的我说什么？`;
     await requestShadowReply(openingQ, statusEl, closeBtn);
     if (form) form.hidden = false;
+    renderDialogSuggestions(year, statusEl, closeBtn);
     if (input) input.focus();
   }
 
@@ -903,6 +959,8 @@
     if (dialogTimer) { clearInterval(dialogTimer); dialogTimer = null; }
     dialogSession = null;
     setDialogBusy(false);
+    const sug = document.getElementById('dlg-suggest');
+    if (sug) { sug.hidden = true; sug.innerHTML = ''; }
     T.modalClose(document.getElementById('dialog-overlay'));
   }
 

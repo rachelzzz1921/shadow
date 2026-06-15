@@ -1033,9 +1033,9 @@
       ${presetNote}
       ${full.tension_flags?.length ? `<div class="tension-box snes"><div style="font-size:11px;color:var(--amber);margin-bottom:10px">⚑ 张力点</div>${tension}</div>` : ''}
       ${personaBlock}
-      <p class="intake-agent-chain" style="margin:16px 0 0;text-align:center">下一步 · Live 全链（Beats → 命运 agent → Year×7）</p>
+      <p class="intake-agent-chain" style="margin:16px 0 0;text-align:center">下一步 · 七年（Beats → 命运 agent → Year×7）</p>
       <div class="summary-actions">
-        <a href="demo-live.html?autostart=1" class="btn-start">进入七年生成</a>
+        <a href="demo.html?live=1" class="btn-start">进入我的七年</a>
         <a href="${mockHref}" class="btn-ghost">Mock 预览七年</a>
         <button type="button" class="btn-ghost" id="btn-restart-intake">重新采集</button>
       </div>

@@ -54,7 +54,8 @@
   }
 
   function eraForYear(forkYear, narrativeYear, snippets) {
-    const cal = forkYear + narrativeYear;
+    // year 1 = 岔路口当年（与 fate band 的 fork + year - 1 对齐）
+    const cal = forkYear + narrativeYear - 1;
     const hit = snippets?.[String(cal)];
     return hit?.era_line || `${cal}年 · 你的平行人生在这一年继续展开`;
   }
@@ -88,7 +89,7 @@
 
     const years = BEATS.map((beat, i) => {
       const y = beat.year;
-      const calYear = forkYear + y;
+      const calYear = forkYear + y - 1;
       const era = eraForYear(forkYear, y, eraSnippets);
       const isPivotal = beat.type === 'pivotal';
       const title = titles[i] || `第 ${y} 年`;

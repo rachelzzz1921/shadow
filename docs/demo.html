@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light" />
 <title>Shadow / 如影 — 平行人生 Demo</title>
 <meta name="description" content="Shadow 平行人生叙事 — 多故事 Mock Demo" />
-<link rel="stylesheet" href="demo-theme.css" />
+<link rel="stylesheet" href="demo-theme.css?v=20260615a" />
 <link rel="stylesheet" href="demo-scenarios.css" />
 <link rel="stylesheet" href="demo-ui-polish.css" />
 <link rel="stylesheet" href="demo-ui-polish-r2.css" />
@@ -47,7 +47,7 @@
       </p>
       <div class="year-preview enter-item" id="year-dots-landing"></div>
 
-      <p class="landing-foot enter-item"><a href="demo-hub.html" style="color:var(--amber)">Demo 入口</a> · <a href="demo-phaser.html" style="color:var(--amber)">Phaser</a> · <a href="intake.html" style="color:var(--amber)">Intake</a> · <a href="demo-live.html" style="color:var(--amber)">Live</a></p>
+      <p class="landing-foot enter-item"><a href="demo-hub.html" style="color:var(--amber)">Demo 入口</a> · <a href="intake.html" style="color:var(--amber)">写我的岔路口</a></p>
     </div>
   </div>
 </div>
@@ -69,6 +69,7 @@
     <div class="dlg-nametag" id="dlg-name">影 · 阿岚</div>
     <div class="dlg-year-ctx" id="dlg-ctx"></div>
     <div class="dlg-text-area snes-inset"><div id="dlg-thread" class="dlg-thread" aria-live="polite"></div></div>
+    <div id="dlg-suggest" class="dlg-suggest" hidden></div>
     <form id="dialog-form" class="dlg-form" hidden>
       <input id="dialog-input" type="text" maxlength="80" placeholder="问影子一句话…" autocomplete="off" />
       <button type="submit" id="dialog-send">发送</button>
@@ -95,10 +96,11 @@
   } catch (_) { /* ignore */ }
 })();
 </script>
+<script src="shadow-api-prefix.js"></script>
 <script src="demo-scenarios.js"></script>
 <script src="demo-story-visuals.js"></script>
 <script src="demo-gender-sprites.js"></script>
-<script src="demo-data.js?v=20260615a"></script>
+<script src="demo-data.js?v=20260615b"></script>
 <script src="demo-stories.js"></script>
 <script src="demo-visual.js"></script>
 <script src="demo-scene-textures.js"></script>
@@ -106,7 +108,7 @@
 <script src="demo-extended-assets.js"></script>
 <script src="demo-transitions.js"></script>
 <script src="demo-audio.js"></script>
-<script src="demo-engine.js"></script>
+<script src="demo-engine.js?v=20260615a"></script>
 <script>
 document.documentElement.classList.add('js-ready');
 window.addEventListener('error', function (e) {

@@ -39,7 +39,8 @@ function bootstrapRag() {
       );
 
       const missing = ['world', 'harness'].filter(ns => !hasNamespaceIndex(ns));
-      if (missing.length) {
+      const useLocalEmbed = /^(local|xenova)$/.test(String(process.env.RAG_EMBEDDING_PROVIDER || ''));
+      if (missing.length && !useLocalEmbed) {
         console.log(`[rag] missing index: ${missing.join(', ')} — building in background (npm run rag:embed:local)`);
         const child = spawn('npm', ['run', 'rag:embed:local'], {
           cwd: REPO_ROOT,
@@ -48,6 +49,10 @@ function bootstrapRag() {
           env: process.env
         });
         child.unref();
+      } else if (missing.length && useLocalEmbed) {
+        console.log(
+          `[rag] missing index: ${missing.join(', ')} — run npm run rag:embed:vectors (local ONNX, not --no-embed)`
+        );
       }
     } catch (err) {
       console.warn('[rag] bootstrap:', err.message);
