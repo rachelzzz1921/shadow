@@ -438,6 +438,11 @@ function applyLiveFromSession() {
       STORY.scenario_primary = session.scenario?.domain || STORY.scenario_primary;
     }
     STORY.premise = live.final?.message?.slice(0, 48) || STORY.premise;
+    // 自定义合成 / 真实 Live 不套用预设线的视觉包（否则会串入复读线锚点）
+    if (live._custom_synthetic || session._custom_synthetic) {
+      STORY.id = 'custom';
+      if (window.ShadowDemo) window.ShadowDemo._activeStoryId = 'custom';
+    }
     STORY._from_live = true;
     STORY._live_run_id = session.run_id || null;
     STORY._demo_mock = Boolean(live._demo_mock || session._demo_mock);

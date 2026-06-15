@@ -177,10 +177,8 @@
       setTimeout(() => showServerBanner(''), 2500);
       return true;
     } catch (_) {
-      showServerBanner(
-        '本地服务未连接。请在项目目录运行 npm run demo:local，并保持终端窗口打开，然后刷新本页。',
-        'error'
-      );
+      // 无 API 也能用：预设走 Mock，自定义走规则兜底。静默降级，不弹吓人的红条。
+      showServerBanner('');
       return false;
     }
   }
@@ -223,12 +221,13 @@
     el.birthYear.value = String(state.layerA.birth_year);
     el.forkYear.value = String(state.layerA.fork_year);
     el.ageAtFork.value = String(state.layerA.age_at_fork);
-    el.ageAtFork.dataset.touched = '1';
+    // 预设给的年龄等于 fork-birth，重置 touched 让后续改年份仍能自动跳转
+    delete el.ageAtFork.dataset.touched;
 
     if (preset.layerA?.gender) setGender(preset.layerA.gender);
     else if (!state.layerA.gender) setGender('female');
 
-    updateCharRing(el.choiceInput.value, el.choiceRing, 20, 120);
+    updateCharRing(el.choiceInput.value, el.choiceRing, 10, 120);
     updateCharRing(el.descInput.value, el.descRing, 40, 200);
 
     state.selectedTags = window.ShadowIntakePresets.resolveTags(preset, state.tagsData);
@@ -243,7 +242,7 @@
     updateSkipDemoButton();
 
     flushLayerAFromDom();
-    updateCharRing(el.choiceInput?.value || '', el.choiceRing, 20, 120);
+    updateCharRing(el.choiceInput?.value || '', el.choiceRing, 10, 120);
     updateCharRing(el.descInput?.value || '', el.descRing, 40, 200);
 
     if ((state.layerA.choice_text || '').length >= 20) {
@@ -274,6 +273,15 @@
     return window.ShadowIntakePresets?.byId(id) ? id : null;
   }
 
+  function flagInvalid(input) {
+    if (!input) return;
+    input.classList.remove('field-invalid');
+    // 强制 reflow 以便重复触发动画
+    void input.offsetWidth;
+    input.classList.add('field-invalid');
+    input.addEventListener('input', () => input.classList.remove('field-invalid'), { once: true });
+  }
+
   function showStepHint(message, tone) {
     const hint = document.getElementById('stepHint');
     if (!hint) {
@@ -297,14 +305,19 @@
 
   async function loadIntakeData() {
     const [tagsRes, qRes] = await Promise.all([
-      fetch('/data/intake-tags.json'),
-      fetch('/data/intake-questions.json')
+      fetch('data/intake-tags.json'),
+      fetch('data/intake-questions.json')
     ]);
     if (!tagsRes.ok || !qRes.ok) {
       throw new Error(`采集数据加载失败（tags ${tagsRes.status} · questions ${qRes.status}）`);
     }
     state.tagsData = await tagsRes.json();
     state.questions = await qRes.json();
+    // 时代锚点（供离线规则合成七年时注入真实年份背景）
+    fetch('demo-era-snippets.json')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((snips) => { if (snips) window.__shadowEraSnippets = snips; })
+      .catch(() => { /* 缺失则用通用时代线 */ });
   }
 
   async function init() {
@@ -352,7 +365,7 @@
           updateSkipDemoButton();
         }
       }
-      updateCharRing(el.choiceInput.value, el.choiceRing, 20, 120);
+      updateCharRing(el.choiceInput.value, el.choiceRing, 10, 120);
       scheduleClassify();
     });
     el.choiceInput.addEventListener('blur', () => {
@@ -371,6 +384,11 @@
     });
     el.birthYear.addEventListener('change', syncAgeFromYears);
     el.forkYear.addEventListener('change', syncAgeFromYears);
+    // 用户手动改年龄 → 标记 touched，停止自动跳转
+    el.ageAtFork.addEventListener('input', () => {
+      el.ageAtFork.dataset.touched = '1';
+      state.layerA.age_at_fork = Number(el.ageAtFork.value);
+    });
     el.ageAtFork.addEventListener('change', () => {
       state.layerA.age_at_fork = Number(el.ageAtFork.value);
     });
@@ -449,13 +467,11 @@
     state.layerA.birth_year = Number(el.birthYear.value);
     state.layerA.fork_year = Number(el.forkYear.value);
     const auto = state.layerA.fork_year - state.layerA.birth_year;
+    // 年份变化时自动跳转年龄（除非用户已手动覆盖）
     if (!el.ageAtFork.dataset.touched) {
       el.ageAtFork.value = String(auto);
     }
     state.layerA.age_at_fork = Number(el.ageAtFork.value);
-    el.ageAtFork.addEventListener('input', () => {
-      el.ageAtFork.dataset.touched = '1';
-    }, { once: true });
   }
 
   function updateCharRing(text, ringEl, min, max) {
@@ -848,11 +864,12 @@
     flushLayerAFromDom();
     if (state.step === 0) {
       const c = state.layerA.choice_text.length;
-      if (c < 20) {
+      if (c < 10) {
+        flagInvalid(el.choiceInput);
         el.choiceInput?.focus();
         const msg = c === 0
-          ? '请填写岔路口（灰色提示不算）。至少 20 字，或点上方故事线 chip 自动填入。'
-          : '岔路口再多说一点——影子需要一个具体的分叉（至少 20 字）。';
+          ? '请填写岔路口（灰色提示不算）。至少 10 字，或点上方故事线 chip 自动填入。'
+          : '岔路口再多说一点——影子需要一个具体的分叉（至少 10 字）。';
         showStepHint(msg, 'warn');
         return false;
       }
@@ -1158,8 +1175,15 @@
       el.previewBody.textContent = result.persona?.core_tension ||
         '人格已就绪，正在合成你的七年…';
     }
-    el.btnNext.textContent = '进入七年…';
+    el.btnNext.textContent = '正在合成你的七年…';
 
+    await routeCustomToDemo(result);
+  }
+
+  // 自定义采集 → 七年呈现。两条链路都落进 demo.html 分层 UI：
+  //  · API 可用 → generate.html 真实全链生成（进度屏，完成后自动跳 demo.html?live=1）
+  //  · API 不可用 → ShadowCustomStory 规则即时合成 → 直达 demo.html?live=1
+  async function routeCustomToDemo(result) {
     const intakeRequest = {
       layerA: state.layerA,
       selectedTags: state.selectedTags,
@@ -1172,17 +1196,60 @@
       meta: { total_duration_ms: Date.now() - state.startedAt }
     };
 
-    if (window.ShadowGenerateBridge?.onIntakeComplete) {
-      result.intake_request = intakeRequest;
-      window.ShadowGenerateBridge.onIntakeComplete(result);
-      el.btnNext.disabled = false;
+    let apiOk = false;
+    try {
+      const res = await fetch('/api/health', { cache: 'no-store' });
+      apiOk = res.ok;
+    } catch (_) { apiOk = false; }
+
+    if (apiOk) {
+      try {
+        sessionStorage.setItem('shadow_intake_request', JSON.stringify(intakeRequest));
+      } catch (_) { /* quota */ }
+      window.location.href = 'generate.html?from=intake&autostart=1';
       return;
     }
 
-    try {
-      sessionStorage.setItem('shadow_intake_request', JSON.stringify(intakeRequest));
-    } catch (_) { /* quota */ }
-    window.location.href = 'generate.html?from=intake&autostart=1';
+    // 离线兜底：本地规则合成七年，直接进入分层叙事浏览
+    if (window.ShadowCustomStory?.build) {
+      try {
+        const story = window.ShadowCustomStory.build({
+          profile: profileForCustom(),
+          persona: result.persona,
+          persona_card: result.persona_card,
+          full_profile: result.full_profile,
+          eraSnippets: window.__shadowEraSnippets || {}
+        });
+        const payload = window.ShadowCustomStory.buildLivePayload(story, result);
+        sessionStorage.setItem('shadow_live_session', JSON.stringify(payload));
+        window.location.href = 'demo.html?live=1';
+        return;
+      } catch (err) {
+        console.error('[custom synth]', err);
+      }
+    }
+
+    showStepHint('合成失败，请刷新后重试。', 'error');
+    el.btnNext.disabled = false;
+    el.btnNext.textContent = 'Persona agent 推导 →';
+  }
+
+  function profileForCustom() {
+    const a = state.layerA;
+    const keywords = (state.selectedTags || [])
+      .map((t) => t.label || t.name || t.id)
+      .filter(Boolean)
+      .slice(0, 6);
+    return {
+      choice: a.choice_text,
+      description: a.self_description,
+      quote: a.one_liner,
+      fork_year: a.fork_year,
+      birth_year: a.birth_year,
+      age: a.age_at_fork,
+      gender: a.gender,
+      keywords
+    };
   }
 
   init().catch((err) => {

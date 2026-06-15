@@ -24,6 +24,11 @@
     self_growth: { environment: 'dorm_night', pose: 'think', prop: 'desk', city: 'city3', scene: 'night' }
   };
 
+  const ENV_LABEL = {
+    classroom: '教室', home: '出租屋', cafeteria: '食堂',
+    office: '工位', dorm_night: '宿舍夜', trainstation: '车站'
+  };
+
   const DOMAIN_TITLES = {
     academic: ['开学那间教室', '举手的一刻', '意外的机会', '第一笔自己挣的', '再次选择', '忘记时间的课题', '毕业前夜'],
     love: ['心动之后', '日常里的裂缝', '一次硬撑', '说出来的那句话', '距离与选择', '重新靠近', '第七年的答案'],
@@ -115,6 +120,8 @@
         emotion_value: mood,
         new_mood: mood,
         new_esteem: esteem,
+        visual_anchor: `「${ENV_LABEL[visual.environment] || '此刻'} · ${title} · ${calYear}年」`,
+        key_props: (keywords.length ? keywords.slice(0, 2) : [visual.prop]).filter(Boolean),
         ...visual,
         intervention_prompt: isPivotal && y < 7 ? {
           question: `第 ${y} 年：让${name}先顾自己，还是先顾重要的人？`,

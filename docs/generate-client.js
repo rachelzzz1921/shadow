@@ -429,10 +429,42 @@
       provider: health.provider
     };
 
+    // 存入 shadow_live_session 供 demo.html 读取
+    try {
+      const livePayload = {
+        session: {
+          ...session,
+          persona_card: session.persona_card || intakeResult.persona_card,
+          _demo_mock: false
+        },
+        final: fin.final,
+        profile,
+        full_profile: intakeResult.full_profile,
+        persona: intakeResult.persona,
+        visual_character: intakeResult.full_profile?.visual_character || null,
+        generated_at: new Date().toISOString(),
+        _from_generate: true
+      };
+      sessionStorage.setItem('shadow_live_session', JSON.stringify(livePayload));
+    } catch (_) { /* quota */ }
+
+    // 生成完成 → 自动进入 demo.html 同款分层叙事 UI（与预设 Demo 一致）
     if (btnRun) {
-      btnRun.textContent = '生成完成';
-      btnRun.disabled = false;
+      btnRun.textContent = '完成，正在进入七年…';
+      btnRun.disabled = true;
     }
+    const finalPanel = $('gen-final-panel');
+    if (finalPanel && !finalPanel.querySelector('.gen-demo-link')) {
+      const linkWrap = document.createElement('div');
+      linkWrap.className = 'gen-actions gen-demo-link';
+      linkWrap.style.marginTop = '20px';
+      linkWrap.innerHTML = '<a href="demo.html?live=1" class="btn-start" style="display:inline-block;text-decoration:none">进入七年浏览 →</a>';
+      finalPanel.appendChild(linkWrap);
+    }
+    // 略作停顿让用户看到"完成"，再跳进分层浏览
+    setTimeout(() => {
+      window.location.href = 'demo.html?live=1';
+    }, 900);
   }
 
   function onIntakeComplete(result) {

@@ -3,124 +3,288 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Shadow — 平行人生 Demo 入口</title>
+<title>影子 · Shadow — 如果当年选了另一条路</title>
 <link rel="stylesheet" href="demo-theme.css" />
 <style>
-.hub-wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
-.hub-title { font-size: 2rem; margin-bottom: 8px; }
-.hub-sub { color: var(--ink-muted); margin-bottom: 36px; line-height: 1.7; }
-.hub-grid { display: grid; gap: 16px; }
-.hub-card {
-  display: block; text-decoration: none; color: inherit;
-  padding: 22px 24px; border: 2px solid var(--line);
-  border-radius: 12px; background: var(--paper);
-  transition: border-color .2s, transform .15s;
+/* ── 覆盖 demo-theme 的全屏滚动限制 ── */
+html, body { height: auto; overflow: auto; }
+body { user-select: auto; }
+
+.hub {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 72px 24px 96px;
 }
-.hub-card:hover { border-color: var(--amber); transform: translateY(-2px); }
-.hub-card h2 { margin: 0 0 8px; font-size: 1.15rem; color: var(--ink); }
-.hub-card p { margin: 0; font-size: 14px; color: var(--ink-muted); line-height: 1.6; }
-.hub-card .tag { font-size: 11px; color: var(--amber); font-family: var(--font-mono, monospace); margin-bottom: 8px; }
-.hub-status { margin-top: 28px; padding: 14px 18px; border-radius: 10px; background: #f5f0e8; font-size: 13px; }
-.hub-chain { margin-top: 40px; font-size: 13px; color: var(--ink-muted); line-height: 1.8; }
-.hub-chain code { font-size: 12px; }
+
+/* ── Hero ── */
+.hero { text-align: center; margin-bottom: 64px; }
+.hero-eyebrow {
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--amber);
+  margin-bottom: 20px;
+}
+.hero-headline {
+  font-size: 12px;
+  transform: scale(2.2);
+  transform-origin: center;
+  display: block;
+  color: var(--ink);
+  line-height: 1.55;
+  margin-bottom: 48px;
+}
+.hero-sub {
+  color: var(--ink-soft);
+  font-size: 12px;
+  line-height: 1.9;
+  max-width: 480px;
+  margin: 0 auto 10px;
+}
+.hero-sub em {
+  font-style: normal;
+  color: var(--amber-deep);
+}
+.hero-note {
+  color: var(--ink-muted);
+  font-size: 12px;
+  transform: scale(0.9);
+  display: inline-block;
+  margin-top: 4px;
+}
+
+/* ── Section header ── */
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.section-head-line {
+  flex: 1;
+  height: 1px;
+  background: var(--paper-shadow);
+  opacity: 0.5;
+}
+.section-head-label {
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+/* ── Story cards ── */
+.story-section { margin-bottom: 52px; }
+.story-grid { display: grid; gap: 12px; }
+
+.story-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 20px 22px;
+  border: 2px solid var(--line, var(--paper-shadow));
+  background: var(--paper);
+  transition: border-color .2s, transform .15s;
+  position: relative;
+}
+.story-card:hover {
+  border-color: var(--amber);
+  transform: translateX(3px);
+}
+.story-card-tag {
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--amber);
+  margin-bottom: 6px;
+}
+.story-card-name {
+  font-size: 12px;
+  transform: scale(1.2);
+  transform-origin: left center;
+  display: inline-block;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.story-card-hook {
+  font-size: 12px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+.story-card-teaser {
+  font-size: 12px;
+  color: var(--ink-muted);
+  line-height: 1.55;
+  transform: scale(0.92);
+  transform-origin: left center;
+  display: block;
+}
+.story-card-arrow {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--paper-shadow);
+  font-size: 14px;
+  transition: color .2s, transform .2s;
+}
+.story-card:hover .story-card-arrow {
+  color: var(--amber);
+  transform: translateY(-50%) translateX(2px);
+}
+
+/* ── CTA section ── */
+.cta-section {
+  text-align: center;
+  padding: 44px 32px;
+  border: 2px solid var(--paper-shadow);
+  background: var(--paper);
+  position: relative;
+}
+.cta-section::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid var(--paper-shadow);
+  opacity: 0.4;
+  pointer-events: none;
+}
+.cta-head {
+  font-size: 12px;
+  transform: scale(1.35);
+  transform-origin: center;
+  display: inline-block;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+.cta-desc {
+  color: var(--ink-soft);
+  line-height: 1.8;
+  max-width: 380px;
+  margin: 0 auto 28px;
+}
+.btn-cta {
+  display: inline-block;
+  text-decoration: none;
+  padding: 14px 44px;
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--highlight);
+  background: linear-gradient(180deg, var(--amber-bright), var(--amber));
+  border: 3px solid var(--amber-deep);
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 255, 255, 0.35),
+    inset -2px -2px 0 rgba(0, 0, 0, 0.12),
+    3px 3px 0 rgba(58, 50, 40, 0.18);
+  transition: transform .12s steps(3, end), box-shadow .12s;
+  cursor: pointer;
+}
+.btn-cta:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 255, 255, 0.4),
+    4px 4px 0 rgba(58, 50, 40, 0.22);
+}
+.cta-foot {
+  margin-top: 16px;
+  color: var(--ink-muted);
+  font-size: 12px;
+  transform: scale(0.88);
+  display: inline-block;
+}
+
+/* ── Footer ── */
+.hub-footer {
+  margin-top: 64px;
+  text-align: center;
+  color: var(--ink-muted);
+  font-size: 12px;
+  transform: scale(0.88);
+  display: block;
+  opacity: 0.65;
+}
+.hub-footer a { color: var(--amber-deep); text-decoration: none; }
 </style>
 </head>
 <body>
-<div class="hub-wrap">
-  <p class="hub-tag" style="font-family:monospace;font-size:11px;color:var(--amber);letter-spacing:2px">SHADOW HARNESS</p>
-  <h1 class="hub-title">平行人生 Demo</h1>
-  <p class="hub-sub">先告诉影子你的岔路口，再选 Mock 预览或 Live 全链生成（Persona → Beats → 命运 agent → Year×7）。本地完整链路请 <code>npm run demo:local</code>。</p>
+<div class="hub">
 
-  <div class="hub-grid">
-    <a class="hub-card" href="generate.html">
-      <div class="tag">STEP 1 · API · 推荐</div>
-      <h2>Intake + API 七年生成</h2>
-      <p>四层采集 → Persona → Beats → 命运 agent → Year×7 → Final。纯文字结果，可下载 JSON。</p>
-    </a>
-    <a class="hub-card" href="intake.html">
-      <div class="tag">STEP 1 · 采集</div>
-      <h2>告诉影子，你是谁</h2>
-      <p>仅 Intake 采集页；自定义岔路口确认后会跳转到 generate.html 跑 API 全链。</p>
-    </a>
-    <a class="hub-card" href="demo.html">
-      <h2>Mock 七年叙事</h2>
-      <p>五条故事线：未复读 · 旧复读 · 出国读研 · 心动爱情 · 插画师。默认进入未复读线；Landing 可切换。</p>
-    </a>
-    <a class="hub-card" href="demo.html?story=wufuxdu">
-      <div class="tag">STORY · 阿岚</div>
-      <h2>未复读线</h2>
-      <p>没有回到那间教室。直接去 211，也在七年里走出了自己的精彩。</p>
-    </a>
-    <a class="hub-card" href="demo.html?story=linwan">
-      <div class="tag">STORY · 林晚</div>
-      <h2>出国读研线</h2>
-      <p>瞒着所有人买了机票。伦敦七年，挂断、两万块、红烧肉与没有回复的消息。</p>
-    </a>
-    <a class="hub-card" href="demo.html?story=heartbeat_line">
-      <div class="tag">STORY · 许星遥</div>
-      <h2>心动爱情线</h2>
-      <p>选了心动的人。十八平出租屋、五百块争吵、没有等来的戒指，与七年后的释然。</p>
-    </a>
-    <a class="hub-card" href="demo.html?story=zhoudran">
-      <div class="tag">STORY · 周染</div>
-      <h2>插画师线</h2>
-      <p>没填计算机。两百块首单、改稿二十次、AI 冲击，与凌晨那棵歪树。</p>
-    </a>
-    <a class="hub-card" href="demo-live.html?demo=1&story=linwan&autostart=1">
-      <div class="tag">MOCK · 林晚</div>
-      <h2>出国读研线 · Demo Mock</h2>
-      <p>无 API，直接播放 Golden 七年 → demo.html 浏览。</p>
-    </a>
-    <a class="hub-card" href="demo-live.html?demo=1&story=heartbeat_line&autostart=1">
-      <div class="tag">MOCK · 许星遥</div>
-      <h2>心动爱情线 · Demo Mock</h2>
-      <p>无 API，Golden 叙事 + 时代层文案（Mock）。</p>
-    </a>
-    <a class="hub-card" href="demo-live.html?demo=1&story=wufuxdu&autostart=1">
-      <div class="tag">MOCK · 阿岚</div>
-      <h2>未复读线 · Demo Mock</h2>
-      <p>无 API，直接播放未复读线七年 → demo.html 浏览。</p>
-    </a>
-    <a class="hub-card" href="demo-live.html?autostart=1">
-      <div class="tag">STEP 2B · Live API</div>
-      <h2>Live 七年生成（Demo 同款 UI）</h2>
-      <p>Intake <strong>点选故事线</strong> → Demo Mock（无 API）；<strong>自己写岔路口</strong> → 需 LLM Key。</p>
-    </a>
-    <a class="hub-card" href="demo-phaser.html">
-      <div class="tag">VISUAL</div>
-      <h2>Phaser 场景预览</h2>
-      <p>六域 UI + 像素场景 layout v1。</p>
-    </a>
-    <a class="hub-card" href="index.html">
-      <div class="tag">TEAM</div>
-      <h2>团队看板</h2>
-      <p>任务、进度、Harness 文档入口。</p>
-    </a>
+  <!-- Hero -->
+  <div class="hero">
+    <p class="hero-eyebrow">SHADOW · 平行人生</p>
+    <span class="hero-headline">如果当年，你选了另一条路<br>七年后，你会在哪里？</span>
+    <p class="hero-sub">
+      每个人都有一个没走过的岔路口。<br>
+      <em>影子</em> 是一个 AI 叙事引擎 —— 告诉它你的那个岔路口，<br>
+      它为你生成另一条人生线的完整七年。
+    </p>
+    <span class="hero-note">专属于你的平行人生，不是模板，不是星座，是你自己的故事。</span>
   </div>
 
-  <div class="hub-status" id="hub-status">检测 Live API…</div>
+  <!-- Section A: 先看一个故事 -->
+  <div class="story-section">
+    <div class="section-head">
+      <div class="section-head-line"></div>
+      <span class="section-head-label">STEP 01 · 先感受一下</span>
+      <div class="section-head-line"></div>
+    </div>
 
-  <div class="hub-chain">
-    <strong>Agent 链路</strong><br>
-    Intake → <code>full_profile</code> → <strong>Persona</strong> → <strong>Beats</strong> →
-    <strong>Year×7</strong>（+ <strong>Fate</strong> 时代层 + Pivotal 介入）→ <strong>Final</strong> →
-    任意时刻 <strong>Dialogue</strong>（RAG 记忆检索）
+    <div class="story-grid">
+      <a class="story-card" href="demo.html?story=linwan">
+        <div class="story-card-tag">STORY · 林晚</div>
+        <div class="story-card-name">出国读研线</div>
+        <p class="story-card-hook">瞒着所有人，买了一张伦敦的机票。</p>
+        <span class="story-card-teaser">挂断的电话、两万块的争吵、没有回复的消息 —— 七年异乡，影子陪她走了一遍。</span>
+        <span class="story-card-arrow">›</span>
+      </a>
+
+      <a class="story-card" href="demo.html?story=heartbeat_line">
+        <div class="story-card-tag">STORY · 许星遥</div>
+        <div class="story-card-name">心动爱情线</div>
+        <p class="story-card-hook">选了心动的人，放弃了更稳的那条路。</p>
+        <span class="story-card-teaser">十八平出租屋、五百块的争吵、没有等来的戒指 —— 七年后她说，值得。</span>
+        <span class="story-card-arrow">›</span>
+      </a>
+
+      <a class="story-card" href="demo.html?story=zhoudran">
+        <div class="story-card-tag">STORY · 周染</div>
+        <div class="story-card-name">插画师线</div>
+        <p class="story-card-hook">高考志愿没有填计算机，填了美术。</p>
+        <span class="story-card-teaser">两百块的首单、改稿二十次、AI 冲击来的那年 —— 凌晨那棵歪树，她一个人画完的。</span>
+        <span class="story-card-arrow">›</span>
+      </a>
+
+      <a class="story-card" href="demo.html?story=wufuxdu">
+        <div class="story-card-tag">STORY · 阿岚</div>
+        <div class="story-card-name">未复读线</div>
+        <p class="story-card-hook">没有回到那间教室，直接去了 211。</p>
+        <span class="story-card-teaser">七年里她也走出了自己的路 —— 只是和另一个平行的自己，永远不会相遇。</span>
+        <span class="story-card-arrow">›</span>
+      </a>
+    </div>
   </div>
+
+  <!-- Section B: 自己试 -->
+  <div class="cta-section">
+    <div class="section-head" style="margin-bottom:28px">
+      <div class="section-head-line"></div>
+      <span class="section-head-label">STEP 02 · 写你自己的</span>
+      <div class="section-head-line"></div>
+    </div>
+    <div class="cta-head">告诉影子，你的岔路口是什么</div>
+    <p class="cta-desc">
+      当年那个没走的选择 —— 可以是学校、城市、工作、一个人，
+      或者任何你偶尔还会想起的岔路口。
+    </p>
+    <a class="btn-cta" href="intake.html">开始我的平行人生 →</a>
+    <div class="cta-foot">约 3 分钟填写 · AI 生成专属七年叙事 · 可下载保存</div>
+  </div>
+
+  <span class="hub-footer">Shadow Harness · 平行叙事引擎</span>
+
 </div>
-<script>
-(function () {
-  const el = document.getElementById('hub-status');
-  const hasIntake = !!(sessionStorage.getItem('shadow_persona'));
-  fetch('/api/health').then(r => r.json()).then(d => {
-    el.innerHTML = hasIntake
-      ? '✓ 已采集人格 · Live API 可用（' + (d.provider || 'ok') + '）— 可直接 <a href="demo-live.html">Live 生成</a>'
-      : '✓ Live API 可用（' + (d.provider || 'ok') + '）— 建议先 <a href="intake.html">Intake</a>';
-  }).catch(() => {
-    el.innerHTML = hasIntake
-      ? '✓ 已采集人格 · Live API 未连接（Pages 静态模式）— 可用 <a href="demo.html?from=intake">Mock 预览</a>'
-      : '○ 静态模式（无 API）— 本地请运行 <code>npm run demo:local</code> → <a href="http://localhost:3000/demo-hub.html">localhost:3000</a>';
-  });
-})();
-</script>
 </body>
 </html>
