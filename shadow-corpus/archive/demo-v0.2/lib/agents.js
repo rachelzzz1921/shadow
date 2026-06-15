@@ -27,8 +27,10 @@ const {
   buildYearPrompt,
   buildFinalPrompt,
   buildDialoguePrompt,
-  buildSuggestPrompt
+  buildSuggestPrompt,
+  YEAR_SYSTEM
 } = require('./prompts');
+const sceneBridge = require('./scene-agents-bridge');
 const { createLiveRuntime, pickProvider } = require('./llm-runtime');
 const { selectMemories } = require('./memory-retrieval');
 const { memoryFromYear } = require('./story-contract');
@@ -76,7 +78,7 @@ function sanitizeYearFromLlm(raw, input) {
     prop: pickEnum(raw?.prop, schemaEnums.PROPS, 'desk'),
     city: pickEnum(raw?.city, schemaEnums.CITIES, 'city1'),
     event: String(raw?.event || input.beat_seed || '这一年在另一条路上继续往前走。'),
-    decision_made: clip(raw?.decision_made, 40, '在岔路口选了更稳妥的那一步'),
+    decision_made: clip(raw?.decision_made, 50, '在岔路口选了更稳妥的那一步'),
     intervention_prompt: intervention,
     emotion: {
       label: clip(emotion.label, 4, '平'),
@@ -176,7 +178,20 @@ async function runBeats({ persona_card, profile, full_profile = null, runtime })
 // Agent 3: one year
 // ------------------------------------------------------------
 async function runYear(input) {
-  const { system, prompt } = buildYearPrompt(input);
+  const { prompt } = buildYearPrompt(input);
+  const profile = input.profile || {
+    choice: input.choice,
+    age: input.age,
+    keywords: input.keywords,
+    description: input.description
+  };
+  const scenePack = await sceneBridge.buildSceneYearSystemFromFullProfile(
+    input.full_profile || null,
+    profile
+  );
+  const system = `${scenePack.system}\n\n---\n\n${YEAR_SYSTEM}`;
+  input._scene_lens = { scene: scenePack.scene, source: scenePack.source };
+
   const raw = await callAgent({
     schema: RelaxedYearSchema,
     system,
@@ -279,23 +294,25 @@ async function runSuggestQuestions(input) {
 // ------------------------------------------------------------
 // Orchestrator: full story in one call (server-side convenience)
 // ------------------------------------------------------------
-async function runFullStory({ profile, onProgress, runtime }) {
+async function runFullStory({ profile, full_profile = null, onProgress, runtime }) {
   const emit = (stage, payload) => {
     if (typeof onProgress === 'function') onProgress(stage, payload);
   };
 
+  const baseline = full_profile?.baseline || {};
+  let mood = baseline.initial_mood ?? 5;
+  let esteem = baseline.initial_esteem ?? 5;
+
   emit('persona:start');
-  const persona_card = await runPersona({ profile, runtime });
+  const persona_card = await runPersona({ profile, full_profile, runtime });
   emit('persona:done', persona_card);
 
   emit('beats:start');
-  const beatsResult = await runBeats({ persona_card, profile, runtime });
+  const beatsResult = await runBeats({ persona_card, profile, full_profile, runtime });
   emit('beats:done', beatsResult);
 
   const years = [];
   const memory_stream = [];
-  let mood = 5;
-  let esteem = 5;
 
   for (let i = 0; i < beatsResult.beats.length; i++) {
     const beat = beatsResult.beats[i];
@@ -304,6 +321,8 @@ async function runFullStory({ profile, onProgress, runtime }) {
 
     const yearObj = await runYear({
       persona_card,
+      profile,
+      full_profile,
       memory_stream,
       current_mood: mood,
       current_esteem: esteem,
@@ -331,6 +350,7 @@ async function runFullStory({ profile, onProgress, runtime }) {
     final_mood: mood,
     final_esteem: esteem,
     profile,
+    full_profile,
     runtime
   });
   emit('final:done', final);

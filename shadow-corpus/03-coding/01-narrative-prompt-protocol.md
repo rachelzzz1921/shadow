@@ -1,8 +1,8 @@
 # Shadow Prompt 叙事协议
 
-更新时间：2026-06-14
+更新时间：2026-06-15
 
-本文档说明 `example/shadow-demo/lib/prompts.js` 中五个 agent 的**写作口径**。改 prompt 时，先改这里，再改代码。
+本文档说明 `shadow-corpus/archive/demo-v0.2/lib/prompts.js` 中各 agent 的**写作口径**。改 prompt 时，先改这里，再改代码。
 
 ## 总原则
 
@@ -48,23 +48,36 @@
 
 ## Year agent（叙事师）
 
+**七年迭代总则**（`SEVEN_YEAR_NARRATIVE_CORE` · 每年共用）
+
+- 第二人称「你」写 event；reflection 用影子第一人称「我」；shadow_dialogue 是七年后的影子对「现在的你」说。
+- 必须呼应 memory_stream；user_intervention 是已发生事实，event 从后果展开。
+- Fate 层作背景压力，勿照抄标题。
+- **字数铁律（汉字，含标点；写完后自检）**：
+
+| 字段 | quiet 年 | pivotal 年 |
+|------|----------|------------|
+| event | **55–75 字** | **200–260 字** |
+| decision_made | 12–28 字 | **22–45 字** |
+| reflection | **55–75 字** | **55–75 字** |
+| shadow_dialogue | **45–58 字** | **45–58 字** |
+| memory_summary | **32–42 字** | **32–42 字** |
+
 **quiet 年**
 
-- event ≤30 字，轻轻掠过。
+- event **55–75 字**，轻轻掠过，留白。
 - new_mood / new_esteem 与上一年差距 ≤1。
 - intervention_prompt 必须为 null。
 
 **pivotal 年**
 
-- event 80-120 字：场景 + 感官 + 情绪锚点。
-- decision_made 写出关键选择 + 人格动因。
+- event **200–260 字**：场景 + 至少两种感官 + 情绪锚点。
+- decision_made **22–45 字**：关键选择 + 人格动因。
 - intervention_prompt 必填：question + 两个互斥 options。
 
 **共同铁律**
 
-- reflection：第一人称，≤40 字，说领悟不复述事件。
-- shadow_dialogue：对「现在的你」说，≤30 字，有钩子。
-- memory_summary：≤20 字，写转折不写细节，供后续引用。
+- reflection / shadow_dialogue / memory_summary 按上表区间；Live 生成走 evaluator `lengthStandard: v2`。
 - environment / pose / prop / city 与 event 强相关。
 
 **user_intervention**
@@ -102,7 +115,7 @@
 | Lens | `family` … `self_growth` | 各域推演边界与 dialogue 风格 |
 | P2 JSON | `output-schema.md` | 含 `agentTrace` 的七年 timeline 契约 |
 
-**当前接线**：archive demo 可通过 `scene-agents-bridge.js` 将 scene lens 叠加到 Year system；完整 P2 编排待实现。
+**当前接线**：archive demo 已通过 `scene-agents-bridge.js` 将 scene lens 叠加到 Year agent system（`runYear`）；Fate 层读取 Intake `scenario_weights` 先验。完整 P2 七年 JSON 编排（`agentTrace`）待实现。
 
 **与 Fate 协作**：Scene 定叙事 lens；Fate 定 `emphasis_line` 与时代 micro。二者同时进 Year prompt，不互相替代。
 
@@ -134,6 +147,8 @@ Skill：`skills/shadow/scene-agents/SKILL.md`
 |----|------|------|
 | Memory 检索 | `memory-retrieval.js` | ✅ |
 | Reflection type | `memoryFromYear` | ✅ |
+| Generate → Demo | `generate-client.js` → `sessionStorage` → `demo.html?live=1&from=generate` | ✅ |
+| SSE 进度 | `POST /api/story/start/stream` · `year/stream` + `onStage` | ✅ |
 | re-plan | `beats-replan.js` + prompt 占位 | 🟡 |
 | Fate 层 | `fate-bridge.js` + `fate-hook.js` | 🟡 placeholder |
 | Dialogue 层 | `dialogue-hook.js` | 🟡 placeholder |

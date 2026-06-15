@@ -79,7 +79,7 @@ function fromIntakeWeights(intakeWeights, raw, rationale) {
   for (const domain of SCENARIO_DOMAINS) {
     const v = Number(intakeWeights[domain]);
     if (Number.isFinite(v) && v > 0) {
-      addBoost(raw, domain, v * 0.5);
+      addBoost(raw, domain, v * 0.75);
       applied = true;
     }
   }
@@ -125,7 +125,6 @@ export function computeFateWeights({
   const raw = uniformWeights();
   const rationale = ['base:uniform'];
 
-  fromIntakeWeights(intakeScenarioWeights, raw, rationale);
   fromProfile(profile, raw);
   rationale.push('profile:choice+keywords');
   fromPersona(persona_card, raw);
@@ -139,6 +138,8 @@ export function computeFateWeights({
   }
   applyNudge(raw, NARRATIVE_YEAR_NUDGE[narrativeYear]);
   rationale.push(`narrative:year${narrativeYear}`);
+
+  fromIntakeWeights(intakeScenarioWeights, raw, rationale);
 
   let weights = normalizeWeights(raw);
   weights = sharpenForBeat(weights, beatType);

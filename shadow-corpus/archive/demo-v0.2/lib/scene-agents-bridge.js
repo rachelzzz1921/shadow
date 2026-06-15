@@ -135,8 +135,6 @@ async function buildSceneYearSystem(profile, sceneOverride) {
   };
 }
 
-let classifyProfileFn = null;
-
 module.exports = {
   PROMPTS_DIR,
   SCENE_FILES,

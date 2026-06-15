@@ -205,5 +205,44 @@
     };
   }
 
-  global.ShadowCustomStory = { build, buildLivePayload };
+  /** API 全链生成 → demo.html?live=1（与 buildLivePayload 同形，供 generate-client 使用） */
+  function buildLivePayloadFromApiSession(session, extras) {
+    const {
+      final = null,
+      profile = session?.profile || null,
+      full_profile = session?.full_profile || null,
+      persona = null,
+      visual_character = null,
+      generated_at = new Date().toISOString()
+    } = extras || {};
+    const last = session?.years?.[session.years.length - 1];
+    return {
+      session: {
+        ...session,
+        profile: session.profile || profile,
+        persona_card: session.persona_card,
+        shadow: session.shadow,
+        beats: session.beats,
+        pivotal_years: session.pivotal_years,
+        memory_stream: session.memory_stream || [],
+        years: session.years || [],
+        mood: session.mood ?? last?.new_mood ?? 5,
+        esteem: session.esteem ?? last?.new_esteem ?? 5,
+        scenario: session.scenario || null,
+        visual_character:
+          visual_character || session.visual_character || full_profile?.visual_character || null,
+        _demo_mock: false
+      },
+      final,
+      profile,
+      full_profile,
+      persona,
+      visual_character:
+        visual_character || session.visual_character || full_profile?.visual_character || null,
+      generated_at,
+      _from_generate: true
+    };
+  }
+
+  global.ShadowCustomStory = { build, buildLivePayload, buildLivePayloadFromApiSession };
 })(window);

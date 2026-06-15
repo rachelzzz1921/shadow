@@ -487,6 +487,7 @@ function applyLiveFromSession() {
       if (window.ShadowDemo) window.ShadowDemo._activeStoryId = 'custom';
     }
     STORY._from_live = true;
+    STORY._from_generate = Boolean(live._from_generate);
     STORY._live_run_id = session.run_id || null;
     STORY._demo_mock = Boolean(live._demo_mock || session._demo_mock);
     if (live.visual_character || session.visual_character) {

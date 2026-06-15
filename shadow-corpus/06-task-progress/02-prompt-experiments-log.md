@@ -115,3 +115,31 @@ Harness Memory：每次改 prompt、模型或 narrative 规则，在此记录，
 **Notes**
 
 - 后续改 prompt 必须追加本文件条目。
+
+---
+
+## 2026-06-15 — Intake → Agent 全链路映射
+
+**Change**
+
+- `intake-kit` 统一 `buildFullProfile`（`schema_version: 1`、结构化 `selected_tags`）。
+- `formatPersonaCard` / `formatIntakeContext` 注入 Beats/Year/Final/Dialogue prompt。
+- Session baseline 来自 intake；Fate 权重 intake 先验；Year system 拼接 Scene Agents lens。
+- `evaluateIntakeConsistency` 接入 `evaluateStory`（有 `full_profile` 时）。
+
+**Expected**
+
+- Intake 张力/域权重/基线 mood 在叙事管线中可追踪，不再仅 Persona 可见。
+
+**Result**
+
+- 单元测试：`prompts-intake-context`、`fate-weights-intake`、`scene-agents-bridge`、`intake-kit-parity`、`evaluator-intake`。
+
+**Keep / Revert**
+
+- Keep
+
+**Notes**
+
+- 浏览器端 `docs/demo-intake-profile.js` 由 `npm run build:intake-browser` 生成，勿手改。
+

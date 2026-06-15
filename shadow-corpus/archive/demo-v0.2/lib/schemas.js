@@ -65,9 +65,9 @@ const YearSchema = z.object({
   city: z.enum(CITIES)
     .describe('city1..city8 之一，按当年环境氛围选'),
   event: z.string()
-    .describe('quiet 年：30 字以内一句话掠过；pivotal 年：80-120 字，完整场景+感官细节+情绪锚点。第二人称"你"叙述'),
-  decision_made: z.string().min(8).max(40)
-    .describe('影子这一年的关键选择 + 人格动因，一句话'),
+    .describe('quiet 年：55–75 字一句话掠过；pivotal 年：200–260 字，完整场景+感官细节+情绪锚点。第二人称"你"叙述'),
+  decision_made: z.string().min(8).max(50)
+    .describe('quiet 年 12–28 字可轻写；pivotal 年 22–45 字，关键选择+人格动因'),
   intervention_prompt: InterventionPromptSchema.nullable()
     .describe('仅 is_pivotal=true 时填写，否则为 null'),
   emotion: z.object({
@@ -78,12 +78,12 @@ const YearSchema = z.object({
     .describe('本年结束后的情绪值。quiet 年与上一年差距 ≤1，pivotal 年可大幅变动'),
   new_esteem: z.number().int().min(1).max(10)
     .describe('本年结束后的自我认同值。规则同 new_mood'),
-  reflection: z.string().min(6).max(45)
-    .describe('影子第一人称内心独白，40 字内，说领悟不复述事件，主题不与其他年份重复'),
-  shadow_dialogue: z.string().min(6).max(35)
-    .describe('七年后的影子对"现在的你"说的一句话，30 字内，有钩子有情绪'),
-  memory_summary: z.string().min(6).max(30)
-    .describe('这一年压成一句话存进 memory_stream，写关键转折不写细节')
+  reflection: z.string().min(45).max(85)
+    .describe('影子第一人称内心独白，55–75 字，说领悟不复述 event，主题不与其他年份重复'),
+  shadow_dialogue: z.string().min(35).max(65)
+    .describe('七年后的影子对"现在的你"说的一句话，45–58 字，有钩子有情绪'),
+  memory_summary: z.string().min(25).max(48)
+    .describe('存进 memory_stream，32–42 字，写关键转折（物件/人/瞬间）不写 event 全文')
 });
 
 const FinalSchema = z.object({

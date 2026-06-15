@@ -184,6 +184,7 @@ async function generateNextYear({
     emitStage(onStage, 'year:generating', yearStartPayload);
     const rawYear = await agents.runYear({
       persona_card: session.persona_card,
+      profile: session.profile,
       memory_stream: session.memory_stream || [],
       current_mood: session.mood ?? 5,
       current_esteem: session.esteem ?? 5,
@@ -208,7 +209,7 @@ async function generateNextYear({
       }
     );
     const memory = memoryFromYear(year);
-    const yearFindings = evaluateYear(year, beat);
+    const yearFindings = evaluateYear(year, beat, { lengthStandard: 'v2' });
     if (nextIndex > 0 && session.years[nextIndex - 1]) {
       yearFindings.push(...evaluateInterventionThread(session.years[nextIndex - 1], year));
     }
@@ -272,7 +273,7 @@ async function finishStorySession({ session, runtime = createLiveRuntime(), trac
       years: session.years,
       final
     };
-    const storyEval = evaluateStory(story);
+    const storyEval = evaluateStory(story, { lengthStandard: 'v2' });
     appendEvent(trace, { stage: 'final:done', payload: { title: final.title }, eval: storyEval });
 
     const finishedSession = { ...session, final };

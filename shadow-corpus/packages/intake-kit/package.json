@@ -1,0 +1,11 @@
+{
+  "name": "@shadow/intake-kit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "lib/index.cjs",
+  "exports": {
+    ".": "./lib/index.cjs",
+    "./schema": "./lib/schema.cjs"
+  }
+}

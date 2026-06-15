@@ -1,8 +1,8 @@
 'use strict';
 
 /**
- * Shadow Generate — Intake 全链 + API 七年纯文字输出
- * Intake（四层）→ Persona → POST /api/story/start → year×7 → final
+ * Shadow Generate — Intake 全链 + API 七年生成
+ * Intake（四层）→ Persona → start/stream → year×7/stream → final → demo.html?live=1
  */
 (function () {
   const $ = (id) => document.getElementById(id);
@@ -252,6 +252,9 @@
 
   function profileFromFull(full) {
     const layerA = layerAFromFull(full);
+    const structuredTags = full.raw?.selected_tags || full.profile?.selected_tags || [];
+    const keywords = full.profile?.keywords
+      || structuredTags.map((t) => (typeof t === 'string' ? t : t.label)).slice(0, 5);
     return {
       choice: layerA.choice_text,
       description: layerA.self_description,
@@ -260,7 +263,10 @@
       fork_year: layerA.fork_year,
       age: layerA.age_at_fork,
       gender: layerA.gender,
-      keywords: full.raw?.selected_tags || []
+      keywords,
+      scenario_domain: full.profile?.scenario_domain || full.meta?.scenario_detected,
+      scenario_label: full.profile?.scenario_label,
+      selected_tags: structuredTags
     };
   }
 
@@ -290,7 +296,9 @@
     const root = $('gen-intake-summary');
     if (!root || !handoff?.full_profile) return;
     const full = handoff.full_profile;
-    const tags = (full.raw?.selected_tags || []).join(' · ') || '—';
+    const tags = (full.raw?.selected_tags || [])
+      .map((t) => (typeof t === 'string' ? t : t.label))
+      .join(' · ') || '—';
     const answered = full.meta?.answered ?? full.micro_questions?.length ?? 0;
     const personaName = handoff.persona_card?.name
       || handoff.persona?.shadow_name
@@ -388,6 +396,87 @@
       ${final.quote ? `<p class="gen-era" style="margin-top:12px">「${escapeHtml(final.quote)}」</p>` : ''}
       ${final.sign_off ? `<p class="gen-era">${escapeHtml(final.sign_off)}</p>` : ''}`;
     show($('gen-final-panel'));
+  }
+
+  function buildApiLivePayload(session, fin, intakeResult, profile) {
+    const extras = {
+      final: fin.final,
+      profile,
+      full_profile: intakeResult.full_profile || null,
+      persona: intakeResult.persona || null,
+      visual_character: intakeResult.full_profile?.visual_character || null
+    };
+    if (window.ShadowCustomStory?.buildLivePayloadFromApiSession) {
+      return window.ShadowCustomStory.buildLivePayloadFromApiSession(session, extras);
+    }
+    return {
+      session: {
+        ...session,
+        persona_card: session.persona_card || intakeResult.persona_card,
+        _demo_mock: false
+      },
+      ...extras,
+      generated_at: new Date().toISOString(),
+      _from_generate: true
+    };
+  }
+
+  function persistLiveSession(payload) {
+    try {
+      sessionStorage.setItem('shadow_live_session', JSON.stringify(payload));
+      return true;
+    } catch (err) {
+      console.warn('[generate] sessionStorage failed', err);
+      return false;
+    }
+  }
+
+  function enterDemoLive({ storedOk }) {
+    const demoUrl = 'demo.html?live=1&from=generate';
+    if (btnRun) {
+      btnRun.textContent = storedOk ? '完成，正在进入七年…' : '完成 — 请点击下方进入七年';
+      btnRun.disabled = true;
+    }
+    const finalPanel = $('gen-final-panel');
+    if (finalPanel && !finalPanel.querySelector('.gen-demo-link')) {
+      const linkWrap = document.createElement('div');
+      linkWrap.className = 'gen-actions gen-demo-link';
+      linkWrap.style.marginTop = '20px';
+      linkWrap.innerHTML =
+        '<a href="demo.html?live=1&from=generate" class="btn-start" style="display:inline-block;text-decoration:none">进入七年浏览 →</a>';
+      finalPanel.appendChild(linkWrap);
+    }
+    if (storedOk) {
+      setTimeout(() => {
+        window.location.replace(demoUrl);
+      }, 600);
+    } else {
+      showError('七年数据过大未能自动缓存，请点击「进入七年浏览」手动打开。');
+    }
+  }
+
+  function finishAndEnterDemo(session, fin, intakeResult, profile, health) {
+    lastExport = {
+      profile,
+      full_profile: intakeResult.full_profile,
+      persona: intakeResult.persona,
+      persona_card: session.persona_card || intakeResult.persona_card,
+      session,
+      final: fin.final,
+      generated_at: new Date().toISOString(),
+      provider: health.provider
+    };
+    const livePayload = buildApiLivePayload(session, fin, intakeResult, profile);
+    if (!livePayload.session?.years?.length) {
+      showError('生成完成但缺少年份数据，无法进入 Demo。');
+      if (btnRun) {
+        btnRun.disabled = false;
+        btnRun.textContent = '重试';
+      }
+      return;
+    }
+    const storedOk = persistLiveSession(livePayload);
+    enterDemoLive({ storedOk });
   }
 
   function resetResults() {
@@ -608,55 +697,8 @@
     session = fin.session;
     renderFinal(fin.final);
     setProgress(100);
-    log('final', '完成');
-
-    lastExport = {
-      profile,
-      full_profile: intakeResult.full_profile,
-      persona: intakeResult.persona,
-      persona_card: session.persona_card || intakeResult.persona_card,
-      session,
-      final: fin.final,
-      generated_at: new Date().toISOString(),
-      provider: health.provider
-    };
-
-    // 存入 shadow_live_session 供 demo.html 读取
-    try {
-      const livePayload = {
-        session: {
-          ...session,
-          persona_card: session.persona_card || intakeResult.persona_card,
-          _demo_mock: false
-        },
-        final: fin.final,
-        profile,
-        full_profile: intakeResult.full_profile,
-        persona: intakeResult.persona,
-        visual_character: intakeResult.full_profile?.visual_character || null,
-        generated_at: new Date().toISOString(),
-        _from_generate: true
-      };
-      sessionStorage.setItem('shadow_live_session', JSON.stringify(livePayload));
-    } catch (_) { /* quota */ }
-
-    // 生成完成 → 自动进入 demo.html 同款分层叙事 UI（与预设 Demo 一致）
-    if (btnRun) {
-      btnRun.textContent = '完成，正在进入七年…';
-      btnRun.disabled = true;
-    }
-    const finalPanel = $('gen-final-panel');
-    if (finalPanel && !finalPanel.querySelector('.gen-demo-link')) {
-      const linkWrap = document.createElement('div');
-      linkWrap.className = 'gen-actions gen-demo-link';
-      linkWrap.style.marginTop = '20px';
-      linkWrap.innerHTML = '<a href="demo.html?live=1" class="btn-start" style="display:inline-block;text-decoration:none">进入七年浏览 →</a>';
-      finalPanel.appendChild(linkWrap);
-    }
-    // 略作停顿让用户看到"完成"，再跳进分层浏览
-    setTimeout(() => {
-      window.location.href = 'demo.html?live=1';
-    }, 900);
+    log('final', '完成 — 即将进入 Demo 七年浏览');
+    finishAndEnterDemo(session, fin, intakeResult, profile, health);
   }
 
   function onIntakeComplete(result) {

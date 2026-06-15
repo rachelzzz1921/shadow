@@ -35,4 +35,37 @@ describe('scene-agents-bridge', () => {
     assert.ok(['career', 'self_growth', 'family'].includes(scene));
     assert.ok(system.includes('Shadow'));
   });
+
+  it('resolveSceneFromFullProfile picks academic from weights', () => {
+    const routed = bridge.resolveSceneFromFullProfile({
+      scenario_weights: {
+        family: 0.1,
+        love: 0.05,
+        friendship: 0.05,
+        academic: 0.55,
+        career: 0.1,
+        self_growth: 0.15
+      }
+    });
+    assert.equal(routed.primary, 'academic');
+    assert.equal(routed.source, 'intake_weights');
+  });
+
+  it('buildSceneYearSystemFromFullProfile prefers intake weights', async () => {
+    const { scene, source } = await bridge.buildSceneYearSystemFromFullProfile(
+      {
+        scenario_weights: {
+          family: 0.05,
+          love: 0.05,
+          friendship: 0.05,
+          academic: 0.6,
+          career: 0.1,
+          self_growth: 0.15
+        }
+      },
+      { choice: '要不要离开家乡', keywords: ['迷茫'] }
+    );
+    assert.equal(scene, 'academic');
+    assert.equal(source, 'intake_weights');
+  });
 });

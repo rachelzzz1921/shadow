@@ -57,15 +57,23 @@ function evaluateBeats(beats, pivotalYears) {
   return findings;
 }
 
-function evaluateYear(year, beat) {
+function evaluateYear(year, beat, opts = {}) {
   const findings = [];
   if (!year) return [issue('year.missing', '缺少年份对象', 'error')];
 
+  const lengthStandard = opts.lengthStandard || 'legacy';
   const beatType = beat?.type || (year.is_pivotal ? 'pivotal' : 'quiet');
   const eventLen = (year.event || '').length;
 
   if (beatType === 'quiet') {
-    if (eventLen > 35) {
+    if (lengthStandard === 'v2') {
+      if (eventLen < 45) {
+        findings.push(issue('year.quiet_short', `quiet 年 event 建议 55–75 字，当前 ${eventLen}`, 'warn'));
+      }
+      if (eventLen > 85) {
+        findings.push(issue('year.quiet_length', `quiet 年 event 应 ≤75 字左右，当前 ${eventLen}`, 'warn'));
+      }
+    } else if (eventLen > 35) {
       findings.push(issue('year.quiet_length', `quiet 年 event 应 ≤30 字左右，当前 ${eventLen}`, 'warn'));
     }
     if (year.intervention_prompt) {
@@ -77,7 +85,14 @@ function evaluateYear(year, beat) {
   }
 
   if (beatType === 'pivotal') {
-    if (eventLen < 40) {
+    if (lengthStandard === 'v2') {
+      if (eventLen < 160) {
+        findings.push(issue('year.pivotal_length', `pivotal 年 event 建议 200–260 字，当前 ${eventLen}`, 'warn'));
+      }
+      if (eventLen > 280) {
+        findings.push(issue('year.pivotal_long', `pivotal 年 event 建议 ≤260 字，当前 ${eventLen}`, 'warn'));
+      }
+    } else if (eventLen < 40) {
       findings.push(issue('year.pivotal_length', `pivotal 年 event 应更完整，当前 ${eventLen} 字`, 'warn'));
     }
     if (!year.intervention_prompt?.question || !Array.isArray(year.intervention_prompt?.options)) {
@@ -100,7 +115,22 @@ function evaluateYear(year, beat) {
     findings.push(issue('year.memory_abstract', 'memory_summary 过于抽象，缺少具体物件或瞬间', 'warn'));
   }
 
-  if ((year.shadow_dialogue || '').length > 35) {
+  const reflectionLen = (year.reflection || '').length;
+  const dialogueLen = (year.shadow_dialogue || '').length;
+  if (lengthStandard === 'v2') {
+    if (reflectionLen < 45) {
+      findings.push(issue('year.reflection_short', `reflection 建议 55–75 字，当前 ${reflectionLen}`, 'warn'));
+    }
+    if (reflectionLen > 85) {
+      findings.push(issue('year.reflection_long', `reflection 建议 ≤75 字，当前 ${reflectionLen}`, 'warn'));
+    }
+    if (dialogueLen < 35) {
+      findings.push(issue('year.dialogue_short', 'shadow_dialogue 建议 45–58 字', 'warn'));
+    }
+    if (dialogueLen > 65) {
+      findings.push(issue('year.dialogue_long', 'shadow_dialogue 建议 ≤58 字', 'warn'));
+    }
+  } else if (dialogueLen > 35) {
     findings.push(issue('year.dialogue_long', 'shadow_dialogue 建议 ≤30 字', 'warn'));
   }
 
@@ -152,6 +182,49 @@ function evaluateInterventionThread(prevYear, nextYear) {
   return findings;
 }
 
+function evaluateIntakeConsistency(fullProfile, personaCard) {
+  const findings = [];
+  if (!fullProfile) {
+    findings.push(issue('intake.missing', '缺少 full_profile', 'error'));
+    return findings;
+  }
+
+  if (fullProfile.meta?.schema_version !== 1) {
+    findings.push(issue(
+      'intake.schema_version',
+      `full_profile.meta.schema_version 应为 1，当前 ${fullProfile.meta?.schema_version ?? '缺失'}`,
+      'warn'
+    ));
+  }
+
+  const tags = fullProfile.raw?.selected_tags || [];
+  if (tags.length && typeof tags[0] === 'string') {
+    findings.push(issue(
+      'intake.tags_shape',
+      'raw.selected_tags 应为 { label, category_id }[]，当前为 string[]',
+      'warn'
+    ));
+  }
+
+  if (!fullProfile.tension_flags?.length) {
+    findings.push(issue('intake.tension_empty', '未检测到 intake 张力标记', 'warn'));
+  }
+
+  if (personaCard?.core_tension && fullProfile.tension_flags?.length) {
+    const tensionBlob = fullProfile.tension_flags.map((f) => `${f.detail || ''}${f.note || ''}`).join('');
+    if (!/(独立|面子|无所谓|再试|真实|依赖|裂缝)/.test(personaCard.core_tension)
+      && !/(独立|面子|无所谓|再试|真实|依赖|裂缝)/.test(tensionBlob)) {
+      findings.push(issue(
+        'intake.persona_tension',
+        'persona_card.core_tension 与 intake tension_flags 语义未对齐',
+        'warn'
+      ));
+    }
+  }
+
+  return findings;
+}
+
 function evaluateFinal(final) {
   const findings = [];
   if (!final) {
@@ -174,13 +247,18 @@ function evaluateFinal(final) {
   return findings;
 }
 
-function evaluateStory(story) {
+function evaluateStory(story, opts = {}) {
   const findings = [];
+  const lengthStandard = opts.lengthStandard
+    || (story?._from_live || story?._from_generate ? 'v2' : 'legacy');
   findings.push(...evaluateBeats(story.beats, story.pivotal_years));
+  if (story.full_profile) {
+    findings.push(...evaluateIntakeConsistency(story.full_profile, story.persona_card));
+  }
 
   const beats = story.beats || [];
   (story.years || []).forEach((year, index) => {
-    findings.push(...evaluateYear(year, beats[index]));
+    findings.push(...evaluateYear(year, beats[index], { lengthStandard }));
     if (index > 0) {
       findings.push(...evaluateInterventionThread(story.years[index - 1], year));
     }
@@ -207,6 +285,7 @@ module.exports = {
   evaluateYear,
   evaluateFinal,
   evaluateStory,
+  evaluateIntakeConsistency,
   evaluateInterventionThread,
   evaluateVisualConsistency
 };

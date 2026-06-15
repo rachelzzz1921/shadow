@@ -23,6 +23,7 @@
   function shouldSkipLanding() {
     const params = new URLSearchParams(location.search);
     if (params.get('from') === 'intake') return true;
+    if (params.get('from') === 'generate') return true;
     if (params.get('live') === '1') return true;
     if (params.get('skipLanding') === '1') return true;
     try {
@@ -1160,9 +1161,16 @@
     if (story._from_live) {
       if (btn) btn.textContent = `进入${story.persona_card.name}的七年（Live）`;
       const tag = document.getElementById('source-tag');
-      if (tag) tag.textContent = story._demo_mock
-        ? '📦 Demo Mock · Golden 七年'
-        : '⚡ Live · 全 Agent 生成';
+      if (tag) {
+        const params = new URLSearchParams(location.search);
+        if (params.get('from') === 'generate' || story._from_generate) {
+          tag.textContent = '⚡ Generate · Live 七年';
+        } else {
+          tag.textContent = story._demo_mock
+            ? '📦 Demo Mock · Golden 七年'
+            : '⚡ Live · 全 Agent 生成';
+        }
+      }
     }
 
     const dlgName = document.getElementById('dlg-name');
