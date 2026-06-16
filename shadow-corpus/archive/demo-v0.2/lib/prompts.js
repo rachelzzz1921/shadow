@@ -265,6 +265,27 @@ const YEAR_SYSTEM = `${SEVEN_YEAR_NARRATIVE_CORE}
 - new_mood / new_esteem 可大幅变动。
 - is_pivotal 必为 true。`;
 
+const FAST_YEAR_APPEND = `# 快速模式（字数仍须达标，但篇幅压缩）
+
+| 字段 | 标准 |
+|------|------|
+| event | **90–120 字**，1–2 段 |
+| decision_made | **14–32 字** |
+| reflection | **40–55 字** |
+| shadow_dialogue | **35–48 字** |
+| memory_summary | **24–36 字** |
+| visual_anchor | **8–40 字** |
+| key_props | **2–3 个**物件 |
+
+quiet 与 pivotal **篇幅相同**；pivotal 仍须 intervention_prompt。写完后自检汉字数。`;
+
+function yearTaskLine(year_n, length_standard) {
+  if (length_standard === 'fast') {
+    return `写出第 ${year_n} 年（快速模式）。event 90–120 字；必填 visual_anchor 与 key_props。输出前自检各字段汉字数。`;
+  }
+  return `写出第 ${year_n} 年。全年 event 160–240 字、2–3 段；必填 visual_anchor 与 key_props。输出前自检各字段汉字数。`;
+}
+
 function buildYearPrompt(input) {
   const {
     persona_card,
@@ -280,7 +301,8 @@ function buildYearPrompt(input) {
     full_beats,
     pivotal_years,
     fate_context,
-    full_profile
+    full_profile,
+    length_standard = 'v2'
   } = input;
 
   const interventionBlock = user_intervention
@@ -331,9 +353,12 @@ function buildYearPrompt(input) {
     `quiet 年 event 示例密度：${BENCHMARK_QUIET_EVENT_HINT}`,
     '',
     '# 任务',
-    `写出第 ${year_n} 年。全年 event 160–240 字、2–3 段；必填 visual_anchor 与 key_props。输出前自检各字段汉字数。`
+    yearTaskLine(year_n, length_standard)
   ];
-  return { system: YEAR_SYSTEM, prompt: lines.join('\n') };
+  const system = length_standard === 'fast'
+    ? `${YEAR_SYSTEM}\n\n${FAST_YEAR_APPEND}`
+    : YEAR_SYSTEM;
+  return { system, prompt: lines.join('\n') };
 }
 
 // ============================================================

@@ -145,15 +145,36 @@
     <section class="gen-panel snes" id="gen-intake-summary-panel">
       <h2 class="gen-section-title">Intake 摘要</h2>
       <div id="gen-intake-summary"></div>
+      <div class="gen-mode-row">
+        <label class="gen-mode-toggle">
+          <input type="checkbox" id="gen-fast-mode" checked />
+          <span>快速模式（默认 · event 约 100 字 · 规则 replan · 目标 2–4 分钟）</span>
+        </label>
+        <p class="gen-mode-hint">关闭后使用完整 v2 体量（160–240 字），耗时显著增加。</p>
+      </div>
       <div class="gen-actions">
         <button type="button" id="btn-edit-intake" class="btn-ghost">← 返回修改采集</button>
         <button type="button" id="btn-run" class="btn-start">开始 API 生成</button>
       </div>
     </section>
 
+    <section class="gen-panel snes gen-hidden" id="gen-resume-panel">
+      <h2 class="gen-section-title">未完成的生成</h2>
+      <p id="gen-resume-text" class="gen-era"></p>
+      <div class="gen-actions">
+        <button type="button" id="btn-resume-job" class="btn-start">继续生成</button>
+        <button type="button" id="btn-discard-job" class="btn-ghost">放弃并重新开始</button>
+      </div>
+    </section>
+
     <section class="gen-panel snes gen-hidden" id="gen-run-panel">
       <p id="gen-provider" class="gen-provider">检测 LLM…</p>
+      <div class="gen-eta-row">
+        <span id="gen-eta-label" class="gen-eta-label">预计总时长 —</span>
+        <span id="gen-eta-remaining" class="gen-eta-remaining"></span>
+      </div>
       <div class="gen-progress-wrap"><div id="gen-progress"></div></div>
+      <p id="gen-bg-hint" class="gen-bg-hint gen-hidden">生成在后台继续 — 可切换标签或浏览其他页面，回来点「继续生成」即可。</p>
       <ul id="gen-log" class="gen-log" aria-live="polite"></ul>
       <p id="gen-error" class="gen-error gen-hidden" role="alert"></p>
     </section>
@@ -170,7 +191,21 @@
 
     <section class="gen-panel snes gen-hidden" id="gen-years-panel">
       <h2 class="gen-section-title">Year ×7 · 命运层</h2>
+      <div id="gen-year-stream" class="gen-year-stream gen-hidden" aria-live="polite">
+        <p class="gen-stream-label">正在写第 <span id="gen-stream-year-n">—</span> 年…</p>
+        <div id="gen-stream-text" class="gen-stream-text"></div>
+      </div>
       <div id="gen-years"></div>
+      <section id="gen-year-dialogue" class="gen-year-dialogue gen-hidden" aria-label="与影子对话">
+        <h3 id="gen-dlg-year-label" class="gen-section-sub">逐年对话</h3>
+        <p class="gen-era">下一年生成时也可聊已完成的年 — 推荐问题会跟着对话走。</p>
+        <div id="gen-dlg-turns" class="gen-dlg-turns"></div>
+        <div id="gen-dlg-suggest" class="dlg-suggest"></div>
+        <div class="gen-dlg-compose">
+          <input type="text" id="gen-dlg-input" placeholder="问影子…" autocomplete="off" />
+          <button type="button" id="gen-dlg-send" class="btn-start">发送</button>
+        </div>
+      </section>
     </section>
 
     <section class="gen-panel snes gen-hidden" id="gen-final-panel">
@@ -233,8 +268,10 @@
 <script src="demo-intake-render.js"></script>
 <script src="demo-intake-profile.js"></script>
 <script src="demo-persona-agent.js"></script>
-<script src="demo-custom-story.js?v=20260616a"></script>
-<script src="generate-client.js?v=20260616a"></script>
-<script src="demo-intake-app.js?v=20260615b"></script>
+<script src="demo-data.js"></script>
+<script src="demo-custom-story.js?v=20260616b"></script>
+<script src="generate-dialogue.js?v=20260616b"></script>
+<script src="generate-client.js?v=20260616b"></script>
+<script src="demo-intake-app.js?v=20260616b"></script>
 </body>
 </html>

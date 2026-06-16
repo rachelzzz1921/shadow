@@ -114,7 +114,8 @@ test('harness smoke: trace records fate:sampled and replan on intervention', asy
   let session = await startStorySession({
     profile: { choice: '复读', age: 18 },
     runtime,
-    trace
+    trace,
+    generation_mode: 'full'
   });
 
   await generateNextYear({ session, runtime, trace });

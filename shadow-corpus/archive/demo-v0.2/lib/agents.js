@@ -185,7 +185,8 @@ async function runBeats({ persona_card, profile, full_profile = null, runtime })
 // Agent 3: one year
 // ------------------------------------------------------------
 async function runYear(input) {
-  const { prompt } = buildYearPrompt(input);
+  const length_standard = input.length_standard || 'v2';
+  const { prompt, system: yearSystem } = buildYearPrompt({ ...input, length_standard });
   const profile = input.profile || {
     choice: input.choice,
     age: input.age,
@@ -196,17 +197,32 @@ async function runYear(input) {
     input.full_profile || null,
     profile
   );
-  const system = `${scenePack.system}\n\n---\n\n${YEAR_SYSTEM}`;
+  const system = `${scenePack.system}\n\n---\n\n${yearSystem}`;
   input._scene_lens = { scene: scenePack.scene, source: scenePack.source };
 
-  const raw = await callAgent({
+  const maxRetries = length_standard === 'fast' ? 1 : 3;
+  const runtime = input.runtime;
+  const callOpts = {
     schema: RelaxedYearSchema,
     system,
     prompt,
     temperature: 0.9,
-    maxRetries: 3,
-    runtime: input.runtime
-  });
+    maxRetries,
+    runtime
+  };
+
+  let raw;
+  if (input.onPartial && runtime?.streamStructured) {
+    raw = await runtime.streamStructured({
+      schema: RelaxedYearSchema,
+      system,
+      prompt,
+      temperature: 0.9,
+      onPartial: input.onPartial
+    });
+  } else {
+    raw = await callAgent(callOpts);
+  }
   const result = sanitizeYearFromLlm(raw, input);
   // Enforce contract: quiet years must not have intervention_prompt
   if (input.beat_type === 'quiet') {

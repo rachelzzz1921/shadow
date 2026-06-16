@@ -17,6 +17,133 @@
   let intakeHandoff = null;
   const pendingLog = new Map();
   let waitTimer = null;
+  let pipelineStartedAt = 0;
+  let yearTimings = [];
+  const JOB_KEY = 'shadow_gen_job';
+  const JOB_ID_KEY = 'shadow_gen_job_id';
+  const TIMING_KEY = 'shadow_gen_timings';
+  let activeEventSource = null;
+  let pendingPollTimer = null;
+  let currentJobId = null;
+
+  const DEFAULT_ETA_MS = {
+    fast: { start: 22000, year: 28000, final: 18000 },
+    full: { start: 32000, year: 72000, final: 24000 }
+  };
+
+  function getGenerationMode() {
+    const el = $('gen-fast-mode');
+    return el && !el.checked ? 'full' : 'fast';
+  }
+
+  function loadTimings() {
+    try {
+      const raw = localStorage.getItem(TIMING_KEY);
+      return raw ? JSON.parse(raw) : { fast: null, full: null };
+    } catch {
+      return { fast: null, full: null };
+    }
+  }
+
+  function recordTiming(mode, phase, ms) {
+    const store = loadTimings();
+    const bucket = store[mode] || { start: [], year: [], final: [] };
+    if (!bucket[phase]) bucket[phase] = [];
+    bucket[phase].push(ms);
+    if (bucket[phase].length > 8) bucket[phase].shift();
+    store[mode] = bucket;
+    try {
+      localStorage.setItem(TIMING_KEY, JSON.stringify(store));
+    } catch (_) { /* quota */ }
+  }
+
+  function avgMs(list, fallback) {
+    if (!list?.length) return fallback;
+    return Math.round(list.reduce((a, b) => a + b, 0) / list.length);
+  }
+
+  function estimateTotalMs(mode, yearsDone, totalYears) {
+    const store = loadTimings();
+    const bucket = store[mode] || {};
+    const base = DEFAULT_ETA_MS[mode] || DEFAULT_ETA_MS.fast;
+    const startMs = avgMs(bucket.start, base.start);
+    const yearMs = avgMs(bucket.year, base.year);
+    const finalMs = avgMs(bucket.final, base.final);
+    const yearsLeft = Math.max(0, totalYears - yearsDone);
+    const includeStart = yearsDone === 0;
+    return (includeStart ? startMs : 0) + yearsLeft * yearMs + (yearsDone >= totalYears ? 0 : finalMs);
+  }
+
+  function formatEta(ms) {
+    const sec = Math.max(0, Math.ceil(ms / 1000));
+    if (sec < 60) return `约 ${sec} 秒`;
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return s ? `约 ${m} 分 ${s} 秒` : `约 ${m} 分钟`;
+  }
+
+  function updateEtaLabel(yearsDone, totalYears, mode) {
+    const label = $('gen-eta-label');
+    const rem = $('gen-eta-remaining');
+    if (!label || !rem) return;
+    const elapsed = pipelineStartedAt ? Date.now() - pipelineStartedAt : 0;
+    const total = estimateTotalMs(mode, yearsDone, totalYears);
+    const left = Math.max(0, total - elapsed);
+    label.textContent = mode === 'fast'
+      ? `快速模式 · 已完成 ${yearsDone}/${totalYears} 年`
+      : `完整模式 · 已完成 ${yearsDone}/${totalYears} 年`;
+    rem.textContent = left > 0 ? `剩余 ${formatEta(left)}` : '即将完成…';
+  }
+
+  function saveJob(job) {
+    try {
+      localStorage.setItem(JOB_KEY, JSON.stringify({ ...job, updatedAt: Date.now() }));
+    } catch (err) {
+      console.warn('[generate] job save failed', err);
+    }
+  }
+
+  function loadJob() {
+    try {
+      const raw = localStorage.getItem(JOB_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function clearJob() {
+    try {
+      localStorage.removeItem(JOB_KEY);
+    } catch (_) { /* ignore */ }
+    hide($('gen-resume-panel'));
+  }
+
+  function showStreamYear(yearN, text) {
+    const wrap = $('gen-year-stream');
+    const nEl = $('gen-stream-year-n');
+    const tEl = $('gen-stream-text');
+    if (!wrap || !tEl) return;
+    if (nEl) nEl.textContent = String(yearN ?? '—');
+    tEl.textContent = text || '';
+    show(wrap);
+  }
+
+  function hideStreamYear() {
+    hide($('gen-year-stream'));
+    const tEl = $('gen-stream-text');
+    if (tEl) tEl.textContent = '';
+  }
+
+  function openYearDialogue(year, session, profile) {
+    if (!window.ShadowGenerateDialogue?.openForYear) return;
+    window.ShadowGenerateDialogue.openForYear(year, {
+      persona_card: session.persona_card,
+      memory_stream: session.memory_stream || [],
+      years: session.years || [],
+      profile
+    });
+  }
 
   function stopWaitTimer() {
     if (waitTimer) {
@@ -240,10 +367,15 @@
         log('fate', (data.era_line || '时代层已注入').slice(0, 80));
         break;
       case 'year:generating':
+        showStreamYear(data.year ?? beat?.year, '');
+        break;
+      case 'year:partial':
+        showStreamYear(data.year ?? beat?.year, data.event || data.title || '');
         break;
       case 'year:done':
         stopWaitTimer();
         clearPending('year');
+        hideStreamYear();
         log('year', `✓ ${data.title || '第' + (data.year ?? beat?.year) + '年'}`);
         break;
       default:
@@ -326,7 +458,7 @@
       questionAnswers,
       scenarioFromText,
       meta: req.meta || full.meta || {},
-      analyze: true,
+      analyze: handoff.persona || handoff.persona_card ? false : true,
       fallback: true
     };
   }
@@ -654,8 +786,228 @@
     }
   }
 
-  async function runPipeline() {
-    let handoff = intakeHandoff || readHandoffFromSession();
+  function saveJobId(jobId) {
+    try {
+      localStorage.setItem(JOB_ID_KEY, jobId);
+    } catch (_) { /* quota */ }
+  }
+
+  function loadJobId() {
+    try {
+      return localStorage.getItem(JOB_ID_KEY) || null;
+    } catch {
+      return null;
+    }
+  }
+
+  function clearJobId() {
+    try {
+      localStorage.removeItem(JOB_ID_KEY);
+      localStorage.removeItem(JOB_KEY);
+    } catch (_) { /* ignore */ }
+    hide($('gen-resume-panel'));
+  }
+
+  function disconnectJobStream() {
+    if (activeEventSource) {
+      activeEventSource.close();
+      activeEventSource = null;
+    }
+    if (pendingPollTimer) {
+      clearInterval(pendingPollTimer);
+      pendingPollTimer = null;
+    }
+  }
+
+  async function fetchJob(jobId) {
+    const res = await fetch(`/api/story/jobs/${encodeURIComponent(jobId)}`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || res.statusText);
+    return data;
+  }
+
+  function renderJobStatusBanner(job) {
+    const pending = $('gen-pending-panel');
+    const failed = $('gen-failed-panel');
+    hide(pending);
+    hide(failed);
+
+    if (job.status === 'pending') {
+      if ($('gen-pending-text')) {
+        $('gen-pending-text').textContent = '排队中 — 前面还有任务在生成，本页会自动更新。';
+      }
+      show(pending);
+      return;
+    }
+    if (job.status === 'failed') {
+      const yr = job.stage?.year_index || job.completed_stages?.filter((s) => s.startsWith('year_')).length || 0;
+      if ($('gen-failed-text')) {
+        $('gen-failed-text').textContent = `生成中断在第 ${yr || '?'} 年附近${job.error ? '：' + job.error : ''}`;
+      }
+      show(failed);
+    }
+  }
+
+  function hydrateJobUi(job) {
+    const session = job.session;
+    if (!session?.beats) return;
+    renderBeats(session);
+    const root = $('gen-years');
+    if (root) root.innerHTML = '';
+    (session.years || []).forEach((y, idx) => {
+      const beat = session.beats?.[idx];
+      appendYear(y, session.last_fate_context?.era_line || '', beat?.type);
+    });
+    if (job.result?.final) renderFinal(job.result.final);
+    const done = session.years?.length || 0;
+    const total = session.beats?.length || 7;
+    const pct = job.status === 'done' ? 100 : Math.round(18 + (done / total) * 68);
+    setProgress(pct);
+    updateEtaLabel(done, total, job.generation_mode || 'fast');
+    if (job.partial?.current_year_text && job.status === 'running') {
+      showStreamYear(job.partial.current_year_index || done + 1, job.partial.current_year_text);
+    }
+  }
+
+  function renderRunningProgress(job) {
+    const session = job.session || {};
+    const done = session.years?.length || 0;
+    const total = job.stage?.total_years || session.beats?.length || 7;
+    const label = $('gen-eta-label');
+    if (label) {
+      const cur = job.status === 'running' && job.partial?.current_year_index > done
+        ? job.partial.current_year_index
+        : Math.min(done + 1, total);
+      label.textContent = `${job.generation_mode === 'fast' ? '快速' : '完整'}模式 · 正在书写第 ${cur} 年 / 共 ${total} 年`;
+    }
+    setProgress(job.status === 'done' ? 100 : Math.round(18 + (done / total) * 68));
+    updateEtaLabel(done, total, job.generation_mode || 'fast');
+    renderJobStatusBanner(job);
+  }
+
+  function onJobSnapshot(job) {
+    currentJobId = job.job_id;
+    saveJobId(job.job_id);
+    show($('gen-run-panel'));
+    show($('gen-years-panel'));
+    show($('gen-bg-hint'));
+    hydrateJobUi(job);
+    renderRunningProgress(job);
+
+    if (job.status === 'done') {
+      disconnectJobStream();
+      if (job.session && job.result?.final) {
+        const intake = job.intake_snapshot || {};
+        finishAndEnterDemo(
+          job.session,
+          { final: job.result.final, session: job.session },
+          intake,
+          job.session.profile,
+          {}
+        );
+      }
+      return;
+    }
+
+    if (job.status === 'failed') {
+      disconnectJobStream();
+      if (btnRun) {
+        btnRun.disabled = false;
+        btnRun.textContent = '重试';
+      }
+      return;
+    }
+
+    if (job.status === 'pending' && !pendingPollTimer) {
+      pendingPollTimer = setInterval(async () => {
+        try {
+          const fresh = await fetchJob(job.job_id);
+          onJobSnapshot(fresh);
+          if (fresh.status === 'running') attachJobStream(job.job_id, true);
+        } catch (e) {
+          console.warn('[generate] pending poll', e);
+        }
+      }, 3000);
+    }
+  }
+
+  function handleJobStreamEvent(event, data) {
+    if (event === 'job:snapshot') {
+      onJobSnapshot(data);
+      return;
+    }
+    if (event === 'job:done') {
+      fetchJob(currentJobId).then(onJobSnapshot).catch((e) => showError(e.message));
+      return;
+    }
+    if (event === 'job:failed') {
+      fetchJob(currentJobId).then(onJobSnapshot).catch((e) => showError(e.message));
+      return;
+    }
+    if (event === 'job:stage_done') {
+      fetchJob(currentJobId).then((job) => {
+        hydrateJobUi(job);
+        renderRunningProgress(job);
+        const yr = job.session?.years?.slice(-1)[0];
+        if (yr) {
+          openYearDialogue(yr, job.session, job.session?.profile);
+        }
+      }).catch(() => {});
+      return;
+    }
+    if (event === 'year:partial') {
+      showStreamYear(data.year, data.event || data.title || '');
+      return;
+    }
+    if (event.startsWith('persona:') || event.startsWith('beats:') || event.startsWith('scenario:')) {
+      handleStartStage(event, data);
+      return;
+    }
+    if (event.startsWith('year:') || event.startsWith('fate:')) {
+      const idx = (currentJobId && data.year) ? data.year - 1 : 0;
+      const beat = { type: data.type };
+      handleYearStage(event, data, beat);
+    }
+  }
+
+  function attachJobStream(jobId, skipSnapshot) {
+    disconnectJobStream();
+    currentJobId = jobId;
+    saveJobId(jobId);
+
+    if (!skipSnapshot) {
+      fetchJob(jobId).then(onJobSnapshot).catch((e) => showError(e.message));
+    }
+
+    const es = new EventSource(`/api/story/jobs/${encodeURIComponent(jobId)}/stream`);
+    activeEventSource = es;
+
+    const bind = (name) => {
+      es.addEventListener(name, (ev) => {
+        let data = {};
+        try {
+          data = JSON.parse(ev.data || '{}');
+        } catch (_) { /* ignore */ }
+        handleJobStreamEvent(name, data);
+      });
+    };
+
+    [
+      'job:snapshot', 'job:queued', 'job:started', 'job:stage_done', 'job:done', 'job:failed',
+      'scenario:classified', 'persona:skipped', 'persona:start', 'persona:done',
+      'beats:start', 'beats:done',
+      'year:start', 'fate:start', 'fate:sampled', 'year:generating', 'year:partial', 'year:done'
+    ].forEach(bind);
+
+    es.onerror = () => {
+      /* EventSource auto-reconnects with Last-Event-ID */
+    };
+  }
+
+  async function runPipeline(resumeJobId = null) {
+    let handoff = resumeJob?.intakeResult
+      ? { ...resumeJob.intakeResult, full_profile: resumeJob.intakeResult.full_profile }
+      : (intakeHandoff || readHandoffFromSession());
     if (!handoff?.full_profile) {
       alert('请先完成 Intake 采集（岔路口 → 标签 → 行为题 → 确认）。');
       if (isUnified) showIntakeSection();
@@ -669,13 +1021,21 @@
       return;
     }
 
-    resetResults();
+    const generationMode = resumeJob?.generation_mode || getGenerationMode();
+    const maxYearRetries = generationMode === 'fast' ? 2 : 3;
+
+    if (!resumeJob) {
+      resetResults();
+    }
+    if (!resumeJob) clearJob();
     show($('gen-run-panel'));
+    show($('gen-bg-hint'));
     if (btnRun) {
       btnRun.disabled = true;
       btnRun.textContent = '生成中…';
     }
     clearError();
+    pipelineStartedAt = Date.now();
 
     let health;
     try {
@@ -700,16 +1060,17 @@
       openai: 'OpenAI'
     }[health.provider] || health.provider;
     if (providerEl) {
-      providerEl.textContent = `${providerLabel} · ${health.model_override || '默认模型'} · 命运 agent + RAG`;
+      providerEl.textContent = `${providerLabel} · ${health.model_override || '默认模型'} · ${generationMode === 'fast' ? '快速' : '完整'}模式`;
     }
 
     setProgress(2);
+    updateEtaLabel(0, 7, generationMode);
 
     let intakeResult = handoff;
     if (intakeResult.persona || intakeResult.persona_card) {
-      log('intake', `沿用 Intake Persona（${intakeResult.persona_source || 'cached'}）· 含标签与行为题`);
+      log('intake', `沿用 Intake Persona（${intakeResult.persona_source || 'cached'}）· 跳过重复分析`);
       renderPersona(intakeResult.persona, intakeResult.persona_card);
-    } else {
+    } else if (!resumeJob) {
       log('intake', '构建 profile + Persona agent（含标签与行为题）…');
       try {
         intakeResult = await post('/api/intake/complete', intakeApiPayloadFromHandoff(handoff));
@@ -726,43 +1087,71 @@
     }
 
     const profile = profileFromFull(intakeResult.full_profile || full);
-    if (intakeResult.persona || intakeResult.persona_card) {
-      log('persona', `${intakeResult.persona_source || 'ok'} · ${intakeResult.persona_card?.name || intakeResult.persona?.shadow_name || '影子'}`);
-    }
-    setProgress(10);
+    let session = resumeJob?.session || null;
+    let startIndex = session?.years?.length || 0;
 
-    let session;
-    try {
-      const startPayload = {
-        profile,
-        persona_card: intakeResult.persona_card || null,
-        full_profile: intakeResult.full_profile || null
-      };
-      const start = await postSse('/api/story/start/stream', startPayload, handleStartStage);
-      session = start.session;
-      renderBeats(session);
-    } catch (e) {
-      stopWaitTimer();
-      showError('Story 启动失败：' + e.message);
-      if (btnRun) {
-        btnRun.disabled = false;
-        btnRun.textContent = '重试';
+    if (!session) {
+      const startAt = Date.now();
+      try {
+        const startPayload = {
+          profile,
+          persona_card: intakeResult.persona_card || null,
+          full_profile: intakeResult.full_profile || null,
+          generation_mode: generationMode
+        };
+        const start = await postSse('/api/story/start/stream', startPayload, handleStartStage);
+        session = start.session;
+        renderBeats(session);
+        recordTiming(generationMode, 'start', Date.now() - startAt);
+      } catch (e) {
+        stopWaitTimer();
+        showError('Story 启动失败：' + e.message);
+        if (btnRun) {
+          btnRun.disabled = false;
+          btnRun.textContent = '重试';
+        }
+        return;
       }
-      return;
+    } else {
+      log('resume', `从第 ${startIndex + 1} 年继续（${generationMode} 模式）`);
+      renderBeats(session);
+      (session.years || []).forEach((y, idx) => {
+        const beat = session.beats?.[idx];
+        appendYear(y, '', beat?.type);
+      });
     }
 
     const totalYears = (session.beats || []).length || 7;
-    let pendingIntervention = null;
+    let pendingIntervention = resumeJob?.pending_intervention || null;
+    updateEtaLabel(startIndex, totalYears, generationMode);
 
-    for (let i = 0; i < totalYears; i++) {
+    saveJob({
+      status: 'running',
+      generation_mode: generationMode,
+      session,
+      intakeResult: {
+        full_profile: intakeResult.full_profile,
+        persona: intakeResult.persona,
+        persona_card: intakeResult.persona_card,
+        persona_source: intakeResult.persona_source
+      },
+      profile,
+      pending_intervention: pendingIntervention,
+      yearIndex: startIndex
+    });
+
+    for (let i = startIndex; i < totalYears; i++) {
       const beat = session.beats[i];
+      const yearStarted = Date.now();
+      updateEtaLabel(i, totalYears, generationMode);
       startWaitTimer('year', `Year agent 生成中 (${beat.type})…`, (secs) => {
-        setProgress(18 + ((i + secs / 90) / totalYears) * 68);
+        setProgress(18 + ((i + secs / (generationMode === 'fast' ? 45 : 90)) / totalYears) * 68);
+        updateEtaLabel(i, totalYears, generationMode);
       });
 
       let result;
       let yearErr = null;
-      for (let attempt = 0; attempt < 3; attempt++) {
+      for (let attempt = 0; attempt < maxYearRetries; attempt++) {
         try {
           result = await postSse(
             '/api/story/year/stream',
@@ -776,19 +1165,37 @@
           stopWaitTimer();
           clearPending('year');
           clearPending('fate');
-          if (attempt < 2) {
-            log('year', `第 ${beat.year} 年 schema 未通过，重试 ${attempt + 2}/3…`);
-            await new Promise((r) => setTimeout(r, 800));
+          hideStreamYear();
+          if (attempt < maxYearRetries - 1) {
+            log('year', `第 ${beat.year} 年未通过，重试 ${attempt + 2}/${maxYearRetries}…`);
+            await new Promise((r) => setTimeout(r, 600));
           }
         }
       }
       stopWaitTimer();
+      recordTiming(generationMode, 'year', Date.now() - yearStarted);
       if (yearErr) {
-        showError(`第 ${beat.year} 年失败：${yearErr.message}`);
+        saveJob({
+          status: 'paused',
+          generation_mode: generationMode,
+          session,
+          intakeResult: {
+            full_profile: intakeResult.full_profile,
+            persona: intakeResult.persona,
+            persona_card: intakeResult.persona_card,
+            persona_source: intakeResult.persona_source
+          },
+          profile,
+          pending_intervention: pendingIntervention,
+          yearIndex: i,
+          error: yearErr.message
+        });
+        showError(`第 ${beat.year} 年失败：${yearErr.message} — 可稍后点「继续生成」`);
         if (btnRun) {
           btnRun.disabled = false;
-          btnRun.textContent = '重试';
+          btnRun.textContent = '继续生成';
         }
+        showResumePanel();
         return;
       }
 
@@ -796,7 +1203,24 @@
       session = result.session;
       const eraLine = session.last_fate_context?.era_line || '';
       appendYear(result.year, eraLine, beat.type);
+      openYearDialogue(result.year, session, profile);
       setProgress(18 + ((i + 1) / totalYears) * 68);
+      updateEtaLabel(i + 1, totalYears, generationMode);
+
+      saveJob({
+        status: i + 1 >= totalYears ? 'finalizing' : 'running',
+        generation_mode: generationMode,
+        session,
+        intakeResult: {
+          full_profile: intakeResult.full_profile,
+          persona: intakeResult.persona,
+          persona_card: intakeResult.persona_card,
+          persona_source: intakeResult.persona_source
+        },
+        profile,
+        pending_intervention: null,
+        yearIndex: i + 1
+      });
 
       if (result.year?.is_pivotal && result.year?.intervention_prompt && i < totalYears - 1) {
         const choice = await openInterventionModal(result.year.intervention_prompt);
@@ -808,28 +1232,89 @@
             option_index: choice.option_index
           };
           log('year', `介入：${choice.choice}`);
+          saveJob({
+            status: 'running',
+            generation_mode: generationMode,
+            session,
+            intakeResult: {
+              full_profile: intakeResult.full_profile,
+              persona: intakeResult.persona,
+              persona_card: intakeResult.persona_card,
+              persona_source: intakeResult.persona_source
+            },
+            profile,
+            pending_intervention: pendingIntervention,
+            yearIndex: i + 1
+          });
         }
       }
     }
 
     log('final', 'Final agent 收束…');
+    const finalAt = Date.now();
     let fin;
     try {
       fin = await post('/api/story/final', { session });
+      recordTiming(generationMode, 'final', Date.now() - finalAt);
     } catch (e) {
-      showError('Final 失败：' + e.message);
+      saveJob({
+        status: 'paused',
+        generation_mode: generationMode,
+        session,
+        intakeResult: {
+          full_profile: intakeResult.full_profile,
+          persona: intakeResult.persona,
+          persona_card: intakeResult.persona_card,
+          persona_source: intakeResult.persona_source
+        },
+        profile,
+        yearIndex: totalYears,
+        error: e.message
+      });
+      showError(`Final 失败：${e.message}`);
       if (btnRun) {
         btnRun.disabled = false;
-        btnRun.textContent = '重试';
+        btnRun.textContent = '继续生成';
       }
+      showResumePanel();
       return;
     }
 
+    clearJob();
     session = fin.session;
     renderFinal(fin.final);
     setProgress(100);
+    updateEtaLabel(totalYears, totalYears, generationMode);
     log('final', '完成 — 即将进入 Demo 七年浏览');
     finishAndEnterDemo(session, fin, intakeResult, profile, health);
+  }
+
+  function showResumePanel() {
+    const job = loadJob();
+    const panel = $('gen-resume-panel');
+    const text = $('gen-resume-text');
+    if (!job || !panel) return;
+    const done = job.session?.years?.length || 0;
+    const total = job.session?.beats?.length || 7;
+    if (text) {
+      text.textContent = `${job.generation_mode === 'fast' ? '快速' : '完整'}模式 · 已生成 ${done}/${total} 年 · ${job.status === 'paused' && job.error ? '上次错误：' + job.error : '可继续'}`;
+    }
+    show(panel);
+  }
+
+  function checkResumeOnLoad() {
+    const job = loadJob();
+    if (!job?.session?.beats?.length) return;
+    const done = job.session.years?.length || 0;
+    const total = job.session.beats.length;
+    if (job.status === 'running' || job.status === 'paused' || (job.status === 'finalizing' && done < total)) {
+      showResumePanel();
+      showPipelineSection();
+      if (job.intakeResult?.full_profile) {
+        intakeHandoff = job.intakeResult;
+        renderIntakeSummary(intakeHandoff);
+      }
+    }
   }
 
   function onIntakeComplete(result) {
@@ -865,7 +1350,20 @@
     window.location.href = 'index.html';
   });
   $('btn-edit-intake')?.addEventListener('click', showIntakeSection);
-  btnRun?.addEventListener('click', runPipeline);
+  btnRun?.addEventListener('click', () => runPipeline());
+  $('btn-resume-job')?.addEventListener('click', () => {
+    const job = loadJob();
+    if (job) runPipeline(job);
+  });
+  $('btn-discard-job')?.addEventListener('click', () => {
+    clearJob();
+    resetResults();
+    hide($('gen-run-panel'));
+    if (btnRun) {
+      btnRun.disabled = false;
+      btnRun.textContent = '开始 API 生成';
+    }
+  });
   $('btn-export')?.addEventListener('click', exportJson);
   $('btn-reset')?.addEventListener('click', () => {
     resetResults();
@@ -884,10 +1382,18 @@
       renderIntakeSummary(handoff);
       showPipelineSection();
       if (params.get('autostart') === '1') {
-        setTimeout(runPipeline, 400);
+        setTimeout(() => runPipeline(), 400);
       }
     }
+  } else {
+    checkResumeOnLoad();
   }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && loadJob()?.status === 'running') {
+      show($('gen-bg-hint'));
+    }
+  });
 
   fetch('/api/health')
     .then((r) => r.json())

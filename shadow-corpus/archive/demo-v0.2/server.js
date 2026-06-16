@@ -438,6 +438,7 @@ async function handleStoryStart(req, res) {
       profile: body.profile,
       persona_card: body.persona_card || null,
       full_profile: body.full_profile || null,
+      generation_mode: body.generation_mode || 'fast',
       trace
     });
     persistTrace(trace);
@@ -462,6 +463,7 @@ async function handleStoryStartStream(req, res) {
       profile: body.profile,
       persona_card: body.persona_card || null,
       full_profile: body.full_profile || null,
+      generation_mode: body.generation_mode || 'fast',
       trace,
       onStage: (stage, payload) => send(stage, payload)
     });
@@ -514,6 +516,60 @@ async function handleStoryYearStream(req, res) {
   } catch (error) {
     send('error', { message: error.message });
     res.end();
+  }
+}
+
+async function handleStoryJobsCreate(req, res) {
+  const body = await readJson(req);
+  if (!body.profile || !body.profile.choice) {
+    sendJson(res, 400, { error: 'Missing profile.choice' });
+    return;
+  }
+  const { getJobManager } = require('./lib/job-manager');
+  const job = getJobManager().createAndSubmit({
+    profile: body.profile,
+    persona_card: body.persona_card || null,
+    full_profile: body.full_profile || null,
+    generation_mode: body.generation_mode || 'fast',
+    intake_snapshot: body.intake_snapshot || null
+  });
+  sendJson(res, 202, { job_id: job.job_id, status: job.status, job });
+}
+
+async function handleStoryJobGet(_req, res, jobId) {
+  const { getJobManager } = require('./lib/job-manager');
+  const job = getJobManager().getJob(jobId);
+  if (!job) {
+    sendJson(res, 404, { error: 'Job not found' });
+    return;
+  }
+  sendJson(res, 200, job);
+}
+
+async function handleStoryJobStream(req, res, jobId) {
+  const { getJobManager } = require('./lib/job-manager');
+  const job = getJobManager().getJob(jobId);
+  if (!job) {
+    sendJson(res, 404, { error: 'Job not found' });
+    return;
+  }
+  const lastEventId = Number(req.headers['last-event-id'] || 0);
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache, no-transform',
+    Connection: 'keep-alive',
+    'X-Accel-Buffering': 'no'
+  });
+  getJobManager().subscribeSse(jobId, res, lastEventId);
+}
+
+async function handleStoryJobRetry(_req, res, jobId) {
+  const { getJobManager } = require('./lib/job-manager');
+  try {
+    const job = getJobManager().retryJob(jobId);
+    sendJson(res, 200, { job_id: job.job_id, status: job.status, job });
+  } catch (error) {
+    sendJson(res, 400, { error: error.message });
   }
 }
 
@@ -680,6 +736,7 @@ const ROUTES = {
   'POST /api/story/year': handleStoryYear,
   'POST /api/story/year/stream': handleStoryYearStream,
   'POST /api/story/final': handleStoryFinal,
+  'POST /api/story/jobs': handleStoryJobsCreate,
   'POST /api/generate': handleLegacyGenerate
 };
 
@@ -707,10 +764,47 @@ async function handleHealth(req, res) {
 }
 
 const server = http.createServer(async (req, res) => {
-  const key = `${req.method} ${req.url.split('?')[0]}`;
+  const pathname = req.url.split('?')[0];
+  const key = `${req.method} ${pathname}`;
 
   if (key === 'GET /api/health') {
     return handleHealth(req, res);
+  }
+
+  const jobStreamMatch = pathname.match(/^\/api\/story\/jobs\/([^/]+)\/stream$/);
+  if (req.method === 'GET' && jobStreamMatch) {
+    try {
+      await handleStoryJobStream(req, res, jobStreamMatch[1]);
+    } catch (error) {
+      console.error(`[GET job stream] ${error.stack || error.message}`);
+      if (!res.headersSent) sendJson(res, 500, { error: error.message });
+      else res.end();
+    }
+    return;
+  }
+
+  const jobIdMatch = pathname.match(/^\/api\/story\/jobs\/([^/]+)$/);
+  if (req.method === 'GET' && jobIdMatch) {
+    try {
+      await handleStoryJobGet(req, res, jobIdMatch[1]);
+    } catch (error) {
+      console.error(`[GET job] ${error.stack || error.message}`);
+      if (!res.headersSent) sendJson(res, 500, { error: error.message });
+      else res.end();
+    }
+    return;
+  }
+
+  const jobRetryMatch = pathname.match(/^\/api\/story\/jobs\/([^/]+)\/retry$/);
+  if (req.method === 'POST' && jobRetryMatch) {
+    try {
+      await handleStoryJobRetry(req, res, jobRetryMatch[1]);
+    } catch (error) {
+      console.error(`[POST job retry] ${error.stack || error.message}`);
+      if (!res.headersSent) sendJson(res, 500, { error: error.message });
+      else res.end();
+    }
+    return;
   }
 
   if (ROUTES[key]) {
@@ -734,6 +828,8 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, () => {
+  const { getJobManager } = require('./lib/job-manager');
+  getJobManager().boot();
   const base = `http://localhost:${PORT}`;
   console.log(`Shadow local preview → ${base}`);
   console.log(`  首页:    ${base}/`);

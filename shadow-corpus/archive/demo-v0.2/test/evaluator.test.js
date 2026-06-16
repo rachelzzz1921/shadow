@@ -56,11 +56,19 @@ test('未复读线标杆 JSON passes v2 rule eval without errors', () => {
   assert.equal(result.errors.length, 0, result.errors.map((e) => e.message).join('; '));
 });
 
-test('v2 evaluateYear flags short event as error on live path', () => {
+test('fast evaluateYear accepts ~100 char event on live path', () => {
+  const event = '春'.repeat(100);
   const findings = evaluateYear(
-    { year: 2, is_pivotal: false, event: '太短。', visual_anchor: '教室举手', key_props: ['课桌', '阳光'] },
-    { type: 'quiet' },
-    { lengthStandard: 'v2', isLive: true }
+    {
+      year: 2,
+      is_pivotal: true,
+      event,
+      visual_anchor: '教室窗边',
+      key_props: ['课桌', '阳光'],
+      intervention_prompt: { question: '继续吗', options: ['继续', '停下'] }
+    },
+    { type: 'pivotal' },
+    { lengthStandard: 'fast', isLive: true }
   );
-  assert.ok(findings.some((f) => f.code === 'year.event_volume' && f.severity === 'error'));
+  assert.ok(!findings.some((f) => f.code === 'year.event_volume' && f.severity === 'error'));
 });

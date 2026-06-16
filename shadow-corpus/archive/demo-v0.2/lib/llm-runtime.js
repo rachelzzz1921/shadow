@@ -1,6 +1,6 @@
 'use strict';
 
-const { generateObject, generateText } = require('ai');
+const { generateObject, generateText, streamObject } = require('ai');
 const { anthropic } = require('@ai-sdk/anthropic');
 const { openai, createOpenAI } = require('@ai-sdk/openai');
 
@@ -111,6 +111,25 @@ function createLiveRuntime({ env = process.env } = {}) {
         const parsed = schema.safeParse(obj);
         if (parsed.success) return parsed.data;
         throw primaryError;
+      }
+    },
+    async streamStructured({ schema, system, prompt, temperature = 0.85, onPartial }) {
+      try {
+        const result = streamObject({
+          model,
+          schema,
+          system,
+          prompt,
+          temperature
+        });
+        let last = null;
+        for await (const partial of result.partialObjectStream) {
+          last = partial;
+          if (typeof onPartial === 'function') onPartial(partial);
+        }
+        return (await result.object) || last;
+      } catch (primaryError) {
+        return this.generateStructured({ schema, system, prompt, temperature });
       }
     }
   };

@@ -107,7 +107,8 @@ test('story session advances year-by-year and threads intervention into runtime 
 
   let session = await startStorySession({
     profile: { choice: '如果去复读', age: 18 },
-    runtime: observingRuntime
+    runtime: observingRuntime,
+    generation_mode: 'full'
   });
 
   let result = await generateNextYear({ session, runtime: observingRuntime });

@@ -62,11 +62,42 @@ function evaluateYear(year, beat, opts = {}) {
   if (!year) return [issue('year.missing', '缺少年份对象', 'error')];
 
   const lengthStandard = opts.lengthStandard || 'legacy';
-  const isLive = opts.isLive || lengthStandard === 'v2';
+  const isLive = opts.isLive || lengthStandard === 'v2' || lengthStandard === 'fast';
   const beatType = beat?.type || (year.is_pivotal ? 'pivotal' : 'quiet');
   const eventLen = (year.event || '').length;
 
-  if (lengthStandard === 'v2') {
+  if (lengthStandard === 'fast') {
+    if (eventLen < 80) {
+      findings.push(issue(
+        'year.event_volume',
+        `快速模式 event 建议 90–120 字，当前 ${eventLen}`,
+        isLive ? 'error' : 'warn'
+      ));
+    }
+    if (eventLen > 145) {
+      findings.push(issue(
+        'year.event_long',
+        `快速模式 event 建议 ≤120 字左右，当前 ${eventLen}`,
+        'warn'
+      ));
+    }
+    const anchorLen = (year.visual_anchor || '').length;
+    if (anchorLen < 8) {
+      findings.push(issue(
+        'year.visual_anchor',
+        `年${year.year} 缺少 visual_anchor（8–48 字）`,
+        'warn'
+      ));
+    }
+    const props = Array.isArray(year.key_props) ? year.key_props : [];
+    if (props.length < 2) {
+      findings.push(issue(
+        'year.key_props',
+        `年${year.year} 缺少 key_props（须 2–3 个物件）`,
+        'warn'
+      ));
+    }
+  } else if (lengthStandard === 'v2') {
     if (eventLen < 160) {
       findings.push(issue(
         'year.event_volume',
@@ -137,7 +168,14 @@ function evaluateYear(year, beat, opts = {}) {
 
   const reflectionLen = (year.reflection || '').length;
   const dialogueLen = (year.shadow_dialogue || '').length;
-  if (lengthStandard === 'v2') {
+  if (lengthStandard === 'fast') {
+    if (reflectionLen < 32) {
+      findings.push(issue('year.reflection_short', `快速模式 reflection 建议 40–55 字，当前 ${reflectionLen}`, 'warn'));
+    }
+    if (dialogueLen < 28) {
+      findings.push(issue('year.dialogue_short', '快速模式 shadow_dialogue 建议 35–48 字', 'warn'));
+    }
+  } else if (lengthStandard === 'v2') {
     if (reflectionLen < 45) {
       findings.push(issue('year.reflection_short', `reflection 建议 55–75 字，当前 ${reflectionLen}`, 'warn'));
     }
@@ -306,6 +344,7 @@ function evaluateFinal(final) {
 function evaluateStory(story, opts = {}) {
   const findings = [];
   const lengthStandard = opts.lengthStandard
+    || story?.generation_mode
     || (story?._from_live || story?._from_generate ? 'v2' : 'legacy');
   const isLive = opts.isLive ?? !!(story?._from_live || story?._from_generate);
   const evalOpts = { lengthStandard, isLive };
