@@ -43,7 +43,7 @@ function year(n, overrides = {}) {
   };
 }
 
-function buildRuntime(yearCount = 2) {
+function buildRuntime(yearCount = 2, { withReplanQueue = true } = {}) {
   const queue = [
     {
       name: '阿岚',
@@ -69,7 +69,7 @@ function buildRuntime(yearCount = 2) {
         ? { question: '告诉父母吗？', options: ['告诉', '不说'] }
         : null
     }));
-    if (i === 1 && yearCount > 1) {
+    if (i === 1 && yearCount > 1 && withReplanQueue) {
       queue.push({
         beats: Array.from({ length: 7 }, (_, j) => ({
           year: j + 1,
@@ -134,4 +134,35 @@ test('harness smoke: trace records fate:sampled and replan on intervention', asy
   const final = await finishStorySession({ session, runtime, trace });
   assert.ok(final.eval.ok);
   assert.ok(final.eval.score >= 70);
+});
+
+test('harness smoke: full 7 years with intervention passes eval', async () => {
+  const runtime = buildRuntime(7, { withReplanQueue: false });
+  const trace = createRunTrace({ profile: { choice: '复读', age: 18 }, mode: 'smoke-full' });
+  const { evaluateStory } = require('../lib/evaluator');
+
+  let session = await startStorySession({
+    profile: { choice: '复读', age: 18 },
+    runtime,
+    trace,
+    generation_mode: 'fast'
+  });
+
+  for (let i = 0; i < 7; i += 1) {
+    const intervention = i === 1
+      ? { from_year: 1, question: '告诉父母吗？', choice: '告诉' }
+      : null;
+    session = (await generateNextYear({
+      session,
+      runtime,
+      trace,
+      user_intervention: intervention
+    })).session;
+  }
+
+  const fin = await finishStorySession({ session, runtime, trace });
+  const evalResult = evaluateStory(fin.session);
+  assert.equal(evalResult.errors.length, 0, JSON.stringify(evalResult.errors));
+  assert.ok(evalResult.ok);
+  assert.ok(fin.session.years.length === 7);
 });

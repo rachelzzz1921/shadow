@@ -1,8 +1,9 @@
 'use strict';
 
 /**
- * Shadow Generate — Intake 全链 + API 七年生成
- * Intake（四层）→ Persona → start/stream → year×7/stream → final → demo.html?live=1
+ * Shadow Generate — Intake + Job 管线（主路径）
+ * Intake → POST /api/story/jobs → SSE → intervention → demo.html?live=1
+ * @deprecated 浏览器直连 SSE 逐年路径保留兼容，新功能请走 Job 管线。
  */
 (function () {
   const $ = (id) => document.getElementById(id);
@@ -24,9 +25,16 @@
   const TIMING_KEY = 'shadow_gen_timings';
   let activeEventSource = null;
   let pendingPollTimer = null;
+  let runningPollTimer = null;
   let currentJobId = null;
   let interventionInFlight = false;
   let interventionForYear = null;
+  let progressScreenMode = false;
+
+  function setProgressScreen(on) {
+    progressScreenMode = !!on;
+    document.body.classList.toggle('gen-progress-screen', progressScreenMode);
+  }
 
   const DEFAULT_ETA_MS = {
     fast: { start: 22000, year: 28000, final: 18000 },
@@ -232,6 +240,11 @@
       const choice = await openInterventionModal(prompt);
       await submitJobIntervention(job.job_id, { from_year: fromYear, prompt, choice });
       log('intervention', choice ? `已选：${choice.choice}` : '已跳过介入');
+      attachJobStream(job.job_id, true);
+      scheduleJobPoll(job.job_id);
+      try {
+        onJobSnapshot(await fetchJob(job.job_id));
+      } catch (_) { /* stream/poll will catch up */ }
     } catch (e) {
       showError('提交介入失败：' + e.message);
     } finally {
@@ -534,6 +547,7 @@
   }
 
   function renderPersona(persona, card) {
+    if (progressScreenMode) return;
     const root = $('gen-persona');
     if (!root) return;
     const name = card?.name || persona?.shadow_name || '影子';
@@ -552,6 +566,7 @@
   }
 
   function renderBeats(session) {
+    if (progressScreenMode) return;
     const root = $('gen-beats');
     if (!root) return;
     const items = (session.beats || [])
@@ -565,6 +580,7 @@
   }
 
   function appendYear(year, eraLine, beatType) {
+    if (progressScreenMode) return;
     const root = $('gen-years');
     if (!root) return;
     const block = document.createElement('article');
@@ -581,6 +597,7 @@
   }
 
   function renderFinal(final) {
+    if (progressScreenMode) return;
     const root = $('gen-final');
     if (!root || !final) return;
     root.innerHTML = `
@@ -685,33 +702,22 @@
     }
   }
 
-  function enterDemoLive({ storedOk }) {
-    const demoUrl = 'demo.html?live=1&from=generate';
+  function enterDemoLive({ storedOk, jobId }) {
+    const q = new URLSearchParams({ live: '1', from: 'generate' });
+    if (jobId) q.set('job_id', jobId);
+    const demoUrl = `demo.html?${q.toString()}`;
     showCompleteOverlay(
-      storedOk ? '正在进入七年浏览…' : '缓存失败，请点击下方按钮进入',
-      storedOk ? 2 : 0
+      storedOk ? '七年已写好，正在进入阅读器…' : '缓存失败，仍将从服务端加载七年…',
+      storedOk ? 2 : 1
     );
-    $('gen-final-panel')?.scrollIntoView({ behavior: 'smooth', block: 'end' });
     if (btnRun) {
-      btnRun.textContent = storedOk ? '完成，正在进入七年…' : '完成 — 请点击下方进入七年';
+      btnRun.textContent = '完成，正在进入七年…';
       btnRun.disabled = true;
     }
-    const finalPanel = $('gen-final-panel');
-    if (finalPanel && !finalPanel.querySelector('.gen-demo-link')) {
-      const linkWrap = document.createElement('div');
-      linkWrap.className = 'gen-actions gen-demo-link';
-      linkWrap.style.marginTop = '20px';
-      linkWrap.innerHTML =
-        '<a href="demo.html?live=1&from=generate" class="btn-start" style="display:inline-block;text-decoration:none">进入七年浏览 →</a>';
-      finalPanel.appendChild(linkWrap);
-    }
-    if (storedOk) {
-      setTimeout(() => {
-        window.location.replace(demoUrl);
-      }, 1200);
-    } else {
-      showError('七年数据过大未能自动缓存，请点击「进入七年浏览」手动打开。');
-    }
+    setProgressScreen(false);
+    setTimeout(() => {
+      window.location.replace(demoUrl);
+    }, 1200);
   }
 
   function finishAndEnterDemo(activeSession, fin, intakeResult, profile, health) {
@@ -743,7 +749,7 @@
       const storedOk = persistLiveSession(livePayload);
       clearJobId();
       disconnectJobStream();
-      enterDemoLive({ storedOk });
+      enterDemoLive({ storedOk, jobId: currentJobId || loadJobId() });
     } catch (err) {
       console.error('[generate] finishAndEnterDemo', err);
       showError('进入 Demo 失败：' + (err.message || '未知错误'));
@@ -832,15 +838,39 @@
     hide($('gen-resume-panel'));
   }
 
+  function clearJobPollers() {
+    if (pendingPollTimer) {
+      clearInterval(pendingPollTimer);
+      pendingPollTimer = null;
+    }
+    if (runningPollTimer) {
+      clearInterval(runningPollTimer);
+      runningPollTimer = null;
+    }
+  }
+
+  function scheduleJobPoll(jobId) {
+    if (runningPollTimer) return;
+    runningPollTimer = setInterval(async () => {
+      try {
+        const fresh = await fetchJob(jobId);
+        onJobSnapshot(fresh);
+        if (fresh.status === 'done' || fresh.status === 'failed' || fresh.status === 'awaiting_intervention') {
+          clearInterval(runningPollTimer);
+          runningPollTimer = null;
+        }
+      } catch (e) {
+        console.warn('[generate] running poll', e);
+      }
+    }, 2000);
+  }
+
   function disconnectJobStream() {
     if (activeEventSource) {
       activeEventSource.close();
       activeEventSource = null;
     }
-    if (pendingPollTimer) {
-      clearInterval(pendingPollTimer);
-      pendingPollTimer = null;
-    }
+    clearJobPollers();
   }
 
   function apiUrl(path) {
@@ -883,14 +913,18 @@
   function hydrateJobUi(job) {
     const session = job.session;
     if (!session?.beats) return;
-    renderBeats(session);
+    if (!progressScreenMode) {
+      renderBeats(session);
+    }
     const root = $('gen-years');
-    if (root) root.innerHTML = '';
-    (session.years || []).forEach((y, idx) => {
-      const beat = session.beats?.[idx];
-      appendYear(y, session.last_fate_context?.era_line || '', beat?.type);
-    });
-    if (job.result?.final) renderFinal(job.result.final);
+    if (root && !progressScreenMode) root.innerHTML = '';
+    if (!progressScreenMode) {
+      (session.years || []).forEach((y, idx) => {
+        const beat = session.beats?.[idx];
+        appendYear(y, session.last_fate_context?.era_line || '', beat?.type);
+      });
+      if (job.result?.final) renderFinal(job.result.final);
+    }
     const done = session.years?.length || 0;
     const total = session.beats?.length || 7;
     const pct = job.status === 'done' ? 100 : Math.round(18 + (done / total) * 68);
@@ -920,13 +954,21 @@
   function onJobSnapshot(job) {
     currentJobId = job.job_id;
     saveJobId(job.job_id);
+    const runningLike = job.status === 'running' || job.status === 'pending'
+      || job.status === 'awaiting_intervention' || job.status === 'orphaned';
+    setProgressScreen(runningLike && job.status !== 'done');
     show($('gen-run-panel'));
-    show($('gen-years-panel'));
+    if (!progressScreenMode) {
+      show($('gen-years-panel'));
+    } else {
+      show($('gen-year-stream'));
+    }
     show($('gen-bg-hint'));
     hydrateJobUi(job);
     renderRunningProgress(job);
 
     if (job.status === 'done') {
+      clearJobPollers();
       disconnectJobStream();
       if (jobReadyForDemo(job)) {
         const intake = job.intake_snapshot || {};
@@ -972,6 +1014,10 @@
         }
       }, 3000);
     }
+
+    if (job.status === 'running') {
+      scheduleJobPoll(job.job_id);
+    }
   }
 
   function handleJobStreamEvent(event, data) {
@@ -984,11 +1030,18 @@
       return;
     }
     if (event === 'job:done') {
-      fetchJob(currentJobId).then(onJobSnapshot).catch((e) => showError(e.message));
+      fetchJob(currentJobId).then(onJobSnapshot).catch((e) => {
+        console.warn('[generate] job:done fetch failed', e);
+        enterDemoLive({ storedOk: false, jobId: currentJobId || loadJobId() });
+      });
       return;
     }
     if (event === 'job:failed') {
       fetchJob(currentJobId).then(onJobSnapshot).catch((e) => showError(e.message));
+      return;
+    }
+    if (event === 'job:timing') {
+      log('timing', `${data.stage} · ${data.ms}ms`);
       return;
     }
     if (event === 'job:stage_done') {
@@ -1041,7 +1094,7 @@
 
     [
       'job:snapshot', 'job:queued', 'job:started', 'job:stage_done', 'job:done', 'job:failed',
-      'job:awaiting_intervention',
+      'job:awaiting_intervention', 'job:timing',
       'scenario:classified', 'persona:skipped', 'persona:start', 'persona:done',
       'beats:start', 'beats:done',
       'year:start', 'fate:start', 'fate:sampled', 'year:generating', 'year:partial', 'year:done'
@@ -1069,6 +1122,7 @@
 
     const generationMode = getGenerationMode();
     resetResults();
+    setProgressScreen(true);
     show($('gen-run-panel'));
     show($('gen-bg-hint'));
     showPipelineSection();

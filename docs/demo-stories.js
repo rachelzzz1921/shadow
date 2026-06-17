@@ -261,6 +261,11 @@ async function bootstrapDemoStory() {
     if (params.get('live') === '1' && typeof window.ShadowDemo.applyLiveFromSession === 'function') {
       window.ShadowDemo.applyLiveFromSession();
     }
+    if (params.get('live') === '1' && params.get('job_id')
+      && !window.ShadowDemo.STORY._from_live
+      && typeof window.ShadowDemo.applyLiveFromJobQuery === 'function') {
+      await window.ShadowDemo.applyLiveFromJobQuery();
+    }
   }
 
   return story;

@@ -53,7 +53,8 @@ async function resolveFateContext({
   full_profile = null,
   narrativeYear,
   beatType,
-  priorInterventions = []
+  priorInterventions = [],
+  generation_mode = 'fast'
 }) {
   const calendarYear = calendarYearForNarrative(profile, narrativeYear);
   const pool = loadWorldYearPool(calendarYear);
@@ -67,6 +68,7 @@ async function resolveFateContext({
   }
 
   const sample = await getSampler();
+  const fastPath = generation_mode === 'fast';
   const narrowedPool = await refinePool(pool, {
     runId,
     profile,
@@ -74,7 +76,8 @@ async function resolveFateContext({
     narrativeYear,
     beatType,
     priorInterventions,
-    calendarYear
+    calendarYear,
+    fastPath
   });
   const ctx = await sample({
     runId,
@@ -94,6 +97,17 @@ async function resolveFateContext({
 let refinePoolFn = null;
 
 async function refinePool(pool, opts) {
+  if (opts?.fastPath) {
+    try {
+      const base = path.join(__dirname, '../../../packages/rag-kit/lib');
+      const worldPool = await import(path.join(base, 'world-pool.mjs'));
+      const query = worldPool.buildFateQuery(opts);
+      return worldPool.refineWorldPool(pool, { ...opts, query, boostIds: [] });
+    } catch (err) {
+      console.warn('[fate-bridge] fast rules refine skipped:', err.message);
+      return pool;
+    }
+  }
   try {
     if (!refinePoolFn) {
       const rag = require('./rag-service');

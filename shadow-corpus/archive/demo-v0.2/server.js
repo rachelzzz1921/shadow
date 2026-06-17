@@ -752,11 +752,16 @@ const ROUTES = {
 };
 
 async function handleHealth(req, res) {
+  const e2e = process.env.SHADOW_E2E === '1';
   let provider = null;
-  try {
-    provider = getAgents().pickProvider();
-  } catch {
-    provider = null;
+  if (!e2e) {
+    try {
+      provider = getAgents().pickProvider();
+    } catch {
+      provider = null;
+    }
+  } else {
+    provider = 'fake';
   }
   let rag = { enabled: process.env.RAG_ENABLED !== 'false' };
   try {
@@ -765,12 +770,21 @@ async function handleHealth(req, res) {
   } catch {
     /* rag kit optional */
   }
+  let stage_p50_ms = {};
+  try {
+    const { getStageP50Summary } = require('./lib/stage-timing-stats');
+    stage_p50_ms = getStageP50Summary();
+  } catch {
+    /* optional */
+  }
   sendJson(res, 200, {
     ok: true,
+    e2e,
     provider,
-    has_key: hasAnyKey(),
+    has_key: e2e || hasAnyKey(),
     model_override: process.env.SHADOW_MODEL || null,
-    rag
+    rag,
+    stage_p50_ms
   });
 }
 
@@ -852,7 +866,13 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, () => {
   const { getJobManager } = require('./lib/job-manager');
-  getJobManager().boot();
+  const jm = getJobManager();
+  if (process.env.SHADOW_E2E === '1') {
+    const { buildE2eRuntime } = require('./lib/e2e-fixture');
+    jm.setRuntime(buildE2eRuntime());
+    console.log('[E2E] mock LLM runtime enabled');
+  }
+  jm.boot();
   const base = `http://localhost:${PORT}`;
   console.log(`Shadow local preview → ${base}`);
   console.log(`  首页:    ${base}/`);

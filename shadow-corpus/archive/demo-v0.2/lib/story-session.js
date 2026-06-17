@@ -266,7 +266,8 @@ async function generateNextYear({
       full_profile: session.full_profile || null,
       narrativeYear: beat.year,
       beatType: beat.type,
-      priorInterventions: replanLog.map(r => r.intervention)
+      priorInterventions: replanLog.map(r => r.intervention),
+      generation_mode: session.generation_mode || 'fast'
     });
     const fatePayload = {
       year: beat.year,

@@ -1,0 +1,349 @@
+{
+  "job_id": "job_20260617_38ad",
+  "status": "awaiting_intervention",
+  "generation_mode": "fast",
+  "created_at": 1781682886464,
+  "updated_at": 1781682886487,
+  "stage": {
+    "current": "intervention",
+    "year_index": 1,
+    "total_years": 7,
+    "intervention_from_year": 1,
+    "next_year": 2
+  },
+  "completed_stages": [
+    "start",
+    "year_1"
+  ],
+  "session": {
+    "profile": {
+      "choice": "复读",
+      "age": 18,
+      "scenario_domain": "academic",
+      "scenario_label": "学业",
+      "scenario_agent": "学业 Agent"
+    },
+    "full_profile": null,
+    "generation_mode": "fast",
+    "scenario": {
+      "domain": "academic",
+      "label": "学业",
+      "agent": "学业 Agent",
+      "brief": "复读、考研、换专业、留学",
+      "confidence": 0.259,
+      "scenario_primary": "academic",
+      "scenario_secondary": "family",
+      "scenario_weights": {
+        "family": 0.12345679012345677,
+        "love": 0.12345679012345677,
+        "friendship": 0.12345679012345677,
+        "academic": 0.382716049382716,
+        "career": 0.12345679012345677,
+        "self_growth": 0.12345679012345677
+      },
+      "matched": [
+        {
+          "domain": "academic",
+          "label": "学业"
+        }
+      ]
+    },
+    "persona_card": {
+      "name": "阿岚",
+      "core_traits": [
+        "要强"
+      ],
+      "soft_spots": [
+        "期待"
+      ],
+      "decision_tendency": "走",
+      "growth_seed": "够"
+    },
+    "shadow": {
+      "character": "Adam",
+      "palette": "violet",
+      "trait_tags": [
+        "要强"
+      ]
+    },
+    "beats": [
+      {
+        "year": 1,
+        "type": "pivotal",
+        "seed": "e2e-1"
+      },
+      {
+        "year": 2,
+        "type": "quiet",
+        "seed": "e2e-2"
+      },
+      {
+        "year": 3,
+        "type": "quiet",
+        "seed": "e2e-3"
+      },
+      {
+        "year": 4,
+        "type": "pivotal",
+        "seed": "e2e-4"
+      },
+      {
+        "year": 5,
+        "type": "quiet",
+        "seed": "e2e-5"
+      },
+      {
+        "year": 6,
+        "type": "pivotal",
+        "seed": "e2e-6"
+      },
+      {
+        "year": 7,
+        "type": "quiet",
+        "seed": "e2e-7"
+      }
+    ],
+    "pivotal_years": [
+      1,
+      4,
+      6
+    ],
+    "memory_stream": [
+      {
+        "id": "m1",
+        "year": 1,
+        "type": "decision",
+        "content": "年1：E2E",
+        "weight": 0.85
+      }
+    ],
+    "years": [
+      {
+        "year": 1,
+        "age": 19,
+        "is_pivotal": true,
+        "title": "E2E第1年",
+        "scene": "rain",
+        "environment": "classroom",
+        "pose": "wait",
+        "prop": "desk",
+        "city": "city2",
+        "event": "第1年，你站在岔路口。雨还在下，你选了继续走。教室里的灯一盏盏灭掉，你背着书包穿过走廊，听见自己的心跳比雨声还响。",
+        "decision_made": "继续走",
+        "intervention_prompt": {
+          "question": "E2E：你要告诉父母这个决定吗？",
+          "options": [
+            "告诉",
+            "不说"
+          ]
+        },
+        "emotion": "低",
+        "emotion_value": 4,
+        "new_mood": 4,
+        "new_esteem": 5,
+        "reflection": "还在这里。",
+        "shadow_dialogue": "影子还在。",
+        "memory_summary": "年1：E2E",
+        "visual_anchor": "E2E · 第1年",
+        "key_props": [
+          "书包",
+          "课桌"
+        ],
+        "daily_micro": null,
+        "user_intervention": null
+      }
+    ],
+    "mood": 4,
+    "esteem": 5,
+    "run_id": "2026-06-17T07-54-46-466Z-d0448c",
+    "visual_character": null,
+    "replan_log": [],
+    "last_fate_context": {
+      "calendar_year": 2019,
+      "narrative_year": 1,
+      "scenario_weights": {
+        "family": 0.23189706762417714,
+        "love": 0.059844404548174746,
+        "friendship": 0.08138839018551766,
+        "academic": 0.267803710353082,
+        "career": 0.059844404548174746,
+        "self_growth": 0.2992220227408737
+      },
+      "scenario_primary": "self_growth",
+      "scenario_secondary": "academic",
+      "emphasis_line": "本年命运侧重：自我成长（30%）· 学业（27%）",
+      "macro_sample": [
+        {
+          "category": "culture_entertainment",
+          "title": "流浪地球",
+          "detail": "2019年春节《流浪地球》开启科幻电影热。",
+          "source_url": "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
+          "scenario": "self_growth"
+        },
+        {
+          "category": "tech_internet",
+          "title": "2019年网民约8.54亿",
+          "detail": "CNNIC统计网民约8.54亿、手机用户约16亿；移动支付、短视频与平台经济渗透日常生活。",
+          "source_url": "https://www.cnnic.cn/hlwfzyj/hlwxzbg/",
+          "scenario": "self_growth"
+        },
+        {
+          "category": "politics_policy",
+          "title": "李鹏逝世",
+          "detail": "7月22日前总理李鹏因病逝世，官方评价其为‘经受住重大政治风浪考验’。",
+          "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+          "scenario": "self_growth"
+        },
+        {
+          "category": "tech_internet",
+          "title": "嫦娥四号地月通信",
+          "detail": "1月中国实现人类首次月球背面软着陆及地月拉格朗日L2点测控通信。",
+          "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+          "scenario": "self_growth"
+        },
+        {
+          "category": "disaster_crisis",
+          "title": "新冠肺炎疫情初发",
+          "detail": "12月湖北武汉出现不明原因肺炎病例，月底李文亮等医生发出预警被‘查处’，预示全球大流行。",
+          "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+          "scenario": "family"
+        },
+        {
+          "category": "tech_internet",
+          "title": "山东号航母服役",
+          "detail": "12月17日中国首艘国产航空母舰‘山东号’正式在三亚某军港交付海军。",
+          "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+          "scenario": "self_growth"
+        },
+        {
+          "category": "society",
+          "title": "内蒙古普通话政策",
+          "detail": "政府在内蒙强行推行统编教材引发局部争议与冲突，相关信息在年底受到管控。",
+          "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+          "scenario": "family"
+        },
+        {
+          "category": "politics_policy",
+          "title": "习五条发布",
+          "detail": "1月《告台湾同胞书》发表40周年大会上，习近平提出探索‘两制台湾方案’。",
+          "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+          "scenario": "self_growth"
+        },
+        {
+          "category": "housing",
+          "title": "2019年房价指数约8.4%",
+          "detail": "70个大中城市新建住宅价格同比约8.4%；首套与二套政策、公积金与按揭利率牵动刚需与改善群体。",
+          "source_url": "https://www.stats.gov.cn/sj/tjgb/",
+          "scenario": "family"
+        },
+        {
+          "category": "tech_internet",
+          "title": "首张黑洞照片公开",
+          "detail": "4月10日人类首张黑洞照片全球同步公开，该科学突破在大陆科普圈引发狂欢。",
+          "source_url": "https://zh.wikipedia.org/wiki/2010%E5%B9%B4%E4%BB%A3",
+          "scenario": "self_growth"
+        }
+      ],
+      "micro_sample": [
+        {
+          "text": "父母来参加你的毕业典礼，在人群里踮脚找你",
+          "can_pivot": true,
+          "category": "family",
+          "scenario": "family"
+        },
+        {
+          "text": "班主任说「再坚持一下」，你想哭",
+          "can_pivot": true,
+          "category": "school",
+          "scenario": "academic"
+        },
+        {
+          "text": "你第一次独自旅行，在青旅和陌生人聊到两点",
+          "can_pivot": true,
+          "category": "health",
+          "scenario": "self_growth"
+        },
+        {
+          "text": "同学出国读书，散伙饭上大家都喝多",
+          "can_pivot": true,
+          "category": "school",
+          "scenario": "academic"
+        },
+        {
+          "text": "你第一次挂科，不敢告诉家里",
+          "can_pivot": true,
+          "category": "school",
+          "scenario": "academic"
+        }
+      ],
+      "atmosphere_slice": {
+        "gdp_trillion_cny": 99.09,
+        "gdp_growth_pct": 6.1,
+        "cpi_pct": 2.9,
+        "gaokao_candidates_wan": 1031,
+        "college_graduates_wan": 834,
+        "internet_users_yi": 8.54,
+        "mobile_users_yi": 16,
+        "housing_price_index_70_cities_pct": 8.4,
+        "migrant_workers_wan": 17300,
+        "avg_urban_disposable_income_cny": 42359,
+        "rural_net_income_cny": 16021,
+        "foreign_reserves_usd_trillion": 3.1,
+        "dominant_anxiety": "不确定性上升",
+        "employment_pressure": "毕业生834万与城镇调查失业率受关注",
+        "education_hotspot": "高考1031万，考研与考公热度",
+        "policy_keyword": "建国70周年、科创板开板。",
+        "international_shadow": "全球宏观与国内结构性矛盾交织",
+        "meme_keywords": [
+          "我太难了",
+          "996",
+          "垃圾分类",
+          "我太南了",
+          "996.ICU",
+          "断裂时代"
+        ],
+        "international_anxiety": "地缘政治脱钩风险与年末不明肺炎传闻"
+      },
+      "pop_culture_slice": [
+        "996.ICU",
+        "我太难了",
+        "少年的你",
+        "庆余年（流行文化）",
+        "5G牌照正式发放引发抢机热"
+      ],
+      "era_line": "2019年 · 本年命运侧重：自我成长（30%）· 学业（27%） · 流浪地球 · 父母来参加你的毕业典礼，在人群里踮脚找你",
+      "placeholder": false,
+      "rag_refine": {
+        "query": "复读 学业 够 走 要强",
+        "macro_before": 56,
+        "macro_after": 20,
+        "micro_before": 307,
+        "micro_after": 123,
+        "scenario_primary": "self_growth"
+      }
+    }
+  },
+  "partial": {
+    "current_year_text": "",
+    "current_year_index": 1
+  },
+  "result": {
+    "years": [
+      "第1年，你站在岔路口。雨还在下，你选了继续走。教室里的灯一盏盏灭掉，你背着书包穿过走廊，听见自己的心跳比雨声还响。"
+    ],
+    "final": null
+  },
+  "error": null,
+  "owner_pid": 90921,
+  "heartbeat_at": 1781682886487,
+  "intake_snapshot": null,
+  "stage_timings": [
+    {
+      "stage": "start",
+      "ms": 1,
+      "at": "2026-06-17T07:54:46.467Z"
+    }
+  ],
+  "resolved_interventions": [],
+  "pending_intervention": null
+}

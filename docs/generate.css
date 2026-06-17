@@ -228,6 +228,29 @@ body.generate-unified #gen-intake-section .intake-page-head .intake-preset-hint:
 }
 .gen-complete-overlay.is-visible { opacity: 1; }
 .gen-complete-overlay[hidden] { display: none !important; }
+
+/* 进度屏模式：generate = 进度，demo = 阅读器 */
+body.gen-progress-screen #gen-intake-summary-panel,
+body.gen-progress-screen #gen-persona-panel,
+body.gen-progress-screen #gen-beats-panel,
+body.gen-progress-screen #gen-final-panel,
+body.gen-progress-screen #gen-year-dialogue,
+body.gen-progress-screen #gen-years .gen-year-block,
+body.gen-progress-screen #gen-years-panel > .gen-section-title {
+  display: none !important;
+}
+
+body.gen-progress-screen #gen-years-panel {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+body.gen-progress-screen #gen-year-stream {
+  display: block !important;
+  margin-top: 12px;
+}
 .gen-complete-title {
   margin: 0;
   font-size: 1.25rem;

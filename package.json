@@ -17,7 +17,9 @@
     "dev": "npm run dev --prefix shadow-corpus/archive/demo-v0.2",
     "start": "npm run start --prefix shadow-corpus/archive/demo-v0.2",
     "test": "npm run test --prefix shadow-corpus/archive/demo-v0.2",
-    "test:golden": "node -e \"const s=require('./shadow-corpus/fixtures/golden-stories/复读线.json');const e=require('./shadow-corpus/archive/demo-v0.2/lib/evaluator').evaluateStory(s);console.log(JSON.stringify({ok:e.ok,score:e.score,errors:e.errors,warnings:e.warnings},null,2));process.exit(e.ok?0:1)\"",
+    "test:golden": "node --test shadow-corpus/archive/demo-v0.2/test/golden-stories.test.js",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "sync:golden-v2": "node shadow-corpus/tooling/scripts/sync-golden-from-v2.mjs --story fuxduxian --dry-run",
     "sync:golden-v2:apply": "node shadow-corpus/tooling/scripts/sync-golden-from-v2.mjs --story fuxduxian --apply",
     "harness:smoke": "node shadow-corpus/tooling/scripts/harness-live-smoke.mjs",
@@ -48,5 +50,8 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0"
   }
 }

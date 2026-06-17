@@ -1,0 +1,55 @@
+name: Test Shadow harness
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'shadow-corpus/**'
+      - 'docs/**'
+      - 'package.json'
+      - 'playwright.config.ts'
+      - 'e2e/**'
+      - '.github/workflows/test.yml'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: |
+          npm install --prefix shadow-corpus/archive/demo-v0.2
+      - name: Unit + golden tests
+        run: |
+          npm test --prefix shadow-corpus/archive/demo-v0.2
+          npm run test:golden
+
+  e2e:
+    runs-on: ubuntu-latest
+    needs: unit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: |
+          npm install
+          npm install --prefix shadow-corpus/archive/demo-v0.2
+          npx playwright install --with-deps chromium
+      - name: Playwright E2E
+        run: npm run test:e2e
+      - name: HTTP job lifecycle (optional probe)
+        run: |
+          SHADOW_E2E=1 SHADOW_JOBS_DIR=runs/jobs-e2e-ci PORT=3098 node server.js &
+          SERVER_PID=$!
+          sleep 2
+          SHADOW_HTTP_TEST=1 PORT=3098 npm test --prefix shadow-corpus/archive/demo-v0.2 -- test/story-jobs-http.test.js
+          kill $SERVER_PID
+        working-directory: shadow-corpus/archive/demo-v0.2

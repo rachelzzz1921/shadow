@@ -58,6 +58,7 @@ class JobManager {
   boot() {
     if (this.booted) return;
     this.booted = true;
+    if (process.env.SHADOW_E2E === '1') return;
     for (const file of listJobFiles()) {
       const jobId = file.replace(/\.json$/, '');
       const job = readJob(jobId);
@@ -205,7 +206,27 @@ class JobManager {
     return this.submit(job);
   }
 
-  mark_done(job, stageName, payload) {
+  _recordStageTiming(job, stage, ms, trace) {
+    if (!job?.job_id || typeof ms !== 'number') return;
+    if (!job.stage_timings) job.stage_timings = [];
+    const entry = { stage, ms, at: new Date().toISOString() };
+    job.stage_timings.push(entry);
+    writeJob(job);
+    this.emitJobEvent(job.job_id, 'job:timing', { job_id: job.job_id, ...entry });
+    if (trace) {
+      const { appendEvent } = require('./run-trace');
+      appendEvent(trace, { stage: `timing:${stage}`, payload: entry, duration_ms: ms });
+    }
+    try {
+      const { recordStageTiming } = require('./stage-timing-stats');
+      recordStageTiming(stage, ms);
+    } catch (_) { /* optional */ }
+  }
+
+  mark_done(jobRef, stageName, payload) {
+    const job = readJob(jobRef?.job_id) || jobRef;
+    if (!job?.job_id) return jobRef;
+
     if (!job.completed_stages.includes(stageName)) {
       job.completed_stages.push(stageName);
     }
@@ -297,6 +318,7 @@ class JobManager {
 
     if (!done.has('start')) {
       const bootstrap = job.session || {};
+      const t0 = Date.now();
       const session = await ss.startStorySession({
         profile: bootstrap.profile,
         persona_card: bootstrap.persona_card || null,
@@ -308,6 +330,7 @@ class JobManager {
       });
       session.run_id = trace.run_id;
       persistTrace(trace);
+      this._recordStageTiming(job, 'start', Date.now() - t0, trace);
       this.mark_done(job, 'start', { session });
       job = readJob(job.job_id);
       done.add('start');
@@ -370,6 +393,7 @@ class JobManager {
       };
       writeJob(job);
 
+      const t0 = Date.now();
       const result = await ss.generateNextYear({
         session: job.session,
         user_intervention: userIntervention,
@@ -378,6 +402,7 @@ class JobManager {
         onStage
       });
       persistTrace(trace);
+      this._recordStageTiming(readJob(job.job_id), stage, Date.now() - t0, trace);
       this.mark_done(job, stage, result);
       job = readJob(job.job_id);
       done.add(stage);
@@ -385,12 +410,14 @@ class JobManager {
 
     if (!done.has('final')) {
       job = readJob(job.job_id);
+      const t0 = Date.now();
       const fin = await ss.finishStorySession({
         session: job.session,
         runtime,
         trace
       });
       persistTrace(trace);
+      this._recordStageTiming(job, 'final', Date.now() - t0, trace);
       finishRunTrace(trace, {
         stop_reason: 'completed',
         eval: fin.eval,
@@ -402,12 +429,20 @@ class JobManager {
 
     job.status = 'done';
     writeJob(job);
+    try {
+      const { recordJobTimings } = require('./stage-timing-stats');
+      recordJobTimings(job.stage_timings || []);
+    } catch (_) { /* optional */ }
     this.emitJobEvent(job.job_id, 'job:done', { job_id: job.job_id, status: 'done' });
     return job;
   }
 
   async run_async(job) {
     try {
+      if (process.env.SHADOW_E2E === '1') {
+        const { buildE2eRuntime } = require('./e2e-fixture');
+        this.setRuntime(buildE2eRuntime());
+      }
       job = readJob(job.job_id);
       const outcome = await this.resume_job(job);
       if (outcome?.paused) return;

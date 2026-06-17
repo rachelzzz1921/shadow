@@ -1,0 +1,592 @@
+{
+  "job_id": "job_20260617_1bf3",
+  "status": "done",
+  "generation_mode": "fast",
+  "created_at": 1781684883178,
+  "updated_at": 1781684883313,
+  "stage": {
+    "current": "done",
+    "year_index": 7,
+    "total_years": 7
+  },
+  "completed_stages": [
+    "start",
+    "year_1",
+    "year_2",
+    "year_3",
+    "year_4",
+    "year_5",
+    "year_6",
+    "year_7",
+    "final"
+  ],
+  "session": {
+    "profile": {
+      "choice": "如果当年我没有选择复读",
+      "age": 18,
+      "keywords": [
+        "接受不完美",
+        "往前走"
+      ],
+      "quote": "E2E 测试岔路口",
+      "description": "E2E fixture profile",
+      "scenario_domain": "academic",
+      "scenario_label": "学业",
+      "scenario_agent": "学业 Agent"
+    },
+    "full_profile": null,
+    "generation_mode": "fast",
+    "scenario": {
+      "domain": "academic",
+      "label": "学业",
+      "agent": "学业 Agent",
+      "brief": "复读、考研、换专业、留学",
+      "confidence": 0.259,
+      "scenario_primary": "academic",
+      "scenario_secondary": "family",
+      "scenario_weights": {
+        "family": 0.12345679012345677,
+        "love": 0.12345679012345677,
+        "friendship": 0.12345679012345677,
+        "academic": 0.382716049382716,
+        "career": 0.12345679012345677,
+        "self_growth": 0.12345679012345677
+      },
+      "matched": [
+        {
+          "domain": "academic",
+          "label": "学业"
+        }
+      ]
+    },
+    "persona_card": {
+      "name": "阿岚",
+      "core_traits": [
+        "要强",
+        "学会放下"
+      ],
+      "soft_spots": [
+        "期待"
+      ],
+      "decision_tendency": "继续走",
+      "growth_seed": "够了"
+    },
+    "shadow": {
+      "character": "Alex",
+      "palette": "violet",
+      "trait_tags": [
+        "要强",
+        "学会放下"
+      ]
+    },
+    "beats": [
+      {
+        "year": 1,
+        "type": "pivotal",
+        "seed": "e2e-1"
+      },
+      {
+        "year": 2,
+        "type": "quiet",
+        "seed": "[告诉] e2e-2"
+      },
+      {
+        "year": 3,
+        "type": "quiet",
+        "seed": "[告诉] e2e-3"
+      },
+      {
+        "year": 4,
+        "type": "pivotal",
+        "seed": "[告诉] e2e-4"
+      },
+      {
+        "year": 5,
+        "type": "quiet",
+        "seed": "[告诉] e2e-5"
+      },
+      {
+        "year": 6,
+        "type": "pivotal",
+        "seed": "[告诉] e2e-6"
+      },
+      {
+        "year": 7,
+        "type": "quiet",
+        "seed": "[告诉] e2e-7"
+      }
+    ],
+    "pivotal_years": [
+      1,
+      4,
+      6
+    ],
+    "memory_stream": [
+      {
+        "id": "m1",
+        "year": 1,
+        "type": "decision",
+        "content": "年1：E2E",
+        "weight": 0.85
+      },
+      {
+        "id": "mdec1",
+        "year": 1,
+        "type": "decision",
+        "content": "选择了「告诉」：E2E",
+        "weight": 0.9
+      },
+      {
+        "id": "m2",
+        "year": 2,
+        "type": "event",
+        "content": "第2年的转折",
+        "weight": 0.7
+      },
+      {
+        "id": "m1",
+        "year": 1,
+        "type": "event",
+        "content": "年1：E2E",
+        "weight": 0.5
+      },
+      {
+        "id": "m2",
+        "year": 2,
+        "type": "decision",
+        "content": "年2：E2E",
+        "weight": 0.85
+      },
+      {
+        "id": "m3",
+        "year": 3,
+        "type": "event",
+        "content": "年3：E2E",
+        "weight": 0.5
+      },
+      {
+        "id": "m4",
+        "year": 4,
+        "type": "decision",
+        "content": "年4：E2E",
+        "weight": 0.85
+      },
+      {
+        "id": "m5",
+        "year": 5,
+        "type": "event",
+        "content": "年5：E2E",
+        "weight": 0.6
+      }
+    ],
+    "years": [
+      {
+        "year": 1,
+        "age": 19,
+        "is_pivotal": true,
+        "title": "E2E第1年",
+        "scene": "rain",
+        "environment": "classroom",
+        "pose": "wait",
+        "prop": "desk",
+        "city": "city2",
+        "event": "第1年，你站在岔路口。雨还在下，你选了继续走。教室里的灯一盏盏灭掉，你背着书包穿过走廊，听见自己的心跳比雨声还响。",
+        "decision_made": "继续走",
+        "intervention_prompt": {
+          "question": "E2E：你要告诉父母这个决定吗？",
+          "options": [
+            "告诉",
+            "不说"
+          ]
+        },
+        "emotion": "低",
+        "emotion_value": 4,
+        "new_mood": 4,
+        "new_esteem": 5,
+        "reflection": "还在这里。",
+        "shadow_dialogue": "影子还在。",
+        "memory_summary": "年1：E2E",
+        "visual_anchor": "E2E · 第1年",
+        "key_props": [
+          "书包",
+          "课桌"
+        ],
+        "daily_micro": null,
+        "user_intervention": {
+          "from_year": 1,
+          "question": "E2E",
+          "choice": "告诉",
+          "option_index": 0
+        }
+      },
+      {
+        "year": 2,
+        "age": 20,
+        "is_pivotal": false,
+        "title": "第2年",
+        "scene": "city",
+        "environment": "office",
+        "pose": "idle",
+        "prop": "desk",
+        "city": "city1",
+        "event": "e2e-2",
+        "decision_made": "在岔路口选了更稳妥的那一步",
+        "intervention_prompt": null,
+        "emotion": "平",
+        "emotion_value": 4,
+        "new_mood": 4,
+        "new_esteem": 5,
+        "reflection": "原来有些路只能自己走完",
+        "shadow_dialogue": "如果重来，我会更早对自己诚实",
+        "memory_summary": "第2年的转折",
+        "visual_anchor": "e2e-2",
+        "key_props": [
+          "桌上的东西",
+          "窗外的光"
+        ],
+        "daily_micro": null,
+        "user_intervention": null
+      },
+      {
+        "year": 1,
+        "age": 19,
+        "is_pivotal": false,
+        "title": "E2E第1年",
+        "scene": "rain",
+        "environment": "classroom",
+        "pose": "wait",
+        "prop": "desk",
+        "city": "city2",
+        "event": "第1年，你站在岔路口。雨还在下，你选了继续走。教室里的灯一盏盏灭掉，你背着书包穿过走廊，听见自己的心跳比雨声还响。",
+        "decision_made": "继续走",
+        "intervention_prompt": null,
+        "emotion": "低",
+        "emotion_value": 4,
+        "new_mood": 4,
+        "new_esteem": 5,
+        "reflection": "还在这里。",
+        "shadow_dialogue": "影子还在。",
+        "memory_summary": "年1：E2E",
+        "visual_anchor": "E2E · 第1年",
+        "key_props": [
+          "书包",
+          "课桌"
+        ],
+        "daily_micro": null,
+        "user_intervention": null
+      },
+      {
+        "year": 2,
+        "age": 20,
+        "is_pivotal": true,
+        "title": "E2E第2年",
+        "scene": "rain",
+        "environment": "classroom",
+        "pose": "wait",
+        "prop": "desk",
+        "city": "city2",
+        "event": "第2年，日子像一层灰。你照常上课、吃饭、睡觉，把不想说的话咽回肚子里，窗外天色总是先暗下来。",
+        "decision_made": "继续走",
+        "intervention_prompt": {
+          "question": "让影子继续走下去，还是停下来？",
+          "options": [
+            "继续",
+            "停下"
+          ]
+        },
+        "emotion": "低",
+        "emotion_value": 4,
+        "new_mood": 4,
+        "new_esteem": 5,
+        "reflection": "还在这里。",
+        "shadow_dialogue": "影子还在。",
+        "memory_summary": "年2：E2E",
+        "visual_anchor": "E2E · 第2年",
+        "key_props": [
+          "课桌",
+          "窗外的光"
+        ],
+        "daily_micro": null,
+        "user_intervention": null
+      },
+      {
+        "year": 3,
+        "age": 21,
+        "is_pivotal": false,
+        "title": "E2E第3年",
+        "scene": "rain",
+        "environment": "classroom",
+        "pose": "wait",
+        "prop": "desk",
+        "city": "city2",
+        "event": "第3年，日子像一层灰。你照常上课、吃饭、睡觉，把不想说的话咽回肚子里，窗外天色总是先暗下来。",
+        "decision_made": "继续走",
+        "intervention_prompt": null,
+        "emotion": "低",
+        "emotion_value": 4,
+        "new_mood": 4,
+        "new_esteem": 5,
+        "reflection": "还在这里。",
+        "shadow_dialogue": "影子还在。",
+        "memory_summary": "年3：E2E",
+        "visual_anchor": "E2E · 第3年",
+        "key_props": [
+          "课桌",
+          "窗外的光"
+        ],
+        "daily_micro": null,
+        "user_intervention": null
+      },
+      {
+        "year": 4,
+        "age": 22,
+        "is_pivotal": true,
+        "title": "E2E第4年",
+        "scene": "rain",
+        "environment": "stage",
+        "pose": "wait",
+        "prop": "desk",
+        "city": "city2",
+        "event": "第4年，日子像一层灰。你照常上课、吃饭、睡觉，把不想说的话咽回肚子里，窗外天色总是先暗下来。",
+        "decision_made": "继续走",
+        "intervention_prompt": {
+          "question": "让影子继续走下去，还是停下来？",
+          "options": [
+            "继续",
+            "停下"
+          ]
+        },
+        "emotion": "低",
+        "emotion_value": 4,
+        "new_mood": 4,
+        "new_esteem": 5,
+        "reflection": "还在这里。",
+        "shadow_dialogue": "影子还在。",
+        "memory_summary": "年4：E2E",
+        "visual_anchor": "E2E · 第4年",
+        "key_props": [
+          "课桌",
+          "窗外的光"
+        ],
+        "daily_micro": null,
+        "user_intervention": null
+      },
+      {
+        "year": 5,
+        "age": 23,
+        "is_pivotal": false,
+        "title": "E2E第5年",
+        "scene": "night",
+        "environment": "classroom",
+        "pose": "wait",
+        "prop": "desk",
+        "city": "city2",
+        "event": "第5年，日子像一层灰。你照常上课、吃饭、睡觉，把不想说的话咽回肚子里，窗外天色总是先暗下来。",
+        "decision_made": "继续走",
+        "intervention_prompt": null,
+        "emotion": "低",
+        "emotion_value": 4,
+        "new_mood": 4,
+        "new_esteem": 5,
+        "reflection": "还在这里。",
+        "shadow_dialogue": "影子还在。",
+        "memory_summary": "年5：E2E",
+        "visual_anchor": "E2E · 第5年",
+        "key_props": [
+          "课桌",
+          "窗外的光"
+        ],
+        "daily_micro": null,
+        "user_intervention": null
+      }
+    ],
+    "mood": 4,
+    "esteem": 5,
+    "run_id": "2026-06-17T08-28-03-181Z-aa2259",
+    "visual_character": null,
+    "replan_log": [
+      {
+        "at_year": 2,
+        "intervention": {
+          "from_year": 1,
+          "question": "E2E",
+          "choice": "告诉",
+          "option_index": 0
+        },
+        "placeholder": true,
+        "note": "fast-mode rule re-plan"
+      }
+    ],
+    "last_fate_context": {
+      "calendar_year": 2025,
+      "narrative_year": 7,
+      "scenario_weights": {
+        "family": 0.242296918767507,
+        "love": 0.0700280112044818,
+        "friendship": 0.0700280112044818,
+        "academic": 0.21708683473389354,
+        "career": 0.0700280112044818,
+        "self_growth": 0.33053221288515405
+      },
+      "scenario_primary": "self_growth",
+      "scenario_secondary": "family",
+      "emphasis_line": "本年命运侧重：自我成长（33%）· 亲情（24%）",
+      "macro_sample": [
+        {
+          "category": "disaster_crisis",
+          "title": "香港宏福苑特大火灾",
+          "detail": "2025年11月香港大埔宏福苑五级大火造成重大伤亡；大湾区居民重新审视高层住宅防火与维修责任。",
+          "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+          "scenario": "family"
+        },
+        {
+          "category": "politics_policy",
+          "title": "以伊直接冲突与停火",
+          "detail": "2025年6月以色列与伊朗爆发直接军事冲突后达成脆弱停火；国内油价与中东局势科普视频刷屏。",
+          "source_url": "https://www.cfr.org/articles/ten-most-significant-world-events-2025",
+          "scenario": "self_growth"
+        },
+        {
+          "category": "tech_internet",
+          "title": "DeepSeek现象",
+          "detail": "2025年初DeepSeek引发全球AI成本讨论。",
+          "source_url": "https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD",
+          "scenario": "self_growth"
+        },
+        {
+          "category": "politics_policy",
+          "title": "海峡雷霆环台演练",
+          "detail": "2025年4月解放军开展「海峡雷霆—2025A」环台演练；新闻滚动报道，东南沿海居民对局势保持高度关注。",
+          "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%86%E5%8F%B2%E5%B9%B4%E8%A1%A8",
+          "scenario": "self_growth"
+        },
+        {
+          "category": "society",
+          "title": "2025年社会焦虑主轴",
+          "detail": "舆论与家庭谈话中「预期管理之年」高频出现，影响婚育、职业选择与地域流动决策。",
+          "source_url": "https://www.gov.cn/",
+          "scenario": "self_growth"
+        },
+        {
+          "category": "politics_policy",
+          "title": "普京2025年访华",
+          "detail": "2025年9月普京访华，与中方在阅兵前后举行战略沟通；国际新闻与国内时政解读刷屏。",
+          "source_url": "https://en.wikipedia.org/wiki/21st_century",
+          "scenario": "self_growth"
+        }
+      ],
+      "micro_sample": [
+        {
+          "text": "父母学会视频通话，每次先问「吃饭了吗」",
+          "can_pivot": false,
+          "category": "family",
+          "scenario": "family"
+        },
+        {
+          "text": "换季过敏，药店断货一种鼻喷",
+          "can_pivot": false,
+          "category": "health",
+          "scenario": "self_growth"
+        },
+        {
+          "text": "你取关一半博主，信息流安静了",
+          "can_pivot": false,
+          "category": "digital",
+          "scenario": "self_growth"
+        }
+      ],
+      "atmosphere_slice": {
+        "gdp_trillion_cny": 140,
+        "gdp_growth_pct": 5,
+        "cpi_pct": 0.5,
+        "gaokao_candidates_wan": 1335,
+        "college_graduates_wan": 1222,
+        "internet_users_yi": 11.2,
+        "mobile_users_yi": 17.8,
+        "housing_price_index_70_cities_pct": -2,
+        "migrant_workers_wan": 17900,
+        "avg_urban_disposable_income_cny": 56000,
+        "rural_net_income_cny": 24000,
+        "foreign_reserves_usd_trillion": 3.3,
+        "dominant_anxiety": "预期管理之年",
+        "employment_pressure": "毕业生1222万与城镇调查失业率受关注",
+        "education_hotspot": "高考1335万，考研与考公热度",
+        "policy_keyword": "十五五规划编制、稳楼市与促消费。",
+        "international_shadow": "全球宏观与国内结构性矛盾交织",
+        "meme_keywords": [
+          "哪吒2",
+          "苏超",
+          "AI应用",
+          "DeepSeek-R1",
+          "K字签证",
+          "去风险化"
+        ],
+        "international_anxiety": "中东局势引发的能源中断风险及中美贸易战重启带来的通胀压力。"
+      },
+      "pop_culture_slice": [
+        "AI Agent",
+        "国补（流行文化）",
+        "哪吒2票房"
+      ],
+      "era_line": "2025年 · 本年命运侧重：自我成长（33%）· 亲情（24%） · 香港宏福苑特大火灾 · 父母学会视频通话，每次先问「吃饭了吗」",
+      "placeholder": false,
+      "rag_refine": {
+        "query": "如果当年我没有选择复读 学业 E2E fixture profile 接受不完美 往前走 够了 继续走 要强 学会放下 告诉",
+        "macro_before": 63,
+        "macro_after": 23,
+        "micro_before": 308,
+        "micro_after": 52,
+        "scenario_primary": "self_growth"
+      }
+    },
+    "final": {
+      "title": "E2E第6年",
+      "message": "七年过去，影子在平行路上走完了你曾犹豫的那一步。",
+      "regret": "有些选择没有回头路",
+      "scene": "night",
+      "emotion_arc": "从紧绷到松动，再到与自己和解"
+    }
+  },
+  "partial": {
+    "current_year_text": "",
+    "current_year_index": 7
+  },
+  "result": {
+    "years": [
+      "第1年，你站在岔路口。雨还在下，你选了继续走。教室里的灯一盏盏灭掉，你背着书包穿过走廊，听见自己的心跳比雨声还响。",
+      "e2e-2",
+      "第1年，你站在岔路口。雨还在下，你选了继续走。教室里的灯一盏盏灭掉，你背着书包穿过走廊，听见自己的心跳比雨声还响。",
+      "第2年，日子像一层灰。你照常上课、吃饭、睡觉，把不想说的话咽回肚子里，窗外天色总是先暗下来。",
+      "第3年，日子像一层灰。你照常上课、吃饭、睡觉，把不想说的话咽回肚子里，窗外天色总是先暗下来。",
+      "第4年，日子像一层灰。你照常上课、吃饭、睡觉，把不想说的话咽回肚子里，窗外天色总是先暗下来。",
+      "第5年，日子像一层灰。你照常上课、吃饭、睡觉，把不想说的话咽回肚子里，窗外天色总是先暗下来。"
+    ],
+    "final": {
+      "title": "E2E第6年",
+      "message": "七年过去，影子在平行路上走完了你曾犹豫的那一步。",
+      "regret": "有些选择没有回头路",
+      "scene": "night",
+      "emotion_arc": "从紧绷到松动，再到与自己和解"
+    }
+  },
+  "error": null,
+  "owner_pid": 10319,
+  "heartbeat_at": 1781684883313,
+  "intake_snapshot": null,
+  "stage_timings": [
+    {
+      "stage": "start",
+      "ms": 1,
+      "at": "2026-06-17T08:28:03.182Z"
+    },
+    {
+      "stage": "final",
+      "ms": 1,
+      "at": "2026-06-17T08:28:03.313Z"
+    }
+  ],
+  "resolved_interventions": [
+    1
+  ],
+  "pending_intervention": null
+}

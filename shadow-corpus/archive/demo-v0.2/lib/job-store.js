@@ -4,7 +4,18 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 
-const JOBS_DIR = path.join(__dirname, '..', 'runs', 'jobs');
+let _jobsDirOverride = null;
+
+function getJobsDir() {
+  if (_jobsDirOverride) return _jobsDirOverride;
+  const fromEnv = process.env.SHADOW_JOBS_DIR;
+  if (fromEnv) {
+    return path.isAbsolute(fromEnv)
+      ? fromEnv
+      : path.join(__dirname, '..', fromEnv);
+  }
+  return path.join(__dirname, '..', 'runs', 'jobs');
+}
 
 const VALID_STATUS = new Set([
   'pending',
@@ -16,8 +27,9 @@ const VALID_STATUS = new Set([
 ]);
 
 function ensureJobsDir() {
-  if (!fs.existsSync(JOBS_DIR)) {
-    fs.mkdirSync(JOBS_DIR, { recursive: true });
+  const dir = getJobsDir();
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
   }
 }
 
@@ -28,7 +40,7 @@ function createJobId() {
 }
 
 function jobFilePath(jobId) {
-  return path.join(JOBS_DIR, `${jobId}.json`);
+  return path.join(getJobsDir(), `${jobId}.json`);
 }
 
 function readJob(jobId) {
@@ -51,7 +63,7 @@ function writeJob(job) {
 
 function listJobFiles() {
   ensureJobsDir();
-  return fs.readdirSync(JOBS_DIR).filter((f) => f.endsWith('.json'));
+  return fs.readdirSync(getJobsDir()).filter((f) => f.endsWith('.json'));
 }
 
 function createJob({
@@ -91,14 +103,19 @@ function createJob({
     error: null,
     owner_pid: null,
     heartbeat_at: now,
-    intake_snapshot: intake_snapshot || null
+    intake_snapshot: intake_snapshot || null,
+    stage_timings: [],
+    resolved_interventions: [],
+    pending_intervention: null
   };
   writeJob(job);
   return job;
 }
 
 module.exports = {
-  JOBS_DIR,
+  get JOBS_DIR() { return getJobsDir(); },
+  set JOBS_DIR(v) { _jobsDirOverride = v; },
+  getJobsDir,
   VALID_STATUS,
   createJobId,
   readJob,

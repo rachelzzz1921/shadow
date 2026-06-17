@@ -499,6 +499,50 @@ function applyLiveFromSession() {
   }
 }
 
+/** Fallback when sessionStorage 失败：?job_id= 从 API 拉取已完成 job */
+async function applyLiveFromJobQuery() {
+  const STORY = window.ShadowDemo?.STORY;
+  if (!STORY) return false;
+  const params = new URLSearchParams(location.search);
+  const jobId = params.get('job_id');
+  if (!jobId) return false;
+  try {
+    if (sessionStorage.getItem('shadow_live_session')) return false;
+  } catch (_) { /* ignore */ }
+
+  const prefix = window.SHADOW_BASE_PREFIX || '';
+  try {
+    const res = await fetch(`${prefix}/api/story/jobs/${encodeURIComponent(jobId)}`);
+    if (!res.ok) return false;
+    const job = await res.json();
+    const session = job.session;
+    const final = job.result?.final || session?.final;
+    if (!session?.years?.length) return false;
+
+    STORY.years = session.years;
+    STORY.beats = session.beats || STORY.beats;
+    STORY.pivotal_years = session.pivotal_years || STORY.pivotal_years;
+    STORY.memory_stream = session.memory_stream || [];
+    STORY.persona_card = session.persona_card || STORY.persona_card;
+    STORY.shadow = session.shadow || STORY.shadow;
+    if (session.profile) STORY.profile = { ...STORY.profile, ...session.profile };
+    if (final) STORY.final = final;
+    if (session.scenario) {
+      STORY.scenario_primary = session.scenario?.domain || STORY.scenario_primary;
+    }
+    STORY.premise = final?.message?.slice(0, 48) || STORY.premise;
+    STORY.id = 'custom';
+    if (window.ShadowDemo) window.ShadowDemo._activeStoryId = 'custom';
+    STORY._from_live = true;
+    STORY._from_generate = true;
+    STORY._live_run_id = session.run_id || job.job_id;
+    STORY._demo_mock = false;
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
+
 /** 当前 Mock 故事（bootstrap 前为复读线） */
 let STORY = STORY_FUXDUXIAN;
 
@@ -512,5 +556,6 @@ window.ShadowDemo = {
   getMemoriesForYear,
   shadowDisplayName,
   applyIntakeFromSession,
-  applyLiveFromSession
+  applyLiveFromSession,
+  applyLiveFromJobQuery
 };

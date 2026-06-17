@@ -138,8 +138,8 @@
   <section id="gen-pipeline-section" class="gen-hidden">
     <header class="gen-head">
       <p class="landing-tagline" style="font-family:monospace;font-size:11px;color:var(--amber);letter-spacing:2px;margin:0 0 8px">SHADOW GENERATE</p>
-      <h1 class="landing-title" style="font-size:1.6rem;margin:0 0 8px">API 七年生成</h1>
-      <p class="landing-tagline">Persona → Beats → 命运 agent → Year×7 → Final → Demo 七年浏览</p>
+      <h1 class="landing-title" style="font-size:1.6rem;margin:0 0 8px">影子在写你的七年</h1>
+      <p class="landing-tagline">这是进度屏 — 写完后自动进入 Demo 分层阅读，不必在此读完正文。</p>
     </header>
 
     <section class="gen-panel snes" id="gen-intake-summary-panel">
@@ -148,9 +148,9 @@
       <div class="gen-mode-row">
         <label class="gen-mode-toggle">
           <input type="checkbox" id="gen-fast-mode" checked />
-          <span>快速模式（默认 · event 约 100 字 · 规则 replan · 目标 2–4 分钟）</span>
+          <span>快速模式（默认 · 约 2–4 分钟 · 规则 replan · 命运层轻量）</span>
         </label>
-        <p class="gen-mode-hint">关闭后使用完整 v2 体量（160–240 字），耗时显著增加。</p>
+        <p class="gen-mode-hint">完整模式叙事更长（160–240 字/年），适合质量档，耗时约 2×。</p>
       </div>
       <div class="gen-actions">
         <button type="button" id="btn-edit-intake" class="btn-ghost">← 返回修改采集</button>
@@ -187,7 +187,7 @@
         <span id="gen-eta-remaining" class="gen-eta-remaining"></span>
       </div>
       <div class="gen-progress-wrap"><div id="gen-progress"></div></div>
-      <p id="gen-bg-hint" class="gen-bg-hint gen-hidden">可以关闭页面，写好后随时回来继续 — 生成在服务端继续跑。</p>
+      <p id="gen-bg-hint" class="gen-bg-hint gen-hidden">可以关掉此页 — 服务端会继续写。回来时用同一浏览器打开即可续看进度。</p>
       <ul id="gen-log" class="gen-log" aria-live="polite"></ul>
       <p id="gen-error" class="gen-error gen-hidden" role="alert"></p>
     </section>
@@ -237,7 +237,7 @@
     <div class="intervention-label">PIVOTAL · 岔路口</div>
     <p id="intervention-question"></p>
     <div id="intervention-options"></div>
-    <p class="intervention-hint">你的选择会写入下一年叙事。可跳过。</p>
+    <p class="intervention-hint">这一选择会写入下一年。也可以跳过，让影子自己走。</p>
     <button type="button" id="intervention-skip">跳过</button>
   </div>
 </div>

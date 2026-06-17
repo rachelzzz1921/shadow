@@ -40,7 +40,14 @@ function createRunTrace({ profile, mode = 'live' } = {}) {
   return trace;
 }
 
-function appendEvent(trace, { stage, status = 'ok', payload = null, error = null, eval: evalResult = null }) {
+function appendEvent(trace, {
+  stage,
+  status = 'ok',
+  payload = null,
+  error = null,
+  eval: evalResult = null,
+  duration_ms = null
+}) {
   if (!trace) return trace;
   const event = {
     at: new Date().toISOString(),
@@ -49,6 +56,9 @@ function appendEvent(trace, { stage, status = 'ok', payload = null, error = null
     payload,
     error: error ? String(error.message || error) : null
   };
+  if (duration_ms != null && Number.isFinite(duration_ms)) {
+    event.duration_ms = duration_ms;
+  }
   trace.events.push(event);
   if (error) {
     trace.errors.push({ stage, message: event.error, at: event.at });

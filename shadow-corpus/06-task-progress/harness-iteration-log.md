@@ -8,6 +8,9 @@
 | I-6 | Dialogue + Phaser + smoke:full | H-006–H-008 ✅ |
 | I-7 | Fate hook + archive visual + API | H-009–H-011 ✅ |
 | I-8 | Live index `#fateOverlay` + offline snippets | H-012 ✅ |
+| I-10 | Playwright E2E（`SHADOW_E2E=1` mock + generate→demo 闭环） | A ✅ |
+| I-11 | Golden 双轨 CI + `test.yml` + stage_timings / fast fate | B/C ✅ |
+| I-12 | Generate 进度屏 + `job_id` demo 回退 + 介入后 poll 续跑 | D ✅ |
 
 ### I-9 — 下一轮
 
@@ -18,8 +21,9 @@
 
 ```bash
 npm test
+npm run test:golden
+npm run test:e2e          # SHADOW_E2E=1 + Playwright
 npm run harness:smoke:full
 npm run dev --prefix shadow-corpus/archive/demo-v0.2
-# 浏览器：生成影子人生 → 每年 topbar 见时代 overlay
-# SHADOW_HTTP_TEST=1 npm test  # 可选 HTTP 探针
+# SHADOW_HTTP_TEST=1 npm test --prefix shadow-corpus/archive/demo-v0.2 -- test/story-jobs-http.test.js
 ```
