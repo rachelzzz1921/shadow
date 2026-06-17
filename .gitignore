@@ -17,7 +17,7 @@ node_modules/
 # Demo traces (generated)
 shadow-corpus/archive/demo-v0.2/runs/*.json
 shadow-corpus/archive/demo-v0.2/runs/jobs/*.json
-shadow-corpus/archive/demo-v0.2/runs/jobs-e2e/
+shadow-corpus/archive/demo-v0.2/runs/jobs-e2e*/
 /test-results/
 /playwright-report/
 example/shadow-demo/runs/*.json
