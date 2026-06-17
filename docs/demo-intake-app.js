@@ -646,11 +646,7 @@
   }
 
   function defaultOpenTagCats() {
-    return new Set(
-      (state.tagsData?.categories || [])
-        .filter((c) => c.display_order <= 2)
-        .map((c) => c.id)
-    );
+    return new Set((state.tagsData?.categories || []).map((c) => c.id));
   }
 
   function syncOpenTagCatsFromDom() {
@@ -666,7 +662,6 @@
 
   function renderTagCategories() {
     if (!el.tagCategories || !state.tagsData) return;
-    syncOpenTagCatsFromDom();
     el.tagCategories.innerHTML = '';
     const selectedByCat = {};
     for (const t of state.selectedTags) {
@@ -678,11 +673,7 @@
       const details = document.createElement('details');
       details.className = 'intake-tag-category';
       details.dataset.catId = cat.id;
-      details.open = state.openTagCats.has(cat.id);
-      details.addEventListener('toggle', () => {
-        if (details.open) state.openTagCats.add(cat.id);
-        else state.openTagCats.delete(cat.id);
-      });
+      details.open = true;
       const tags = state.tagsData.tags.filter((t) => t.category_id === cat.id);
       const count = (selectedByCat[cat.id] || []).length;
       const summary = document.createElement('summary');
