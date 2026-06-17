@@ -31,7 +31,6 @@
     scenario: null,
     previewText: '',
     activePresetId: null,
-    openTagCats: null,
     quickPath: false
   };
 
@@ -258,8 +257,6 @@
 
     state.selectedTags = window.ShadowIntakePresets.resolveTags(preset, state.tagsData);
     state.scenario = window.ShadowIntakePresets.scenarioFromPreset(preset);
-    state.openTagCats = defaultOpenTagCats();
-    for (const t of state.selectedTags) state.openTagCats.add(t.category_id);
     paintScenarioCapsule();
 
     renderTagCategories();
@@ -645,21 +642,6 @@
     return lines.join('\n');
   }
 
-  function defaultOpenTagCats() {
-    return new Set((state.tagsData?.categories || []).map((c) => c.id));
-  }
-
-  function syncOpenTagCatsFromDom() {
-    if (!el.tagCategories) return;
-    if (!state.openTagCats) state.openTagCats = defaultOpenTagCats();
-    el.tagCategories.querySelectorAll('details.intake-tag-category').forEach((node) => {
-      const id = node.dataset.catId;
-      if (!id) return;
-      if (node.open) state.openTagCats.add(id);
-      else state.openTagCats.delete(id);
-    });
-  }
-
   function renderTagCategories() {
     if (!el.tagCategories || !state.tagsData) return;
     el.tagCategories.innerHTML = '';
@@ -670,20 +652,26 @@
     }
 
     for (const cat of state.tagsData.categories) {
-      const details = document.createElement('details');
-      details.className = 'intake-tag-category';
-      details.dataset.catId = cat.id;
-      details.open = true;
+      const block = document.createElement('section');
+      block.className = 'intake-tag-category';
+      block.dataset.catId = cat.id;
       const tags = state.tagsData.tags.filter((t) => t.category_id === cat.id);
       const count = (selectedByCat[cat.id] || []).length;
-      const summary = document.createElement('summary');
-      summary.innerHTML = `<span>${cat.label_zh}</span><span data-count>${count}/${cat.max_select}</span>`;
-      details.appendChild(summary);
+
+      const head = document.createElement('div');
+      head.className = 'intake-tag-category-head';
+      head.innerHTML = `<span>${cat.label_zh}</span><span data-count>${count}/${cat.max_select}</span>`;
+      block.appendChild(head);
 
       const grid = document.createElement('div');
       grid.className = 'intake-tag-grid';
-
-      for (const tag of tags) {
+      const displayTags = [
+        ...tags,
+        ...state.selectedTags.filter(
+          (t) => t.category_id === cat.id && t.is_custom && !tags.some((x) => x.id === t.id)
+        )
+      ];
+      for (const tag of displayTags) {
         const selected = (selectedByCat[cat.id] || []).includes(tag.id);
         const atMax = count >= cat.max_select && !selected;
         const chip = document.createElement('button');
@@ -694,26 +682,45 @@
         window.ShadowAudio?.bindOptionButton?.(chip);
         grid.appendChild(chip);
       }
-      details.appendChild(grid);
+      block.appendChild(grid);
 
-      const addCustom = document.createElement('button');
-      addCustom.type = 'button';
-      addCustom.className = 'intake-chip custom';
-      addCustom.style.margin = '0 14px 14px';
-      addCustom.textContent = '+ 加一个自己的词';
-      addCustom.addEventListener('click', () => {
-        const label = prompt(`为「${cat.label_zh}」添加一个词：`);
-        if (!label?.trim()) return;
+      const customRow = document.createElement('div');
+      customRow.className = 'intake-tag-custom';
+      const customInput = document.createElement('input');
+      customInput.type = 'text';
+      customInput.className = 'intake-tag-custom-input';
+      customInput.maxLength = 16;
+      customInput.placeholder = '有自己的说法？写在这里（选填）';
+      customInput.setAttribute('aria-label', `为「${cat.label_zh}」添加自定义词`);
+      const customBtn = document.createElement('button');
+      customBtn.type = 'button';
+      customBtn.className = 'btn-ghost intake-tag-custom-btn';
+      customBtn.textContent = '添加';
+      function submitCustom() {
+        const label = customInput.value.trim();
+        if (!label) return;
+        const countNow = state.selectedTags.filter((t) => t.category_id === cat.id).length;
+        if (countNow >= cat.max_select) return;
         toggleTag({
           id: `custom-${Date.now()}`,
           category_id: cat.id,
-          label: label.trim(),
+          label,
           is_custom: true,
           moderation_status: 'pending'
         }, cat);
+        customInput.value = '';
+      }
+      customBtn.addEventListener('click', submitCustom);
+      customInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          submitCustom();
+        }
       });
-      details.appendChild(addCustom);
-      el.tagCategories.appendChild(details);
+      customRow.append(customInput, customBtn);
+      block.appendChild(customRow);
+
+      el.tagCategories.appendChild(block);
     }
   }
 
