@@ -680,32 +680,20 @@
       summary.innerHTML = `<span>${cat.label_zh}</span><span data-count>${count}/${cat.max_select}</span>`;
       details.appendChild(summary);
 
-      const search = document.createElement('input');
-      search.className = 'intake-tag-search';
-      search.placeholder = '搜索标签…';
-      details.appendChild(search);
-
       const grid = document.createElement('div');
       grid.className = 'intake-tag-grid';
 
-      function paint(filter) {
-        grid.innerHTML = '';
-        const q = (filter || '').trim().toLowerCase();
-        for (const tag of tags) {
-          if (q && !tag.label.includes(q) && !(tag.synonyms || []).some((s) => s.includes(q))) continue;
-          const selected = (selectedByCat[cat.id] || []).includes(tag.id);
-          const atMax = count >= cat.max_select && !selected;
-          const chip = document.createElement('button');
-          chip.type = 'button';
-          chip.className = 'intake-chip' + (selected ? ' selected' : '') + (atMax ? ' disabled' : '');
-          chip.textContent = tag.label;
-          chip.addEventListener('click', () => toggleTag(tag, cat));
-          window.ShadowAudio?.bindOptionButton?.(chip);
-          grid.appendChild(chip);
-        }
+      for (const tag of tags) {
+        const selected = (selectedByCat[cat.id] || []).includes(tag.id);
+        const atMax = count >= cat.max_select && !selected;
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'intake-chip' + (selected ? ' selected' : '') + (atMax ? ' disabled' : '');
+        chip.textContent = tag.label;
+        chip.addEventListener('click', () => toggleTag(tag, cat));
+        window.ShadowAudio?.bindOptionButton?.(chip);
+        grid.appendChild(chip);
       }
-      search.addEventListener('input', () => paint(search.value));
-      paint();
       details.appendChild(grid);
 
       const addCustom = document.createElement('button');
