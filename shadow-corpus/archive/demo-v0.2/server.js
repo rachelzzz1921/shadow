@@ -573,6 +573,17 @@ async function handleStoryJobRetry(_req, res, jobId) {
   }
 }
 
+async function handleStoryJobIntervention(req, res, jobId) {
+  const body = await readJson(req);
+  const { getJobManager } = require('./lib/job-manager');
+  try {
+    const job = getJobManager().submitIntervention(jobId, body);
+    sendJson(res, 200, { job_id: job.job_id, status: job.status, job });
+  } catch (error) {
+    sendJson(res, 400, { error: error.message });
+  }
+}
+
 async function handleStoryFinal(req, res) {
   const body = await readJson(req);
   if (!body.session) {
@@ -801,6 +812,18 @@ const server = http.createServer(async (req, res) => {
       await handleStoryJobRetry(req, res, jobRetryMatch[1]);
     } catch (error) {
       console.error(`[POST job retry] ${error.stack || error.message}`);
+      if (!res.headersSent) sendJson(res, 500, { error: error.message });
+      else res.end();
+    }
+    return;
+  }
+
+  const jobInterventionMatch = pathname.match(/^\/api\/story\/jobs\/([^/]+)\/intervention$/);
+  if (req.method === 'POST' && jobInterventionMatch) {
+    try {
+      await handleStoryJobIntervention(req, res, jobInterventionMatch[1]);
+    } catch (error) {
+      console.error(`[POST job intervention] ${error.stack || error.message}`);
       if (!res.headersSent) sendJson(res, 500, { error: error.message });
       else res.end();
     }

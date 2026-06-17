@@ -21,7 +21,8 @@ function stageOrder() {
 }
 
 class JobManager {
-  constructor() {
+  constructor({ runtime = null } = {}) {
+    this.runtime = runtime;
     this.running_count = 0;
     this.pending_queue = [];
     /** @type {Map<string, { id: number, events: { id: number, event: string, data: object }[] }>} */
@@ -42,6 +43,17 @@ class JobManager {
     return this.storySession;
   }
 
+  /** @param {object|null} runtime — tests inject stub */
+  setRuntime(runtime) {
+    this.runtime = runtime;
+  }
+
+  getRuntime() {
+    if (this.runtime) return this.runtime;
+    this.runtime = require('./llm-runtime').createLiveRuntime();
+    return this.runtime;
+  }
+
   // ── A. 进程启动时,扫盘捞孤儿 ─────────────────────────────────────────
   boot() {
     if (this.booted) return;
@@ -51,7 +63,7 @@ class JobManager {
       const job = readJob(jobId);
       if (!job) continue;
 
-      if (job.status === 'done' || job.status === 'failed') {
+      if (job.status === 'done' || job.status === 'failed' || job.status === 'awaiting_intervention') {
         continue;
       }
 
@@ -148,6 +160,51 @@ class JobManager {
     return readJob(jobId);
   }
 
+  /** Pause gate: pivotal year finished, user must choose before next year. */
+  _needsInterventionPause(job, nextYearIndex) {
+    if (nextYearIndex <= 1) return null;
+    const prevYear = job.session?.years?.slice(-1)[0];
+    if (!prevYear || prevYear.year !== nextYearIndex - 1) return null;
+    if (!prevYear.intervention_prompt?.question) return null;
+    const resolved = job.resolved_interventions || [];
+    if (resolved.includes(prevYear.year)) return null;
+    if (job.pending_intervention?.for_next_year === nextYearIndex) return null;
+    return prevYear;
+  }
+
+  submitIntervention(jobId, payload = {}) {
+    const job = readJob(jobId);
+    if (!job) throw new Error('Job not found');
+    if (job.status !== 'awaiting_intervention') {
+      throw new Error('Job is not awaiting intervention');
+    }
+    const fromYear = Number(payload.from_year);
+    if (!fromYear) throw new Error('Missing from_year');
+
+    const resolved = [...(job.resolved_interventions || [])];
+    if (!resolved.includes(fromYear)) resolved.push(fromYear);
+
+    if (payload.skipped || !payload.choice) {
+      job.pending_intervention = {
+        skipped: true,
+        from_year: fromYear,
+        for_next_year: fromYear + 1
+      };
+    } else {
+      job.pending_intervention = {
+        from_year: fromYear,
+        question: payload.question || null,
+        choice: payload.choice,
+        option_index: payload.option_index ?? 0,
+        for_next_year: fromYear + 1
+      };
+    }
+    job.resolved_interventions = resolved;
+    job.status = 'pending';
+    writeJob(job);
+    return this.submit(job);
+  }
+
   mark_done(job, stageName, payload) {
     if (!job.completed_stages.includes(stageName)) {
       job.completed_stages.push(stageName);
@@ -236,7 +293,7 @@ class JobManager {
     }
 
     const onStage = this.buildOnStage(job.job_id, trace);
-    const runtime = require('./llm-runtime').createLiveRuntime();
+    const runtime = this.getRuntime();
 
     if (!done.has('start')) {
       const bootstrap = job.session || {};
@@ -261,6 +318,47 @@ class JobManager {
       if (done.has(stage)) continue;
 
       job = readJob(job.job_id);
+
+      const prevNeedingPause = this._needsInterventionPause(job, i);
+      if (prevNeedingPause) {
+        job.status = 'awaiting_intervention';
+        job.stage = {
+          current: 'intervention',
+          year_index: prevNeedingPause.year,
+          total_years: job.session?.beats?.length || TOTAL_YEARS,
+          intervention_from_year: prevNeedingPause.year,
+          next_year: i
+        };
+        writeJob(job);
+        this.emitJobEvent(job.job_id, 'job:awaiting_intervention', {
+          job_id: job.job_id,
+          from_year: prevNeedingPause.year,
+          next_year: i,
+          prompt: prevNeedingPause.intervention_prompt,
+          completed_year: {
+            year: prevNeedingPause.year,
+            title: prevNeedingPause.title,
+            event: prevNeedingPause.event
+          }
+        });
+        return { paused: true, job };
+      }
+
+      let userIntervention = null;
+      const pending = job.pending_intervention;
+      if (pending?.for_next_year === i) {
+        if (!pending.skipped && pending.choice) {
+          userIntervention = {
+            from_year: pending.from_year,
+            question: pending.question,
+            choice: pending.choice,
+            option_index: pending.option_index ?? 0
+          };
+        }
+        job.pending_intervention = null;
+        writeJob(job);
+      }
+
       job.stage = {
         current: 'year',
         year_index: i - 1,
@@ -274,7 +372,7 @@ class JobManager {
 
       const result = await ss.generateNextYear({
         session: job.session,
-        user_intervention: null,
+        user_intervention: userIntervention,
         runtime,
         trace,
         onStage
@@ -311,10 +409,11 @@ class JobManager {
   async run_async(job) {
     try {
       job = readJob(job.job_id);
-      await this.resume_job(job);
+      const outcome = await this.resume_job(job);
+      if (outcome?.paused) return;
     } catch (error) {
       job = readJob(job.job_id);
-      if (job && job.status !== 'done') {
+      if (job && job.status !== 'done' && job.status !== 'awaiting_intervention') {
         job.status = 'failed';
         job.error = error.message || String(error);
         writeJob(job);

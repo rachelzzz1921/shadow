@@ -84,16 +84,18 @@ board.html → Corpus / Visual / 任务库
 4. **点选 Golden 预设 chip**  
    `ShadowDemoMock` → 对应 `demo.html?story=…`（fixture 主角，非用户自定义）
 
-### API 管线（`generate-client.js`）
+### API 管线（`generate-client.js` + 服务端 Job）
 
 ```text
 Intake 摘要确认
-  → POST /api/story/start
-  → POST /api/story/beats
-  → Year×7 stream（pivotal 弹窗介入）
-  → POST /api/story/final
-  → shadow_live_session → demo.html?live=1
+  → POST /api/story/jobs（创建后台任务）
+  → GET  /api/story/jobs/:id/stream（SSE 订阅进度）
+  → pivotal 年完成后 job:awaiting_intervention → 弹窗选介入
+  → POST /api/story/jobs/:id/intervention → 续跑下一年
+  → job:done → shadow_live_session → demo.html?live=1（自动跳转）
 ```
+
+断点续跑：`localStorage.shadow_gen_job_id` + `?job_id=` / 恢复面板。
 
 ---
 

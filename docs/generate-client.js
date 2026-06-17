@@ -25,6 +25,8 @@
   let activeEventSource = null;
   let pendingPollTimer = null;
   let currentJobId = null;
+  let interventionInFlight = false;
+  let interventionForYear = null;
 
   const DEFAULT_ETA_MS = {
     fast: { start: 22000, year: 28000, final: 18000 },
@@ -93,30 +95,6 @@
       ? `快速模式 · 已完成 ${yearsDone}/${totalYears} 年`
       : `完整模式 · 已完成 ${yearsDone}/${totalYears} 年`;
     rem.textContent = left > 0 ? `剩余 ${formatEta(left)}` : '即将完成…';
-  }
-
-  function saveJob(job) {
-    try {
-      localStorage.setItem(JOB_KEY, JSON.stringify({ ...job, updatedAt: Date.now() }));
-    } catch (err) {
-      console.warn('[generate] job save failed', err);
-    }
-  }
-
-  function loadJob() {
-    try {
-      const raw = localStorage.getItem(JOB_KEY);
-      return raw ? JSON.parse(raw) : null;
-    } catch {
-      return null;
-    }
-  }
-
-  function clearJob() {
-    try {
-      localStorage.removeItem(JOB_KEY);
-    } catch (_) { /* ignore */ }
-    hide($('gen-resume-panel'));
   }
 
   function showStreamYear(yearN, text) {
@@ -215,6 +193,50 @@
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
+  }
+
+  function jobFinalPayload(job) {
+    return job?.result?.final || job?.session?.final || null;
+  }
+
+  function jobReadyForDemo(job) {
+    const years = job?.session?.years || [];
+    const total = job?.session?.beats?.length || 7;
+    return Boolean(job?.session && years.length >= total && jobFinalPayload(job));
+  }
+
+  async function submitJobIntervention(jobId, data) {
+    const body = {
+      from_year: data.from_year,
+      question: data.prompt?.question || data.question || null,
+      choice: data.choice?.choice ?? null,
+      option_index: data.choice?.option_index ?? null,
+      skipped: !data.choice
+    };
+    return post(apiUrl(`/api/story/jobs/${encodeURIComponent(jobId)}/intervention`), body);
+  }
+
+  async function promptInterventionIfNeeded(job) {
+    if (job.status !== 'awaiting_intervention' || interventionInFlight) return;
+    const fromYear = job.stage?.intervention_from_year || job.stage?.year_index;
+    if (interventionForYear === fromYear) return;
+
+    const prompt = job.stage?.prompt
+      || (job.session?.years || []).find((y) => y.year === fromYear)?.intervention_prompt;
+    if (!prompt?.question) return;
+
+    interventionInFlight = true;
+    interventionForYear = fromYear;
+    log('intervention', `第 ${fromYear} 年 pivotal · 请选择介入`);
+    try {
+      const choice = await openInterventionModal(prompt);
+      await submitJobIntervention(job.job_id, { from_year: fromYear, prompt, choice });
+      log('intervention', choice ? `已选：${choice.choice}` : '已跳过介入');
+    } catch (e) {
+      showError('提交介入失败：' + e.message);
+    } finally {
+      interventionInFlight = false;
+    }
   }
 
   function openInterventionModal(prompt) {
@@ -719,6 +741,8 @@
     }
     try {
       const storedOk = persistLiveSession(livePayload);
+      clearJobId();
+      disconnectJobStream();
       enterDemoLive({ storedOk });
     } catch (err) {
       console.error('[generate] finishAndEnterDemo', err);
@@ -819,8 +843,16 @@
     }
   }
 
+  function apiUrl(path) {
+    const prefix = window.SHADOW_BASE_PREFIX || '';
+    if (typeof path === 'string' && path.startsWith('/api/')) {
+      return prefix + path;
+    }
+    return path;
+  }
+
   async function fetchJob(jobId) {
-    const res = await fetch(`/api/story/jobs/${encodeURIComponent(jobId)}`);
+    const res = await fetch(apiUrl(`/api/story/jobs/${encodeURIComponent(jobId)}`));
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || res.statusText);
     return data;
@@ -896,16 +928,27 @@
 
     if (job.status === 'done') {
       disconnectJobStream();
-      if (job.session && job.result?.final) {
+      if (jobReadyForDemo(job)) {
         const intake = job.intake_snapshot || {};
         finishAndEnterDemo(
           job.session,
-          { final: job.result.final, session: job.session },
+          { final: jobFinalPayload(job), session: job.session },
           intake,
           job.session.profile,
           {}
         );
+      } else {
+        showError('生成完成但缺少终局或年份数据，无法进入 Demo。');
+        if (btnRun) {
+          btnRun.disabled = false;
+          btnRun.textContent = '重试';
+        }
       }
+      return;
+    }
+
+    if (job.status === 'awaiting_intervention') {
+      void promptInterventionIfNeeded(job);
       return;
     }
 
@@ -934,6 +977,10 @@
   function handleJobStreamEvent(event, data) {
     if (event === 'job:snapshot') {
       onJobSnapshot(data);
+      return;
+    }
+    if (event === 'job:awaiting_intervention') {
+      fetchJob(currentJobId).then(onJobSnapshot).catch((e) => showError(e.message));
       return;
     }
     if (event === 'job:done') {
@@ -979,7 +1026,7 @@
       fetchJob(jobId).then(onJobSnapshot).catch((e) => showError(e.message));
     }
 
-    const es = new EventSource(`/api/story/jobs/${encodeURIComponent(jobId)}/stream`);
+    const es = new EventSource(apiUrl(`/api/story/jobs/${encodeURIComponent(jobId)}/stream`));
     activeEventSource = es;
 
     const bind = (name) => {
@@ -994,6 +1041,7 @@
 
     [
       'job:snapshot', 'job:queued', 'job:started', 'job:stage_done', 'job:done', 'job:failed',
+      'job:awaiting_intervention',
       'scenario:classified', 'persona:skipped', 'persona:start', 'persona:done',
       'beats:start', 'beats:done',
       'year:start', 'fate:start', 'fate:sampled', 'year:generating', 'year:partial', 'year:done'
@@ -1005,31 +1053,25 @@
   }
 
   async function runPipeline(resumeJobId = null) {
-    let handoff = resumeJob?.intakeResult
-      ? { ...resumeJob.intakeResult, full_profile: resumeJob.intakeResult.full_profile }
-      : (intakeHandoff || readHandoffFromSession());
-    if (!handoff?.full_profile) {
+    const handoff = intakeHandoff || readHandoffFromSession();
+    if (!handoff?.full_profile && !resumeJobId) {
       alert('请先完成 Intake 采集（岔路口 → 标签 → 行为题 → 确认）。');
       if (isUnified) showIntakeSection();
       return;
     }
 
-    const full = handoff.full_profile;
-    if ((full.raw?.choice_text || '').length < 10) {
+    const full = handoff?.full_profile;
+    if (full && (full.raw?.choice_text || '').length < 10) {
       alert('岔路口至少 10 字。');
       if (isUnified) showIntakeSection();
       return;
     }
 
-    const generationMode = resumeJob?.generation_mode || getGenerationMode();
-    const maxYearRetries = generationMode === 'fast' ? 2 : 3;
-
-    if (!resumeJob) {
-      resetResults();
-    }
-    if (!resumeJob) clearJob();
+    const generationMode = getGenerationMode();
+    resetResults();
     show($('gen-run-panel'));
     show($('gen-bg-hint'));
+    showPipelineSection();
     if (btnRun) {
       btnRun.disabled = true;
       btnRun.textContent = '生成中…';
@@ -1041,14 +1083,18 @@
     try {
       health = await (await fetch('/api/health')).json();
     } catch {
-      log('intake', 'API 不可用 — 用本地规则即时合成七年，进入分层浏览');
-      await synthLocalAndGoDemo(handoff);
+      if (handoff) {
+        log('intake', 'API 不可用 — 用本地规则即时合成七年，进入分层浏览');
+        await synthLocalAndGoDemo(handoff);
+      }
       return;
     }
 
     if (!health.has_key) {
-      log('intake', '未检测到 LLM Key — 用本地规则即时合成七年，进入分层浏览');
-      await synthLocalAndGoDemo(handoff);
+      if (handoff) {
+        log('intake', '未检测到 LLM Key — 用本地规则即时合成七年，进入分层浏览');
+        await synthLocalAndGoDemo(handoff);
+      }
       return;
     }
 
@@ -1060,22 +1106,33 @@
       openai: 'OpenAI'
     }[health.provider] || health.provider;
     if (providerEl) {
-      providerEl.textContent = `${providerLabel} · ${health.model_override || '默认模型'} · ${generationMode === 'fast' ? '快速' : '完整'}模式`;
+      providerEl.textContent = `${providerLabel} · ${health.model_override || '默认模型'} · ${generationMode === 'fast' ? '快速' : '完整'}模式 · 服务端任务`;
     }
 
-    setProgress(2);
-    updateEtaLabel(0, 7, generationMode);
+    if (resumeJobId) {
+      log('job', `恢复任务 ${resumeJobId}`);
+      attachJobStream(resumeJobId);
+      return;
+    }
+
+    if (!handoff?.full_profile) {
+      showError('缺少 Intake 数据');
+      if (btnRun) {
+        btnRun.disabled = false;
+        btnRun.textContent = '开始 API 生成';
+      }
+      return;
+    }
 
     let intakeResult = handoff;
     if (intakeResult.persona || intakeResult.persona_card) {
-      log('intake', `沿用 Intake Persona（${intakeResult.persona_source || 'cached'}）· 跳过重复分析`);
+      log('intake', `沿用 Intake Persona（${intakeResult.persona_source || 'cached'}）`);
       renderPersona(intakeResult.persona, intakeResult.persona_card);
-    } else if (!resumeJob) {
-      log('intake', '构建 profile + Persona agent（含标签与行为题）…');
+    } else {
+      log('intake', '构建 profile + Persona agent…');
       try {
         intakeResult = await post('/api/intake/complete', intakeApiPayloadFromHandoff(handoff));
         renderPersona(intakeResult.persona, intakeResult.persona_card);
-        log('persona', `${intakeResult.persona_source || 'ok'} · ${intakeResult.persona_card?.name || intakeResult.persona?.shadow_name || '影子'}`);
       } catch (e) {
         showError('Intake/Persona 失败：' + e.message);
         if (btnRun) {
@@ -1087,233 +1144,68 @@
     }
 
     const profile = profileFromFull(intakeResult.full_profile || full);
-    let session = resumeJob?.session || null;
-    let startIndex = session?.years?.length || 0;
+    setProgress(2);
+    updateEtaLabel(0, 7, generationMode);
 
-    if (!session) {
-      const startAt = Date.now();
-      try {
-        const startPayload = {
-          profile,
-          persona_card: intakeResult.persona_card || null,
-          full_profile: intakeResult.full_profile || null,
-          generation_mode: generationMode
-        };
-        const start = await postSse('/api/story/start/stream', startPayload, handleStartStage);
-        session = start.session;
-        renderBeats(session);
-        recordTiming(generationMode, 'start', Date.now() - startAt);
-      } catch (e) {
-        stopWaitTimer();
-        showError('Story 启动失败：' + e.message);
-        if (btnRun) {
-          btnRun.disabled = false;
-          btnRun.textContent = '重试';
-        }
-        return;
-      }
-    } else {
-      log('resume', `从第 ${startIndex + 1} 年继续（${generationMode} 模式）`);
-      renderBeats(session);
-      (session.years || []).forEach((y, idx) => {
-        const beat = session.beats?.[idx];
-        appendYear(y, '', beat?.type);
-      });
-    }
-
-    const totalYears = (session.beats || []).length || 7;
-    let pendingIntervention = resumeJob?.pending_intervention || null;
-    updateEtaLabel(startIndex, totalYears, generationMode);
-
-    saveJob({
-      status: 'running',
-      generation_mode: generationMode,
-      session,
-      intakeResult: {
-        full_profile: intakeResult.full_profile,
-        persona: intakeResult.persona,
-        persona_card: intakeResult.persona_card,
-        persona_source: intakeResult.persona_source
-      },
-      profile,
-      pending_intervention: pendingIntervention,
-      yearIndex: startIndex
-    });
-
-    for (let i = startIndex; i < totalYears; i++) {
-      const beat = session.beats[i];
-      const yearStarted = Date.now();
-      updateEtaLabel(i, totalYears, generationMode);
-      startWaitTimer('year', `Year agent 生成中 (${beat.type})…`, (secs) => {
-        setProgress(18 + ((i + secs / (generationMode === 'fast' ? 45 : 90)) / totalYears) * 68);
-        updateEtaLabel(i, totalYears, generationMode);
-      });
-
-      let result;
-      let yearErr = null;
-      for (let attempt = 0; attempt < maxYearRetries; attempt++) {
-        try {
-          result = await postSse(
-            '/api/story/year/stream',
-            { session, user_intervention: pendingIntervention },
-            (event, data) => handleYearStage(event, data, beat)
-          );
-          yearErr = null;
-          break;
-        } catch (e) {
-          yearErr = e;
-          stopWaitTimer();
-          clearPending('year');
-          clearPending('fate');
-          hideStreamYear();
-          if (attempt < maxYearRetries - 1) {
-            log('year', `第 ${beat.year} 年未通过，重试 ${attempt + 2}/${maxYearRetries}…`);
-            await new Promise((r) => setTimeout(r, 600));
-          }
-        }
-      }
-      stopWaitTimer();
-      recordTiming(generationMode, 'year', Date.now() - yearStarted);
-      if (yearErr) {
-        saveJob({
-          status: 'paused',
-          generation_mode: generationMode,
-          session,
-          intakeResult: {
-            full_profile: intakeResult.full_profile,
-            persona: intakeResult.persona,
-            persona_card: intakeResult.persona_card,
-            persona_source: intakeResult.persona_source
-          },
-          profile,
-          pending_intervention: pendingIntervention,
-          yearIndex: i,
-          error: yearErr.message
-        });
-        showError(`第 ${beat.year} 年失败：${yearErr.message} — 可稍后点「继续生成」`);
-        if (btnRun) {
-          btnRun.disabled = false;
-          btnRun.textContent = '继续生成';
-        }
-        showResumePanel();
-        return;
-      }
-
-      pendingIntervention = null;
-      session = result.session;
-      const eraLine = session.last_fate_context?.era_line || '';
-      appendYear(result.year, eraLine, beat.type);
-      openYearDialogue(result.year, session, profile);
-      setProgress(18 + ((i + 1) / totalYears) * 68);
-      updateEtaLabel(i + 1, totalYears, generationMode);
-
-      saveJob({
-        status: i + 1 >= totalYears ? 'finalizing' : 'running',
-        generation_mode: generationMode,
-        session,
-        intakeResult: {
-          full_profile: intakeResult.full_profile,
-          persona: intakeResult.persona,
-          persona_card: intakeResult.persona_card,
-          persona_source: intakeResult.persona_source
-        },
-        profile,
-        pending_intervention: null,
-        yearIndex: i + 1
-      });
-
-      if (result.year?.is_pivotal && result.year?.intervention_prompt && i < totalYears - 1) {
-        const choice = await openInterventionModal(result.year.intervention_prompt);
-        if (choice) {
-          pendingIntervention = {
-            from_year: result.year.year,
-            question: result.year.intervention_prompt?.question,
-            choice: choice.choice,
-            option_index: choice.option_index
-          };
-          log('year', `介入：${choice.choice}`);
-          saveJob({
-            status: 'running',
-            generation_mode: generationMode,
-            session,
-            intakeResult: {
-              full_profile: intakeResult.full_profile,
-              persona: intakeResult.persona,
-              persona_card: intakeResult.persona_card,
-              persona_source: intakeResult.persona_source
-            },
-            profile,
-            pending_intervention: pendingIntervention,
-            yearIndex: i + 1
-          });
-        }
-      }
-    }
-
-    log('final', 'Final agent 收束…');
-    const finalAt = Date.now();
-    let fin;
     try {
-      fin = await post('/api/story/final', { session });
-      recordTiming(generationMode, 'final', Date.now() - finalAt);
-    } catch (e) {
-      saveJob({
-        status: 'paused',
+      const created = await post('/api/story/jobs', {
+        profile,
+        persona_card: intakeResult.persona_card || null,
+        full_profile: intakeResult.full_profile || null,
         generation_mode: generationMode,
-        session,
-        intakeResult: {
+        intake_snapshot: {
           full_profile: intakeResult.full_profile,
           persona: intakeResult.persona,
           persona_card: intakeResult.persona_card,
           persona_source: intakeResult.persona_source
-        },
-        profile,
-        yearIndex: totalYears,
-        error: e.message
+        }
       });
-      showError(`Final 失败：${e.message}`);
+      log('job', `已创建 ${created.job_id} · ${created.status}`);
+      saveJobId(created.job_id);
+      attachJobStream(created.job_id, true);
+      onJobSnapshot(created.job);
+    } catch (e) {
+      showError('创建生成任务失败：' + e.message);
       if (btnRun) {
         btnRun.disabled = false;
-        btnRun.textContent = '继续生成';
+        btnRun.textContent = '重试';
       }
-      showResumePanel();
-      return;
     }
-
-    clearJob();
-    session = fin.session;
-    renderFinal(fin.final);
-    setProgress(100);
-    updateEtaLabel(totalYears, totalYears, generationMode);
-    log('final', '完成 — 即将进入 Demo 七年浏览');
-    finishAndEnterDemo(session, fin, intakeResult, profile, health);
   }
 
-  function showResumePanel() {
-    const job = loadJob();
+  function showResumePanel(jobId) {
     const panel = $('gen-resume-panel');
     const text = $('gen-resume-text');
-    if (!job || !panel) return;
-    const done = job.session?.years?.length || 0;
-    const total = job.session?.beats?.length || 7;
+    if (!jobId || !panel) return;
     if (text) {
-      text.textContent = `${job.generation_mode === 'fast' ? '快速' : '完整'}模式 · 已生成 ${done}/${total} 年 · ${job.status === 'paused' && job.error ? '上次错误：' + job.error : '可继续'}`;
+      text.textContent = `未完成的生成任务 · ${jobId.slice(0, 20)}… · 可继续查看进度`;
     }
     show(panel);
   }
 
-  function checkResumeOnLoad() {
-    const job = loadJob();
-    if (!job?.session?.beats?.length) return;
-    const done = job.session.years?.length || 0;
-    const total = job.session.beats.length;
-    if (job.status === 'running' || job.status === 'paused' || (job.status === 'finalizing' && done < total)) {
-      showResumePanel();
-      showPipelineSection();
-      if (job.intakeResult?.full_profile) {
-        intakeHandoff = job.intakeResult;
-        renderIntakeSummary(intakeHandoff);
+  async function checkResumeOnLoad() {
+    const params = new URLSearchParams(location.search);
+    const paramJobId = params.get('job_id');
+    const jobId = paramJobId || loadJobId();
+    if (!jobId) return;
+
+    try {
+      const job = await fetchJob(jobId);
+      if (job.status === 'done' || job.status === 'failed' || job.status === 'running'
+        || job.status === 'pending' || job.status === 'orphaned' || job.status === 'awaiting_intervention') {
+        showPipelineSection();
+        if (job.intake_snapshot?.full_profile) {
+          intakeHandoff = job.intake_snapshot;
+          renderIntakeSummary(intakeHandoff);
+        }
+        showResumePanel(jobId);
+        if (params.get('autoresume') === '1' || job.status === 'running' || job.status === 'pending'
+          || job.status === 'orphaned' || job.status === 'awaiting_intervention') {
+          attachJobStream(jobId);
+        }
       }
+    } catch {
+      clearJobId();
     }
   }
 
@@ -1352,11 +1244,26 @@
   $('btn-edit-intake')?.addEventListener('click', showIntakeSection);
   btnRun?.addEventListener('click', () => runPipeline());
   $('btn-resume-job')?.addEventListener('click', () => {
-    const job = loadJob();
-    if (job) runPipeline(job);
+    const jobId = loadJobId();
+    if (jobId) runPipeline(jobId);
+  });
+  $('btn-retry-job')?.addEventListener('click', async () => {
+    const jobId = loadJobId();
+    if (!jobId) return;
+    try {
+      await post(apiUrl(`/api/story/jobs/${encodeURIComponent(jobId)}/retry`), {});
+      attachJobStream(jobId);
+      if (btnRun) {
+        btnRun.disabled = true;
+        btnRun.textContent = '生成中…';
+      }
+    } catch (e) {
+      showError('重试失败：' + e.message);
+    }
   });
   $('btn-discard-job')?.addEventListener('click', () => {
-    clearJob();
+    disconnectJobStream();
+    clearJobId();
     resetResults();
     hide($('gen-run-panel'));
     if (btnRun) {
@@ -1390,7 +1297,7 @@
   }
 
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden && loadJob()?.status === 'running') {
+    if (document.hidden && loadJobId()) {
       show($('gen-bg-hint'));
     }
   });

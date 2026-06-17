@@ -6,7 +6,14 @@ const crypto = require('node:crypto');
 
 const JOBS_DIR = path.join(__dirname, '..', 'runs', 'jobs');
 
-const VALID_STATUS = new Set(['pending', 'running', 'done', 'failed', 'orphaned']);
+const VALID_STATUS = new Set([
+  'pending',
+  'running',
+  'done',
+  'failed',
+  'orphaned',
+  'awaiting_intervention'
+]);
 
 function ensureJobsDir() {
   if (!fs.existsSync(JOBS_DIR)) {

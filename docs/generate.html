@@ -162,8 +162,21 @@
       <h2 class="gen-section-title">未完成的生成</h2>
       <p id="gen-resume-text" class="gen-era"></p>
       <div class="gen-actions">
-        <button type="button" id="btn-resume-job" class="btn-start">继续生成</button>
+        <button type="button" id="btn-resume-job" class="btn-start">查看进度 / 继续</button>
         <button type="button" id="btn-discard-job" class="btn-ghost">放弃并重新开始</button>
+      </div>
+    </section>
+
+    <section class="gen-panel snes gen-hidden" id="gen-pending-panel">
+      <h2 class="gen-section-title">排队中</h2>
+      <p id="gen-pending-text" class="gen-era">前面还有任务在生成，本页会自动更新。</p>
+    </section>
+
+    <section class="gen-panel snes gen-hidden" id="gen-failed-panel">
+      <h2 class="gen-section-title">生成中断</h2>
+      <p id="gen-failed-text" class="gen-error"></p>
+      <div class="gen-actions">
+        <button type="button" id="btn-retry-job" class="btn-start">从断点重试</button>
       </div>
     </section>
 
@@ -174,7 +187,7 @@
         <span id="gen-eta-remaining" class="gen-eta-remaining"></span>
       </div>
       <div class="gen-progress-wrap"><div id="gen-progress"></div></div>
-      <p id="gen-bg-hint" class="gen-bg-hint gen-hidden">生成在后台继续 — 可切换标签或浏览其他页面，回来点「继续生成」即可。</p>
+      <p id="gen-bg-hint" class="gen-bg-hint gen-hidden">可以关闭页面，写好后随时回来继续 — 生成在服务端继续跑。</p>
       <ul id="gen-log" class="gen-log" aria-live="polite"></ul>
       <p id="gen-error" class="gen-error gen-hidden" role="alert"></p>
     </section>
