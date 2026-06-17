@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Shadow Generate — Intake + API 七年</title>
+<title>影子 · 写我的七年</title>
 <link rel="stylesheet" href="demo-theme.css" />
 <link rel="stylesheet" href="demo-ui-polish.css" />
 <link rel="stylesheet" href="demo-ui-polish-r2.css" />
@@ -17,19 +17,18 @@
 <div id="ambient-particles" aria-hidden="true"></div>
 
 <button type="button" id="nav-back" class="visible">← 首页</button>
-<div id="source-tag" class="visible">⚡ Intake + Generate · API</div>
+<div id="source-tag" class="visible" hidden aria-hidden="true"></div>
 
 <div id="gen-viewport">
   <section id="gen-intake-section">
     <div id="intake-viewport">
       <div class="intake-app">
         <header class="intake-page-head enter-item">
-          <p class="landing-tagline" style="font-family:var(--font-mono,monospace);font-size:11px;color:var(--amber);letter-spacing:2px;margin:0 0 8px">SHADOW INTAKE → GENERATE</p>
+          <p class="landing-tagline" style="font-family:var(--font-mono,monospace);font-size:11px;color:var(--amber);letter-spacing:2px;margin:0 0 8px">SHADOW</p>
           <h1 class="landing-title" style="font-size:1.75rem;margin:0 0 8px">告诉影子，你是谁</h1>
-          <p class="landing-tagline">四层采集 → Persona agent → API 七年 → 自动进入 Demo 分层浏览</p>
-          <nav id="storyPresetPicker" class="story-picker intake-preset-picker enter-item" aria-label="Demo 预设情景"></nav>
-          <p class="intake-preset-hint enter-item">自己写岔路口 → 确认后在本页直接跑 API 全链；预设线仍可走 Mock Demo。</p>
-          <p class="intake-preset-hint enter-item">服务没开？先在终端跑 <code>npm run demo:local</code>，保持窗口不关。</p>
+          <p class="landing-tagline">说说岔路口与那时的你 · 约 3 分钟 · 写完自动进入七年阅读</p>
+          <nav id="storyPresetPicker" class="story-picker intake-preset-picker enter-item" aria-label="示例情景"></nav>
+          <p class="intake-preset-hint enter-item">也可以先选一条示例故事感受节奏；写自己的故事请从岔路口开始。</p>
           <div id="serverBanner" class="intake-server-banner intake-hidden" role="alert"></div>
         </header>
 
@@ -107,8 +106,8 @@
             </div>
 
             <div id="stepConfirm" class="intake-hidden">
-              <h2 class="intake-section-title">Agent 会怎么读你</h2>
-              <p class="intake-section-sub">确认后 Persona agent 推导人格，再在本页跑 API 七年生成。</p>
+              <h2 class="intake-section-title">影子读到的你</h2>
+              <p class="intake-section-sub">确认无误后，影子会据此书写你的七年。</p>
               <div id="confirmSummary"></div>
             </div>
 
@@ -119,8 +118,7 @@
             <p class="intake-preview-title">影子初读</p>
             <div id="characterPreview" class="intake-character-preview intake-hidden" aria-live="polite" hidden></div>
             <div id="previewBody" class="intake-preview-body">影子还在听你说话——选几个词，或把岔路口说具体一点。</div>
-            <p class="intake-preview-foot">确认后 Persona agent 给出完整人格卡；生成完成自动跳进 Demo 七年（每年一页）。</p>
-            <p class="intake-agent-chain">链路 · Intake → Persona → Beats → <strong>命运</strong> → Year×7 → Final</p>
+            <p class="intake-preview-foot">确认后影子会给出完整人格侧写；七年写完后自动进入阅读。</p>
           </aside>
         </div>
 
@@ -128,7 +126,7 @@
           <p id="stepHint" class="intake-step-hint intake-hidden" role="status" aria-live="polite"></p>
           <div class="intake-footer-actions">
             <button type="button" id="btnBack" class="btn-ghost">上一步</button>
-            <button type="button" id="btnSkipDemo" class="btn-ghost intake-hidden">跳过采集，直达 Demo →</button>
+            <button type="button" id="btnSkipDemo" class="btn-ghost intake-hidden">先读示例故事 →</button>
             <button type="button" id="btnNext" class="btn-start">继续</button>
           </div>
         </footer>
@@ -138,24 +136,24 @@
 
   <section id="gen-pipeline-section" class="gen-hidden">
     <header class="gen-head">
-      <p class="landing-tagline" style="font-family:monospace;font-size:11px;color:var(--amber);letter-spacing:2px;margin:0 0 8px">SHADOW GENERATE</p>
+      <p class="landing-tagline" style="font-family:monospace;font-size:11px;color:var(--amber);letter-spacing:2px;margin:0 0 8px">SHADOW</p>
       <h1 class="landing-title" style="font-size:1.6rem;margin:0 0 8px">影子在写你的七年</h1>
-      <p class="landing-tagline">这是进度屏 — 写完后自动进入 Demo 分层阅读，不必在此读完正文。</p>
+      <p class="landing-tagline">这是进度页 — 写完后会自动带你进入阅读，不必在这里读完。</p>
     </header>
 
     <section class="gen-panel snes" id="gen-intake-summary-panel">
-      <h2 class="gen-section-title">Intake 摘要</h2>
+      <h2 class="gen-section-title">你的岔路口</h2>
       <div id="gen-intake-summary"></div>
       <div class="gen-mode-row">
         <label class="gen-mode-toggle">
           <input type="checkbox" id="gen-fast-mode" checked />
-          <span>快速模式（默认 · 约 2–4 分钟 · 规则 replan · 命运层轻量）</span>
+          <span>快速模式（默认 · 约 2–4 分钟 · 叙事略简）</span>
         </label>
-        <p class="gen-mode-hint">完整模式叙事更长（160–240 字/年），适合质量档，耗时约 2×。</p>
+        <p class="gen-mode-hint">完整模式每年写得更细更长，适合慢慢读，耗时约 2 倍。</p>
       </div>
       <div class="gen-actions">
-        <button type="button" id="btn-edit-intake" class="btn-ghost">← 返回修改采集</button>
-        <button type="button" id="btn-run" class="btn-start">开始 API 生成</button>
+        <button type="button" id="btn-edit-intake" class="btn-ghost">← 返回修改</button>
+        <button type="button" id="btn-run" class="btn-start">开始书写七年</button>
       </div>
     </section>
 
@@ -182,18 +180,18 @@
     </section>
 
     <section class="gen-panel snes gen-hidden" id="gen-run-panel">
-      <p id="gen-provider" class="gen-provider">检测 LLM…</p>
-      <ol id="gen-stage-timeline" class="gen-stage-timeline" aria-label="生成阶段">
-        <li data-stage="persona"><span class="gen-stage-dot"></span><span class="gen-stage-label">Persona</span></li>
-        <li data-stage="beats"><span class="gen-stage-dot"></span><span class="gen-stage-label">Beats</span></li>
-        <li data-stage="year_1"><span class="gen-stage-dot"></span><span class="gen-stage-label">Y1</span></li>
-        <li data-stage="year_2"><span class="gen-stage-dot"></span><span class="gen-stage-label">Y2</span></li>
-        <li data-stage="year_3"><span class="gen-stage-dot"></span><span class="gen-stage-label">Y3</span></li>
-        <li data-stage="year_4"><span class="gen-stage-dot"></span><span class="gen-stage-label">Y4</span></li>
-        <li data-stage="year_5"><span class="gen-stage-dot"></span><span class="gen-stage-label">Y5</span></li>
-        <li data-stage="year_6"><span class="gen-stage-dot"></span><span class="gen-stage-label">Y6</span></li>
-        <li data-stage="year_7"><span class="gen-stage-dot"></span><span class="gen-stage-label">Y7</span></li>
-        <li data-stage="final"><span class="gen-stage-dot"></span><span class="gen-stage-label">Final</span></li>
+      <p id="gen-provider" class="gen-provider" hidden aria-hidden="true"></p>
+      <ol id="gen-stage-timeline" class="gen-stage-timeline" aria-label="书写进度">
+        <li data-stage="persona"><span class="gen-stage-dot"></span><span class="gen-stage-label">读懂你</span></li>
+        <li data-stage="beats"><span class="gen-stage-dot"></span><span class="gen-stage-label">七年节奏</span></li>
+        <li data-stage="year_1"><span class="gen-stage-dot"></span><span class="gen-stage-label">第1年</span></li>
+        <li data-stage="year_2"><span class="gen-stage-dot"></span><span class="gen-stage-label">第2年</span></li>
+        <li data-stage="year_3"><span class="gen-stage-dot"></span><span class="gen-stage-label">第3年</span></li>
+        <li data-stage="year_4"><span class="gen-stage-dot"></span><span class="gen-stage-label">第4年</span></li>
+        <li data-stage="year_5"><span class="gen-stage-dot"></span><span class="gen-stage-label">第5年</span></li>
+        <li data-stage="year_6"><span class="gen-stage-dot"></span><span class="gen-stage-label">第6年</span></li>
+        <li data-stage="year_7"><span class="gen-stage-dot"></span><span class="gen-stage-label">第7年</span></li>
+        <li data-stage="final"><span class="gen-stage-dot"></span><span class="gen-stage-label">收束</span></li>
       </ol>
       <p id="gen-timing-hint" class="gen-timing-hint gen-hidden" aria-live="polite"></p>
       <div class="gen-eta-row">
@@ -201,7 +199,7 @@
         <span id="gen-eta-remaining" class="gen-eta-remaining"></span>
       </div>
       <div class="gen-progress-wrap"><div id="gen-progress"></div></div>
-      <p id="gen-bg-hint" class="gen-bg-hint gen-hidden">可以关掉此页 — 服务端会继续写。回来时用同一浏览器打开即可续看进度。</p>
+      <p id="gen-bg-hint" class="gen-bg-hint gen-hidden">可以暂时离开 — 影子会继续写。用同一浏览器回来即可续看。</p>
       <ul id="gen-log" class="gen-log" aria-live="polite"></ul>
       <p id="gen-error" class="gen-error gen-hidden" role="alert"></p>
     </section>
@@ -248,7 +246,7 @@
 
 <div id="intervention-modal" hidden>
   <div class="intervention-card snes modal-cutin" role="dialog" aria-modal="true" aria-labelledby="intervention-question">
-    <div class="intervention-label">PIVOTAL · 岔路口</div>
+    <div class="intervention-label">关键转折</div>
     <p id="intervention-question"></p>
     <div id="intervention-options" class="intervention-options-grid"></div>
     <p class="intervention-hint">这一选择会写入下一年。按 <kbd>1</kbd>–<kbd>3</kbd> 快捷选择，或跳过让影子自己走。</p>
@@ -261,8 +259,7 @@
   if (location.protocol === 'file:') {
     document.body.insertAdjacentHTML('afterbegin',
       '<div style="position:fixed;inset:0;z-index:9999;background:#fff5f0;padding:24px;font:16px/1.6 sans-serif;color:#5a2a22">' +
-      '<strong>不能双击打开 HTML 文件。</strong><br><br>请在终端执行：<code style="background:#eee;padding:2px 6px">npm run demo:local</code><br>' +
-      '然后打开 <a href="http://localhost:3000/">http://localhost:3000/</a></div>');
+      '<strong>请通过网站打开本页。</strong><br><br>影子需要在联网环境下运行，请访问官方站点首页，从「写我的七年」进入。</div>');
   }
   (function fillYearSelects() {
     const birth = document.getElementById('birthYear');

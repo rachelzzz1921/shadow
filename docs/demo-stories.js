@@ -282,7 +282,7 @@ function showGenerateWelcomeStrip() {
   const bar = document.createElement('div');
   bar.id = 'demo-live-welcome';
   bar.className = 'demo-live-welcome';
-  bar.innerHTML = '<div><strong>你的七年已就绪</strong>点「开始」进入第 1 年；顶部圆点可跳年，pivotal 年可介入。</div>'
+  bar.innerHTML = '<div><strong>你的七年已就绪</strong>点「开始」进入第 1 年；顶部圆点可跳年，关键转折处可以介入。</div>'
     + '<button type="button" class="demo-live-welcome-dismiss" aria-label="关闭提示">知道了</button>';
   document.body.appendChild(bar);
   bar.querySelector('.demo-live-welcome-dismiss')?.addEventListener('click', () => {

@@ -180,53 +180,51 @@ body { user-select: auto; }
   <nav class="site-nav" aria-label="站点导航">
     <a class="site-nav-brand" href="index.html">SHADOW</a>
     <div class="site-nav-links">
-      <a href="pitch.html">沿路路演</a>
+      <a href="pitch.html">走近影子</a>
       <a href="generate.html" class="is-primary">写我的七年</a>
-      <a href="demo-phaser.html">视觉预览</a>
-      <a href="board.html">团队看板</a>
     </div>
   </nav>
 
-  <div id="hub-status" class="hub-status is-off" role="status" aria-live="polite">
+  <div id="hub-status" class="hub-status is-off" role="status" aria-live="polite" hidden>
     <span class="hub-status-dot" aria-hidden="true"></span>
-    <span class="hub-status-text">检测 API 与 RAG…</span>
+    <span class="hub-status-text"></span>
   </div>
 
   <div class="hero">
-    <p class="hero-eyebrow">SHADOW · 平行人生 Harness</p>
+    <p class="hero-eyebrow">SHADOW · 平行人生</p>
     <span class="hero-headline">如果当年，你选了另一条路<br>七年后，你会在哪里？</span>
     <p class="hero-sub">
       不是模板运势，也不是一次性作文。<br>
-      <em>影子</em> 接收你的岔路口，经多 Agent 协作生成一条<br>
-      可回放、可介入、可追问的七年平行人生。
+      告诉<em>影子</em>你的岔路口，它会一年一年写下去——<br>
+      你可以在关键转折处介入，也可以随时和影子对话。
     </p>
-    <span class="hero-note">两条路，同一个叙事引擎 —— 先读别人的，再写你自己的。</span>
+    <span class="hero-note">先读别人的七年，再写你自己的。</span>
 
     <div class="site-dual-path" aria-label="进入方式">
       <a class="site-path-card" href="#stories">
-        <div class="site-path-kicker">STEP 01 · 先感受</div>
-        <div class="site-path-title">读一条 Golden 线</div>
-        <p class="site-path-desc">林晚、许星遥、周染、阿岚 —— 体验 pivotal 介入与七年分层阅读。</p>
+        <div class="site-path-kicker">第一步 · 先感受</div>
+        <div class="site-path-title">读一条别人的路</div>
+        <p class="site-path-desc">林晚、许星遥、周染、阿岚 —— 四条完整七年，随时进入。</p>
       </a>
       <a class="site-path-card is-featured" href="generate.html">
-        <div class="site-path-kicker">STEP 02 · 写我的</div>
-        <div class="site-path-title">生成平行人生</div>
-        <p class="site-path-desc">四层采集 → Persona → API 七年 → 自动进入 Demo。约 3 分钟。</p>
+        <div class="site-path-kicker">第二步 · 写我的</div>
+        <div class="site-path-title">生成我的平行人生</div>
+        <p class="site-path-desc">说说岔路口与那时的你，约 3 分钟，写完自动进入阅读。</p>
       </a>
     </div>
 
-    <ul class="domain-row" aria-label="六域场景 Agent">
+    <ul class="domain-row" aria-label="人生主题">
       <li>亲情</li><li>爱情</li><li>友情</li><li>学业</li><li>事业</li><li>自我</li>
     </ul>
     <p class="hero-pitch">
-      <a href="pitch.html">沿路看看 · 路演版（投资人 / 合作方）→</a>
+      <a href="pitch.html">想了解影子是怎么写的 →</a>
     </p>
   </div>
 
   <div id="stories" class="story-section">
     <div class="section-head">
       <div class="section-head-line"></div>
-      <span class="site-section-label">Golden 故事线</span>
+      <span class="site-section-label">精选故事</span>
       <div class="section-head-line"></div>
     </div>
 
@@ -273,17 +271,15 @@ body { user-select: auto; }
     </div>
     <div class="cta-head">把岔路口交给影子</div>
     <p class="cta-desc">
-      四层采集写入 <code style="font-size:11px">full_profile</code> → Persona agent →
-      Beats → 命运层 → Year×7（pivotal 可介入）→ Final。
-      有 API 时在本页一气呵成；离线则规则合成后进入阅读器。
+      写下「如果当年……」与那时的你。影子会先读懂你，再一年一年写下去；
+      遇到关键转折时会停下来问你，写完后进入七年阅读。
     </p>
     <a class="btn-cta" href="generate.html">开始我的平行人生 →</a>
-    <p class="cta-foot">约 3 分钟 · 可跳过行为题，只写岔路口也能玩</p>
-    <p class="cta-secondary"><a href="demo.html?story=wufuxdu">或先打开阿岚线，体验 pivotal 介入 →</a></p>
+    <p class="cta-foot">约 3 分钟 · 可以跳过问卷，只写岔路口也能开始</p>
+    <p class="cta-secondary"><a href="demo.html?story=wufuxdu">或先打开阿岚的故事，体验关键转折 →</a></p>
   </div>
 
-  <span class="hub-footer">Shadow Harness · 平行叙事引擎</span>
-  <p class="hub-team-link">研发进度、Corpus 与 Visual 流水线 → <a href="board.html">团队看板</a></p>
+  <span class="hub-footer">Shadow · 如影</span>
 
 </div>
 <script src="shadow-api-prefix.js"></script>

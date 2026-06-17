@@ -82,9 +82,9 @@
     return document.getElementById('descInput');
   }
 
-  function updateSourceTag(label) {
+  function updateSourceTag(_label) {
     const tag = document.getElementById('source-tag');
-    if (tag) tag.textContent = `📋 Intake · ${label}`;
+    if (tag) tag.textContent = '';
   }
 
   function bindChrome() {
@@ -116,7 +116,7 @@
       el.btnSkipDemo.addEventListener('click', () => {
         const presetId = resolveSkipPresetId();
         if (!window.ShadowDemoMock?.isDemoStory(presetId)) {
-          showStepHint('Demo 桥接未加载，请刷新页面后重试。', 'error');
+          showStepHint('暂时无法打开示例故事，请刷新后重试。', 'error');
           return;
         }
         goDemoFromPreset(presetId);
@@ -155,7 +155,7 @@
   function setSkipDemoLoading(loading) {
     if (!el.btnSkipDemo) return;
     el.btnSkipDemo.disabled = loading;
-    el.btnSkipDemo.textContent = loading ? '进入样例…' : '玩样例故事 →';
+    el.btnSkipDemo.textContent = loading ? '进入样例…' : '先读这条故事 →';
   }
 
   function setQuickPlayLoading(loading) {
@@ -356,14 +356,8 @@
       await loadIntakeData();
     } catch (err) {
       console.error(err);
-      showStepHint(
-        '标签/行为题数据未加载。请确认 npm run demo:local 在运行，然后刷新。',
-        'error'
-      );
-      showServerBanner(
-        '采集数据加载失败。请运行 npm run demo:local 后刷新；或打开首页直达 Demo。',
-        'error'
-      );
+      showStepHint('问卷加载失败，请刷新页面；也可以从首页直接读精选故事。', 'error');
+      showServerBanner('网络不太稳定，请刷新后再试；或从首页进入精选故事。', 'error');
       return;
     }
     window.__shadowSeedTags = state.tagsData;
@@ -791,16 +785,16 @@
     el.stepConfirm.classList.toggle('intake-hidden', step !== 3);
     el.stepDone?.classList.toggle('intake-hidden', step !== 4);
 
-    const stepLabels = ['岔路口', '标签', '行为题', '确认', 'Persona · 成形'];
-    updateSourceTag(stepLabels[step] || '三层采集');
+    const stepLabels = ['岔路口', '标签', '问卷', '确认', '成形'];
+    updateSourceTag(stepLabels[step] || '');
 
     el.btnBack.disabled = step === 0 || step === 4;
     el.btnNext.classList.toggle('intake-hidden', step === 4);
     el.btnNext.disabled = false;
     el.btnNext.textContent = step === 3
       ? (state.activePresetId && window.ShadowDemoMock?.isDemoStory(state.activePresetId)
-        ? '进入 Demo →'
-        : (window.ShadowGenerateBridge?.onIntakeComplete ? '开始 API 生成 →' : 'API 生成七年 →'))
+        ? '进入这条故事 →'
+        : (window.ShadowGenerateBridge?.onIntakeComplete ? '开始书写七年 →' : '生成我的七年 →'))
       : '继续';
 
     if (step === 2) renderQuestion();
@@ -1025,11 +1019,11 @@
     const persona = result.persona;
     const full = result.full_profile;
     const sourceLabel = {
-      llm: '阶跃星辰 LLM',
-      rule_fallback: 'LLM 失败 · 规则兜底',
-      rule_local: '离线规则版（无 API）',
+      llm: '在线推导',
+      rule_fallback: '备用方式',
+      rule_local: '离线书写',
       error: '推导异常'
-    }[result.persona_source] || result.persona_source || '未知';
+    }[result.persona_source] || '已确认';
 
     const tension = (full.tension_flags || []).map((t) => `
       <div style="margin-bottom:10px">
@@ -1041,36 +1035,35 @@
       <div class="persona-card snes">
         <h3>影 · ${escapeHtml(persona.shadow_name)}</h3>
         <dl>
-          <dt>core_tension</dt><dd>${escapeHtml(persona.core_tension)}</dd>
-          <dt>core_traits</dt><dd>${(persona.core_traits || []).map(escapeHtml).join(' · ')}</dd>
-          <dt>soft_spots</dt><dd>${(persona.soft_spots || []).map((s) => `<div style="margin-bottom:8px">${escapeHtml(s)}</div>`).join('')}</dd>
-          <dt>decision_tendency</dt><dd>${escapeHtml(persona.decision_tendency)}</dd>
-          <dt>growth_seed</dt><dd>${escapeHtml(persona.growth_seed)}</dd>
-          <dt>voice_notes</dt><dd>${escapeHtml(persona.voice_notes)}</dd>
+          <dt>核心张力</dt><dd>${escapeHtml(persona.core_tension)}</dd>
+          <dt>性格</dt><dd>${(persona.core_traits || []).map(escapeHtml).join(' · ')}</dd>
+          <dt>软肋</dt><dd>${(persona.soft_spots || []).map((s) => `<div style="margin-bottom:8px">${escapeHtml(s)}</div>`).join('')}</dd>
+          <dt>做决定时</dt><dd>${escapeHtml(persona.decision_tendency)}</dd>
+          <dt>可能的长成</dt><dd>${escapeHtml(persona.growth_seed)}</dd>
+          <dt>说话方式</dt><dd>${escapeHtml(persona.voice_notes)}</dd>
         </dl>
       </div>` : `
       <div class="persona-card snes">
-        <p style="margin:0;color:var(--ink-muted)">人格卡未生成（无 API）。Live 链仍会尝试用 full_profile 启动。</p>
+        <p style="margin:0;color:var(--ink-muted)">侧写将在书写开始时补全。</p>
       </div>`;
 
     const mockHref = window.ShadowIntakePresets?.mockHref(state.activePresetId) || 'demo.html?from=intake';
     const presetNote = state.activePresetId
-      ? `<p class="summary-sub" style="margin-top:-8px">Mock 预览将打开 <strong>${escapeHtml(window.ShadowIntakePresets?.byId(state.activePresetId)?.line_name || state.activePresetId)}</strong> Golden 叙事壳。</p>`
+      ? `<p class="summary-sub" style="margin-top:-8px">也可以先读示例故事 <strong>${escapeHtml(window.ShadowIntakePresets?.byId(state.activePresetId)?.line_name || state.activePresetId)}</strong> 感受节奏。</p>`
       : '';
 
     return `
       <h2 class="summary-title">影子已经成形</h2>
-      <p class="summary-sub">Persona agent · <span style="color:var(--amber)">${escapeHtml(sourceLabel)}</span>${errMsg ? ` · ${escapeHtml(errMsg)}` : ''}</p>
+      <p class="summary-sub">${escapeHtml(sourceLabel)}${errMsg ? ` · ${escapeHtml(errMsg)}` : ''}</p>
       ${presetNote}
       ${full.tension_flags?.length ? `<div class="tension-box snes"><div style="font-size:11px;color:var(--amber);margin-bottom:10px">⚑ 张力点</div>${tension}</div>` : ''}
       ${personaBlock}
-      <p class="intake-agent-chain" style="margin:16px 0 0;text-align:center">下一步 · 七年（Beats → 命运 agent → Year×7）</p>
       <div class="summary-actions">
         <a href="demo.html?live=1" class="btn-start">进入我的七年</a>
-        <a href="${mockHref}" class="btn-ghost">Mock 预览七年</a>
-        <button type="button" class="btn-ghost" id="btn-restart-intake">重新采集</button>
+        <a href="${mockHref}" class="btn-ghost">先读示例故事</a>
+        <button type="button" class="btn-ghost" id="btn-restart-intake">重新填写</button>
       </div>
-      <p class="intake-foot-link"><a href="index.html">← 首页</a> · <a href="demo.html">叙事 Demo</a></p>`;
+      <p class="intake-foot-link"><a href="index.html">← 首页</a> · <a href="demo.html">读故事</a></p>`;
   }
 
   async function showCompletion(result, errMsg) {
@@ -1093,7 +1086,7 @@
     }
     if (el.previewBody) {
       el.previewBody.textContent = result.persona?.core_tension ||
-        '人格已写入 session。进入 Live 后，命运 agent 会按你的岔路口年份注入时代背景。';
+        '影子已经记住你。接下来会一年一年写下去。';
     }
   }
 
@@ -1101,7 +1094,7 @@
     ensurePresetContextForSkip(presetId);
     setSkipDemoLoading(true);
     el.btnNext.disabled = true;
-    el.btnNext.textContent = '进入 Demo…';
+    el.btnNext.textContent = '进入故事中…';
     try {
       const mock = await window.ShadowDemoMock.completeIntakeMock(presetId, {
         layerA: state.layerA,
@@ -1121,10 +1114,10 @@
       sessionStorage.setItem('shadow_intake_story_id', presetId);
       window.location.replace(window.ShadowDemoMock.demoBrowseHref(presetId));
     } catch (e) {
-      alert('Demo 加载失败：' + e.message);
+      alert('故事加载失败：' + e.message);
       setSkipDemoLoading(false);
       el.btnNext.disabled = false;
-      el.btnNext.textContent = state.step === 3 ? '进入 Demo →' : '继续';
+      el.btnNext.textContent = state.step === 3 ? '进入这条故事 →' : '继续';
     }
   }
 
@@ -1141,7 +1134,7 @@
     }
 
     el.btnNext.disabled = true;
-    el.btnNext.textContent = 'Persona agent 推导中…';
+    el.btnNext.textContent = '影子在读你…';
 
     const body = {
       layerA: state.layerA,
@@ -1189,9 +1182,9 @@
     }
 
     if (!result?.full_profile) {
-      alert('采集失败，请确认已运行 npm run demo:local 或刷新重试。');
+      alert('提交失败，请刷新后重试。');
       el.btnNext.disabled = false;
-      el.btnNext.textContent = 'Persona agent 推导 →';
+      el.btnNext.textContent = '开始书写七年 →';
       return;
     }
 

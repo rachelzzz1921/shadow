@@ -545,14 +545,14 @@ async function applyLiveFromJobQuery() {
   try {
     const res = await fetch(`${prefix}/api/story/jobs/${encodeURIComponent(jobId)}`);
     if (!res.ok) {
-      showLiveError(`无法加载 job <code>${jobId}</code>（HTTP ${res.status}）。<a href="generate.html">返回生成页</a>`);
+      showLiveError(`暂时无法加载你的故事，请稍后再试。<a href="generate.html">返回书写页</a>`);
       return false;
     }
     const job = await res.json();
     const session = job.session;
     const final = job.result?.final || session?.final;
     if (!session?.years?.length) {
-      showLiveError('该 job 尚无七年数据。<a href="generate.html">返回生成页</a>');
+      showLiveError('你的七年尚未写完。<a href="generate.html">返回书写页</a>');
       return false;
     }
 
@@ -579,7 +579,7 @@ async function applyLiveFromJobQuery() {
     if (errEl) errEl.remove();
     return true;
   } catch (err) {
-    showLiveError(`加载失败：${String(err?.message || err)}。 <a href="generate.html">返回生成页</a>`);
+    showLiveError(`加载失败，请稍后再试。<a href="generate.html">返回书写页</a>`);
     return false;
   }
 }

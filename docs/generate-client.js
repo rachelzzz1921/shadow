@@ -148,15 +148,15 @@
     }, 1000);
   }
 
-  function logPending(stage, msg) {
-    let li = pendingLog.get(stage);
+  function logPending(_stage, msg) {
+    let li = pendingLog.get(_stage);
     if (!li) {
       li = document.createElement('li');
       li.className = 'gen-log-pending';
       logEl?.appendChild(li);
-      pendingLog.set(stage, li);
+      pendingLog.set(_stage, li);
     }
-    li.textContent = `[${stage}] ${msg}`;
+    li.textContent = msg;
     if (logEl) logEl.scrollTop = logEl.scrollHeight;
   }
 
@@ -211,16 +211,13 @@
     });
   }
 
-  function showTimingHint(stage, ms) {
-    const el = $('gen-timing-hint');
-    if (!el || !stage || !ms) return;
-    el.textContent = `${stage} · ${ms}ms`;
-    show(el);
+  function showTimingHint(_stage, _ms) {
+    /* 不向用户展示毫秒级计时 */
   }
 
-  function log(stage, msg) {
+  function log(_stage, msg) {
     const li = document.createElement('li');
-    li.textContent = `[${stage}] ${msg}`;
+    li.textContent = msg;
     logEl?.appendChild(li);
     if (logEl) logEl.scrollTop = logEl.scrollHeight;
   }
@@ -275,7 +272,7 @@
 
     interventionInFlight = true;
     interventionForYear = fromYear;
-    log('intervention', `第 ${fromYear} 年 pivotal · 请选择介入`);
+    log('intervention', `第 ${fromYear} 年 · 请选择下一步`);
     const loadingEl = $('intervention-loading');
     try {
       const choice = await openInterventionModal(prompt);
@@ -411,32 +408,36 @@
     switch (event) {
       case 'scenario:classified':
         setProgress(8);
-        log('scenario', `${data.label || data.domain || '—'} · ${data.agent || '命运'}`);
+        log('scenario', `故事主题 · ${data.label || data.domain || '人生'}`);
         break;
       case 'persona:skipped':
-        log('persona', `沿用 Intake · ${data.name || '影子'}`);
+        log('persona', `已读懂你 · ${data.name || '影子'}`);
         setProgress(9);
         break;
       case 'persona:start':
-        logPending('persona', 'Persona agent 写人格卡…');
+        logPending('persona', '正在读懂你…');
         setProgress(9);
         break;
       case 'persona:done':
         clearPending('persona');
-        log('persona', `${data.name || '影子'}`);
+        log('persona', `侧写完成 · ${data.name || '影子'}`);
         setProgress(10);
         break;
       case 'beats:start':
-        logPending('beats', 'Beats agent 编排七年节奏…');
+        logPending('beats', '正在安排七年节奏…');
         setProgress(11);
-        startWaitTimer('beats', 'Beats agent 编排七年节奏…', (secs) => {
+        startWaitTimer('beats', '正在安排七年节奏…', (secs) => {
           setProgress(11 + Math.min(6, secs / 15));
         });
         break;
       case 'beats:done':
         stopWaitTimer();
         clearPending('beats');
-        log('beats', `pivotal · ${(data.pivotal_years || []).join(', ')}`);
+        if ((data.pivotal_years || []).length) {
+          log('beats', `关键转折 · 第 ${(data.pivotal_years || []).join('、')} 年`);
+        } else {
+          log('beats', '七年节奏已定');
+        }
         setProgress(18);
         break;
       default:
@@ -447,14 +448,14 @@
   function handleYearStage(event, data, beat) {
     switch (event) {
       case 'year:start':
-        logPending('year', `Year agent 生成中 (${beat?.type || data.type})…`);
+        logPending('year', `正在写第 ${data.year ?? beat?.year ?? '—'} 年…`);
         break;
       case 'fate:start':
-        logPending('fate', `第 ${data.year ?? beat?.year} 年 · 命运 agent 采样…`);
+        logPending('fate', `第 ${data.year ?? beat?.year} 年 · 对照时代背景…`);
         break;
       case 'fate:sampled':
         clearPending('fate');
-        log('fate', (data.era_line || '时代层已注入').slice(0, 80));
+        log('fate', (data.era_line || '时代背景已融入').slice(0, 80));
         break;
       case 'year:generating':
         showStreamYear(data.year ?? beat?.year, '');
@@ -597,7 +598,7 @@
     hide($('gen-run-panel'));
     if (btnRun) {
       btnRun.disabled = false;
-      btnRun.textContent = '开始 API 生成';
+      btnRun.textContent = '开始书写七年';
     }
   }
 
@@ -1103,7 +1104,6 @@
       return;
     }
     if (event === 'job:timing') {
-      log('timing', `${data.stage} · ${data.ms}ms`);
       showTimingHint(data.stage, data.ms);
       return;
     }
@@ -1171,7 +1171,7 @@
   async function runPipeline(resumeJobId = null) {
     const handoff = intakeHandoff || readHandoffFromSession();
     if (!handoff?.full_profile && !resumeJobId) {
-      alert('请先完成 Intake 采集（岔路口 → 标签 → 行为题 → 确认）。');
+      alert('请先完成前面的步骤（岔路口 → 标签 → 问卷 → 确认）。');
       if (isUnified) showIntakeSection();
       return;
     }
@@ -1201,7 +1201,7 @@
       health = await (await fetch('/api/health')).json();
     } catch {
       if (handoff) {
-        log('intake', 'API 不可用 — 用本地规则即时合成七年，进入分层浏览');
+        log('intake', '正在离线为你书写七年…');
         await synthLocalAndGoDemo(handoff);
       }
       return;
@@ -1209,7 +1209,7 @@
 
     if (!health.has_key) {
       if (handoff) {
-        log('intake', '未检测到 LLM Key — 用本地规则即时合成七年，进入分层浏览');
+        log('intake', '正在为你书写七年…');
         await synthLocalAndGoDemo(handoff);
       }
       return;
@@ -1223,7 +1223,7 @@
       openai: 'OpenAI'
     }[health.provider] || health.provider;
     if (providerEl) {
-      providerEl.textContent = `${providerLabel} · ${health.model_override || '默认模型'} · ${generationMode === 'fast' ? '快速' : '完整'}模式 · 服务端任务`;
+      providerEl.textContent = `${generationMode === 'fast' ? '快速' : '完整'}模式 · 影子正在书写`;
     }
 
     if (resumeJobId) {
@@ -1233,25 +1233,25 @@
     }
 
     if (!handoff?.full_profile) {
-      showError('缺少 Intake 数据');
+      showError('缺少你的岔路口信息，请返回上一步填写');
       if (btnRun) {
         btnRun.disabled = false;
-        btnRun.textContent = '开始 API 生成';
+        btnRun.textContent = '开始书写七年';
       }
       return;
     }
 
     let intakeResult = handoff;
     if (intakeResult.persona || intakeResult.persona_card) {
-      log('intake', `沿用 Intake Persona（${intakeResult.persona_source || 'cached'}）`);
+      log('intake', `已记住你的侧写 · ${intakeResult.persona_source === 'cached' ? '沿用上次' : '本次确认'}`);
       renderPersona(intakeResult.persona, intakeResult.persona_card);
     } else {
-      log('intake', '构建 profile + Persona agent…');
+      log('intake', '正在整理你的岔路口与人格侧写…');
       try {
         intakeResult = await post('/api/intake/complete', intakeApiPayloadFromHandoff(handoff));
         renderPersona(intakeResult.persona, intakeResult.persona_card);
       } catch (e) {
-        showError('Intake/Persona 失败：' + e.message);
+        showError('准备失败：' + e.message);
         if (btnRun) {
           btnRun.disabled = false;
           btnRun.textContent = '重试';
@@ -1277,7 +1277,7 @@
           persona_source: intakeResult.persona_source
         }
       });
-      log('job', `已创建 ${created.job_id} · ${created.status}`);
+      log('job', `已开始书写 · ${created.job_id.slice(0, 12)}…`);
       saveJobId(created.job_id);
       attachJobStream(created.job_id, true);
       onJobSnapshot(created.job);
@@ -1295,7 +1295,7 @@
     const text = $('gen-resume-text');
     if (!jobId || !panel) return;
     if (text) {
-      text.textContent = `未完成的生成任务 · ${jobId.slice(0, 20)}… · 可继续查看进度`;
+      text.textContent = `你还有一篇未写完的七年 · 可继续查看进度`;
     }
     show(panel);
   }
@@ -1339,7 +1339,7 @@
     renderIntakeSummary(intakeHandoff);
     showPipelineSection();
     const tag = document.getElementById('source-tag');
-    if (tag) tag.textContent = '⚡ Generate · API';
+    if (tag) tag.textContent = '';
     setTimeout(runPipeline, 350);
   }
 
@@ -1385,7 +1385,7 @@
     hide($('gen-run-panel'));
     if (btnRun) {
       btnRun.disabled = false;
-      btnRun.textContent = '开始 API 生成';
+      btnRun.textContent = '开始书写七年';
     }
   });
   $('btn-export')?.addEventListener('click', exportJson);
@@ -1394,7 +1394,7 @@
     hide($('gen-run-panel'));
     if (btnRun) {
       btnRun.disabled = false;
-      btnRun.textContent = '开始 API 生成';
+      btnRun.textContent = '开始书写七年';
     }
   });
 
@@ -1425,13 +1425,13 @@
       if (!providerEl) return;
       if (h.has_key) {
         providerEl.textContent = isUnified
-          ? `就绪 · ${h.provider || 'LLM'} · 先完成 Intake，确认后自动生成本页七年`
-          : `就绪 · ${h.provider || 'LLM'} · 点「开始 API 生成」`;
+          ? '影子已就绪 · 完成填写后将自动开始书写'
+          : '影子已就绪 · 点「开始书写七年」';
       } else {
-        providerEl.textContent = '未检测到 API Key — 请配置 .env 后重启 demo:local';
+        providerEl.textContent = '';
       }
     })
     .catch(() => {
-      if (providerEl) providerEl.textContent = '本地服务未连接 — npm run demo:local';
+      if (providerEl) providerEl.textContent = '';
     });
 })();
