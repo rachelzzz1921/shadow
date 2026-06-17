@@ -317,6 +317,127 @@ body.gen-progress-screen #gen-year-stream {
   background: rgba(125, 168, 122, 0.1);
 }
 
+/* I-14 · 阶段时间轴 */
+.gen-stage-timeline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 4px;
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(212, 160, 86, 0.06);
+  border: 1px solid rgba(212, 160, 86, 0.2);
+}
+.gen-stage-timeline li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 36px;
+  font-size: 10px;
+  color: var(--ink-muted);
+  transition: color 0.2s ease;
+}
+.gen-stage-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--panel-edge);
+  background: var(--paper);
+}
+.gen-stage-timeline li.is-active .gen-stage-dot {
+  border-color: var(--amber);
+  background: var(--amber-bright);
+  box-shadow: 0 0 0 3px var(--amber-glow);
+}
+.gen-stage-timeline li.is-active .gen-stage-label { color: var(--amber-deep); font-weight: 600; }
+.gen-stage-timeline li.is-done .gen-stage-dot {
+  border-color: var(--sage);
+  background: var(--sage-light);
+}
+.gen-stage-timeline li.is-done .gen-stage-label { color: var(--sage, #5a7a58); }
+.gen-stage-timeline li.is-pivotal .gen-stage-dot {
+  border-color: var(--rose-soft, #c97868);
+  animation: pivotal-pulse 1.6s ease-in-out infinite;
+}
+@keyframes pivotal-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 120, 104, 0.35); }
+  50% { box-shadow: 0 0 0 6px rgba(201, 120, 104, 0); }
+}
+.gen-timing-hint {
+  font-size: 11px;
+  font-family: monospace;
+  color: var(--ink-muted);
+  margin: 0 0 8px;
+}
+
+/* I-14 · 介入 modal */
+.intervention-options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.intervention-options-grid button {
+  width: 100%;
+  min-height: 44px;
+  text-align: left;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--paper);
+  border: 2px solid var(--panel-edge);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.intervention-options-grid button:hover {
+  border-color: var(--amber);
+  background: rgba(212, 160, 86, 0.08);
+}
+.intervention-options-grid button:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+.intervention-options-grid button .opt-key {
+  display: inline-block;
+  min-width: 1.4em;
+  margin-right: 8px;
+  font-family: monospace;
+  color: var(--amber-deep);
+}
+.intervention-skip-btn { width: 100%; min-height: 44px; margin-top: 4px; }
+.intervention-loading {
+  text-align: center;
+  font-size: 12px;
+  color: var(--amber);
+  margin-top: 8px;
+}
+.intervention-hint kbd {
+  font-family: monospace;
+  font-size: 10px;
+  padding: 1px 5px;
+  border: 1px solid var(--panel-edge);
+  border-radius: 4px;
+  background: var(--paper-deep);
+}
+
+#gen-failed-panel .gen-error,
+#gen-resume-panel .gen-era {
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: rgba(180, 72, 56, 0.06);
+  border: 1px solid rgba(180, 72, 56, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gen-stage-timeline li.is-pivotal .gen-stage-dot { animation: none; }
+  .gen-complete-overlay { transition: none; }
+}
+
 .gen-year-stream {
   margin-bottom: 16px;
   padding: 14px 16px;

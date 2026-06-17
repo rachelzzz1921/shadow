@@ -469,6 +469,11 @@ function applyLiveFromSession() {
     const session = live.session;
     if (!session?.years?.length) return false;
 
+    const urlJobId = new URLSearchParams(location.search).get('job_id');
+    if (urlJobId && live.generated_job_id && live.generated_job_id !== urlJobId) {
+      return false;
+    }
+
     STORY.years = session.years;
     STORY.beats = session.beats || STORY.beats;
     STORY.pivotal_years = session.pivotal_years || STORY.pivotal_years;
@@ -506,18 +511,50 @@ async function applyLiveFromJobQuery() {
   const params = new URLSearchParams(location.search);
   const jobId = params.get('job_id');
   if (!jobId) return false;
+
+  const loadingEl = document.getElementById('demo-live-loading');
+  const showLoading = () => { if (loadingEl) loadingEl.hidden = false; };
+  const hideLoading = () => { if (loadingEl) loadingEl.hidden = true; };
+  const showLiveError = (msg) => {
+    hideLoading();
+    let el = document.getElementById('demo-live-error');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'demo-live-error';
+      el.className = 'demo-live-error';
+      el.setAttribute('role', 'alert');
+      document.body.appendChild(el);
+    }
+    el.innerHTML = msg;
+  };
+
   try {
-    if (sessionStorage.getItem('shadow_live_session')) return false;
+    const raw = sessionStorage.getItem('shadow_live_session');
+    if (raw) {
+      try {
+        const live = JSON.parse(raw);
+        if (!jobId || live.generated_job_id === jobId) {
+          return false;
+        }
+      } catch (_) { /* fall through to API */ }
+    }
   } catch (_) { /* ignore */ }
 
+  showLoading();
   const prefix = window.SHADOW_BASE_PREFIX || '';
   try {
     const res = await fetch(`${prefix}/api/story/jobs/${encodeURIComponent(jobId)}`);
-    if (!res.ok) return false;
+    if (!res.ok) {
+      showLiveError(`无法加载 job <code>${jobId}</code>（HTTP ${res.status}）。<a href="generate.html">返回生成页</a>`);
+      return false;
+    }
     const job = await res.json();
     const session = job.session;
     const final = job.result?.final || session?.final;
-    if (!session?.years?.length) return false;
+    if (!session?.years?.length) {
+      showLiveError('该 job 尚无七年数据。<a href="generate.html">返回生成页</a>');
+      return false;
+    }
 
     STORY.years = session.years;
     STORY.beats = session.beats || STORY.beats;
@@ -537,8 +574,12 @@ async function applyLiveFromJobQuery() {
     STORY._from_generate = true;
     STORY._live_run_id = session.run_id || job.job_id;
     STORY._demo_mock = false;
+    hideLoading();
+    const errEl = document.getElementById('demo-live-error');
+    if (errEl) errEl.remove();
     return true;
-  } catch (_) {
+  } catch (err) {
+    showLiveError(`加载失败：${String(err?.message || err)}。 <a href="generate.html">返回生成页</a>`);
     return false;
   }
 }

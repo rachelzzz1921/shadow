@@ -178,6 +178,46 @@
     if (progressEl) progressEl.style.width = Math.min(100, pct) + '%';
   }
 
+  const STAGE_ORDER = ['persona', 'beats', 'year_1', 'year_2', 'year_3', 'year_4', 'year_5', 'year_6', 'year_7', 'final'];
+
+  function updateStageTimeline(job) {
+    const root = $('gen-stage-timeline');
+    if (!root) return;
+    const done = new Set(job?.completed_stages || []);
+    const yearsDone = job?.session?.years?.length || 0;
+    for (let i = 1; i <= yearsDone; i++) done.add(`year_${i}`);
+    if (job?.session?.beats?.length) done.add('beats');
+    if (job?.session?.persona_card) done.add('persona');
+    if (jobFinalPayload(job)) done.add('final');
+
+    let active = job?.stage?.stage || null;
+    if (job?.status === 'awaiting_intervention') {
+      const fy = job.stage?.intervention_from_year || job.stage?.year_index;
+      if (fy) active = `year_${fy}`;
+    } else if (job?.status === 'running' && job.partial?.current_year_index) {
+      active = `year_${job.partial.current_year_index}`;
+    } else if (job?.status === 'running' && yearsDone < 7) {
+      active = `year_${yearsDone + 1}`;
+    } else if (job?.status === 'done') {
+      active = 'final';
+    }
+
+    root.querySelectorAll('li[data-stage]').forEach((li) => {
+      const id = li.getAttribute('data-stage');
+      li.classList.remove('is-done', 'is-active', 'is-pivotal');
+      if (done.has(id)) li.classList.add('is-done');
+      if (id === active) li.classList.add('is-active');
+      if (job?.status === 'awaiting_intervention' && id === active) li.classList.add('is-pivotal');
+    });
+  }
+
+  function showTimingHint(stage, ms) {
+    const el = $('gen-timing-hint');
+    if (!el || !stage || !ms) return;
+    el.textContent = `${stage} · ${ms}ms`;
+    show(el);
+  }
+
   function log(stage, msg) {
     const li = document.createElement('li');
     li.textContent = `[${stage}] ${msg}`;
@@ -236,8 +276,10 @@
     interventionInFlight = true;
     interventionForYear = fromYear;
     log('intervention', `第 ${fromYear} 年 pivotal · 请选择介入`);
+    const loadingEl = $('intervention-loading');
     try {
       const choice = await openInterventionModal(prompt);
+      if (loadingEl) show(loadingEl);
       await submitJobIntervention(job.job_id, { from_year: fromYear, prompt, choice });
       log('intervention', choice ? `已选：${choice.choice}` : '已跳过介入');
       attachJobStream(job.job_id, true);
@@ -248,6 +290,7 @@
     } catch (e) {
       showError('提交介入失败：' + e.message);
     } finally {
+      if (loadingEl) hide(loadingEl);
       interventionInFlight = false;
     }
   }
@@ -264,30 +307,42 @@
         return;
       }
 
+      let settled = false;
+      const finish = (value) => {
+        if (settled) return;
+        settled = true;
+        document.removeEventListener('keydown', onKey);
+        modal.hidden = true;
+        modal.classList.remove('open');
+        resolve(value);
+      };
+
       qEl.textContent = prompt.question;
       optsEl.innerHTML = '';
-      (prompt.options || []).forEach((label, i) => {
+      const options = prompt.options || [];
+      options.forEach((label, i) => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'btn-start';
-        btn.style.margin = '6px 6px 0 0';
-        btn.textContent = label;
-        btn.onclick = () => {
-          modal.hidden = true;
-          modal.classList.remove('open');
-          resolve({ choice: label, option_index: i });
-        };
+        btn.innerHTML = `<span class="opt-key">${i + 1}</span>${escapeHtml(label)}`;
+        btn.onclick = () => finish({ choice: label, option_index: i });
         optsEl.appendChild(btn);
       });
 
-      skipBtn.onclick = () => {
-        modal.hidden = true;
-        modal.classList.remove('open');
-        resolve(null);
+      skipBtn.onclick = () => finish(null);
+
+      const onKey = (ev) => {
+        if (ev.key >= '1' && ev.key <= '3') {
+          const idx = Number(ev.key) - 1;
+          if (options[idx]) finish({ choice: options[idx], option_index: idx });
+        }
+        if (ev.key === 'Escape') finish(null);
       };
+      document.addEventListener('keydown', onKey);
 
       modal.hidden = false;
       modal.classList.add('open');
+      const first = optsEl.querySelector('button');
+      if (first) first.focus();
     });
   }
 
@@ -655,7 +710,8 @@
       persona: payload.persona,
       visual_character: payload.visual_character || s.visual_character || null,
       generated_at: payload.generated_at,
-      _from_generate: true
+      _from_generate: true,
+      generated_job_id: payload.generated_job_id || null
     };
   }
 
@@ -715,9 +771,10 @@
       btnRun.disabled = true;
     }
     setProgressScreen(false);
+    const delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1200;
     setTimeout(() => {
       window.location.replace(demoUrl);
-    }, 1200);
+    }, delay);
   }
 
   function finishAndEnterDemo(activeSession, fin, intakeResult, profile, health) {
@@ -737,6 +794,7 @@
       provider: health?.provider
     };
     const livePayload = buildApiLivePayload(mergedSession, fin, intakeResult, profile);
+    livePayload.generated_job_id = currentJobId || loadJobId() || null;
     if (!livePayload.session?.years?.length) {
       showError('生成完成但缺少年份数据，无法进入 Demo。');
       if (btnRun) {
@@ -930,6 +988,7 @@
     const pct = job.status === 'done' ? 100 : Math.round(18 + (done / total) * 68);
     setProgress(pct);
     updateEtaLabel(done, total, job.generation_mode || 'fast');
+    updateStageTimeline(job);
     if (job.partial?.current_year_text && job.status === 'running') {
       showStreamYear(job.partial.current_year_index || done + 1, job.partial.current_year_text);
     }
@@ -948,6 +1007,7 @@
     }
     setProgress(job.status === 'done' ? 100 : Math.round(18 + (done / total) * 68));
     updateEtaLabel(done, total, job.generation_mode || 'fast');
+    updateStageTimeline(job);
     renderJobStatusBanner(job);
   }
 
@@ -966,11 +1026,13 @@
     show($('gen-bg-hint'));
     hydrateJobUi(job);
     renderRunningProgress(job);
+    updateStageTimeline(job);
 
     if (job.status === 'done') {
       clearJobPollers();
       disconnectJobStream();
-      if (jobReadyForDemo(job)) {
+      const ready = jobReadyForDemo(job);
+      if (ready) {
         const intake = job.intake_snapshot || {};
         finishAndEnterDemo(
           job.session,
@@ -1042,6 +1104,7 @@
     }
     if (event === 'job:timing') {
       log('timing', `${data.stage} · ${data.ms}ms`);
+      showTimingHint(data.stage, data.ms);
       return;
     }
     if (event === 'job:stage_done') {

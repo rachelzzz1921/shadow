@@ -6,6 +6,8 @@
 <meta name="color-scheme" content="light" />
 <title>Shadow · 平行人生叙事 Harness — 路演</title>
 <meta name="description" content="Shadow 不是单 prompt 故事生成器，而是一套可被干预、能记住、可复盘的平行人生叙事 Harness。" />
+<link rel="stylesheet" href="demo-theme.css" />
+<link rel="stylesheet" href="site-chrome.css" />
 <link rel="stylesheet" href="pitch.css?v=20260615" />
 </head>
 <body>
@@ -275,7 +277,29 @@
   </div>
 </div>
 
+<div class="site-sticky-cta" id="pitch-sticky-cta" aria-hidden="true">
+  <a class="btn-ghost" href="demo.html">先逛 Demo</a>
+  <a class="btn-start" href="generate.html">写我的七年 →</a>
+</div>
+
 <script src="shadow-api-prefix.js"></script>
 <script src="pitch.js?v=20260615"></script>
+<script>
+(function pitchStickyCta() {
+  var bar = document.getElementById('pitch-sticky-cta');
+  if (!bar || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var shown = false;
+  function onScroll() {
+    var y = window.scrollY || document.documentElement.scrollTop;
+    var next = y > 320;
+    if (next === shown) return;
+    shown = next;
+    bar.classList.toggle('is-visible', next);
+    bar.setAttribute('aria-hidden', next ? 'false' : 'true');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
 </body>
 </html>

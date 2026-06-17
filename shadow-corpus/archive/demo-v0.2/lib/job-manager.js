@@ -1,5 +1,6 @@
 'use strict';
 
+const fs = require('node:fs');
 const { createRunTrace, persistTrace, finishRunTrace } = require('./run-trace');
 const { readJob, writeJob, listJobFiles, createJob } = require('./job-store');
 

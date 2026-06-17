@@ -11,6 +11,9 @@
 | I-10 | Playwright E2E（`SHADOW_E2E=1` mock + generate→demo 闭环） | A ✅ |
 | I-11 | Golden 双轨 CI + `test.yml` + stage_timings / fast fate | B/C ✅ |
 | I-12 | Generate 进度屏 + `job_id` demo 回退 + 介入后 poll 续跑 | D ✅ |
+| I-13 | 设计系统 v0.1 + site-chrome + index/pitch 双路径入口 | UX-1 ✅ |
+| I-14 | Generate 阶段时间轴 + 介入卡片化 + timing hint | UX-2 ✅ |
+| I-15 | Demo live 接手 strip + API 错误态 + board 移动表格 | UX-3 ✅ |
 
 ### I-9 — 下一轮
 

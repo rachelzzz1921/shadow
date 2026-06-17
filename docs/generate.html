@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="demo-theme.css" />
 <link rel="stylesheet" href="demo-ui-polish.css" />
 <link rel="stylesheet" href="demo-ui-polish-r2.css" />
+<link rel="stylesheet" href="site-chrome.css" />
 <link rel="stylesheet" href="demo-intake.css" />
 <link rel="stylesheet" href="generate.css" />
 </head>
@@ -182,6 +183,19 @@
 
     <section class="gen-panel snes gen-hidden" id="gen-run-panel">
       <p id="gen-provider" class="gen-provider">检测 LLM…</p>
+      <ol id="gen-stage-timeline" class="gen-stage-timeline" aria-label="生成阶段">
+        <li data-stage="persona"><span class="gen-stage-dot"></span><span class="gen-stage-label">Persona</span></li>
+        <li data-stage="beats"><span class="gen-stage-dot"></span><span class="gen-stage-label">Beats</span></li>
+        <li data-stage="year_1"><span class="gen-stage-dot"></span><span class="gen-stage-label">Y1</span></li>
+        <li data-stage="year_2"><span class="gen-stage-dot"></span><span class="gen-stage-label">Y2</span></li>
+        <li data-stage="year_3"><span class="gen-stage-dot"></span><span class="gen-stage-label">Y3</span></li>
+        <li data-stage="year_4"><span class="gen-stage-dot"></span><span class="gen-stage-label">Y4</span></li>
+        <li data-stage="year_5"><span class="gen-stage-dot"></span><span class="gen-stage-label">Y5</span></li>
+        <li data-stage="year_6"><span class="gen-stage-dot"></span><span class="gen-stage-label">Y6</span></li>
+        <li data-stage="year_7"><span class="gen-stage-dot"></span><span class="gen-stage-label">Y7</span></li>
+        <li data-stage="final"><span class="gen-stage-dot"></span><span class="gen-stage-label">Final</span></li>
+      </ol>
+      <p id="gen-timing-hint" class="gen-timing-hint gen-hidden" aria-live="polite"></p>
       <div class="gen-eta-row">
         <span id="gen-eta-label" class="gen-eta-label">预计总时长 —</span>
         <span id="gen-eta-remaining" class="gen-eta-remaining"></span>
@@ -236,9 +250,10 @@
   <div class="intervention-card snes modal-cutin" role="dialog" aria-modal="true" aria-labelledby="intervention-question">
     <div class="intervention-label">PIVOTAL · 岔路口</div>
     <p id="intervention-question"></p>
-    <div id="intervention-options"></div>
-    <p class="intervention-hint">这一选择会写入下一年。也可以跳过，让影子自己走。</p>
-    <button type="button" id="intervention-skip">跳过</button>
+    <div id="intervention-options" class="intervention-options-grid"></div>
+    <p class="intervention-hint">这一选择会写入下一年。按 <kbd>1</kbd>–<kbd>3</kbd> 快捷选择，或跳过让影子自己走。</p>
+    <button type="button" id="intervention-skip" class="btn-ghost intervention-skip-btn">跳过</button>
+    <p id="intervention-loading" class="intervention-loading gen-hidden" role="status">提交中…</p>
   </div>
 </div>
 

@@ -266,9 +266,29 @@ async function bootstrapDemoStory() {
       && typeof window.ShadowDemo.applyLiveFromJobQuery === 'function') {
       await window.ShadowDemo.applyLiveFromJobQuery();
     }
+    if (params.get('from') === 'generate' && params.get('live') === '1') {
+      showGenerateWelcomeStrip();
+    }
   }
 
   return story;
+}
+
+function showGenerateWelcomeStrip() {
+  try {
+    if (sessionStorage.getItem('shadow_welcome_dismissed')) return;
+  } catch (_) { /* ignore */ }
+  if (document.getElementById('demo-live-welcome')) return;
+  const bar = document.createElement('div');
+  bar.id = 'demo-live-welcome';
+  bar.className = 'demo-live-welcome';
+  bar.innerHTML = '<div><strong>你的七年已就绪</strong>点「开始」进入第 1 年；顶部圆点可跳年，pivotal 年可介入。</div>'
+    + '<button type="button" class="demo-live-welcome-dismiss" aria-label="关闭提示">知道了</button>';
+  document.body.appendChild(bar);
+  bar.querySelector('.demo-live-welcome-dismiss')?.addEventListener('click', () => {
+    bar.remove();
+    try { sessionStorage.setItem('shadow_welcome_dismissed', '1'); } catch (_) { /* ignore */ }
+  });
 }
 
 function renderStoryPicker(containerId) {

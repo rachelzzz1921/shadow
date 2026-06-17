@@ -35,6 +35,14 @@
   --highlight: #fffdf8;
   --step: 3px;
 
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --focus-ring: 0 0 0 2px var(--paper), 0 0 0 4px var(--amber);
+
   --cc0-floor: url('visual-assets/coolschool_A2.png');
   --sprite-char: url('visual-assets/coolschool_B.png');
   --sprite-pos: -240px -672px;
@@ -42,6 +50,17 @@
 
   --ease-pixel: steps(4, end);
   --ease-soft: cubic-bezier(0.22, 0.68, 0.12, 1);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --focus-ring: 2px solid var(--amber);
+  --focus-offset: 3px;
 }
 
 html, body { height: 100%; }
@@ -471,6 +490,13 @@ img { image-rendering: pixelated; image-rendering: crisp-edges; }
 .btn-start:active {
   transform: translateY(2px);
   box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.15);
+}
+.btn-start:focus-visible,
+.btn-ghost:focus-visible,
+button:focus-visible,
+a.btn-cta:focus-visible {
+  outline: var(--focus-ring, 2px solid var(--amber));
+  outline-offset: var(--focus-offset, 3px);
 }
 
 .year-preview {

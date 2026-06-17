@@ -70,6 +70,50 @@ test('generate → intervention → demo live', async ({ page, request }) => {
   await expect(page.getByRole('button', { name: /第 1 年/ }).first()).toBeVisible({ timeout: 15_000 });
 });
 
+async function completeE2eJob(request: import('@playwright/test').APIRequestContext, jobId: string) {
+  const paused = await waitForJobStatus(request, jobId, 'awaiting_intervention');
+  const submitted = await request.post(`/api/story/jobs/${encodeURIComponent(jobId)}/intervention`, {
+    data: {
+      from_year: paused.stage?.intervention_from_year ?? 1,
+      question: paused.stage?.prompt?.question || 'E2E',
+      choice: paused.stage?.prompt?.options?.[0]?.label || '继续走',
+      option_index: 0
+    }
+  });
+  expect(submitted.ok()).toBeTruthy();
+  await waitForJobStatus(request, jobId, 'done');
+}
+
+test('stale sessionStorage falls back to job_id API', async ({ page, request }) => {
+  const staleJobId = await createE2eJob(request);
+  await completeE2eJob(request, staleJobId);
+
+  const freshJobId = await createE2eJob(request);
+  await completeE2eJob(request, freshJobId);
+
+  const freshRes = await request.get(`/api/story/jobs/${encodeURIComponent(freshJobId)}`);
+  expect(freshRes.ok()).toBeTruthy();
+  const freshJob = await freshRes.json();
+  expect(freshJob.session?.years?.length).toBe(7);
+
+  await page.addInitScript(({ staleId }) => {
+    sessionStorage.setItem('shadow_live_session', JSON.stringify({
+      session: { years: [{ year: 1, title: 'stale-only-one-year' }], beats: [] },
+      generated_job_id: staleId,
+      _from_generate: true
+    }));
+  }, { staleId: staleJobId });
+
+  await page.goto(`/demo.html?live=1&from=generate&job_id=${encodeURIComponent(freshJobId)}`);
+  await page.waitForFunction(() => {
+    const story = (window as unknown as { ShadowDemo?: { STORY?: { years?: unknown[]; _from_live?: boolean } } }).ShadowDemo?.STORY;
+    return story?._from_live && story.years?.length === 7;
+  }, { timeout: 15_000 });
+
+  const yearCount = await page.evaluate(() => window.ShadowDemo?.STORY?.years?.length ?? 0);
+  expect(yearCount).toBe(7);
+});
+
 test('awaiting_intervention survives page reload', async ({ page, request }) => {
   const jobId = await createE2eJob(request);
   await waitForJobStatus(request, jobId, 'awaiting_intervention');

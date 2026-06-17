@@ -6,11 +6,12 @@
 <title>影子 · Shadow — 平行人生叙事</title>
 <meta name="description" content="输入一个人生岔路口，生成可回放、可介入、可追问的七年影子人生。" />
 <link rel="stylesheet" href="demo-theme.css" />
+<link rel="stylesheet" href="site-chrome.css" />
 <style>
 html, body { height: auto; overflow: auto; }
 body { user-select: auto; }
 
-.hub { max-width: 680px; margin: 0 auto; padding: 56px 24px 96px; }
+.hub { max-width: 720px; margin: 0 auto; padding: 48px 24px 120px; }
 
 .hub-top {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
@@ -176,14 +177,14 @@ body { user-select: auto; }
 <body>
 <div class="hub">
 
-  <nav class="hub-top" aria-label="站点导航">
-    <span style="font-family:monospace;letter-spacing:2px;color:var(--amber)">SHADOW</span>
-    <span>
+  <nav class="site-nav" aria-label="站点导航">
+    <a class="site-nav-brand" href="index.html">SHADOW</a>
+    <div class="site-nav-links">
       <a href="pitch.html">沿路路演</a>
-      · <a href="generate.html" class="is-primary">写我的七年</a>
-      · <a href="demo-phaser.html">视觉预览</a>
-      · <a href="board.html">团队看板</a>
-    </span>
+      <a href="generate.html" class="is-primary">写我的七年</a>
+      <a href="demo-phaser.html">视觉预览</a>
+      <a href="board.html">团队看板</a>
+    </div>
   </nav>
 
   <div id="hub-status" class="hub-status is-off" role="status" aria-live="polite">
@@ -199,7 +200,21 @@ body { user-select: auto; }
       <em>影子</em> 接收你的岔路口，经多 Agent 协作生成一条<br>
       可回放、可介入、可追问的七年平行人生。
     </p>
-    <span class="hero-note">先读别人的故事，再写你自己的 —— 同一条叙事引擎，两种进入方式。</span>
+    <span class="hero-note">两条路，同一个叙事引擎 —— 先读别人的，再写你自己的。</span>
+
+    <div class="site-dual-path" aria-label="进入方式">
+      <a class="site-path-card" href="#stories">
+        <div class="site-path-kicker">STEP 01 · 先感受</div>
+        <div class="site-path-title">读一条 Golden 线</div>
+        <p class="site-path-desc">林晚、许星遥、周染、阿岚 —— 体验 pivotal 介入与七年分层阅读。</p>
+      </a>
+      <a class="site-path-card is-featured" href="generate.html">
+        <div class="site-path-kicker">STEP 02 · 写我的</div>
+        <div class="site-path-title">生成平行人生</div>
+        <p class="site-path-desc">四层采集 → Persona → API 七年 → 自动进入 Demo。约 3 分钟。</p>
+      </a>
+    </div>
+
     <ul class="domain-row" aria-label="六域场景 Agent">
       <li>亲情</li><li>爱情</li><li>友情</li><li>学业</li><li>事业</li><li>自我</li>
     </ul>
@@ -211,7 +226,7 @@ body { user-select: auto; }
   <div id="stories" class="story-section">
     <div class="section-head">
       <div class="section-head-line"></div>
-      <span class="section-head-label">STEP 01 · 先读一条 Golden 线</span>
+      <span class="site-section-label">Golden 故事线</span>
       <div class="section-head-line"></div>
     </div>
 
@@ -253,7 +268,7 @@ body { user-select: auto; }
   <div id="play" class="cta-section">
     <div class="section-head" style="margin-bottom:28px">
       <div class="section-head-line"></div>
-      <span class="section-head-label">STEP 02 · 写你自己的</span>
+      <span class="site-section-label">开始写</span>
       <div class="section-head-line"></div>
     </div>
     <div class="cta-head">把岔路口交给影子</div>
