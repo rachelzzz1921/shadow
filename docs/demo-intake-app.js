@@ -1338,17 +1338,59 @@
     };
   }
 
+  function isUnifiedGeneratePage() {
+    return document.body.classList.contains('generate-unified');
+  }
+
+  async function probeApiHealth() {
+    try {
+      const res = await fetch('/api/health', { cache: 'no-store' });
+      if (!res.ok) return false;
+      const ct = res.headers.get('content-type') || '';
+      if (!ct.includes('json')) return false;
+      const data = await res.json();
+      return !!(data && (typeof data.has_key === 'boolean' || data.provider || data.ok === true));
+    } catch {
+      return false;
+    }
+  }
+
+  async function redirectToLocalDemo(result) {
+    if (!window.ShadowCustomStory?.build) {
+      throw new Error('本地合成模块未加载，请刷新后重试。');
+    }
+    const story = window.ShadowCustomStory.build({
+      profile: profileForCustom(),
+      persona: result.persona,
+      persona_card: result.persona_card,
+      full_profile: result.full_profile,
+      eraSnippets: window.__shadowEraSnippets || {}
+    });
+    const payload = window.ShadowCustomStory.buildLivePayload(story, result);
+    try {
+      sessionStorage.removeItem('shadow_live_session');
+      sessionStorage.setItem('shadow_live_session', JSON.stringify(payload));
+    } catch (err) {
+      throw new Error('浏览器存储已满，请清理本站数据后重试。');
+    }
+    window.location.href = 'demo.html?live=1';
+  }
+
   async function handoffToGeneratePipeline(result) {
     const intakeRequest = buildIntakeRequest(result);
     try {
       sessionStorage.setItem('shadow_intake_request', JSON.stringify(intakeRequest));
     } catch (_) { /* quota */ }
     if (window.ShadowGenerateBridge?.onIntakeComplete) {
-      window.ShadowGenerateBridge.onIntakeComplete({
-        ...result,
-        intake_request: intakeRequest
-      });
-      return true;
+      try {
+        window.ShadowGenerateBridge.onIntakeComplete({
+          ...result,
+          intake_request: intakeRequest
+        });
+        return true;
+      } catch (err) {
+        console.error('[generate handoff]', err);
+      }
     }
     return false;
   }
@@ -1360,12 +1402,22 @@
   async function routeCustomToDemo(result) {
     if (await handoffToGeneratePipeline(result)) return;
 
+    // 统一页 handoff 失败时（静态站 / 脚本异常）直接本地合成，避免卡在采集 footer
+    if (isUnifiedGeneratePage()) {
+      try {
+        await redirectToLocalDemo(result);
+        return;
+      } catch (err) {
+        console.error('[custom synth unified]', err);
+        showStepHint(err.message || '合成失败，请刷新后重试。', 'error');
+        el.btnNext.disabled = false;
+        el.btnNext.textContent = '开始书写七年 →';
+        return;
+      }
+    }
+
     const intakeRequest = buildIntakeRequest(result);
-    let apiOk = false;
-    try {
-      const res = await fetch('/api/health', { cache: 'no-store' });
-      apiOk = res.ok;
-    } catch (_) { apiOk = false; }
+    const apiOk = await probeApiHealth();
 
     if (apiOk) {
       try {
@@ -1375,28 +1427,14 @@
       return;
     }
 
-    // 离线兜底：本地规则合成七年，直接进入分层叙事浏览
-    if (window.ShadowCustomStory?.build) {
-      try {
-        const story = window.ShadowCustomStory.build({
-          profile: profileForCustom(),
-          persona: result.persona,
-          persona_card: result.persona_card,
-          full_profile: result.full_profile,
-          eraSnippets: window.__shadowEraSnippets || {}
-        });
-        const payload = window.ShadowCustomStory.buildLivePayload(story, result);
-        sessionStorage.setItem('shadow_live_session', JSON.stringify(payload));
-        window.location.href = 'demo.html?live=1';
-        return;
-      } catch (err) {
-        console.error('[custom synth]', err);
-      }
+    try {
+      await redirectToLocalDemo(result);
+    } catch (err) {
+      console.error('[custom synth]', err);
+      showStepHint(err.message || '合成失败，请刷新后重试。', 'error');
+      el.btnNext.disabled = false;
+      el.btnNext.textContent = '开始书写七年 →';
     }
-
-    showStepHint('合成失败，请刷新后重试。', 'error');
-    el.btnNext.disabled = false;
-    el.btnNext.textContent = 'Persona agent 推导 →';
   }
 
   function profileForCustom() {

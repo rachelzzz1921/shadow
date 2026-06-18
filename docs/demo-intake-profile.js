@@ -6,13 +6,16 @@
 
 (function (global) {
 // schema.cjs
+const kit_schema = (function() {
 const FULL_PROFILE_SCHEMA_VERSION = 1;
 
-const kit_schema = {
+return {
   FULL_PROFILE_SCHEMA_VERSION
 };
+})();
 
 // utils.cjs
+const kit_utils = (function() {
 function clamp(n, min, max) {
   return Math.max(min, Math.min(max, n));
 }
@@ -63,7 +66,7 @@ function topScenarioDomain(weights) {
   );
 }
 
-const kit_utils = {
+return {
   clamp,
   findQuestionAnswer,
   findOption,
@@ -72,8 +75,10 @@ const kit_utils = {
   longestDwellQuestion,
   topScenarioDomain
 };
+})();
 
 // maps-to-reducer.cjs
+const kit_maps_to_reducer = (function() {
 const SCENARIO_DOMAINS = [
   'family',
   'love',
@@ -146,14 +151,16 @@ function reduceMapsFromAnswers(questionAnswers, questionsById) {
   return acc;
 }
 
-const kit_maps_to_reducer = {
+return {
   SCENARIO_DOMAINS,
   applyMapsTo,
   reduceMapsFromAnswers,
   findOption
 };
+})();
 
 // tension-detectors.cjs
+const kit_tension_detectors = (function() {
 const { findQuestionAnswer } = kit_utils;
 
 function detectTensionFlags(layerA, tagMap, answers) {
@@ -206,11 +213,13 @@ function detectTensionFlags(layerA, tagMap, answers) {
   return flags;
 }
 
-const kit_tension_detectors = {
+return {
   detectTensionFlags
 };
+})();
 
 // shadow-preview.cjs
+const kit_shadow_preview = (function() {
 const { tagsByCategory } = kit_utils;
 
 /**
@@ -249,11 +258,13 @@ function buildShadowPreview(layerA, selectedTags) {
   return lines.join('\n');
 }
 
-const kit_shadow_preview = {
+return {
   buildShadowPreview
 };
+})();
 
 // build-full-profile.cjs
+const kit_build_full_profile = (function() {
 const { FULL_PROFILE_SCHEMA_VERSION } = kit_schema;
 const {
   SCENARIO_DOMAINS,
@@ -562,7 +573,7 @@ function buildFullProfile({
   };
 }
 
-const kit_build_full_profile = {
+return {
   SCENARIO_DOMAINS,
   SCENARIO_LABEL_TO_DOMAIN,
   buildFullProfile,
@@ -570,15 +581,17 @@ const kit_build_full_profile = {
   computeScenarioWeights,
   computeBaselineSignals
 };
+})();
 
 // index.cjs
+const kit_index = (function() {
 const { FULL_PROFILE_SCHEMA_VERSION } = kit_schema;
 const { buildFullProfile, normalizeScenarioWeights, SCENARIO_DOMAINS } = kit_build_full_profile;
 const { buildShadowPreview } = kit_shadow_preview;
 const { detectTensionFlags } = kit_tension_detectors;
 const { applyMapsTo, reduceMapsFromAnswers } = kit_maps_to_reducer;
 
-const kit_index = {
+return {
   FULL_PROFILE_SCHEMA_VERSION,
   SCENARIO_DOMAINS,
   buildFullProfile,
@@ -588,6 +601,7 @@ const kit_index = {
   applyMapsTo,
   reduceMapsFromAnswers
 };
+})();
 
 
 function getAnswer(answersObj, id) {

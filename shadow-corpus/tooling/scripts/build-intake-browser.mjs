@@ -39,9 +39,8 @@ function bundleEntry(entry, registry = new Map()) {
 
   src = src.replace(/^'use strict';\s*/m, '');
   const exportVar = varNameFor(entry);
-  src = src.replace(/module\.exports\s*=\s*/, `const ${exportVar} = `);
-
-  const record = { entry, varName: exportVar, src: src.trim() };
+  src = src.replace(/module\.exports\s*=\s*/, 'return ');
+  const record = { entry, varName: exportVar, src: `const ${exportVar} = (function() {\n${src.trim()}\n})();` };
   registry.set(entry, record);
   return record;
 }

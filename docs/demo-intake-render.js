@@ -141,7 +141,7 @@
     const root = document.createElement('div');
     const hint = document.createElement('p');
     hint.className = 'intake-rank-hint';
-    hint.textContent = '先点最怕失去的（标为 1），再依次点完其余；点错了可再点取消。';
+    hint.textContent = '按优先级依次点击全部选项；选满后自动继续。';
     root.appendChild(hint);
 
     const buttons = [];

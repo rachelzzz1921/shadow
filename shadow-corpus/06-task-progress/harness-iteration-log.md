@@ -14,6 +14,7 @@
 | I-13 | 设计系统 v0.1 + site-chrome + index/pitch 双路径入口 | UX-1 ✅ |
 | I-14 | Generate 阶段时间轴 + 介入卡片化 + timing hint | UX-2 ✅ |
 | I-15 | Demo live 接手 strip + API 错误态 + board 移动表格 | UX-3 ✅ |
+| I-16 | ECC 通路 debug：`demo-intake-profile.js` 打包语法错误 + 离线 intake→demo E2E | ECC-1 ✅ |
 
 ### I-9 — 下一轮
 

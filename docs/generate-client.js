@@ -474,6 +474,19 @@
     }
   }
 
+  async function probeApiHealth() {
+    try {
+      const res = await fetch('/api/health', { cache: 'no-store' });
+      if (!res.ok) return false;
+      const ct = res.headers.get('content-type') || '';
+      if (!ct.includes('json')) return false;
+      const data = await res.json();
+      return !!(data && (typeof data.has_key === 'boolean' || data.provider || data.ok === true));
+    } catch {
+      return false;
+    }
+  }
+
   function readHandoffFromSession() {
     try {
       const raw = sessionStorage.getItem('shadow_full_profile');
@@ -866,11 +879,13 @@
         eraSnippets
       });
       const payload = window.ShadowCustomStory.buildLivePayload(story, handoff);
+      sessionStorage.removeItem('shadow_live_session');
       sessionStorage.setItem('shadow_live_session', JSON.stringify(payload));
       window.location.href = 'demo.html?live=1';
       return true;
     } catch (err) {
-      showError('本地合成失败：' + err.message);
+      showError(err.message?.includes('存储') ? err.message : '本地合成失败：' + err.message);
+      if (isUnified) showIntakeSection();
       return false;
     }
   }
@@ -1198,7 +1213,11 @@
 
     let health;
     try {
-      health = await (await fetch('/api/health')).json();
+      const res = await fetch('/api/health', { cache: 'no-store' });
+      if (!res.ok) throw new Error('offline');
+      const ct = res.headers.get('content-type') || '';
+      if (!ct.includes('json')) throw new Error('not-json');
+      health = await res.json();
     } catch {
       if (handoff) {
         log('intake', '正在离线为你书写七年…');
@@ -1343,6 +1362,8 @@
     setTimeout(runPipeline, 350);
   }
 
+  window.ShadowGenerateBridge = { onIntakeComplete };
+
   function exportJson() {
     if (!lastExport) return;
     const blob = new Blob([JSON.stringify(lastExport, null, 2)], { type: 'application/json' });
@@ -1352,8 +1373,6 @@
     a.click();
     URL.revokeObjectURL(a.href);
   }
-
-  window.ShadowGenerateBridge = { onIntakeComplete };
 
   $('nav-back')?.addEventListener('click', () => {
     window.location.href = 'index.html';
